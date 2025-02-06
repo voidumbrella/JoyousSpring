@@ -12,6 +12,8 @@ Balatro mod that adds modern Yu-Gi-Oh! cards to Balatro.
 
 I might drop this at any moment (if I haven't already), so please feel free to fork or do PRs if you feel like you can improve on this or fix any of the problems above!
 
+I'm not accepting contributions that add consumables or that add any Spells or (non-monster) Traps as monsters for the time being. Also, when contributing an archetype I'm not merging PRs until a minimum viable version of the entire archetype is finished.
+
 ## Contact
 
 If you have any issues feel free to contact me on [Twitter](https://nh6574.com/), [Bluesky](https://bsky.app/profile/nh6574.com) or Discord as nh6574

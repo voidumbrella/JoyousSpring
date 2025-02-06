@@ -1,0 +1,35 @@
+[manifest]
+version = "0.1.0"
+dump_lua = true
+priority = 0
+
+## Extra Deck
+
+[[patches]]
+[patches.regex]
+target = "functions/button_callbacks.lua"
+pattern = 'G\.jokers:emplace\(c1\)'
+position = 'at'
+match_indent = true
+payload = '''
+if JoyousSpring.is_extra_deck_monster(c1) then
+    JoyousSpring.add_to_extra_deck(c1)
+    JoyousSpring.open_extra_deck(false, false, 1.85)
+else
+    G.jokers:emplace(c1)
+end
+'''
+
+## Summon Materials
+
+[[patches]]
+[patches.regex]
+target = "cardarea.lua"
+pattern = 'self\.children\.area_uibox = UIBox'
+position = 'before'
+match_indent = true
+payload = '''
+if self.config.type == 'summon_materials' then
+    card_count = nil
+end
+'''
