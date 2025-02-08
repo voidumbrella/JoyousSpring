@@ -1,3 +1,7 @@
+--- MONSTERS
+
+-- Individual checks
+
 JoyousSpring.is_monster_card = function(card)
     return card.ability and card.ability.extra and type(card.ability.extra) == "table" and
         card.ability.extra.joyous_spring or false
@@ -42,9 +46,24 @@ JoyousSpring.is_pendulum_monster = function(card)
     return JoyousSpring.is_monster_card(card) and card.ability.extra.joyous_spring.is_pendulum or false
 end
 
-JoyousSpring.is_material = function(card, properties)
+JoyousSpring.is_summoned = function(card)
+    return JoyousSpring.is_monster_card(card) and card.ability.extra.joyous_spring.summoned or false
+end
 
-    if card.ability.eternal or card.facing == 'back' then
+JoyousSpring.is_revived = function(card)
+    return JoyousSpring.is_monster_card(card) and card.ability.extra.joyous_spring.revived or false
+end
+
+-- General checks
+
+JoyousSpring.is_material = function(card, properties)
+    if card.ability.eternal then
+        return false
+    end
+    if not next(properties) == 0 then
+        return true
+    end
+    if card.facing == 'back' then
         return false
     end
     if properties.func then
@@ -177,6 +196,151 @@ JoyousSpring.is_material = function(card, properties)
     return true
 end
 
+JoyousSpring.is_material_center = function(card_key, properties)
+    local card_center = G.P_CENTERS[card_key]
+
+    if not card_center then return false end
+
+    if properties.func_center then
+        if not properties.func_center(card_center, properties.func_vars) then
+            return false
+        end
+    end
+    if properties.key then
+        if card_key ~= properties.key then
+            return false
+        end
+    end
+    if properties.exclude_keys then
+        for _, key in ipairs(properties.exclude_keys) do
+            if card_key == key then
+                return false
+            end
+        end
+    end
+    if properties.is_token then
+        if card_key ~= "j_joy_token" then
+            return false
+        end
+    end
+    if properties.exclude_tokens then
+        if card_key == "j_joy_token" then
+            return false
+        end
+    end
+    if properties.rarity then
+        if card_center.rarity ~= properties.rarity then
+            return false
+        end
+    end
+    if properties.exclude_rarities then
+        for _, rarity in ipairs(properties.exclude_rarities) do
+            if card_center.rarity == rarity then
+                return false
+            end
+        end
+    end
+
+    local monster_card_properties = card_center.config and card_center.config.extra and
+        type(card_center.config.extra) == "table" and
+        card_center.config.extra.joyous_spring
+
+    if properties.is_joker then
+        return not monster_card_properties
+    end
+    if properties.is_monster or properties.monster_type or properties.monster_attribute or properties.monster_archetypes or properties.is_pendulum or properties.summon_type or properties.is_effect or properties.is_non_effect or properties.is_normal then
+        if not monster_card_properties then
+            return false
+        end
+    end
+    if properties.exclude_monster_types or properties.exclude_monster_attributes or properties.exclude_monster_archetypes or properties.exclude_pendulum or properties.exclude_summon_types then
+        if not monster_card_properties then
+            return true
+        end
+    end
+    if not monster_card_properties then
+        return false
+    end
+    if properties.monster_type then
+        if monster_card_properties.monster_type ~= properties.monster_type then
+            return false
+        end
+    end
+    if properties.exclude_monster_types then
+        for _, monster_type in ipairs(properties.exclude_monster_types) do
+            if monster_card_properties.monster_type == monster_type then
+                return false
+            end
+        end
+    end
+    if properties.monster_attribute then
+        if monster_card_properties.attribute ~= properties.monster_attribute then
+            return false
+        end
+    end
+    if properties.exclude_monster_attributes then
+        for _, monster_attribute in ipairs(properties.exclude_monster_attributes) do
+            if monster_card_properties.attribute == monster_attribute then
+                return false
+            end
+        end
+    end
+    if properties.monster_archetypes then
+        for _, monster_archetype in ipairs(properties.monster_archetypes) do
+            if not monster_card_properties.monster_archetypes[monster_archetype] then
+                return false
+            end
+        end
+    end
+    if properties.exclude_monster_archetypes then
+        for _, monster_archetype in ipairs(properties.exclude_monster_archetypes) do
+            if monster_card_properties.monster_archetypes[monster_archetype] then
+                return false
+            end
+        end
+    end
+    if properties.is_pendulum then
+        if not monster_card_properties.is_pendulum then
+            return false
+        end
+    end
+    if properties.exclude_pendulum then
+        if monster_card_properties.is_pendulum then
+            return false
+        end
+    end
+    if properties.summon_type then
+        if monster_card_properties.summon_type ~= properties.summon_type then
+            return false
+        end
+    end
+    if properties.exclude_summon_types then
+        for _, summon_type in ipairs(properties.exclude_summon_types) do
+            if monster_card_properties.summon_type == summon_type then
+                return false
+            end
+        end
+    end
+    if properties.is_effect then
+        if not monster_card_properties.is_effect then
+            return false
+        end
+    end
+    if properties.is_non_effect then
+        if monster_card_properties.is_effect then
+            return false
+        end
+    end
+    if properties.is_normal then
+        if monster_card_properties.is_effect or not monster_card_properties.is_main_deck then
+            return false
+        end
+    end
+    return true
+end
+
+-- Summon and material calculations
+
 JoyousSpring.filter_materials_on_properties = function(properties, card_list)
     local card_table = card_list or G.jokers.cards
     local filtered_table = {}
@@ -200,7 +364,7 @@ JoyousSpring.filter_materials_on_conditions = function(condition, card_list)
         local filtered_by_property = JoyousSpring.filter_materials_on_properties(properties, card_table)
 
         if #filtered_by_property == 0 and not properties.optional then return {} end
-        table.insert(filtered_table,filtered_by_property)
+        table.insert(filtered_table, filtered_by_property)
     end
 
     return filtered_table
@@ -306,7 +470,7 @@ JoyousSpring.can_summon_by_condition = function(condition, card_list)
     local filtered_materials = JoyousSpring.filter_materials_on_conditions(condition, card_table)
 
     if not filtered_materials or #filtered_materials == 0 or #filtered_materials ~= #condition.materials then return false end
-    
+
     local function backtrack(combo, remaining_material_sets)
         if #remaining_material_sets == 0 then
             if JoyousSpring.is_valid_material_combo(combo, condition.restrictions) then
@@ -352,10 +516,32 @@ JoyousSpring.can_summon = function(card, card_list)
     return false
 end
 
-JoyousSpring.perform_summon = function (card, card_list)
+JoyousSpring.perform_summon = function(card, card_list)
     for _, joker in ipairs(card_list) do
-        JoyousSpring.remove_material(joker)
+        joker:start_dissolve()
     end
     JoyousSpring.extra_deck_area:remove_card(card)
+    card:add_to_deck()
+    card.ability.extra.joyous_spring.summoned = true
+    card:set_cost()
     G.jokers:emplace(card)
+end
+
+-- Modifiers
+
+JoyousSpring.set_sell_cost = function(card)
+    if JoyousSpring.is_summoned(card) then
+        card.sell_cost = card.cost + (card.ability.extra_value or 0)
+    elseif JoyousSpring.is_revived(card) then
+        card.sell_cost = 1 + (card.ability.extra_value or 0)
+    end
+end
+
+-- Hooks
+
+local card_flip_ref = Card.flip
+function Card:flip()
+    if not JoyousSpring.is_summon_type(self, "Link") and self.config.center_key ~= "j_joy_token" then
+        card_flip_ref(self)
+    end
 end

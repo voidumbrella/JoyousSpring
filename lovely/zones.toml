@@ -5,6 +5,20 @@ priority = 0
 
 ## Extra Deck
 
+# Prevent add_to_deck when buying an Extra Deck Joker
+[[patches]]
+[patches.regex]
+target = "functions/button_callbacks.lua"
+pattern = 'c1:add_to_deck\(\)'
+position = 'at'
+match_indent = true
+payload = '''
+if not JoyousSpring.is_extra_deck_monster(c1) then
+    c1:add_to_deck()
+end
+'''
+
+# Add joker to Extra Deck when buying from the shop
 [[patches]]
 [patches.regex]
 target = "functions/button_callbacks.lua"
@@ -20,8 +34,26 @@ else
 end
 '''
 
+# Add joker to Extra Deck when selecting from a pack
+[[patches]]
+[patches.regex]
+target = "functions/button_callbacks.lua"
+pattern = '''elseif card.ability.set == 'Joker' then'''
+position = 'before'
+match_indent = true
+payload = '''
+elseif card.ability.set == 'Joker' and JoyousSpring.is_extra_deck_monster(card) then 
+    JoyousSpring.add_to_extra_deck(card)
+    JoyousSpring.open_extra_deck(false, false, 1.85)
+    play_sound('card1', 0.8, 0.6)
+    play_sound('generic1')
+    dont_dissolve = true
+    delay_fac = 0.2
+'''
+
 ## Summon Materials
 
+# Remove card count when selecting summoning materials
 [[patches]]
 [patches.regex]
 target = "cardarea.lua"

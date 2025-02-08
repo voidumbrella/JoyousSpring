@@ -8,6 +8,11 @@ Balatro mod that adds modern Yu-Gi-Oh! cards to Balatro.
 2. Download the [latest release](https://github.com/nh6574/JoyousSpring/releases)
 3. Extract the zip file into it's own folder inside your Balatro mods folder (%appdata%\Balatro\Mods)
 
+## Known Issues
+
+* Extra Deck renders behind consumables so buttons on right-most Jokers can be tricky to press. (For now, just move it)
+* Extra Deck and summon material selection doesn't work properly with a controller
+
 ## Contributing
 
 I might drop this at any moment (if I haven't already), so please feel free to fork or do PRs if you feel like you can improve on this or fix any of the problems above!

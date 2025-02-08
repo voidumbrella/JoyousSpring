@@ -1,3 +1,5 @@
+--- GLOBALS
+
 G.C.JOY = {
     NORMAL = HEX("FDDD5D"),
     EFFECT = HEX("FF8B53"),
@@ -10,6 +12,8 @@ G.C.JOY = {
     LINK = HEX("006EAD"),
     TOKEN = HEX("828E85"),
 }
+
+-- Hooks
 
 local loc_colour_ref = loc_colour
 function loc_colour(_c, _default)
@@ -130,7 +134,7 @@ function init_localization()
     end
 end
 
--- This removes the colour markup on the Joker names on the info tooltips and adds summoning conditions
+---This removes the colour markup on the Joker names on the info tooltips and adds summoning conditions
 JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
     SMODS.Center.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
 
@@ -171,10 +175,3 @@ end
 --     end
 --     return ret
 -- end
-
-local card_flip_ref = Card.flip
-function Card:flip()
-    if not JoyousSpring.is_summon_type(self, "Link") and self.config.center_key ~= "j_joy_token" then
-        card_flip_ref(self)
-    end
-end

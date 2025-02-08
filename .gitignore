@@ -45,3 +45,5 @@ luac.out
 #App Specific
 .lovelyignore
 *.psd
+*.aseprite
+assets/templates/*

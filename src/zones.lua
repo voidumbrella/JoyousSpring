@@ -1,85 +1,36 @@
-local game_start_run_ref = Game.start_run
-function Game:start_run(args)
-    G.joy_extra_deck_area = CardArea(
-        0,
-        0,
-        G.CARD_W * 4.95,
-        G.CARD_H * 0.95,
-        {
-            card_limit = 5,
-            type = 'extra_deck',
-            highlight_limit = 1,
-        }
-    )
-    JoyousSpring.extra_deck_area = G.joy_extra_deck_area
+JoyousSpring.add_to_extra_deck = function(card, args)
+    local args = args or {}
+    if type(card) == "string" then
+        card = SMODS.create_card({
+            area = JoyousSpring.extra_deck_area,
+            key = card,
+            no_edition = args.no_edition or false,
+            skip_materialize = true,
+        })
+    end
+    if card.edition and card.edition.card_limit then
+        JoyousSpring.extra_deck_area.config.card_limit = JoyousSpring.extra_deck_area.config.card_limit +
+            card.edition.card_limit
+    end
+    JoyousSpring.extra_deck_area:emplace(card)
+end
 
-
-    game_start_run_ref(self, args)
-    G.joy_extra_deck = UIBox {
-        definition = JoyousSpring.create_UIBox_extra_deck(),
-        config = { align = 'cmi', offset = { x = 0, y = -5 }, major = G.jokers, bond = 'Weak' }
-    }
-    G.joy_extra_deck.states.visible = false
-    JoyousSpring.extra_deck_open = false
-    JoyousSpring.extra_deck_forced = false
-    JoyousSpring.extra_deck_limit = 5
-    self.extra_buttons = UIBox {
-        definition = {
-            n = G.UIT.ROOT,
-            config = {
-                align = "cm",
-                minw = 1,
-                minh = 0.3,
-                padding = 0.15,
-                r = 0.1,
-                colour = G.C.CLEAR
-            },
-            nodes = {
-                {
-                    n = G.UIT.C,
-                    config = {
-                        id = 'extra_deck',
-                        align = "tm",
-                        minw = 2,
-                        padding = 0.1,
-                        r = 0.1,
-                        hover = true,
-                        colour = G.C.JOY.TRAP,
-                        shadow = true,
-                        button = "joy_open_extra_deck"
-                    },
-                    nodes = {
-                        {
-                            n = G.UIT.R,
-                            config = { align = "bcm", padding = 0 },
-                            nodes = {
-                                {
-                                    n = G.UIT.T,
-                                    config = {
-                                        text = localize('b_joy_extra_deck'),
-                                        scale = 0.35,
-                                        colour = G.C.UI.TEXT_LIGHT
-                                    }
-                                }
-                            }
-                        },
-                    }
-                }
-            }
-        },
-        config = {
-            align = "tr",
-            offset = { x = -2, y = 0 },
-            major = G.consumeables,
-            bond = 'Weak'
-        }
-    }
+JoyousSpring.send_to_graveyard = function(card)
+    if JoyousSpring.graveyard then
+        if type(card) == "string" then
+            JoyousSpring.graveyard[card] = (JoyousSpring.graveyard[card] and
+                JoyousSpring.graveyard[card] + 1) or 1
+        elseif type(card) == "table" then
+            JoyousSpring.graveyard[card.config.center_key] = (JoyousSpring.graveyard[card.config.center_key] and
+                JoyousSpring.graveyard[card.config.center_key] + 1) or 1
+        end
+    end
 end
 
 JoyousSpring.create_UIBox_extra_deck = function()
     local t = {
         n = G.UIT.ROOT,
-        config = { align = 'cm', r = 0.1 },
+        config = { align = 'cm', r = 0.1, colour = G.C.JOY.SPELL },
         nodes = {
             {
                 n = G.UIT.O,
@@ -372,29 +323,240 @@ JoyousSpring.create_overlay_select_summon_materials = function(card, card_list)
     end
 end
 
-local controller_queue_R_cursor_press_ref = Controller.queue_R_cursor_press
-function Controller:queue_R_cursor_press(x, y)
-    controller_queue_R_cursor_press_ref(self, x, y)
-
-    if JoyousSpring.summon_material_area and next(JoyousSpring.summon_material_area.highlighted) then
-        JoyousSpring.summon_material_area:unhighlight_all()
+JoyousSpring.create_overlay_graveyard = function()
+    JoyousSpring.graveyard_area = {}
+    local num_graveyard_areas = math.min(4, math.floor(#JoyousSpring.graveyard / 25) + 1)
+    for i = 1, num_graveyard_areas do
+        JoyousSpring.graveyard_area[i] = CardArea(
+            G.ROOM.T.x + 0.2 * G.ROOM.T.w / 2,
+            G.ROOM.T.h,
+            6.5 * G.CARD_W,
+            0.6 * G.CARD_H,
+            {
+                card_limit = (num_graveyard_areas == i and #JoyousSpring.graveyard - 25 * (i - 1)) or 25,
+                type = 'title',
+                highlight_limit = 0,
+                card_w = G.CARD_W * 0.7,
+                draw_layers = { 'card' },
+            }
+        )
+        JoyousSpring.graveyard_area[i].monster_h_popup = true
     end
-end
 
-local card_align_h_popup = Card.align_h_popup
-function Card:align_h_popup()
-    local ret = card_align_h_popup(self)
-    local focused_ui = self.children.focused_ui and true or false
-    if self.area and self.area.config.type == "summon_materials" then
-        ret.offset.x = 0
-        ret.offset.y = focused_ui and 0.12 or 0.1
-        ret.type = 'bm'
+    local i = 0
+    for key, count in pairs(JoyousSpring.graveyard) do
+        if count > 0 then
+            local added_card = SMODS.create_card({
+                area = JoyousSpring.graveyard_area[math.min(4, math.floor(i / 25) + 1)],
+                key = key,
+                no_edition = true,
+                skip_materialize = true,
+            })
+            JoyousSpring.graveyard_area[math.min(4, math.floor(i / 25) + 1)]:emplace(added_card)
+            i = i + 1
+            -- copied from Cartomancer
+            if not added_card.children.stack_display and count > 1 then
+                added_card.children.stack_display = UIBox {
+                    definition = {
+                        n = G.UIT.ROOT,
+                        config = {
+                            minh = 0.6,
+                            maxh = 1.2,
+                            minw = 0.6,
+                            maxw = 2,
+                            r = 0.001,
+                            padding = 0.1,
+                            align = 'cm',
+                            colour = adjust_alpha(darken(G.C.BLACK, 0.2), 0.8),
+                            shadow = false,
+                            ref_table = added_card
+                        },
+                        nodes = {
+                            {
+                                n = G.UIT.R, -- node type
+                                config = {
+                                    align = 'cm',
+                                    colour = G.C.CLEAR
+                                },
+                                nodes = {
+                                    {
+                                        n = G.UIT.T, -- node type
+                                        config = {
+                                            text = 'X',
+                                            scale = 0.45,
+                                            colour = G.C.JOY.TRAP
+                                        },
+                                    },
+                                    {
+                                        n = G.UIT.T, -- node type
+                                        config = {
+                                            text = count,
+                                            scale = 0.45,
+                                            colour = G.C.UI.TEXT_LIGHT
+                                        }
+                                    }
+                                }
+                            },
+                        }
+                    },
+                    config = {
+                        align = "tli",
+                        bond = 'Strong',
+                        parent = added_card,
+                    },
+                    states = {
+                        collide = { can = false },
+                        drag = { can = true }
+                    }
+                }
+            end
+        end
     end
-    return ret
+
+    G.FUNCS.overlay_menu({
+        definition = create_UIBox_generic_options({
+            contents = {
+                {
+                    n = G.UIT.R,
+                    config = {
+                        align = "cm",
+                        padding = 0.05,
+                        minw = 7
+                    },
+                    nodes = {
+                        {
+                            n = G.UIT.O,
+                            config = {
+                                object = DynaText({
+                                    string = { localize('b_joy_graveyard') },
+                                    colours = { G.C.UI.TEXT_LIGHT },
+                                    bump = true,
+                                    silent = true,
+                                    pop_in = 0,
+                                    pop_in_rate = 4,
+                                    minw = 10,
+                                    shadow = true,
+                                    y_offset = -0.6,
+                                    scale = 0.9
+                                })
+                            }
+                        }
+                    }
+
+                },
+                {
+                    n = G.UIT.R,
+                    config = {
+                        align = "cm",
+                        padding = 0.2,
+                        minw = 7
+                    },
+                    nodes = {
+                        {
+                            n = G.UIT.R,
+                            config = {
+                                r = 0.1,
+                                minw = 7,
+                                minh = 5,
+                                align = "cm",
+                                padding = 1,
+                                colour = G.C.BLACK
+                            },
+                            nodes = {
+                                {
+                                    n = G.UIT.C,
+                                    config = {
+                                        align = "cm",
+                                        padding = 0.07,
+                                        no_fill = true,
+                                        scale = 1
+                                    },
+                                    nodes = {
+                                        num_graveyard_areas > 0 and {
+                                            n = G.UIT.R,
+                                            config = {
+                                                align = "cm",
+                                                padding = 0.07,
+                                                no_fill = true,
+                                                scale = 1
+                                            },
+                                            nodes = {
+                                                {
+                                                    n = G.UIT.O,
+                                                    config = {
+                                                        object = JoyousSpring.graveyard_area[1]
+                                                    }
+                                                },
+                                            }
+                                        } or nil,
+                                        num_graveyard_areas > 1 and {
+                                            n = G.UIT.R,
+                                            config = {
+                                                align = "cm",
+                                                padding = 0.07,
+                                                no_fill = true,
+                                                scale = 1
+                                            },
+                                            nodes = {
+                                                {
+                                                    n = G.UIT.O,
+                                                    config = {
+                                                        object = JoyousSpring.graveyard_area[2]
+                                                    }
+                                                },
+                                            }
+                                        } or nil,
+                                        num_graveyard_areas > 2 and {
+                                            n = G.UIT.R,
+                                            config = {
+                                                align = "cm",
+                                                padding = 0.07,
+                                                no_fill = true,
+                                                scale = 1
+                                            },
+                                            nodes = {
+                                                {
+                                                    n = G.UIT.O,
+                                                    config = {
+                                                        object = JoyousSpring.graveyard_area[3]
+                                                    }
+                                                },
+                                            }
+                                        } or nil,
+                                        num_graveyard_areas > 3 and {
+                                            n = G.UIT.R,
+                                            config = {
+                                                align = "cm",
+                                                padding = 0.07,
+                                                no_fill = true,
+                                                scale = 1
+                                            },
+                                            nodes = {
+                                                {
+                                                    n = G.UIT.O,
+                                                    config = {
+                                                        object = JoyousSpring.graveyard_area[4]
+                                                    }
+                                                },
+                                            }
+                                        } or nil,
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    })
 end
 
 G.FUNCS.joy_open_extra_deck = function(e)
     JoyousSpring.open_extra_deck(true, not G.joy_extra_deck.states.visible)
+end
+
+G.FUNCS.joy_open_graveyard = function(e)
+    JoyousSpring.create_overlay_graveyard()
 end
 
 G.FUNCS.joy_perform_summon = function(e)
@@ -438,6 +600,56 @@ G.FUNCS.exit_select_material_menu = function(e)
         JoyousSpring.open_extra_deck(true, false)
     end
     G.FUNCS.exit_overlay_menu()
+end
+
+local g_funcs_reroll_shop_ref = G.FUNCS.reroll_shop
+G.FUNCS.reroll_shop = function(e)
+    JoyousSpring.open_extra_deck(false, false)
+    g_funcs_reroll_shop_ref(e)
+end
+
+local check_for_buy_space_ref = G.FUNCS.check_for_buy_space
+G.FUNCS.check_for_buy_space = function(card)
+    if JoyousSpring.is_extra_deck_monster(card) then
+        if #JoyousSpring.extra_deck_area.cards < JoyousSpring.extra_deck_area.config.card_limit +
+            ((card.edition and card.edition.negative) and 1 or 0) then
+            return true
+        else
+            alert_no_space(card, G.jokers)
+            return false
+        end
+    end
+    return check_for_buy_space_ref(card)
+end
+
+local can_select_card_ref = G.FUNCS.can_select_card
+G.FUNCS.can_select_card = function(e)
+    local card = e.config.ref_table
+    if card.ability.set == 'Joker' and JoyousSpring.is_extra_deck_monster(card) then
+        if (card.edition and card.edition.negative) or
+            #JoyousSpring.extra_deck_area.cards < JoyousSpring.extra_deck_area.config.card_limit then
+            e.config.colour = G.C.GREEN
+            e.config.button = 'use_card'
+        else
+            e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+            e.config.button = nil
+        end
+    else
+        can_select_card_ref(e)
+    end
+end
+
+local card_align_h_popup = Card.align_h_popup
+function Card:align_h_popup()
+    local ret = card_align_h_popup(self)
+    local focused_ui = self.children.focused_ui and true or false
+    if (self.area and self.area.config.type == "summon_materials") or
+        (self.area.config.type == "title" and self.area.monster_h_popup and JoyousSpring.is_monster_card(self)) then
+        ret.offset.x = 0
+        ret.offset.y = focused_ui and 0.12 or 0.1
+        ret.type = 'bm'
+    end
+    return ret
 end
 
 local card_highlight_ref = Card.highlight
@@ -537,16 +749,46 @@ function Card:highlight(is_highlighted)
         self.highlighted = is_highlighted
     else
         card_highlight_ref(self, is_highlighted)
-        if JoyousSpring.is_extra_deck_monster(self) and self.area == G.shop_jokers and G.shop_jokers or self.area == G.shop_booster and G.shop_booster then
+        if self.area and JoyousSpring.is_extra_deck_monster(self) and
+            (self.area == G.shop_jokers and G.shop_jokers or self.area == G.pack_cards and G.pack_cards) then
             JoyousSpring.open_extra_deck(false, is_highlighted)
         end
     end
 end
 
-local g_funcs_reroll_shop_ref = G.FUNCS.reroll_shop
-G.FUNCS.reroll_shop = function(e)
-    JoyousSpring.open_extra_deck(false, false)
-    g_funcs_reroll_shop_ref(e)
+local card_can_sell_card_ref = Card.can_sell_card
+function Card:can_sell_card(context)
+    if (G.play and #G.play.cards > 0) or
+        (G.CONTROLLER.locked) or
+        (G.GAME.STOP_USE and G.GAME.STOP_USE > 0)
+    then
+        return false
+    end
+    if self.area and
+        self.area.config.type == 'extra_deck' and
+        not self.ability.eternal then
+        return true
+    end
+    return card_can_sell_card_ref(self, context)
+end
+
+local card_remove_ref = Card.remove
+function Card:remove()
+    if (self.area == G.jokers or self.area == JoyousSpring.extra_deck_area) and
+        JoyousSpring.is_monster_card(self) then
+        JoyousSpring.send_to_graveyard(self)
+    end
+    card_remove_ref(self)
+end
+
+local card_remove_from_area_ref = Card.remove_from_area
+function Card:remove_from_area()
+    if self.area == JoyousSpring.extra_deck_area and
+        self.edition and self.edition.card_limit then
+        JoyousSpring.extra_deck_area.config.card_limit =
+            JoyousSpring.extra_deck_area.config.card_limit - self.edition.card_limit
+    end
+    card_remove_from_area_ref(self)
 end
 
 local cardarea_remove_ref = CardArea.remove
@@ -645,36 +887,120 @@ function CardArea:align_cards()
     end
 end
 
-local check_for_buy_space_ref = G.FUNCS.check_for_buy_space
-G.FUNCS.check_for_buy_space = function(card)
-    if JoyousSpring.is_extra_deck_monster(card) then
-        if #JoyousSpring.extra_deck_area.cards < JoyousSpring.extra_deck_limit +
-            ((card.edition and card.edition.negative) and 1 or 0) then
-            return true
-        else
-            alert_no_space(card, G.jokers)
-            return false
-        end
+local controller_queue_R_cursor_press_ref = Controller.queue_R_cursor_press
+function Controller:queue_R_cursor_press(x, y)
+    controller_queue_R_cursor_press_ref(self, x, y)
+
+    if JoyousSpring.summon_material_area and next(JoyousSpring.summon_material_area.highlighted) then
+        JoyousSpring.summon_material_area:unhighlight_all()
     end
-    return check_for_buy_space_ref(card)
 end
 
-JoyousSpring.add_to_extra_deck = function(card)
-    JoyousSpring.extra_deck_area:emplace(card)
-end
+local game_start_run_ref = Game.start_run
+function Game:start_run(args)
+    self.joy_extra_deck_area = CardArea(
+        0,
+        0,
+        self.CARD_W * 4.95,
+        self.CARD_H * 0.95,
+        {
+            card_limit = 5,
+            type = 'extra_deck',
+            highlight_limit = 1,
+        }
+    )
+    JoyousSpring.extra_deck_area = G.joy_extra_deck_area
+    game_start_run_ref(self, args)
+    self.joy_extra_deck = UIBox {
+        definition = JoyousSpring.create_UIBox_extra_deck(),
+        config = { align = 'cmi', offset = { x = 0, y = -5 }, major = self.jokers, bond = 'Weak' }
+    }
+    self.joy_extra_deck.states.visible = false
 
-local card_can_sell_card_ref = Card.can_sell_card
-function Card:can_sell_card(context)
-    if (G.play and #G.play.cards > 0) or
-        (G.CONTROLLER.locked) or
-        (G.GAME.STOP_USE and G.GAME.STOP_USE > 0)
-    then
-        return false
-    end
-    if self.area and
-        self.area.config.type == 'extra_deck' and
-        not self.ability.eternal then
-        return true
-    end
-    return card_can_sell_card_ref(self, context)
+    JoyousSpring.extra_deck_open = false
+    JoyousSpring.extra_deck_forced = false
+    JoyousSpring.extra_deck_limit = 5
+
+    self.GAME.joy_graveyard = self.GAME.joy_graveyard or {}
+    JoyousSpring.graveyard = self.GAME.joy_graveyard
+
+    self.extra_buttons = UIBox {
+        definition = {
+            n = G.UIT.ROOT,
+            config = {
+                align = "cm",
+                minw = 1,
+                minh = 0.3,
+                padding = 0.15,
+                r = 0.1,
+                colour = G.C.CLEAR
+            },
+            nodes = {
+                {
+                    n = G.UIT.C,
+                    config = {
+                        align = "tm",
+                        minw = 2,
+                        padding = 0.1,
+                        r = 0.1,
+                        hover = true,
+                        colour = G.C.JOY.TRAP,
+                        shadow = true,
+                        button = "joy_open_graveyard"
+                    },
+                    nodes = {
+                        {
+                            n = G.UIT.R,
+                            config = { align = "bcm", padding = 0 },
+                            nodes = {
+                                {
+                                    n = G.UIT.T,
+                                    config = {
+                                        text = localize('b_joy_graveyard'),
+                                        scale = 0.35,
+                                        colour = G.C.UI.TEXT_LIGHT
+                                    }
+                                }
+                            }
+                        },
+                    }
+                },
+                {
+                    n = G.UIT.C,
+                    config = {
+                        align = "tm",
+                        minw = 2,
+                        padding = 0.1,
+                        r = 0.1,
+                        hover = true,
+                        colour = G.C.JOY.SPELL,
+                        shadow = true,
+                        button = "joy_open_extra_deck"
+                    },
+                    nodes = {
+                        {
+                            n = G.UIT.R,
+                            config = { align = "bcm", padding = 0 },
+                            nodes = {
+                                {
+                                    n = G.UIT.T,
+                                    config = {
+                                        text = localize('b_joy_extra_deck'),
+                                        scale = 0.35,
+                                        colour = G.C.UI.TEXT_LIGHT
+                                    }
+                                }
+                            }
+                        },
+                    }
+                },
+            }
+        },
+        config = {
+            align = "tr",
+            offset = { x = -4, y = 0 },
+            major = G.consumeables,
+            bond = 'Weak'
+        }
+    }
 end

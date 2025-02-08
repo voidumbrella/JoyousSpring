@@ -13,13 +13,12 @@ return {
 			j_joy_dmaid_kitchen = {
 				name = "{C:joy_effect}Kitchen Dragonmaid",
 				text = {
-					"{C:attention}#1#{} free {C:green}Reroll{} for each",
-					"{C:joy_normal}\"Dragonmaid\"{} {C:attention}Joker{} per shop",
-					"{C:inactive}(Currently{} {C:attention}#2#{} {C:inactive}Rerolls){}",
+					"Gain {C:attention}#1#{} free {C:green}Reroll{}",
+					"for each {C:joy_normal}\"Dragonmaid\"{} {C:attention}Joker{}",
+					"when obtained",
 					" ",
-					"When {C:attention}Blind{} is selected,",
-					"{C:attention}transforms{} into",
-					"{C:joy_effect}\"Dragonmaid Tinkhec\""
+					"{C:attention}Transforms{} into {C:joy_effect}\"Dragonmaid Tinkhec\"",
+					"when {C:attention}Blind{} is selected",
 				},
 			},
 			j_joy_dmaid_tinkhec = {
@@ -28,45 +27,40 @@ return {
 					"{C:joy_normal}\"Dragonmaid\"{} {C:attention}Jokers{} each",
 					"give {C:mult}+#1#{} Mult",
 					" ",
-					"At end of round,",
-					"{C:attention}transforms{} into",
-					"{C:joy_effect}\"Kitchen Dragonmaid\""
+					"{C:attention}Transforms{} into {C:joy_effect}\"Kitchen Dragonmaid\"",
+					"at end of round",
 				},
 			},
 			j_joy_dmaid_parlor = {
 				name = "{C:joy_effect}Parlor Dragonmaid",
 				text = {
-					"Gives {C:attention}#1#{} discard in packs",
-					"once per shop and adds",
-					"an extra pack for every",
-					"{C:attention}#2#{} {C:joy_normal}\"Dragonmaid\"{} {C:attention}Jokers{}",
+					"Gain {C:attention}#1# Booster Tag{} if you have",
+					"{C:attention}#2#{} {C:joy_normal}\"Dragonmaid\"{} {C:attention}Jokers{},",
+					"gaining an extra for every {C:attention}#3#{} more",
 					" ",
-					"When {C:attention}Blind{} is selected,",
-					"{C:attention}transforms{} into",
-					"{C:joy_effect}\"Dragonmaid Lorpar\""
+					"{C:attention}Transforms{} into {C:joy_effect}\"Dragonmaid Lorpar\"",
+					"when {C:attention}Blind{} is selected",
 				},
 			},
 			j_joy_dmaid_lorpar = {
 				name = "{C:joy_effect}Dragonmaid Lorpar",
 				text = {
 					"{C:joy_normal}\"Dragonmaid\"{} {C:attention}Jokers{} each",
-					"give {C:chips}+#1#{} Chips",
+					"give {X:mult,C:white}X#1#{} Mult",
 					" ",
-					"At end of round,",
-					"{C:attention}transforms{} into",
-					"{C:joy_effect}\"Parlor Dragonmaid\""
+					"{C:attention}Transforms{} into {C:joy_effect}\"Parlor Dragonmaid\"",
+					"at end of round",
 				},
 			},
 			j_joy_dmaid_nurse = {
 				name = "{C:joy_effect}Nurse Dragonmaid",
 				text = {
-					"Immediately {C:attention}revives #1#{} random",
-					"{C:blue}Common{} {C:joy_normal}\"Dragonmaid\"{} {C:attention}Joker{}",
+					"{C:green}#1# in #2#{} chance to {C:attention}revive #3#{}",
+					"{C:blue}Common{} {C:joy_normal}\"Dragonmaid\"{} {C:attention}Joker(s){}",
 					"{C:inactive}(Must have room){}",
 					" ",
-					"When {C:attention}Blind{} is selected,",
-					"{C:attention}transforms{} into",
-					"{C:joy_effect}\"Dragonmaid Ernus\""
+					"{C:attention}Transforms{} into {C:joy_effect}\"Dragonmaid Ernus\"",
+					"when {C:attention}Blind{} is selected",
 				},
 			},
 			j_joy_dmaid_ernus = {
@@ -75,21 +69,18 @@ return {
 					"{C:mult}+#1#{} Mult for each {C:joy_normal}\"Dragonmaid\"{}",
 					"{C:attention}Joker{} in the {C:attention}GY{}",
 					" ",
-					"At end of round,",
-					"{C:attention}transforms{} into",
-					"{C:joy_effect}\"Nurse Dragonmaid\""
+					"{C:attention}Transforms{} into {C:joy_effect}\"Nurse Dragonmaid\"",
+					"at end of round",
 				},
 			},
 			j_joy_dmaid_laundry = {
 				name = "{C:joy_effect}Laundry Dragonmaid",
 				text = {
-					"Immediately adds {C:attention}#1#{} random",
-					"{C:joy_normal}Main Deck \"Dragonmaid\"{} {C:attention}Jokers{}",
-					"to the {C:attention}GY{}",
+					"Adds {C:attention}#1#{} random {C:joy_normal}Main Deck{}",
+					"{C:joy_normal}\"Dragonmaid\"{} {C:attention}Jokers{} to the {C:attention}GY{}",
 					" ",
-					"When {C:attention}Blind{} is selected,",
-					"{C:attention}transforms{} into",
-					"{C:joy_effect}\"Dragonmaid Nudyarl\""
+					"{C:attention}Transforms{} into {C:joy_effect}\"Dragonmaid Nudyarl\"",
+					"when {C:attention}Blind{} is selected",
 				},
 			},
 			j_joy_dmaid_nudyarl = {
@@ -98,48 +89,45 @@ return {
 					"{C:chips}+#1#{} Chips for each {C:joy_normal}\"Dragonmaid\"{}",
 					"{C:attention}Joker{} in the {C:attention}GY{}",
 					" ",
-					"At end of round,",
-					"{C:attention}transforms{} into",
-					"{C:joy_effect}\"Laundry Dragonmaid\""
+					"{C:attention}Transforms{} into {C:joy_effect}\"Laundry Dragonmaid\"",
+					"at end of round",
 				},
 			},
 			j_joy_dmaid_chamber = {
 				name = "{C:joy_effect}Chamber Dragonmaid",
 				text = {
-					"Adds an extra {C:attention}Voucher{} to the shop",
-					"for every {C:attention}#2#{} {C:joy_normal}\"Dragonmaid\"{} {C:attention}Jokers{}",
-					"and each shop starts with {C:attention}#1#{}",
-					"{C:joy_normal}\"Dragonmaid\"{} {C:attention}Joker{} (but it costs more)",
+					"Gain {C:attention}#1# Voucher Tag{} if you have",
+					"{C:attention}#2#{} {C:joy_normal}\"Dragonmaid\"{} {C:attention}Jokers{},",
+					"gaining an extra for every {C:attention}#3#{} more",
 					" ",
-					"When {C:attention}Blind{} is selected,",
-					"{C:attention}transforms{} into",
-					"{C:joy_effect}\"Dragonmaid Stern\""
+					"{C:attention}Transforms{} into {C:joy_effect}\"Dragonmaid Stern\"",
+					"when {C:attention}Blind{} is selected",
 				},
 			},
 			j_joy_dmaid_stern = {
 				name = "{C:joy_effect}Dragonmaid Stern",
 				text = {
-					"Immediately {C:attention}revives 1{} random",
-					"{C:green}Uncommon{} or {C:red}Rare{}",
-					"{C:joy_normal}\"Dragonmaid\"{} {C:attention}Joker{}",
+					"{C:green}#1# in #2#{} chance to {C:attention}revive #3#{} {C:green}Uncommon{}",
+					"or {C:red}Rare{} {C:joy_normal}\"Dragonmaid\"{} {C:attention}Joker(s){}",
 					"{C:inactive}(Must have room){}",
 					" ",
-					"At end of round,",
-					"{C:attention}transforms{} into",
-					"{C:joy_effect}\"Chamber Dragonmaid\""
+					"{C:attention}Transforms{} into {C:joy_effect}\"Chamber Dragonmaid\"",
+					"at end of round",
 				},
 			},
 			j_joy_dmaid_lady = {
 				name = "{C:joy_effect}Lady's Dragonmaid",
 				text = {
-					"Adds {C:joy_fusion}\"House Dragonmaid\" to the",
-					"{C:joy_normal}\"Extra Deck\" {C:inactive,S:0.6}(Must have room){}",
+					"Adds {C:joy_fusion}\"House Dragonmaid\"{} to the",
+					"{C:joy_effect}Extra Deck{} {C:inactive,S:0.6}(Must have room){}",
 					" ",
-					"When {C:attention}Blind{} is selected,",
-					"has a {C:green}1 in 3{} chance to",
-					"{C:attention}transform{} into a random",
-					"{C:green}Uncommon{} {C:joy_normal}\"Dragonmaid\"{} {C:attention}Joker{}"
+					"{C:green}#1# in #2#{} chance to {C:attention}transform{} into an",
+					"{C:green}Uncommon{} {C:joy_normal}\"Dragonmaid\"{} {C:attention}Joker{}",
+					"when {C:attention}Blind{} is selected",
 				},
+				joy_summon_conditions = {
+					"{C:attention}2{} {C:attention}Jokers{}, including a {C:joy_normal}\"Dragonmaid\"{}"
+				}
 			},
 			j_joy_dmaid_house = {
 				name = "{C:joy_fusion}House Dragonmaid",
@@ -148,42 +136,47 @@ return {
 					"{C:joy_normal}\"Dragonmaid\"{} {C:attention}Joker{}",
 					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}",
 					" ",
-					"{C:attention}Jokers{} in the {C:attention}GY{} count as",
-					"cards you own for",
+					"{C:attention}Jokers{} in the {C:attention}GY{} count for",
 					"{C:joy_normal}\"Dragonmaid\"{} effects",
 					" ",
-					"After {C:attention}#3# Blinds{} are defeated,",
-					"{C:attention}transforms{} into",
-					"{C:joy_fusion}\"Dragonmaid Sheou\" {C:inactive}(#4#/#3#){}"
+					"{C:attention}Transforms{} into {C:joy_fusion}\"Dragonmaid Sheou\"",
+					"after {C:attention}#3#{} rounds {C:inactive}(#4#/#3#){}",
 				},
 				joy_summon_conditions = {
-					"{C:joy_fusion}Fuse {C:attention}2{} {C:joy_normal}\"Dragonmaid\"{} {C:attention}Jokers{}"
+					"{C:attention}2{} {C:joy_normal}\"Dragonmaid\"{} {C:attention}Jokers{}"
 				}
 			},
 			j_joy_dmaid_sheou = {
 				name = "{C:joy_fusion}Dragonmaid Sheou",
 				text = {
-					"{C:attention}Jokers{} in the {C:attention}GY{} count as",
-					"cards you own for",
+					"{C:attention}Jokers{} in the {C:attention}GY{} count for",
 					"{C:joy_normal}\"Dragonmaid\"{} effects",
 					" ",
 					"When {C:attention}Boss Blind{} is selected,",
-					"disables its effects then",
-					"{C:attention}transforms{} into",
-					"{C:joy_fusion}\"House Dragonmaid\"{} and",
-					"creates {C:attention}#1#{} {C:blue}Common{}",
+					"disables its effects then {C:attention}transforms{} into",
+					"{C:joy_fusion}\"House Dragonmaid\"{} and creates {C:attention}#1#{} {C:blue}Common{}",
 					"{C:joy_normal}\"Dragonmaid\"{} {C:attention}Joker{}",
 					"{C:inactive}(Must have room){}"
 				},
 			},
 		},
+		Tag = {
+			tag_joy_booster = {
+				name = "Booster Tag",
+				text = {
+                    "Adds one {C:booster}Booster",
+                    "to the next shop",
+                },
+			},
+		}
 	},
 	misc = {
 		dictionary = {
 			b_joy_extra_deck = "Extra Deck",
 			b_joy_summon_conditions = "Summoning Conditions",
 			b_joy_graveyard = "Graveyard",
-			b_joy_summon = "Summon"
+			b_joy_summon = "Summon",
+			b_joy_disable_booster_tag = "Disable Booster Tag from appearing naturally"
 		}
 	},
 }

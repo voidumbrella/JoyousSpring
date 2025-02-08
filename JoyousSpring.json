@@ -1,13 +1,13 @@
 {
 	"id": "JoyousSpring",
 	"name": "JoyousSpring",
-	"display_name": "Joyous Spring",
+	"display_name": "JoyousSpring",
 	"author": ["nh6574"],
 	"description": "Adds modern Yu-Gi-Oh! cards and mechanics.",
 	"prefix": "joy",
 	"main_file": "JoyousSpring.lua",
 	"priority": 0,
-	"badge_colour": "",
+	"badge_colour": "F4A6C7",
 	"badge_text_colour": "",
 	"version": "0.1",
 	"dependencies": ["Steamodded (>=1.0.0~ALPHA-1404g)"]

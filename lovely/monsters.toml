@@ -3,8 +3,7 @@ version = "0.1.0"
 dump_lua = true
 priority = 0
 
-## Card Back
-
+# Change card back to Yu-Gi-Oh's card back
 [[patches]]
 [patches.regex]
 target = "card.lua"
@@ -20,5 +19,18 @@ if JoyousSpring.is_monster_card(self) then
     self.children.back.states.collide.can = false
     self.children.back:set_role({major = self, role_type = 'Glued', draw_major = self})
     return
+end
+'''
+
+# Customize sell cost
+[[patches]]
+[patches.regex]
+target = "card.lua"
+pattern = 'if self\.area and self\.ability\.couponed and.*'
+position = 'before'
+match_indent = true
+payload = '''
+if JoyousSpring.is_monster_card(self) then
+    JoyousSpring.set_sell_cost(self)
 end
 '''
