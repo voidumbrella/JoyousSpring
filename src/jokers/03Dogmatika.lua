@@ -522,6 +522,13 @@ SMODS.Joker({
             end
         end
     end,
+    joy_create_card_for_shop = function (card, area)
+        if card and JoyousSpring.is_extra_deck_monster(card) and next(SMODS.find_card("j_joy_dogma_knight")) then
+            card.ability.extra.joyous_spring.is_free = true
+            JoyousSpring.create_perma_debuffed_card(card, "Dogmatika")
+            card:set_cost()
+        end
+    end,
     joker_display_def = function(JokerDisplay)
         return {
             text = {
@@ -540,14 +547,3 @@ SMODS.Joker({
         }
     end
 })
-
-local create_card_for_shop_ref = create_card_for_shop
-function create_card_for_shop(area)
-    local card = create_card_for_shop_ref(area)
-    if card and JoyousSpring.is_extra_deck_monster(card) and next(SMODS.find_card("j_joy_dogma_knight")) then
-        card.ability.extra.joyous_spring.is_free = true
-        JoyousSpring.create_perma_debuffed_card(card, "Dogmatika")
-        card:set_cost()
-    end
-    return card
-end

@@ -30,7 +30,5 @@ pattern = 'if self\.area and self\.ability\.couponed and.*'
 position = 'before'
 match_indent = true
 payload = '''
-if JoyousSpring.is_monster_card(self) then
-    JoyousSpring.set_cost(self)
-end
+JoyousSpring.set_cost(self)
 '''

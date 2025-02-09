@@ -353,7 +353,7 @@ return {
 			j_joy_yokai_ogre = {
 				name = "{C:joy_effect}Ghost Ogre & Snow Rabbit",
 				text = {
-					"Destroy every played card",
+					"Destroy every scored card",
 					"Gains {X:mult,C:white}X#1#{} Mult for each",
 					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}"
 				},
@@ -397,9 +397,9 @@ return {
 			j_joy_yokai_mourner = {
 				name = "{C:joy_effect}Ghost Mourner & Moonlit Chill",
 				text = {
-					"Permanently debuffs every",
-					"{C:blue}Common{} and {C:green}Uncommon{} {C:attention}Joker{}",
-					"Gains {X:mult,C:white}X#1#{} Mult for each",
+					"Permanently debuffs every {C:blue}Common{} and {C:green}Uncommon{}",
+					"{C:attention}Joker{} in the shop",
+					"Gains {X:mult,C:white}X#1#{} Mult for each debuffed card sold",
 					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}",
 				},
 			},
@@ -414,7 +414,7 @@ return {
 					" ",
 					"The number of hands equals the number of {C:joy_spell}Extra Deck{} types owned",
 					"No repeat hand types",
-					"Other {C:joy_normal}Main Deck{} {C:attention}Jokers{} are debufffed"
+					"Bought {C:joy_normal}Main Deck{} {C:attention}Jokers{} are debufffed"
 				},
 			},
 			--#endregion

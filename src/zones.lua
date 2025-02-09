@@ -911,6 +911,7 @@ end
 
 local game_start_run_ref = Game.start_run
 function Game:start_run(args)
+    self.GAME.joy_game_over = false
     self.joy_extra_deck_area = CardArea(
         0,
         0,
@@ -1016,4 +1017,17 @@ function Game:start_run(args)
             bond = 'Weak'
         }
     }
+end
+
+local create_card_for_shop_ref = create_card_for_shop
+function create_card_for_shop(area)
+    local card = create_card_for_shop_ref(area)
+    if card and G.jokers then
+        for _, joker in ipairs(G.jokers.cards) do
+            if joker.config.center.joy_create_card_for_shop then
+                joker.config.center.joy_create_card_for_shop(card, area)
+            end
+        end
+    end
+    return card
 end

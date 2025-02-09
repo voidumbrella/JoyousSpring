@@ -35,6 +35,43 @@ SMODS.Joker({
             xmult = 1
         },
     },
+    calculate = function(self, card, context)
+        if card.facing ~= 'back' then
+            if not context.blueprint_card and not context.retrigger_joker and
+                context.destroy_card and context.cardarea == G.play then
+                for _, playing_card in ipairs(context.scoring_hand) do
+                    if playing_card == context.destroy_card then
+                        card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.base_xmult
+                        G.E_MANAGER:add_event(Event({
+                            func = function()
+                                card_eval_status_text(card, 'extra', nil, nil, nil,
+                                    { message = localize('k_upgrade_ex') }); return true
+                            end
+                        }))
+                        return { remove = true }
+                    end
+                end
+            end
+
+            if context.joker_main then
+                return {
+                    xmult = card.ability.extra.xmult
+                }
+            end
+        end
+    end,
+    joker_display_def = function(JokerDisplay)
+        return {
+            text = {
+                {
+                    border_nodes = {
+                        { text = "X" },
+                        { ref_table = "card.ability.extra", ref_value = "xmult", retrigger_type = "exp" }
+                    }
+                }
+            },
+        }
+    end
 })
 
 
@@ -49,7 +86,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 12,
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.xmult, 0 } }
+        return { vars = { card.ability.extra.xmult, 1 + card.ability.extra.xmult * JoyousSpring.count_materials_in_graveyard({ { is_extra_deck = true } }) } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
     config = {
@@ -66,6 +103,33 @@ SMODS.Joker({
             xmult = 0.2
         },
     },
+    calculate = function(self, card, context)
+        if card.facing ~= 'back' then
+            if context.joker_main then
+                return {
+                    xmult = 1 +
+                        card.ability.extra.xmult *
+                        JoyousSpring.count_materials_in_graveyard({ { is_extra_deck = true } })
+                }
+            end
+        end
+    end,
+    joker_display_def = function(JokerDisplay)
+        return {
+            text = {
+                {
+                    border_nodes = {
+                        { text = "X" },
+                        { ref_table = "card.joker_display_values", ref_value = "xmult", retrigger_type = "exp" }
+                    }
+                }
+            },
+            calc_function = function(card)
+                card.joker_display_values.xmult = 1 +
+                    card.ability.extra.xmult * JoyousSpring.count_materials_in_graveyard({ { is_extra_deck = true } })
+            end
+        }
+    end
 })
 
 
@@ -100,9 +164,38 @@ SMODS.Joker({
             xmult = 1
         },
     },
+    calculate = function(self, card, context)
+        if card.facing ~= 'back' then
+            if not context.blueprint_card and not context.retrigger_joker and context.joy_no_draw then
+                card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.base_xmult
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        card_eval_status_text(card, 'extra', nil, nil, nil,
+                            { message = localize('k_upgrade_ex') }); return true
+                    end
+                }))
+            end
+
+            if context.joker_main then
+                return {
+                    xmult = card.ability.extra.xmult
+                }
+            end
+        end
+    end,
+    joker_display_def = function(JokerDisplay)
+        return {
+            text = {
+                {
+                    border_nodes = {
+                        { text = "X" },
+                        { ref_table = "card.ability.extra", ref_value = "xmult", retrigger_type = "exp" }
+                    }
+                }
+            },
+        }
+    end
 })
-
-
 
 -- Ghost Belle & Haunted Mansion
 SMODS.Joker({
@@ -133,6 +226,37 @@ SMODS.Joker({
             xmult = 1
         },
     },
+    calculate = function(self, card, context)
+        if card.facing ~= 'back' then
+            if not context.blueprint_card and not context.retrigger_joker and context.joy_revived then
+                card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.base_xmult
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        card_eval_status_text(card, 'extra', nil, nil, nil,
+                            { message = localize('k_upgrade_ex') }); return true
+                    end
+                }))
+            end
+
+            if context.joker_main then
+                return {
+                    xmult = card.ability.extra.xmult
+                }
+            end
+        end
+    end,
+    joker_display_def = function(JokerDisplay)
+        return {
+            text = {
+                {
+                    border_nodes = {
+                        { text = "X" },
+                        { ref_table = "card.ability.extra", ref_value = "xmult", retrigger_type = "exp" }
+                    }
+                }
+            },
+        }
+    end
 })
 
 
@@ -145,7 +269,7 @@ SMODS.Joker({
     pos = { x = 1, y = 1 },
     rarity = 4,
     discovered = true,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
     cost = 12,
     loc_vars = function(self, info_queue, card)
@@ -164,9 +288,58 @@ SMODS.Joker({
                 monster_archetypes = {},
             },
             base_xmult = 0.2,
-            xmult = 1
+            xmult = 1,
+            consumable_count = 0
         },
     },
+    calculate = function(self, card, context)
+        if card.facing ~= 'back' then
+            if not context.blueprint_card and not context.retrigger_joker then
+                if context.setting_blind and not context.repetition and not context.individual then
+                    local eval = function(card)
+                        return (card.ability.extra.consumable_count == 0) and not G
+                            .RESET_JIGGLES
+                    end
+                    juice_card_until(card, eval, true)
+                end
+                if context.using_consumeable and G.GAME.blind:get_type() then
+                    card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.base_xmult
+                    card.ability.extra.consumable_count = card.ability.extra.consumable_count + 1
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            card_eval_status_text(card, 'extra', nil, nil, nil,
+                                { message = localize('k_upgrade_ex') }); return true
+                        end
+                    }))
+                end
+            end
+            if not context.blueprint_card and not context.retrigger_joker and
+                context.end_of_round and context.game_over == false and not context.repetition and not context.individual then
+                if card.ability.extra.consumable_count > 0 then
+                    card.ability.extra.consumable_count = 0
+                else
+                    G.GAME.joy_game_over = true
+                end
+            end
+            if context.joker_main then
+                return {
+                    xmult = card.ability.extra.xmult
+                }
+            end
+        end
+    end,
+    joker_display_def = function(JokerDisplay)
+        return {
+            text = {
+                {
+                    border_nodes = {
+                        { text = "X" },
+                        { ref_table = "card.ability.extra", ref_value = "xmult", retrigger_type = "exp" }
+                    }
+                }
+            },
+        }
+    end
 })
 
 
@@ -200,4 +373,47 @@ SMODS.Joker({
             xmult = 1
         },
     },
+    calculate = function(self, card, context)
+        if card.facing ~= 'back' then
+            if not context.blueprint_card and not context.retrigger_joker and context.selling_card then
+                if context.card.debuff then
+                    card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.base_xmult
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            card_eval_status_text(card, 'extra', nil, nil, nil,
+                                { message = localize('k_upgrade_ex') }); return true
+                        end
+                    }))
+                end
+            end
+
+            if context.joker_main then
+                return {
+                    xmult = card.ability.extra.xmult
+                }
+            end
+        end
+    end,
+    joy_create_card_for_shop = function(card, area)
+        if card and card.ability and card.ability.set == 'Joker' and
+            (card.config.center.rarity == 1 or card.config.center.rarity == 2) then
+            local added_card = JoyousSpring.create_perma_debuffed_card(card, "j_joy_yokai_mourner")
+            if added_card then
+                added_card.joy_modify_cost = { cost = 0, sell_cost = 1 }
+                added_card:set_cost()
+            end
+        end
+    end,
+    joker_display_def = function(JokerDisplay)
+        return {
+            text = {
+                {
+                    border_nodes = {
+                        { text = "X" },
+                        { ref_table = "card.ability.extra", ref_value = "xmult", retrigger_type = "exp" }
+                    }
+                }
+            },
+        }
+    end
 })

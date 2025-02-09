@@ -119,13 +119,13 @@ JoyousSpring.is_material = function(card, properties, summon_type)
         end
     end
     if properties.rarity then
-        if card.rarity ~= properties.rarity then
+        if card.config.center.rarity ~= properties.rarity then
             return false
         end
     end
     if properties.exclude_rarities then
         for _, rarity in ipairs(properties.exclude_rarities) do
-            if card.rarity == rarity then
+            if card.config.center.rarity == rarity then
                 return false
             end
         end
@@ -616,6 +616,7 @@ JoyousSpring.revive = function(key, must_have_room)
         added_card.ability.extra.joyous_spring.revived = true
         added_card:set_cost()
         JoyousSpring.graveyard[key] = JoyousSpring.graveyard[key] - 1
+        SMODS.calculate_context({joy_revived = true, joy_revived_card = added_card})
         return added_card
     end
 end
@@ -633,18 +634,28 @@ end
 -- Modifiers
 
 JoyousSpring.set_cost = function(card)
-    if JoyousSpring.is_perma_debuffed(card) then
-        card.sell_cost = 1
-    elseif JoyousSpring.is_summoned(card) then
-        card.sell_cost = card.cost + (card.ability.extra_value or 0)
-    elseif JoyousSpring.is_revived(card) then
-        card.sell_cost = 1 + (card.ability.extra_value or 0)
+    if JoyousSpring.is_monster_card(card) then
+        if JoyousSpring.is_perma_debuffed(card) then
+            card.sell_cost = 1
+        elseif JoyousSpring.is_summoned(card) then
+            card.sell_cost = card.cost + (card.ability.extra_value or 0)
+        elseif JoyousSpring.is_revived(card) then
+            card.sell_cost = 1 + (card.ability.extra_value or 0)
+        end
+        if card.config.center.joy_set_cost then
+            card.config.center.joy_set_cost(card)
+        end
+        if JoyousSpring.is_free(card) then
+            card.cost = 0
+        end
     end
-    if card.config.center.joy_set_cost then
-        card.config.center.joy_set_cost(card)
-    end
-    if JoyousSpring.is_free(card) then
-        card.cost = 0
+    if card.joy_modify_cost then
+        if card.joy_modify_cost.cost then
+            card.cost = card.joy_modify_cost.cost
+        end
+        if card.joy_modify_cost.sell_cost then
+            card.sell_cost = card.joy_modify_cost.sell_cost
+        end
     end
 end
 

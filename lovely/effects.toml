@@ -1,0 +1,36 @@
+[manifest]
+version = "0.1.0"
+dump_lua = true
+priority = 0
+
+# Causes game over
+[[patches]]
+[patches.regex]
+target = "functions/state_events.lua"
+pattern = 'if SMODS\.saved then game_over = false end'
+position = 'after'
+match_indent = true
+payload = '''
+if not game_over then game_over = G.GAME.joy_game_over or false end
+'''
+
+# Ash Blossom effect
+[[patches]]
+[patches.regex]
+target = "functions/state_events.lua"
+pattern = 'if G\.GAME\.blind\.name == .The Serpent. and'
+position = 'before'
+match_indent = true
+payload = '''
+if next(SMODS.find_card("j_joy_yokai_ash")) and
+    (G.GAME.current_round.hands_played > 0 or G.GAME.current_round.discards_used > 0) then
+    for _, joker in ipairs(SMODS.find_card("j_joy_yokai_ash")) do
+        if not joker.debuff and joker.facing ~= 'back' and 
+            pseudorandom("j_joy_yokai_ash") < G.GAME.probabilities.normal / joker.ability.extra.odds then
+            hand_space = 0
+            SMODS.calculate_context({joy_no_draw = true, joy_card = joker})
+            break
+        end
+    end
+end
+'''
