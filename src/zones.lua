@@ -15,6 +15,19 @@ JoyousSpring.add_to_extra_deck = function(card, args)
     JoyousSpring.extra_deck_area:emplace(card)
 end
 
+JoyousSpring.return_to_extra_deck = function(card)
+    if card.area and card.area == G.jokers then
+        G.jokers:remove_card(card)
+        card:remove_from_deck()
+        card.ability.extra.joyous_spring.summoned = false
+        card:set_cost()
+        JoyousSpring.extra_deck_area:emplace(card)
+        if JokerDisplay then
+            card:joker_display_remove()
+        end
+    end
+end
+
 JoyousSpring.send_to_graveyard = function(card)
     if JoyousSpring.graveyard then
         if type(card) == "string" then

@@ -19,6 +19,7 @@ end
 
 JoyousSpring.is_attribute = function(card, attribute)
     return JoyousSpring.is_monster_card(card) and
+        card.ability.extra.joyous_spring.is_all_attributes or
         card.ability.extra.joyous_spring.attribute == attribute
 end
 
@@ -46,6 +47,19 @@ JoyousSpring.is_pendulum_monster = function(card)
     return JoyousSpring.is_monster_card(card) and card.ability.extra.joyous_spring.is_pendulum or false
 end
 
+JoyousSpring.is_tuner_monster = function(card)
+    return JoyousSpring.is_monster_card(card) and card.ability.extra.joyous_spring.is_tuner or false
+end
+
+JoyousSpring.is_nontuner_monster = function(card)
+    return not JoyousSpring.is_tuner_monster(card)
+end
+
+JoyousSpring.is_all_materials = function(card, summon_type)
+    return JoyousSpring.is_monster_card(card) and card.ability.extra.joyous_spring.is_all_materials and
+        card.ability.extra.joyous_spring.is_all_materials[summon_type]
+end
+
 JoyousSpring.is_summoned = function(card)
     return JoyousSpring.is_monster_card(card) and card.ability.extra.joyous_spring.summoned or false
 end
@@ -56,7 +70,7 @@ end
 
 -- General checks
 
-JoyousSpring.is_material = function(card, properties)
+JoyousSpring.is_material = function(card, properties, summon_type)
     if card.ability.eternal then
         return false
     end
@@ -65,6 +79,9 @@ JoyousSpring.is_material = function(card, properties)
     end
     if card.facing == 'back' then
         return false
+    end
+    if summon_type and JoyousSpring.is_all_materials(card, summon_type) then
+        return true
     end
     if properties.func then
         if not properties.func(card, properties.func_vars) then
@@ -341,12 +358,12 @@ end
 
 -- Summon and material calculations
 
-JoyousSpring.filter_materials_on_properties = function(properties, card_list)
+JoyousSpring.filter_materials_on_properties = function(properties, card_list, summon_type)
     local card_table = card_list or G.jokers.cards
     local filtered_table = {}
 
     for _, card in ipairs(card_table) do
-        if JoyousSpring.is_material(card, properties) then
+        if JoyousSpring.is_material(card, properties, summon_type) then
             table.insert(filtered_table, card)
         end
     end
@@ -361,7 +378,7 @@ JoyousSpring.filter_materials_on_conditions = function(condition, card_list)
     local filtered_table = {}
 
     for _, properties in ipairs(condition.materials) do
-        local filtered_by_property = JoyousSpring.filter_materials_on_properties(properties, card_table)
+        local filtered_by_property = JoyousSpring.filter_materials_on_properties(properties, card_table, condition.type)
 
         if #filtered_by_property == 0 and not properties.optional then return {} end
         table.insert(filtered_table, filtered_by_property)
@@ -370,7 +387,17 @@ JoyousSpring.filter_materials_on_conditions = function(condition, card_list)
     return filtered_table
 end
 
-JoyousSpring.is_valid_material_combo = function(combo_list, restrictions)
+JoyousSpring.is_valid_material_combo = function(combo_list, restrictions, summon_type)
+    local all_materials_count = 0
+    for _, card in ipairs(combo_list) do
+        if summon_type and JoyousSpring.is_all_materials(card, summon_type) then
+            all_materials_count = all_materials_count + 1
+        end
+        if all_materials_count > 1 then
+            return false
+        end
+    end
+
     for i = 1, #combo_list do
         for j = i + 1, #combo_list do
             local card_1 = combo_list[i]
@@ -426,7 +453,7 @@ JoyousSpring.get_summon_material_combo_by_condition = function(condition, card_l
 
     local function backtrack(combo, remaining_material_sets)
         if #remaining_material_sets == 0 then
-            if JoyousSpring.is_valid_material_combo(combo, condition.restrictions) then
+            if JoyousSpring.is_valid_material_combo(combo, condition.restrictions, condition.type) then
                 table.insert(material_combos, combo)
             end
             return
@@ -527,13 +554,41 @@ JoyousSpring.perform_summon = function(card, card_list)
     G.jokers:emplace(card)
 end
 
+-- Revive
+
+JoyousSpring.revive = function(key, must_have_room)
+    if JoyousSpring.graveyard[key] and JoyousSpring.graveyard[key] > 0 and
+        (not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit)) then
+        local added_card = SMODS.add_card({
+            key = key
+        })
+        added_card.ability.extra.joyous_spring.revived = true
+        added_card:set_cost()
+        JoyousSpring.graveyard[key] = JoyousSpring.graveyard[key] - 1
+        return added_card
+    end
+end
+
+JoyousSpring.revive_pseudorandom = function(property_list, seed, must_have_room)
+    if not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit) then
+        local choices = JoyousSpring.get_materials_in_graveyard(property_list, true)
+        local key_to_add = pseudorandom_element(choices, seed)
+        if key_to_add then
+            return JoyousSpring.revive(key_to_add, must_have_room)
+        end
+    end
+end
+
 -- Modifiers
 
-JoyousSpring.set_sell_cost = function(card)
+JoyousSpring.set_cost = function(card)
     if JoyousSpring.is_summoned(card) then
         card.sell_cost = card.cost + (card.ability.extra_value or 0)
     elseif JoyousSpring.is_revived(card) then
         card.sell_cost = 1 + (card.ability.extra_value or 0)
+    end
+    if card.config.center.joy_set_cost then
+        card.config.center.joy_set_cost(card)
     end
 end
 

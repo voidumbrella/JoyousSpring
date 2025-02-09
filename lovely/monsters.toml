@@ -31,6 +31,6 @@ position = 'before'
 match_indent = true
 payload = '''
 if JoyousSpring.is_monster_card(self) then
-    JoyousSpring.set_sell_cost(self)
+    JoyousSpring.set_cost(self)
 end
 '''

@@ -46,17 +46,19 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        local count_graveyard = (next(SMODS.find_card("j_joy_dmaid_house")) or
-            next(SMODS.find_card("j_joy_dmaid_sheou"))) and true
-        local dragonmaid_count = JoyousSpring.count_materials_owned({ { monster_archetypes = { "Dragonmaid" } } }) +
-            (count_graveyard and JoyousSpring.count_materials_in_graveyard({ { monster_archetypes = { "Dragonmaid" } } }) or 0)
+        if not from_debuff then
+            local count_graveyard = (next(SMODS.find_card("j_joy_dmaid_house")) or
+                next(SMODS.find_card("j_joy_dmaid_sheou"))) and true
+            local dragonmaid_count = JoyousSpring.count_materials_owned({ { monster_archetypes = { "Dragonmaid" } } }) +
+                (count_graveyard and JoyousSpring.count_materials_in_graveyard({ { monster_archetypes = { "Dragonmaid" } } }) or 0)
 
-        card.ability.extra.rerolls = card.ability.extra.base_rerolls * dragonmaid_count
-        if not card.area or card.area ~= G.jokers then
-            card.ability.extra.rerolls = card.ability.extra.rerolls + 1
+            card.ability.extra.rerolls = card.ability.extra.base_rerolls * dragonmaid_count
+            if not card.area or card.area ~= G.jokers then
+                card.ability.extra.rerolls = card.ability.extra.rerolls + 1
+            end
+            G.GAME.current_round.free_rerolls = G.GAME.current_round.free_rerolls + card.ability.extra.rerolls
+            calculate_reroll_cost(true)
         end
-        G.GAME.current_round.free_rerolls = G.GAME.current_round.free_rerolls + card.ability.extra.rerolls
-        calculate_reroll_cost(true)
     end,
     in_pool = function(self, args)
         return true
@@ -197,24 +199,26 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        local count_graveyard = (next(SMODS.find_card("j_joy_dmaid_house")) or
-            next(SMODS.find_card("j_joy_dmaid_sheou"))) and true
-        local dragonmaid_count = JoyousSpring.count_materials_owned({ { monster_archetypes = { "Dragonmaid" } } }) +
-            (count_graveyard and JoyousSpring.count_materials_in_graveyard({ { monster_archetypes = { "Dragonmaid" } } }) or 0)
-        if not card.area or card.area ~= G.jokers then
-            dragonmaid_count = dragonmaid_count + 1
-        end
-        if dragonmaid_count >= card.ability.extra.dragonmaid_count then
-            for j = 1, card.ability.extra.tags_to_add do
-                add_tag(Tag('tag_joy_booster'))
+        if not from_debuff then
+            local count_graveyard = (next(SMODS.find_card("j_joy_dmaid_house")) or
+                next(SMODS.find_card("j_joy_dmaid_sheou"))) and true
+            local dragonmaid_count = JoyousSpring.count_materials_owned({ { monster_archetypes = { "Dragonmaid" } } }) +
+                (count_graveyard and JoyousSpring.count_materials_in_graveyard({ { monster_archetypes = { "Dragonmaid" } } }) or 0)
+            if not card.area or card.area ~= G.jokers then
+                dragonmaid_count = dragonmaid_count + 1
             end
-        end
-        local number_to_add = math.max(0,
-            math.floor((dragonmaid_count - card.ability.extra.dragonmaid_count) /
-                card.ability.extra.extra_dragonmaid_count))
-        for i = 1, number_to_add do
-            for j = 1, card.ability.extra.tags_to_add do
-                add_tag(Tag('tag_joy_booster'))
+            if dragonmaid_count >= card.ability.extra.dragonmaid_count then
+                for j = 1, card.ability.extra.tags_to_add do
+                    add_tag(Tag('tag_joy_booster'))
+                end
+            end
+            local number_to_add = math.max(0,
+                math.floor((dragonmaid_count - card.ability.extra.dragonmaid_count) /
+                    card.ability.extra.extra_dragonmaid_count))
+            for i = 1, number_to_add do
+                for j = 1, card.ability.extra.tags_to_add do
+                    add_tag(Tag('tag_joy_booster'))
+                end
             end
         end
     end,
@@ -355,13 +359,15 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        if pseudorandom("j_joy_dmaid_nurse") < G.GAME.probabilities.normal / card.ability.extra.odds then
-            for i = 1, card.ability.extra.revives do
-                JoyousSpring.revive_pseudorandom(
-                    { { rarity = 1, monster_archetypes = { "Dragonmaid" } } },
-                    pseudoseed("j_joy_dmaid_nurse"),
-                    true
-                )
+        if not from_debuff then
+            if pseudorandom("j_joy_dmaid_nurse") < G.GAME.probabilities.normal / card.ability.extra.odds then
+                for i = 1, card.ability.extra.revives do
+                    JoyousSpring.revive_pseudorandom(
+                        { { rarity = 1, monster_archetypes = { "Dragonmaid" } } },
+                        pseudoseed("j_joy_dmaid_nurse"),
+                        true
+                    )
+                end
             end
         end
     end,
@@ -488,21 +494,23 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        local choices = {
-            "j_joy_dmaid_kitchen",
-            "j_joy_dmaid_tinkhec",
-            "j_joy_dmaid_parlor",
-            "j_joy_dmaid_lorpar",
-            "j_joy_dmaid_nurse",
-            "j_joy_dmaid_ernus",
-            "j_joy_dmaid_laundry",
-            "j_joy_dmaid_nudyarl",
-            "j_joy_dmaid_chamber",
-            "j_joy_dmaid_stern"
-        }
+        if not from_debuff then
+            local choices = {
+                "j_joy_dmaid_kitchen",
+                "j_joy_dmaid_tinkhec",
+                "j_joy_dmaid_parlor",
+                "j_joy_dmaid_lorpar",
+                "j_joy_dmaid_nurse",
+                "j_joy_dmaid_ernus",
+                "j_joy_dmaid_laundry",
+                "j_joy_dmaid_nudyarl",
+                "j_joy_dmaid_chamber",
+                "j_joy_dmaid_stern"
+            }
 
-        for i = 1, card.ability.extra.mill do
-            JoyousSpring.send_to_graveyard(pseudorandom_element(choices, pseudoseed("j_joy_dmaid_laundry")))
+            for i = 1, card.ability.extra.mill do
+                JoyousSpring.send_to_graveyard(pseudorandom_element(choices, pseudoseed("j_joy_dmaid_laundry")))
+            end
         end
     end,
     in_pool = function(self, args)
@@ -619,24 +627,26 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        local count_graveyard = (next(SMODS.find_card("j_joy_dmaid_house")) or
-            next(SMODS.find_card("j_joy_dmaid_sheou"))) and true
-        local dragonmaid_count = JoyousSpring.count_materials_owned({ { monster_archetypes = { "Dragonmaid" } } }) +
-            (count_graveyard and JoyousSpring.count_materials_in_graveyard({ { monster_archetypes = { "Dragonmaid" } } }) or 0)
-        if not card.area or card.area ~= G.jokers then
-            dragonmaid_count = dragonmaid_count + 1
-        end
-        if dragonmaid_count >= card.ability.extra.dragonmaid_count then
-            for j = 1, card.ability.extra.tags_to_add do
-                add_tag(Tag('tag_voucher'))
+        if not from_debuff then
+            local count_graveyard = (next(SMODS.find_card("j_joy_dmaid_house")) or
+                next(SMODS.find_card("j_joy_dmaid_sheou"))) and true
+            local dragonmaid_count = JoyousSpring.count_materials_owned({ { monster_archetypes = { "Dragonmaid" } } }) +
+                (count_graveyard and JoyousSpring.count_materials_in_graveyard({ { monster_archetypes = { "Dragonmaid" } } }) or 0)
+            if not card.area or card.area ~= G.jokers then
+                dragonmaid_count = dragonmaid_count + 1
             end
-        end
-        local number_to_add = math.max(0,
-            math.floor((dragonmaid_count - card.ability.extra.dragonmaid_count) /
-                card.ability.extra.extra_dragonmaid_count))
-        for i = 1, number_to_add do
-            for j = 1, card.ability.extra.tags_to_add do
-                add_tag(Tag('tag_voucher'))
+            if dragonmaid_count >= card.ability.extra.dragonmaid_count then
+                for j = 1, card.ability.extra.tags_to_add do
+                    add_tag(Tag('tag_voucher'))
+                end
+            end
+            local number_to_add = math.max(0,
+                math.floor((dragonmaid_count - card.ability.extra.dragonmaid_count) /
+                    card.ability.extra.extra_dragonmaid_count))
+            for i = 1, number_to_add do
+                for j = 1, card.ability.extra.tags_to_add do
+                    add_tag(Tag('tag_voucher'))
+                end
             end
         end
     end,
@@ -685,16 +695,18 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        if pseudorandom("j_joy_dmaid_stern") < G.GAME.probabilities.normal / card.ability.extra.odds then
-            for i = 1, card.ability.extra.revives do
-                JoyousSpring.revive_pseudorandom(
-                    {
-                        { rarity = 2, monster_archetypes = { "Dragonmaid" } },
-                        { rarity = 3, monster_archetypes = { "Dragonmaid" } },
-                    },
-                    pseudoseed("j_joy_dmaid_stern"),
-                    true
-                )
+        if not from_debuff then
+            if pseudorandom("j_joy_dmaid_stern") < G.GAME.probabilities.normal / card.ability.extra.odds then
+                for i = 1, card.ability.extra.revives do
+                    JoyousSpring.revive_pseudorandom(
+                        {
+                            { rarity = 2, monster_archetypes = { "Dragonmaid" } },
+                            { rarity = 3, monster_archetypes = { "Dragonmaid" } },
+                        },
+                        pseudoseed("j_joy_dmaid_stern"),
+                        true
+                    )
+                end
             end
         end
     end,
@@ -748,7 +760,7 @@ SMODS.Joker({
                 monster_archetypes = { ["Dragonmaid"] = true },
                 summon_conditions = {
                     {
-                        type = "fusion",
+                        type = "FUSION",
                         materials = {
                             { monster_archetypes = { "Dragonmaid" } },
                             {}
@@ -777,8 +789,10 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        if #JoyousSpring.extra_deck_area.cards < JoyousSpring.extra_deck_area.config.card_limit then
-            JoyousSpring.add_to_extra_deck("j_joy_dmaid_house")
+        if not from_debuff then
+            if #JoyousSpring.extra_deck_area.cards < JoyousSpring.extra_deck_area.config.card_limit then
+                JoyousSpring.add_to_extra_deck("j_joy_dmaid_house")
+            end
         end
     end,
     in_pool = function(self, args)
@@ -837,7 +851,7 @@ SMODS.Joker({
                 monster_archetypes = { ["Dragonmaid"] = true },
                 summon_conditions = {
                     {
-                        type = "fusion",
+                        type = "FUSION",
                         materials = {
                             { monster_archetypes = { "Dragonmaid" } },
                             { monster_archetypes = { "Dragonmaid" } }

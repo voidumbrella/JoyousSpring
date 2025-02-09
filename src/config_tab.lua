@@ -28,7 +28,6 @@ SMODS.current_mod.config_tab = function()
                     },
                 }
             },
-            { n = G.UIT.R, config = { minh = 0.5 } }
         }
     }
 end
