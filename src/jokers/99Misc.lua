@@ -257,3 +257,13 @@ SMODS.Joker({
 })
 
 --#endregion
+
+-- Add to extra deck list
+local extra_deck_monsters = {
+    "j_joy_mudragon",
+    "j_joy_garura",
+    "j_joy_apollousa",
+}
+for _, key in ipairs(extra_deck_monsters) do
+    table.insert(JoyousSpring.lists.extra_deck, key)
+end

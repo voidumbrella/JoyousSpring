@@ -128,12 +128,16 @@ SMODS.Joker({
         },
     },
     add_to_deck = function(self, card, from_debuff)
-        G.GAME.round_resets.discards = G.GAME.round_resets.discards + card.ability.extra.discards
-        ease_discard(card.ability.extra.discards)
+        if not JoyousSpring.is_perma_debuffed(card) then
+            G.GAME.round_resets.discards = G.GAME.round_resets.discards + card.ability.extra.discards
+            ease_discard(card.ability.extra.discards)
+        end
     end,
     remove_from_deck = function(self, card, from_debuff)
-        G.GAME.round_resets.discards = G.GAME.round_resets.discards - card.ability.extra.discards
-        ease_discard(-card.ability.extra.discards)
+        if not JoyousSpring.is_perma_debuffed(card) then
+            G.GAME.round_resets.discards = G.GAME.round_resets.discards - card.ability.extra.discards
+            ease_discard(-card.ability.extra.discards)
+        end
     end,
     joy_set_cost = function(card)
         if JoyousSpring.count_materials_owned({ { monster_archetypes = { "Kisikil" } } }) > 0 then
@@ -170,12 +174,16 @@ SMODS.Joker({
         },
     },
     add_to_deck = function(self, card, from_debuff)
-        G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.hands
-        ease_hands_played(card.ability.extra.hands)
+        if not JoyousSpring.is_perma_debuffed(card) then
+            G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.hands
+            ease_hands_played(card.ability.extra.hands)
+        end
     end,
     remove_from_deck = function(self, card, from_debuff)
-        G.GAME.round_resets.hands = G.GAME.round_resets.hands - card.ability.extra.hands
-        ease_hands_played(-card.ability.extra.hands)
+        if not JoyousSpring.is_perma_debuffed(card) then
+            G.GAME.round_resets.hands = G.GAME.round_resets.hands - card.ability.extra.hands
+            ease_hands_played(-card.ability.extra.hands)
+        end
     end,
     joy_set_cost = function(card)
         if JoyousSpring.count_materials_owned({ { monster_archetypes = { "Kisikil" } } }) > 0 then
@@ -212,10 +220,14 @@ SMODS.Joker({
         },
     },
     add_to_deck = function(self, card, from_debuff)
-        G.hand:change_size(card.ability.extra.h_size)
+        if not JoyousSpring.is_perma_debuffed(card) then
+            G.hand:change_size(card.ability.extra.h_size)
+        end
     end,
     remove_from_deck = function(self, card, from_debuff)
-        G.hand:change_size(-card.ability.extra.h_size)
+        if not JoyousSpring.is_perma_debuffed(card) then
+            G.hand:change_size(-card.ability.extra.h_size)
+        end
     end,
     joy_set_cost = function(card)
         if JoyousSpring.count_materials_owned({ { monster_archetypes = { "Lilla" } } }) > 0 then
@@ -282,10 +294,14 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        G.hand:change_size(card.ability.extra.h_size)
+        if not JoyousSpring.is_perma_debuffed(card) then
+            G.hand:change_size(card.ability.extra.h_size)
+        end
     end,
     remove_from_deck = function(self, card, from_debuff)
-        G.hand:change_size(-card.ability.extra.h_size)
+        if not JoyousSpring.is_perma_debuffed(card) then
+            G.hand:change_size(-card.ability.extra.h_size)
+        end
     end,
     joker_display_def = function(JokerDisplay)
         return {
@@ -361,7 +377,7 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        if not from_debuff and JoyousSpring.count_materials_owned({ { monster_archetypes = { "Lilla" } } }) > 0 then
+        if not card.debuff and not from_debuff and JoyousSpring.count_materials_owned({ { monster_archetypes = { "Lilla" } } }) > 0 then
             G.hand:change_size(card.ability.extra.h_size)
             card_eval_status_text(card, 'extra', nil, nil, nil,
                 { message = localize { type = 'variable', key = 'a_handsize', vars = { card.ability.extra.h_size } } })
@@ -441,7 +457,7 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        if not from_debuff and JoyousSpring.count_materials_owned({ { monster_archetypes = { "Kisikil" } } }) > 0 then
+        if not card.debuff and not from_debuff and JoyousSpring.count_materials_owned({ { monster_archetypes = { "Kisikil" } } }) > 0 then
             ease_dollars(card.ability.extra.money)
             card_eval_status_text(card, 'dollars', card.ability.extra.money)
         end
@@ -544,7 +560,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 8,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card then
+        if not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_etwin_kisikil
             info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_etwin_lilla
         end
@@ -582,7 +598,8 @@ SMODS.Joker({
                 if #JoyousSpring.extra_deck_area.cards < JoyousSpring.extra_deck_area.config.card_limit +
                     ((card.edition and card.edition.negative) and 1 or 0) then
                     JoyousSpring.return_to_extra_deck(card)
-                    local is_lilla_owned = JoyousSpring.count_materials_owned({ { monster_archetypes = { "Lilla" } } }) > 0
+                    local is_lilla_owned = JoyousSpring.count_materials_owned({ { monster_archetypes = { "Lilla" } } }) >
+                    0
                     local kisikil_summoned = {}
                     if JoyousSpring.graveyard["j_joy_etwin_kisikil"] then
                         for i = 1, card.ability.extra.revives do
@@ -620,3 +637,14 @@ SMODS.Joker({
         }
     end
 })
+
+-- Add to extra deck list
+local extra_deck_monsters = {
+    "j_joy_etwin_kisikil_deal",
+    "j_joy_etwin_kisikil",
+    "j_joy_etwin_lilla",
+    "j_joy_etwin_sunny"
+}
+for _, key in ipairs(extra_deck_monsters) do
+    table.insert(JoyousSpring.lists.extra_deck, key)
+end

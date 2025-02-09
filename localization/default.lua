@@ -268,9 +268,8 @@ return {
 			j_joy_dogma_ecclesia = {
 				name = "{C:joy_effect}Dogmatika Ecclesia, the Virtuous",
 				text = {
-					"Gains {X:mult,C:white}X#1#{} Mult for each {C:joy_spell}Extra Deck{}",
-					"{C:attention}Joker{} sold or destroyed, resets when",
-					"{C:attention}Boss Blind{} is defeated",
+					"Gains {X:mult,C:white}X#1#{} Mult for each {C:joy_spell}Extra Deck{} {C:attention}Joker{} sold,",
+					"resets when {C:attention}Boss Blind{} is defeated",
 					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}"
 				},
 			},
@@ -290,7 +289,7 @@ return {
 			j_joy_dogma_adin = {
 				name = "{C:joy_effect}Dogmatika Adin, the Enlightened",
 				text = {
-					"Create {C:attention}#1#{} {C:joy_normal}Main Deck \"Dogmatika\"{} {C:attention}Joker{}",
+					"Create {C:attention}#1#{} {C:joy_ritual}non-Ritual{} {C:joy_normal}\"Dogmatika\"{} {C:attention}Joker{}",
 					"when {C:attention}Boss Blind{} is defeated",
 					"{C:inactive}(Must have room){}",
 					" ",
@@ -327,6 +326,7 @@ return {
 				text = {
 					"{C:attention}+#1#{} hand size for every {C:attention}#2#{} debuffed",
 					"{C:joy_spell}Extra Deck{} {C:attention}Jokers{}",
+					"{C:inactive}(Currently{} {C:attention}+#3# {C:inactive}hand size){}",
 					" ",
 					"{C:joy_spell}Extra Deck{} {C:attention}Jokers{} in the {C:attention}GY{}",
 					"count for {C:joy_normal}\"Dogmatika\"{} effects {C:inactive}(as debuffed){}"
@@ -342,7 +342,7 @@ return {
 					"{C:joy_spell}Extra Deck{} {C:attention}Joker{}",
 					"{C:inactive}(Currently{} {C:mult}+#2# {C:inactive}Mult){}",
 					" ",
-					"All {C:joy_spell}Extra Deck{} {C:attention}Jokers{} are debuffed and free",
+					"All {C:joy_spell}Extra Deck{} {C:attention}Jokers{} in the shop are debuffed and free",
 				},
 				joy_summon_conditions = {
 					"{C:attention}2{} {C:joy_normal}\"Dogmatika\"{} {C:attention}Jokers{}"

@@ -17,7 +17,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 6,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card then
+        if not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_tinkhec
         end
         return { vars = { card.ability.extra.base_rerolls, card.ability.extra.rerolls } }
@@ -46,7 +46,7 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        if not from_debuff then
+        if not from_debuff and not card.debuff then
             local count_graveyard = (next(SMODS.find_card("j_joy_dmaid_house")) or
                 next(SMODS.find_card("j_joy_dmaid_sheou"))) and true
             local dragonmaid_count = JoyousSpring.count_materials_owned({ { monster_archetypes = { "Dragonmaid" } } }) +
@@ -76,7 +76,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 6,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card then
+        if not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_kitchen
         end
         return { vars = { card.ability.extra.mult } }
@@ -101,7 +101,8 @@ SMODS.Joker({
                 context.end_of_round and context.game_over == false and not context.repetition and not context.individual then
                 JoyousSpring.transform_card(card, "j_joy_dmaid_kitchen")
             end
-            if context.other_joker and context.other_joker.ability.set == "Joker" and JoyousSpring.is_monster_archetype(context.other_joker, "Dragonmaid") then
+            if context.other_joker and context.other_joker.ability.set == "Joker" and
+                JoyousSpring.is_monster_archetype(context.other_joker, "Dragonmaid") then
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         context.other_joker:juice_up(0.5, 0.5)
@@ -165,7 +166,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 4,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card then
+        if not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = G.P_TAGS.tag_joy_booster
             info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_lorpar
         end
@@ -199,7 +200,7 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        if not from_debuff then
+        if not from_debuff and not card.debuff then
             local count_graveyard = (next(SMODS.find_card("j_joy_dmaid_house")) or
                 next(SMODS.find_card("j_joy_dmaid_sheou"))) and true
             local dragonmaid_count = JoyousSpring.count_materials_owned({ { monster_archetypes = { "Dragonmaid" } } }) +
@@ -238,7 +239,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 4,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card then
+        if not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_parlor
         end
         return { vars = { card.ability.extra.xmult } }
@@ -263,7 +264,8 @@ SMODS.Joker({
                 context.end_of_round and context.game_over == false and not context.repetition and not context.individual then
                 JoyousSpring.transform_card(card, "j_joy_dmaid_parlor")
             end
-            if context.other_joker and context.other_joker.ability.set == "Joker" and JoyousSpring.is_monster_archetype(context.other_joker, "Dragonmaid") then
+            if context.other_joker and context.other_joker.ability.set == "Joker" and
+                JoyousSpring.is_monster_archetype(context.other_joker, "Dragonmaid") then
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         context.other_joker:juice_up(0.5, 0.5)
@@ -331,7 +333,7 @@ SMODS.Joker({
     cost = 3,
     generate_ui = JoyousSpring.generate_info_ui,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card then
+        if not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_ernus
         end
         return { vars = { G.GAME.probabilities.normal, card.ability.extra.odds, card.ability.extra.revives } }
@@ -359,7 +361,7 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        if not from_debuff then
+        if not from_debuff and not card.debuff then
             if pseudorandom("j_joy_dmaid_nurse") < G.GAME.probabilities.normal / card.ability.extra.odds then
                 for i = 1, card.ability.extra.revives do
                     JoyousSpring.revive_pseudorandom(
@@ -402,7 +404,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 3,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card then
+        if not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_nurse
         end
         return { vars = { card.ability.extra.mult } }
@@ -466,7 +468,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 5,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card then
+        if not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_nudyarl
         end
         return { vars = { card.ability.extra.mill } }
@@ -494,7 +496,7 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        if not from_debuff then
+        if not from_debuff and not card.debuff then
             local choices = {
                 "j_joy_dmaid_kitchen",
                 "j_joy_dmaid_tinkhec",
@@ -529,7 +531,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 5,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card then
+        if not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_laundry
         end
         return { vars = { card.ability.extra.chips } }
@@ -593,7 +595,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 2,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card then
+        if not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = G.P_TAGS.tag_voucher
             info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_stern
         end
@@ -627,7 +629,7 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        if not from_debuff then
+        if not from_debuff and not card.debuff then
             local count_graveyard = (next(SMODS.find_card("j_joy_dmaid_house")) or
                 next(SMODS.find_card("j_joy_dmaid_sheou"))) and true
             local dragonmaid_count = JoyousSpring.count_materials_owned({ { monster_archetypes = { "Dragonmaid" } } }) +
@@ -666,7 +668,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 2,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card then
+        if not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_chamber
         end
         return { vars = { G.GAME.probabilities.normal, card.ability.extra.odds, card.ability.extra.revives } }
@@ -695,7 +697,7 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        if not from_debuff then
+        if not from_debuff and not card.debuff then
             if pseudorandom("j_joy_dmaid_stern") < G.GAME.probabilities.normal / card.ability.extra.odds then
                 for i = 1, card.ability.extra.revives do
                     JoyousSpring.revive_pseudorandom(
@@ -741,7 +743,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 9,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card then
+        if not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_house
         end
         return {
@@ -789,14 +791,14 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        if not from_debuff then
+        if not from_debuff and not card.debuff then
             if #JoyousSpring.extra_deck_area.cards < JoyousSpring.extra_deck_area.config.card_limit then
                 JoyousSpring.add_to_extra_deck("j_joy_dmaid_house")
             end
         end
     end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = true }
+        return true
     end,
     joker_display_def = function(JokerDisplay)
         return {
@@ -826,7 +828,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 7,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card then
+        if not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_sheou
         end
         return {
@@ -883,7 +885,7 @@ SMODS.Joker({
         end
     end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = true }
+        return true
     end,
     joker_display_def = function(JokerDisplay)
         return {
@@ -921,7 +923,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 7,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card then
+        if not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_house
         end
         return { vars = { card.ability.extra.cards_to_create } }
@@ -971,3 +973,13 @@ SMODS.Joker({
         return false
     end,
 })
+
+-- Add to extra deck list
+local extra_deck_monsters = {
+    "j_joy_dmaid_lady",
+    "j_joy_dmaid_house",
+    "j_joy_dmaid_sheou"
+}
+for _, key in ipairs(extra_deck_monsters) do
+    table.insert(JoyousSpring.lists.extra_deck, key)
+end

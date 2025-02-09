@@ -68,6 +68,14 @@ JoyousSpring.is_revived = function(card)
     return JoyousSpring.is_monster_card(card) and card.ability.extra.joyous_spring.revived or false
 end
 
+JoyousSpring.is_perma_debuffed = function(card)
+    return JoyousSpring.is_monster_card(card) and card.ability.extra.joyous_spring.perma_debuffed or false
+end
+
+JoyousSpring.is_free = function(card)
+    return JoyousSpring.is_monster_card(card) and card.ability.extra.joyous_spring.is_free or false
+end
+
 -- General checks
 
 JoyousSpring.is_material = function(card, properties, summon_type)
@@ -120,6 +128,16 @@ JoyousSpring.is_material = function(card, properties, summon_type)
             if card.rarity == rarity then
                 return false
             end
+        end
+    end
+    if properties.is_debuffed then
+        if not card.debuff then
+            return false
+        end
+    end
+    if properties.exclude_debuffed then
+        if card.debuff then
+            return false
         end
     end
     if properties.is_joker then
@@ -180,6 +198,26 @@ JoyousSpring.is_material = function(card, properties, summon_type)
     end
     if properties.exclude_pendulum then
         if JoyousSpring.is_pendulum_monster(card) then
+            return false
+        end
+    end
+    if properties.is_extra_deck then
+        if not JoyousSpring.is_extra_deck_monster(card) then
+            return false
+        end
+    end
+    if properties.exclude_extra_deck then
+        if JoyousSpring.is_extra_deck_monster(card) then
+            return false
+        end
+    end
+    if properties.is_main_deck then
+        if not JoyousSpring.is_main_deck_monster(card) then
+            return false
+        end
+    end
+    if properties.exclude_main_deck then
+        if JoyousSpring.is_main_deck_monster(card) then
             return false
         end
     end
@@ -257,6 +295,9 @@ JoyousSpring.is_material_center = function(card_key, properties)
             end
         end
     end
+    if properties.is_debuffed then
+        return false
+    end
 
     local monster_card_properties = card_center.config and card_center.config.extra and
         type(card_center.config.extra) == "table" and
@@ -323,6 +364,16 @@ JoyousSpring.is_material_center = function(card_key, properties)
     end
     if properties.exclude_pendulum then
         if monster_card_properties.is_pendulum then
+            return false
+        end
+    end
+    if properties.is_extra_deck or properties.exclude_main_deck then
+        if monster_card_properties.is_main_deck then
+            return false
+        end
+    end
+    if properties.exclude_extra_deck or properties.is_main_deck then
+        if not monster_card_properties.is_main_deck then
             return false
         end
     end
@@ -582,13 +633,18 @@ end
 -- Modifiers
 
 JoyousSpring.set_cost = function(card)
-    if JoyousSpring.is_summoned(card) then
+    if JoyousSpring.is_perma_debuffed(card) then
+        card.sell_cost = 1
+    elseif JoyousSpring.is_summoned(card) then
         card.sell_cost = card.cost + (card.ability.extra_value or 0)
     elseif JoyousSpring.is_revived(card) then
         card.sell_cost = 1 + (card.ability.extra_value or 0)
     end
     if card.config.center.joy_set_cost then
         card.config.center.joy_set_cost(card)
+    end
+    if JoyousSpring.is_free(card) then
+        card.cost = 0
     end
 end
 

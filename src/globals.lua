@@ -13,6 +13,10 @@ G.C.JOY = {
     TOKEN = HEX("828E85"),
 }
 
+JoyousSpring.lists = {}
+
+JoyousSpring.lists.extra_deck = {}
+
 -- Hooks
 
 local loc_colour_ref = loc_colour
