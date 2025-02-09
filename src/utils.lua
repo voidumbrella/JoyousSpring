@@ -105,7 +105,7 @@ JoyousSpring.create_perma_debuffed_card = function(card, source, edition)
         })
         SMODS.debuff_card(added_card, true, source)
         if JoyousSpring.is_monster_card(added_card) then
-            card.ability.extra.joyous_spring.perma_debuffed = true
+            added_card.ability.extra.joyous_spring.perma_debuffed = true
         end
         added_card:set_cost()
         added_card:add_to_deck()
