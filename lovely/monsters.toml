@@ -11,7 +11,7 @@ pattern = 'self\.children\.back = Sprite.*'
 position = 'before'
 match_indent = true
 payload = '''
-if JoyousSpring.is_monster_card(self) then
+if JoyousSpring and JoyousSpring.is_monster_card(self) then
     self.children.back = Sprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ASSET_ATLAS["joy_Back"], { x = 0, y = 0 })
     self.children.back.states.hover = self.states.hover
     self.children.back.states.click = self.states.click
@@ -30,5 +30,5 @@ pattern = 'if self\.area and self\.ability\.couponed and.*'
 position = 'before'
 match_indent = true
 payload = '''
-JoyousSpring.set_cost(self)
+if JoyousSpring then JoyousSpring.set_cost(self) end
 '''
