@@ -280,7 +280,7 @@ SMODS.Joker({
                     mult = card.ability.extra.mult,
                 }
             end
-            if context.setting_blind and not context.repetition and not context.individual then
+            if context.setting_blind and context.main_eval then
                 local choices = {
                     "j_joy_ltwin_lilla",
                     "j_joy_ltwin_lilla_treat",
@@ -359,7 +359,7 @@ SMODS.Joker({
                     mult = card.ability.extra.mult,
                 }
             end
-            if context.setting_blind and not context.repetition and not context.individual then
+            if context.setting_blind and context.main_eval then
                 if JoyousSpring.graveyard["j_joy_etwin_lilla"] then
                     for i = 1, card.ability.extra.revives do
                         JoyousSpring.revive("j_joy_etwin_lilla", true)
@@ -439,7 +439,7 @@ SMODS.Joker({
                     chips = card.ability.extra.chips,
                 }
             end
-            if context.setting_blind and not context.repetition and not context.individual then
+            if context.setting_blind and context.main_eval then
                 if JoyousSpring.graveyard["j_joy_etwin_kisikil"] then
                     for i = 1, card.ability.extra.revives do
                         JoyousSpring.revive("j_joy_etwin_kisikil", true)
@@ -515,7 +515,7 @@ SMODS.Joker({
     },
     calculate = function(self, card, context)
         if card.facing ~= 'back' then
-            if context.setting_blind and not context.repetition and not context.individual then
+            if context.setting_blind and context.main_eval then
                 local links_owned = JoyousSpring.count_materials_owned({ { summon_type = "LINK" } })
                 if links_owned and links_owned > 0 then
                     ease_discard(-links_owned)
@@ -594,7 +594,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if card.facing ~= 'back' then
             if not context.blueprint_card and not context.retrigger_joker and
-                context.end_of_round and context.game_over == false and not context.repetition and not context.individual then
+                context.end_of_round and context.game_over == false and context.main_eval then
                 if #JoyousSpring.extra_deck_area.cards < JoyousSpring.extra_deck_area.config.card_limit +
                     ((card.edition and card.edition.negative) and 1 or 0) then
                     JoyousSpring.return_to_extra_deck(card)

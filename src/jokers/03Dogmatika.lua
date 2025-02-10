@@ -53,7 +53,7 @@ SMODS.Joker({
             end
         end
         if not context.blueprint_card and not context.retrigger_joker and
-            context.end_of_round and context.game_over == false and not context.repetition and not context.individual then
+            context.end_of_round and context.game_over == false and context.main_eval then
             if G.GAME.blind.boss and card.ability.extra.xmult > 1 then
                 card.ability.extra.xmult = 1
                 return {
@@ -161,7 +161,7 @@ SMODS.Joker({
     },
     calculate = function(self, card, context)
         if card.facing ~= 'back' then
-            if context.setting_blind and not context.repetition and not context.individual then
+            if context.setting_blind and context.main_eval then
                 for i = 1, card.ability.extra.cards_to_create do
                     local key_to_add = pseudorandom_element(JoyousSpring.lists.extra_deck,
                         pseudoseed("j_joy_dogma_maximus"))
@@ -201,7 +201,7 @@ SMODS.Joker({
     },
     calculate = function(self, card, context)
         if card.facing ~= 'back' then
-            if context.end_of_round and context.game_over == false and not context.repetition and not context.individual then
+            if context.end_of_round and context.game_over == false and context.main_eval then
                 if G.GAME.blind.boss then
                     local choices = {
                         "j_joy_dogma_ecclesia",
@@ -378,7 +378,7 @@ SMODS.Joker({
     },
     calculate = function(self, card, context)
         if card.facing ~= 'back' then
-            if context.end_of_round and context.game_over == false and not context.repetition and not context.individual then
+            if context.end_of_round and context.game_over == false and context.main_eval then
                 for i = 1, card.ability.extra.duplicates do
                     local choices = next(SMODS.find_card("j_joy_dogma_relic")) and
                         JoyousSpring.get_all_material_keys({ { is_extra_deck = true } }) or

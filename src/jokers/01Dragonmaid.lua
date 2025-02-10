@@ -40,7 +40,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if card.facing ~= 'back' then
             if not context.blueprint_card and not context.retrigger_joker and
-                context.setting_blind and not context.repetition and not context.individual then
+                context.setting_blind and context.main_eval then
                 JoyousSpring.transform_card(card, "j_joy_dmaid_tinkhec")
             end
         end
@@ -98,7 +98,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if card.facing ~= 'back' then
             if not context.blueprint_card and not context.retrigger_joker and
-                context.end_of_round and context.game_over == false and not context.repetition and not context.individual then
+                context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.transform_card(card, "j_joy_dmaid_kitchen")
             end
             if context.other_joker and context.other_joker.ability.set == "Joker" and
@@ -194,7 +194,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if card.facing ~= 'back' then
             if not context.blueprint_card and not context.retrigger_joker and
-                context.setting_blind and not context.repetition and not context.individual then
+                context.setting_blind and context.main_eval then
                 JoyousSpring.transform_card(card, "j_joy_dmaid_lorpar")
             end
         end
@@ -261,7 +261,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if card.facing ~= 'back' then
             if not context.blueprint_card and not context.retrigger_joker and
-                context.end_of_round and context.game_over == false and not context.repetition and not context.individual then
+                context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.transform_card(card, "j_joy_dmaid_parlor")
             end
             if context.other_joker and context.other_joker.ability.set == "Joker" and
@@ -355,7 +355,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if card.facing ~= 'back' then
             if not context.blueprint_card and not context.retrigger_joker and
-                context.setting_blind and not context.repetition and not context.individual then
+                context.setting_blind and context.main_eval then
                 JoyousSpring.transform_card(card, "j_joy_dmaid_ernus")
             end
         end
@@ -426,7 +426,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if card.facing ~= 'back' then
             if not context.blueprint_card and not context.retrigger_joker and
-                context.end_of_round and context.game_over == false and not context.repetition and not context.individual then
+                context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.transform_card(card, "j_joy_dmaid_nurse")
             end
 
@@ -490,7 +490,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if card.facing ~= 'back' then
             if not context.blueprint_card and not context.retrigger_joker and
-                context.setting_blind and not context.repetition and not context.individual then
+                context.setting_blind and context.main_eval then
                 JoyousSpring.transform_card(card, "j_joy_dmaid_nudyarl")
             end
         end
@@ -553,7 +553,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if card.facing ~= 'back' then
             if not context.blueprint_card and not context.retrigger_joker and
-                context.end_of_round and context.game_over == false and not context.repetition and not context.individual then
+                context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.transform_card(card, "j_joy_dmaid_laundry")
             end
 
@@ -623,7 +623,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if card.facing ~= 'back' then
             if not context.blueprint_card and not context.retrigger_joker and
-                context.setting_blind and not context.repetition and not context.individual then
+                context.setting_blind and context.main_eval then
                 JoyousSpring.transform_card(card, "j_joy_dmaid_stern")
             end
         end
@@ -691,7 +691,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if card.facing ~= 'back' then
             if not context.blueprint_card and not context.retrigger_joker and
-                context.end_of_round and context.game_over == false and not context.repetition and not context.individual then
+                context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.transform_card(card, "j_joy_dmaid_chamber")
             end
         end
@@ -776,7 +776,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if card.facing ~= 'back' then
             if not context.blueprint_card and not context.retrigger_joker and
-                context.setting_blind and not context.repetition and not context.individual then
+                context.setting_blind and context.main_eval then
                 if pseudorandom("j_joy_dmaid_lady") < G.GAME.probabilities.normal / card.ability.extra.odds then
                     local choices = {
                         "j_joy_dmaid_tinkhec",
@@ -869,7 +869,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if card.facing ~= 'back' then
             if not context.blueprint_card and not context.retrigger_joker and
-                context.end_of_round and context.game_over == false and not context.repetition and not context.individual then
+                context.end_of_round and context.game_over == false and context.main_eval then
                 card.ability.extra.blinds_won = card.ability.extra.blinds_won + 1
                 if card.ability.extra.blinds_won >= 3 then
                     JoyousSpring.transform_card(card, "j_joy_dmaid_sheou")
@@ -945,7 +945,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if card.facing ~= 'back' then
             if not context.blueprint_card and not context.retrigger_joker and
-                context.setting_blind and not context.repetition and not context.individual then
+                context.setting_blind and context.main_eval then
                 if G.GAME.blind and ((not G.GAME.blind.disabled) and (G.GAME.blind:get_type() == 'Boss')) then
                     G.GAME.blind:disable()
                     local choices = {

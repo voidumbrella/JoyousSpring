@@ -295,14 +295,14 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if card.facing ~= 'back' then
             if not context.blueprint_card and not context.retrigger_joker then
-                if context.setting_blind and not context.repetition and not context.individual then
+                if context.setting_blind and context.main_eval then
                     local eval = function(card)
                         return (card.ability.extra.consumable_count == 0) and not G
                             .RESET_JIGGLES
                     end
                     juice_card_until(card, eval, true)
                 end
-                if context.using_consumeable and G.GAME.blind:get_type() then
+                if context.using_consumeable and G.GAME.blind.in_blind then
                     card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.base_xmult
                     card.ability.extra.consumable_count = card.ability.extra.consumable_count + 1
                     G.E_MANAGER:add_event(Event({
@@ -314,7 +314,7 @@ SMODS.Joker({
                 end
             end
             if not context.blueprint_card and not context.retrigger_joker and
-                context.end_of_round and context.game_over == false and not context.repetition and not context.individual then
+                context.end_of_round and context.game_over == false and context.main_eval then
                 if card.ability.extra.consumable_count > 0 then
                     card.ability.extra.consumable_count = 0
                 else
