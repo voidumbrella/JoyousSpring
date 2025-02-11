@@ -610,13 +610,13 @@ end
 JoyousSpring.revive = function(key, must_have_room)
     if JoyousSpring.graveyard[key] and JoyousSpring.graveyard[key] > 0 and
         (not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit)) then
+        JoyousSpring.graveyard[key] = JoyousSpring.graveyard[key] - 1
         local added_card = SMODS.add_card({
             key = key
         })
         added_card.ability.extra.joyous_spring.revived = true
         added_card:set_cost()
-        JoyousSpring.graveyard[key] = JoyousSpring.graveyard[key] - 1
-        SMODS.calculate_context({joy_revived = true, joy_revived_card = added_card})
+        SMODS.calculate_context({ joy_revived = true, joy_revived_card = added_card })
         return added_card
     end
 end
