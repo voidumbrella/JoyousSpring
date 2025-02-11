@@ -60,9 +60,6 @@ SMODS.Joker({
             calculate_reroll_cost(true)
         end
     end,
-    in_pool = function(self, args)
-        return true
-    end,
 })
 
 -- Dragonmaid Tinkhec
@@ -127,7 +124,7 @@ SMODS.Joker({
         end
     end,
     in_pool = function(self, args)
-        return false
+        return args.source and args.source == "JoyousSpring" or false
     end,
     joker_display_def = function(JokerDisplay)
         return {
@@ -223,9 +220,6 @@ SMODS.Joker({
             end
         end
     end,
-    in_pool = function(self, args)
-        return true
-    end,
 })
 
 -- Dragonmaid Lorpar
@@ -290,7 +284,7 @@ SMODS.Joker({
         end
     end,
     in_pool = function(self, args)
-        return false
+        return args.source and args.source == "JoyousSpring" or false
     end,
     joker_display_def = function(JokerDisplay)
         return {
@@ -373,9 +367,6 @@ SMODS.Joker({
             end
         end
     end,
-    in_pool = function(self, args)
-        return true
-    end,
     joker_display_def = function(JokerDisplay)
         return {
             extra = {
@@ -440,7 +431,7 @@ SMODS.Joker({
         end
     end,
     in_pool = function(self, args)
-        return false
+        return args.source and args.source == "JoyousSpring" or false
     end,
     joker_display_def = function(JokerDisplay)
         return {
@@ -515,9 +506,6 @@ SMODS.Joker({
             end
         end
     end,
-    in_pool = function(self, args)
-        return true
-    end,
 })
 
 -- Dragonmaid Nudyarl
@@ -567,7 +555,7 @@ SMODS.Joker({
         end
     end,
     in_pool = function(self, args)
-        return false
+        return args.source and args.source == "JoyousSpring" or false
     end,
     joker_display_def = function(JokerDisplay)
         return {
@@ -652,9 +640,6 @@ SMODS.Joker({
             end
         end
     end,
-    in_pool = function(self, args)
-        return true
-    end,
 })
 
 -- Dragonmaid Stern
@@ -713,7 +698,7 @@ SMODS.Joker({
         end
     end,
     in_pool = function(self, args)
-        return false
+        return args.source and args.source == "JoyousSpring" or false
     end,
     joker_display_def = function(JokerDisplay)
         return {
@@ -796,9 +781,6 @@ SMODS.Joker({
                 JoyousSpring.add_to_extra_deck("j_joy_dmaid_house")
             end
         end
-    end,
-    in_pool = function(self, args)
-        return true
     end,
     joker_display_def = function(JokerDisplay)
         return {
@@ -884,9 +866,6 @@ SMODS.Joker({
             end
         end
     end,
-    in_pool = function(self, args)
-        return true
-    end,
     joker_display_def = function(JokerDisplay)
         return {
             text = {
@@ -970,16 +949,6 @@ SMODS.Joker({
         end
     end,
     in_pool = function(self, args)
-        return false
+        return args.source and args.source == "JoyousSpring" or false
     end,
 })
-
--- Add to extra deck list
-local extra_deck_monsters = {
-    "j_joy_dmaid_lady",
-    "j_joy_dmaid_house",
-    "j_joy_dmaid_sheou"
-}
-for _, key in ipairs(extra_deck_monsters) do
-    table.insert(JoyousSpring.lists.extra_deck, key)
-end

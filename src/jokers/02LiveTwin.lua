@@ -637,14 +637,3 @@ SMODS.Joker({
         }
     end
 })
-
--- Add to extra deck list
-local extra_deck_monsters = {
-    "j_joy_etwin_kisikil_deal",
-    "j_joy_etwin_kisikil",
-    "j_joy_etwin_lilla",
-    "j_joy_etwin_sunny"
-}
-for _, key in ipairs(extra_deck_monsters) do
-    table.insert(JoyousSpring.lists.extra_deck, key)
-end
