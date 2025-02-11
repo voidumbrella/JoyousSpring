@@ -564,6 +564,115 @@ JoyousSpring.create_overlay_graveyard = function()
     })
 end
 
+JoyousSpring.create_sell_and_use_buttons = function (card, args)
+    local args = args or {}
+    local sell = nil
+    local summon = nil
+    local detach = nil
+
+    if args.sell then
+        sell = {
+            n = G.UIT.C,
+            config = { align = "cr" },
+            nodes = {
+                {
+                    n = G.UIT.C,
+                    config = { ref_table = card, align = "cr", padding = 0.1, r = 0.08, minw = 1.25, hover = true, shadow = true, colour = G.C.UI.BACKGROUND_INACTIVE, one_press = true, button = 'sell_card', func = 'can_sell_card' },
+                    nodes = {
+                        { n = G.UIT.B, config = { w = 0.1, h = 0.6 } },
+                        {
+                            n = G.UIT.C,
+                            config = { align = "tm" },
+                            nodes = {
+                                {
+                                    n = G.UIT.R,
+                                    config = { align = "cm", maxw = 1.25 },
+                                    nodes = {
+                                        { n = G.UIT.T, config = { text = localize('b_sell'), colour = G.C.UI.TEXT_LIGHT, scale = 0.4, shadow = true } }
+                                    }
+                                },
+                                {
+                                    n = G.UIT.R,
+                                    config = { align = "cm" },
+                                    nodes = {
+                                        { n = G.UIT.T, config = { text = localize('$'), colour = G.C.WHITE, scale = 0.4, shadow = true } },
+                                        { n = G.UIT.T, config = { ref_table = card, ref_value = 'sell_cost_label', colour = G.C.WHITE, scale = 0.55, shadow = true } }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+            }
+        }
+    end
+    if args.summon then
+        summon= {
+            n = G.UIT.C,
+            config = { align = "cr" },
+            nodes = {
+    
+                {
+                    n = G.UIT.C,
+                    config = { ref_table = card, align = "cr", maxw = 1.25, padding = 0.1, r = 0.08, minw = 1.25, minh = 0, hover = true, shadow = true, colour = args.can_summon and G.C.JOY[args.summon_type] or G.C.UI.BACKGROUND_INACTIVE, one_press = true, button = args.can_summon and 'joy_perform_summon' or nil },
+                    nodes = {
+                        { n = G.UIT.B, config = { w = 0.1, h = 0.6 } },
+                        { n = G.UIT.T, config = { text = localize('b_joy_summon'), colour = G.C.UI.TEXT_LIGHT, scale = 0.55, shadow = true } }
+                    }
+                }
+            }
+        }
+    end
+    if args.detach then
+        detach= {
+            n = G.UIT.C,
+            config = { align = "cr" },
+            nodes = {
+                {
+                    n = G.UIT.C,
+                    config = { ref_table = card, align = "cr", maxw = 1.25, padding = 0.1, r = 0.08, minw = 1.25, minh = 0, hover = true, shadow = true, colour = G.C.JOY.XYZ or G.C.UI.BACKGROUND_INACTIVE, button = 'joy_detach_material'},
+                    nodes = {
+                        { n = G.UIT.B, config = { w = 0.1, h = 0.6 } },
+                        { n = G.UIT.T, config = { text = localize('b_joy_detach'), colour = G.C.UI.TEXT_LIGHT, scale = 0.55, shadow = true } }
+                    }
+                }
+            }
+        }
+    end
+    
+    return {
+        n = G.UIT.ROOT,
+        config = {
+            align = "cr",
+            padding = 0,
+            colour = G.C.CLEAR
+        },
+        nodes = {
+            {
+                n = G.UIT.C,
+                config = { padding = 0.15, align = 'cl' },
+                nodes = {
+                    sell and {
+                        n = G.UIT.R,
+                        config = { align = 'cl' },
+                        nodes = { sell }
+                    } or nil,
+                    summon and {
+                        n = G.UIT.R,
+                        config = { align = 'cl' },
+                        nodes = { summon }
+                    } or nil,
+                    detach and {
+                        n = G.UIT.R,
+                        config = { align = 'cl' },
+                        nodes = { detach }
+                    } or nil,
+                }
+            }
+        }
+    }
+end
+
 G.FUNCS.joy_open_extra_deck = function(e)
     JoyousSpring.open_extra_deck(true, not G.joy_extra_deck.states.visible)
 end
@@ -597,10 +706,20 @@ G.FUNCS.can_select_material = function(e)
     end
 end
 
+G.FUNCS.joy_detach_material = function(e)
+    local card = e.config.ref_table
+
+    if JoyousSpring.get_xyz_materials(card) > 0 then
+        card.ability.extra.joyous_spring.xyz_materials = card.ability.extra.joyous_spring.xyz_materials -1
+        SMODS.calculate_context({ joy_detach = true, joy_detaching_card = card })
+    end
+end
+
 G.FUNCS.exit_select_material_menu = function(e)
     if not G.OVERLAY_MENU then return end
 
     local card = e.config.ref_table
+    local summon_type = card.ability.extra.joyous_spring.summon_type or "Fusion"
 
     if card and JoyousSpring.summon_material_area and next(JoyousSpring.summon_material_area.highlighted) then
         local material_list = {}
@@ -609,7 +728,7 @@ G.FUNCS.exit_select_material_menu = function(e)
                 table.insert(material_list, G.jokers.cards[material.joy_g_jokers_pos])
             end
         end
-        JoyousSpring.perform_summon(card, material_list)
+        JoyousSpring.perform_summon(card, material_list, summon_type)
         JoyousSpring.open_extra_deck(true, false)
     end
     G.FUNCS.exit_overlay_menu()
@@ -656,8 +775,8 @@ local card_align_h_popup = Card.align_h_popup
 function Card:align_h_popup()
     local ret = card_align_h_popup(self)
     local focused_ui = self.children.focused_ui and true or false
-    if (self.area and self.area.config.type == "summon_materials") or
-        (self.area.config.type == "title" and self.area.monster_h_popup and JoyousSpring.is_monster_card(self)) then
+    if self.area and (self.area.config.type == "summon_materials" or
+        (self.area.config.type == "title" and self.area.monster_h_popup and JoyousSpring.is_monster_card(self))) then
         ret.offset.x = 0
         ret.offset.y = focused_ui and 0.12 or 0.1
         ret.type = 'bm'
@@ -672,82 +791,9 @@ function Card:highlight(is_highlighted)
         if self.highlighted then
             local can_summon = JoyousSpring.can_summon(self)
             local summon_type = self.ability.extra.joyous_spring.summon_type or "Fusion"
-            local sell = {
-                n = G.UIT.C,
-                config = { align = "cr" },
-                nodes = {
-                    {
-                        n = G.UIT.C,
-                        config = { ref_table = self, align = "cr", padding = 0.1, r = 0.08, minw = 1.25, hover = true, shadow = true, colour = G.C.UI.BACKGROUND_INACTIVE, one_press = true, button = 'sell_card', func = 'can_sell_card' },
-                        nodes = {
-                            { n = G.UIT.B, config = { w = 0.1, h = 0.6 } },
-                            {
-                                n = G.UIT.C,
-                                config = { align = "tm" },
-                                nodes = {
-                                    {
-                                        n = G.UIT.R,
-                                        config = { align = "cm", maxw = 1.25 },
-                                        nodes = {
-                                            { n = G.UIT.T, config = { text = localize('b_sell'), colour = G.C.UI.TEXT_LIGHT, scale = 0.4, shadow = true } }
-                                        }
-                                    },
-                                    {
-                                        n = G.UIT.R,
-                                        config = { align = "cm" },
-                                        nodes = {
-                                            { n = G.UIT.T, config = { text = localize('$'), colour = G.C.WHITE, scale = 0.4, shadow = true } },
-                                            { n = G.UIT.T, config = { ref_table = self, ref_value = 'sell_cost_label', colour = G.C.WHITE, scale = 0.55, shadow = true } }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                }
-            }
-            local summon = {
-                n = G.UIT.C,
-                config = { align = "cr" },
-                nodes = {
-
-                    {
-                        n = G.UIT.C,
-                        config = { ref_table = self, align = "cr", maxw = 1.25, padding = 0.1, r = 0.08, minw = 1.25, minh = 0, hover = true, shadow = true, colour = can_summon and G.C.JOY[summon_type] or G.C.UI.BACKGROUND_INACTIVE, one_press = true, button = can_summon and 'joy_perform_summon' or nil },
-                        nodes = {
-                            { n = G.UIT.B, config = { w = 0.1, h = 0.6 } },
-                            { n = G.UIT.T, config = { text = localize('b_joy_summon'), colour = G.C.UI.TEXT_LIGHT, scale = 0.55, shadow = true } }
-                        }
-                    }
-                }
-            }
+            
             self.children.use_button = UIBox {
-                definition = {
-                    n = G.UIT.ROOT,
-                    config = {
-                        align = "cr",
-                        padding = 0,
-                        colour = G.C.CLEAR
-                    },
-                    nodes = {
-                        {
-                            n = G.UIT.C,
-                            config = { padding = 0.15, align = 'cl' },
-                            nodes = {
-                                {
-                                    n = G.UIT.R,
-                                    config = { align = 'cl' },
-                                    nodes = { sell }
-                                },
-                                {
-                                    n = G.UIT.R,
-                                    config = { align = 'cl' },
-                                    nodes = { summon }
-                                },
-                            }
-                        }
-                    }
-                },
+                definition = JoyousSpring.create_sell_and_use_buttons(self, {sell = true, summon = true, can_summon = can_summon, summon_type = summon_type}),
                 config = {
                     align = "cr",
                     offset = { x = -0.4, y = 0 },
@@ -760,6 +806,22 @@ function Card:highlight(is_highlighted)
         end
     elseif self.area and self.area.config.type == "summon_materials" then
         self.highlighted = is_highlighted
+    elseif JoyousSpring.is_summon_type(self, "XYZ") and JoyousSpring.get_xyz_materials(self) > 0 and 
+    self.area and self.area.config.type == 'joker' then
+        self.highlighted = is_highlighted
+        if self.highlighted then
+            self.children.use_button = UIBox {
+                definition = JoyousSpring.create_sell_and_use_buttons(self, {sell = true, detach = true}),
+                config = {
+                    align = "cr",
+                    offset = { x = -0.4, y = 0 },
+                    parent = self
+                }
+            }
+        elseif self.children.use_button then
+            self.children.use_button:remove()
+            self.children.use_button = nil
+        end
     else
         card_highlight_ref(self, is_highlighted)
         if self.area and JoyousSpring.is_extra_deck_monster(self) and
@@ -898,6 +960,18 @@ function CardArea:align_cards()
             end
         end
     end
+end
+
+local cardarea_emplace_ref = CardArea.emplace
+function CardArea:emplace(card, location, stay_flipped)
+    if self == G.jokers then
+        for _, joker in ipairs(G.jokers.cards) do
+            if joker.config.center.joy_apply_to_jokers_added then
+                joker.config.center.joy_apply_to_jokers_added(card)
+            end
+        end
+    end
+    cardarea_emplace_ref(self, card, location, stay_flipped)
 end
 
 local controller_queue_R_cursor_press_ref = Controller.queue_R_cursor_press

@@ -76,6 +76,14 @@ JoyousSpring.is_free = function(card)
     return JoyousSpring.is_monster_card(card) and card.ability.extra.joyous_spring.is_free or false
 end
 
+JoyousSpring.get_materials = function(card)
+    return JoyousSpring.is_monster_card(card) and card.ability.extra.joyous_spring.summon_materials or {}
+end
+
+JoyousSpring.get_xyz_materials = function(card)
+    return JoyousSpring.is_monster_card(card) and card.ability.extra.joyous_spring.xyz_materials or 0
+end
+
 -- General checks
 
 JoyousSpring.is_material = function(card, properties, summon_type)
@@ -594,8 +602,13 @@ JoyousSpring.can_summon = function(card, card_list)
     return false
 end
 
-JoyousSpring.perform_summon = function(card, card_list)
+JoyousSpring.perform_summon = function(card, card_list, summon_type)
+    card.ability.extra.joyous_spring.summon_materials = {}
+    card.ability.extra.joyous_spring.xyz_materials = 0
     for _, joker in ipairs(card_list) do
+        table.insert(card.ability.extra.joyous_spring.summon_materials, joker.config.center.key)
+        card.ability.extra.joyous_spring.xyz_materials = #card.ability.extra.joyous_spring.summon_materials
+
         joker:start_dissolve()
     end
     JoyousSpring.extra_deck_area:remove_card(card)
@@ -603,6 +616,10 @@ JoyousSpring.perform_summon = function(card, card_list)
     card.ability.extra.joyous_spring.summoned = true
     card:set_cost()
     G.jokers:emplace(card)
+
+    if summon_type == "XYZ" then
+        card.children.xyz_materials = JoyousSpring.create_UIBox_xyz_materials(card)
+    end
 end
 
 -- Revive
@@ -657,6 +674,65 @@ JoyousSpring.set_cost = function(card)
             card.sell_cost = card.joy_modify_cost.sell_cost
         end
     end
+end
+
+-- UI
+
+JoyousSpring.create_UIBox_xyz_materials = function (card)
+    return UIBox {
+        definition = {
+            n = G.UIT.ROOT,
+            config = {
+                minh = 0.6,
+                maxh = 1.2,
+                minw = 0.6,
+                maxw = 2,
+                r = 0.001,
+                padding = 0.1,
+                align = 'cm',
+                colour = adjust_alpha(darken(G.C.BLACK, 0.2), 0.8),
+                shadow = false,
+                ref_table = card
+            },
+            nodes = {
+                {
+                    n = G.UIT.R, -- node type
+                    config = {
+                        align = 'cm',
+                        colour = G.C.CLEAR
+                    },
+                    nodes = {
+                        {
+                            n = G.UIT.T, -- node type
+                            config = {
+                                text = 'X',
+                                scale = 0.45,
+                                colour = G.C.JOY.TRAP
+                            },
+                        },
+                        {
+                            n = G.UIT.T, -- node type
+                            config = {
+                                ref_table = card.ability.extra.joyous_spring,
+                                ref_value = "xyz_materials",
+                                scale = 0.45,
+                                colour = G.C.UI.TEXT_LIGHT
+                            }
+                        }
+                    }
+                },
+            }
+        },
+        config = {
+            align = "tri",
+            bond = 'Strong',
+            parent = card,
+        },
+        states = {
+            collide = { can = false },
+            drag = { can = true }
+        }
+    }
 end
 
 -- Hooks
