@@ -911,6 +911,35 @@ end
 
 local game_start_run_ref = Game.start_run
 function Game:start_run(args)
+    if not JoyousSpring.lists then
+        JoyousSpring.lists = {}
+        JoyousSpring.lists.main_deck = {}
+        JoyousSpring.lists.extra_deck = {}
+        JoyousSpring.lists.legendary = {}
+        JoyousSpring.lists.rare = {}
+        JoyousSpring.lists.uncommon = {}
+        JoyousSpring.lists.common = {}
+        for k, v in pairs(G.P_CENTERS) do
+            if string.sub(k, 1, 6) == "j_joy_" then
+                local monster_card_properties = v.config.extra.joyous_spring
+                if monster_card_properties.is_main_deck then
+                    table.insert(JoyousSpring.lists.main_deck, k)
+                else
+                    table.insert(JoyousSpring.lists.extra_deck, k)
+                end
+                if v.rarity == 4 then
+                    table.insert(JoyousSpring.lists.legendary, k)
+                elseif v.rarity == 3 then
+                    table.insert(JoyousSpring.lists.rare, k)
+                elseif v.rarity == 2 then
+                    table.insert(JoyousSpring.lists.uncommon, k)
+                else
+                    table.insert(JoyousSpring.lists.common, k)
+                end
+            end
+        end
+    end
+
     self.GAME.joy_game_over = false
     self.joy_extra_deck_area = CardArea(
         0,
