@@ -8,14 +8,10 @@ G.C.JOY = {
     RITUAL = HEX("9DB5CC"),
     FUSION = HEX("A086B7"),
     SYNCHRO = HEX("CCCCCC"),
-    XYZ = HEX("5E5E5E"),
+    XYZ = HEX("717070"),
     LINK = HEX("006EAD"),
     TOKEN = HEX("828E85"),
 }
-
-JoyousSpring.lists = {}
-
-JoyousSpring.lists.extra_deck = {}
 
 -- Hooks
 
