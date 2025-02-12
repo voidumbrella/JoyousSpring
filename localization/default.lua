@@ -397,8 +397,8 @@ return {
 			j_joy_yokai_mourner = {
 				name = "{C:joy_effect}Ghost Mourner & Moonlit Chill",
 				text = {
-					"Permanently debuffs every {C:blue}Common{} and {C:green}Uncommon{}",
-					"{C:attention}Joker{} in the shop",
+					"Permanently debuffs every",
+					"{C:blue}Common{} and {C:green}Uncommon{} {C:attention}Joker{}",
 					"Gains {X:mult,C:white}X#1#{} Mult for each debuffed card sold",
 					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}",
 				},
