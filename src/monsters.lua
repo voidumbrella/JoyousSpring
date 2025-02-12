@@ -87,7 +87,7 @@ end
 -- General checks
 
 JoyousSpring.is_material = function(card, properties, summon_type)
-    if card.ability.eternal then
+    if summon_type and card.ability.eternal then
         return false
     end
     if not next(properties) == 0 then
