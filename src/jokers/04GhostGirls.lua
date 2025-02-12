@@ -318,7 +318,8 @@ SMODS.Joker({
                 if card.ability.extra.consumable_count > 0 then
                     card.ability.extra.consumable_count = 0
                 else
-                    G.GAME.joy_game_over = true
+                    G.STATE = G.STATES.GAME_OVER
+                    G.STATE_COMPLETE = false
                 end
             end
             if context.joker_main then

@@ -3,17 +3,6 @@ version = "0.1.0"
 dump_lua = true
 priority = 0
 
-# Causes game over
-[[patches]]
-[patches.regex]
-target = "functions/state_events.lua"
-pattern = 'if SMODS\.saved then game_over = false end'
-position = 'after'
-match_indent = true
-payload = '''
-if not game_over then game_over = G.GAME.joy_game_over or false end
-'''
-
 # Ash Blossom effect
 [[patches]]
 [patches.regex]

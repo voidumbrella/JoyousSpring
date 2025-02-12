@@ -1014,7 +1014,6 @@ function Game:start_run(args)
         end
     end
 
-    self.GAME.joy_game_over = false
     self.joy_extra_deck_area = CardArea(
         0,
         0,
