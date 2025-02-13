@@ -39,18 +39,25 @@ SMODS.Joker({
         if card.facing ~= 'back' then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.destroy_card and context.cardarea == G.play then
-                for _, playing_card in ipairs(context.scoring_hand) do
-                    if playing_card == context.destroy_card then
-                        card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.base_xmult
+                card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.base_xmult
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        card_eval_status_text(card, 'extra', nil, nil, nil,
+                            { message = localize('k_upgrade_ex') }); return true
+                    end
+                }))
+                for _, joker in ipairs(SMODS.find_card("j_joy_yokai_ogre")) do
+                    if joker ~= card then
+                        joker.ability.extra.xmult = joker.ability.extra.xmult + joker.ability.extra.base_xmult
                         G.E_MANAGER:add_event(Event({
                             func = function()
-                                card_eval_status_text(card, 'extra', nil, nil, nil,
+                                card_eval_status_text(joker, 'extra', nil, nil, nil,
                                     { message = localize('k_upgrade_ex') }); return true
                             end
                         }))
-                        return { remove = true }
                     end
                 end
+                return { remove = true }
             end
 
             if context.joker_main then
@@ -232,7 +239,7 @@ SMODS.Joker({
                 card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.base_xmult
                 G.E_MANAGER:add_event(Event({
                     func = function()
-                        card_eval_status_text(card, 'extra', nil, nil, nil,{ message = localize('k_upgrade_ex') })
+                        card_eval_status_text(card, 'extra', nil, nil, nil, { message = localize('k_upgrade_ex') })
                         return true
                     end
                 }))
