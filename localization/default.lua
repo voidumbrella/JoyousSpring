@@ -504,18 +504,22 @@ return {
 					"{X:mult,C:white}X#1#{} Mult for each {C:joy_spell}Extra Deck{} {C:attention}Joker{}",
 					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}",
 					" ",
-					"The number of hands equals the number of {C:joy_spell}Extra Deck{} types owned",
+					"{C:blue}Hands{} equal {C:joy_spell}Extra Deck{} types owned + 1",
 					"No repeat hand types",
-					"Bought {C:joy_normal}Main Deck{} {C:attention}Jokers{} are debufffed"
+					"{C:joy_normal}Main Deck{} {C:attention}Jokers{} are debuffed",
+					"{C:inactive}(Except{} {C:joy_effect}\"Inspector Boarder\"{}{C:inactive}){}"
 				},
 			},
 			--#endregion
 			--#region Pendulum
 			j_joy_eccentrick = {
-				name = "{C:joy_spell}Archfiend Eccentrick",
+				name = "{C:joy_pendulum}Archfiend Eccentrick",
 				text = {
-					"{C:mult}+#1#{} Mult for every destroyed playing card this run",
-					"{C:inactive}(Currently{} {C:mult}+#2#{} {C:inactive}Mult){}",
+					"{C:joy_pendulum}Consumable effect:{}",
+					"{C:joy_pendulum}Destroys up to{} {C:attention}#1#{} {C:joy_pendulum}selected cards{}",
+					" ",
+					"{C:mult}+#2#{} Mult for every destroyed playing card this run",
+					"{C:inactive}(Currently{} {C:mult}+#3#{} {C:inactive}Mult){}",
 				},
 				pendulum_text = {
 					"Destroys up to",

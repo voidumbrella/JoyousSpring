@@ -9,7 +9,6 @@ priority = 0
 target = "card.lua"
 pattern = 'self\.children\.back = Sprite.*'
 position = 'before'
-match_indent = true
 payload = '''
 if JoyousSpring and JoyousSpring.is_monster_card(self) then
     self.children.back = Sprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ASSET_ATLAS["joy_Back"], { x = 0, y = 0 })
@@ -24,9 +23,9 @@ end
 
 # Customize sell cost
 [[patches]]
-[patches.regex]
+[patches.pattern]
 target = "card.lua"
-pattern = 'if self\.area and self\.ability\.couponed and.*'
+pattern = "if self.area and self.ability.couponed and (self.area == G.shop_jokers or self.area == G.shop_booster) then self.cost = 0 end"
 position = 'before'
 match_indent = true
 payload = '''

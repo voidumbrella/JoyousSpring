@@ -433,7 +433,7 @@ SMODS.Joker({
                         type = "RITUAL",
                         materials = {
                             { monster_archetypes = { "Dogmatika" } },
-                            { monster_archetypes = {} },
+                            { },
                         }
                     }
                 },

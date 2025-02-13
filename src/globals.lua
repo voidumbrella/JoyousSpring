@@ -4,6 +4,7 @@ G.C.JOY = {
     NORMAL = HEX("FDDD5D"),
     EFFECT = HEX("FF8B53"),
     SPELL = HEX("1D9E74"),
+    PENDULUM = HEX("1D9E74"),
     TRAP = HEX("BC5A84"),
     RITUAL = HEX("9DB5CC"),
     FUSION = HEX("A086B7"),
@@ -23,6 +24,7 @@ function loc_colour(_c, _default)
     G.ARGS.LOC_COLOURS.joy_normal = G.C.JOY.NORMAL
     G.ARGS.LOC_COLOURS.joy_effect = G.C.JOY.EFFECT
     G.ARGS.LOC_COLOURS.joy_spell = G.C.JOY.SPELL
+    G.ARGS.LOC_COLOURS.joy_pendulum = G.C.JOY.PENDULUM
     G.ARGS.LOC_COLOURS.joy_trap = G.C.JOY.TRAP
     G.ARGS.LOC_COLOURS.joy_ritual = G.C.JOY.RITUAL
     G.ARGS.LOC_COLOURS.joy_fusion = G.C.JOY.FUSION
@@ -134,6 +136,15 @@ function init_localization()
     end
 end
 
+local SMODS_calculate_context_ref = SMODS.calculate_context
+function SMODS.calculate_context(context, return_table)
+    if context.remove_playing_cards then
+        G.GAME.joy_cards_destroyed = G.GAME.joy_cards_destroyed and
+            (G.GAME.joy_cards_destroyed + #context.removed) or #context.removed
+    end
+    SMODS_calculate_context_ref(context, return_table)
+end
+
 ---This removes the colour markup on the Joker names on the info tooltips and adds summoning conditions
 JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
     SMODS.Center.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
@@ -150,7 +161,7 @@ JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, spe
         full_UI_table.info[#full_UI_table.info + 1] = {}
         local summon_desc_nodes = full_UI_table.info[#full_UI_table.info]
         summon_desc_nodes.name = localize('b_joy_summon_conditions')
-        localize { type = "joy_summon_conditions", set = self.set, key = self.key, nodes= summon_desc_nodes }
+        localize { type = "joy_summon_conditions", set = self.set, key = self.key, nodes = summon_desc_nodes }
     end
 end
 

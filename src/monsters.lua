@@ -1,3 +1,4 @@
+---@diagnostic disable: deprecated
 --- MONSTERS
 
 -- Individual checks
@@ -151,15 +152,9 @@ JoyousSpring.is_material = function(card, properties, summon_type)
     if properties.is_joker then
         return not JoyousSpring.is_monster_card(card)
     end
-    if properties.is_monster or properties.monster_type or properties.monster_attribute or properties.monster_archetypes or properties.is_pendulum or properties.summon_type or properties.is_effect or properties.is_non_effect or properties.is_normal then
-        if not JoyousSpring.is_monster_card(card) then
-            return false
-        end
-    end
-    if properties.exclude_monster_types or properties.exclude_monster_attributes or properties.exclude_monster_archetypes or properties.exclude_pendulum or properties.exclude_summon_types then
-        if not JoyousSpring.is_monster_card(card) then
-            return true
-        end
+    if not JoyousSpring.is_monster_card(card) then
+        return not (properties.is_monster or properties.monster_type or properties.monster_attribute or properties.monster_archetypes or properties.is_pendulum or properties.summon_type or properties.is_effect or properties.is_non_effect or properties.is_normal or properties.is_extra_deck or properties.is_main_deck) or
+            false
     end
     if properties.monster_type then
         if not JoyousSpring.is_monster_type(card, properties.monster_type) then
@@ -611,11 +606,124 @@ JoyousSpring.perform_summon = function(card, card_list, summon_type)
 
         joker:start_dissolve()
     end
-    JoyousSpring.extra_deck_area:remove_card(card)
-    card:add_to_deck()
+    if card.area == JoyousSpring.extra_deck_area then
+        JoyousSpring.extra_deck_area:remove_card(card)
+        card:add_to_deck()
+        G.jokers:emplace(card)
+    elseif card.area == G.pack_cards then
+        local area = card.area
+        local prev_state = G.STATE
+        local delay_fac = 1
+
+        G.TAROT_INTERRUPT = G.STATE
+        G.STATE = (G.STATE == G.STATES.TAROT_PACK and G.STATES.TAROT_PACK) or
+            (G.STATE == G.STATES.PLANET_PACK and G.STATES.PLANET_PACK) or
+            (G.STATE == G.STATES.SPECTRAL_PACK and G.STATES.SPECTRAL_PACK) or
+            (G.STATE == G.STATES.STANDARD_PACK and G.STATES.STANDARD_PACK) or
+            (G.STATE == G.STATES.SMODS_BOOSTER_OPENED and G.STATES.SMODS_BOOSTER_OPENED) or
+            (G.STATE == G.STATES.BUFFOON_PACK and G.STATES.BUFFOON_PACK) or
+            G.STATES.PLAY_TAROT
+
+        G.CONTROLLER.locks.use = true
+        if G.booster_pack and not G.booster_pack.alignment.offset.py and (card.ability.consumeable or not (G.GAME.pack_choices and G.GAME.pack_choices > 1)) then
+            G.booster_pack.alignment.offset.py = G.booster_pack.alignment.offset.y
+            G.booster_pack.alignment.offset.y = G.ROOM.T.y + 29
+        end
+        if G.shop and not G.shop.alignment.offset.py then
+            G.shop.alignment.offset.py = G.shop.alignment.offset.y
+            G.shop.alignment.offset.y = G.ROOM.T.y + 29
+        end
+        if G.blind_select and not G.blind_select.alignment.offset.py then
+            G.blind_select.alignment.offset.py = G.blind_select.alignment.offset.y
+            G.blind_select.alignment.offset.y = G.ROOM.T.y + 39
+        end
+        if G.round_eval and not G.round_eval.alignment.offset.py then
+            G.round_eval.alignment.offset.py = G.round_eval.alignment.offset.y
+            G.round_eval.alignment.offset.y = G.ROOM.T.y + 29
+        end
+
+        if card.children.use_button then
+            card.children.use_button:remove(); card.children.use_button = nil
+        end
+        if card.children.sell_button then
+            card.children.sell_button:remove(); card.children.sell_button = nil
+        end
+        if card.children.price then
+            card.children.price:remove(); card.children.price = nil
+        end
+
+        if not card.from_area then card.from_area = card.area end
+        if card.area and (not nc or card.area == G.pack_cards) then card.area:remove_card(card) end
+
+        card:add_to_deck()
+        G.jokers:emplace(card)
+        play_sound('card1', 0.8, 0.6)
+        play_sound('generic1')
+        delay_fac = 0.2
+
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.1,
+                    func = function()
+                        G.STATE = prev_state
+                        G.TAROT_INTERRUPT = nil
+                        G.CONTROLLER.locks.use = false
+
+                        if (prev_state == G.STATES.TAROT_PACK or prev_state == G.STATES.PLANET_PACK or
+                                prev_state == G.STATES.SPECTRAL_PACK or prev_state == G.STATES.STANDARD_PACK or
+                                prev_state == G.STATES.SMODS_BOOSTER_OPENED or
+                                prev_state == G.STATES.BUFFOON_PACK) and G.booster_pack then
+
+                            if G.GAME.pack_choices and G.GAME.pack_choices > 1 then
+                                if G.booster_pack.alignment.offset.py then
+                                    G.booster_pack.alignment.offset.y = G.booster_pack.alignment.offset.py
+                                    G.booster_pack.alignment.offset.py = nil
+                                end
+                                G.GAME.pack_choices = G.GAME.pack_choices - 1
+                            else
+                                G.CONTROLLER.interrupt.focus = true
+                                G.FUNCS.end_consumeable(nil, delay_fac)
+                            end
+                        end
+                        return true
+                    end
+                }))
+                return true
+            end
+        }))
+    else
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.1,
+            func = function()
+                card.area:remove_card(card)
+                card:add_to_deck()
+                if card.children.price then card.children.price:remove() end
+                card.children.price = nil
+                if card.children.buy_button then card.children.buy_button:remove() end
+                card.children.buy_button = nil
+                remove_nils(card.children)
+                G.jokers:emplace(card)
+                G.GAME.round_scores.cards_purchased.amt = G.GAME.round_scores.cards_purchased.amt + 1
+                G.GAME.current_round.jokers_purchased = G.GAME.current_round.jokers_purchased + 1
+
+                for i = 1, #G.jokers.cards do
+                    G.jokers.cards[i]:calculate_joker({ buying_card = true, card = card })
+                end
+
+                play_sound('card1')
+                G.CONTROLLER:save_cardarea_focus('jokers')
+                G.CONTROLLER:recall_cardarea_focus('jokers')
+                return true
+            end
+        }))
+    end
     card.ability.extra.joyous_spring.summoned = true
     card:set_cost()
-    G.jokers:emplace(card)
 
     if summon_type == "XYZ" then
         card.children.xyz_materials = JoyousSpring.create_UIBox_xyz_materials(card)
@@ -676,9 +784,18 @@ JoyousSpring.set_cost = function(card)
     end
 end
 
+JoyousSpring.debuff_hand = function(cards, hand, handname)
+    for _, joker in ipairs(G.jokers.cards) do
+        if joker.config.center.joy_debuff_hand and joker.config.center.joy_debuff_hand(joker, cards, hand, handname) then
+            return true
+        end
+    end
+    return false
+end
+
 -- UI
 
-JoyousSpring.create_UIBox_xyz_materials = function (card)
+JoyousSpring.create_UIBox_xyz_materials = function(card)
     return UIBox {
         definition = {
             n = G.UIT.ROOT,

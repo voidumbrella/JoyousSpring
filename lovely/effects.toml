@@ -5,9 +5,9 @@ priority = 0
 
 # Ash Blossom effect
 [[patches]]
-[patches.regex]
+[patches.pattern]
 target = "functions/state_events.lua"
-pattern = 'if G\.GAME\.blind\.name == .The Serpent. and'
+pattern = "if G.GAME.blind.name == 'The Serpent' and"
 position = 'before'
 match_indent = true
 payload = '''
@@ -21,5 +21,41 @@ if next(SMODS.find_card("j_joy_yokai_ash")) and
             break
         end
     end
+end
+'''
+
+# Hand debuff
+# TODO: See if I want it to not call SMODS.calculate_context after
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "if not G.GAME.blind:debuff_hand(G.play.cards, poker_hands, text) then"
+position = 'at'
+match_indent = true
+payload = '''
+if not G.GAME.blind:debuff_hand(G.play.cards, poker_hands, text) and not JoyousSpring.debuff_hand(G.play.cards, poker_hands, text) then 
+'''
+
+# Add to next shop
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "G.GAME.spectral_rate = G.GAME.spectral_rate or 0"
+position = 'before'
+match_indent = true
+payload = '''
+if G.GAME.joy_create_card and #G.GAME.joy_create_card > 0 then
+    local joy_forced_card_key = table.remove(G.GAME.joy_create_card,1)
+    local joy_forced_card = SMODS.create_card({
+                        key = joy_forced_card_key.key,
+                        area = area
+                    })
+    create_shop_card_ui(joy_forced_card, 'Joker', area)
+    joy_forced_card.states.visible = false
+    joy_forced_card:start_materialize()
+    for k, v in ipairs(G.GAME.tags) do
+        if v:apply_to_run({ type = 'store_joker_modify', card = joy_forced_card }) then break end
+    end
+    return joy_forced_card
 end
 '''

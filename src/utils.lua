@@ -97,6 +97,15 @@ JoyousSpring.count_all_materials = function(property_list, different_names)
         JoyousSpring.count_materials_owned(property_list, different_names)
 end
 
+JoyousSpring.extra_deck_types_owned = function()
+    local fusion = (JoyousSpring.count_all_materials({{summon_type = "FUSION"}}) > 0) and 1 or 0
+    local synchro = (JoyousSpring.count_all_materials({{summon_type = "SYNCHRO"}}) > 0) and 1 or 0
+    local xyz = (JoyousSpring.count_all_materials({{summon_type = "XYZ"}}) > 0) and 1 or 0
+    local link = (JoyousSpring.count_all_materials({{summon_type = "LINK"}}) > 0) and 1 or 0
+
+    return fusion + synchro + xyz + link
+end
+
 JoyousSpring.create_perma_debuffed_card = function(card, source, edition)
     if type(card) == "string" then
         local added_card = SMODS.create_card({

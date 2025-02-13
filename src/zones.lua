@@ -564,11 +564,12 @@ JoyousSpring.create_overlay_graveyard = function()
     })
 end
 
-JoyousSpring.create_sell_and_use_buttons = function (card, args)
+JoyousSpring.create_sell_and_use_buttons = function(card, args)
     local args = args or {}
     local sell = nil
     local summon = nil
     local detach = nil
+    local use = nil
 
     if args.sell then
         sell = {
@@ -607,11 +608,11 @@ JoyousSpring.create_sell_and_use_buttons = function (card, args)
         }
     end
     if args.summon then
-        summon= {
+        summon = {
             n = G.UIT.C,
             config = { align = "cr" },
             nodes = {
-    
+
                 {
                     n = G.UIT.C,
                     config = { ref_table = card, align = "cr", maxw = 1.25, padding = 0.1, r = 0.08, minw = 1.25, minh = 0, hover = true, shadow = true, colour = args.can_summon and G.C.JOY[args.summon_type] or G.C.UI.BACKGROUND_INACTIVE, one_press = true, button = args.can_summon and 'joy_perform_summon' or nil },
@@ -624,13 +625,13 @@ JoyousSpring.create_sell_and_use_buttons = function (card, args)
         }
     end
     if args.detach then
-        detach= {
+        detach = {
             n = G.UIT.C,
             config = { align = "cr" },
             nodes = {
                 {
                     n = G.UIT.C,
-                    config = { ref_table = card, align = "cr", maxw = 1.25, padding = 0.1, r = 0.08, minw = 1.25, minh = 0, hover = true, shadow = true, colour = G.C.JOY.XYZ or G.C.UI.BACKGROUND_INACTIVE, button = 'joy_detach_material'},
+                    config = { ref_table = card, align = "cr", maxw = 1.25, padding = 0.1, r = 0.08, minw = 1.25, minh = 0, hover = true, shadow = true, colour = G.C.JOY.XYZ or G.C.UI.BACKGROUND_INACTIVE, button = 'joy_detach_material' },
                     nodes = {
                         { n = G.UIT.B, config = { w = 0.1, h = 0.6 } },
                         { n = G.UIT.T, config = { text = localize('b_joy_detach'), colour = G.C.UI.TEXT_LIGHT, scale = 0.55, shadow = true } }
@@ -639,7 +640,24 @@ JoyousSpring.create_sell_and_use_buttons = function (card, args)
             }
         }
     end
-    
+    if args.use then
+        use = {
+            n = G.UIT.C,
+            config = { align = "cr" },
+            nodes = {
+
+                {
+                    n = G.UIT.C,
+                    config = { ref_table = card, align = "cr", maxw = 1.25, padding = 0.1, r = 0.08, minw = 1.25, minh = 0, hover = true, shadow = true, colour = G.C.JOY.PENDULUM or G.C.UI.BACKGROUND_INACTIVE, one_press = true, func = 'joy_can_use', button = 'joy_use_card' },
+                    nodes = {
+                        { n = G.UIT.B, config = { w = 0.1, h = 0.6 } },
+                        { n = G.UIT.T, config = { text = localize('b_use'), colour = G.C.UI.TEXT_LIGHT, scale = 0.55, shadow = true } }
+                    }
+                }
+            }
+        }
+    end
+
     return {
         n = G.UIT.ROOT,
         config = {
@@ -666,6 +684,11 @@ JoyousSpring.create_sell_and_use_buttons = function (card, args)
                         n = G.UIT.R,
                         config = { align = 'cl' },
                         nodes = { detach }
+                    } or nil,
+                    use and {
+                        n = G.UIT.R,
+                        config = { align = 'cl' },
+                        nodes = { use }
                     } or nil,
                 }
             }
@@ -710,8 +733,205 @@ G.FUNCS.joy_detach_material = function(e)
     local card = e.config.ref_table
 
     if JoyousSpring.get_xyz_materials(card) > 0 then
-        card.ability.extra.joyous_spring.xyz_materials = card.ability.extra.joyous_spring.xyz_materials -1
+        card.ability.extra.joyous_spring.xyz_materials = card.ability.extra.joyous_spring.xyz_materials - 1
         SMODS.calculate_context({ joy_detach = true, joy_detaching_card = card })
+    end
+end
+
+G.FUNCS.joy_can_use = function(e)
+    local card = e.config.ref_table
+    if card.config.center.can_use and card.config.center:can_use(card) then
+        e.config.colour = G.C.JOY.PENDULUM
+        e.config.button = 'joy_use_card'
+    else
+        e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+        e.config.button = nil
+    end
+end
+
+G.FUNCS.joy_can_buy_and_use = function(e)
+    local card = e.config.ref_table
+    if (((card.cost > G.GAME.dollars - G.GAME.bankrupt_at) and (card.cost > 0)) or
+            not (card.config.center.can_use and card.config.center:can_use(card))) then
+        e.UIBox.states.visible = false
+        e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+        e.config.button = nil
+    else
+        if card.highlighted then
+            e.UIBox.states.visible = true
+        end
+        e.config.colour = G.C.SECONDARY_SET.Voucher
+        e.config.button = 'joy_buy_and_use'
+    end
+end
+
+G.FUNCS.joy_buy_and_use = function(e)
+    local card = e.config.ref_table
+    if card and card:is(Card) then
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.1,
+            func = function()
+                card.area:remove_card(card)
+                card:add_to_deck()
+                if card.children.price then card.children.price:remove() end
+                card.children.price = nil
+                if card.children.buy_button then card.children.buy_button:remove() end
+                card.children.buy_button = nil
+                remove_nils(card.children)
+
+                G.GAME.round_scores.cards_purchased.amt = G.GAME.round_scores.cards_purchased.amt + 1
+                G.GAME.current_round.jokers_purchased = G.GAME.current_round.jokers_purchased + 1
+
+                for i = 1, #G.jokers.cards do
+                    G.jokers.cards[i]:calculate_joker({ buying_card = true, card = card })
+                end
+
+                if G.GAME.modifiers.inflation then
+                    G.GAME.inflation = G.GAME.inflation + 1
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            for k, v in pairs(G.I.CARD) do
+                                if v.set_cost then v:set_cost() end
+                            end
+                            return true
+                        end
+                    }))
+                end
+
+                play_sound('card1')
+                inc_career_stat('c_shop_dollars_spent', card.cost)
+                if card.cost ~= 0 then
+                    ease_dollars(-card.cost)
+                end
+                G.CONTROLLER:save_cardarea_focus('jokers')
+                G.CONTROLLER:recall_cardarea_focus('jokers')
+
+                G.FUNCS.joy_use_card(e)
+                return true
+            end
+        }))
+    end
+end
+
+G.FUNCS.joy_use_card = function(e)
+    local card = e.config.ref_table
+    local prev_state = G.STATE
+
+    if card.config.center.use then
+        G.TAROT_INTERRUPT = G.STATE
+        G.STATE = (G.STATE == G.STATES.TAROT_PACK and G.STATES.TAROT_PACK) or
+            (G.STATE == G.STATES.PLANET_PACK and G.STATES.PLANET_PACK) or
+            (G.STATE == G.STATES.SPECTRAL_PACK and G.STATES.SPECTRAL_PACK) or
+            (G.STATE == G.STATES.STANDARD_PACK and G.STATES.STANDARD_PACK) or
+            (G.STATE == G.STATES.SMODS_BOOSTER_OPENED and G.STATES.SMODS_BOOSTER_OPENED) or
+            (G.STATE == G.STATES.BUFFOON_PACK and G.STATES.BUFFOON_PACK) or
+            G.STATES.PLAY_TAROT
+
+        G.CONTROLLER.locks.use = true
+        if G.booster_pack and not G.booster_pack.alignment.offset.py then
+            G.booster_pack.alignment.offset.py = G.booster_pack.alignment.offset.y
+            G.booster_pack.alignment.offset.y = G.ROOM.T.y + 29
+        end
+        if G.shop and not G.shop.alignment.offset.py then
+            G.shop.alignment.offset.py = G.shop.alignment.offset.y
+            G.shop.alignment.offset.y = G.ROOM.T.y + 29
+        end
+        if G.blind_select and not G.blind_select.alignment.offset.py then
+            G.blind_select.alignment.offset.py = G.blind_select.alignment.offset.y
+            G.blind_select.alignment.offset.y = G.ROOM.T.y + 39
+        end
+        if G.round_eval and not G.round_eval.alignment.offset.py then
+            G.round_eval.alignment.offset.py = G.round_eval.alignment.offset.y
+            G.round_eval.alignment.offset.y = G.ROOM.T.y + 29
+        end
+
+        if card.children.use_button then
+            card.children.use_button:remove()
+            card.children.use_button = nil
+        end
+        if card.children.sell_button then
+            card.children.sell_button:remove()
+            card.children.sell_button = nil
+        end
+        if card.children.price then
+            card.children.price:remove()
+            card.children.price = nil
+        end
+        G.jokers:remove_card(card)
+        draw_card(G.hand, G.play, 1, 'up', true, card, nil, false)
+        delay(0.2)
+        stop_use()
+        set_consumeable_usage(card)
+        card.config.center:use(card, G.jokers)
+        SMODS.calculate_context({ using_consumeable = true, consumeable = card, area = G.jokers })
+
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                card:start_dissolve()
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.1,
+                    func = function()
+                        G.STATE = prev_state
+                        G.TAROT_INTERRUPT = nil
+                        G.CONTROLLER.locks.use = false
+
+                        if (prev_state == G.STATES.TAROT_PACK or prev_state == G.STATES.PLANET_PACK or
+                                prev_state == G.STATES.SPECTRAL_PACK or prev_state == G.STATES.STANDARD_PACK or
+                                prev_state == G.STATES.SMODS_BOOSTER_OPENED or
+                                prev_state == G.STATES.BUFFOON_PACK) and G.booster_pack then
+                            G.booster_pack.alignment.offset.y = G.booster_pack.alignment.offset.py
+                            G.booster_pack.alignment.offset.py = nil
+                        else
+                            if G.shop then
+                                G.shop.alignment.offset.y = G.shop.alignment.offset.py
+                                G.shop.alignment.offset.py = nil
+                            end
+                            if G.blind_select then
+                                G.blind_select.alignment.offset.y = G.blind_select.alignment.offset.py
+                                G.blind_select.alignment.offset.py = nil
+                            end
+                            if G.round_eval then
+                                G.round_eval.alignment.offset.y = G.round_eval.alignment.offset.py
+                                G.round_eval.alignment.offset.py = nil
+                            end
+                            if G.jokers and G.jokers.cards[1] then
+                                G.E_MANAGER:add_event(Event({
+                                    func = function()
+                                        G.E_MANAGER:add_event(Event({
+                                            func = function()
+                                                G.CONTROLLER.interrupt.focus = nil
+                                                if G.jokers then
+                                                    G.CONTROLLER:recall_cardarea_focus(G.jokers)
+                                                end
+                                                return true
+                                            end
+                                        }))
+                                        return true
+                                    end
+                                }))
+                            end
+                        end
+                        return true
+                    end
+                }))
+                return true
+            end
+        }))
+    end
+end
+
+G.FUNCS.joy_can_summon_from_shop = function(e)
+    local card = e.config.ref_table
+    if JoyousSpring.can_summon(card) then
+        e.config.colour = G.C.JOY.RITUAL
+        e.config.button = 'joy_perform_summon'
+    else
+        e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+        e.config.button = nil
     end
 end
 
@@ -776,7 +996,7 @@ function Card:align_h_popup()
     local ret = card_align_h_popup(self)
     local focused_ui = self.children.focused_ui and true or false
     if self.area and (self.area.config.type == "summon_materials" or
-        (self.area.config.type == "title" and self.area.monster_h_popup and JoyousSpring.is_monster_card(self))) then
+            (self.area.config.type == "title" and self.area.monster_h_popup and JoyousSpring.is_monster_card(self))) then
         ret.offset.x = 0
         ret.offset.y = focused_ui and 0.12 or 0.1
         ret.type = 'bm'
@@ -791,9 +1011,9 @@ function Card:highlight(is_highlighted)
         if self.highlighted then
             local can_summon = JoyousSpring.can_summon(self)
             local summon_type = self.ability.extra.joyous_spring.summon_type or "Fusion"
-            
+
             self.children.use_button = UIBox {
-                definition = JoyousSpring.create_sell_and_use_buttons(self, {sell = true, summon = true, can_summon = can_summon, summon_type = summon_type}),
+                definition = JoyousSpring.create_sell_and_use_buttons(self, { sell = true, summon = true, can_summon = can_summon, summon_type = summon_type }),
                 config = {
                     align = "cr",
                     offset = { x = -0.4, y = 0 },
@@ -806,15 +1026,45 @@ function Card:highlight(is_highlighted)
         end
     elseif self.area and self.area.config.type == "summon_materials" then
         self.highlighted = is_highlighted
-    elseif JoyousSpring.is_summon_type(self, "XYZ") and JoyousSpring.get_xyz_materials(self) > 0 and 
-    self.area and self.area.config.type == 'joker' then
+    elseif ((JoyousSpring.is_summon_type(self, "XYZ") and JoyousSpring.get_xyz_materials(self) > 0) or
+            JoyousSpring.is_pendulum_monster(self)) and
+        self.area and self.area.config.type == 'joker' then
         self.highlighted = is_highlighted
         if self.highlighted then
             self.children.use_button = UIBox {
-                definition = JoyousSpring.create_sell_and_use_buttons(self, {sell = true, detach = true}),
+                definition = JoyousSpring.create_sell_and_use_buttons(self, {
+                    sell = true,
+                    detach = (JoyousSpring.is_summon_type(self, "XYZ") and JoyousSpring.get_xyz_materials(self) > 0),
+                    use = JoyousSpring.is_pendulum_monster(self)
+                }),
                 config = {
                     align = "cr",
                     offset = { x = -0.4, y = 0 },
+                    parent = self
+                }
+            }
+        elseif self.children.use_button then
+            self.children.use_button:remove()
+            self.children.use_button = nil
+        end
+    elseif JoyousSpring.is_summon_type(self, "RITUAL") and self.area and self.area == G.pack_cards then
+        self.highlighted = is_highlighted
+        if self.highlighted then
+            self.children.use_button = UIBox {
+                definition = {
+                    n = G.UIT.ROOT,
+                    config = { padding = 0, colour = G.C.CLEAR },
+                    nodes = {
+                        {
+                            n = G.UIT.R, config = { ref_table = self, r = 0.08, padding = 0.1, align = "bm", minw = 0.5 * self.T.w - 0.15, maxw = 0.9 * self.T.w - 0.15, minh = 0.3 * self.T.h, hover = true, shadow = true, colour = G.C.UI.BACKGROUND_INACTIVE, one_press = true, button = 'use_card', func = 'joy_can_summon_from_shop' }, nodes = {
+                            { n = G.UIT.T, config = { text = localize('b_joy_summon'), colour = G.C.UI.TEXT_LIGHT, scale = 0.45, shadow = true } }
+                        }
+                        },
+                    }
+                },
+                config = {
+                    align = "bmi",
+                    offset = { x = 0, y = 0.65 },
                     parent = self
                 }
             }
@@ -1040,6 +1290,9 @@ function Game:start_run(args)
     self.GAME.joy_graveyard = self.GAME.joy_graveyard or {}
     JoyousSpring.graveyard = self.GAME.joy_graveyard
 
+    self.GAME.joy_create_card = self.GAME.joy_create_card or {}
+    JoyousSpring.cards_to_create = self.GAME.joy_create_card
+
     self.extra_buttons = UIBox {
         definition = {
             n = G.UIT.ROOT,
@@ -1132,4 +1385,136 @@ function create_card_for_shop(area)
         end
     end
     return card
+end
+
+local create_shop_card_ui_ref = create_shop_card_ui
+function create_shop_card_ui(card, type, area)
+    if JoyousSpring.is_pendulum_monster(card) then
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.43,
+            blocking = false,
+            blockable = false,
+            func = (function()
+                if card.opening then return true end
+                local t1 = {
+                    n = G.UIT.ROOT,
+                    config = { minw = 0.6, align = 'tm', colour = darken(G.C.BLACK, 0.2), shadow = true, r = 0.05, padding = 0.05, minh = 1 },
+                    nodes = {
+                        {
+                            n = G.UIT.R,
+                            config = { align = "cm", colour = lighten(G.C.BLACK, 0.1), r = 0.1, minw = 1, minh = 0.55, emboss = 0.05, padding = 0.03 },
+                            nodes = {
+                                { n = G.UIT.O, config = { object = DynaText({ string = { { prefix = localize('$'), ref_table = card, ref_value = 'cost' } }, colours = { G.C.MONEY }, shadow = true, silent = true, bump = true, pop_in = 0, scale = 0.5 }) } },
+                            }
+                        }
+                    }
+                }
+                local t2 = {
+                    n = G.UIT.ROOT,
+                    config = { ref_table = card, minw = 1.1, maxw = 1.3, padding = 0.1, align = 'bm', colour = G.C.GOLD, shadow = true, r = 0.08, minh = 0.94, func = 'can_buy', one_press = true, button = 'buy_from_shop', hover = true },
+                    nodes = {
+                        { n = G.UIT.T, config = { text = localize('b_buy'), colour = G.C.WHITE, scale = 0.5 } }
+                    }
+                }
+                local t3 = {
+                    n = G.UIT.ROOT,
+                    config = { id = 'buy_and_use', ref_table = card, minh = 1.1, padding = 0.1, align = 'cr', colour = G.C.RED, shadow = true, r = 0.08, minw = 1.1, func = 'joy_can_buy_and_use', one_press = true, button = 'joy_buy_and_use', hover = true, focus_args = { type = 'none' } },
+                    nodes = {
+                        { n = G.UIT.B, config = { w = 0.1, h = 0.6 } },
+                        {
+                            n = G.UIT.C,
+                            config = { align = 'cm' },
+                            nodes = {
+                                {
+                                    n = G.UIT.R,
+                                    config = { align = 'cm', maxw = 1 },
+                                    nodes = {
+                                        { n = G.UIT.T, config = { text = localize('b_buy'), colour = G.C.WHITE, scale = 0.5 } }
+                                    }
+                                },
+                                {
+                                    n = G.UIT.R,
+                                    config = { align = 'cm', maxw = 1 },
+                                    nodes = {
+                                        { n = G.UIT.T, config = { text = localize('b_and_use'), colour = G.C.WHITE, scale = 0.3 } }
+                                    }
+                                },
+                            }
+                        }
+                    }
+                }
+
+
+                card.children.price = UIBox {
+                    definition = t1,
+                    config = {
+                        align = "tm",
+                        offset = { x = 0, y = 1.5 },
+                        major = card,
+                        bond = 'Weak',
+                        parent = card
+                    }
+                }
+
+                card.children.buy_button = UIBox {
+                    definition = t2,
+                    config = {
+                        align = "bm",
+                        offset = { x = 0, y = -0.3 },
+                        major = card,
+                        bond = 'Weak',
+                        parent = card
+                    }
+                }
+
+                card.children.buy_and_use_button = UIBox {
+                    definition = t3,
+                    config = {
+                        align = "cr",
+                        offset = { x = -0.3, y = 0 },
+                        major = card,
+                        bond = 'Weak',
+                        parent = card
+                    }
+                }
+
+                card.children.price.alignment.offset.y = 0.38
+
+                return true
+            end)
+        }))
+    elseif JoyousSpring.is_summon_type(card, "RITUAL") then
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.43,
+            blocking = false,
+            blockable = false,
+            func = (function()
+                if card.opening then return true end
+                local t2 = {
+                    n = G.UIT.ROOT,
+                    config = { ref_table = card, minw = 1.1, maxw = 1.3, padding = 0.1, align = 'bm', colour = G.C.JOY.RITUAL, shadow = true, r = 0.08, minh = 0.94, func = 'joy_can_summon_from_shop', one_press = true, button = 'joy_perform_summon', hover = true },
+                    nodes = {
+                        { n = G.UIT.T, config = { text = localize('b_joy_summon'), colour = G.C.WHITE, scale = 0.5 } }
+                    }
+                }
+
+                card.children.buy_button = UIBox {
+                    definition = t2,
+                    config = {
+                        align = "bm",
+                        offset = { x = 0, y = -0.3 },
+                        major = card,
+                        bond = 'Weak',
+                        parent = card
+                    }
+                }
+
+                return true
+            end)
+        }))
+    else
+        create_shop_card_ui_ref(card, type, area)
+    end
 end

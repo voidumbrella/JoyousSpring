@@ -232,8 +232,8 @@ SMODS.Joker({
                 card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.base_xmult
                 G.E_MANAGER:add_event(Event({
                     func = function()
-                        card_eval_status_text(card, 'extra', nil, nil, nil,
-                            { message = localize('k_upgrade_ex') }); return true
+                        card_eval_status_text(card, 'extra', nil, nil, nil,{ message = localize('k_upgrade_ex') })
+                        return true
                     end
                 }))
             end
