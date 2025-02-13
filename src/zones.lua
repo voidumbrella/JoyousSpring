@@ -935,6 +935,28 @@ G.FUNCS.joy_can_summon_from_shop = function(e)
     end
 end
 
+G.FUNCS.joy_show_extra_deck = function (e)
+    if JoyousSpring.extra_deck_area and #JoyousSpring.extra_deck_area.cards > 0 then
+        G.GAME.joy_show_extra_deck = true
+    end
+    if G.GAME.joy_show_extra_deck then
+        e.states.visible = true
+    else
+        e.states.visible = false
+    end
+end
+
+G.FUNCS.joy_show_graveyard = function (e)
+    if JoyousSpring.graveyard and next(JoyousSpring.graveyard) then
+        G.GAME.joy_show_graveyard = true
+    end
+    if G.GAME.joy_show_graveyard then
+        e.states.visible = true
+    else
+        e.states.visible = false
+    end
+end
+
 G.FUNCS.exit_select_material_menu = function(e)
     if not G.OVERLAY_MENU then return end
 
@@ -988,6 +1010,151 @@ G.FUNCS.can_select_card = function(e)
         end
     else
         can_select_card_ref(e)
+    end
+end
+
+local create_card_for_shop_ref = create_card_for_shop
+function create_card_for_shop(area)
+    local card = create_card_for_shop_ref(area)
+    if card and G.jokers then
+        for _, joker in ipairs(G.jokers.cards) do
+            if joker.config.center.joy_create_card_for_shop then
+                joker.config.center.joy_create_card_for_shop(card, area)
+            end
+        end
+    end
+    return card
+end
+
+local create_shop_card_ui_ref = create_shop_card_ui
+function create_shop_card_ui(card, type, area)
+    if JoyousSpring.is_pendulum_monster(card) then
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.43,
+            blocking = false,
+            blockable = false,
+            func = (function()
+                if card.opening then return true end
+                local t1 = {
+                    n = G.UIT.ROOT,
+                    config = { minw = 0.6, align = 'tm', colour = darken(G.C.BLACK, 0.2), shadow = true, r = 0.05, padding = 0.05, minh = 1 },
+                    nodes = {
+                        {
+                            n = G.UIT.R,
+                            config = { align = "cm", colour = lighten(G.C.BLACK, 0.1), r = 0.1, minw = 1, minh = 0.55, emboss = 0.05, padding = 0.03 },
+                            nodes = {
+                                { n = G.UIT.O, config = { object = DynaText({ string = { { prefix = localize('$'), ref_table = card, ref_value = 'cost' } }, colours = { G.C.MONEY }, shadow = true, silent = true, bump = true, pop_in = 0, scale = 0.5 }) } },
+                            }
+                        }
+                    }
+                }
+                local t2 = {
+                    n = G.UIT.ROOT,
+                    config = { ref_table = card, minw = 1.1, maxw = 1.3, padding = 0.1, align = 'bm', colour = G.C.GOLD, shadow = true, r = 0.08, minh = 0.94, func = 'can_buy', one_press = true, button = 'buy_from_shop', hover = true },
+                    nodes = {
+                        { n = G.UIT.T, config = { text = localize('b_buy'), colour = G.C.WHITE, scale = 0.5 } }
+                    }
+                }
+                local t3 = {
+                    n = G.UIT.ROOT,
+                    config = { id = 'buy_and_use', ref_table = card, minh = 1.1, padding = 0.1, align = 'cr', colour = G.C.RED, shadow = true, r = 0.08, minw = 1.1, func = 'joy_can_buy_and_use', one_press = true, button = 'joy_buy_and_use', hover = true, focus_args = { type = 'none' } },
+                    nodes = {
+                        { n = G.UIT.B, config = { w = 0.1, h = 0.6 } },
+                        {
+                            n = G.UIT.C,
+                            config = { align = 'cm' },
+                            nodes = {
+                                {
+                                    n = G.UIT.R,
+                                    config = { align = 'cm', maxw = 1 },
+                                    nodes = {
+                                        { n = G.UIT.T, config = { text = localize('b_buy'), colour = G.C.WHITE, scale = 0.5 } }
+                                    }
+                                },
+                                {
+                                    n = G.UIT.R,
+                                    config = { align = 'cm', maxw = 1 },
+                                    nodes = {
+                                        { n = G.UIT.T, config = { text = localize('b_and_use'), colour = G.C.WHITE, scale = 0.3 } }
+                                    }
+                                },
+                            }
+                        }
+                    }
+                }
+
+
+                card.children.price = UIBox {
+                    definition = t1,
+                    config = {
+                        align = "tm",
+                        offset = { x = 0, y = 1.5 },
+                        major = card,
+                        bond = 'Weak',
+                        parent = card
+                    }
+                }
+
+                card.children.buy_button = UIBox {
+                    definition = t2,
+                    config = {
+                        align = "bm",
+                        offset = { x = 0, y = -0.3 },
+                        major = card,
+                        bond = 'Weak',
+                        parent = card
+                    }
+                }
+
+                card.children.buy_and_use_button = UIBox {
+                    definition = t3,
+                    config = {
+                        align = "cr",
+                        offset = { x = -0.3, y = 0 },
+                        major = card,
+                        bond = 'Weak',
+                        parent = card
+                    }
+                }
+
+                card.children.price.alignment.offset.y = 0.38
+
+                return true
+            end)
+        }))
+    elseif JoyousSpring.is_summon_type(card, "RITUAL") then
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.43,
+            blocking = false,
+            blockable = false,
+            func = (function()
+                if card.opening then return true end
+                local t2 = {
+                    n = G.UIT.ROOT,
+                    config = { ref_table = card, minw = 1.1, maxw = 1.3, padding = 0.1, align = 'bm', colour = G.C.JOY.RITUAL, shadow = true, r = 0.08, minh = 0.94, func = 'joy_can_summon_from_shop', one_press = true, button = 'joy_perform_summon', hover = true },
+                    nodes = {
+                        { n = G.UIT.T, config = { text = localize('b_joy_summon'), colour = G.C.WHITE, scale = 0.5 } }
+                    }
+                }
+
+                card.children.buy_button = UIBox {
+                    definition = t2,
+                    config = {
+                        align = "bm",
+                        offset = { x = 0, y = -0.3 },
+                        major = card,
+                        bond = 'Weak',
+                        parent = card
+                    }
+                }
+
+                return true
+            end)
+        }))
+    else
+        create_shop_card_ui_ref(card, type, area)
     end
 end
 
@@ -1282,6 +1449,8 @@ function Game:start_run(args)
         config = { align = 'cmi', offset = { x = 0, y = -5 }, major = self.jokers, bond = 'Weak' }
     }
     self.joy_extra_deck.states.visible = false
+    G.GAME.joy_show_extra_deck = G.GAME.joy_show_extra_deck or false
+    G.GAME.joy_show_graveyard = G.GAME.joy_show_graveyard or false
 
     JoyousSpring.extra_deck_open = false
     JoyousSpring.extra_deck_forced = false
@@ -1315,7 +1484,8 @@ function Game:start_run(args)
                         hover = true,
                         colour = G.C.JOY.TRAP,
                         shadow = true,
-                        button = "joy_open_graveyard"
+                        button = "joy_open_graveyard",
+                        func = "joy_show_graveyard"
                     },
                     nodes = {
                         {
@@ -1344,7 +1514,8 @@ function Game:start_run(args)
                         hover = true,
                         colour = G.C.JOY.SPELL,
                         shadow = true,
-                        button = "joy_open_extra_deck"
+                        button = "joy_open_extra_deck",
+                        func = "joy_show_extra_deck"
                     },
                     nodes = {
                         {
@@ -1372,149 +1543,4 @@ function Game:start_run(args)
             bond = 'Weak'
         }
     }
-end
-
-local create_card_for_shop_ref = create_card_for_shop
-function create_card_for_shop(area)
-    local card = create_card_for_shop_ref(area)
-    if card and G.jokers then
-        for _, joker in ipairs(G.jokers.cards) do
-            if joker.config.center.joy_create_card_for_shop then
-                joker.config.center.joy_create_card_for_shop(card, area)
-            end
-        end
-    end
-    return card
-end
-
-local create_shop_card_ui_ref = create_shop_card_ui
-function create_shop_card_ui(card, type, area)
-    if JoyousSpring.is_pendulum_monster(card) then
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = 0.43,
-            blocking = false,
-            blockable = false,
-            func = (function()
-                if card.opening then return true end
-                local t1 = {
-                    n = G.UIT.ROOT,
-                    config = { minw = 0.6, align = 'tm', colour = darken(G.C.BLACK, 0.2), shadow = true, r = 0.05, padding = 0.05, minh = 1 },
-                    nodes = {
-                        {
-                            n = G.UIT.R,
-                            config = { align = "cm", colour = lighten(G.C.BLACK, 0.1), r = 0.1, minw = 1, minh = 0.55, emboss = 0.05, padding = 0.03 },
-                            nodes = {
-                                { n = G.UIT.O, config = { object = DynaText({ string = { { prefix = localize('$'), ref_table = card, ref_value = 'cost' } }, colours = { G.C.MONEY }, shadow = true, silent = true, bump = true, pop_in = 0, scale = 0.5 }) } },
-                            }
-                        }
-                    }
-                }
-                local t2 = {
-                    n = G.UIT.ROOT,
-                    config = { ref_table = card, minw = 1.1, maxw = 1.3, padding = 0.1, align = 'bm', colour = G.C.GOLD, shadow = true, r = 0.08, minh = 0.94, func = 'can_buy', one_press = true, button = 'buy_from_shop', hover = true },
-                    nodes = {
-                        { n = G.UIT.T, config = { text = localize('b_buy'), colour = G.C.WHITE, scale = 0.5 } }
-                    }
-                }
-                local t3 = {
-                    n = G.UIT.ROOT,
-                    config = { id = 'buy_and_use', ref_table = card, minh = 1.1, padding = 0.1, align = 'cr', colour = G.C.RED, shadow = true, r = 0.08, minw = 1.1, func = 'joy_can_buy_and_use', one_press = true, button = 'joy_buy_and_use', hover = true, focus_args = { type = 'none' } },
-                    nodes = {
-                        { n = G.UIT.B, config = { w = 0.1, h = 0.6 } },
-                        {
-                            n = G.UIT.C,
-                            config = { align = 'cm' },
-                            nodes = {
-                                {
-                                    n = G.UIT.R,
-                                    config = { align = 'cm', maxw = 1 },
-                                    nodes = {
-                                        { n = G.UIT.T, config = { text = localize('b_buy'), colour = G.C.WHITE, scale = 0.5 } }
-                                    }
-                                },
-                                {
-                                    n = G.UIT.R,
-                                    config = { align = 'cm', maxw = 1 },
-                                    nodes = {
-                                        { n = G.UIT.T, config = { text = localize('b_and_use'), colour = G.C.WHITE, scale = 0.3 } }
-                                    }
-                                },
-                            }
-                        }
-                    }
-                }
-
-
-                card.children.price = UIBox {
-                    definition = t1,
-                    config = {
-                        align = "tm",
-                        offset = { x = 0, y = 1.5 },
-                        major = card,
-                        bond = 'Weak',
-                        parent = card
-                    }
-                }
-
-                card.children.buy_button = UIBox {
-                    definition = t2,
-                    config = {
-                        align = "bm",
-                        offset = { x = 0, y = -0.3 },
-                        major = card,
-                        bond = 'Weak',
-                        parent = card
-                    }
-                }
-
-                card.children.buy_and_use_button = UIBox {
-                    definition = t3,
-                    config = {
-                        align = "cr",
-                        offset = { x = -0.3, y = 0 },
-                        major = card,
-                        bond = 'Weak',
-                        parent = card
-                    }
-                }
-
-                card.children.price.alignment.offset.y = 0.38
-
-                return true
-            end)
-        }))
-    elseif JoyousSpring.is_summon_type(card, "RITUAL") then
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = 0.43,
-            blocking = false,
-            blockable = false,
-            func = (function()
-                if card.opening then return true end
-                local t2 = {
-                    n = G.UIT.ROOT,
-                    config = { ref_table = card, minw = 1.1, maxw = 1.3, padding = 0.1, align = 'bm', colour = G.C.JOY.RITUAL, shadow = true, r = 0.08, minh = 0.94, func = 'joy_can_summon_from_shop', one_press = true, button = 'joy_perform_summon', hover = true },
-                    nodes = {
-                        { n = G.UIT.T, config = { text = localize('b_joy_summon'), colour = G.C.WHITE, scale = 0.5 } }
-                    }
-                }
-
-                card.children.buy_button = UIBox {
-                    definition = t2,
-                    config = {
-                        align = "bm",
-                        offset = { x = 0, y = -0.3 },
-                        major = card,
-                        bond = 'Weak',
-                        parent = card
-                    }
-                }
-
-                return true
-            end)
-        }))
-    else
-        create_shop_card_ui_ref(card, type, area)
-    end
 end
