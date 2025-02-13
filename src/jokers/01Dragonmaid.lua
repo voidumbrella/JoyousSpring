@@ -952,3 +952,8 @@ SMODS.Joker({
         return args.source and args.source == "JoyousSpring" or false
     end,
 })
+
+JoyousSpring.collection_pool[#JoyousSpring.collection_pool + 1] = {
+    keys = { "dmaid" },
+    label = "b_joy_archetype_dmaid"
+}

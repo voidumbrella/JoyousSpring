@@ -598,7 +598,13 @@ return {
 			b_joy_graveyard = "Graveyard",
 			b_joy_summon = "Summon",
 			b_joy_detach = "Detach",
-			b_joy_disable_booster_tag = "Disable Booster Tag from appearing naturally"
+			b_joy_disable_booster_tag = "Disable Booster Tag from appearing naturally",
+			b_joy_archetype_dmaid = "Dragonmaid",
+			b_joy_archetype_ltwin = "Live☆Twin",
+			b_joy_archetype_dogma = "Dogmatika",
+			b_joy_archetype_yokai = "Ghost Girls",
+			b_joy_archetype_spright = "Spright",
+			b_joy_archetype_misc = "Miscellaneous",
 		}
 	},
 }

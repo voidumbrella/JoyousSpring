@@ -411,3 +411,8 @@ SMODS.Joker({
 -- })
 
 -- --#endregion
+
+JoyousSpring.collection_pool[#JoyousSpring.collection_pool + 1] = {
+    keys = { "misc" },
+    label = "b_joy_archetype_misc"
+}

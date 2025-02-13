@@ -18,7 +18,7 @@ SMODS.Atlas({
 JoyousSpring.config = SMODS.current_mod.config
 
 assert(SMODS.load_file("src/utils.lua"))()
-assert(SMODS.load_file("src/config_tab.lua"))()
+assert(SMODS.load_file("src/mod_info.lua"))()
 assert(SMODS.load_file("src/globals.lua"))()
 assert(SMODS.load_file("src/zones.lua"))()
 assert(SMODS.load_file("src/monsters.lua"))()

@@ -637,3 +637,8 @@ SMODS.Joker({
         }
     end
 })
+
+JoyousSpring.collection_pool[#JoyousSpring.collection_pool + 1] = {
+    keys = { "ltwin", "etwin" },
+    label = "b_joy_archetype_ltwin"
+}

@@ -547,3 +547,8 @@ SMODS.Joker({
         }
     end
 })
+
+JoyousSpring.collection_pool[#JoyousSpring.collection_pool + 1] = {
+    keys = { "dogma" },
+    label = "b_joy_archetype_dogma"
+}
