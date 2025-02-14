@@ -617,7 +617,7 @@ JoyousSpring.create_sell_and_use_buttons = function(card, args)
 
                 {
                     n = G.UIT.C,
-                    config = { ref_table = card, align = "cr", maxw = 1.25, padding = 0.1, r = 0.08, minw = 1.25, minh = 0, hover = true, shadow = true, colour = args.can_summon and G.C.JOY[args.summon_type] or G.C.UI.BACKGROUND_INACTIVE, one_press = true, button = args.can_summon and 'joy_perform_summon' or nil },
+                    config = { ref_table = card, align = "cr", maxw = 1.25, padding = 0.1, r = 0.08, minw = 1.25, minh = 0, hover = true, shadow = true, colour = args.can_summon and G.C.JOY[args.summon_type] or G.C.UI.BACKGROUND_INACTIVE, button = args.can_summon and 'joy_perform_summon' or nil },
                     nodes = {
                         { n = G.UIT.B, config = { w = 0.1, h = 0.6 } },
                         { n = G.UIT.T, config = { text = localize('b_joy_summon'), colour = G.C.UI.TEXT_LIGHT, scale = 0.55, shadow = true } }
@@ -1136,7 +1136,7 @@ function create_shop_card_ui(card, type, area)
                 if card.opening then return true end
                 local t2 = {
                     n = G.UIT.ROOT,
-                    config = { ref_table = card, minw = 1.1, maxw = 1.3, padding = 0.1, align = 'bm', colour = G.C.JOY.RITUAL, shadow = true, r = 0.08, minh = 0.94, func = 'joy_can_summon_from_shop', one_press = true, button = 'joy_perform_summon', hover = true },
+                    config = { ref_table = card, minw = 1.1, maxw = 1.3, padding = 0.1, align = 'bm', colour = G.C.JOY.RITUAL, shadow = true, r = 0.08, minh = 0.94, func = 'joy_can_summon_from_shop', button = 'joy_perform_summon', hover = true },
                     nodes = {
                         { n = G.UIT.T, config = { text = localize('b_joy_summon'), colour = G.C.WHITE, scale = 0.5 } }
                     }
@@ -1226,7 +1226,7 @@ function Card:highlight(is_highlighted)
                     config = { padding = 0, colour = G.C.CLEAR },
                     nodes = {
                         {
-                            n = G.UIT.R, config = { ref_table = self, r = 0.08, padding = 0.1, align = "bm", minw = 0.5 * self.T.w - 0.15, maxw = 0.9 * self.T.w - 0.15, minh = 0.3 * self.T.h, hover = true, shadow = true, colour = G.C.UI.BACKGROUND_INACTIVE, one_press = true, button = 'use_card', func = 'joy_can_summon_from_shop' }, nodes = {
+                            n = G.UIT.R, config = { ref_table = self, r = 0.08, padding = 0.1, align = "bm", minw = 0.5 * self.T.w - 0.15, maxw = 0.9 * self.T.w - 0.15, minh = 0.3 * self.T.h, hover = true, shadow = true, colour = G.C.UI.BACKGROUND_INACTIVE, button = 'use_card', func = 'joy_can_summon_from_shop' }, nodes = {
                             { n = G.UIT.T, config = { text = localize('b_joy_summon'), colour = G.C.UI.TEXT_LIGHT, scale = 0.45, shadow = true } }
                         }
                         },
