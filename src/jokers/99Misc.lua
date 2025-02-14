@@ -272,7 +272,7 @@ SMODS.Joker({
 
 --#endregion
 
--- --#region Fusion
+--#region Fusion
 
 -- -- Mudragon of the Swamp
 
@@ -317,100 +317,151 @@ SMODS.Joker({
 --     },
 -- })
 
+-- Garura, Wings of Resonant Life
 
+SMODS.Joker({
+    key = "garura",
+    atlas = 'Misc01',
+    pos = { x = 0, y = 1 },
+    rarity = 2,
+    discovered = true,
+    blueprint_compat = false,
+    eternal_compat = true,
+    cost = 6,
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.h_size, card.ability.extra.h_size_gain } }
+    end,
+    generate_ui = JoyousSpring.generate_info_ui,
+    config = {
+        extra = {
+            joyous_spring = {
+                is_main_deck = false,
+                summon_type = "FUSION",
+                is_effect = true,
+                attribute = "DARK",
+                monster_type = "Winged Beast",
+                monster_archetypes = {},
+                summon_conditions = {
+                    {
+                        type = "FUSION",
+                        materials = {
+                            {},
+                            {},
+                        },
+                        restrictions = {
+                            same_rarity = true,
+                            different_names = true
+                        }
+                    }
+                },
+            },
+            h_size = 2,
+            h_size_gain = 1
+        },
+    },
+    calculate = function(self, card, context)
+        if context.joy_summon and context.main_eval and not context.blueprint_card then
+            for _, joker in ipairs(context.joy_summon_materials) do
+                if joker == card then
+                    G.hand:change_size(card.ability.extra.h_size_gain)
+                    break
+                end
+            end
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if not JoyousSpring.is_perma_debuffed(card) then
+            G.hand:change_size(card.ability.extra.h_size)
+        end
+    end,
+    remove_from_deck = function(self, card, from_debuff)
+        if not JoyousSpring.is_perma_debuffed(card) then
+            G.hand:change_size(-card.ability.extra.h_size)
+        end
+    end,
+})
 
--- -- Garura, Wings of Resonant Life
+--#endregion
 
--- SMODS.Joker({
---     key = "garura",
---     atlas = 'Misc01',
---     pos = { x = 0, y = 1 },
---     rarity = 2,
---     discovered = true,
---     blueprint_compat = false,
---     eternal_compat = true,
---     cost = 6,
---     loc_vars = function(self, info_queue, card)
---         return { vars = { card.ability.extra.h_size, card.ability.extra.h_size_gain } }
---     end,
---     generate_ui = JoyousSpring.generate_info_ui,
---     config = {
---         extra = {
---             joyous_spring = {
---                 is_main_deck = false,
---                 summon_type = "FUSION",
---                 is_effect = true,
---                 attribute = "DARK",
---                 monster_type = "Winged Beast",
---                 monster_archetypes = {},
---                 summon_conditions = {
---                     {
---                         type = "FUSION",
---                         materials = {
---                             {},
---                             {},
---                         },
---                         restrictions = {
---                             same_rarity = true,
---                             different_names = true
---                         }
---                     }
---                 },
---             },
---             h_size = 2,
---             h_size_gain = 1
---         },
---     },
--- })
+--#region Link
 
--- --#endregion
+-- Apollousa, Bow of the Goddess
 
--- --#region Link
+SMODS.Joker({
+    key = "apollousa",
+    atlas = 'Misc01',
+    pos = { x = 2, y = 1 },
+    rarity = 1,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = true,
+    cost = 6,
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.chips_gain, card.ability.extra.chips_loss, card.ability.extra.chips } }
+    end,
+    generate_ui = JoyousSpring.generate_info_ui,
+    config = {
+        extra = {
+            joyous_spring = {
+                is_main_deck = false,
+                summon_type = "LINK",
+                is_effect = true,
+                attribute = "WIND",
+                monster_type = "Fairy",
+                monster_archetypes = {},
+                summon_conditions = {
+                    {
+                        type = "LINK",
+                        materials = {
+                            { min = 2 },
+                        },
+                        restrictions = {
+                            different_names = true
+                        }
+                    }
+                },
+            },
+            chips_gain = 80,
+            chips_loss = 80,
+            chips = 0
+        },
+    },
+    calculate = function(self, card, context)
+        if card.facing ~= 'back' then
+            if context.joker_main then
+                return {
+                    chips = card.ability.extra.chips
+                }
+            end
+            if context.end_of_round and context.game_over == false and context.main_eval then
+                if card.ability.extra.chips > 0 then
+                    card.ability.extra.chips = card.ability.extra.chips - card.ability.extra.chips_loss
+                    card.ability.extra.chips = (card.ability.extra.chips >= 0 and card.ability.extra.chips) or 0
+                    return {
+                        message = localize { type = 'variable', key = 'a_chips_minus', vars = { card.ability.extra.chips_loss } },
+                        colour = G.C.CHIPS
+                    }
+                end
+            end
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if not card.debuff and not from_debuff then
+            card.ability.extra.chips = card.ability.extra.chips_gain * #JoyousSpring.get_materials(card)
+        end
+    end,
+    joker_display_def = function(JokerDisplay)
+        return {
+            text = {
+                { text = "+" },
+                { ref_table = "card.ability.extra", ref_value = "chips", retrigger_type = "mult" }
+            },
+            text_config = { colour = G.C.CHIPS },
+        }
+    end
+})
 
--- -- Apollousa, Bow of the Goddess
-
--- SMODS.Joker({
---     key = "apollousa",
---     atlas = 'Misc01',
---     pos = { x = 2, y = 1 },
---     rarity = 2,
---     discovered = true,
---     blueprint_compat = false,
---     eternal_compat = true,
---     cost = 6,
---     loc_vars = function(self, info_queue, card)
---         return { vars = { card.ability.extra.chips, card.ability.extra.chips_reduction, 0 } }
---     end,
---     generate_ui = JoyousSpring.generate_info_ui,
---     config = {
---         extra = {
---             joyous_spring = {
---                 is_main_deck = false,
---                 summon_type = "LINK",
---                 is_effect = true,
---                 attribute = "WIND",
---                 monster_type = "Fairy",
---                 monster_archetypes = {},
---                 summon_conditions = {
---                     {
---                         type = "LINK",
---                         materials = {
---                             {},
---                             {},
---                         },
---                         restrictions = {
---                             different_names = true
---                         }
---                     }
---                 },
---             },
---             chips = 80,
---             chips_reduction = 80
---         },
---     },
--- })
-
--- --#endregion
+--#endregion
 
 JoyousSpring.collection_pool[#JoyousSpring.collection_pool + 1] = {
     keys = { "misc" },

@@ -301,7 +301,7 @@ end
 
 JoyousSpring.create_overlay_select_summon_materials = function(card, card_list)
     local material_combos = JoyousSpring.get_all_summon_material_combos(card, card_list)
-
+    --print(material_combos)
     if material_combos then
         local material_list = SMODS.merge_lists(material_combos)
 
@@ -319,6 +319,8 @@ JoyousSpring.create_overlay_select_summon_materials = function(card, card_list)
                 highlight_limit = highlight_limit,
             }
         )
+        JoyousSpring.summon_material_area.material_combos = material_combos
+
 
         for _, joker in ipairs(material_list) do
             local added_joker = copy_card(joker)
@@ -716,7 +718,8 @@ G.FUNCS.can_select_material = function(e)
     if card and JoyousSpring.summon_material_area and next(JoyousSpring.summon_material_area.highlighted) then
         local summon_type = card.ability.extra.joyous_spring.summon_type or "Fusion"
         local colour = G.C.JOY[summon_type] or G.C.JOY.FUSION
-        if JoyousSpring.can_summon(card, JoyousSpring.summon_material_area.highlighted) then
+
+        if JoyousSpring.can_summon_with_combo(card, JoyousSpring.summon_material_area.highlighted) then
             e.config.colour = colour
             e.config.button = 'exit_select_material_menu'
         else

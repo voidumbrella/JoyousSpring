@@ -47,3 +47,4 @@ luac.out
 *.psd
 *.aseprite
 assets/templates/*
+debug.lua

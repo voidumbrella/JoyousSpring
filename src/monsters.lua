@@ -91,7 +91,7 @@ JoyousSpring.is_material = function(card, properties, summon_type)
     if summon_type and card.ability.eternal then
         return false
     end
-    if not next(properties) == 0 then
+    if not next(properties) then
         return true
     end
     if card.facing == 'back' then
@@ -412,37 +412,52 @@ end
 
 -- Summon and material calculations
 
-JoyousSpring.filter_materials_on_properties = function(properties, card_list, summon_type)
-    local card_table = card_list or G.jokers.cards
-    local filtered_table = {}
+local function get_combinations(list)
+    local result = {}
 
-    for _, card in ipairs(card_table) do
-        if JoyousSpring.is_material(card, properties, summon_type) then
-            table.insert(filtered_table, card)
+    local function generate_combination(start, current_combo)
+        table.insert(result, { unpack(current_combo) })
+
+        for i = start, #list do
+            table.insert(current_combo, list[i])
+            generate_combination(i + 1, current_combo)
+            table.remove(current_combo)
         end
     end
 
-    return filtered_table
+    generate_combination(1, {})
+
+    return result
 end
 
-JoyousSpring.filter_materials_on_conditions = function(condition, card_list)
-    if not condition.materials then return {} end
+local function get_condition_min_max(condition)
+    local min_materials = 0
+    local max_materials = 0
+    if condition and condition.materials then
+        for _, property in ipairs(condition.materials) do
+            if property.min then
+                min_materials = min_materials + (property.optional and 0 or property.min)
+                max_materials = max_materials + (property.max or 10)
+            else
+                min_materials = min_materials + (property.optional and 0 or 1)
+                max_materials = max_materials + 1
+            end
+        end
+    end
+    return min_materials, max_materials
+end
 
-    local card_table = card_list or G.jokers.cards
-    local filtered_table = {}
+JoyousSpring.is_valid_material_combo = function(combo_list, condition)
+    local all_materials_count = 0
+    local restrictions = condition.restrictions
+    local summon_type = condition.type
 
-    for _, properties in ipairs(condition.materials) do
-        local filtered_by_property = JoyousSpring.filter_materials_on_properties(properties, card_table, condition.type)
+    local min_materials, max_materials = get_condition_min_max(condition)
 
-        if #filtered_by_property == 0 and not properties.optional then return {} end
-        table.insert(filtered_table, filtered_by_property)
+    if (min_materials == 0) or (#combo_list < min_materials) or (#combo_list > max_materials) then
+        return false
     end
 
-    return filtered_table
-end
-
-JoyousSpring.is_valid_material_combo = function(combo_list, restrictions, summon_type)
-    local all_materials_count = 0
     for _, card in ipairs(combo_list) do
         if summon_type and JoyousSpring.is_all_materials(card, summon_type) then
             all_materials_count = all_materials_count + 1
@@ -462,16 +477,16 @@ JoyousSpring.is_valid_material_combo = function(combo_list, restrictions, summon
             if not restrictions then
                 break
             end
-            if restrictions.different_names and card_1.config.center_key == card_2.config.center_key then
+            if restrictions.different_names and card_1.config.center.key == card_2.config.center.key then
                 return false
             end
-            if restrictions.same_name and card_1.config.center_key ~= card_2.config.center_key then
+            if restrictions.same_name and card_1.config.center.key ~= card_2.config.center.key then
                 return false
             end
-            if restrictions.different_rarities and card_1.rarity == card_2.rarity then
+            if restrictions.different_rarities and card_1.config.center.rarity == card_2.config.center.rarity then
                 return false
             end
-            if restrictions.same_rarity and card_1.rarity ~= card_2.rarity then
+            if restrictions.same_rarity and card_1.config.center.rarity ~= card_2.config.center.rarity then
                 return false
             end
             if restrictions.different_attributes or restrictions.same_attribute or restrictions.different_types or restrictions.same_type then
@@ -498,29 +513,114 @@ JoyousSpring.is_valid_material_combo = function(combo_list, restrictions, summon
     return true
 end
 
-JoyousSpring.get_summon_material_combo_by_condition = function(condition, card_list)
-    local card_table = card_list or G.jokers.cards
-    local material_combos = {}
+local function separate_properties(condition)
+    local mandatory = {}
+    local optional = {}
 
-    local filtered_materials = JoyousSpring.filter_materials_on_conditions(condition, card_table)
-    if not filtered_materials or #filtered_materials == 0 or #filtered_materials ~= #condition.materials then return {} end
-
-    local function backtrack(combo, remaining_material_sets)
-        if #remaining_material_sets == 0 then
-            if JoyousSpring.is_valid_material_combo(combo, condition.restrictions, condition.type) then
-                table.insert(material_combos, combo)
+    for i, property in ipairs(condition.materials) do
+        if property.optional then
+            local amount = property.max or 1
+            for i = 1, amount do
+                table.insert(optional, property)
             end
-            return
-        end
-        local filtered = remaining_material_sets[1]
-        for i = 1, #filtered do
-            local card = filtered[i]
-            local new_combo = { unpack(combo) }
-            table.insert(new_combo, card)
-            backtrack(new_combo, { unpack(remaining_material_sets, 2) })
+        elseif property.min then
+            local amount = (property.max and
+                    property.max - property.min) or
+                (10 - property.min)
+            for i = 1, property.min do
+                table.insert(mandatory, property)
+            end
+            for i = 1, amount do
+                table.insert(optional, property)
+            end
+        else
+            table.insert(mandatory, property)
         end
     end
-    backtrack({}, filtered_materials)
+
+    return mandatory, optional
+end
+
+JoyousSpring.fulfills_conditions = function(combo_list, condition)
+    if not JoyousSpring.is_valid_material_combo(combo_list, condition) then
+        return false
+    end
+
+    local mandatory_properties, optional_properties = separate_properties(condition)
+
+    local visited = {}
+
+    for i = 1, #combo_list do
+        visited[i] = false
+    end
+
+    local function check_properties(combo, properties, index, visited_check)
+        if index > #properties then
+            return true
+        end
+
+        for i = 1, #combo do
+            if not visited_check[i] and JoyousSpring.is_material(combo[i], properties[index], condition.type) then
+                visited_check[i] = true
+                if check_properties(combo, properties, index + 1, visited_check) then
+                    return true
+                end
+                visited_check[i] = false
+            end
+        end
+
+        return false
+    end
+
+    if not check_properties(combo_list, mandatory_properties, 1, visited) then
+        return false
+    end
+
+    local remaining_cards = {}
+    local visited_optional = {}
+
+    for i = 1, #combo_list do
+        if not visited[i] then
+            table.insert(remaining_cards, combo_list[i])
+        end
+    end
+
+    for i = 1, #remaining_cards do
+        visited_optional[i] = false
+    end
+
+    local function check_optional_properties(combo, optional_props, index, visited_check)
+        if index > #combo then
+            return true
+        end
+
+        for i = 1, #optional_props do
+            if not visited_check[i] and JoyousSpring.is_material(combo[index], optional_props[i], condition.type) then
+                visited_check[i] = true
+                if check_optional_properties(combo, optional_props, index + 1, visited_check) then
+                    return true
+                end
+                visited_check[i] = false
+            end
+        end
+
+        return false
+    end
+
+    return check_optional_properties(remaining_cards, optional_properties, 1, visited_optional)
+end
+
+JoyousSpring.get_summon_material_combo_by_condition = function(condition, card_list)
+    local card_list = card_list or G.jokers.cards
+    local material_combos = {}
+
+    local current_combos = get_combinations(card_list)
+
+    for _, combination in ipairs(current_combos) do
+        if JoyousSpring.fulfills_conditions(combination, condition) then
+            table.insert(material_combos, combination)
+        end
+    end
 
     return material_combos
 end
@@ -546,33 +646,17 @@ JoyousSpring.get_all_summon_material_combos = function(card, card_list)
 end
 
 JoyousSpring.can_summon_by_condition = function(condition, card_list)
-    local card_table = card_list or G.jokers.cards
+    local card_list = card_list or G.jokers.cards
 
-    local filtered_materials = JoyousSpring.filter_materials_on_conditions(condition, card_table)
+    local current_combos = get_combinations(card_list)
 
-    if not filtered_materials or #filtered_materials == 0 or #filtered_materials ~= #condition.materials then return false end
-
-    local function backtrack(combo, remaining_material_sets)
-        if #remaining_material_sets == 0 then
-            if JoyousSpring.is_valid_material_combo(combo, condition.restrictions) then
-                return true
-            end
-            return false
+    for _, combination in ipairs(current_combos) do
+        if JoyousSpring.fulfills_conditions(combination, condition) then
+            return true
         end
-        local filtered = remaining_material_sets[1]
-        for i = 1, #filtered do
-            local card = filtered[i]
-            local new_combo = { unpack(combo) }
-            table.insert(new_combo, card)
-
-            if backtrack(new_combo, { unpack(remaining_material_sets, 2) }) then
-                return true
-            end
-        end
-        return false
     end
 
-    return backtrack({}, filtered_materials)
+    return false
 end
 
 JoyousSpring.can_summon = function(card, card_list)
@@ -588,8 +672,7 @@ JoyousSpring.can_summon = function(card, card_list)
     local conditions = card.ability.extra.joyous_spring.summon_conditions
 
     for _, condition in ipairs(conditions) do
-        local combos_by_condition = JoyousSpring.can_summon_by_condition(condition, card_table)
-        if combos_by_condition then
+        if JoyousSpring.can_summon_by_condition(condition, card_table) then
             return true
         end
     end
@@ -597,130 +680,153 @@ JoyousSpring.can_summon = function(card, card_list)
     return false
 end
 
+JoyousSpring.can_summon_with_combo = function(card, combo)
+    if not JoyousSpring.is_monster_card(card) or not combo or #combo == 0 or not card.ability.extra.joyous_spring.summon_conditions then
+        return false
+    end
+
+    local conditions = card.ability.extra.joyous_spring.summon_conditions
+
+    for _, condition in ipairs(conditions) do
+        if JoyousSpring.fulfills_conditions(combo, condition) then
+            return true
+        end
+    end
+
+    return false
+end
+
+local function summon_from_booster(card)
+    local prev_state = G.STATE
+    local delay_fac = 1
+
+    G.TAROT_INTERRUPT = G.STATE
+    G.STATE = (G.STATE == G.STATES.TAROT_PACK and G.STATES.TAROT_PACK) or
+        (G.STATE == G.STATES.PLANET_PACK and G.STATES.PLANET_PACK) or
+        (G.STATE == G.STATES.SPECTRAL_PACK and G.STATES.SPECTRAL_PACK) or
+        (G.STATE == G.STATES.STANDARD_PACK and G.STATES.STANDARD_PACK) or
+        (G.STATE == G.STATES.SMODS_BOOSTER_OPENED and G.STATES.SMODS_BOOSTER_OPENED) or
+        (G.STATE == G.STATES.BUFFOON_PACK and G.STATES.BUFFOON_PACK) or
+        G.STATES.PLAY_TAROT
+
+    G.CONTROLLER.locks.use = true
+    if G.booster_pack and not G.booster_pack.alignment.offset.py and (card.ability.consumeable or not (G.GAME.pack_choices and G.GAME.pack_choices > 1)) then
+        G.booster_pack.alignment.offset.py = G.booster_pack.alignment.offset.y
+        G.booster_pack.alignment.offset.y = G.ROOM.T.y + 29
+    end
+    if G.shop and not G.shop.alignment.offset.py then
+        G.shop.alignment.offset.py = G.shop.alignment.offset.y
+        G.shop.alignment.offset.y = G.ROOM.T.y + 29
+    end
+    if G.blind_select and not G.blind_select.alignment.offset.py then
+        G.blind_select.alignment.offset.py = G.blind_select.alignment.offset.y
+        G.blind_select.alignment.offset.y = G.ROOM.T.y + 39
+    end
+    if G.round_eval and not G.round_eval.alignment.offset.py then
+        G.round_eval.alignment.offset.py = G.round_eval.alignment.offset.y
+        G.round_eval.alignment.offset.y = G.ROOM.T.y + 29
+    end
+
+    if card.children.use_button then
+        card.children.use_button:remove(); card.children.use_button = nil
+    end
+    if card.children.sell_button then
+        card.children.sell_button:remove(); card.children.sell_button = nil
+    end
+    if card.children.price then
+        card.children.price:remove(); card.children.price = nil
+    end
+
+    if not card.from_area then card.from_area = card.area end
+    if card.area and (not nc or card.area == G.pack_cards) then card.area:remove_card(card) end
+
+    card:add_to_deck()
+    G.jokers:emplace(card)
+    play_sound('card1', 0.8, 0.6)
+    play_sound('generic1')
+    delay_fac = 0.2
+
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.2,
+        func = function()
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.1,
+                func = function()
+                    G.STATE = prev_state
+                    G.TAROT_INTERRUPT = nil
+                    G.CONTROLLER.locks.use = false
+
+                    if (prev_state == G.STATES.TAROT_PACK or prev_state == G.STATES.PLANET_PACK or
+                            prev_state == G.STATES.SPECTRAL_PACK or prev_state == G.STATES.STANDARD_PACK or
+                            prev_state == G.STATES.SMODS_BOOSTER_OPENED or
+                            prev_state == G.STATES.BUFFOON_PACK) and G.booster_pack then
+                        if G.GAME.pack_choices and G.GAME.pack_choices > 1 then
+                            if G.booster_pack.alignment.offset.py then
+                                G.booster_pack.alignment.offset.y = G.booster_pack.alignment.offset.py
+                                G.booster_pack.alignment.offset.py = nil
+                            end
+                            G.GAME.pack_choices = G.GAME.pack_choices - 1
+                        else
+                            G.CONTROLLER.interrupt.focus = true
+                            G.FUNCS.end_consumeable(nil, delay_fac)
+                        end
+                    end
+                    return true
+                end
+            }))
+            return true
+        end
+    }))
+end
+
+local function summon_from_shop(card)
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.1,
+        func = function()
+            card.area:remove_card(card)
+            card:add_to_deck()
+            if card.children.price then card.children.price:remove() end
+            card.children.price = nil
+            if card.children.buy_button then card.children.buy_button:remove() end
+            card.children.buy_button = nil
+            remove_nils(card.children)
+            G.jokers:emplace(card)
+            G.GAME.round_scores.cards_purchased.amt = G.GAME.round_scores.cards_purchased.amt + 1
+            G.GAME.current_round.jokers_purchased = G.GAME.current_round.jokers_purchased + 1
+
+            for i = 1, #G.jokers.cards do
+                G.jokers.cards[i]:calculate_joker({ buying_card = true, card = card })
+            end
+
+            play_sound('card1')
+            G.CONTROLLER:save_cardarea_focus('jokers')
+            G.CONTROLLER:recall_cardarea_focus('jokers')
+            return true
+        end
+    }))
+end
+
 JoyousSpring.perform_summon = function(card, card_list, summon_type)
+    SMODS.calculate_context({joy_summon = true, joy_card = card, joy_summon_materials = card_list, joy_summon_type = summon_type})
     card.ability.extra.joyous_spring.summon_materials = {}
     card.ability.extra.joyous_spring.xyz_materials = 0
     for _, joker in ipairs(card_list) do
         table.insert(card.ability.extra.joyous_spring.summon_materials, joker.config.center.key)
-        card.ability.extra.joyous_spring.xyz_materials = #card.ability.extra.joyous_spring.summon_materials
 
         joker:start_dissolve()
     end
+    card.ability.extra.joyous_spring.xyz_materials = #card.ability.extra.joyous_spring.summon_materials
     if card.area == JoyousSpring.extra_deck_area then
         JoyousSpring.extra_deck_area:remove_card(card)
         card:add_to_deck()
         G.jokers:emplace(card)
     elseif card.area == G.pack_cards then
-        local area = card.area
-        local prev_state = G.STATE
-        local delay_fac = 1
-
-        G.TAROT_INTERRUPT = G.STATE
-        G.STATE = (G.STATE == G.STATES.TAROT_PACK and G.STATES.TAROT_PACK) or
-            (G.STATE == G.STATES.PLANET_PACK and G.STATES.PLANET_PACK) or
-            (G.STATE == G.STATES.SPECTRAL_PACK and G.STATES.SPECTRAL_PACK) or
-            (G.STATE == G.STATES.STANDARD_PACK and G.STATES.STANDARD_PACK) or
-            (G.STATE == G.STATES.SMODS_BOOSTER_OPENED and G.STATES.SMODS_BOOSTER_OPENED) or
-            (G.STATE == G.STATES.BUFFOON_PACK and G.STATES.BUFFOON_PACK) or
-            G.STATES.PLAY_TAROT
-
-        G.CONTROLLER.locks.use = true
-        if G.booster_pack and not G.booster_pack.alignment.offset.py and (card.ability.consumeable or not (G.GAME.pack_choices and G.GAME.pack_choices > 1)) then
-            G.booster_pack.alignment.offset.py = G.booster_pack.alignment.offset.y
-            G.booster_pack.alignment.offset.y = G.ROOM.T.y + 29
-        end
-        if G.shop and not G.shop.alignment.offset.py then
-            G.shop.alignment.offset.py = G.shop.alignment.offset.y
-            G.shop.alignment.offset.y = G.ROOM.T.y + 29
-        end
-        if G.blind_select and not G.blind_select.alignment.offset.py then
-            G.blind_select.alignment.offset.py = G.blind_select.alignment.offset.y
-            G.blind_select.alignment.offset.y = G.ROOM.T.y + 39
-        end
-        if G.round_eval and not G.round_eval.alignment.offset.py then
-            G.round_eval.alignment.offset.py = G.round_eval.alignment.offset.y
-            G.round_eval.alignment.offset.y = G.ROOM.T.y + 29
-        end
-
-        if card.children.use_button then
-            card.children.use_button:remove(); card.children.use_button = nil
-        end
-        if card.children.sell_button then
-            card.children.sell_button:remove(); card.children.sell_button = nil
-        end
-        if card.children.price then
-            card.children.price:remove(); card.children.price = nil
-        end
-
-        if not card.from_area then card.from_area = card.area end
-        if card.area and (not nc or card.area == G.pack_cards) then card.area:remove_card(card) end
-
-        card:add_to_deck()
-        G.jokers:emplace(card)
-        play_sound('card1', 0.8, 0.6)
-        play_sound('generic1')
-        delay_fac = 0.2
-
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = 0.2,
-            func = function()
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'after',
-                    delay = 0.1,
-                    func = function()
-                        G.STATE = prev_state
-                        G.TAROT_INTERRUPT = nil
-                        G.CONTROLLER.locks.use = false
-
-                        if (prev_state == G.STATES.TAROT_PACK or prev_state == G.STATES.PLANET_PACK or
-                                prev_state == G.STATES.SPECTRAL_PACK or prev_state == G.STATES.STANDARD_PACK or
-                                prev_state == G.STATES.SMODS_BOOSTER_OPENED or
-                                prev_state == G.STATES.BUFFOON_PACK) and G.booster_pack then
-
-                            if G.GAME.pack_choices and G.GAME.pack_choices > 1 then
-                                if G.booster_pack.alignment.offset.py then
-                                    G.booster_pack.alignment.offset.y = G.booster_pack.alignment.offset.py
-                                    G.booster_pack.alignment.offset.py = nil
-                                end
-                                G.GAME.pack_choices = G.GAME.pack_choices - 1
-                            else
-                                G.CONTROLLER.interrupt.focus = true
-                                G.FUNCS.end_consumeable(nil, delay_fac)
-                            end
-                        end
-                        return true
-                    end
-                }))
-                return true
-            end
-        }))
+        summon_from_booster(card)
     else
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = 0.1,
-            func = function()
-                card.area:remove_card(card)
-                card:add_to_deck()
-                if card.children.price then card.children.price:remove() end
-                card.children.price = nil
-                if card.children.buy_button then card.children.buy_button:remove() end
-                card.children.buy_button = nil
-                remove_nils(card.children)
-                G.jokers:emplace(card)
-                G.GAME.round_scores.cards_purchased.amt = G.GAME.round_scores.cards_purchased.amt + 1
-                G.GAME.current_round.jokers_purchased = G.GAME.current_round.jokers_purchased + 1
-
-                for i = 1, #G.jokers.cards do
-                    G.jokers.cards[i]:calculate_joker({ buying_card = true, card = card })
-                end
-
-                play_sound('card1')
-                G.CONTROLLER:save_cardarea_focus('jokers')
-                G.CONTROLLER:recall_cardarea_focus('jokers')
-                return true
-            end
-        }))
+        summon_from_shop(card)
     end
     card.ability.extra.joyous_spring.summoned = true
     card:set_cost()

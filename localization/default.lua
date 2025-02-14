@@ -542,7 +542,7 @@ return {
 			--#endregion
 			--#region Fusion
 			j_joy_mudragon = {
-				name = "{C:joy_ritual}Mudragon of the Swamp",
+				name = "{C:joy_fusion}Mudragon of the Swamp",
 				text = {
 					"This {C:attention}Joker{} is treated as every",
 					"{C:joy_normal}Attribute{} and can be used as any {C:attention}material{}",
@@ -553,7 +553,7 @@ return {
 				}
 			},
 			j_joy_garura = {
-				name = "{C:joy_ritual}Garura, Wings of Resonant Life",
+				name = "{C:joy_fusion}Garura, Wings of Resonant Life",
 				text = {
 					"{C:attention}+#1#{} hand size",
 					" ",
@@ -571,8 +571,8 @@ return {
 				name = "{C:joy_link}Apollousa, Bow of the Goddess",
 				text = {
 					"{C:chips}+#1#{} Chips for each {C:attention}material{}",
-					"used for its summon, reduces by {C:red}80{} each round",
-					"{C:inactive}(Currently{} {C:chips}+#2#{} {C:inactive}Chips){}",
+					"used for its summon, reduces by {C:red}#2#{} each round",
+					"{C:inactive}(Currently{} {C:chips}+#3#{} {C:inactive}Chips){}",
 				},
 				joy_summon_conditions = {
 					"{C:attention}2+ Jokers{} with different names",
