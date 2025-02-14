@@ -1,5 +1,5 @@
 JoyousSpring = {}
-JoyousSpring.debug = true
+JoyousSpring.debug = false
 
 SMODS.Atlas({
     key = "modicon",
