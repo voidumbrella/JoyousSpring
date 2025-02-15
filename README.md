@@ -39,6 +39,9 @@ Planned archetypes (I probably won't accept suggestions on these until they're f
 <img src="screenshots/implemented1.png" alt="Implemented 1" width="500">
 <img src="screenshots/implemented2.png" alt="Implemented 2" width="500">
 <img src="screenshots/implemented3.png" alt="Implemented 3" width="500">
+<img src="screenshots/implemented4.png" alt="Implemented 4" width="500">
+<img src="screenshots/implemented5.png" alt="Implemented 5" width="500">
+<img src="screenshots/implemented6.png" alt="Implemented 6" width="500">
 
 ## Contributing
 
