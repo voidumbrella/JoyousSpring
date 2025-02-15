@@ -8,6 +8,8 @@ Balatro mod that adds modern Yu-Gi-Oh! cards to Balatro.
 2. Download the [latest release](https://github.com/nh6574/JoyousSpring/releases)
 3. Extract the zip file into it's own folder inside your Balatro mods folder (%appdata%\Balatro\Mods)
 
+Make sure to check the Glossary and the Config in Main Menu > Mods > JoyousSpring
+
 Has compatibility with [JokerDisplay](https://github.com/nh6574/JokerDisplay) version >1.8.2
 
 ## Known Issues and future ideas
@@ -18,7 +20,6 @@ Has compatibility with [JokerDisplay](https://github.com/nh6574/JokerDisplay) ve
 * It hasn't been tested with other mods (other than JokerDisplay) so it might not play well with them
 
 * The Ghost Girls will eventually be Legendary instead of rare
-* There will be a in-game glossary with all the terms that the mod adds
 * I'm bad at game design so I will take any feedback on effect balancing
 
 Planned archetypes (I probably won't accept suggestions on these until they're finished): The entire Abyss storyline, Plunder Patroll, Zoodiac, Labyrinth, Eldlich, Knightmare, Mekk-Knight. Feel free to suggest others.
