@@ -22,8 +22,6 @@ Has compatibility with [JokerDisplay](https://github.com/nh6574/JokerDisplay) ve
 * The Ghost Girls will eventually be Legendary instead of rare
 * I'm bad at game design so I will take any feedback on effect balancing
 
-Planned archetypes (I probably won't accept suggestions on these until they're finished): The entire Abyss storyline, Plunder Patroll, Zoodiac, Labyrinth, Eldlich, Knightmare, Mekk-Knight. Feel free to suggest others.
-
 ## Screenshots
 
 <img src="screenshots/1.png" alt="Example 1" width="500">
