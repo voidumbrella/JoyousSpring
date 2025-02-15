@@ -1136,7 +1136,7 @@ function create_shop_card_ui(card, type, area)
                 if card.opening then return true end
                 local t2 = {
                     n = G.UIT.ROOT,
-                    config = { ref_table = card, minw = 1.1, maxw = 1.3, padding = 0.1, align = 'bm', colour = G.C.JOY.RITUAL, shadow = true, r = 0.08, minh = 0.94, func = 'joy_can_summon_from_shop', button = 'joy_perform_summon', hover = true },
+                    config = { ref_table = card, minw = 1.1, maxw = 1.3, padding = 0.1, align = 'bm', colour = G.C.JOY.RITUAL, shadow = true, r = 0.08, minh = 0.94, button = 'joy_perform_summon', hover = true },
                     nodes = {
                         { n = G.UIT.T, config = { text = localize('b_joy_summon'), colour = G.C.WHITE, scale = 0.5 } }
                     }
@@ -1219,6 +1219,7 @@ function Card:highlight(is_highlighted)
         end
     elseif JoyousSpring.is_summon_type(self, "RITUAL") and self.area and self.area == G.pack_cards then
         self.highlighted = is_highlighted
+        local can_summon = JoyousSpring.can_summon(self)
         if self.highlighted then
             self.children.use_button = UIBox {
                 definition = {
@@ -1226,7 +1227,7 @@ function Card:highlight(is_highlighted)
                     config = { padding = 0, colour = G.C.CLEAR },
                     nodes = {
                         {
-                            n = G.UIT.R, config = { ref_table = self, r = 0.08, padding = 0.1, align = "bm", minw = 0.5 * self.T.w - 0.15, maxw = 0.9 * self.T.w - 0.15, minh = 0.3 * self.T.h, hover = true, shadow = true, colour = G.C.UI.BACKGROUND_INACTIVE, button = 'use_card', func = 'joy_can_summon_from_shop' }, nodes = {
+                            n = G.UIT.R, config = { ref_table = self, r = 0.08, padding = 0.1, align = "bm", minw = 0.5 * self.T.w - 0.15, maxw = 0.9 * self.T.w - 0.15, minh = 0.3 * self.T.h, hover = true, shadow = true, colour = can_summon and G.C.JOY.RITUAL or G.C.UI.BACKGROUND_INACTIVE, button = can_summon and 'use_card' or nil }, nodes = {
                             { n = G.UIT.T, config = { text = localize('b_joy_summon'), colour = G.C.UI.TEXT_LIGHT, scale = 0.45, shadow = true } }
                         }
                         },

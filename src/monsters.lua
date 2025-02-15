@@ -416,6 +416,7 @@ local function get_combinations(list)
     local result = {}
 
     local function generate_combination(start, current_combo)
+        if #current_combo > 5 then return end
         table.insert(result, { unpack(current_combo) })
 
         for i = start, #list do
