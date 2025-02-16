@@ -17,7 +17,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 2,
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.chips } }
+        if not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_ltwin_kisikil
+        end
+        return { vars = { card.ability.extra.chips, card.ability.extra.cards_to_create } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
     config = {
@@ -30,7 +33,8 @@ SMODS.Joker({
                 monster_type = "Cyberse",
                 monster_archetypes = { ["LiveTwin"] = true, ["Lilla"] = true },
             },
-            chips = 20
+            chips = 20,
+            cards_to_create = 1
         },
     },
     calculate = function(self, card, context)
@@ -39,6 +43,20 @@ SMODS.Joker({
                 return {
                     chips = card.ability.extra.chips,
                 }
+            end
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if not card.joy_from_kisikil and not next(SMODS.find_card("j_joy_ltwin_kisikil", true)) and not card.debuff and not from_debuff then
+            for i = 1, card.ability.extra.cards_to_create do
+                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+                    local added_card = SMODS.create_card({
+                        key = "j_joy_ltwin_kisikil"
+                    })
+                    added_card.joy_from_lilla = true
+                    added_card:add_to_deck()
+                    G.jokers:emplace(added_card)
+                end
             end
         end
     end,
@@ -64,7 +82,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 2,
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.mult } }
+        if not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_ltwin_lilla
+        end
+        return { vars = { card.ability.extra.mult, card.ability.extra.cards_to_create } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
     config = {
@@ -77,7 +98,8 @@ SMODS.Joker({
                 monster_type = "Cyberse",
                 monster_archetypes = { ["LiveTwin"] = true, ["Kisikil"] = true },
             },
-            mult = 10
+            mult = 10,
+            cards_to_create = 1
         },
     },
     calculate = function(self, card, context)
@@ -86,6 +108,20 @@ SMODS.Joker({
                 return {
                     mult = card.ability.extra.mult,
                 }
+            end
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if not card.joy_from_lilla and not next(SMODS.find_card("j_joy_ltwin_lilla", true)) and not card.debuff and not from_debuff then
+            for i = 1, card.ability.extra.cards_to_create do
+                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+                    local added_card = SMODS.create_card({
+                        key = "j_joy_ltwin_lilla"
+                    })
+                    added_card.joy_from_kisikil = true
+                    added_card:add_to_deck()
+                    G.jokers:emplace(added_card)
+                end
             end
         end
     end,
@@ -599,7 +635,7 @@ SMODS.Joker({
                     ((card.edition and card.edition.negative) and 1 or 0) then
                     JoyousSpring.return_to_extra_deck(card)
                     local is_lilla_owned = JoyousSpring.count_materials_owned({ { monster_archetypes = { "Lilla" } } }) >
-                    0
+                        0
                     local kisikil_summoned = {}
                     if JoyousSpring.graveyard["j_joy_etwin_kisikil"] then
                         for i = 1, card.ability.extra.revives do

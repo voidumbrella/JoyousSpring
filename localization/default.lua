@@ -163,13 +163,21 @@ return {
 			j_joy_ltwin_lilla = {
 				name = "{C:joy_effect}Live☆Twin Lil-la",
 				text = {
-					"{C:chips}+#1#{} Chips"
+					"{C:chips}+#1#{} Chips",
+					" ",
+					"Create {C:attention}#2#{} {C:joy_effect}\"Live☆Twin Ki-sikil\"{}",
+					"when obtained, if not owned",
+					"{C:inactive}(Must have room){}",
 				},
 			},
 			j_joy_ltwin_kisikil = {
 				name = "{C:joy_effect}Live☆Twin Ki-sikil",
 				text = {
-					"{C:mult}+#1#{} Mult"
+					"{C:mult}+#1#{} Mult",
+					" ",
+					"Create {C:attention}#2#{} {C:joy_effect}\"Live☆Twin Lil-la\"{}",
+					"when obtained, if not owned",
+					"{C:inactive}(Must have room){}",
 				},
 			},
 			j_joy_ltwin_lilla_treat = {
