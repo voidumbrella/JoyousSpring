@@ -93,14 +93,14 @@ SMODS.current_mod.extra_tabs = function()
                     { card_limit = 5, type = 'title', highlight_limit = 0, collection = true }
                 )
 
-                for i, key in ipairs({ "j_joy_garura", "j_joy_spright_gigantic", "j_joy_apollousa", "j_joy_sauravis"}) do
+                for i, key in ipairs({ "j_joy_garura", "j_joy_spright_gigantic", "j_joy_apollousa", "j_joy_sauravis" }) do
                     local card = Card(G.joy_desc_area.T.x + G.joy_desc_area.T.w / 2, G.joy_desc_area.T.y,
                         G.CARD_W, G.CARD_H, G.P_CARDS.empty,
                         G.P_CENTERS[key])
 
                     G.joy_glossary_area:emplace(card)
                 end
-                modNodes[#modNodes + 1] ={
+                modNodes[#modNodes + 1] = {
                     n = G.UIT.R,
                     config = { align = "cm", padding = 0.07, no_fill = true },
                     nodes = {
@@ -143,7 +143,7 @@ SMODS.current_mod.config_tab = function()
                                 config = { align = "cm", padding = 0.01 },
                                 nodes = {
                                     create_toggle({
-                                        label = localize('b_joy_disable_booster_tag'),
+                                        label = localize('k_joy_disable_booster_tag'),
                                         ref_table = JoyousSpring.config,
                                         ref_value = 'disable_booster_tag'
                                     })
@@ -158,6 +158,7 @@ SMODS.current_mod.config_tab = function()
 end
 
 JoyousSpring.collection_pool = {}
+JoyousSpring.token_pool = {}
 
 JoyousSpring.get_archetype_pool = function(pool)
     local archetype_pool = {}
@@ -168,11 +169,16 @@ JoyousSpring.get_archetype_pool = function(pool)
         local found = false
         for archetype_index, archetype in ipairs(JoyousSpring.collection_pool) do
             for _, key in ipairs(archetype.keys) do
-                if (center.original_key:sub(1, #key) == key) or (key == "misc" and not found) then
+                if center.original_key ~= "token" and ((center.original_key:sub(1, #key) == key) or (key == "misc" and not found)) then
                     table.insert(archetype_pool[archetype_index], center)
                     found = true
                     break
                 end
+            end
+        end
+        if center.original_key == "token" then
+            for k, _ in pairs(JoyousSpring.token_pool) do
+                table.insert(archetype_pool[#archetype_pool], k)
             end
         end
     end
@@ -227,7 +233,7 @@ JoyousSpring.card_collection_UIBox = function(_pool, rows, args)
 
     for i = 1, #archetype_pool do
         table.insert(options,
-            (JoyousSpring.collection_pool[i].label and localize(JoyousSpring.collection_pool[i].label) or localize("b_joy_archetype_misc")) ..
+            (JoyousSpring.collection_pool[i].label and localize(JoyousSpring.collection_pool[i].label) or localize("k_joy_archetype_misc")) ..
             ' (' .. tostring(i) .. '/' .. #archetype_pool .. ")")
     end
 
@@ -244,9 +250,20 @@ JoyousSpring.card_collection_UIBox = function(_pool, rows, args)
             for i = 1, rows[j] do
                 local center = archetype_pool[e.cycle_config.current_option][i + row_totals[j]]
                 if not center then break end
+                local token_key
+                if type(center) == "string" then
+                    token_key = center
+                    center = G.P_CENTERS["j_joy_token"]
+                end
                 local card = Card(G.your_collection[j].T.x + G.your_collection[j].T.w / 2, G.your_collection[j].T.y,
                     G.CARD_W * args.card_scale, G.CARD_H * args.card_scale, G.P_CARDS.empty,
                     (args.center and G.P_CENTERS[args.center]) or center)
+                if token_key then
+                    card.ability.extra.joyous_spring.token_name = JoyousSpring.token_pool[token_key].name
+                    card.children.center.atlas.name = JoyousSpring.token_pool[token_key].atlas
+                    card.children.center.sprite_pos = JoyousSpring.token_pool[token_key].sprite_pos
+                    card.children.center:reset()
+                end
                 if args.modify_card then args.modify_card(card, center, i, j) end
                 if not args.no_materialize then card:start_materialize(nil, i > 1 or j > 1) end
                 G.your_collection[j]:emplace(card)

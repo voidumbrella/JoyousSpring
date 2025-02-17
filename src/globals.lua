@@ -147,6 +147,10 @@ end
 
 ---This removes the colour markup on the Joker names on the info tooltips and adds summoning conditions
 JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
+    if card and card.config.center.key == "j_joy_token" then
+        full_UI_table.name = localize { type = 'name', set = "Joker", key = card.ability and card.ability.extra.joyous_spring.token_name or "j_joy_token", nodes = {} }
+    end
+    
     SMODS.Center.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
 
     if desc_nodes ~= full_UI_table.main then
@@ -160,7 +164,7 @@ JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, spe
     elseif G.localization.descriptions[self.set][self.key].joy_summon_conditions then
         full_UI_table.info[#full_UI_table.info + 1] = {}
         local summon_desc_nodes = full_UI_table.info[#full_UI_table.info]
-        summon_desc_nodes.name = localize('b_joy_summon_conditions')
+        summon_desc_nodes.name = localize('k_joy_summon_conditions')
         localize { type = "joy_summon_conditions", set = self.set, key = self.key, nodes = summon_desc_nodes }
     end
 end

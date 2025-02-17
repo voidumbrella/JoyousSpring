@@ -440,5 +440,5 @@ SMODS.Joker({
 
 JoyousSpring.collection_pool[#JoyousSpring.collection_pool + 1] = {
     keys = { "yokai" },
-    label = "b_joy_archetype_yokai"
+    label = "k_joy_archetype_yokai"
 }

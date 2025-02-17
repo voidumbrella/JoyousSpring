@@ -236,7 +236,7 @@ JoyousSpring.create_UIBox_select_summon_materials = function(card)
                                                     {
                                                         n = G.UIT.T,
                                                         config = {
-                                                            text = localize('b_joy_summon'),
+                                                            text = localize('k_joy_summon'),
                                                             scale = 0.5,
                                                             colour = G.C.UI.TEXT_LIGHT,
                                                             shadow = true,
@@ -443,7 +443,7 @@ JoyousSpring.create_overlay_graveyard = function()
                             n = G.UIT.O,
                             config = {
                                 object = DynaText({
-                                    string = { localize('b_joy_graveyard') },
+                                    string = { localize('k_joy_graveyard') },
                                     colours = { G.C.UI.TEXT_LIGHT },
                                     bump = true,
                                     silent = true,
@@ -620,7 +620,7 @@ JoyousSpring.create_sell_and_use_buttons = function(card, args)
                     config = { ref_table = card, align = "cr", maxw = 1.25, padding = 0.1, r = 0.08, minw = 1.25, minh = 0, hover = true, shadow = true, colour = args.can_summon and G.C.JOY[args.summon_type] or G.C.UI.BACKGROUND_INACTIVE, button = args.can_summon and 'joy_perform_summon' or nil },
                     nodes = {
                         { n = G.UIT.B, config = { w = 0.1, h = 0.6 } },
-                        { n = G.UIT.T, config = { text = localize('b_joy_summon'), colour = G.C.UI.TEXT_LIGHT, scale = 0.55, shadow = true } }
+                        { n = G.UIT.T, config = { text = localize('k_joy_summon'), colour = G.C.UI.TEXT_LIGHT, scale = 0.55, shadow = true } }
                     }
                 }
             }
@@ -636,7 +636,7 @@ JoyousSpring.create_sell_and_use_buttons = function(card, args)
                     config = { ref_table = card, align = "cr", maxw = 1.25, padding = 0.1, r = 0.08, minw = 1.25, minh = 0, hover = true, shadow = true, colour = G.C.JOY.XYZ or G.C.UI.BACKGROUND_INACTIVE, button = 'joy_detach_material' },
                     nodes = {
                         { n = G.UIT.B, config = { w = 0.1, h = 0.6 } },
-                        { n = G.UIT.T, config = { text = localize('b_joy_detach'), colour = G.C.UI.TEXT_LIGHT, scale = 0.55, shadow = true } }
+                        { n = G.UIT.T, config = { text = localize('k_joy_detach'), colour = G.C.UI.TEXT_LIGHT, scale = 0.55, shadow = true } }
                     }
                 }
             }
@@ -1138,7 +1138,7 @@ function create_shop_card_ui(card, type, area)
                     n = G.UIT.ROOT,
                     config = { ref_table = card, minw = 1.1, maxw = 1.3, padding = 0.1, align = 'bm', colour = G.C.JOY.RITUAL, shadow = true, r = 0.08, minh = 0.94, button = 'joy_perform_summon', hover = true },
                     nodes = {
-                        { n = G.UIT.T, config = { text = localize('b_joy_summon'), colour = G.C.WHITE, scale = 0.5 } }
+                        { n = G.UIT.T, config = { text = localize('k_joy_summon'), colour = G.C.WHITE, scale = 0.5 } }
                     }
                 }
 
@@ -1228,7 +1228,7 @@ function Card:highlight(is_highlighted)
                     nodes = {
                         {
                             n = G.UIT.R, config = { ref_table = self, r = 0.08, padding = 0.1, align = "bm", minw = 0.5 * self.T.w - 0.15, maxw = 0.9 * self.T.w - 0.15, minh = 0.3 * self.T.h, hover = true, shadow = true, colour = can_summon and G.C.JOY.RITUAL or G.C.UI.BACKGROUND_INACTIVE, button = can_summon and 'use_card' or nil }, nodes = {
-                            { n = G.UIT.T, config = { text = localize('b_joy_summon'), colour = G.C.UI.TEXT_LIGHT, scale = 0.45, shadow = true } }
+                            { n = G.UIT.T, config = { text = localize('k_joy_summon'), colour = G.C.UI.TEXT_LIGHT, scale = 0.45, shadow = true } }
                         }
                         },
                     }
@@ -1499,7 +1499,7 @@ function Game:start_run(args)
                                 {
                                     n = G.UIT.T,
                                     config = {
-                                        text = localize('b_joy_graveyard'),
+                                        text = localize('k_joy_graveyard'),
                                         scale = 0.35,
                                         colour = G.C.UI.TEXT_LIGHT
                                     }
@@ -1529,7 +1529,7 @@ function Game:start_run(args)
                                 {
                                     n = G.UIT.T,
                                     config = {
-                                        text = localize('b_joy_extra_deck'),
+                                        text = localize('k_joy_extra_deck'),
                                         scale = 0.35,
                                         colour = G.C.UI.TEXT_LIGHT
                                     }

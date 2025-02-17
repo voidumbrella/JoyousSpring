@@ -9,6 +9,12 @@ return {
 			}
 		},
 		Joker = {
+			j_joy_token = {
+				name = "{C:joy_token}Token",
+				text = {
+					"This card can be used as any {C:joy_token}Token{}",
+				},
+			},
 			--#region Dragonmaid
 			j_joy_dmaid_kitchen = {
 				name = "{C:joy_effect}Kitchen Dragonmaid",
@@ -512,6 +518,14 @@ return {
 				},
 			},
 			--#endregion
+			--#region Generaider
+			j_joy_token_generaider = {
+				name = "{C:joy_token}Generaider Token",
+				text = {
+					"This card can be used as any {C:joy_token}Token{}",
+				},
+			},
+			--#endregion
 			--#region Miscellaneous
 			--#region Effect
 			j_joy_boarder = {
@@ -682,19 +696,21 @@ return {
 	},
 	misc = {
 		dictionary = {
-			b_joy_extra_deck = "Extra Deck",
-			b_joy_summon_conditions = "Summoning Conditions",
-			b_joy_graveyard = "Graveyard",
-			b_joy_summon = "Summon",
-			b_joy_detach = "Detach",
-			b_joy_disable_booster_tag = "Disable Booster Tag from appearing naturally",
-			b_joy_archetype_dmaid = "Dragonmaid",
-			b_joy_archetype_ltwin = "Live☆Twin",
-			b_joy_archetype_dogma = "Dogmatika",
-			b_joy_archetype_yokai = "Ghost Girls",
-			b_joy_archetype_spright = "Spright",
-			b_joy_archetype_mekk = "Mekk-Knight",
-			b_joy_archetype_misc = "Miscellaneous",
+			k_joy_extra_deck = "Extra Deck",
+			k_joy_summon_conditions = "Summoning Conditions",
+			k_joy_graveyard = "Graveyard",
+			k_joy_summon = "Summon",
+			k_joy_detach = "Detach",
+			k_joy_token = "Token",
+			k_joy_disable_booster_tag = "Disable Booster Tag from appearing naturally",
+			k_joy_archetype_dmaid = "Dragonmaid",
+			k_joy_archetype_ltwin = "Live☆Twin",
+			k_joy_archetype_dogma = "Dogmatika",
+			k_joy_archetype_yokai = "Ghost Girls",
+			k_joy_archetype_spright = "Spright",
+			k_joy_archetype_mekk = "Mekk-Knight",
+			k_joy_archetype_misc = "Miscellaneous",
+			k_joy_archetype_token = "Tokens",
 		}
 	},
 }

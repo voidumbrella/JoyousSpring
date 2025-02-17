@@ -811,7 +811,13 @@ local function summon_from_shop(card)
 end
 
 JoyousSpring.perform_summon = function(card, card_list, summon_type)
-    SMODS.calculate_context({joy_summon = true, joy_card = card, joy_summon_materials = card_list, joy_summon_type = summon_type})
+    SMODS.calculate_context({
+        joy_summon = true,
+        joy_card = card,
+        joy_summon_materials = card_list,
+        joy_summon_type =
+            summon_type
+    })
     card.ability.extra.joyous_spring.summon_materials = {}
     card.ability.extra.joyous_spring.xyz_materials = 0
     for _, joker in ipairs(card_list) do
@@ -836,6 +842,25 @@ JoyousSpring.perform_summon = function(card, card_list, summon_type)
         card.children.xyz_materials = JoyousSpring.create_UIBox_xyz_materials(card)
     end
 end
+
+JoyousSpring.summon_token = function(key, atlas_key, sprite_pos, joyous_spring_table)
+    local card = SMODS.add_card({
+        key = "j_joy_token"
+    })
+    local pool_info = JoyousSpring.token_pool[key] or {}
+    local og_table = card.ability.extra.joyous_spring
+    og_table.token_name = joyous_spring_table and joyous_spring_table.token_name or pool_info.name or og_table.token_name or "Token"
+    og_table.is_tuner = joyous_spring_table and joyous_spring_table.is_tuner or pool_info.is_tuner or og_table.is_tuner or false
+    og_table.attribute = joyous_spring_table and joyous_spring_table.attribute or pool_info.attribute or og_table.attribute or "EARTH"
+    og_table.monster_type = joyous_spring_table and joyous_spring_table.monster_type or pool_info.monster_type or og_table.monster_type or "Beast"
+    og_table.monster_archetypes = joyous_spring_table and joyous_spring_table.monster_archetypes or pool_info.monster_archetypes or og_table.monster_archetypes or {}
+    og_table.token_atlas = atlas_key or pool_info.atlas or "joy_Token"
+    og_table.token_sprite_pos = sprite_pos or pool_info.sprite_pos or { x = pseudorandom("Token", 0, 1), y = pseudorandom("Token", 0, 1) }
+    card.children.center.atlas.name = og_table.token_atlas
+    card.children.center.sprite_pos = og_table.token_sprite_pos
+    card.children.center:reset()
+end
+
 
 -- Revive
 
