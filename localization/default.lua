@@ -504,6 +504,14 @@ return {
 				}
 			},
 			--#endregion
+			--#region Mekk-Knight
+			j_joy_mekk_avram = {
+				name = "{C:joy_normal}Mekk-Knight Avram",
+				text = {
+					"{E:1}\"Check THIS out!\"{}",
+				},
+			},
+			--#endregion
 			--#region Miscellaneous
 			--#region Effect
 			j_joy_boarder = {
@@ -685,6 +693,7 @@ return {
 			b_joy_archetype_dogma = "Dogmatika",
 			b_joy_archetype_yokai = "Ghost Girls",
 			b_joy_archetype_spright = "Spright",
+			b_joy_archetype_mekk = "Mekk-Knight",
 			b_joy_archetype_misc = "Miscellaneous",
 		}
 	},

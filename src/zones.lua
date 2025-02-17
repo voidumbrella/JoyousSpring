@@ -1270,7 +1270,7 @@ end
 
 local card_remove_ref = Card.remove
 function Card:remove()
-    if self.area and (self.area == G.jokers or self.area == JoyousSpring.extra_deck_area) and
+    if (self.area == G.jokers or self.area == JoyousSpring.extra_deck_area) and
         JoyousSpring.is_monster_card(self) then
         JoyousSpring.send_to_graveyard(self)
     end
