@@ -260,6 +260,8 @@ JoyousSpring.card_collection_UIBox = function(_pool, rows, args)
                     (args.center and G.P_CENTERS[args.center]) or center)
                 if token_key then
                     card.ability.extra.joyous_spring.token_name = JoyousSpring.token_pool[token_key].name
+                    card.ability.extra.joyous_spring.attribute = JoyousSpring.token_pool[token_key].attribute or card.ability.extra.joyous_spring.attribute
+                    card.ability.extra.joyous_spring.monster_type = JoyousSpring.token_pool[token_key].monster_type or card.ability.extra.joyous_spring.monster_type
                     card.children.center.atlas.name = JoyousSpring.token_pool[token_key].atlas
                     card.children.center.sprite_pos = JoyousSpring.token_pool[token_key].sprite_pos
                     card.children.center:reset()
