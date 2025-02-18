@@ -522,7 +522,7 @@ return {
 				text = {
 					"Scored card in this {C:attention}column{}",
 					"gives {C:mult}+#1#{} Mult times its rank",
-					"(Currently in column #2#)",
+					"{C:inactive}(Currently in column{} {C:attention}#2#{}{C:inactive}){}",
 				},
 			},
 			j_joy_mekk_orange = {
@@ -530,7 +530,7 @@ return {
 				text = {
 					"Played card in this {C:attention}column{}",
 					"counts for scoring",
-					"(Currently in column #2#)",
+					"{C:inactive}(Currently in column{} {C:attention}#1#{}{C:inactive}){}",
 				},
 			},
 			j_joy_mekk_yellow = {
@@ -538,7 +538,7 @@ return {
 				text = {
 					"Scored card in this {C:attention}column{}",
 					"gives {C:money}+$#1#{} times its rank",
-					"(Currently in column #2#)",
+					"{C:inactive}(Currently in column{} {C:attention}#2#{}{C:inactive}){}",
 				},
 			},
 			j_joy_mekk_green = {
@@ -547,7 +547,7 @@ return {
 					"Scored card in this {C:attention}column{}",
 					"has a chance based on its rank to",
 					"retrigger that many times",
-					"(Currently in column #2#)",
+					"{C:inactive}(Currently in column{} {C:attention}#1#{}{C:inactive}){}",
 				},
 			},
 			j_joy_mekk_blue = {
@@ -555,7 +555,7 @@ return {
 				text = {
 					"Scored card in this {C:attention}column{}",
 					"gives {C:chips}+#1#{} Chips times its rank",
-					"(Currently in column #2#)",
+					"{C:inactive}(Currently in column{} {C:attention}#2#{}{C:inactive}){}",
 				},
 			},
 			j_joy_mekk_indigo = {
@@ -578,13 +578,13 @@ return {
 					"{C:inactive}(Must have room){}",
 				},
 			},
-			j_joy_mekk_morning = {
+			j_joy_mekk_morningstar = {
 				name = "{C:joy_link}Mekk-Knight of the Morning Star",
 				text = {
-					"Scored card in adjacent {C:attention}column{}",
-					"give {C:mult}X#1#{} Mult if there's a",
+					"Scored card in adjacent {C:attention}columns{}",
+					"give {X:mult,C:white}X#1#{} Mult if there's a",
 					"{C:joy_normal}\"Mekk-Knight\"{} {C:attention}Joker{} in that {C:attention}column{}",
-					"(Currently in columns #2# and #3#)",
+					"{C:inactive}(Currently in columns{} {C:attention}#2#{} {C:inactive}and{} {C:attention}#3#{}{C:inactive}){}",
 				},
 				joy_summon_conditions = {
 					"{C:attention}2{} {C:attention}Jokers{}",
@@ -601,7 +601,7 @@ return {
 					"{C:inactive}(Must have room){}",
 				},
 				joy_summon_conditions = {
-					"{C:attention}3{} {C:joy_normal}\"Mekk-Knight\"{}",
+					"{C:attention}3{} {C:joy_normal}\"Mekk-Knight\"{} {C:attention}Jokers{}",
 				}
 			},
 			j_joy_mekkcrus_avramax = {
@@ -678,9 +678,8 @@ return {
 				name = "{C:joy_effect}Mardel, Generaider Boss of Light",
 				text = {
 					"You can {C:attention}tribute #1#{} {C:joy_normal}\"Generaider\"{}",
-					"and/or {C:joy_normal}Plant{} {C:attention}Joker{}",
-					"to create {C:attention}#2#{} {C:green}Uncommon{}",
-					"{C:joy_normal}\"Generaider\"{} {C:attention}Joker{}",
+					"and/or {C:joy_normal}Plant{} {C:attention}Joker{} to create {C:attention}#2#{}",
+					"{C:green}Uncommon{} {C:joy_normal}\"Generaider\"{} {C:attention}Joker{}",
 					"{C:inactive}(Must have room){}",
 				},
 			},
@@ -706,7 +705,7 @@ return {
 				text = {
 					"You can {C:attention}tribute #1#{} {C:joy_normal}\"Generaider\"{}",
 					"and/or {C:joy_normal}Zombie{} {C:attention}Jokers{}",
-					"to {C:attention}revive #1#{} not owned {C:red}Rare{}",
+					"to {C:attention}revive #2#{} not owned {C:red}Rare{}",
 					"{C:joy_normal}\"Generaider\"{} {C:attention}Joker{} as {C:dark_edition}Negative{}",
 				},
 			},
@@ -726,9 +725,8 @@ return {
 				name = "{C:joy_xyz}Laevatein, Generaider Boss of Shadows",
 				text = {
 					"Destroy all other {C:attention}Jokers{} when summoned to",
-					"create {C:attention}#1#{} {C:joy_xyz}\"Jormungandr, Generaider Boss of Eternity\"{}",
-					"attaching all cards in the {C:attention}GY{} to it as",
-					"{C:joy_xyz}Xyz materials{}",
+					"create a {C:joy_xyz}\"Jormungandr, Generaider Boss of Eternity\"{}",
+					"attaching all cards in the {C:attention}GY{} to it as {C:joy_xyz}Xyz materials{}",
 				},
 				joy_summon_conditions = {
 					"{C:attention}5{} {C:red}Rare{} {C:attention}Jokers{}",
@@ -742,7 +740,7 @@ return {
 					" ",
 					"Once per round, you can {C:attention}tribute #1#{}",
 					"{C:joy_token}\"Generaider Tokens\"{} to create {C:attention}#2#{}",
-					"{C:attention}#3#{} not owned {C:red}Rare{} {C:joy_normal}\"Generaider\"{} {C:attention}Jokers{}",
+					"not owned {C:red}Rare{} {C:joy_normal}\"Generaider\"{} {C:attention}Jokers{}",
 					"{C:inactive}(Must have room){}",
 				},
 			},
@@ -828,8 +826,7 @@ return {
 					" ",
 					"This card {C:attention}banishes{} at the end of round",
 					"until {C:attention}Blind{} is selected to",
-					"add {C:attention}#3#{} {C:joy_normal}\"Ghoti\"{} {C:attention}Joker{}",
-					"to the {C:joy_spell}Extra Deck{}",
+					"add {C:attention}#3#{} {C:joy_normal}\"Ghoti\"{} {C:attention}Joker{} to the {C:joy_spell}Extra Deck{}",
 					"{C:inactive}(Must have room){}",
 				},
 				joy_summon_conditions = {
@@ -914,7 +911,7 @@ return {
 					" ",
 					"{C:attention}Banish #2#{} {C:joy_normal}\"PSY-Frame Driver\"",
 					"when {C:attention}Blind{} is selected until end of round to",
-					"make all score cards give {X:mult,C:white}X#3#{} Mult this round",
+					"make all scored cards give {X:mult,C:white}X#3#{} Mult this round",
 				},
 			},
 			j_joy_psy_gamma = {
@@ -1042,7 +1039,7 @@ return {
 					"if there's any in the {C:attention}GY{}",
 					"{C:inactive}(Must have room){}",
 					" ",
-					"Sell this card to create {C:attention}#2#{} {C:tarot}Tarot{} card",
+					"Sell this card to create {C:attention}#2#{} {C:tarot}Tarot{} cards",
 					"{C:inactive}(Must have room){}",
 				},
 				joy_summon_conditions = {
@@ -1055,7 +1052,7 @@ return {
 					"Adds {C:attention}#1#{} random {C:attention}playing cards{}",
 					"when a {C:tarot}Tarot{} card is used during a {C:attention}Blind{}",
 					" ",
-					"Sell this card to create {C:attention}#2#{} {C:tarot}Tarot{} card",
+					"Sell this card to create {C:attention}#2#{} {C:tarot}Tarot{} cards",
 					"{C:inactive}(Must have room){}",
 				},
 				joy_summon_conditions = {
@@ -1068,7 +1065,7 @@ return {
 					"This card {C:attention}banishes{} at the end of round",
 					"until {C:attention}Blind{} is selected",
 					" ",
-					"Create {C:attention}#1#{} {C:dark_edition}Negative{} {C:tarot}Tarot{} card",
+					"Create {C:attention}#1#{} {C:dark_edition}Negative{} {C:tarot}Tarot{} cards",
 					"when it returns from {C:attention}banishment{}",
 				},
 				joy_summon_conditions = {
@@ -1076,14 +1073,14 @@ return {
 				}
 			},
 			j_joy_runick_fountain = {
-				name = "{C:joy_spell}Generaider Boss Stage",
+				name = "{C:joy_spell}Runick Fountain",
 				text = {
 					"Creates as many {C:tarot}Tarot{} cards used during",
 					"this {C:attention}Blind{} as possible at end of round",
-					"{C:inactive}(Removes{} {C:dark_edition}Negative{}{C:inactive}){}",
+					"{C:inactive}(Removes Editions){}",
 					" ",
 					"Destroys {C:attention}#1#{} random {C:attention}playing cards{}",
-					"in your deck when this {C:attention}Blind{} is selected",
+					"in your deck when {C:attention}Blind{} is selected",
 				},
 			},
 			--#endregion
@@ -1307,6 +1304,9 @@ return {
 			k_joy_EARTH = "EARTH",
 			k_joy_WIND = "WIND",
 			k_joy_DIVINE = "DIVINE",
+			k_joy_spell = "Spell",
+			k_joy_trap = "Trap",
+			k_joy_fieldspell = "Field Spell",
 			--#endregion
 			--#region Archetypes
 			k_joy_archetype_dmaid = "Dragonmaid",
@@ -1315,6 +1315,10 @@ return {
 			k_joy_archetype_yokai = "Ghost Girls",
 			k_joy_archetype_spright = "Spright",
 			k_joy_archetype_mekk = "Mekk-Knight",
+			k_joy_archetype_generaider = "Generaider",
+			k_joy_archetype_fish = "Ghoti",
+			k_joy_archetype_psy = "PSY-Frame",
+			k_joy_archetype_runick = "Runick",
 			k_joy_archetype_misc = "Miscellaneous",
 			k_joy_archetype_token = "Tokens",
 			--#endregion

@@ -153,7 +153,7 @@ JoyousSpring.is_material = function(card, properties, summon_type)
         return not JoyousSpring.is_monster_card(card)
     end
     if not JoyousSpring.is_monster_card(card) then
-        return not (properties.is_monster or properties.monster_type or properties.monster_attribute or properties.monster_archetypes or properties.is_pendulum or properties.summon_type or properties.is_effect or properties.is_non_effect or properties.is_normal or properties.is_extra_deck or properties.is_main_deck) or
+        return not (properties.is_monster or properties.monster_type or properties.monster_attribute or properties.monster_archetypes or properties.is_pendulum or properties.summon_type or properties.is_effect or properties.is_non_effect or properties.is_normal or properties.is_extra_deck or properties.is_main_deck or properties.is_summoned) or
             false
     end
     if properties.monster_type then
@@ -248,6 +248,26 @@ JoyousSpring.is_material = function(card, properties, summon_type)
     end
     if properties.is_normal then
         if JoyousSpring.is_effect_monster(card) or JoyousSpring.is_extra_deck_monster(card) then
+            return false
+        end
+    end
+    if properties.is_summoned then
+        if not JoyousSpring.is_summoned(card) then
+            return false
+        end
+    end
+    if properties.exclude_summoned then
+        if JoyousSpring.is_summoned(card) then
+            return false
+        end
+    end
+    if properties.is_tuner then
+        if JoyousSpring.is_nontuner_monster(card) then
+            return false
+        end
+    end
+    if properties.exclude_tuners then
+        if JoyousSpring.is_tuner_monster(card) then
             return false
         end
     end
@@ -404,6 +424,16 @@ JoyousSpring.is_material_center = function(card_key, properties)
     end
     if properties.is_normal then
         if monster_card_properties.is_effect or not monster_card_properties.is_main_deck then
+            return false
+        end
+    end
+    if properties.is_tuner then
+        if not monster_card_properties.is_tuner then
+            return false
+        end
+    end
+    if properties.exclude_tuners then
+        if monster_card_properties.is_tuner then
             return false
         end
     end

@@ -161,6 +161,30 @@ end
 
 JoyousSpring.get_type_ui = function(card)
     local joyous_spring_table = card and card.ability and card.ability.extra.joyous_spring or {}
+
+    if joyous_spring_table.is_field_spell then
+        return {
+            {
+                n = G.UIT.O,
+                config = {
+                    object = DynaText({
+                        string = { localize("k_joy_fieldspell") },
+                        colours = { G.C.JOY.SPELL },
+                        bump = true,
+                        silent = true,
+                        pop_in = 0,
+                        pop_in_rate = 4,
+                        maxw = 5,
+                        shadow = true,
+                        y_offset = 0,
+                        spacing = math.max(0, 0.32 * (17 - #localize("k_joy_fieldspell"))),
+                        scale = (0.4 - 0.004 * #localize("k_joy_fieldspell"))
+                    })
+                }
+            }
+        }
+    end
+
     local attribute_text = localize("k_joy_".. (joyous_spring_table.attribute or "LIGHT"))
     local type_text = localize("k_joy_".. (joyous_spring_table.monster_type or "Beast"))
     local summon_type_text = joyous_spring_table.summon_type and joyous_spring_table.summon_type ~= "NORMAL" and
@@ -168,10 +192,12 @@ JoyousSpring.get_type_ui = function(card)
     local pendulum_text = joyous_spring_table.is_pendulum and localize("k_joy_pendulum") or nil
     local tuner_text = joyous_spring_table.is_tuner and localize("k_joy_tuner") or nil
     local effect_text = joyous_spring_table.is_effect and localize("k_joy_effect") or localize("k_joy_normal")
+    local trap_text = joyous_spring_table.is_trap and localize("k_joy_trap") or nil
     local full_text = attribute_text.. "/".. type_text .. "/" .. (summon_type_text or "") .. (summon_type_text and "/" or "") ..
         (pendulum_text or "") .. (pendulum_text and "/" or "") ..
         (tuner_text or "") .. (tuner_text and "/" or "") ..
-        effect_text
+        effect_text .. (trap_text and "/" or "")..
+        (trap_text or "")
 
     local attribute = {
         n = G.UIT.O,
@@ -216,7 +242,7 @@ JoyousSpring.get_type_ui = function(card)
             config = {
                 object = DynaText({
                     string = { summon_type_text },
-                    colours = { G.C.JOY[summon_type_text] or G.C.JOY.FUSION },
+                    colours = { G.C.JOY[joyous_spring_table.summon_type] or G.C.JOY.FUSION },
                     bump = true,
                     silent = true,
                     pop_in = 0,
@@ -290,6 +316,27 @@ JoyousSpring.get_type_ui = function(card)
             })
         }
     }
+    local trap
+    if trap_text then
+        trap = {
+            n = G.UIT.O,
+            config = {
+                object = DynaText({
+                    string = { trap_text },
+                    colours = { G.C.JOY.TRAP },
+                    bump = true,
+                    silent = true,
+                    pop_in = 0,
+                    pop_in_rate = 4,
+                    maxw = 5,
+                    shadow = true,
+                    y_offset = 0,
+                    spacing = math.max(0, 0.32 * (17 - #full_text)),
+                    scale = (0.4 - 0.004 * #full_text)
+                })
+            }
+        }
+    end
     local separator = {
         n = G.UIT.T,
         config = {
@@ -309,7 +356,9 @@ JoyousSpring.get_type_ui = function(card)
         pendulum and separator or nil,
         tuner,
         tuner and separator or nil,
-        effect
+        effect,
+        trap and separator or nil,
+        trap
     }
 end
 

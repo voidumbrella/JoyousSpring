@@ -24,8 +24,9 @@ SMODS.current_mod.custom_ui = function(modNodes)
         G.joy_desc_area:emplace(card)
         card:flip()
         G.E_MANAGER:add_event(Event({
+            blocking = false,
             trigger = "after",
-            delay = 0.4,
+            delay = 0.4*i,
             func = function()
                 play_sound("card1")
                 card:flip()
