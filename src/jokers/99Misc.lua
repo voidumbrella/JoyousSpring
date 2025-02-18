@@ -346,7 +346,7 @@ SMODS.Joker({
                 summon_type = "FUSION",
                 is_effect = true,
                 attribute = "DARK",
-                monster_type = "Winged Beast",
+                monster_type = "WingedBeast",
                 monster_archetypes = {},
                 summon_conditions = {
                     {

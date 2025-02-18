@@ -13,10 +13,10 @@ G.C.JOY = {
     LINK = HEX("006EAD"),
     TOKEN = HEX("828E85"),
     LIGHT = HEX("DBBB51"),
-    DARK = HEX("785BA2"),
+    DARK = lighten(HEX("785BA2"), 0.2),
     WATER = HEX("21BBE4"),
     FIRE = HEX("FD0404"),
-    EARTH = HEX("747447"),
+    EARTH = lighten(HEX("747447"), 0.2),
     WIND = HEX("8CC56E"),
     DIVINE = HEX("836A3C"),
 }
@@ -39,6 +39,13 @@ function loc_colour(_c, _default)
     G.ARGS.LOC_COLOURS.joy_xyz = G.C.JOY.XYZ
     G.ARGS.LOC_COLOURS.joy_link = G.C.JOY.LINK
     G.ARGS.LOC_COLOURS.joy_token = G.C.JOY.TOKEN
+    G.ARGS.LOC_COLOURS.joy_light = G.C.JOY.LIGHT
+    G.ARGS.LOC_COLOURS.joy_dark = G.C.JOY.DARK
+    G.ARGS.LOC_COLOURS.joy_water = G.C.JOY.WATER
+    G.ARGS.LOC_COLOURS.joy_fire = G.C.JOY.FIRE
+    G.ARGS.LOC_COLOURS.joy_earth = G.C.JOY.EARTH
+    G.ARGS.LOC_COLOURS.joy_wind = G.C.JOY.WIND
+    G.ARGS.LOC_COLOURS.joy_divine = G.C.JOY.DIVINE
 
     return loc_colour_ref(_c, _default)
 end
@@ -154,17 +161,36 @@ end
 
 JoyousSpring.get_type_ui = function(card)
     local joyous_spring_table = card and card.ability and card.ability.extra.joyous_spring or {}
-    local type_text = joyous_spring_table.monster_type or "Beast"
+    local attribute_text = localize("k_joy_".. (joyous_spring_table.attribute or "LIGHT"))
+    local type_text = localize("k_joy_".. (joyous_spring_table.monster_type or "Beast"))
     local summon_type_text = joyous_spring_table.summon_type and joyous_spring_table.summon_type ~= "NORMAL" and
-        joyous_spring_table.summon_type or nil
-    local pendulum_text = joyous_spring_table.is_pendulum and "PENDULUM" or nil
-    local tuner_text = joyous_spring_table.is_tuner and "TUNER" or nil
-    local effect_text = joyous_spring_table.is_effect and "EFFECT" or "NORMAL"
-    local full_text = type_text .. "/" .. (summon_type_text or "") .. (summon_type_text and "/" or "") ..
+    localize("k_joy_".. joyous_spring_table.summon_type) or nil
+    local pendulum_text = joyous_spring_table.is_pendulum and localize("k_joy_pendulum") or nil
+    local tuner_text = joyous_spring_table.is_tuner and localize("k_joy_tuner") or nil
+    local effect_text = joyous_spring_table.is_effect and localize("k_joy_effect") or localize("k_joy_normal")
+    local full_text = attribute_text.. "/".. type_text .. "/" .. (summon_type_text or "") .. (summon_type_text and "/" or "") ..
         (pendulum_text or "") .. (pendulum_text and "/" or "") ..
         (tuner_text or "") .. (tuner_text and "/" or "") ..
         effect_text
 
+    local attribute = {
+        n = G.UIT.O,
+        config = {
+            object = DynaText({
+                string = { attribute_text },
+                colours = { G.C.JOY[attribute_text] },
+                bump = true,
+                silent = true,
+                pop_in = 0,
+                pop_in_rate = 4,
+                maxw = 5,
+                shadow = true,
+                y_offset = 0,
+                spacing = math.max(0, 0.32 * (17 - #full_text)),
+                scale = (0.4 - 0.004 * #full_text)
+            })
+        }
+    }
     local type = {
         n = G.UIT.O,
         config = {
@@ -273,6 +299,8 @@ JoyousSpring.get_type_ui = function(card)
         }
     }
     return {
+        attribute,
+        separator,
         type,
         separator,
         summon_type,
