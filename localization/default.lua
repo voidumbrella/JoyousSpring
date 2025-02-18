@@ -142,7 +142,7 @@ return {
 					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}",
 					" ",
 					"{C:attention}Jokers{} in the {C:attention}GY{} count for",
-					"{C:joy_normal}\"Dragonmaid\"{} effects",
+					"{C:joy_normal}\"Dragonmaid\"{} abilities",
 					" ",
 					"{C:attention}Transforms{} into {C:joy_fusion}\"Dragonmaid Sheou\"",
 					"after {C:attention}#3#{} rounds {C:inactive}(#4#/#3#){}",
@@ -155,7 +155,7 @@ return {
 				name = "{C:joy_fusion}Dragonmaid Sheou",
 				text = {
 					"{C:attention}Jokers{} in the {C:attention}GY{} count for",
-					"{C:joy_normal}\"Dragonmaid\"{} effects",
+					"{C:joy_normal}\"Dragonmaid\"{} abilities",
 					" ",
 					"When {C:attention}Boss Blind{} is selected,",
 					"disables its effects then {C:attention}transforms{} into",
@@ -343,7 +343,7 @@ return {
 					"{C:inactive}(Currently{} {C:attention}+#3# {C:inactive}hand size){}",
 					" ",
 					"{C:joy_spell}Extra Deck{} {C:attention}Jokers{} in the {C:attention}GY{}",
-					"count for {C:joy_normal}\"Dogmatika\"{} effects {C:inactive}(as debuffed){}"
+					"count for {C:joy_normal}\"Dogmatika\"{} abilities {C:inactive}(as debuffed){}"
 				},
 				joy_summon_conditions = {
 					"{C:attention}2 Jokers{}, including a {C:joy_normal}\"Dogmatika\"{}"
@@ -475,7 +475,7 @@ return {
 					"when {C:attention}Blind{} is selected",
 					" ",
 					"{C:green}Uncommon{} {C:attention}Jokers{} in the {C:attention}GY{}",
-					"count for {C:joy_normal}\"Spright\"{} effects"
+					"count for {C:joy_normal}\"Spright\"{} abilities"
 				},
 				joy_summon_conditions = {
 					"{C:attention}2{} {C:green}Uncommon{} {C:attention}Jokers{}"
@@ -517,12 +517,572 @@ return {
 					"{E:1}\"Check THIS out!\"{}",
 				},
 			},
+			j_joy_mekk_red = {
+				name = "{C:joy_effect}Mekk-Knight Red Moon",
+				text = {
+					"Scored card in this {C:attention}column{}",
+					"gives {C:mult}+#1#{} Mult times its rank",
+					"(Currently in column #2#)",
+				},
+			},
+			j_joy_mekk_orange = {
+				name = "{C:joy_effect}Mekk-Knight Orange Sunset",
+				text = {
+					"Played card in this {C:attention}column{}",
+					"counts for scoring",
+					"(Currently in column #2#)",
+				},
+			},
+			j_joy_mekk_yellow = {
+				name = "{C:joy_effect}Mekk-Knight Yellow Star",
+				text = {
+					"Scored card in this {C:attention}column{}",
+					"gives {C:money}+$#1#{} times its rank",
+					"(Currently in column #2#)",
+				},
+			},
+			j_joy_mekk_green = {
+				name = "{C:joy_effect}Mekk-Knight Green Horizon",
+				text = {
+					"Scored card in this {C:attention}column{}",
+					"has a chance based on its rank to",
+					"retrigger that many times",
+					"(Currently in column #2#)",
+				},
+			},
+			j_joy_mekk_blue = {
+				name = "{C:joy_effect}Mekk-Knight Blue Sky",
+				text = {
+					"Scored card in this {C:attention}column{}",
+					"gives {C:chips}+#1#{} Chips times its rank",
+					"(Currently in column #2#)",
+				},
+			},
+			j_joy_mekk_indigo = {
+				name = "{C:joy_effect}Mekk-Knight Indigo Eclipse",
+				text = {
+					"Gets ability based on the {C:attention}column{}",
+					"1: All scored cards retrigger once",
+					"2: {C:chips}+#1#{} Chips",
+					"3: {C:mult}+#2#{} Mult",
+					"4: {X:mult,C:white}X#3#{} Mult",
+					"5+: {C:money}+$#4#{} at end of round",
+				},
+			},
+			j_joy_mekk_purple = {
+				name = "{C:joy_effect}Mekk-Knight Purple Nightfall",
+				text = {
+					"This card {C:attention}banishes{} until end of {C:attention}Ante{}",
+					"when {C:attention}Blind{} is selected to create {C:attention}#1#{}",
+					"{C:joy_normal}Main Deck \"Mekk-Knight\"{} {C:attention}Joker{}",
+					"{C:inactive}(Must have room){}",
+				},
+			},
+			j_joy_mekk_morning = {
+				name = "{C:joy_link}Mekk-Knight of the Morning Star",
+				text = {
+					"Scored card in adjacent {C:attention}column{}",
+					"give {C:mult}X#1#{} Mult if there's a",
+					"{C:joy_normal}\"Mekk-Knight\"{} {C:attention}Joker{} in that {C:attention}column{}",
+					"(Currently in columns #2# and #3#)",
+				},
+				joy_summon_conditions = {
+					"{C:attention}2{} {C:attention}Jokers{}",
+				}
+			},
+			j_joy_mekk_spectrum = {
+				name = "{C:joy_link}Mekk-Knight Spectrum Supreme",
+				text = {
+					"{C:joy_normal}\"Mekk-Knight\"{} abilities apply to",
+					"all played cards",
+					" ",
+					"Once per round, sell 1 {C:joy_normal}\"Mekk-Knight\"{} {C:attention}Joker{}",
+					"to create {C:attention}#1#{} {C:joy_normal}Main Deck \"Mekk-Knight\"{} {C:attention}Joker{}",
+					"{C:inactive}(Must have room){}",
+				},
+				joy_summon_conditions = {
+					"{C:attention}3{} {C:joy_normal}\"Mekk-Knight\"{}",
+				}
+			},
+			j_joy_mekkcrus_avramax = {
+				name = "{C:joy_link}Mekk-Knight Crusadia Avramax",
+				text = {
+					"Immediately wins every {C:attention}Blind{}",
+					" ",
+					"Destroys itself after a number of {C:attention}Blinds{} selected",
+					"equal to the {C:attention}materials{} used for its summon {C:inactive}(#1#/#2#){}",
+				},
+				joy_summon_conditions = {
+					"{C:attention}2+{} {C:joy_spell}Extra Deck{} summoned {C:attention}Jokers{}",
+				}
+			},
 			--#endregion
 			--#region Generaider
 			j_joy_token_generaider = {
 				name = "{C:joy_token}Generaider Token",
 				text = {
 					"This card can be used as any {C:joy_token}Token{}",
+				},
+			},
+			j_joy_generaider_loptr = {
+				name = "{C:joy_effect}Loptr, Shadow of the Generaider Bosses",
+				text = {
+					"This card is destroyed when a {C:attention}Boss Blind{}",
+					"is defeated to add {C:joy_spell}\"Generaider Boss Stage\"{}",
+					"to the {C:joy_spell}Field Spell{} area",
+					"{C:inactive}(Must have room){}",
+				},
+			},
+			j_joy_generaider_vala = {
+				name = "{C:joy_effect}Vala, Seidhr of the Generaider Bosses",
+				text = {
+					"This card is destroyed when a {C:attention}Boss Blind{}",
+					"is defeated to {C:attention}revive #1#{} not owned {C:red}Rare{}",
+					"{C:joy_normal}\"Generaider\"{} {C:attention}Joker{}",
+				},
+			},
+			j_joy_generaider_harr = {
+				name = "{C:joy_effect}Harr, Generaider Boss of Storms",
+				text = {
+					"You can {C:attention}tribute #1#{} {C:joy_normal}\"Generaider\"{}",
+					"and/or {C:joy_normal}Spellcaster{} {C:attention}Jokers{}",
+					"to disable the current {C:attention}Boss Blind{}",
+				},
+			},
+			j_joy_generaider_nidhogg = {
+				name = "{C:joy_effect}Nidhogg, Generaider Boss of Ice",
+				text = {
+					"You can {C:attention}tribute #1#{} {C:joy_normal}\"Generaider\"{}",
+					"and/or {C:joy_normal}Wyrm{} {C:attention}Jokers{}",
+					"to retrigger each scored card this round",
+				},
+			},
+			j_joy_generaider_frodi = {
+				name = "{C:joy_effect}Frodi, Generaider Boss of Swords",
+				text = {
+					"You can {C:attention}tribute{} any number of {C:joy_normal}\"Generaider\"{}",
+					"and/or {C:joy_normal}Warrior{} {C:attention}Jokers{}",
+					"to gain that much hand size this round",
+				},
+			},
+			j_joy_generaider_utgarda = {
+				name = "{C:joy_effect}Utgarda, Generaider Boss of Delusion",
+				text = {
+					"You can {C:attention}tribute #1#{} {C:joy_normal}\"Generaider\"{}",
+					"and/or {C:joy_normal}Rock{} {C:attention}Joker{}",
+					"to banish a card in your consumable area",
+					"until {C:attention}Blind{} is selected",
+				},
+			},
+			j_joy_generaider_mardel = {
+				name = "{C:joy_effect}Mardel, Generaider Boss of Light",
+				text = {
+					"You can {C:attention}tribute #1#{} {C:joy_normal}\"Generaider\"{}",
+					"and/or {C:joy_normal}Plant{} {C:attention}Joker{}",
+					"to create {C:attention}#2#{} {C:green}Uncommon{}",
+					"{C:joy_normal}\"Generaider\"{} {C:attention}Joker{}",
+					"{C:inactive}(Must have room){}",
+				},
+			},
+			j_joy_generaider_dovelgus = {
+				name = "{C:joy_effect}Dovelgus, Generaider Boss of Iron",
+				text = {
+					"You can {C:attention}tribute #1#{} {C:joy_normal}\"Generaider\"{}",
+					"and/or {C:joy_normal}Machine{} {C:attention}Jokers{}",
+					"to make each {C:joy_normal}\"Generaider\"{} and {C:joy_normal}Machine{}",
+					"give {X:mult,C:white}X#2#{} Mult this round",
+				},
+			},
+			j_joy_generaider_naglfar = {
+				name = "{C:joy_effect}Naglfar, Generaider Boss of Fire",
+				text = {
+					"You can {C:attention}tribute #1#{} {C:joy_normal}\"Generaider\"{}",
+					"and/or {C:joy_normal}Beast-Warrior{} {C:attention}Jokers{}",
+					"to gain {C:blue}+#2#{} Hand and {C:red}+#3#{} Discard this round",
+				},
+			},
+			j_joy_generaider_hela = {
+				name = "{C:joy_effect}Hela, Generaider Boss of Doom",
+				text = {
+					"You can {C:attention}tribute #1#{} {C:joy_normal}\"Generaider\"{}",
+					"and/or {C:joy_normal}Zombie{} {C:attention}Jokers{}",
+					"to {C:attention}revive #1#{} not owned {C:red}Rare{}",
+					"{C:joy_normal}\"Generaider\"{} {C:attention}Joker{} as {C:dark_edition}Negative{}",
+				},
+			},
+			j_joy_generaider_jormungandr = {
+				name = "{C:joy_xyz}Jormungandr, Generaider Boss of Eternity",
+				text = {
+					"{C:mult}+#1#{} Mult for each {C:joy_xyz}Xyz material{}",
+					" ",
+					"{C:joy_xyz}Detach{} {C:attention}#2# materials{} to permanently",
+					"gain {C:attention}+#3#{} hand size",
+				},
+				joy_summon_conditions = {
+					"{C:attention}2+{} {C:red}Rare{} {C:attention}Jokers{}",
+				}
+			},
+			j_joy_generaider_laevatein = {
+				name = "{C:joy_xyz}Laevatein, Generaider Boss of Shadows",
+				text = {
+					"Destroy all other {C:attention}Jokers{} when summoned to",
+					"create {C:attention}#1#{} {C:joy_xyz}\"Jormungandr, Generaider Boss of Eternity\"{}",
+					"attaching all cards in the {C:attention}GY{} to it as",
+					"{C:joy_xyz}Xyz materials{}",
+				},
+				joy_summon_conditions = {
+					"{C:attention}5{} {C:red}Rare{} {C:attention}Jokers{}",
+				}
+			},
+			j_joy_generaider_boss_stage = {
+				name = "{C:joy_spell}Generaider Boss Stage",
+				text = {
+					"Creates as many {C:joy_token}\"Generaider Tokens\"{}",
+					"as possible when {C:attention}Blind{} is selected",
+					" ",
+					"Once per round, you can {C:attention}tribute #1#{}",
+					"{C:joy_token}\"Generaider Tokens\"{} to create {C:attention}#2#{}",
+					"{C:attention}#3#{} not owned {C:red}Rare{} {C:joy_normal}\"Generaider\"{} {C:attention}Jokers{}",
+					"{C:inactive}(Must have room){}",
+				},
+			},
+			--#endregion
+			--#region Ghoti
+			j_joy_fish_keaf = {
+				name = "{C:joy_effect}Keaf, Murk of the Ghoti",
+				text = {
+					"This card {C:attention}banishes{} at the end of round",
+					"until {C:attention}Blind{} is selected to",
+					"{C:attention}revive #1#{} {C:joy_spell}Extra Deck{} {C:joy_normal}\"Ghoti\"{} {C:attention}Joker{}",
+				},
+			},
+			j_joy_fish_paces = {
+				name = "{C:joy_effect}Paces, Light of the Ghoti",
+				text = {
+					"{C:chips}+#1#{} Chips",
+					" ",
+					"This card {C:attention}banishes{} at the end of round",
+					"until {C:attention}Blind{} is selected",
+				},
+			},
+			j_joy_fish_shif = {
+				name = "{C:joy_effect}Shif, Fairy of the Ghoti",
+				text = {
+					"{C:mult}+#1#{} Mult",
+					" ",
+					"This card {C:attention}banishes{} at the end of round",
+					"until {C:attention}Blind{} is selected",
+				},
+			},
+			j_joy_fish_zep = {
+				name = "{C:joy_effect}Zep, Ruby of the Ghoti",
+				text = {
+					"This card {C:attention}banishes{} at the end of round",
+					"until {C:attention}Blind{} is selected to",
+					"{C:attention}revive #1#{} {C:joy_normal}Main Deck{} {C:joy_normal}\"Ghoti\"{} {C:attention}Joker{}",
+				},
+			},
+			j_joy_fish_ixeep = {
+				name = "{C:joy_effect}Ixeep, Omen of the Ghoti",
+				text = {
+					"This card {C:attention}banishes{} at the end of round",
+					"until {C:attention}Blind{} is selected to",
+					"create {C:attention}#1#{} {C:joy_normal}Main Deck{} {C:joy_normal}\"Ghoti\"{} {C:attention}Joker{}",
+					"{C:inactive}(Must have room){}",
+				},
+			},
+			j_joy_fish_eanoc = {
+				name = "{C:joy_effect}Eanoc, Sentry of the Ghoti",
+				text = {
+					"This card {C:attention}banishes{} at the end of round",
+					"until {C:attention}Blind{} is selected",
+					" ",
+					"Adds {C:attention}#1#{} {C:joy_normal}\"Ghoti\"{} {C:attention}Joker{}",
+					"to the {C:joy_spell}Extra Deck{} after returning from",
+					"{C:attention}banishment #2#{} times",
+					"{C:inactive}(Must have room){}",
+				},
+			},
+			j_joy_fish_psiics = {
+				name = "{C:joy_effect}Psiics, Moonlight of the Ghoti",
+				text = {
+					"This card {C:attention}banishes{} at the end of round",
+					"until {C:attention}Boss Blind{} is selected to",
+					"create {C:attention}#1#{} {C:dark_edition}Negative{} {C:joy_normal}Main Deck{} {C:joy_normal}Fish{} {C:attention}Joker{}",
+				},
+			},
+			j_joy_fish_snopios = {
+				name = "{C:joy_effect}Snopios, Shade of the Ghoti",
+				text = {
+					"This card and a non-{C:joy_normal}\"Ghoti\"{} {C:attention}Joker{}",
+					"{C:attention}banish{} at the end of round",
+					"until {C:attention}Blind{} is selected",
+				},
+			},
+			j_joy_fish_arionpos = {
+				name = "{C:joy_synchro}Arionpos, Serpent of the Ghoti",
+				text = {
+					"{C:chips}+#1#{} Chips for each card",
+					"{C:attention}banished{} this run",
+					"{C:inactive}(Currently{} {C:chips}+#2#{} {C:inactive}Chips){}",
+					" ",
+					"This card {C:attention}banishes{} at the end of round",
+					"until {C:attention}Blind{} is selected to",
+					"add {C:attention}#3#{} {C:joy_normal}\"Ghoti\"{} {C:attention}Joker{}",
+					"to the {C:joy_spell}Extra Deck{}",
+					"{C:inactive}(Must have room){}",
+				},
+				joy_summon_conditions = {
+					"{C:attention}1{} {C:joy_normal}Fish{} {C:joy_synchro}Tuner{} +",
+					"{C:attention}1{} non-{C:joy_synchro}Tuner{}",
+				}
+			},
+			j_joy_fish_askaan = {
+				name = "{C:joy_synchro}Askaan, the Bicorned Ghoti",
+				text = {
+					"{C:mult}+#1#{} Mult for each card",
+					"{C:attention}banished{} this run",
+					"{C:inactive}(Currently{} {C:mult}+#2#{} {C:inactive}Mult){}",
+					" ",
+					"This card and another {C:attention}Joker{}",
+					"{C:attention}banish{} at the end of round",
+					"until {C:attention}Blind{} is selected",
+				},
+				joy_summon_conditions = {
+					"{C:attention}1{} {C:joy_synchro}Tuner{} +",
+					"{C:attention}1{} {C:red}Rare{} non-{C:joy_synchro}Tuner{}",
+				}
+			},
+			j_joy_fish_guoglim = {
+				name = "{C:joy_synchro}Guoglim, Spear of the Ghoti",
+				text = {
+					"Gains {X:mult,C:white}X#1#{} Mult for each card",
+					"{C:attention}banished{} this run",
+					"{C:inactive}(Currently{} {C:chips}X#2#{} {C:inactive}Chips){}",
+					" ",
+					"{C:attention}Revives{} as many different {C:joy_normal}Fish{}",
+					"{C:attention}Jokers{} as possible when summoned",
+					" ",
+					"This card {C:attention}banishes{} at the end of round",
+					"until {C:attention}Blind{} is selected",
+				},
+				joy_summon_conditions = {
+					"{C:attention}1{} {C:joy_synchro}Tuner{} +",
+					"{C:attention}1{} {C:red}Rare{} non-{C:joy_synchro}Tuner{}",
+				}
+			},
+			j_joy_fish_deepbeyond = {
+				name = "{C:joy_synchro}Ghoti of the Deep Beyond",
+				text = {
+					"This card and all other non-{C:joy_normal}\"Ghoti\"{} {C:attention}Jokers{}",
+					"{C:attention}banish{} at the end of round",
+					"until {C:attention}Blind{} is selected",
+				},
+				joy_summon_conditions = {
+					"{C:attention}2{} {C:joy_normal}Fish{} {C:joy_synchro}Tuners{} +",
+					"{C:attention}1{} non-{C:joy_synchro}Tuner{}",
+				}
+			},
+			--#endregion
+			--#region PSY-Frame
+			j_joy_psy_driver = {
+				name = "{C:joy_normal}PSY-Frame Driver",
+				text = {
+					"{E:1}A Psychic soldier that rides into battle against the Security{}",
+					"{E:1}Forces on currents of lightning, using an autonomic amplifier{}",
+					"{E:1}called \"PSY-Frame\"{}",
+				},
+			},
+			j_joy_psy_alpha = {
+				name = "{C:joy_effect}PSY-Framegear Alpha",
+				text = {
+					"Create {C:attention}#1#{} {C:joy_normal}\"PSY-Frame Driver\"",
+					"when obtained, if not owned",
+					"{C:inactive}(Must have room){}",
+					" ",
+					"{C:attention}Banish #2#{} {C:joy_normal}\"PSY-Frame Driver\"",
+					"when {C:attention}Blind{} is selected until end of round to",
+					"make all cards held in hand give {X:mult,C:white}X#3#{} Mult this round",
+				},
+			},
+			j_joy_psy_beta = {
+				name = "{C:joy_effect}PSY-Framegear Beta",
+				text = {
+					"Create {C:attention}#1#{} {C:joy_normal}\"PSY-Frame Driver\"",
+					"when obtained, if not owned",
+					"{C:inactive}(Must have room){}",
+					" ",
+					"{C:attention}Banish #2#{} {C:joy_normal}\"PSY-Frame Driver\"",
+					"when {C:attention}Blind{} is selected until end of round to",
+					"make all score cards give {X:mult,C:white}X#3#{} Mult this round",
+				},
+			},
+			j_joy_psy_gamma = {
+				name = "{C:joy_effect}PSY-Framegear Gamma",
+				text = {
+					"Create {C:attention}#1#{} {C:joy_normal}\"PSY-Frame Driver\"",
+					"when obtained, if not owned",
+					"{C:inactive}(Must have room){}",
+					" ",
+					"{C:attention}Banish #2#{} {C:joy_normal}\"PSY-Frame Driver\"",
+					"when {C:attention}Blind{} is selected until end of round to",
+					"make all {C:attention}Jokers{} each give {X:mult,C:white}X#3#{} Mult this round",
+				},
+			},
+			j_joy_psy_delta = {
+				name = "{C:joy_effect}PSY-Framegear Delta",
+				text = {
+					"Create {C:attention}#1#{} {C:joy_normal}\"PSY-Frame Driver\"",
+					"when obtained, if not owned",
+					"{C:inactive}(Must have room){}",
+					" ",
+					"{C:attention}Banish #2#{} {C:joy_normal}\"PSY-Frame Driver\"",
+					"when {C:attention}Blind{} is selected until end of round to",
+					"make all {C:tarot}Tarot{} cards in your consumable area",
+					"each give {X:mult,C:white}X#3#{} Mult this round",
+				},
+			},
+			j_joy_psy_epsilon = {
+				name = "{C:joy_effect}PSY-Framegear Epsilon",
+				text = {
+					"Create {C:attention}#1#{} {C:joy_normal}\"PSY-Frame Driver\"",
+					"when obtained, if not owned",
+					"{C:inactive}(Must have room){}",
+					" ",
+					"{C:attention}Banish #2#{} {C:joy_normal}\"PSY-Frame Driver\"",
+					"when {C:attention}Blind{} is selected until end of round to",
+					"make all {C:planet}Planet{} cards in your consumable area",
+					"each give {X:mult,C:white}X#3#{} Mult this round",
+				},
+			},
+			j_joy_psy_multithreader = {
+				name = "{C:joy_effect}PSY-Frame Multi-Threader",
+				text = {
+					"This card is treated as {C:joy_normal}\"PSY-Frame Driver\"",
+					"for {C:joy_normal}\"PSY-Frame\"{} abilities",
+					" ",
+					"Create {C:attention}#1#{} {C:joy_normal}Main Deck \"PSY-Frame\"{}",
+					"{C:joy_effect}Effect{} {C:attention}Joker{} when this card",
+					"returns from {C:attention}banishment{}",
+					"{C:inactive}(Must have room){}",
+				},
+			},
+			j_joy_psy_zeta = {
+				name = "{C:joy_synchro}PSY-Framelord Zeta",
+				text = {
+					"This card and a card in your consumable",
+					"area {C:attention}banish{} at the end of round",
+					"until {C:attention}Blind{} is selected",
+				},
+				joy_summon_conditions = {
+					"{C:attention}1{} {C:joy_synchro}Tuner{} +",
+					"{C:attention}1{} {C:blue}Common{} non-{C:joy_synchro}Tuner{}",
+				}
+			},
+			j_joy_psy_omega = {
+				name = "{C:joy_synchro}PSY-Framelord Omega",
+				text = {
+					"This card and another {C:attention}Joker{}",
+					"{C:attention}banish{} at the end of round",
+					"until {C:attention}Boss Blind{} is selected",
+				},
+				joy_summon_conditions = {
+					"{C:attention}1{} {C:joy_synchro}Tuner{} +",
+					"{C:attention}1{} {C:blue}Common{} non-{C:joy_synchro}Tuner{}",
+				}
+			},
+			j_joy_psy_lambda = {
+				name = "{C:joy_synchro}PSY-Framelord Lambda",
+				text = {
+					"{C:joy_normal}\"PSY-Frame\"{} abilities are active",
+					"without {C:attention}banishing{} {C:joy_normal}\"PSY-Frame Driver\"",
+					" ",
+					"Add {C:attention}#1#{} {C:joy_normal}\"PSY-Frame Driver\"",
+					"to the {C:joy_spell}Extra Deck{} when a {C:joy_normal}Psychic{}",
+					"{C:attention}Joker{} is {C:attention}banished{}",
+					"{C:inactive}(Must have room){}",
+				},
+				joy_summon_conditions = {
+					"{C:attention}2{} {C:attention}Jokers{}, except {C:joy_token}Tokens{}",
+				}
+			},
+			--#endregion
+			--#region Runick
+			j_joy_runick_hugin = {
+				name = "{C:joy_fusion}Hugin the Runick Wings",
+				text = {
+					"{C:attention}+#1#{} consumable slot",
+					" ",
+					"Adds {C:attention}#1#{} {C:joy_spell}\"Runick Fountain\"",
+					"to the {C:joy_spell}Field Spell{} area when summoned",
+					"{C:inactive}(Must have room){}",
+				},
+				joy_summon_conditions = {
+					"{C:attention}3{} {C:tarot}Tarot{} cards",
+				}
+			},
+			j_joy_runick_munin = {
+				name = "{C:joy_fusion}Munin the Runick Wings",
+				text = {
+					"{C:attention}+#1#{} consumable slot",
+					" ",
+					"Gains {C:chips}+#2#{} Chips for each {C:tarot}Tarot{}",
+					"used during a {C:attention}Blind{}",
+					"{C:inactive}(Currently{} {C:chips}+#3#{} {C:inactive}Chips){}",
+				},
+				joy_summon_conditions = {
+					"{C:attention}2{} {C:tarot}Tarot{} cards",
+				}
+			},
+			j_joy_runick_geri = {
+				name = "{C:joy_fusion}Geri the Runick Fangs",
+				text = {
+					"Adds {C:attention}#1#{} {C:joy_spell}\"Runick Fountain\"",
+					"to the {C:joy_spell}Field Spell{} area when summoned",
+					"if there's any in the {C:attention}GY{}",
+					"{C:inactive}(Must have room){}",
+					" ",
+					"Sell this card to create {C:attention}#2#{} {C:tarot}Tarot{} card",
+					"{C:inactive}(Must have room){}",
+				},
+				joy_summon_conditions = {
+					"{C:attention}2{} {C:tarot}Tarot{} cards",
+				}
+			},
+			j_joy_runick_freki = {
+				name = "{C:joy_fusion}Freki the Runick Fangs",
+				text = {
+					"Adds {C:attention}#1#{} random {C:attention}playing cards{}",
+					"when a {C:tarot}Tarot{} card is used during a {C:attention}Blind{}",
+					" ",
+					"Sell this card to create {C:attention}#2#{} {C:tarot}Tarot{} card",
+					"{C:inactive}(Must have room){}",
+				},
+				joy_summon_conditions = {
+					"{C:attention}2{} {C:tarot}Tarot{} cards",
+				}
+			},
+			j_joy_runick_sleipnir = {
+				name = "{C:joy_fusion}Sleipnir the Runick Mane",
+				text = {
+					"This card {C:attention}banishes{} at the end of round",
+					"until {C:attention}Blind{} is selected",
+					" ",
+					"Create {C:attention}#1#{} {C:dark_edition}Negative{} {C:tarot}Tarot{} card",
+					"when it returns from {C:attention}banishment{}",
+				},
+				joy_summon_conditions = {
+					"{C:attention}4{} {C:tarot}Tarot{} cards",
+				}
+			},
+			j_joy_runick_fountain = {
+				name = "{C:joy_spell}Generaider Boss Stage",
+				text = {
+					"Creates as many {C:tarot}Tarot{} cards used during",
+					"this {C:attention}Blind{} as possible at end of round",
+					" ",
+					"Destroys {C:attention}#1#{} random {C:attention}playing cards{}",
+					"in your deck when this {C:attention}Blind{} is selected",
 				},
 			},
 			--#endregion
@@ -683,7 +1243,7 @@ return {
 				name = "",
 				text = {
 					"{C:joy_xyz,s:1.3}Detach{}: {C:joy_xyz}Xyz{} {C:attention}Jokers{} start with a number equal to the materials used to summon it.",
-					"Some effects might {C:joy_xyz}detach{} these or allow you to do it to activate some ability",
+					"Some abilities might {C:joy_xyz}detach{} these or allow you to do it to activate some ability",
 				},
 			},
 			joy_glossary_ritual = {
