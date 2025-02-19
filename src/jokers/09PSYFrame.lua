@@ -46,7 +46,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    cost = 1,
+    cost = 5,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.cards_to_create, card.ability.extra.xmult } }
     end,
@@ -116,7 +116,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    cost = 1,
+    cost = 5,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.cards_to_create, card.ability.extra.xmult } }
     end,
@@ -185,7 +185,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    cost = 1,
+    cost = 5,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.cards_to_create, card.ability.extra.xmult } }
     end,
@@ -254,7 +254,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    cost = 1,
+    cost = 5,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.cards_to_create, card.ability.extra.xmult } }
     end,
@@ -323,7 +323,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    cost = 1,
+    cost = 5,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.cards_to_create, card.ability.extra.xmult } }
     end,
@@ -392,7 +392,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 1,
+    cost = 3,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.cards_to_create } }
     end,
@@ -446,7 +446,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 1,
+    cost = 10,
     generate_ui = JoyousSpring.generate_info_ui,
     config = {
         extra = {
@@ -497,7 +497,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 1,
+    cost = 10,
     generate_ui = JoyousSpring.generate_info_ui,
     config = {
         extra = {
@@ -548,7 +548,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 1,
+    cost = 8,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.cards_to_create } }
     end,

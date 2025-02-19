@@ -1,5 +1,5 @@
 JoyousSpring = {}
-JoyousSpring.debug = true
+JoyousSpring.debug = false
 JoyousSpring.debug_shop_cards = {{ key = "j_joy_generaider_laevatein" }}
 
 SMODS.Atlas({

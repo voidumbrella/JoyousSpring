@@ -15,7 +15,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 1,
+    cost = 8,
     loc_vars = function(self, info_queue, card)
         if not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_generaider_boss_stage
@@ -60,7 +60,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 1,
+    cost = 5,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.revives } }
     end,
@@ -672,7 +672,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    cost = 1,
+    cost = 8,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult, card.ability.extra.joyous_spring.xyz_materials * card.ability.extra.mult, card.ability.extra.detach, card.ability.extra.hsize } }
     end,
@@ -737,7 +737,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 1,
+    cost = 12,
     loc_vars = function(self, info_queue, card)
         if not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_generaider_jormungandr
@@ -804,7 +804,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 1,
+    cost = 15,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.tributes, card.ability.extra.cards_to_create } }
     end,

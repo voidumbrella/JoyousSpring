@@ -36,7 +36,7 @@ SMODS.Joker({
                 perma_debuffed = false,
                 is_free = false,
             },
-            chips = 20,
+            chips = 40,
             cards_to_create = 1
         },
     },
@@ -493,7 +493,7 @@ SMODS.Joker({
                 summoned = false,
                 summon_materials = {},
             },
-            chips = 40,
+            chips = 80,
             money = 5,
             revives = 1
         },
@@ -575,7 +575,7 @@ SMODS.Joker({
                 cannot_revive = true,
                 is_free = false,
             },
-            chips = 40,
+            chips = 80,
             mult = 20,
             h_size = 1
         },
@@ -658,7 +658,7 @@ SMODS.Joker({
                 summoned = false,
                 summon_materials = {},
             },
-            chips = 80,
+            chips = 160,
             mult = 40,
             revives = 1
         },

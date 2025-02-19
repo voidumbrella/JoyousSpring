@@ -284,7 +284,7 @@ SMODS.Joker({
                 perma_debuffed = false,
                 is_free = false,
             },
-            chips = 10,
+            chips = 15,
         },
     },
     calculate = function(self, card, context)

@@ -15,7 +15,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 1,
+    cost = 2,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.revives } }
     end,
@@ -66,7 +66,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    cost = 1,
+    cost = 4,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips } }
     end,
@@ -112,7 +112,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    cost = 1,
+    cost = 4,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult } }
     end,
@@ -158,7 +158,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 1,
+    cost = 2,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.revives } }
     end,
@@ -210,7 +210,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 1,
+    cost = 4,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.cards_to_create } }
     end,
@@ -269,7 +269,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 1,
+    cost = 4,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.cards_to_create, card.ability.extra.times, card.ability.extra.returned } }
     end,
@@ -331,7 +331,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 1,
+    cost = 5,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.revives } }
     end,
@@ -383,7 +383,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 1,
+    cost = 7,
     generate_ui = JoyousSpring.generate_info_ui,
     config = {
         extra = {
@@ -424,7 +424,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 1,
+    cost = 9,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips, card.ability.extra.chips * (G.GAME.joy_cards_banished or 0), card.ability.extra.cards_to_create } }
     end,
@@ -495,7 +495,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 1,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult, card.ability.extra.mult * (G.GAME.joy_cards_banished or 0) } }
     end,
@@ -557,7 +557,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 1,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.xmult, 1 + (card.ability.extra.xmult * (G.GAME.joy_cards_banished or 0)) } }
     end,
@@ -631,7 +631,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 1,
+    cost = 12,
     generate_ui = JoyousSpring.generate_info_ui,
     config = {
         extra = {

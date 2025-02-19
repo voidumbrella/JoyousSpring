@@ -15,7 +15,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 7,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
         if not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_runick_fountain
@@ -74,7 +74,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    cost = 7,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.extra_slots, card.ability.extra.base_chips, card.ability.extra.chips } }
     end,
@@ -140,7 +140,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 7,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
         if not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_runick_fountain
@@ -205,7 +205,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    cost = 7,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.playing_cards_to_create, card.ability.extra.cards_to_create } }
     end,
@@ -264,7 +264,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 7,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.cards_to_create } }
     end,
@@ -318,7 +318,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 7,
+    cost = 15,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.cards_to_destroy } }
     end,

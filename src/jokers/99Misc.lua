@@ -128,7 +128,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    cost = 1,
+    cost = 3,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips, card.ability.extra.chips * (G.GAME.joy_cards_banished or 0) } }
     end,
@@ -497,7 +497,7 @@ SMODS.Joker({
                 summon_materials = {},
             },
             chips_gain = 80,
-            chips_loss = 80,
+            chips_loss = 40,
             chips = 0
         },
     },
