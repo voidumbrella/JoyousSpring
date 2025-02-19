@@ -8,11 +8,20 @@ JoyousSpring.add_to_extra_deck = function(card, args)
             skip_materialize = true,
         })
     end
-    if card.edition and card.edition.card_limit then
-        JoyousSpring.extra_deck_area.config.card_limit = JoyousSpring.extra_deck_area.config.card_limit +
-            card.edition.card_limit
+    if JoyousSpring.is_field_spell(card) then
+        if card.edition and card.edition.card_limit then
+            JoyousSpring.field_spell_area.config.card_limit = JoyousSpring.field_spell_area.config.card_limit +
+                card.edition.card_limit
+        end
+        JoyousSpring.field_spell_area:emplace(card)
+        card:add_to_deck()
+    else
+        if card.edition and card.edition.card_limit then
+            JoyousSpring.extra_deck_area.config.card_limit = JoyousSpring.extra_deck_area.config.card_limit +
+                card.edition.card_limit
+        end
+        JoyousSpring.extra_deck_area:emplace(card)
     end
-    JoyousSpring.extra_deck_area:emplace(card)
 end
 
 JoyousSpring.return_to_extra_deck = function(card)
@@ -49,14 +58,20 @@ end
 JoyousSpring.create_UIBox_extra_deck = function()
     local t = {
         n = G.UIT.ROOT,
-        config = { align = 'cm', r = 0.1, colour = G.C.JOY.SPELL },
+        config = { align = 'cm', r = 0.1, colour = G.C.CLEAR, padding = 0.2 },
         nodes = {
             {
                 n = G.UIT.O,
                 config = {
-                    object = JoyousSpring.extra_deck_area
+                    object = JoyousSpring.extra_deck_area,
                 }
-            }
+            },
+            {
+                n = G.UIT.O,
+                config = {
+                    object = JoyousSpring.field_spell_area
+                }
+            },
         }
     }
     return t
@@ -70,6 +85,7 @@ JoyousSpring.open_extra_deck = function(forced, open, delay_close)
             blockable = false,
             func = function()
                 G.jokers.states.visible = false
+                G.consumeables.states.visible = false
                 G.joy_extra_deck.states.visible = true
                 G.joy_extra_deck.alignment.offset.y = 0
                 return true
@@ -85,12 +101,15 @@ JoyousSpring.open_extra_deck = function(forced, open, delay_close)
             func = function()
                 G.joy_extra_deck.alignment.offset.y = -5
                 G.jokers.states.visible = true
+                G.consumeables.states.visible = true
                 G.E_MANAGER:add_event(Event({
                     blockable = false,
                     trigger = "after",
                     delay = 0.15,
                     func = function()
                         G.joy_extra_deck.states.visible = false
+                        JoyousSpring.extra_deck_area:unhighlight_all()
+                        JoyousSpring.field_spell_area:unhighlight_all()
                         return true
                     end
                 }))
@@ -977,7 +996,8 @@ G.FUNCS.joy_can_summon_from_shop = function(e)
 end
 
 G.FUNCS.joy_show_extra_deck = function(e)
-    if JoyousSpring.extra_deck_area and #JoyousSpring.extra_deck_area.cards > 0 then
+    if JoyousSpring.extra_deck_area and #JoyousSpring.extra_deck_area.cards > 0 or
+        JoyousSpring.field_spell_area and #JoyousSpring.field_spell_area.cards > 0 then
         G.GAME.joy_show_extra_deck = true
     end
     if G.GAME.joy_show_extra_deck then
@@ -1025,6 +1045,15 @@ end
 
 local check_for_buy_space_ref = G.FUNCS.check_for_buy_space
 G.FUNCS.check_for_buy_space = function(card)
+    if JoyousSpring.is_field_spell(card) then
+        if #JoyousSpring.field_spell_area.cards < JoyousSpring.field_spell_area.config.card_limit +
+            ((card.edition and card.edition.negative) and 1 or 0) then
+            return true
+        else
+            alert_no_space(card, G.consumeables)
+            return false
+        end
+    end
     if JoyousSpring.is_extra_deck_monster(card) then
         if #JoyousSpring.extra_deck_area.cards < JoyousSpring.extra_deck_area.config.card_limit +
             ((card.edition and card.edition.negative) and 1 or 0) then
@@ -1040,7 +1069,16 @@ end
 local can_select_card_ref = G.FUNCS.can_select_card
 G.FUNCS.can_select_card = function(e)
     local card = e.config.ref_table
-    if card.ability.set == 'Joker' and JoyousSpring.is_extra_deck_monster(card) then
+    if card.ability.set == 'Joker' and JoyousSpring.is_field_spell(card) then
+        if (card.edition and card.edition.negative) or
+            #JoyousSpring.field_spell_area.cards < JoyousSpring.field_spell_area.config.card_limit then
+            e.config.colour = G.C.GREEN
+            e.config.button = 'use_card'
+        else
+            e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+            e.config.button = nil
+        end
+    elseif card.ability.set == 'Joker' and JoyousSpring.is_extra_deck_monster(card) then
         if (card.edition and card.edition.negative) or
             #JoyousSpring.extra_deck_area.cards < JoyousSpring.extra_deck_area.config.card_limit then
             e.config.colour = G.C.GREEN
@@ -1222,17 +1260,28 @@ function Card:highlight(is_highlighted)
     if self.area and self.area.config.type == "extra_deck" then
         self.highlighted = is_highlighted
         if self.highlighted then
-            local can_summon = JoyousSpring.can_summon(self)
-            local summon_type = self.ability.extra.joyous_spring.summon_type or "Fusion"
-
-            self.children.use_button = UIBox {
-                definition = JoyousSpring.create_sell_and_use_buttons(self, { sell = true, summon = true, can_summon = can_summon, summon_type = summon_type }),
-                config = {
-                    align = "cr",
-                    offset = { x = -0.4, y = 0 },
-                    parent = self
+            if JoyousSpring.is_field_spell(self) then
+                self.children.use_button = UIBox {
+                    definition = JoyousSpring.create_sell_and_use_buttons(self, { sell = true }),
+                    config = {
+                        align = "cr",
+                        offset = { x = -0.4, y = 0 },
+                        parent = self
+                    }
                 }
-            }
+            else
+                local can_summon = JoyousSpring.can_summon(self)
+                local summon_type = self.ability.extra.joyous_spring.summon_type or "Fusion"
+
+                self.children.use_button = UIBox {
+                    definition = JoyousSpring.create_sell_and_use_buttons(self, { sell = true, summon = true, can_summon = can_summon, summon_type = summon_type }),
+                    config = {
+                        align = "cr",
+                        offset = { x = -0.4, y = 0 },
+                        parent = self
+                    }
+                }
+            end
         elseif self.children.use_button then
             self.children.use_button:remove()
             self.children.use_button = nil
@@ -1313,7 +1362,7 @@ end
 
 local card_remove_ref = Card.remove
 function Card:remove()
-    if (self.area == G.jokers or self.area == JoyousSpring.extra_deck_area) and
+    if (self.area == G.jokers or self.area == JoyousSpring.extra_deck_area or self.area == JoyousSpring.field_spell_area) and
         JoyousSpring.is_monster_card(self) and self.config.center.key ~= "j_joy_token" then
         JoyousSpring.send_to_graveyard(self)
     end
@@ -1322,6 +1371,11 @@ end
 
 local card_remove_from_area_ref = Card.remove_from_area
 function Card:remove_from_area()
+    if self.area == JoyousSpring.field_spell_area and
+        self.edition and self.edition.card_limit then
+        JoyousSpring.field_spell_area.config.card_limit =
+            JoyousSpring.field_spell_area.config.card_limit - self.edition.card_limit
+    end
     if self.area == JoyousSpring.extra_deck_area and
         self.edition and self.edition.card_limit then
         JoyousSpring.extra_deck_area.config.card_limit =
@@ -1478,6 +1532,18 @@ function Game:start_run(args)
         end
     end
 
+    self.joy_field_spell_area = CardArea(
+        0,
+        0,
+        self.CARD_W * 2.3,
+        self.CARD_H * 0.95,
+        {
+            card_limit = 1,
+            type = 'extra_deck',
+            highlight_limit = 1,
+        }
+    )
+    JoyousSpring.field_spell_area = G.joy_field_spell_area
     self.joy_extra_deck_area = CardArea(
         0,
         0,
@@ -1490,6 +1556,7 @@ function Game:start_run(args)
         }
     )
     JoyousSpring.extra_deck_area = G.joy_extra_deck_area
+    --#region Banish areas
     self.joy_banish_blind_selected_area = CardArea(
         0,
         0,
@@ -1542,10 +1609,13 @@ function Game:start_run(args)
     )
     self.joy_banish_end_of_ante_area.states.visible = false
     JoyousSpring.banish_end_of_ante_area = G.joy_banish_end_of_ante_area
+    --#endregion
+
     game_start_run_ref(self, args)
+
     self.joy_extra_deck = UIBox {
         definition = JoyousSpring.create_UIBox_extra_deck(),
-        config = { align = 'cmi', offset = { x = 0, y = -5 }, major = self.jokers, bond = 'Weak' }
+        config = { align = 'cmi', offset = { x = 2.4, y = -5 }, major = self.jokers, bond = 'Weak' }
     }
     self.joy_extra_deck.states.visible = false
     G.GAME.joy_show_extra_deck = G.GAME.joy_show_extra_deck or false
@@ -1638,8 +1708,9 @@ function Game:start_run(args)
         config = {
             align = "tr",
             offset = { x = -4, y = 0 },
-            major = G.consumeables,
+            major = G.ROOM_ATTACH,
             bond = 'Weak'
         }
     }
+    self.HUD:recalculate()
 end

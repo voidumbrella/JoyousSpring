@@ -210,6 +210,13 @@ SMODS.Joker({
             cards_to_destroy = 5
         },
     },
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return {
+                xmult = 100
+            }
+        end
+    end,
 })
 
 JoyousSpring.collection_pool[#JoyousSpring.collection_pool + 1] = {

@@ -56,6 +56,10 @@ JoyousSpring.is_nontuner_monster = function(card)
     return not JoyousSpring.is_tuner_monster(card)
 end
 
+JoyousSpring.is_field_spell = function(card)
+    return JoyousSpring.is_monster_card(card) and card.ability.extra.joyous_spring.is_field_spell or false
+end
+
 JoyousSpring.is_all_materials = function(card, summon_type)
     return JoyousSpring.is_monster_card(card) and card.ability.extra.joyous_spring.is_all_materials and
         card.ability.extra.joyous_spring.is_all_materials[summon_type]

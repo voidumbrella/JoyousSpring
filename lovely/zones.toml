@@ -51,6 +51,17 @@ elseif card.ability.set == 'Joker' and JoyousSpring and JoyousSpring.is_extra_de
     delay_fac = 0.2
 '''
 
+# Change background color
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = "{n=G.UIT.R, config={minw = self.T.w,minh = self.T.h,align = \"cm\", padding = 0.1, mid = true, r = 0.1, colour = self ~= G.shop_vouchers and {0,0,0,0.1} or nil, ref_table = self}, nodes={"
+position = 'at'
+match_indent = true
+payload = '''
+{n=G.UIT.R, config={minw = self.T.w,minh = self.T.h,align = "cm", padding = 0.1, mid = true, r = 0.1, colour = self.config.type == 'extra_deck' and {G.C.JOY.TRAP[1],G.C.JOY.TRAP[2],G.C.JOY.TRAP[3],0.5} or self ~= G.shop_vouchers and {0,0,0,0.1} or nil, ref_table = self}, nodes={
+'''
+
 ## Summon Materials
 
 # Remove card count when selecting summoning materials
@@ -64,4 +75,28 @@ payload = '''
 if self.config.type == 'summon_materials' then
     card_count = nil
 end
+'''
+
+# Field Spells
+
+# Change other_joker key
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "-- TARGET: add context.other_something identifier to your cards"
+position = 'before'
+match_indent = true
+payload = '''
+if JoyousSpring and JoyousSpring.is_field_spell(_card) then other_key = 'other_field_spell' end
+'''
+
+# Add field spell area to joker evaluation
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/utils.lua"]'
+pattern = "-- TARGET: add your own CardAreas for joker evaluation"
+position = 'before'
+match_indent = true
+payload = '''
+if JoyousSpring and JoyousSpring.field_spell_area then table.insert(t, JoyousSpring.field_spell_area) end
 '''
