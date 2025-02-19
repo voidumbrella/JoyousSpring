@@ -350,9 +350,17 @@ JoyousSpring.create_overlay_select_summon_materials = function(card, card_list)
         for _, joker in ipairs(material_list) do
             local added_joker = copy_card(joker)
             JoyousSpring.summon_material_area:emplace(added_joker)
-            for i, og_joker in ipairs(G.jokers.cards) do
-                if og_joker == joker then
-                    added_joker.joy_g_jokers_pos = i
+            if joker.ability.set == 'Joker' then
+                for i, og_joker in ipairs(G.jokers.cards) do
+                    if og_joker == joker then
+                        added_joker.joy_g_jokers_pos = i
+                    end
+                end
+            else
+                for i, og_consumeable in ipairs(G.consumeables.cards) do
+                    if og_consumeable == joker then
+                        added_joker.joy_g_consumeables_pos = i
+                    end
                 end
             end
         end
@@ -1029,6 +1037,9 @@ G.FUNCS.exit_select_material_menu = function(e)
         for _, material in ipairs(JoyousSpring.summon_material_area.highlighted) do
             if material.joy_g_jokers_pos then
                 table.insert(material_list, G.jokers.cards[material.joy_g_jokers_pos])
+            end
+            if material.joy_g_consumeables_pos then
+                table.insert(material_list, G.consumeables.cards[material.joy_g_consumeables_pos])
             end
         end
         JoyousSpring.perform_summon(card, material_list, summon_type)

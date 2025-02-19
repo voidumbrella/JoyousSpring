@@ -661,19 +661,24 @@ JoyousSpring.get_summon_material_combo_by_condition = function(condition, card_l
 end
 
 JoyousSpring.get_all_summon_material_combos = function(card, card_list)
-    local card_table = card_list or G.jokers.cards
-
-    if not JoyousSpring.is_monster_card(card) or not card.ability.extra.joyous_spring.summon_conditions then
+    if not JoyousSpring.is_monster_card(card) or 
+    (not card.ability.extra.joyous_spring.summon_conditions and not card.ability.extra.joyous_spring.summon_consumeable_conditions) then
         return nil
     end
 
-    local conditions = card.ability.extra.joyous_spring.summon_conditions
     local material_combos = {}
+    if card.ability.extra.joyous_spring.summon_consumeable_conditions then
+        local card_table = card_list or G.consumeables.cards
+        table.insert(material_combos, JoyousSpring.get_summon_materials_consumables(card.ability.extra.joyous_spring.summon_consumeable_conditions, card_table))
+    else
+        local card_table = card_list or G.jokers.cards
+        local conditions = card.ability.extra.joyous_spring.summon_conditions
 
-    for _, condition in ipairs(conditions) do
-        local combos_by_condition = JoyousSpring.get_summon_material_combo_by_condition(condition, card_table)
-        for _, combo in ipairs(combos_by_condition) do
-            table.insert(material_combos, combo)
+        for _, condition in ipairs(conditions) do
+            local combos_by_condition = JoyousSpring.get_summon_material_combo_by_condition(condition, card_table)
+            for _, combo in ipairs(combos_by_condition) do
+                table.insert(material_combos, combo)
+            end
         end
     end
 
@@ -695,20 +700,24 @@ JoyousSpring.can_summon_by_condition = function(condition, card_list)
 end
 
 JoyousSpring.can_summon = function(card, card_list)
-    local card_table = card_list or G.jokers.cards
-
     if not JoyousSpring.is_monster_card(card) then
         return false
     end
-    if not card.ability.extra.joyous_spring.summon_conditions then
+    if not card.ability.extra.joyous_spring.summon_conditions and not card.ability.extra.joyous_spring.summon_consumeable_conditions then
         return true
     end
 
-    local conditions = card.ability.extra.joyous_spring.summon_conditions
+    if card.ability.extra.joyous_spring.summon_consumeable_conditions then
+        local card_table = card_list or G.consumeables.cards
+        return JoyousSpring.can_summon_consumeables(card.ability.extra.joyous_spring.summon_consumeable_conditions, card_table)
+    else
+        local card_table = card_list or G.jokers.cards
+        local conditions = card.ability.extra.joyous_spring.summon_conditions
 
-    for _, condition in ipairs(conditions) do
-        if JoyousSpring.can_summon_by_condition(condition, card_table) then
-            return true
+        for _, condition in ipairs(conditions) do
+            if JoyousSpring.can_summon_by_condition(condition, card_table) then
+                return true
+            end
         end
     end
 
@@ -716,19 +725,116 @@ JoyousSpring.can_summon = function(card, card_list)
 end
 
 JoyousSpring.can_summon_with_combo = function(card, combo)
-    if not JoyousSpring.is_monster_card(card) or not combo or #combo == 0 or not card.ability.extra.joyous_spring.summon_conditions then
+    if not JoyousSpring.is_monster_card(card) or not combo or #combo == 0 or 
+    (not card.ability.extra.joyous_spring.summon_conditions and not card.ability.extra.joyous_spring.summon_consumeable_conditions) then
         return false
     end
 
-    local conditions = card.ability.extra.joyous_spring.summon_conditions
+    if card.ability.extra.joyous_spring.summon_consumeable_conditions then
+        return JoyousSpring.fulfills_condition_consumeables(card.ability.extra.joyous_spring.summon_consumeable_conditions, combo)
+    else
+        local conditions = card.ability.extra.joyous_spring.summon_conditions
 
-    for _, condition in ipairs(conditions) do
-        if JoyousSpring.fulfills_conditions(combo, condition) then
-            return true
+        for _, condition in ipairs(conditions) do
+            if JoyousSpring.fulfills_conditions(combo, condition) then
+                return true
+            end
         end
     end
 
     return false
+end
+
+local function get_consumeable_counts(combo)
+    local counts = {
+        any = #combo,
+        tarot = 0,
+        planet = 0,
+        spectral = 0,
+        other = 0
+    }
+
+    for _, card in ipairs(combo) do
+        if card.ability.set == 'Tarot' then
+            counts.tarot = counts.tarot + 1
+        elseif card.ability.set == 'Planet' then
+            counts.planet = counts.planet + 1
+        elseif card.ability.set == 'Spectral' then
+            counts.spectral = counts.spectral + 1
+        else
+            counts.other = counts.other + 1
+        end
+    end
+
+    return counts
+end
+
+local function get_consumeables(combo, args)
+    local materials = {}
+
+    for _, card in ipairs(combo) do
+        if args.any or (args.tarot and card.ability.set == 'Tarot') or 
+        (args.planet and card.ability.set == 'Planet') or (args.spectral and card.ability.set == 'Spectral') then
+            table.insert(materials, card)
+        end
+    end
+
+    return materials
+end
+
+JoyousSpring.get_summon_materials_consumables = function (condition, card_table)
+    local card_table = card_table or G.consumeables.cards
+    local any_min = condition.any and (type(condition.any) == "table" and condition.any.min or condition.any) or 0
+    local tarot_min = condition.tarot and (type(condition.tarot) == "table" and condition.tarot.min or condition.tarot) or 0
+    local planet_min = condition.planet and (type(condition.planet) == "table" and condition.planet.min or condition.planet) or 0
+    local spectral_min = condition.spectral and (type(condition.spectral) == "table" and condition.spectral.min or condition.spectral) or 0
+
+    return get_consumeables(card_table, {
+        any = (any_min > 0) or nil,
+        tarot = (tarot_min > 0) or nil,
+        planet = (planet_min > 0) or nil,
+        spectral = (spectral_min > 0) or nil,
+    })
+end
+
+JoyousSpring.can_summon_consumeables = function (condition, combo)
+    local any_min = condition.any and (type(condition.any) == "table" and condition.any.min or condition.any) or 0
+    local tarot_min = condition.tarot and (type(condition.tarot) == "table" and condition.tarot.min or condition.tarot) or 0
+    local planet_min = condition.planet and (type(condition.planet) == "table" and condition.planet.min or condition.planet) or 0
+    local spectral_min = condition.spectral and (type(condition.spectral) == "table" and condition.spectral.min or condition.spectral) or 0
+
+    local counts = get_consumeable_counts(combo)
+
+    if counts.any < any_min or counts.tarot < tarot_min or counts.planet < planet_min or counts.spectral < spectral_min then
+        return false
+    end
+    return true
+end
+
+JoyousSpring.fulfills_condition_consumeables = function (condition, combo)
+    local any_min = condition.any and (type(condition.any) == "table" and condition.any.min or condition.any) or nil
+    local any_max = condition.any and (type(condition.any) == "table" and condition.any.max or condition.any) or nil
+    local tarot_min = condition.tarot and (type(condition.tarot) == "table" and condition.tarot.min or condition.tarot) or nil
+    local tarot_max = condition.tarot and (type(condition.tarot) == "table" and condition.tarot.max or condition.tarot) or nil
+    local planet_min = condition.planet and (type(condition.planet) == "table" and condition.planet.min or condition.planet) or nil
+    local planet_max = condition.planet and (type(condition.planet) == "table" and condition.planet.max or condition.planet) or nil
+    local spectral_min = condition.spectral and (type(condition.spectral) == "table" and condition.spectral.min or condition.spectral) or nil
+    local spectral_max = condition.spectral and (type(condition.spectral) == "table" and condition.spectral.max or condition.spectral) or nil
+
+    local counts = get_consumeable_counts(combo)
+
+    if (any_min and (counts.any < any_min)) or
+    (any_max and (counts.any > any_max)) or
+    (tarot_min and (counts.tarot < tarot_min)) or
+    (tarot_max and (counts.tarot > tarot_max)) or
+    (planet_min and (counts.planet < planet_min)) or
+    (planet_max and (counts.planet > planet_max)) or
+    (spectral_min and (counts.spectral < spectral_min)) or
+    (spectral_max and (counts.spectral > spectral_max)) then
+        return false
+    end
+
+    return true
 end
 
 local function summon_from_booster(card)

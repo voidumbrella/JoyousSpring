@@ -43,12 +43,6 @@ SMODS.Joker({
             if not context.blueprint_card and not context.retrigger_joker and
                 context.destroy_card and context.cardarea == G.play then
                 card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.base_xmult
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        card_eval_status_text(card, 'extra', nil, nil, nil,
-                            { message = localize('k_upgrade_ex') }); return true
-                    end
-                }))
                 for _, joker in ipairs(SMODS.find_card("j_joy_yokai_ogre")) do
                     if joker ~= card then
                         joker.ability.extra.xmult = joker.ability.extra.xmult + joker.ability.extra.base_xmult
@@ -60,7 +54,7 @@ SMODS.Joker({
                         }))
                     end
                 end
-                return { remove = true }
+                return { remove = true, message = localize('k_upgrade_ex') }
             end
 
             if context.joker_main then
@@ -184,12 +178,9 @@ SMODS.Joker({
         if card.facing ~= 'back' then
             if not context.blueprint_card and not context.retrigger_joker and context.joy_no_draw then
                 card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.base_xmult
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        card_eval_status_text(card, 'extra', nil, nil, nil,
-                            { message = localize('k_upgrade_ex') }); return true
-                    end
-                }))
+                return {
+                    message = localize('k_upgrade_ex')
+                }
             end
 
             if context.joker_main then
@@ -249,12 +240,9 @@ SMODS.Joker({
         if card.facing ~= 'back' then
             if not context.blueprint_card and not context.retrigger_joker and context.joy_revived then
                 card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.base_xmult
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        card_eval_status_text(card, 'extra', nil, nil, nil, { message = localize('k_upgrade_ex') })
-                        return true
-                    end
-                }))
+                return {
+                    message = localize('k_upgrade_ex')
+                }
             end
 
             if context.joker_main then
@@ -327,12 +315,9 @@ SMODS.Joker({
                 if context.using_consumeable and G.GAME.blind.in_blind then
                     card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.base_xmult
                     card.ability.extra.consumable_count = card.ability.extra.consumable_count + 1
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            card_eval_status_text(card, 'extra', nil, nil, nil,
-                                { message = localize('k_upgrade_ex') }); return true
-                        end
-                    }))
+                    return {
+                        message = localize('k_upgrade_ex')
+                    }
                 end
             end
             if not context.blueprint_card and not context.retrigger_joker and
@@ -404,12 +389,9 @@ SMODS.Joker({
             if not context.blueprint_card and not context.retrigger_joker and context.selling_card then
                 if context.card.debuff then
                     card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.base_xmult
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            card_eval_status_text(card, 'extra', nil, nil, nil,
-                                { message = localize('k_upgrade_ex') }); return true
-                        end
-                    }))
+                    return {
+                        message = localize('k_upgrade_ex')
+                    }
                 end
             end
 

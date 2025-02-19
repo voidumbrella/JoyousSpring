@@ -1039,8 +1039,8 @@ return {
 					"if there's any in the {C:attention}GY{}",
 					"{C:inactive}(Must have room){}",
 					" ",
-					"Sell this card to create {C:attention}#2#{} {C:tarot}Tarot{} cards",
-					"{C:inactive}(Must have room){}",
+					"Sell this card to create up to",
+					"{C:attention}#2#{} {C:tarot}Tarot{} cards",
 				},
 				joy_summon_conditions = {
 					"{C:attention}2{} {C:tarot}Tarot{} cards",
@@ -1052,8 +1052,8 @@ return {
 					"Adds {C:attention}#1#{} random {C:attention}playing cards{}",
 					"when a {C:tarot}Tarot{} card is used during a {C:attention}Blind{}",
 					" ",
-					"Sell this card to create {C:attention}#2#{} {C:tarot}Tarot{} cards",
-					"{C:inactive}(Must have room){}",
+					"Sell this card to create up to",
+					"{C:attention}#2#{} {C:tarot}Tarot{} cards",
 				},
 				joy_summon_conditions = {
 					"{C:attention}2{} {C:tarot}Tarot{} cards",
@@ -1279,6 +1279,7 @@ return {
 			k_joy_disable_booster_tag = "Disable Booster Tag from appearing naturally",
 			k_joy_splash = "Splash!",
 			k_joy_defeated = "Defeated!",
+			k_joy_banished = "Banished!",
 			--#region Card types
 			k_joy_Aqua = "Aqua",
 			k_joy_Beast = "Beast",

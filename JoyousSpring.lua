@@ -1,6 +1,6 @@
 JoyousSpring = {}
 JoyousSpring.debug = true
-JoyousSpring.debug_shop_cards = {{ key = "j_joy_runick_fountain" }}
+JoyousSpring.debug_shop_cards = {}
 
 SMODS.Atlas({
     key = "modicon",

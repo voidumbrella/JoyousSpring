@@ -157,6 +157,37 @@ JoyousSpring.get_joker_column = function(joker)
     return JoyousSpring.index_of(G.jokers.cards or {}, joker) or 0
 end
 
+JoyousSpring.create_random_playing_card = function(enhanced_prob, silent, colours, seed)
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.3,
+        func = function()
+            local _rank = pseudorandom_element({ 'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K' },
+                seed or pseudoseed('JoyousSpring')) or 'A'
+            local _suit = pseudorandom_element({ 'S', 'H', 'D', 'C' }, seed or pseudoseed('JoyousSpring')) or 'S'
+            local cen_pool = {}
+            for k, v in pairs(G.P_CENTER_POOLS["Enhanced"]) do
+                if v.key ~= 'm_stone' then
+                    cen_pool[#cen_pool + 1] = v
+                end
+            end
+            local enhanced = enhanced_prob >= 1 and (pseudorandom(seed or pseudoseed('JoyousSpring')) < 1 / enhanced_prob and true) or false
+            create_playing_card(
+                {
+                    front = G.P_CARDS[_suit .. '_' .. _rank],
+                    center = enhanced and pseudorandom_element(cen_pool,
+                        seed or pseudoseed('JoyousSpring')) or nil
+                },
+                G.hand,
+                nil,
+                silent,
+                colours or { G.C.JOY.EFFECT }
+            )
+            return true
+        end
+    }))
+end
+
 if JoyousSpring.debug then
     function calculate_reroll_cost(skip_increment)
         G.GAME.current_round.reroll_cost = 0

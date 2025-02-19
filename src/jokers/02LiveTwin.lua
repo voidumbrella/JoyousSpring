@@ -421,7 +421,7 @@ SMODS.Joker({
                 }
             end
             if context.setting_blind and context.main_eval then
-                if JoyousSpring.graveyard["j_joy_etwin_lilla"] then
+                if JoyousSpring.graveyard["j_joy_etwin_lilla"] and JoyousSpring.graveyard["j_joy_etwin_lilla"].summonable > 0 then
                     for i = 1, card.ability.extra.revives do
                         JoyousSpring.revive("j_joy_etwin_lilla", true)
                     end
@@ -506,7 +506,7 @@ SMODS.Joker({
                 }
             end
             if context.setting_blind and context.main_eval then
-                if JoyousSpring.graveyard["j_joy_etwin_kisikil"] then
+                if JoyousSpring.graveyard["j_joy_etwin_kisikil"] and JoyousSpring.graveyard["j_joy_etwin_kisikil"].summonable > 0 then
                     for i = 1, card.ability.extra.revives do
                         JoyousSpring.revive("j_joy_etwin_kisikil", true)
                     end
@@ -673,12 +673,12 @@ SMODS.Joker({
                     local is_lilla_owned = JoyousSpring.count_materials_owned({ { monster_archetypes = { "Lilla" } } }) >
                         0
                     local kisikil_summoned = {}
-                    if JoyousSpring.graveyard["j_joy_etwin_kisikil"] then
+                    if JoyousSpring.graveyard["j_joy_etwin_kisikil"] and JoyousSpring.graveyard["j_joy_etwin_kisikil"].summonable > 0 then
                         for i = 1, card.ability.extra.revives do
                             table.insert(kisikil_summoned, JoyousSpring.revive("j_joy_etwin_kisikil", true))
                         end
                     end
-                    if JoyousSpring.graveyard["j_joy_etwin_lilla"] then
+                    if JoyousSpring.graveyard["j_joy_etwin_lilla"] and JoyousSpring.graveyard["j_joy_etwin_lilla"].summonable > 0 then
                         for i = 1, card.ability.extra.revives do
                             JoyousSpring.revive("j_joy_etwin_lilla", true)
                         end

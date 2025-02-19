@@ -41,12 +41,9 @@ SMODS.Joker({
             if not context.blueprint_card and not context.retrigger_joker and
                 context.selling_card and JoyousSpring.is_extra_deck_monster(context.card) then
                 card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.base_xmult
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        card_eval_status_text(card, 'extra', nil, nil, nil,
-                            { message = localize('k_upgrade_ex') }); return true
-                    end
-                }))
+                return {
+                    message = localize('k_upgrade_ex')
+                }
             end
             if context.joker_main then
                 return {
