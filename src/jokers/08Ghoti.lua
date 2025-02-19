@@ -85,7 +85,7 @@ SMODS.Joker({
                 perma_debuffed = false,
                 is_free = false,
             },
-            chips = 10
+            chips = 50
         },
     },
     calculate = function(self, card, context)
@@ -131,7 +131,7 @@ SMODS.Joker({
                 perma_debuffed = false,
                 is_free = false,
             },
-            mult = 5
+            mult = 15
         },
     },
     calculate = function(self, card, context)
@@ -453,7 +453,7 @@ SMODS.Joker({
                 summoned = false,
                 summon_materials = {},
             },
-            chips = 4,
+            chips = 5,
             cards_to_create = 1
         },
     },
@@ -524,7 +524,7 @@ SMODS.Joker({
                 summoned = false,
                 summon_materials = {},
             },
-            mult = 2,
+            mult = 5,
         },
     },
     calculate = function(self, card, context)
@@ -586,7 +586,7 @@ SMODS.Joker({
                 summoned = false,
                 summon_materials = {},
             },
-            xmult = 0.05,
+            xmult = 0.1,
         },
     },
     calculate = function(self, card, context)

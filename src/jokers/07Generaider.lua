@@ -742,7 +742,7 @@ SMODS.Joker({
         if not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_generaider_jormungandr
         end
-        return {}
+        return { vars = { card.ability.extra.detach } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
     config = {

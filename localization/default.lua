@@ -855,7 +855,7 @@ return {
 				text = {
 					"Gains {X:mult,C:white}X#1#{} Mult for each card",
 					"{C:attention}banished{} this run",
-					"{C:inactive}(Currently{} {X:mult,C:white}333X#2#{} {C:inactive}Mult){}",
+					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}",
 					" ",
 					"{C:attention}Revives{} as many different {C:joy_normal}Fish{}",
 					"{C:attention}Jokers{} as possible when summoned",

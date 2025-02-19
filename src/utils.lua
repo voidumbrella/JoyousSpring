@@ -154,7 +154,7 @@ JoyousSpring.index_of = function(array, value)
 end
 
 JoyousSpring.get_joker_column = function(joker)
-    return JoyousSpring.index_of(G.jokers.cards or {}, joker) or 0
+    return G.jokers and JoyousSpring.index_of(G.jokers.cards or {}, joker) or 0
 end
 
 JoyousSpring.create_random_playing_card = function(enhanced_prob, silent, colours, seed)
