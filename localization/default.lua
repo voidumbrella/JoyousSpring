@@ -1195,7 +1195,15 @@ return {
 				name = "",
 				text = {
 					"{C:attention,s:1.3}Revive{}: Create a card from the {C:attention}GY{} and remove it from there. Must have room and might have a random edition, unless specified",
+					"{C:joy_spell}Extra Deck{} and {C:joy_ritual}Ritual{} {C:attention}Jokers{} that were not properly summoned can't be revived",
 					"Revived Jokers have a sell value of 1"
+				},
+			},
+			joy_glossary_banish = {
+				name = "",
+				text = {
+					"{C:attention,s:1.3}Banish{}: Card temporarily disappears until specified time, keeping only some effects active.",
+					"They can return even if you don't have room, unless specified"
 				},
 			},
 			joy_glossary_transform = {
@@ -1228,6 +1236,8 @@ return {
 					"{C:joy_spell,s:1.3}Extra Deck{} {C:attention,s:1.3}Jokers{}: When obtanied from the shop they are put in the {C:joy_spell}Extra Deck{}.",
 					"To use them, you have to sacrifice {C:attention}Jokers{} listed on the card's summoning requirements.",
 					"This includes {C:joy_fusion}Fusion{}, {C:joy_synchro}Synchro{}, {C:joy_xyz}Xyz{} and {C:joy_link}Link{} {C:attention}Jokers{}",
+					"{C:joy_xyz}Xyz{} and {C:joy_link}Link{} {C:attention}Jokers{} can't be used for {C:joy_synchro}Synchro{} and {C:joy_xyz}Xyz{} summons unless specified",
+					"{C:joy_token}Tokens{} can't be used for {C:joy_xyz}Xyz{} summons unless specified",
 					"Summoned Jokers have a sell value equal to their cost"
 				},
 			},

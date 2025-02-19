@@ -26,7 +26,7 @@ SMODS.current_mod.custom_ui = function(modNodes)
         G.E_MANAGER:add_event(Event({
             blocking = false,
             trigger = "after",
-            delay = 0.4*i,
+            delay = 0.4 * i,
             func = function()
                 play_sound("card1")
                 card:flip()
@@ -51,7 +51,7 @@ SMODS.current_mod.extra_tabs = function()
             tab_definition_function = function()
                 local modNodes = {}
 
-                for _, key in ipairs({ "joy_glossary_monster", "joy_glossary_gy", "joy_glossary_revive", "joy_glossary_transform", "joy_glossary_facedown", "joy_glossary_maindeck", "joy_glossary_pendulum" }) do
+                for _, key in ipairs({ "joy_glossary_monster", "joy_glossary_gy", "joy_glossary_revive", "joy_glossary_banish", "joy_glossary_transform", "joy_glossary_facedown", "joy_glossary_maindeck", "joy_glossary_pendulum" }) do
                     modNodes[#modNodes + 1] = {}
                     local loc_vars = { scale = 1.2 }
                     localize { type = 'descriptions', key = key, set = 'Other', nodes = modNodes[#modNodes], vars = loc_vars.vars, scale = loc_vars.scale, text_colour = loc_vars.text_colour, shadow = loc_vars.shadow }
@@ -94,7 +94,7 @@ SMODS.current_mod.extra_tabs = function()
                     { card_limit = 5, type = 'title', highlight_limit = 0, collection = true }
                 )
 
-                for i, key in ipairs({ "j_joy_garura", "j_joy_spright_gigantic", "j_joy_apollousa", "j_joy_sauravis" }) do
+                for i, key in ipairs({ "j_joy_garura", "j_joy_psy_omega", "j_joy_spright_gigantic", "j_joy_apollousa", "j_joy_sauravis" }) do
                     local card = Card(G.joy_desc_area.T.x + G.joy_desc_area.T.w / 2, G.joy_desc_area.T.y,
                         G.CARD_W, G.CARD_H, G.P_CARDS.empty,
                         G.P_CENTERS[key])
@@ -261,8 +261,10 @@ JoyousSpring.card_collection_UIBox = function(_pool, rows, args)
                     (args.center and G.P_CENTERS[args.center]) or center)
                 if token_key then
                     card.ability.extra.joyous_spring.token_name = JoyousSpring.token_pool[token_key].name
-                    card.ability.extra.joyous_spring.attribute = JoyousSpring.token_pool[token_key].attribute or card.ability.extra.joyous_spring.attribute
-                    card.ability.extra.joyous_spring.monster_type = JoyousSpring.token_pool[token_key].monster_type or card.ability.extra.joyous_spring.monster_type
+                    card.ability.extra.joyous_spring.attribute = JoyousSpring.token_pool[token_key].attribute or
+                    card.ability.extra.joyous_spring.attribute
+                    card.ability.extra.joyous_spring.monster_type = JoyousSpring.token_pool[token_key].monster_type or
+                    card.ability.extra.joyous_spring.monster_type
                     card.children.center.atlas.name = JoyousSpring.token_pool[token_key].atlas
                     card.children.center.sprite_pos = JoyousSpring.token_pool[token_key].sprite_pos
                     card.children.center:reset()
