@@ -64,7 +64,7 @@ SMODS.Joker({
     pos = { x = 1, y = 0 },
     rarity = 1,
     discovered = true,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
     cost = 1,
     loc_vars = function(self, info_queue, card)
@@ -110,7 +110,7 @@ SMODS.Joker({
     pos = { x = 2, y = 0 },
     rarity = 1,
     discovered = true,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
     cost = 1,
     loc_vars = function(self, info_queue, card)
@@ -312,7 +312,7 @@ SMODS.Joker({
 
                     for i = 1, card.ability.extra.cards_to_create do
                         local key_to_add, _ = pseudorandom_element(choices, pseudoseed("j_joy_fish_eanoc"))
-                        if key_to_add then
+                        if key_to_add and #JoyousSpring.extra_deck_area.cards < JoyousSpring.extra_deck_area.config.card_limit then
                             JoyousSpring.add_to_extra_deck(key_to_add)
                         end
                     end
@@ -470,7 +470,7 @@ SMODS.Joker({
 
                     for i = 1, c.ability.extra.cards_to_create do
                         local key_to_add, _ = pseudorandom_element(choices, pseudoseed("j_joy_fish_arionpos"))
-                        if key_to_add then
+                        if key_to_add and #JoyousSpring.extra_deck_area.cards < JoyousSpring.extra_deck_area.config.card_limit then
                             JoyousSpring.add_to_extra_deck(key_to_add)
                         end
                     end

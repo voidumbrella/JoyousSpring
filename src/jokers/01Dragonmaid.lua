@@ -104,8 +104,7 @@ SMODS.Joker({
                 context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.transform_card(card, "j_joy_dmaid_kitchen")
             end
-            if context.other_joker and context.other_joker.ability.set == "Joker" and
-                JoyousSpring.is_monster_archetype(context.other_joker, "Dragonmaid") then
+            if context.other_joker and JoyousSpring.is_monster_archetype(context.other_joker, "Dragonmaid") then
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         context.other_joker:juice_up(0.5, 0.5)
@@ -270,8 +269,7 @@ SMODS.Joker({
                 context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.transform_card(card, "j_joy_dmaid_parlor")
             end
-            if context.other_joker and context.other_joker.ability.set == "Joker" and
-                JoyousSpring.is_monster_archetype(context.other_joker, "Dragonmaid") then
+            if context.other_joker and JoyousSpring.is_monster_archetype(context.other_joker, "Dragonmaid") then
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         context.other_joker:juice_up(0.5, 0.5)

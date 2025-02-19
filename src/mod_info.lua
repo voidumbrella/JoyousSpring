@@ -51,7 +51,7 @@ SMODS.current_mod.extra_tabs = function()
             tab_definition_function = function()
                 local modNodes = {}
 
-                for _, key in ipairs({ "joy_glossary_monster", "joy_glossary_gy", "joy_glossary_revive", "joy_glossary_banish", "joy_glossary_transform", "joy_glossary_facedown", "joy_glossary_maindeck", "joy_glossary_pendulum" }) do
+                for _, key in ipairs({ "joy_glossary_monster", "joy_glossary_gy", "joy_glossary_revive", "joy_glossary_banish", "joy_glossary_transform", "joy_glossary_facedown", "joy_glossary_maindeck", "joy_glossary_pendulum", "joy_glossary_fieldspell" }) do
                     modNodes[#modNodes + 1] = {}
                     local loc_vars = { scale = 1.2 }
                     localize { type = 'descriptions', key = key, set = 'Other', nodes = modNodes[#modNodes], vars = loc_vars.vars, scale = loc_vars.scale, text_colour = loc_vars.text_colour, shadow = loc_vars.shadow }

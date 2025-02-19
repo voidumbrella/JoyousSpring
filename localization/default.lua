@@ -897,9 +897,9 @@ return {
 					"when obtained, if not owned",
 					"{C:inactive}(Must have room){}",
 					" ",
-					"{C:attention}Banish #2#{} {C:joy_normal}\"PSY-Frame Driver\"",
+					"{C:attention}Banish a{} {C:joy_normal}\"PSY-Frame Driver\"",
 					"when {C:attention}Blind{} is selected until end of round to",
-					"make all cards held in hand give {X:mult,C:white}X#3#{} Mult this round",
+					"make all cards held in hand give {X:mult,C:white}X#2#{} Mult this round",
 				},
 			},
 			j_joy_psy_beta = {
@@ -909,9 +909,9 @@ return {
 					"when obtained, if not owned",
 					"{C:inactive}(Must have room){}",
 					" ",
-					"{C:attention}Banish #2#{} {C:joy_normal}\"PSY-Frame Driver\"",
+					"{C:attention}Banish a{} {C:joy_normal}\"PSY-Frame Driver\"",
 					"when {C:attention}Blind{} is selected until end of round to",
-					"make all scored cards give {X:mult,C:white}X#3#{} Mult this round",
+					"make all scored cards give {X:mult,C:white}X#2#{} Mult this round",
 				},
 			},
 			j_joy_psy_gamma = {
@@ -921,9 +921,9 @@ return {
 					"when obtained, if not owned",
 					"{C:inactive}(Must have room){}",
 					" ",
-					"{C:attention}Banish #2#{} {C:joy_normal}\"PSY-Frame Driver\"",
+					"{C:attention}Banish a{} {C:joy_normal}\"PSY-Frame Driver\"",
 					"when {C:attention}Blind{} is selected until end of round to",
-					"make all {C:attention}Jokers{} each give {X:mult,C:white}X#3#{} Mult this round",
+					"make all {C:attention}Jokers{} each give {X:mult,C:white}X#2#{} Mult this round",
 				},
 			},
 			j_joy_psy_delta = {
@@ -933,10 +933,10 @@ return {
 					"when obtained, if not owned",
 					"{C:inactive}(Must have room){}",
 					" ",
-					"{C:attention}Banish #2#{} {C:joy_normal}\"PSY-Frame Driver\"",
+					"{C:attention}Banish a{} {C:joy_normal}\"PSY-Frame Driver\"",
 					"when {C:attention}Blind{} is selected until end of round to",
 					"make all {C:tarot}Tarot{} cards in your consumable area",
-					"each give {X:mult,C:white}X#3#{} Mult this round",
+					"each give {X:mult,C:white}X#2#{} Mult this round",
 				},
 			},
 			j_joy_psy_epsilon = {
@@ -946,10 +946,10 @@ return {
 					"when obtained, if not owned",
 					"{C:inactive}(Must have room){}",
 					" ",
-					"{C:attention}Banish #2#{} {C:joy_normal}\"PSY-Frame Driver\"",
+					"{C:attention}Banish a{} {C:joy_normal}\"PSY-Frame Driver\"",
 					"when {C:attention}Blind{} is selected until end of round to",
 					"make all {C:planet}Planet{} cards in your consumable area",
-					"each give {X:mult,C:white}X#3#{} Mult this round",
+					"each give {X:mult,C:white}X#2#{} Mult this round",
 				},
 			},
 			j_joy_psy_multithreader = {
@@ -994,7 +994,7 @@ return {
 					"{C:joy_normal}\"PSY-Frame\"{} abilities are active",
 					"without {C:attention}banishing{} {C:joy_normal}\"PSY-Frame Driver\"",
 					" ",
-					"Add {C:attention}#1#{} {C:joy_normal}\"PSY-Frame Driver\"",
+					"Add {C:attention}#1#{} {C:joy_normal}\"PSY-Frame\"",
 					"to the {C:joy_spell}Extra Deck{} when a {C:joy_normal}Psychic{}",
 					"{C:attention}Joker{} is {C:attention}banished{}",
 					"{C:inactive}(Must have room){}",
@@ -1228,6 +1228,12 @@ return {
 				name = "",
 				text = {
 					"{C:joy_pendulum,s:1.3}Pendulum{} {C:attention,s:1.3}Jokers{}: {C:attention}Jokers{} that can also be used as consumables",
+				},
+			},
+			joy_glossary_fieldspell = {
+				name = "",
+				text = {
+					"{C:joy_spell,s:1.3}Field Spells{}: They go into the {C:joy_spell}Field Spell{} area (press the {C:joy_spell}Extra Deck{} button) but otherwise act like any other {C:attention}Joker{}",
 				},
 			},
 			joy_glossary_extradeck = {
