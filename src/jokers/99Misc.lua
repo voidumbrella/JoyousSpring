@@ -13,6 +13,13 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = "joy_Misc02",
+    path = "99Misc02.png",
+    px = 71,
+    py = 95
+})
+
 --#region Effect
 
 -- Inspector Boarder
@@ -111,6 +118,46 @@ SMODS.Joker({
             end
         }
     end
+})
+
+SMODS.Joker({
+    key = "grenmaju",
+    atlas = 'Misc02',
+    pos = { x = 0, y = 0 },
+    rarity = 1,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = true,
+    cost = 1,
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.chips, card.ability.extra.chips * (G.GAME.joy_cards_banished or 0) } }
+    end,
+    generate_ui = JoyousSpring.generate_info_ui,
+    config = {
+        extra = {
+            joyous_spring = {
+                is_main_deck = true,
+                summon_type = "NORMAL",
+                is_effect = true,
+                attribute = "FIRE",
+                monster_type = "Fiend",
+                monster_archetypes = {},
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
+            },
+            chips = 4,
+        },
+    },
+    calculate = function(self, card, context)
+        if card.facing ~= 'back' then
+            if context.joker_main then
+                return {
+                    chips = card.ability.extra.chips * (G.GAME.joy_cards_banished or 0)
+                }
+            end
+        end
+    end,
 })
 
 --#endregion

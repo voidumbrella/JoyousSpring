@@ -1098,6 +1098,14 @@ return {
 					"{C:inactive}(Except{} {C:joy_effect}\"Inspector Boarder\"{}{C:inactive}){}"
 				},
 			},
+			j_joy_grenmaju = {
+				name = "{C:joy_effect}Gren Maju Da Eiza",
+				text = {
+					"{C:chips}+#1#{} Chips for each card",
+					"{C:attention}banished{} this run",
+					"{C:inactive}(Currently{} {C:chips}+#2#{} {C:inactive}Chips){}",
+				},
+			},
 			--#endregion
 			--#region Pendulum
 			j_joy_eccentrick = {
