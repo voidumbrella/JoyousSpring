@@ -29,6 +29,8 @@ SMODS.Joker({
                 attribute = "LIGHT",
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Dogmatika"] = true },
+                revived = false,
+                is_free = false,
             },
             base_xmult = 0.5,
             xmult = 1
@@ -100,6 +102,8 @@ SMODS.Joker({
                 attribute = "LIGHT",
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Dogmatika"] = true },
+                revived = false,
+                is_free = false,
             },
             mult = 50
         },
@@ -155,6 +159,8 @@ SMODS.Joker({
                 attribute = "LIGHT",
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Dogmatika"] = true },
+                revived = false,
+                is_free = false,
             },
             cards_to_create = 1
         },
@@ -195,6 +201,8 @@ SMODS.Joker({
                 attribute = "LIGHT",
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Dogmatika"] = true },
+                revived = false,
+                is_free = false,
             },
             cards_to_create = 1
         },
@@ -256,6 +264,8 @@ SMODS.Joker({
                 attribute = "LIGHT",
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Dogmatika"] = true },
+                revived = false,
+                is_free = false,
             },
             chips = 10
         },
@@ -325,6 +335,8 @@ SMODS.Joker({
                 attribute = "LIGHT",
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Dogmatika"] = true },
+                revived = false,
+                is_free = false,
             },
             revives = 1
         },
@@ -372,6 +384,8 @@ SMODS.Joker({
                 attribute = "LIGHT",
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Dogmatika"] = true },
+                revived = false,
+                is_free = false,
             },
             duplicates = 2
         },
@@ -437,6 +451,10 @@ SMODS.Joker({
                         }
                     }
                 },
+                revived = false,
+                is_free = false,
+                summoned = false,
+                summon_materials = {},
             },
             base_h_size = 1,
             h_size = 0,
@@ -502,6 +520,10 @@ SMODS.Joker({
                         }
                     }
                 },
+                revived = false,
+                is_free = false,
+                summoned = false,
+                summon_materials = {},
             },
             mult = 10
         },

@@ -562,11 +562,11 @@ return {
 				name = "{C:joy_effect}Mekk-Knight Indigo Eclipse",
 				text = {
 					"Gets ability based on the {C:attention}column{}",
-					"1: All scored cards retrigger once",
-					"2: {C:chips}+#1#{} Chips",
-					"3: {C:mult}+#2#{} Mult",
-					"4: {X:mult,C:white}X#3#{} Mult",
-					"5+: {C:money}+$#4#{} at end of round",
+					"{V:1}1: All scored cards retrigger once{}",
+					"{V:2}2:{} {C:chips}+#1#{} {V:2}Chips{}",
+					"{V:3}3:{} {C:mult}+#2#{} {V:3}Mult{}",
+					"{V:4}4:{} {X:mult,C:white}X#3#{} {V:4}Mult{}",
+					"{V:5}5+:{} {C:money}+$#4#{} {V:5}at end of round{}",
 				},
 			},
 			j_joy_mekk_purple = {
@@ -609,7 +609,7 @@ return {
 				text = {
 					"Immediately wins every {C:attention}Blind{}",
 					" ",
-					"Destroys itself after a number of {C:attention}Blinds{} selected",
+					"Destroys itself after a number of {C:attention}Blinds{} is defeated",
 					"equal to the {C:attention}materials{} used for its summon {C:inactive}(#1#/#2#){}",
 				},
 				joy_summon_conditions = {
@@ -750,8 +750,8 @@ return {
 				name = "{C:joy_effect}Keaf, Murk of the Ghoti",
 				text = {
 					"This card {C:attention}banishes{} at the end of round",
-					"until {C:attention}Blind{} is selected to",
-					"{C:attention}revive #1#{} {C:joy_spell}Extra Deck{} {C:joy_normal}\"Ghoti\"{} {C:attention}Joker{}",
+					"until {C:attention}Blind{} is selected and",
+					"{C:attention}revives #1#{} {C:joy_spell}Extra Deck{} {C:joy_normal}\"Ghoti\"{} {C:attention}Joker{}",
 				},
 			},
 			j_joy_fish_paces = {
@@ -776,16 +776,16 @@ return {
 				name = "{C:joy_effect}Zep, Ruby of the Ghoti",
 				text = {
 					"This card {C:attention}banishes{} at the end of round",
-					"until {C:attention}Blind{} is selected to",
-					"{C:attention}revive #1#{} {C:joy_normal}Main Deck{} {C:joy_normal}\"Ghoti\"{} {C:attention}Joker{}",
+					"until {C:attention}Blind{} is selected and",
+					"{C:attention}revives #1#{} {C:joy_normal}Main Deck{} {C:joy_normal}\"Ghoti\"{} {C:attention}Joker{}",
 				},
 			},
 			j_joy_fish_ixeep = {
 				name = "{C:joy_effect}Ixeep, Omen of the Ghoti",
 				text = {
 					"This card {C:attention}banishes{} at the end of round",
-					"until {C:attention}Blind{} is selected to",
-					"create {C:attention}#1#{} {C:joy_normal}Main Deck{} {C:joy_normal}\"Ghoti\"{} {C:attention}Joker{}",
+					"until {C:attention}Blind{} is selected and",
+					"creates {C:attention}#1#{} {C:joy_normal}Main Deck{} {C:joy_normal}\"Ghoti\"{} {C:attention}Joker{}",
 					"{C:inactive}(Must have room){}",
 				},
 			},
@@ -798,15 +798,15 @@ return {
 					"Adds {C:attention}#1#{} {C:joy_normal}\"Ghoti\"{} {C:attention}Joker{}",
 					"to the {C:joy_spell}Extra Deck{} after returning from",
 					"{C:attention}banishment #2#{} times",
-					"{C:inactive}(Must have room){}",
+					"{C:inactive}(Must have room) (#3#/#2#){}",
 				},
 			},
 			j_joy_fish_psiics = {
 				name = "{C:joy_effect}Psiics, Moonlight of the Ghoti",
 				text = {
 					"This card {C:attention}banishes{} at the end of round",
-					"until {C:attention}Boss Blind{} is selected to",
-					"create {C:attention}#1#{} {C:dark_edition}Negative{} {C:joy_normal}Main Deck{} {C:joy_normal}Fish{} {C:attention}Joker{}",
+					"until {C:attention}Boss Blind{} is selected and revives {C:attention}#1#{}",
+					"{C:joy_synchro}Tuner{} {C:attention}Joker{} as {C:dark_edition}Negative{}",
 				},
 			},
 			j_joy_fish_snopios = {
@@ -825,8 +825,8 @@ return {
 					"{C:inactive}(Currently{} {C:chips}+#2#{} {C:inactive}Chips){}",
 					" ",
 					"This card {C:attention}banishes{} at the end of round",
-					"until {C:attention}Blind{} is selected to",
-					"add {C:attention}#3#{} {C:joy_normal}\"Ghoti\"{} {C:attention}Joker{} to the {C:joy_spell}Extra Deck{}",
+					"until {C:attention}Blind{} is selected and",
+					"adds {C:attention}#3#{} {C:joy_normal}\"Ghoti\"{} {C:attention}Joker{} to the {C:joy_spell}Extra Deck{}",
 					"{C:inactive}(Must have room){}",
 				},
 				joy_summon_conditions = {
@@ -841,7 +841,7 @@ return {
 					"{C:attention}banished{} this run",
 					"{C:inactive}(Currently{} {C:mult}+#2#{} {C:inactive}Mult){}",
 					" ",
-					"This card and another {C:attention}Joker{}",
+					"This card and a non-{C:joy_normal}\"Ghoti\"{} {C:attention}Joker{}",
 					"{C:attention}banish{} at the end of round",
 					"until {C:attention}Blind{} is selected",
 				},
@@ -855,7 +855,7 @@ return {
 				text = {
 					"Gains {X:mult,C:white}X#1#{} Mult for each card",
 					"{C:attention}banished{} this run",
-					"{C:inactive}(Currently{} {C:chips}X#2#{} {C:inactive}Chips){}",
+					"{C:inactive}(Currently{} {X:mult,C:white}333X#2#{} {C:inactive}Mult){}",
 					" ",
 					"{C:attention}Revives{} as many different {C:joy_normal}Fish{}",
 					"{C:attention}Jokers{} as possible when summoned",
@@ -1261,6 +1261,8 @@ return {
 			k_joy_detach = "Detach",
 			k_joy_token = "Token",
 			k_joy_disable_booster_tag = "Disable Booster Tag from appearing naturally",
+			k_joy_splash = "Splash!",
+			k_joy_defeated = "Defeated!",
 			--#region Card types
 			k_joy_Aqua = "Aqua",
 			k_joy_Beast = "Beast",

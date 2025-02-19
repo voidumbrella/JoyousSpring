@@ -31,11 +31,17 @@ end
 JoyousSpring.send_to_graveyard = function(card)
     if JoyousSpring.graveyard then
         if type(card) == "string" then
-            JoyousSpring.graveyard[card] = (JoyousSpring.graveyard[card] and
-                JoyousSpring.graveyard[card] + 1) or 1
+            local not_summoned = JoyousSpring.is_material_center(card, { is_extra_deck = true })
+            if not JoyousSpring.graveyard[card] then JoyousSpring.graveyard[card] = { count = 0, summonable = 0 } end
+            JoyousSpring.graveyard[card].count = JoyousSpring.graveyard[card].count + 1
+            JoyousSpring.graveyard[card].summonable = JoyousSpring.graveyard[card].summonable + (not_summoned and 0 or 1)
         elseif type(card) == "table" then
-            JoyousSpring.graveyard[card.config.center_key] = (JoyousSpring.graveyard[card.config.center_key] and
-                JoyousSpring.graveyard[card.config.center_key] + 1) or 1
+            local not_summoned = JoyousSpring.is_extra_deck_monster(card) and not JoyousSpring.is_summoned(card)
+            if not JoyousSpring.graveyard[card.config.center_key] then JoyousSpring.graveyard[card.config.center_key] = { count = 0, summonable = 0 } end
+            JoyousSpring.graveyard[card.config.center_key].count = JoyousSpring.graveyard[card.config.center_key].count +
+                1
+            JoyousSpring.graveyard[card.config.center_key].summonable = JoyousSpring.graveyard[card.config.center_key]
+                .summonable + (not_summoned and 0 or 1)
         end
     end
 end
@@ -339,8 +345,12 @@ JoyousSpring.create_overlay_select_summon_materials = function(card, card_list)
 end
 
 JoyousSpring.create_overlay_graveyard = function()
+    local gy_count = 0
+    for _, _ in pairs(JoyousSpring.graveyard) do
+        gy_count = gy_count + 1
+    end
     JoyousSpring.graveyard_area = {}
-    local num_graveyard_areas = math.min(4, math.floor(#JoyousSpring.graveyard / 25) + 1)
+    local num_graveyard_areas = math.min(4, math.floor(gy_count / 25) + 1)
     for i = 1, num_graveyard_areas do
         JoyousSpring.graveyard_area[i] = CardArea(
             G.ROOM.T.x + 0.2 * G.ROOM.T.w / 2,
@@ -348,7 +358,7 @@ JoyousSpring.create_overlay_graveyard = function()
             6.5 * G.CARD_W,
             0.6 * G.CARD_H,
             {
-                card_limit = (num_graveyard_areas == i and #JoyousSpring.graveyard - 25 * (i - 1)) or 25,
+                card_limit = (num_graveyard_areas == i and gy_count - 25 * (i - 1)) or 25,
                 type = 'title',
                 highlight_limit = 0,
                 card_w = G.CARD_W * 0.7,
@@ -359,7 +369,9 @@ JoyousSpring.create_overlay_graveyard = function()
     end
 
     local i = 0
-    for key, count in pairs(JoyousSpring.graveyard) do
+    for key, t in pairs(JoyousSpring.graveyard) do
+        local count = t.count
+        local summonable = t.summonable
         if count > 0 then
             local added_card = SMODS.create_card({
                 area = JoyousSpring.graveyard_area[math.min(4, math.floor(i / 25) + 1)],
@@ -370,7 +382,8 @@ JoyousSpring.create_overlay_graveyard = function()
             JoyousSpring.graveyard_area[math.min(4, math.floor(i / 25) + 1)]:emplace(added_card)
             i = i + 1
             -- copied from Cartomancer
-            if not added_card.children.stack_display and count > 1 then
+            if not added_card.children.stack_display and (count > 1 or
+                    (JoyousSpring.is_extra_deck_monster(added_card)) and count ~= summonable) then
                 added_card.children.stack_display = UIBox {
                     definition = {
                         n = G.UIT.ROOT,
@@ -412,6 +425,31 @@ JoyousSpring.create_overlay_graveyard = function()
                                     }
                                 }
                             },
+                            JoyousSpring.is_extra_deck_monster(added_card) and {
+                                n = G.UIT.R, -- node type
+                                config = {
+                                    align = 'cm',
+                                    colour = G.C.CLEAR
+                                },
+                                nodes = {
+                                    {
+                                        n = G.UIT.T, -- node type
+                                        config = {
+                                            text = 'X',
+                                            scale = 0.45,
+                                            colour = G.C.JOY.SPELL
+                                        },
+                                    },
+                                    {
+                                        n = G.UIT.T, -- node type
+                                        config = {
+                                            text = summonable,
+                                            scale = 0.45,
+                                            colour = G.C.UI.TEXT_LIGHT
+                                        }
+                                    }
+                                }
+                            } or nil,
                         }
                     },
                     config = {
@@ -938,7 +976,7 @@ G.FUNCS.joy_can_summon_from_shop = function(e)
     end
 end
 
-G.FUNCS.joy_show_extra_deck = function (e)
+G.FUNCS.joy_show_extra_deck = function(e)
     if JoyousSpring.extra_deck_area and #JoyousSpring.extra_deck_area.cards > 0 then
         G.GAME.joy_show_extra_deck = true
     end
@@ -949,7 +987,7 @@ G.FUNCS.joy_show_extra_deck = function (e)
     end
 end
 
-G.FUNCS.joy_show_graveyard = function (e)
+G.FUNCS.joy_show_graveyard = function(e)
     if JoyousSpring.graveyard and next(JoyousSpring.graveyard) then
         G.GAME.joy_show_graveyard = true
     end
@@ -1171,7 +1209,7 @@ function Card:align_h_popup()
         ret.offset.y = focused_ui and 0.12 or 0.1
         ret.type = 'bm'
     end
-    if (self.T.y < G.CARD_H*1.2) and self.area and (self.area.config.type == "title" and JoyousSpring.is_monster_card(self)) then
+    if (self.T.y < G.CARD_H * 1.2) and self.area and (self.area.config.type == "title" and JoyousSpring.is_monster_card(self)) then
         ret.offset.x = 0
         ret.offset.y = focused_ui and 0.12 or 0.1
         ret.type = 'bm'
@@ -1276,7 +1314,7 @@ end
 local card_remove_ref = Card.remove
 function Card:remove()
     if (self.area == G.jokers or self.area == JoyousSpring.extra_deck_area) and
-        JoyousSpring.is_monster_card(self) then
+        JoyousSpring.is_monster_card(self) and self.config.center.key ~= "j_joy_token" then
         JoyousSpring.send_to_graveyard(self)
     end
     card_remove_ref(self)
@@ -1452,6 +1490,58 @@ function Game:start_run(args)
         }
     )
     JoyousSpring.extra_deck_area = G.joy_extra_deck_area
+    self.joy_banish_blind_selected_area = CardArea(
+        0,
+        0,
+        self.CARD_W * 4.95,
+        self.CARD_H * 0.95,
+        {
+            card_limit = 999,
+            type = 'title',
+            highlight_limit = 1,
+        }
+    )
+    self.joy_banish_blind_selected_area.states.visible = false
+    JoyousSpring.banish_blind_selected_area = G.joy_banish_blind_selected_area
+    self.joy_banish_end_of_round_area = CardArea(
+        0,
+        0,
+        self.CARD_W * 4.95,
+        self.CARD_H * 0.95,
+        {
+            card_limit = 999,
+            type = 'title',
+            highlight_limit = 1,
+        }
+    )
+    self.joy_banish_end_of_round_area.states.visible = false
+    JoyousSpring.banish_end_of_round_area = G.joy_banish_end_of_round_area
+    self.joy_banish_boss_selected_area = CardArea(
+        0,
+        0,
+        self.CARD_W * 4.95,
+        self.CARD_H * 0.95,
+        {
+            card_limit = 999,
+            type = 'title',
+            highlight_limit = 1,
+        }
+    )
+    self.joy_banish_boss_selected_area.states.visible = false
+    JoyousSpring.banish_boss_selected_area = G.joy_banish_boss_selected_area
+    self.joy_banish_end_of_ante_area = CardArea(
+        0,
+        0,
+        self.CARD_W * 4.95,
+        self.CARD_H * 0.95,
+        {
+            card_limit = 999,
+            type = 'title',
+            highlight_limit = 1,
+        }
+    )
+    self.joy_banish_end_of_ante_area.states.visible = false
+    JoyousSpring.banish_end_of_ante_area = G.joy_banish_end_of_ante_area
     game_start_run_ref(self, args)
     self.joy_extra_deck = UIBox {
         definition = JoyousSpring.create_UIBox_extra_deck(),
@@ -1468,7 +1558,7 @@ function Game:start_run(args)
     self.GAME.joy_graveyard = self.GAME.joy_graveyard or {}
     JoyousSpring.graveyard = self.GAME.joy_graveyard
 
-    self.GAME.joy_create_card = self.GAME.joy_create_card or {}
+    self.GAME.joy_create_card = JoyousSpring.debug and JoyousSpring.debug_shop_cards or self.GAME.joy_create_card or {}
     JoyousSpring.cards_to_create = self.GAME.joy_create_card
 
     self.extra_buttons = UIBox {

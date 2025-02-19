@@ -29,6 +29,9 @@ SMODS.Joker({
                 attribute = "DARK",
                 monster_type = "Thunder",
                 monster_archetypes = { ["Spright"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             cards_to_create = 1,
         },
@@ -84,6 +87,9 @@ SMODS.Joker({
                 attribute = "DARK",
                 monster_type = "Thunder",
                 monster_archetypes = { ["Spright"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             mill = 2,
         },
@@ -135,6 +141,9 @@ SMODS.Joker({
                 attribute = "FIRE",
                 monster_type = "Thunder",
                 monster_archetypes = { ["Spright"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             xmult = 0.1,
         },
@@ -203,6 +212,9 @@ SMODS.Joker({
                 attribute = "FIRE",
                 monster_type = "Thunder",
                 monster_archetypes = { ["Spright"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             mult = 10,
         },
@@ -268,6 +280,9 @@ SMODS.Joker({
                 attribute = "DARK",
                 monster_type = "Thunder",
                 monster_archetypes = { ["Spright"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             chips = 10,
         },
@@ -336,6 +351,11 @@ SMODS.Joker({
                         }
                     }
                 },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
+                summoned = false,
+                summon_materials = {},
             },
             revives = 1,
         },
@@ -387,6 +407,11 @@ SMODS.Joker({
                         }
                     }
                 },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
+                summoned = false,
+                summon_materials = {},
             },
             base_materials = 2,
             detached = 0
@@ -474,11 +499,17 @@ SMODS.Joker({
                     {
                         type = "XYZ",
                         materials = {
-                            { rarity = 2, exclude_tokens = true },
-                            { rarity = 2, exclude_tokens = true }
+                            { rarity = 2, exclude_tokens = true, exclude_summon_types = { "XYZ" } },
+                            { rarity = 2, exclude_tokens = true, exclude_summon_types = { "XYZ" } }
                         },
                     }
                 },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
+                summoned = false,
+                summon_materials = {},
+                xyz_materials = 0
             },
             cards_to_create = 1
         },

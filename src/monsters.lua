@@ -879,13 +879,19 @@ JoyousSpring.summon_token = function(key, atlas_key, sprite_pos, joyous_spring_t
     })
     local pool_info = JoyousSpring.token_pool[key] or {}
     local og_table = card.ability.extra.joyous_spring
-    og_table.token_name = joyous_spring_table and joyous_spring_table.token_name or pool_info.name or og_table.token_name or "Token"
-    og_table.is_tuner = joyous_spring_table and joyous_spring_table.is_tuner or pool_info.is_tuner or og_table.is_tuner or false
-    og_table.attribute = joyous_spring_table and joyous_spring_table.attribute or pool_info.attribute or og_table.attribute or "EARTH"
-    og_table.monster_type = joyous_spring_table and joyous_spring_table.monster_type or pool_info.monster_type or og_table.monster_type or "Beast"
-    og_table.monster_archetypes = joyous_spring_table and joyous_spring_table.monster_archetypes or pool_info.monster_archetypes or og_table.monster_archetypes or {}
+    og_table.token_name = joyous_spring_table and joyous_spring_table.token_name or pool_info.name or og_table
+        .token_name or "Token"
+    og_table.is_tuner = joyous_spring_table and joyous_spring_table.is_tuner or pool_info.is_tuner or og_table.is_tuner or
+        false
+    og_table.attribute = joyous_spring_table and joyous_spring_table.attribute or pool_info.attribute or
+        og_table.attribute or "EARTH"
+    og_table.monster_type = joyous_spring_table and joyous_spring_table.monster_type or pool_info.monster_type or
+        og_table.monster_type or "Beast"
+    og_table.monster_archetypes = joyous_spring_table and joyous_spring_table.monster_archetypes or
+        pool_info.monster_archetypes or og_table.monster_archetypes or {}
     og_table.token_atlas = atlas_key or pool_info.atlas or "joy_Token"
-    og_table.token_sprite_pos = sprite_pos or pool_info.sprite_pos or { x = pseudorandom("Token", 0, 1), y = pseudorandom("Token", 0, 1) }
+    og_table.token_sprite_pos = sprite_pos or pool_info.sprite_pos or
+        { x = pseudorandom("Token", 0, 1), y = pseudorandom("Token", 0, 1) }
     card.children.center.atlas.name = og_table.token_atlas
     card.children.center.sprite_pos = og_table.token_sprite_pos
     card.children.center:reset()
@@ -894,28 +900,77 @@ end
 
 -- Revive
 
-JoyousSpring.revive = function(key, must_have_room)
-    if JoyousSpring.graveyard[key] and JoyousSpring.graveyard[key] > 0 and
+JoyousSpring.revive = function(key, must_have_room, edition)
+    if JoyousSpring.graveyard[key] and JoyousSpring.graveyard[key].summonable > 0 and
         (not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit)) then
-        JoyousSpring.graveyard[key] = JoyousSpring.graveyard[key] - 1
+        JoyousSpring.graveyard[key].count = JoyousSpring.graveyard[key].count - 1
+        JoyousSpring.graveyard[key].summonable = JoyousSpring.graveyard[key].summonable - 1
         local added_card = SMODS.add_card({
-            key = key
+            key = key,
+            edition = edition
         })
+        added_card.ability.extra.joyous_spring.summoned = JoyousSpring.is_extra_deck_monster(added_card) or nil
         added_card.ability.extra.joyous_spring.revived = true
         added_card:set_cost()
         SMODS.calculate_context({ joy_revived = true, joy_revived_card = added_card })
         return added_card
     end
+    return nil
 end
 
-JoyousSpring.revive_pseudorandom = function(property_list, seed, must_have_room)
+JoyousSpring.revive_pseudorandom = function(property_list, seed, must_have_room, edition)
     if not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit) then
         local choices = JoyousSpring.get_materials_in_graveyard(property_list, true)
         local key_to_add = pseudorandom_element(choices, seed)
         if key_to_add then
-            return JoyousSpring.revive(key_to_add, must_have_room)
+            return JoyousSpring.revive(key_to_add, must_have_room, edition)
         end
     end
+end
+
+-- Banish
+
+JoyousSpring.banish = function(card, banish_until, func)
+    if not card.area then return end
+    card:juice_up()
+    G.E_MANAGER:add_event(Event({
+        trigger = "after",
+        delay = 0.3,
+        func = function()
+            local time_to_banish = banish_until == "blind_selected" and JoyousSpring.banish_blind_selected_area or
+                banish_until == "boss_selected" and JoyousSpring.banish_boss_selected_area or
+                banish_until == "end_of_ante" and JoyousSpring.banish_end_of_ante_area or
+                JoyousSpring.banish_end_of_round_area
+            local area = card.area
+            card.area:remove_card(card)
+            time_to_banish:emplace(card)
+            G.GAME.joy_cards_banished = G.GAME.joy_cards_banished and
+                (G.GAME.joy_cards_banished + 1) or 1
+            if func then
+                func(card)
+            end
+            SMODS.calculate_context({
+                joy_banished = true,
+                joy_banished_card = card,
+                joy_banished_area = area,
+                joy_banish_until =
+                    banish_until
+            })
+            return true
+        end,
+    }))
+end
+
+JoyousSpring.return_from_banish = function(card)
+    local area = card.area
+    area:remove_card(card)
+    if card.ability.set == 'Joker' then
+        G.jokers:emplace(card)
+    else
+        G.consumeables:emplace(card)
+    end
+
+    SMODS.calculate_context({ joy_returned = true, joy_returned_card = card, joy_returned_area = area })
 end
 
 -- Modifiers

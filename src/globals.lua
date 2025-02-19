@@ -152,11 +152,36 @@ end
 
 local SMODS_calculate_context_ref = SMODS.calculate_context
 function SMODS.calculate_context(context, return_table)
+    JoyousSpring.calculate_context(context)
+    return SMODS_calculate_context_ref(context, return_table)
+end
+
+JoyousSpring.calculate_context = function(context)
     if context.remove_playing_cards then
         G.GAME.joy_cards_destroyed = G.GAME.joy_cards_destroyed and
             (G.GAME.joy_cards_destroyed + #context.removed) or #context.removed
     end
-    SMODS_calculate_context_ref(context, return_table)
+
+    if context.setting_blind then
+        if G.GAME.blind and G.GAME.blind:get_type() == 'Boss' then
+            while #JoyousSpring.banish_boss_selected_area.cards > 0 do
+                JoyousSpring.return_from_banish(JoyousSpring.banish_boss_selected_area.cards[1])
+            end
+        end
+        while #JoyousSpring.banish_blind_selected_area.cards > 0 do
+            JoyousSpring.return_from_banish(JoyousSpring.banish_blind_selected_area.cards[1])
+        end
+    end
+    if context.end_of_round and context.game_over == false then
+        if G.GAME.blind and G.GAME.blind:get_type() == 'Boss' then
+            while #JoyousSpring.banish_end_of_ante_area.cards > 0 do
+                JoyousSpring.return_from_banish(JoyousSpring.banish_end_of_ante_area.cards[1])
+            end
+        end
+        while #JoyousSpring.banish_end_of_round_area.cards > 0 do
+            JoyousSpring.return_from_banish(JoyousSpring.banish_end_of_round_area.cards[1])
+        end
+    end
 end
 
 JoyousSpring.get_type_ui = function(card)
@@ -185,18 +210,19 @@ JoyousSpring.get_type_ui = function(card)
         }
     end
 
-    local attribute_text = localize("k_joy_".. (joyous_spring_table.attribute or "LIGHT"))
-    local type_text = localize("k_joy_".. (joyous_spring_table.monster_type or "Beast"))
+    local attribute_text = localize("k_joy_" .. (joyous_spring_table.attribute or "LIGHT"))
+    local type_text = localize("k_joy_" .. (joyous_spring_table.monster_type or "Beast"))
     local summon_type_text = joyous_spring_table.summon_type and joyous_spring_table.summon_type ~= "NORMAL" and
-    localize("k_joy_".. joyous_spring_table.summon_type) or nil
+        localize("k_joy_" .. joyous_spring_table.summon_type) or nil
     local pendulum_text = joyous_spring_table.is_pendulum and localize("k_joy_pendulum") or nil
     local tuner_text = joyous_spring_table.is_tuner and localize("k_joy_tuner") or nil
     local effect_text = joyous_spring_table.is_effect and localize("k_joy_effect") or localize("k_joy_normal")
     local trap_text = joyous_spring_table.is_trap and localize("k_joy_trap") or nil
-    local full_text = attribute_text.. "/".. type_text .. "/" .. (summon_type_text or "") .. (summon_type_text and "/" or "") ..
+    local full_text = attribute_text ..
+        "/" .. type_text .. "/" .. (summon_type_text or "") .. (summon_type_text and "/" or "") ..
         (pendulum_text or "") .. (pendulum_text and "/" or "") ..
         (tuner_text or "") .. (tuner_text and "/" or "") ..
-        effect_text .. (trap_text and "/" or "")..
+        effect_text .. (trap_text and "/" or "") ..
         (trap_text or "")
 
     local attribute = {

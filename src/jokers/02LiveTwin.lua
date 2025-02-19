@@ -32,6 +32,9 @@ SMODS.Joker({
                 attribute = "DARK",
                 monster_type = "Cyberse",
                 monster_archetypes = { ["LiveTwin"] = true, ["Lilla"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             chips = 20,
             cards_to_create = 1
@@ -97,6 +100,9 @@ SMODS.Joker({
                 attribute = "LIGHT",
                 monster_type = "Cyberse",
                 monster_archetypes = { ["LiveTwin"] = true, ["Kisikil"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             mult = 10,
             cards_to_create = 1
@@ -159,6 +165,9 @@ SMODS.Joker({
                 attribute = "DARK",
                 monster_type = "Zombie",
                 monster_archetypes = { ["LiveTwin"] = true, ["Lilla"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             discards = 1
         },
@@ -205,6 +214,9 @@ SMODS.Joker({
                 attribute = "DARK",
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["LiveTwin"] = true, ["Lilla"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             hands = 1
         },
@@ -251,6 +263,9 @@ SMODS.Joker({
                 attribute = "LIGHT",
                 monster_type = "Aqua",
                 monster_archetypes = { ["LiveTwin"] = true, ["Kisikil"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             h_size = 1
         },
@@ -303,6 +318,11 @@ SMODS.Joker({
                         }
                     }
                 },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
+                summoned = false,
+                summon_materials = {},
             },
             mult = 10,
             h_size = 1,
@@ -382,6 +402,11 @@ SMODS.Joker({
                         }
                     }
                 },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
+                summoned = false,
+                summon_materials = {},
             },
             mult = 20,
             h_size = 1,
@@ -462,6 +487,11 @@ SMODS.Joker({
                         }
                     }
                 },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
+                summoned = false,
+                summon_materials = {},
             },
             chips = 40,
             money = 5,
@@ -542,7 +572,8 @@ SMODS.Joker({
                 attribute = "DARK",
                 monster_type = "Fiend",
                 monster_archetypes = { ["EvilTwin"] = true, ["Kisikil"] = true, ["Lilla"] = true },
-                cannot_revive = true
+                cannot_revive = true,
+                is_free = false,
             },
             chips = 40,
             mult = 20,
@@ -621,6 +652,11 @@ SMODS.Joker({
                         }
                     }
                 },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
+                summoned = false,
+                summon_materials = {},
             },
             chips = 80,
             mult = 40,

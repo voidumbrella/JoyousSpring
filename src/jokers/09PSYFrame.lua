@@ -26,6 +26,9 @@ SMODS.Joker({
                 attribute = "LIGHT",
                 monster_type = "Psychic",
                 monster_archetypes = { ["PSYFrame"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
         },
     },
@@ -52,11 +55,15 @@ SMODS.Joker({
         extra = {
             joyous_spring = {
                 is_main_deck = true,
+                is_tuner = true,
                 summon_type = "NORMAL",
                 is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Psychic",
                 monster_archetypes = { ["PSYFrame"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             cards_to_create = 1,
             banishes = 1,
@@ -83,11 +90,15 @@ SMODS.Joker({
         extra = {
             joyous_spring = {
                 is_main_deck = true,
+                is_tuner = true,
                 summon_type = "NORMAL",
                 is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Psychic",
                 monster_archetypes = { ["PSYFrame"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             cards_to_create = 1,
             banishes = 1,
@@ -114,11 +125,15 @@ SMODS.Joker({
         extra = {
             joyous_spring = {
                 is_main_deck = true,
+                is_tuner = true,
                 summon_type = "NORMAL",
                 is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Psychic",
                 monster_archetypes = { ["PSYFrame"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             cards_to_create = 1,
             banishes = 1,
@@ -145,11 +160,15 @@ SMODS.Joker({
         extra = {
             joyous_spring = {
                 is_main_deck = true,
+                is_tuner = true,
                 summon_type = "NORMAL",
                 is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Psychic",
                 monster_archetypes = { ["PSYFrame"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             cards_to_create = 1,
             banishes = 1,
@@ -176,11 +195,15 @@ SMODS.Joker({
         extra = {
             joyous_spring = {
                 is_main_deck = true,
+                is_tuner = true,
                 summon_type = "NORMAL",
                 is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Psychic",
                 monster_archetypes = { ["PSYFrame"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             cards_to_create = 1,
             banishes = 1,
@@ -212,6 +235,9 @@ SMODS.Joker({
                 attribute = "LIGHT",
                 monster_type = "Psychic",
                 monster_archetypes = { ["PSYFrame"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             cards_to_create = 1,
         },
@@ -242,11 +268,16 @@ SMODS.Joker({
                     {
                         type = "SYNCHRO",
                         materials = {
-                            { is_tuner = true },
-                            { rarity = 1,     exclude_tuners = true },
+                            { is_tuner = true, exclude_summon_types = { "XYZ", "LINK" } },
+                            { rarity = 1,      exclude_tuners = true,                 exclude_summon_types = { "XYZ", "LINK" } },
                         },
                     }
                 },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
+                summoned = false,
+                summon_materials = {},
             },
         },
     },
@@ -276,11 +307,16 @@ SMODS.Joker({
                     {
                         type = "SYNCHRO",
                         materials = {
-                            { is_tuner = true },
-                            { rarity = 1,     exclude_tuners = true },
+                            { is_tuner = true, exclude_summon_types = { "XYZ", "LINK" } },
+                            { rarity = 1,      exclude_tuners = true,                 exclude_summon_types = { "XYZ", "LINK" } },
                         },
                     }
                 },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
+                summoned = false,
+                summon_materials = {},
             },
         },
     },
@@ -310,7 +346,7 @@ SMODS.Joker({
                 monster_type = "Psychic",
                 monster_archetypes = { ["PSYFrame"] = true },
                 summon_conditions = {
-                    {
+                {
                         type = "LINK",
                         materials = {
                             { exclude_tokens = true },
@@ -318,6 +354,11 @@ SMODS.Joker({
                         },
                     }
                 },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
+                summoned = false,
+                summon_materials = {},
             },
             cards_to_create = 1
         },

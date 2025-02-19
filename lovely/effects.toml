@@ -3,7 +3,7 @@ version = "0.1.0"
 dump_lua = true
 priority = 0
 
-# Ash Blossom effect
+# Ash Blossom prevent draw effect
 [[patches]]
 [patches.pattern]
 target = "functions/state_events.lua"
@@ -22,6 +22,17 @@ if next(SMODS.find_card("j_joy_yokai_ash")) and
         end
     end
 end
+'''
+
+# Avramax instawin context
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "G.GAME.blind:drawn_to_hand()"
+position = 'before'
+match_indent = true
+payload = '''
+SMODS.calculate_context({joy_selecting_hand = true})
 '''
 
 # Hand debuff

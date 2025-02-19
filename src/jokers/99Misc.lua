@@ -44,6 +44,9 @@ SMODS.Joker({
                 attribute = "LIGHT",
                 monster_type = "Machine",
                 monster_archetypes = {},
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             xmult = 2,
             hands = {}
@@ -139,6 +142,9 @@ SMODS.Joker({
                 attribute = "LIGHT",
                 monster_type = "Fiend",
                 monster_archetypes = { ["Archfiend"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             mult = 5,
             max = 2
@@ -239,6 +245,11 @@ SMODS.Joker({
                         }
                     }
                 },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
+                summoned = false,
+                summon_materials = {},
             },
         },
     },
@@ -361,6 +372,11 @@ SMODS.Joker({
                         }
                     }
                 },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
+                summoned = false,
+                summon_materials = {},
             },
             h_size = 2,
             h_size_gain = 1
@@ -427,6 +443,11 @@ SMODS.Joker({
                         }
                     }
                 },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
+                summoned = false,
+                summon_materials = {},
             },
             chips_gain = 80,
             chips_loss = 80,
@@ -491,7 +512,10 @@ SMODS.Joker({
                 attribute = "EARTH",
                 monster_type = "Beast",
                 monster_archetypes = {},
-                token_name = "j_joy_token"
+                token_name = "j_joy_token",
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
         },
     },

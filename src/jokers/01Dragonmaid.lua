@@ -32,6 +32,9 @@ SMODS.Joker({
                 attribute = "FIRE",
                 monster_type = "Dragon",
                 monster_archetypes = { ["Dragonmaid"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             base_rerolls = 1,
             rerolls = 1
@@ -88,6 +91,9 @@ SMODS.Joker({
                 attribute = "FIRE",
                 monster_type = "Dragon",
                 monster_archetypes = { ["Dragonmaid"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             mult = 20
         },
@@ -182,6 +188,9 @@ SMODS.Joker({
                 attribute = "WIND",
                 monster_type = "Dragon",
                 monster_archetypes = { ["Dragonmaid"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             tags_to_add = 1,
             dragonmaid_count = 5,
@@ -248,6 +257,9 @@ SMODS.Joker({
                 attribute = "WIND",
                 monster_type = "Dragon",
                 monster_archetypes = { ["Dragonmaid"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             xmult = 1.1
         },
@@ -341,6 +353,9 @@ SMODS.Joker({
                 attribute = "EARTH",
                 monster_type = "Dragon",
                 monster_archetypes = { ["Dragonmaid"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             revives = 1,
             odds = 3
@@ -474,6 +489,9 @@ SMODS.Joker({
                 attribute = "WATER",
                 monster_type = "Dragon",
                 monster_archetypes = { ["Dragonmaid"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             mill = 3
         },
@@ -534,6 +552,9 @@ SMODS.Joker({
                 attribute = "WATER",
                 monster_type = "Dragon",
                 monster_archetypes = { ["Dragonmaid"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             chips = 3
         },
@@ -602,6 +623,9 @@ SMODS.Joker({
                 attribute = "DARK",
                 monster_type = "Dragon",
                 monster_archetypes = { ["Dragonmaid"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             tags_to_add = 1,
             dragonmaid_count = 5,
@@ -668,6 +692,9 @@ SMODS.Joker({
                 attribute = "DARK",
                 monster_type = "Dragon",
                 monster_archetypes = { ["Dragonmaid"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
             },
             revives = 1,
             odds = 3
@@ -754,6 +781,11 @@ SMODS.Joker({
                         }
                     }
                 },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
+                summoned = false,
+                summon_materials = {},
             },
             odds = 3
         },
@@ -842,6 +874,11 @@ SMODS.Joker({
                         }
                     }
                 },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
+                summoned = false,
+                summon_materials = {},
             },
             xmult = 0.1,
             blinds = 3,
@@ -917,6 +954,11 @@ SMODS.Joker({
                 attribute = "LIGHT",
                 monster_type = "Dragon",
                 monster_archetypes = { ["Dragonmaid"] = true },
+                revived = false,
+                perma_debuffed = false,
+                is_free = false,
+                summoned = false,
+                summon_materials = {},
             },
             cards_to_create = 1
         },

@@ -31,3 +31,25 @@ match_indent = true
 payload = '''
 if JoyousSpring then JoyousSpring.set_cost(self) end
 '''
+
+# Fix dollar bonus name text
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "elseif string.find(config.name, 'joker') then"
+position = 'before'
+match_indent = true
+payload = '''
+elseif string.find(config.name, 'joker') and JoyousSpring and JoyousSpring.is_monster_card(config.card) then
+    local joy_loc_string = localize{type = 'name_text', set = config.card.config.center.set, key = config.card.config.center.key}
+    local joy_colour
+    if string.len(joy_loc_string) > 2 and string.sub(joy_loc_string, string.len(joy_loc_string) - 1, string.len(joy_loc_string)) == "{}" then
+            joy_loc_string = string.sub(joy_loc_string, 1, string.len(joy_loc_string) - 2)
+        end
+        if string.sub(joy_loc_string, 1, 3) == "{C:" then
+            local _, _, colour, real_name = string.find(joy_loc_string, "{C:(.*)}(.*)")
+            joy_colour = colour
+            joy_loc_string = real_name
+        end
+    table.insert(left_text, {n=G.UIT.O, config={object = DynaText({string = joy_loc_string, colours = {G.ARGS.LOC_COLOURS[joy_colour] or G.C.JOY.NORMAL}, shadow = true, pop_in = 0, scale = (0.6*scale)- 0.006 * #joy_loc_string, silent = true})}})
+'''

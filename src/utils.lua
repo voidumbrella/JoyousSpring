@@ -1,4 +1,10 @@
 JoyousSpring.transform_card = function(card, other_key, keep_edition)
+    local joyous_spring_table = card.ability.extra.joyous_spring
+    local revived = joyous_spring_table.revived
+    local is_free = joyous_spring_table.is_free
+    local summoned = joyous_spring_table.summoned
+    local summon_materials = joyous_spring_table.summon_materials
+    local xyz_materials = joyous_spring_table.xyz_materials
     G.E_MANAGER:add_event(Event({
         trigger = "after",
         delay = 0.15,
@@ -6,6 +12,12 @@ JoyousSpring.transform_card = function(card, other_key, keep_edition)
             card:set_ability(G.P_CENTERS[other_key])
             play_sound("card1")
             card:juice_up(0.3, 0.3)
+            local joyous_spring_table = card.ability.extra.joyous_spring
+            joyous_spring_table.revived = revived
+            joyous_spring_table.is_free = is_free
+            joyous_spring_table.summoned = summoned
+            joyous_spring_table.summon_materials = summon_materials
+            joyous_spring_table.xyz_materials = xyz_materials
             return true
         end,
     }))
@@ -15,8 +27,8 @@ JoyousSpring.get_graveyard_count = function()
     if not JoyousSpring.graveyard then return 0 end
 
     local total = 0
-    for _, count in pairs(JoyousSpring.graveyard) do
-        total = total + count
+    for _, t in pairs(JoyousSpring.graveyard) do
+        total = total + t.count
     end
     return total
 end
@@ -56,9 +68,11 @@ JoyousSpring.get_materials_in_graveyard = function(property_list, to_revive, dif
     if not JoyousSpring.graveyard then return {} end
 
     local materials = {}
-    for key, count in pairs(JoyousSpring.graveyard) do
+    for key, t in pairs(JoyousSpring.graveyard) do
+        local count = t.count
+        local summonable = t.summonable
         if count > 0 then
-            if not to_revive or not G.P_CENTERS[key].config.extra.joyous_spring.cannot_revive then
+            if not (to_revive and (G.P_CENTERS[key].config.extra.joyous_spring.cannot_revive or summonable < 1)) then
                 if not property_list or #property_list == 0 then
                     for i = 1, (different_names and 1 or count) do
                         table.insert(materials, key)
@@ -98,10 +112,10 @@ JoyousSpring.count_all_materials = function(property_list, different_names)
 end
 
 JoyousSpring.extra_deck_types_owned = function()
-    local fusion = (JoyousSpring.count_all_materials({{summon_type = "FUSION"}}) > 0) and 1 or 0
-    local synchro = (JoyousSpring.count_all_materials({{summon_type = "SYNCHRO"}}) > 0) and 1 or 0
-    local xyz = (JoyousSpring.count_all_materials({{summon_type = "XYZ"}}) > 0) and 1 or 0
-    local link = (JoyousSpring.count_all_materials({{summon_type = "LINK"}}) > 0) and 1 or 0
+    local fusion = (JoyousSpring.count_all_materials({ { summon_type = "FUSION" } }) > 0) and 1 or 0
+    local synchro = (JoyousSpring.count_all_materials({ { summon_type = "SYNCHRO" } }) > 0) and 1 or 0
+    local xyz = (JoyousSpring.count_all_materials({ { summon_type = "XYZ" } }) > 0) and 1 or 0
+    local link = (JoyousSpring.count_all_materials({ { summon_type = "LINK" } }) > 0) and 1 or 0
 
     return fusion + synchro + xyz + link
 end
@@ -128,6 +142,19 @@ JoyousSpring.create_perma_debuffed_card = function(card, source, edition)
         card:set_cost()
         return card
     end
+end
+
+JoyousSpring.index_of = function(array, value)
+    for i, v in ipairs(array) do
+        if v == value then
+            return i
+        end
+    end
+    return nil
+end
+
+JoyousSpring.get_joker_column = function(joker)
+    return JoyousSpring.index_of(G.jokers.cards or {}, joker) or 0
 end
 
 if JoyousSpring.debug then
