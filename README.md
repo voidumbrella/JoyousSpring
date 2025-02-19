@@ -35,12 +35,17 @@ Has compatibility with [JokerDisplay](https://github.com/nh6574/JokerDisplay) ve
 
 ## Currently implemented
 
-<img src="screenshots/implemented1.png" alt="Implemented 1" width="500">
-<img src="screenshots/implemented2.png" alt="Implemented 2" width="500">
-<img src="screenshots/implemented3.png" alt="Implemented 3" width="500">
-<img src="screenshots/implemented4.png" alt="Implemented 4" width="500">
-<img src="screenshots/implemented5.png" alt="Implemented 5" width="500">
-<img src="screenshots/implemented6.png" alt="Implemented 6" width="500">
+<img src="screenshots/implemented01.png" alt="Implemented 1" width="500">
+<img src="screenshots/implemented02.png" alt="Implemented 2" width="500">
+<img src="screenshots/implemented03.png" alt="Implemented 3" width="500">
+<img src="screenshots/implemented04.png" alt="Implemented 4" width="500">
+<img src="screenshots/implemented05.png" alt="Implemented 5" width="500">
+<img src="screenshots/implemented06.png" alt="Implemented 6" width="500">
+<img src="screenshots/implemented07.png" alt="Implemented 7" width="500">
+<img src="screenshots/implemented08.png" alt="Implemented 8" width="500">
+<img src="screenshots/implemented09.png" alt="Implemented 9" width="500">
+<img src="screenshots/implemented10.png" alt="Implemented 10" width="500">
+<img src="screenshots/implemented11.png" alt="Implemented 11" width="500">
 
 ## Contributing
 
