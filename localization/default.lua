@@ -637,7 +637,7 @@ return {
 				name = "{C:joy_effect}Vala, Seidhr of the Generaider Bosses",
 				text = {
 					"This card is destroyed when a {C:attention}Boss Blind{}",
-					"is defeated to {C:attention}revive #1#{} not owned {C:red}Rare{}",
+					"is defeated to {C:attention}revive #1#{} {C:red}Rare{}",
 					"{C:joy_normal}\"Generaider\"{} {C:attention}Joker{}",
 				},
 			},
@@ -697,25 +697,25 @@ return {
 				text = {
 					"You can {C:attention}tribute #1#{} {C:joy_normal}\"Generaider\"{}",
 					"and/or {C:joy_normal}Beast-Warrior{} {C:attention}Jokers{}",
-					"to gain {C:blue}+#2#{} Hand and {C:red}+#3#{} Discard this round",
+					"to gain {C:blue}+#2#{} Hand and {C:red}+#3#{} Discard this {C:attention}Blind{}",
 				},
 			},
 			j_joy_generaider_hela = {
 				name = "{C:joy_effect}Hela, Generaider Boss of Doom",
 				text = {
 					"You can {C:attention}tribute #1#{} {C:joy_normal}\"Generaider\"{}",
-					"and/or {C:joy_normal}Zombie{} {C:attention}Jokers{}",
-					"to {C:attention}revive #2#{} not owned {C:red}Rare{}",
-					"{C:joy_normal}\"Generaider\"{} {C:attention}Joker{} as {C:dark_edition}Negative{}",
+					"and/or {C:joy_normal}Zombie{} {C:attention}Jokers{} to {C:attention}revive #2#{}",
+					"{C:red}Rare{} {C:joy_normal}\"Generaider\"{} {C:attention}Joker{} as {C:dark_edition}Negative{}",
 				},
 			},
 			j_joy_generaider_jormungandr = {
 				name = "{C:joy_xyz}Jormungandr, Generaider Boss of Eternity",
 				text = {
 					"{C:mult}+#1#{} Mult for each {C:joy_xyz}Xyz material{}",
+					"{C:inactive}(Currently{} {C:mult}+#2#{} {C:inactive}Mult){}",
 					" ",
-					"{C:joy_xyz}Detach{} {C:attention}#2# materials{} to permanently",
-					"gain {C:attention}+#3#{} hand size",
+					"{C:joy_xyz}Detach{} {C:attention}#3# materials{} to permanently",
+					"gain {C:attention}+#4#{} hand size",
 				},
 				joy_summon_conditions = {
 					"{C:attention}2+{} {C:red}Rare{} {C:attention}Jokers{}",
@@ -724,7 +724,7 @@ return {
 			j_joy_generaider_laevatein = {
 				name = "{C:joy_xyz}Laevatein, Generaider Boss of Shadows",
 				text = {
-					"Destroy all other {C:attention}Jokers{} when summoned to",
+					"{C:joy_xyz}Detach{} {C:attention}#1# materials{} to destroy all other {C:attention}Jokers{} and",
 					"create a {C:joy_xyz}\"Jormungandr, Generaider Boss of Eternity\"{}",
 					"attaching all cards in the {C:attention}GY{} to it as {C:joy_xyz}Xyz materials{}",
 				},
@@ -740,7 +740,7 @@ return {
 					" ",
 					"Once per round, you can {C:attention}tribute #1#{}",
 					"{C:joy_token}\"Generaider Tokens\"{} to create {C:attention}#2#{}",
-					"not owned {C:red}Rare{} {C:joy_normal}\"Generaider\"{} {C:attention}Jokers{}",
+					"not owned {C:red}Rare{} {C:joy_normal}\"Generaider\"{} {C:attention}Joker{}",
 					"{C:inactive}(Must have room){}",
 				},
 			},
@@ -1281,8 +1281,11 @@ return {
 			k_joy_extra_deck = "Extra Deck",
 			k_joy_summon_conditions = "Summoning Conditions",
 			k_joy_graveyard = "Graveyard",
+			k_joy_select_materials = "Select Materials",
+			k_joy_select_tributes = "Select Tributes",
 			k_joy_summon = "Summon",
 			k_joy_detach = "Detach",
+			k_joy_activate = "Activate",
 			k_joy_token = "Token",
 			k_joy_disable_booster_tag = "Disable Booster Tag from appearing naturally",
 			k_joy_splash = "Splash!",

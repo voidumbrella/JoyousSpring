@@ -173,7 +173,7 @@ JoyousSpring.calculate_context = function(context)
         end
     end
     if context.end_of_round and context.game_over == false then
-        if G.GAME.blind and G.GAME.blind:get_type() == 'Boss' then
+        if G.GAME.blind and G.GAME.blind.boss then
             while #JoyousSpring.banish_end_of_ante_area.cards > 0 do
                 JoyousSpring.return_from_banish(JoyousSpring.banish_end_of_ante_area.cards[1])
             end

@@ -105,12 +105,6 @@ SMODS.Joker({
                 JoyousSpring.transform_card(card, "j_joy_dmaid_kitchen")
             end
             if context.other_joker and JoyousSpring.is_monster_archetype(context.other_joker, "Dragonmaid") then
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        context.other_joker:juice_up(0.5, 0.5)
-                        return true
-                    end,
-                }))
                 return {
                     mult = card.ability.extra.mult,
                 }
@@ -270,12 +264,6 @@ SMODS.Joker({
                 JoyousSpring.transform_card(card, "j_joy_dmaid_parlor")
             end
             if context.other_joker and JoyousSpring.is_monster_archetype(context.other_joker, "Dragonmaid") then
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        context.other_joker:juice_up(0.5, 0.5)
-                        return true
-                    end,
-                }))
                 return {
                     xmult = card.ability.extra.xmult,
                 }
@@ -965,7 +953,7 @@ SMODS.Joker({
         if card.facing ~= 'back' then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.setting_blind and context.main_eval then
-                if G.GAME.blind and ((not G.GAME.blind.disabled) and (G.GAME.blind:get_type() == 'Boss')) then
+                if G.GAME.blind and ((not G.GAME.blind.disabled) and (G.GAME.blind.boss)) then
                     G.GAME.blind:disable()
                     local choices = {
                         "j_joy_dmaid_kitchen",

@@ -93,12 +93,12 @@ JoyousSpring.get_materials_in_graveyard = function(property_list, to_revive, dif
     return materials
 end
 
-JoyousSpring.count_materials_in_graveyard = function(property_list, different_names)
-    return #JoyousSpring.get_materials_in_graveyard(property_list, different_names)
+JoyousSpring.count_materials_in_graveyard = function(property_list, to_revive, different_names)
+    return #JoyousSpring.get_materials_in_graveyard(property_list, to_revive, different_names)
 end
 
-JoyousSpring.get_all_material_keys = function(property_list, different_names)
-    local gy = JoyousSpring.get_materials_in_graveyard(property_list, different_names)
+JoyousSpring.get_all_material_keys = function(property_list, to_revive, different_names)
+    local gy = JoyousSpring.get_materials_in_graveyard(property_list, to_revive, different_names)
     local owned = JoyousSpring.get_materials_owned(property_list, different_names)
     for _, card in ipairs(owned) do
         gy[#gy + 1] = card.config.center_key or nil
@@ -186,6 +186,23 @@ JoyousSpring.create_random_playing_card = function(enhanced_prob, silent, colour
             return true
         end
     }))
+end
+
+JoyousSpring.get_not_owned = function (keys, count_debuffed)
+    local not_owned = {}
+    for _, key in ipairs(keys) do
+        if not next(SMODS.find_card(key, count_debuffed)) then
+            table.insert(not_owned, key)
+        end
+    end
+    return not_owned
+end
+
+JoyousSpring.empty_graveyard = function ()
+    for _, t in pairs(JoyousSpring.graveyard) do
+        t.count = 0
+        t.summonable = 0
+    end
 end
 
 if JoyousSpring.debug then

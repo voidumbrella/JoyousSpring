@@ -89,6 +89,14 @@ JoyousSpring.get_xyz_materials = function(card)
     return JoyousSpring.is_monster_card(card) and card.ability.extra.joyous_spring.xyz_materials or 0
 end
 
+JoyousSpring.has_activated_effect = function (card)
+    return JoyousSpring.is_monster_card(card) and card.config.center.joy_can_activate and true or false
+end
+
+JoyousSpring.can_activate = function (card)
+    return JoyousSpring.has_activated_effect(card) and card.config.center.joy_can_activate(card) or false
+end
+
 -- General checks
 
 JoyousSpring.is_material = function(card, properties, summon_type)
@@ -983,9 +991,11 @@ JoyousSpring.perform_summon = function(card, card_list, summon_type)
     end
 end
 
-JoyousSpring.summon_token = function(key, atlas_key, sprite_pos, joyous_spring_table)
+JoyousSpring.summon_token = function(key, edition, atlas_key, sprite_pos, joyous_spring_table)
     local card = SMODS.add_card({
-        key = "j_joy_token"
+        key = "j_joy_token",
+        edition = edition,
+        no_edition = not edition and true or nil
     })
     local pool_info = JoyousSpring.token_pool[key] or {}
     local og_table = card.ability.extra.joyous_spring

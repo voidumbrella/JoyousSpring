@@ -120,7 +120,7 @@ JoyousSpring.open_extra_deck = function(forced, open, delay_close)
 end
 
 JoyousSpring.create_UIBox_select_summon_materials = function(card)
-    local summon_type = card.ability.extra.joyous_spring.summon_type or "Fusion"
+    local summon_type = card.ability.extra.joyous_spring.summon_type or "FUSION"
 
     local colour = G.C.JOY[summon_type] or G.C.JOY.FUSION
     return {
@@ -169,7 +169,7 @@ JoyousSpring.create_UIBox_select_summon_materials = function(card)
                                         n = G.UIT.O,
                                         config = {
                                             object = DynaText({
-                                                string = { "Select Materials" },
+                                                string = { localize("k_joy_select_materials") },
                                                 colours = { G.C.UI.TEXT_LIGHT },
                                                 bump = true,
                                                 silent = true,
@@ -245,9 +245,9 @@ JoyousSpring.create_UIBox_select_summon_materials = function(card)
                                             r = 0.1,
                                             hover = true,
                                             colour = G.C.UI.BACKGROUND_INACTIVE,
-                                            button = 'exit_select_material_menu',
+                                            button = 'joy_exit_select_material_menu',
                                             shadow = true,
-                                            func = 'can_select_material',
+                                            func = 'joy_can_select_material',
                                             focus_args = {
                                                 nav = 'wide',
                                                 button = 'rightshoulder'
@@ -349,6 +349,16 @@ JoyousSpring.create_overlay_select_summon_materials = function(card, card_list)
 
         for _, joker in ipairs(material_list) do
             local added_joker = copy_card(joker)
+            if JoyousSpring.is_monster_card(joker) then
+                for k, v in pairs(joker.ability.extra.joyous_spring) do
+                    added_joker.ability.extra.joyous_spring[k] = v
+                end
+                if joker.config.center.key == "j_joy_token" then
+                    added_joker.children.center.atlas.name = joker.ability.extra.joyous_spring.token_atlas
+                    added_joker.children.center.sprite_pos = joker.ability.extra.joyous_spring.token_sprite_pos
+                    added_joker.children.center:reset()
+                end
+            end
             JoyousSpring.summon_material_area:emplace(added_joker)
             if joker.ability.set == 'Joker' then
                 for i, og_joker in ipairs(G.jokers.cards) do
@@ -369,6 +379,259 @@ JoyousSpring.create_overlay_select_summon_materials = function(card, card_list)
             definition = JoyousSpring.create_UIBox_select_summon_materials(card)
         })
     end
+end
+
+JoyousSpring.create_UIBox_effect_selection = function(card, text, select_text)
+    local colour = G.C.JOY.EFFECT
+    return {
+        n = G.UIT.ROOT,
+        config = {
+            align = "cm",
+            minw = G.ROOM.T.w * 5,
+            minh = G.ROOM.T.h * 5,
+            padding = 0.1,
+            r = 0.1,
+            colour = { colour[1], colour[2], colour[3], 0.7 }
+        },
+        nodes = {
+            {
+                n = G.UIT.R,
+                config = {
+                    align = "cm",
+                    minh = 1,
+                    r = 0.3,
+                    padding = 0.07,
+                    minw = 1,
+                    colour = lighten(colour, 0.4),
+                    emboss = 0.1
+                },
+                nodes = {
+                    {
+                        n = G.UIT.C,
+                        config = {
+                            align = "cm",
+                            minh = 1,
+                            r = 0.2,
+                            padding = 0.05,
+                            minw = 1,
+                            colour = G.C.L_BLACK
+                        },
+                        nodes = {
+                            {
+                                n = G.UIT.R,
+                                config = {
+                                    align = "cm",
+                                    padding = 0.05,
+                                    minw = 7
+                                },
+                                nodes = {
+                                    {
+                                        n = G.UIT.O,
+                                        config = {
+                                            object = DynaText({
+                                                string = { text or localize("k_joy_select_tributes") },
+                                                colours = { G.C.UI.TEXT_LIGHT },
+                                                bump = true,
+                                                silent = true,
+                                                pop_in = 0,
+                                                pop_in_rate = 4,
+                                                minw = 10,
+                                                shadow = true,
+                                                y_offset = -0.6,
+                                                scale = 0.8
+                                            })
+                                        }
+                                    }
+                                }
+
+                            },
+                            {
+                                n = G.UIT.R,
+                                config = {
+                                    align = "cm",
+                                    padding = 0.2,
+                                    minw = 7
+                                },
+                                nodes = {
+                                    {
+                                        n = G.UIT.R,
+                                        config = {
+                                            r = 0.1,
+                                            minw = 7,
+                                            minh = 5,
+                                            align = "cm",
+                                            padding = 1,
+                                            colour = G.C.BLACK
+                                        },
+                                        nodes = {
+                                            {
+                                                n = G.UIT.R,
+                                                config = {
+                                                    align = "cm",
+                                                    padding = 0.07,
+                                                    no_fill = true,
+                                                    scale = 1
+                                                },
+                                                nodes = {
+                                                    {
+                                                        n = G.UIT.O,
+                                                        config = {
+                                                            object = JoyousSpring.summon_effect_area
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                n = G.UIT.R,
+                                config = {
+                                    align = "cm",
+                                    padding = 0.1,
+                                    minw = 7,
+                                    colour = G.C.CLEAR,
+                                },
+                                nodes = {
+                                    {
+                                        n = G.UIT.C,
+                                        config = {
+                                            ref_table = card,
+                                            align = "cm",
+                                            minh = 0.7,
+                                            minw = 10,
+                                            padding = 0.1,
+                                            r = 0.1,
+                                            hover = true,
+                                            colour = G.C.UI.BACKGROUND_INACTIVE,
+                                            button = 'joy_exit_select_effect',
+                                            shadow = true,
+                                            func = 'joy_can_select_effect',
+                                            focus_args = {
+                                                nav = 'wide',
+                                                button = 'rightshoulder'
+                                            }
+                                        },
+                                        nodes = {
+                                            {
+                                                n = G.UIT.R,
+                                                config = { align = "cm", padding = 0, no_fill = true },
+                                                nodes = {
+                                                    {
+                                                        n = G.UIT.T,
+                                                        config = {
+                                                            text = select_text or localize('k_joy_summon'),
+                                                            scale = 0.5,
+                                                            colour = G.C.UI.TEXT_LIGHT,
+                                                            shadow = true,
+                                                            func = 'set_button_pip',
+                                                            focus_args = {
+                                                                button = 'rightshoulder'
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                        }
+                                    },
+                                    {
+                                        n = G.UIT.C,
+                                        config = {
+                                            align = "cm",
+                                            minh = 0.7,
+                                            minw = 3,
+                                            padding = 0.1,
+                                            r = 0.1,
+                                            hover = true,
+                                            colour = colour,
+                                            button = "exit_overlay_menu",
+                                            shadow = true,
+                                            focus_args = {
+                                                nav = 'wide',
+                                                button = 'b'
+                                            }
+                                        },
+                                        nodes = {
+                                            {
+                                                n = G.UIT.R,
+                                                config = { align = "cm", padding = 0, no_fill = true },
+                                                nodes = {
+                                                    {
+                                                        n = G.UIT.T,
+                                                        config = {
+                                                            text = localize('b_back'),
+                                                            scale = 0.5,
+                                                            colour = G.C.UI.TEXT_LIGHT,
+                                                            shadow = true,
+                                                            func = 'set_button_pip',
+                                                            focus_args = {
+                                                                button = 'b'
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                        }
+                                    },
+                                }
+                            },
+                        }
+                    },
+                }
+            },
+        }
+    }
+end
+
+JoyousSpring.create_overlay_effect_selection = function(card, card_list, min, max, text, select_text)
+    local highlight_limit = max or min or 1
+
+    JoyousSpring.summon_effect_area = CardArea(
+        0,
+        0,
+        G.CARD_W * 4.95,
+        G.CARD_H,
+        {
+            type = 'summon_materials',
+            highlight_limit = highlight_limit,
+        }
+    )
+
+    for _, joker in ipairs(card_list) do
+        local added_joker = copy_card(joker)
+        if JoyousSpring.is_monster_card(joker) then
+            for k, v in pairs(joker.ability.extra.joyous_spring) do
+                added_joker.ability.extra.joyous_spring[k] = v
+            end
+            if joker.config.center.key == "j_joy_token" then
+                added_joker.children.center.atlas.name = joker.ability.extra.joyous_spring.token_atlas
+                added_joker.children.center.sprite_pos = joker.ability.extra.joyous_spring.token_sprite_pos
+                added_joker.children.center:reset()
+            end
+        end
+        JoyousSpring.summon_effect_area:emplace(added_joker)
+        if joker.ability.set == 'Joker' then
+            for i, og_joker in ipairs(G.jokers.cards) do
+                if og_joker == joker then
+                    added_joker.joy_g_jokers_pos = i
+                end
+            end
+        else
+            for i, og_consumeable in ipairs(G.consumeables.cards) do
+                if og_consumeable == joker then
+                    added_joker.joy_g_consumeables_pos = i
+                end
+            end
+        end
+    end
+
+    card.joy_min_selection = min
+    card.joy_max_selection = max
+
+    G.FUNCS.overlay_menu({
+        definition = JoyousSpring.create_UIBox_effect_selection(card, text, select_text)
+    })
 end
 
 JoyousSpring.create_overlay_graveyard = function()
@@ -637,6 +900,7 @@ JoyousSpring.create_sell_and_use_buttons = function(card, args)
     local summon = nil
     local detach = nil
     local use = nil
+    local activate = nil
 
     if args.sell then
         sell = {
@@ -724,6 +988,23 @@ JoyousSpring.create_sell_and_use_buttons = function(card, args)
             }
         }
     end
+    if args.activate then
+        activate = {
+            n = G.UIT.C,
+            config = { align = "cr" },
+            nodes = {
+
+                {
+                    n = G.UIT.C,
+                    config = { ref_table = card, align = "cr", maxw = 1.25, padding = 0.1, r = 0.08, minw = 1.25, minh = 0, hover = true, shadow = true, colour = G.C.JOY.EFFECT or G.C.UI.BACKGROUND_INACTIVE, one_press = true, func = 'joy_can_activate', button = 'joy_activate_effect' },
+                    nodes = {
+                        { n = G.UIT.B, config = { w = 0.1, h = 0.6 } },
+                        { n = G.UIT.T, config = { text = localize('k_joy_activate'), colour = G.C.UI.TEXT_LIGHT, scale = 0.55, shadow = true } }
+                    }
+                }
+            }
+        }
+    end
 
     return {
         n = G.UIT.ROOT,
@@ -757,10 +1038,34 @@ JoyousSpring.create_sell_and_use_buttons = function(card, args)
                         config = { align = 'cl' },
                         nodes = { use }
                     } or nil,
+                    activate and {
+                        n = G.UIT.R,
+                        config = { align = 'cl' },
+                        nodes = { activate }
+                    } or nil,
                 }
             }
         }
     }
+end
+
+G.FUNCS.joy_activate_effect = function(e)
+    local card = e.config.ref_table
+
+    SMODS.calculate_context({ joy_activate_effect = true, joy_activated_card = card })
+    card:highlight(false)
+end
+
+G.FUNCS.joy_can_activate = function(e)
+    local card = e.config.ref_table
+
+    if card and JoyousSpring.can_activate(card) then
+        e.config.colour = G.C.JOY.EFFECT
+        e.config.button = 'joy_activate_effect'
+    else
+        e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+        e.config.button = nil
+    end
 end
 
 G.FUNCS.joy_open_extra_deck = function(e)
@@ -777,7 +1082,46 @@ G.FUNCS.joy_perform_summon = function(e)
     JoyousSpring.create_overlay_select_summon_materials(card)
 end
 
-G.FUNCS.can_select_material = function(e)
+G.FUNCS.joy_can_select_effect = function(e)
+    local card = e.config.ref_table
+
+    if card and JoyousSpring.summon_effect_area and next(JoyousSpring.summon_effect_area.highlighted) then
+        local count = #JoyousSpring.summon_effect_area.highlighted
+        if (card.joy_min_selection and count < card.joy_min_selection) or (card.joy_max_selection and count > card.joy_max_selection) then
+            e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+            e.config.button = nil
+        else
+            e.config.colour = G.C.JOY.EFFECT
+            e.config.button = 'joy_exit_select_effect'
+        end
+    else
+        e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+        e.config.button = nil
+    end
+end
+
+G.FUNCS.joy_exit_select_effect = function(e)
+    if not G.OVERLAY_MENU then return end
+
+    local card = e.config.ref_table
+
+    if card and JoyousSpring.summon_effect_area and next(JoyousSpring.summon_effect_area.highlighted) then
+        local material_list = {}
+        for _, material in ipairs(JoyousSpring.summon_effect_area.highlighted) do
+            if material.joy_g_jokers_pos then
+                table.insert(material_list, G.jokers.cards[material.joy_g_jokers_pos])
+            end
+            if material.joy_g_consumeables_pos then
+                table.insert(material_list, G.consumeables.cards[material.joy_g_consumeables_pos])
+            end
+        end
+        JoyousSpring.open_extra_deck(true, false)
+        SMODS.calculate_context({ joy_exit_effect_selection = true, joy_card = card, joy_selection = material_list })
+    end
+    G.FUNCS.exit_overlay_menu()
+end
+
+G.FUNCS.joy_can_select_material = function(e)
     local card = e.config.ref_table
 
     if card and JoyousSpring.summon_material_area and next(JoyousSpring.summon_material_area.highlighted) then
@@ -786,7 +1130,7 @@ G.FUNCS.can_select_material = function(e)
 
         if JoyousSpring.can_summon_with_combo(card, JoyousSpring.summon_material_area.highlighted) then
             e.config.colour = colour
-            e.config.button = 'exit_select_material_menu'
+            e.config.button = 'joy_exit_select_material_menu'
         else
             e.config.colour = G.C.UI.BACKGROUND_INACTIVE
             e.config.button = nil
@@ -797,11 +1141,33 @@ G.FUNCS.can_select_material = function(e)
     end
 end
 
+G.FUNCS.joy_exit_select_material_menu = function(e)
+    if not G.OVERLAY_MENU then return end
+
+    local card = e.config.ref_table
+    local summon_type = card.ability.extra.joyous_spring.summon_type or "Fusion"
+
+    if card and JoyousSpring.summon_material_area and next(JoyousSpring.summon_material_area.highlighted) then
+        local material_list = {}
+        for _, material in ipairs(JoyousSpring.summon_material_area.highlighted) do
+            if material.joy_g_jokers_pos then
+                table.insert(material_list, G.jokers.cards[material.joy_g_jokers_pos])
+            end
+            if material.joy_g_consumeables_pos then
+                table.insert(material_list, G.consumeables.cards[material.joy_g_consumeables_pos])
+            end
+        end
+        JoyousSpring.perform_summon(card, material_list, summon_type)
+        JoyousSpring.open_extra_deck(true, false)
+    end
+    G.FUNCS.exit_overlay_menu()
+end
+
 G.FUNCS.joy_detach_material = function(e)
     local card = e.config.ref_table
-
-    if JoyousSpring.get_xyz_materials(card) > 0 then
-        card.ability.extra.joyous_spring.xyz_materials = card.ability.extra.joyous_spring.xyz_materials - 1
+    local detach = card.ability.extra.detach or 1
+    if JoyousSpring.get_xyz_materials(card) >= detach then
+        card.ability.extra.joyous_spring.xyz_materials = card.ability.extra.joyous_spring.xyz_materials - detach
         SMODS.calculate_context({ joy_detach = true, joy_detaching_card = card })
     end
 end
@@ -1024,28 +1390,6 @@ G.FUNCS.joy_show_graveyard = function(e)
     else
         e.states.visible = false
     end
-end
-
-G.FUNCS.exit_select_material_menu = function(e)
-    if not G.OVERLAY_MENU then return end
-
-    local card = e.config.ref_table
-    local summon_type = card.ability.extra.joyous_spring.summon_type or "Fusion"
-
-    if card and JoyousSpring.summon_material_area and next(JoyousSpring.summon_material_area.highlighted) then
-        local material_list = {}
-        for _, material in ipairs(JoyousSpring.summon_material_area.highlighted) do
-            if material.joy_g_jokers_pos then
-                table.insert(material_list, G.jokers.cards[material.joy_g_jokers_pos])
-            end
-            if material.joy_g_consumeables_pos then
-                table.insert(material_list, G.consumeables.cards[material.joy_g_consumeables_pos])
-            end
-        end
-        JoyousSpring.perform_summon(card, material_list, summon_type)
-        JoyousSpring.open_extra_deck(true, false)
-    end
-    G.FUNCS.exit_overlay_menu()
 end
 
 local g_funcs_reroll_shop_ref = G.FUNCS.reroll_shop
@@ -1273,7 +1617,7 @@ function Card:highlight(is_highlighted)
         if self.highlighted then
             if JoyousSpring.is_field_spell(self) then
                 self.children.use_button = UIBox {
-                    definition = JoyousSpring.create_sell_and_use_buttons(self, { sell = true }),
+                    definition = JoyousSpring.create_sell_and_use_buttons(self, { sell = true, activate = JoyousSpring.has_activated_effect(self) }),
                     config = {
                         align = "cr",
                         offset = { x = -0.4, y = 0 },
@@ -1299,16 +1643,15 @@ function Card:highlight(is_highlighted)
         end
     elseif self.area and self.area.config.type == "summon_materials" then
         self.highlighted = is_highlighted
-    elseif ((JoyousSpring.is_summon_type(self, "XYZ") and JoyousSpring.get_xyz_materials(self) > 0) or
-            JoyousSpring.is_pendulum_monster(self)) and
-        self.area and self.area.config.type == 'joker' then
+    elseif JoyousSpring.is_monster_card(self) and self.area and self.area == G.jokers then
         self.highlighted = is_highlighted
         if self.highlighted then
             self.children.use_button = UIBox {
                 definition = JoyousSpring.create_sell_and_use_buttons(self, {
                     sell = true,
                     detach = (JoyousSpring.is_summon_type(self, "XYZ") and JoyousSpring.get_xyz_materials(self) > 0),
-                    use = JoyousSpring.is_pendulum_monster(self)
+                    use = JoyousSpring.is_pendulum_monster(self),
+                    activate = JoyousSpring.has_activated_effect(self)
                 }),
                 config = {
                     align = "cr",
