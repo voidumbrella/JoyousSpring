@@ -521,15 +521,18 @@ SMODS.Joker({
                 local choices, _ = get_current_pool("Joker", "Uncommon", nil, "JoyousSpring")
 
                 for i = 1, card.ability.extra.cards_to_create do
-                    local it = 0
-                    local center = pseudorandom_element(choices, pseudoseed("j_joy_spright_gigantic"))
-                    while center == 'UNAVAILABLE' do
-                        it = it + 1
-                        center = pseudorandom_element(choices, pseudoseed("j_joy_spright_gigantic" .. '_resample' .. it))
+                    if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+                        local it = 0
+                        local center = pseudorandom_element(choices, pseudoseed("j_joy_spright_gigantic"))
+                        while center == 'UNAVAILABLE' do
+                            it = it + 1
+                            center = pseudorandom_element(choices,
+                                pseudoseed("j_joy_spright_gigantic" .. '_resample' .. it))
+                        end
+                        SMODS.add_card({
+                            key = center
+                        })
                     end
-                    SMODS.add_card({
-                        key = center
-                    })
                 end
             end
         end
