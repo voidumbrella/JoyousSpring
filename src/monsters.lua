@@ -165,7 +165,7 @@ JoyousSpring.is_material = function(card, properties, summon_type)
         return not JoyousSpring.is_monster_card(card)
     end
     if not JoyousSpring.is_monster_card(card) then
-        return not (properties.is_monster or properties.monster_type or properties.monster_attribute or properties.monster_archetypes or properties.is_pendulum or properties.summon_type or properties.is_effect or properties.is_non_effect or properties.is_normal or properties.is_extra_deck or properties.is_main_deck or properties.is_summoned) or
+        return not (properties.is_monster or properties.monster_type or properties.monster_attribute or properties.monster_archetypes or properties.is_pendulum or properties.summon_type or properties.is_effect or properties.is_non_effect or properties.is_normal or properties.is_extra_deck or properties.is_main_deck or properties.is_summoned or properties.is_tuner) or
             false
     end
     if properties.monster_type then
