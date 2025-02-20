@@ -162,7 +162,7 @@ SMODS.Joker({
             true or false
     end,
     in_pool = function(self, args)
-        return args.source and args.source == "JoyousSpring" or false
+        return args and args.source and args.source == "JoyousSpring" or false
     end,
 })
 
@@ -237,7 +237,7 @@ SMODS.Joker({
             true or false
     end,
     in_pool = function(self, args)
-        return args.source and args.source == "JoyousSpring" or false
+        return args and args.source and args.source == "JoyousSpring" or false
     end,
 })
 
@@ -306,7 +306,7 @@ SMODS.Joker({
         return (next(tokens)) and true or false
     end,
     in_pool = function(self, args)
-        return args.source and args.source == "JoyousSpring" or false
+        return args and args.source and args.source == "JoyousSpring" or false
     end,
 })
 
@@ -372,7 +372,7 @@ SMODS.Joker({
             true or false
     end,
     in_pool = function(self, args)
-        return args.source and args.source == "JoyousSpring" or false
+        return args and args.source and args.source == "JoyousSpring" or false
     end,
 })
 
@@ -445,7 +445,7 @@ SMODS.Joker({
             true or false
     end,
     in_pool = function(self, args)
-        return args.source and args.source == "JoyousSpring" or false
+        return args and args.source and args.source == "JoyousSpring" or false
     end,
 })
 
@@ -522,7 +522,7 @@ SMODS.Joker({
             true or false
     end,
     in_pool = function(self, args)
-        return args.source and args.source == "JoyousSpring" or false
+        return args and args.source and args.source == "JoyousSpring" or false
     end,
 })
 
@@ -588,7 +588,7 @@ SMODS.Joker({
         return (G.GAME.blind and G.GAME.blind.in_blind and next(tokens)) and true or false
     end,
     in_pool = function(self, args)
-        return args.source and args.source == "JoyousSpring" or false
+        return args and args.source and args.source == "JoyousSpring" or false
     end,
 })
 
@@ -659,7 +659,7 @@ SMODS.Joker({
         return (G.GAME.blind and G.GAME.blind.in_blind and next(tokens)) and true or false
     end,
     in_pool = function(self, args)
-        return args.source and args.source == "JoyousSpring" or false
+        return args and args.source and args.source == "JoyousSpring" or false
     end,
 })
 

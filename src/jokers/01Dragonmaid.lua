@@ -123,7 +123,7 @@ SMODS.Joker({
         end
     end,
     in_pool = function(self, args)
-        return args.source and args.source == "JoyousSpring" or false
+        return args and args.source and args.source == "JoyousSpring" or false
     end,
     joker_display_def = function(JokerDisplay)
         return {
@@ -282,7 +282,7 @@ SMODS.Joker({
         end
     end,
     in_pool = function(self, args)
-        return args.source and args.source == "JoyousSpring" or false
+        return args and args.source and args.source == "JoyousSpring" or false
     end,
     joker_display_def = function(JokerDisplay)
         return {
@@ -432,7 +432,7 @@ SMODS.Joker({
         end
     end,
     in_pool = function(self, args)
-        return args.source and args.source == "JoyousSpring" or false
+        return args and args.source and args.source == "JoyousSpring" or false
     end,
     joker_display_def = function(JokerDisplay)
         return {
@@ -562,7 +562,7 @@ SMODS.Joker({
         end
     end,
     in_pool = function(self, args)
-        return args.source and args.source == "JoyousSpring" or false
+        return args and args.source and args.source == "JoyousSpring" or false
     end,
     joker_display_def = function(JokerDisplay)
         return {
@@ -711,7 +711,7 @@ SMODS.Joker({
         end
     end,
     in_pool = function(self, args)
-        return args.source and args.source == "JoyousSpring" or false
+        return args and args.source and args.source == "JoyousSpring" or false
     end,
     joker_display_def = function(JokerDisplay)
         return {
@@ -977,7 +977,7 @@ SMODS.Joker({
         end
     end,
     in_pool = function(self, args)
-        return args.source and args.source == "JoyousSpring" or false
+        return args and args.source and args.source == "JoyousSpring" or false
     end,
 })
 
