@@ -363,7 +363,7 @@ SMODS.Joker({
                                 { is_tuner = true },
                             },
                             pseudoseed("j_joy_fish_psiics"),
-                            true,
+                            false,
                             { negative = true }
                         )
                     end
