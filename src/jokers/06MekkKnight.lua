@@ -150,7 +150,7 @@ SMODS.Joker({
                 perma_debuffed = false,
                 is_free = false,
             },
-            money = 3
+            money = 2
         },
     },
     calculate = function(self, card, context)
