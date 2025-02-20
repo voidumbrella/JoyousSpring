@@ -1,6 +1,6 @@
 JoyousSpring = {}
-JoyousSpring.debug = false
-JoyousSpring.debug_shop_cards = { { key = "j_joy_generaider_laevatein" } }
+JoyousSpring.debug = true
+JoyousSpring.debug_shop_cards = { { key = "j_joy_eccentrick" } }
 
 SMODS.Atlas({
     key = "modicon",

@@ -205,6 +205,10 @@ JoyousSpring.empty_graveyard = function ()
     end
 end
 
+to_big = to_big or function(a)
+    return a
+end
+
 if JoyousSpring.debug then
     function calculate_reroll_cost(skip_increment)
         G.GAME.current_round.reroll_cost = 0
