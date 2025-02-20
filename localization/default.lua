@@ -1288,6 +1288,7 @@ return {
 			k_joy_activate = "Activate",
 			k_joy_token = "Token",
 			k_joy_disable_booster_tag = "Disable Booster Tag from appearing naturally",
+			k_joy_only_ygo_cards = "Only Monster Cards appear",
 			k_joy_splash = "Splash!",
 			k_joy_defeated = "Defeated!",
 			k_joy_banished = "Banished!",
