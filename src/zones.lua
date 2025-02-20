@@ -1185,7 +1185,7 @@ end
 
 G.FUNCS.joy_can_buy_and_use = function(e)
     local card = e.config.ref_table
-    if (((to_big(card.cost) > to_big(G.GAME.dollars) - to_big(G.GAME.bankrupt_at)) and (card.cost > 0)) or
+    if (((to_big(card.cost) > to_big(G.GAME.dollars - G.GAME.bankrupt_at) ) and (card.cost > 0)) or
             not (card.config.center.can_use and card.config.center:can_use(card))) then
         e.UIBox.states.visible = false
         e.config.colour = G.C.UI.BACKGROUND_INACTIVE
