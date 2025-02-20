@@ -51,11 +51,11 @@ Has compatibility with [JokerDisplay](https://github.com/nh6574/JokerDisplay) ve
 
 I might drop this at any moment (if I haven't already), so please feel free to fork or do PRs if you feel like you can improve on this or fix any of the problems above!
 
-I'm not accepting contributions that add consumables or that add any Spells or (non-monster) Traps as monsters for the time being. Also, when contributing an archetype I'm not merging PRs until a minimum viable version of the entire archetype is finished.
+I will be strict with any card constributions that don't fit the theme of the mod. Also, when contributing an archetype I'm not merging PRs until a minimum viable version of the entire archetype is finished.
 
 ## Contact
 
-If you have any issues feel free to contact me on [Bluesky](https://bsky.app/profile/nh6574.com) or Discord as nh6574
+If you have any issues feel free to contact me on [Bluesky](https://bsky.app/profile/nh6574.com) or [on the official Balatro Discord as nh6574](https://discord.com/invite/balatro)
 
 And here's my [ko-fi link](https://ko-fi.com/nh6574) if you feel especially grateful.
 
