@@ -52,7 +52,8 @@ SMODS.Joker({
     add_to_deck = function(self, card, from_debuff)
         if not card.joy_from_kisikil and not next(SMODS.find_card("j_joy_ltwin_kisikil", true)) and not card.debuff and not from_debuff then
             for i = 1, card.ability.extra.cards_to_create do
-                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit -
+                    ((card.edition and card.edition.negative) and 0 or 1) then
                     local added_card = SMODS.create_card({
                         key = "j_joy_ltwin_kisikil"
                     })
@@ -120,7 +121,8 @@ SMODS.Joker({
     add_to_deck = function(self, card, from_debuff)
         if not card.joy_from_lilla and not next(SMODS.find_card("j_joy_ltwin_lilla", true)) and not card.debuff and not from_debuff then
             for i = 1, card.ability.extra.cards_to_create do
-                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit -
+                    ((card.edition and card.edition.negative) and 0 or 1) then
                     local added_card = SMODS.create_card({
                         key = "j_joy_ltwin_lilla"
                     })

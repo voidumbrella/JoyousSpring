@@ -205,8 +205,8 @@ JoyousSpring.empty_graveyard = function ()
     end
 end
 
-to_big = to_big or function(a)
-    return a
+to_big = to_big or function(num)
+    return num
 end
 
 if JoyousSpring.debug then

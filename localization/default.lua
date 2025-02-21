@@ -1117,10 +1117,6 @@ return {
 					"{C:mult}+#2#{} Mult for every destroyed playing card this run",
 					"{C:inactive}(Currently{} {C:mult}+#3#{} {C:inactive}Mult){}",
 				},
-				pendulum_text = {
-					"Destroys up to",
-					"{C:attention}#1#{} selected cards",
-				}
 			},
 			--#endregion
 			--#region Ritual
