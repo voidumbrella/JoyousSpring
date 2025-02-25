@@ -206,7 +206,7 @@ SMODS.Joker({
     key = "fish_ixeep",
     atlas = 'Ghoti',
     pos = { x = 0, y = 1 },
-    rarity = 1,
+    rarity = 3,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
@@ -254,7 +254,7 @@ SMODS.Joker({
                         end
                     end
                 end
-                JoyousSpring.banish(card, "blind_selected", func)
+                JoyousSpring.banish(card, "boss_selected", func)
             end
         end
     end,
@@ -384,6 +384,9 @@ SMODS.Joker({
     blueprint_compat = false,
     eternal_compat = true,
     cost = 7,
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.banishes } }
+    end,
     generate_ui = JoyousSpring.generate_info_ui,
     config = {
         extra = {
@@ -398,6 +401,7 @@ SMODS.Joker({
                 perma_debuffed = false,
                 is_free = false,
             },
+            banishes = 1
         },
     },
     calculate = function(self, card, context)
@@ -405,10 +409,18 @@ SMODS.Joker({
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.banish(card, "blind_selected")
-                local choices = JoyousSpring.get_materials_owned({ { exclude_monster_archetypes = { "Ghoti" } } })
-                local to_banish = pseudorandom_element(choices, pseudoseed("j_joy_fish_snopios"))
-                if to_banish then
-                    JoyousSpring.banish(to_banish, "blind_selected")
+                local choices = {}
+                for _, consumable in ipairs(G.consumeables.cards) do
+                    table.insert(choices, consumable)
+                end
+                for i = 1, card.ability.extra.banishes do
+                    if #choices > 0 then
+                        local to_banish, pos = pseudorandom_element(choices, pseudoseed("j_joy_fish_snopios"))
+                        if to_banish then
+                            JoyousSpring.banish(to_banish, "blind_selected")
+                        end
+                        table.remove(choices, pos)
+                    end
                 end
             end
         end
@@ -646,9 +658,9 @@ SMODS.Joker({
                     {
                         type = "SYNCHRO",
                         materials = {
-                            { is_tuner = true,       monster_type = "Fish",                   exclude_summon_types = { "XYZ", "LINK" } },
-                            { is_tuner = true,       monster_type = "Fish",                   exclude_summon_types = { "XYZ", "LINK" } },
-                            { exclude_tuners = true, exclude_summon_types = { "XYZ", "LINK" } },
+                            { is_tuner = true, monster_type = "Fish", exclude_summon_types = { "XYZ", "LINK" } },
+                            { is_tuner = true, monster_type = "Fish", exclude_summon_types = { "XYZ", "LINK" } },
+                            { rarity = 3,      exclude_tuners = true, exclude_summon_types = { "XYZ", "LINK" } },
                         },
                     }
                 },

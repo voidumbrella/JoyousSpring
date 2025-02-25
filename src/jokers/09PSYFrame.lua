@@ -98,7 +98,7 @@ SMODS.Joker({
         if not next(SMODS.find_card("j_joy_psy_driver", true)) and not card.debuff and not from_debuff then
             for i = 1, card.ability.extra.cards_to_create do
                 if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit -
-                ((card.edition and card.edition.negative) and 0 or 1) then
+                    ((card.edition and card.edition.negative) and 0 or 1) then
                     SMODS.add_card({
                         key = "j_joy_psy_driver"
                     })
@@ -168,7 +168,7 @@ SMODS.Joker({
         if not next(SMODS.find_card("j_joy_psy_driver", true)) and not card.debuff and not from_debuff then
             for i = 1, card.ability.extra.cards_to_create do
                 if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit -
-                ((card.edition and card.edition.negative) and 0 or 1) then
+                    ((card.edition and card.edition.negative) and 0 or 1) then
                     SMODS.add_card({
                         key = "j_joy_psy_driver"
                     })
@@ -238,7 +238,7 @@ SMODS.Joker({
         if not next(SMODS.find_card("j_joy_psy_driver", true)) and not card.debuff and not from_debuff then
             for i = 1, card.ability.extra.cards_to_create do
                 if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit -
-                ((card.edition and card.edition.negative) and 0 or 1) then
+                    ((card.edition and card.edition.negative) and 0 or 1) then
                     SMODS.add_card({
                         key = "j_joy_psy_driver"
                     })
@@ -308,7 +308,7 @@ SMODS.Joker({
         if not next(SMODS.find_card("j_joy_psy_driver", true)) and not card.debuff and not from_debuff then
             for i = 1, card.ability.extra.cards_to_create do
                 if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit -
-                ((card.edition and card.edition.negative) and 0 or 1) then
+                    ((card.edition and card.edition.negative) and 0 or 1) then
                     SMODS.add_card({
                         key = "j_joy_psy_driver"
                     })
@@ -378,7 +378,7 @@ SMODS.Joker({
         if not next(SMODS.find_card("j_joy_psy_driver", true)) and not card.debuff and not from_debuff then
             for i = 1, card.ability.extra.cards_to_create do
                 if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit -
-                ((card.edition and card.edition.negative) and 0 or 1) then
+                    ((card.edition and card.edition.negative) and 0 or 1) then
                     SMODS.add_card({
                         key = "j_joy_psy_driver"
                     })
@@ -452,6 +452,9 @@ SMODS.Joker({
     blueprint_compat = false,
     eternal_compat = true,
     cost = 10,
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.banishes } }
+    end,
     generate_ui = JoyousSpring.generate_info_ui,
     config = {
         extra = {
@@ -477,16 +480,25 @@ SMODS.Joker({
                 summoned = false,
                 summon_materials = {},
             },
+            banishes = 2
         },
     },
     calculate = function(self, card, context)
         if card.facing ~= 'back' then
             if not context.blueprint_card and context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.banish(card, "blind_selected")
-                local choices = G.consumeables.cards
-                local to_banish = pseudorandom_element(choices, pseudoseed("j_joy_psy_zeta"))
-                if to_banish then
-                    JoyousSpring.banish(to_banish, "blind_selected")
+                local choices = {}
+                for _, consumable in ipairs(G.consumeables.cards) do
+                    table.insert(choices, consumable)
+                end
+                for i = 1, card.ability.extra.banishes do
+                    if #choices > 0 then
+                        local to_banish, pos = pseudorandom_element(choices, pseudoseed("j_joy_psy_zeta"))
+                        if to_banish then
+                            JoyousSpring.banish(to_banish, "blind_selected")
+                        end
+                        table.remove(choices, pos)
+                    end
                 end
             end
         end

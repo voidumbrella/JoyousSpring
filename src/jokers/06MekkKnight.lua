@@ -128,7 +128,7 @@ SMODS.Joker({
     key = "mekk_yellow",
     atlas = 'MekkKnight',
     pos = { x = 3, y = 0 },
-    rarity = 2,
+    rarity = 3,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
@@ -150,7 +150,7 @@ SMODS.Joker({
                 perma_debuffed = false,
                 is_free = false,
             },
-            money = 2
+            money = 1
         },
     },
     calculate = function(self, card, context)

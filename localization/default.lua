@@ -784,7 +784,7 @@ return {
 				name = "{C:joy_effect}Ixeep, Omen of the Ghoti",
 				text = {
 					"This card {C:attention}banishes{} at the end of round",
-					"until {C:attention}Blind{} is selected and",
+					"until {C:attention}Boss Blind{} is selected and",
 					"creates {C:attention}#1#{} {C:joy_normal}Main Deck{} {C:joy_normal}\"Ghoti\"{} {C:attention}Joker{}",
 					"{C:inactive}(Must have room){}",
 				},
@@ -812,8 +812,8 @@ return {
 			j_joy_fish_snopios = {
 				name = "{C:joy_effect}Snopios, Shade of the Ghoti",
 				text = {
-					"This card and a non-{C:joy_normal}\"Ghoti\"{} {C:attention}Joker{}",
-					"{C:attention}banish{} at the end of round",
+					"This card and #1# card in your consumable",
+					"area {C:attention}banish{} at the end of round",
 					"until {C:attention}Blind{} is selected",
 				},
 			},
@@ -967,7 +967,7 @@ return {
 			j_joy_psy_zeta = {
 				name = "{C:joy_synchro}PSY-Framelord Zeta",
 				text = {
-					"This card and a card in your consumable",
+					"This card and #1# cards in your consumable",
 					"area {C:attention}banish{} at the end of round",
 					"until {C:attention}Blind{} is selected",
 				},
