@@ -278,7 +278,6 @@ SMODS.Joker({
                     JoyousSpring.get_joker_column(card) >= 5 and G.C.UI.TEXT_DARK or G.C.UI.TEXT_INACTIVE
                 }
             },
-
         }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
