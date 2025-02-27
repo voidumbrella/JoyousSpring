@@ -1185,7 +1185,7 @@ end
 
 G.FUNCS.joy_can_buy_and_use = function(e)
     local card = e.config.ref_table
-    if (((to_big(card.cost) > to_big(G.GAME.dollars - G.GAME.bankrupt_at) ) and (card.cost > 0)) or
+    if (((to_big(card.cost) > to_big(G.GAME.dollars - G.GAME.bankrupt_at)) and (card.cost > 0)) or
             not (card.config.center.can_use and card.config.center:can_use(card))) then
         e.UIBox.states.visible = false
         e.config.colour = G.C.UI.BACKGROUND_INACTIVE
@@ -1979,7 +1979,7 @@ function Game:start_run(args)
     JoyousSpring.extra_deck_forced = false
     JoyousSpring.extra_deck_limit = 5
 
-    self.GAME.joy_graveyard = self.GAME.joy_graveyard or {}
+    self.GAME.joy_graveyard = self.GAME.joy_graveyard or self.GAME.modifiers["joy_gy_start"] or {}
     JoyousSpring.graveyard = self.GAME.joy_graveyard
 
     self.GAME.joy_create_card = JoyousSpring.debug and JoyousSpring.debug_shop_cards or self.GAME.joy_create_card or {}

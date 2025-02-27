@@ -1,6 +1,6 @@
 -- CHALLENGES
 
-JoyousSpring.get_challenge_colour = function (challenge)
+JoyousSpring.get_challenge_colour = function(challenge)
     if challenge and challenge.joy_colour then return challenge.joy_colour end
     return nil
 end
@@ -44,10 +44,10 @@ SMODS.Challenge({
     key = "mistake",
     rules = {
         modifiers = {
-            { id = "hands", value = 3 },
-            { id = "discards", value = 2 },
+            { id = "hands",       value = 3 },
+            { id = "discards",    value = 2 },
             { id = "joker_slots", value = 3 },
-            { id = "dollars", value = 8 },
+            { id = "dollars",     value = 8 },
         }
     },
     jokers = {
@@ -69,6 +69,28 @@ SMODS.Challenge({
             { id = "j_juggler" },
             { id = "j_turtle_bean" },
         }
+    },
+    unlocked = function(self)
+        return true
+    end,
+    joy_colour = G.C.JOY.SPELL
+})
+
+-- Monster Reborn
+SMODS.Challenge({
+    key = "monster_reborn",
+    rules = {
+        custom = {
+            { id = "joy_gy_start", value = { j_joy_etwin_lilla = { count = 1, summonable = 1 } } }
+        },
+        modifiers = {
+            { id = "joker_slots", value = 4 },
+            { id = "dollars",     value = 0 },
+        }
+    },
+    jokers = {
+        { id = "j_joy_yokai_belle",  eternal = true },
+        { id = "j_joy_etwin_kisikil", joy_summoned = true, joy_revived = true },
     },
     unlocked = function(self)
         return true

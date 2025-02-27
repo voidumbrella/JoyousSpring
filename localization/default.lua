@@ -1276,6 +1276,12 @@ return {
 		challenge_names = {
 			c_joy_mystic_wok = "Mystic Wok",
 			c_joy_mistake = "Mistake",
+			c_joy_monster_reborn = "Monster Reborn",
+		},
+		v_text = {
+			ch_c_joy_gy_start={
+                "Start with some cards in the {C:attention}GY{}",
+            },
 		},
 		dictionary = {
 			k_joy_extra_deck = "Extra Deck",
