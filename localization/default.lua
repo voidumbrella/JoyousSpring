@@ -1273,6 +1273,10 @@ return {
 		}
 	},
 	misc = {
+		challenge_names = {
+			c_joy_mystic_wok = "Mystic Wok",
+			c_joy_mistake = "Mistake",
+		},
 		dictionary = {
 			k_joy_extra_deck = "Extra Deck",
 			k_joy_summon_conditions = "Summoning Conditions",
