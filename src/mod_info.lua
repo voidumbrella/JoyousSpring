@@ -161,6 +161,17 @@ SMODS.current_mod.config_tab = function()
                                     })
                                 }
                             },
+                            {
+                                n = G.UIT.R,
+                                config = { align = "cm", padding = 0.01 },
+                                nodes = {
+                                    create_toggle({
+                                        label = localize('k_joy_extra_ygo_booster'),
+                                        ref_table = JoyousSpring.config,
+                                        ref_value = 'extra_ygo_booster'
+                                    })
+                                }
+                            },
                         }
                     },
                 }

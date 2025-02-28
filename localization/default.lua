@@ -1183,6 +1183,49 @@ return {
 			},
 		},
 		Other = {
+			p_joy_monster_pack = {
+				name = "Champion Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{} {C:joy_normal}Monster{} {C:joker}Joker{} cards",
+				},
+			},
+			p_joy_jumbo_monster_pack = {
+				name = "Turbo Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{} {C:joy_normal}Monster{} {C:joker}Joker{} cards",
+				},
+			},
+			p_joy_mega_monster_pack = {
+				name = "Astral Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{} {C:joy_normal}Monster{} {C:joker}Joker{} cards",
+				},
+			},
+			p_joy_extra_pack = {
+				name = "Duelist Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{} {C:joy_spell}Special Summon{} {C:joker}Joker{} cards",
+				},
+			},
+			p_joy_jumbo_extra_pack = {
+				name = "Star Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{} {C:joy_spell}Special Summon{} {C:joker}Joker{} cards",
+				},
+			},
+			p_joy_mega_extra_pack = {
+				name = "Premium Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{} {C:joy_spell}Special Summon{} {C:joker}Joker{} cards",
+				},
+			},
+			--#region Glossary
 			joy_glossary_monster = {
 				name = "",
 				text = {
@@ -1270,6 +1313,7 @@ return {
 					"{C:joy_ritual,s:1.3}Ritual{} {C:attention,s:1.3}Jokers{}: These don't go in the {C:joy_spell}Extra Deck{} but are summoned directly from the shop instead. They count as {C:joy_normal}Main Deck{} {C:attention}Jokers{}",
 				},
 			},
+			--#endregion
 		}
 	},
 	misc = {
@@ -1279,9 +1323,9 @@ return {
 			c_joy_monster_reborn = "Monster Reborn",
 		},
 		v_text = {
-			ch_c_joy_gy_start={
-                "Start with some cards in the {C:attention}GY{}",
-            },
+			ch_c_joy_gy_start = {
+				"Start with some cards in the {C:attention}GY{}",
+			},
 		},
 		dictionary = {
 			k_joy_extra_deck = "Extra Deck",
@@ -1295,9 +1339,11 @@ return {
 			k_joy_token = "Token",
 			k_joy_disable_booster_tag = "Disable Booster Tag from appearing naturally",
 			k_joy_only_ygo_cards = "Only Monster Cards appear",
+			k_joy_extra_ygo_booster = "Extra Monster Card booster each shop",
 			k_joy_splash = "Splash!",
 			k_joy_defeated = "Defeated!",
 			k_joy_banished = "Banished!",
+			k_joy_booster_group = "Monster Pack",
 			--#region Card types
 			k_joy_Aqua = "Aqua",
 			k_joy_Beast = "Beast",
