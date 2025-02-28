@@ -5,12 +5,14 @@ priority = 0
 
 # Change card back to Yu-Gi-Oh's card back
 [[patches]]
-[patches.regex]
+[patches.pattern]
 target = "card.lua"
-pattern = 'self\.children\.back = Sprite.*'
+pattern = 'if not self.children.back then'
 position = 'before'
+match_indent = true
 payload = '''
 if JoyousSpring and JoyousSpring.is_monster_card(self) then
+print(self.config.center.key)
     self.children.back = Sprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ASSET_ATLAS["joy_Back"], { x = 0, y = 0 })
     self.children.back.states.hover = self.states.hover
     self.children.back.states.click = self.states.click

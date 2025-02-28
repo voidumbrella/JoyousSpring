@@ -432,24 +432,12 @@ JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, spe
     end
 end
 
--- This fixes the colours on the Joker names on the info tooltips but it looks ugly so I will revisit it in the future
-
--- local info_tip_from_rows_ref = info_tip_from_rows
--- function info_tip_from_rows(desc_nodes, name)
---     local ret = info_tip_from_rows_ref(desc_nodes, name)
---     if ret then
---         local name_node_config = ret.nodes[1].nodes[1].config
---         if string.len(name_node_config.text) > 2 and string.sub(name_node_config.text, string.len(name_node_config.text) - 1, string.len(name_node_config.text)) == "{}" then
---             name_node_config.text = string.sub(name_node_config.text, 1, string.len(name_node_config.text) - 2)
---         end
---         if string.sub(name_node_config.text, 1, 3) == "{C:" then
---             local _, _, colour, real_name = string.find(name_node_config.text, "{C:(.*)}(.*)")
---             name_node_config.text = real_name or name_node_config.text
---             name_node_config.colour = G.ARGS.LOC_COLOURS[colour] or G.C.UI.TEXT_LIGHT
---             if colour then
---                 name_node_config.shadow = true
---             end
---         end
---     end
---     return ret
--- end
+JoyousSpring.set_back_sprite = function(self, card, front)
+    if card.children.back then card.children.back:remove() end
+    card.children.back = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS["joy_Back"], { x = 0, y = 0 })
+    card.children.back.states.hover = card.states.hover
+    card.children.back.states.click = card.states.click
+    card.children.back.states.drag = card.states.drag
+    card.children.back.states.collide.can = false
+    card.children.back:set_role({ major = card, role_type = 'Glued', draw_major = card })
+end

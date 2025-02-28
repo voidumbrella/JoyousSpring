@@ -42,6 +42,7 @@ SMODS.Joker({
         }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -133,6 +134,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.chips, card.ability.extra.chips * (G.GAME.joy_cards_banished or 0) } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -179,6 +181,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.max, card.ability.extra.mult, card.ability.extra.mult * (G.GAME.joy_cards_destroyed or 0) } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -274,6 +277,7 @@ SMODS.Joker({
         return {}
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -353,103 +357,105 @@ SMODS.Joker({
 --     loc_vars = function(self, info_queue, card)
 --         return {}
 --     end,
---     generate_ui = JoyousSpring.generate_info_ui,
---     config = {
---         extra = {
---             joyous_spring = {
---                 is_main_deck = false,
---                 summon_type = "FUSION",
---                 is_effect = true,
---                 is_all_attributes = true,
---                 is_all_materials = { "FUSION" },
---                 attribute = "FIRE",
---                 monster_type = "Dragon",
---                 monster_archetypes = {},
---                 summon_conditions = {
---                     {
---                         type = "FUSION",
---                         materials = {
---                             {},
---                             {},
---                         },
---                         restrictions = {
---                             different_rarities = true
---                         }
---                     }
---                 },
---             },
---         },
---     },
--- })
+--     generate_ui = JoyousSpring.generate_info_ui,	
+set_sprites = JoyousSpring.set_back_sprite,
+    --     config = {
+    --         extra = {
+    --             joyous_spring = {
+    --                 is_main_deck = false,
+    --                 summon_type = "FUSION",
+    --                 is_effect = true,
+    --                 is_all_attributes = true,
+    --                 is_all_materials = { "FUSION" },
+    --                 attribute = "FIRE",
+    --                 monster_type = "Dragon",
+    --                 monster_archetypes = {},
+    --                 summon_conditions = {
+    --                     {
+    --                         type = "FUSION",
+    --                         materials = {
+    --                             {},
+    --                             {},
+    --                         },
+    --                         restrictions = {
+    --                             different_rarities = true
+    --                         }
+    --                     }
+    --                 },
+    --             },
+    --         },
+    --     },
+    -- })
 
--- Garura, Wings of Resonant Life
+    -- Garura, Wings of Resonant Life
 
-SMODS.Joker({
-    key = "garura",
-    atlas = 'Misc01',
-    pos = { x = 0, y = 1 },
-    rarity = 2,
-    discovered = true,
-    blueprint_compat = false,
-    eternal_compat = true,
-    cost = 6,
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.h_size, card.ability.extra.h_size_gain } }
-    end,
-    generate_ui = JoyousSpring.generate_info_ui,
-    config = {
-        extra = {
-            joyous_spring = {
-                is_main_deck = false,
-                summon_type = "FUSION",
-                is_effect = true,
-                attribute = "DARK",
-                monster_type = "WingedBeast",
-                monster_archetypes = {},
-                summon_conditions = {
-                    {
-                        type = "FUSION",
-                        materials = {
-                            {},
-                            {},
-                        },
-                        restrictions = {
-                            same_rarity = true,
-                            different_names = true
+    SMODS.Joker({
+        key = "garura",
+        atlas = 'Misc01',
+        pos = { x = 0, y = 1 },
+        rarity = 2,
+        discovered = true,
+        blueprint_compat = false,
+        eternal_compat = true,
+        cost = 6,
+        loc_vars = function(self, info_queue, card)
+            return { vars = { card.ability.extra.h_size, card.ability.extra.h_size_gain } }
+        end,
+        generate_ui = JoyousSpring.generate_info_ui,
+        set_sprites = JoyousSpring.set_back_sprite,
+        config = {
+            extra = {
+                joyous_spring = {
+                    is_main_deck = false,
+                    summon_type = "FUSION",
+                    is_effect = true,
+                    attribute = "DARK",
+                    monster_type = "WingedBeast",
+                    monster_archetypes = {},
+                    summon_conditions = {
+                        {
+                            type = "FUSION",
+                            materials = {
+                                {},
+                                {},
+                            },
+                            restrictions = {
+                                same_rarity = true,
+                                different_names = true
+                            }
                         }
-                    }
+                    },
+                    revived = false,
+                    perma_debuffed = false,
+                    is_free = false,
+                    summoned = false,
+                    summon_materials = {},
                 },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
+                h_size = 2,
+                h_size_gain = 1
             },
-            h_size = 2,
-            h_size_gain = 1
         },
-    },
-    calculate = function(self, card, context)
-        if context.joy_summon and context.main_eval and not context.blueprint_card then
-            for _, joker in ipairs(context.joy_summon_materials) do
-                if joker == card then
-                    G.hand:change_size(card.ability.extra.h_size_gain)
-                    break
+        calculate = function(self, card, context)
+            if context.joy_summon and context.main_eval and not context.blueprint_card then
+                for _, joker in ipairs(context.joy_summon_materials) do
+                    if joker == card then
+                        G.hand:change_size(card.ability.extra.h_size_gain)
+                        break
+                    end
                 end
             end
-        end
-    end,
-    add_to_deck = function(self, card, from_debuff)
-        if not JoyousSpring.is_perma_debuffed(card) then
-            G.hand:change_size(card.ability.extra.h_size)
-        end
-    end,
-    remove_from_deck = function(self, card, from_debuff)
-        if not JoyousSpring.is_perma_debuffed(card) then
-            G.hand:change_size(-card.ability.extra.h_size)
-        end
-    end,
-})
+        end,
+        add_to_deck = function(self, card, from_debuff)
+            if not JoyousSpring.is_perma_debuffed(card) then
+                G.hand:change_size(card.ability.extra.h_size)
+            end
+        end,
+        remove_from_deck = function(self, card, from_debuff)
+            if not JoyousSpring.is_perma_debuffed(card) then
+                G.hand:change_size(-card.ability.extra.h_size)
+            end
+        end,
+    })
 
 --#endregion
 
@@ -470,6 +476,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.chips_gain, card.ability.extra.chips_loss, card.ability.extra.chips } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -550,6 +557,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 1,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {

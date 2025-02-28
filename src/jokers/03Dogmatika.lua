@@ -20,6 +20,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.base_xmult, card.ability.extra.xmult } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -90,6 +91,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.mult } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -146,6 +148,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.cards_to_create } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -188,6 +191,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.cards_to_create } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -251,6 +255,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.chips, card.ability.extra.chips * JoyousSpring.count_materials_owned({ { is_extra_deck = true, is_debuffed = true } }) } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -322,6 +327,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.revives } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -371,6 +377,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.duplicates } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -423,12 +430,14 @@ SMODS.Joker({
                 card.ability.extra.base_h_size,
                 card.ability.extra.debuffed_ed_count,
                 math.floor((JoyousSpring.count_materials_owned({ { is_extra_deck = true, is_debuffed = true } }) +
-                JoyousSpring.count_materials_in_graveyard({ { is_extra_deck = true } }))/card.ability.extra.debuffed_ed_count)
+                    JoyousSpring.count_materials_in_graveyard({ { is_extra_deck = true } })) /
+                card.ability.extra.debuffed_ed_count)
             }
 
         }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -443,7 +452,7 @@ SMODS.Joker({
                         type = "RITUAL",
                         materials = {
                             { monster_archetypes = { "Dogmatika" } },
-                            { },
+                            {},
                         }
                     }
                 },
@@ -498,6 +507,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.mult, 0 } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -540,7 +550,7 @@ SMODS.Joker({
             end
         end
     end,
-    joy_create_card_for_shop = function (card, area)
+    joy_create_card_for_shop = function(card, area)
         if card and JoyousSpring.is_extra_deck_monster(card) and next(SMODS.find_card("j_joy_dogma_knight")) then
             card.ability.extra.joyous_spring.is_free = true
             JoyousSpring.create_perma_debuffed_card(card, "Dogmatika")

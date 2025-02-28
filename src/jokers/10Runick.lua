@@ -24,6 +24,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.extra_slots, card.ability.extra.cards_to_create } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -79,6 +80,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.extra_slots, card.ability.extra.base_chips, card.ability.extra.chips } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -148,6 +150,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.fields_to_create, card.ability.extra.cards_to_create } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -210,6 +213,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.playing_cards_to_create, card.ability.extra.cards_to_create } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -248,7 +252,7 @@ SMODS.Joker({
             if context.using_consumeable and G.GAME.blind.in_blind and context.consumeable.ability.set == 'Tarot' then
                 for i = 1, card.ability.extra.playing_cards_to_create do
                     JoyousSpring.create_random_playing_card(8, i ~= 1, { G.C.JOY.FUSION },
-                    pseudoseed("j_joy_runick_freki"))
+                        pseudoseed("j_joy_runick_freki"))
                 end
             end
         end
@@ -269,6 +273,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.cards_to_create } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -323,6 +328,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.cards_to_destroy } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {

@@ -20,6 +20,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.base_xmult, card.ability.extra.xmult } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -93,6 +94,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.xmult, 1 + card.ability.extra.xmult * JoyousSpring.count_materials_in_graveyard({ { is_extra_deck = true } }) } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -155,6 +157,7 @@ SMODS.Joker({
         return { vars = { G.GAME.probabilities.normal, card.ability.extra.odds, card.ability.extra.base_xmult, card.ability.extra.xmult } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -218,6 +221,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.base_xmult, card.ability.extra.xmult } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -283,6 +287,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.base_xmult, card.ability.extra.xmult } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -366,6 +371,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.base_xmult, card.ability.extra.xmult } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {

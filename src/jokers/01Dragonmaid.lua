@@ -23,6 +23,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.base_rerolls, card.ability.extra.rerolls } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -82,6 +83,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.mult } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -172,6 +174,7 @@ SMODS.Joker({
         }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -241,6 +244,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.xmult } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -324,6 +328,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 3,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     loc_vars = function(self, info_queue, card)
         if not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_ernus
@@ -402,6 +407,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.mult } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -466,6 +472,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.mill } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -529,6 +536,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.chips } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -600,6 +608,7 @@ SMODS.Joker({
         }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -669,6 +678,7 @@ SMODS.Joker({
         return { vars = { G.GAME.probabilities.normal, card.ability.extra.odds, card.ability.extra.revives } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -749,6 +759,7 @@ SMODS.Joker({
         }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -842,6 +853,7 @@ SMODS.Joker({
         }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -931,6 +943,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.cards_to_create } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {

@@ -1238,7 +1238,7 @@ end
 
 local card_flip_ref = Card.flip
 function Card:flip()
-    if not JoyousSpring.is_summon_type(self, "Link") and self.config.center_key ~= "j_joy_token" then
+    if not JoyousSpring.is_summon_type(self, "LINK") and self.config.center_key ~= "j_joy_token" then
         card_flip_ref(self)
     end
 end

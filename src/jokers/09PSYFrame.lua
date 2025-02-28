@@ -17,6 +17,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 1,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -51,6 +52,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.cards_to_create, card.ability.extra.xmult } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -122,6 +124,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.cards_to_create, card.ability.extra.xmult } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -192,6 +195,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.cards_to_create, card.ability.extra.xmult } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -262,6 +266,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.cards_to_create, card.ability.extra.xmult } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -332,6 +337,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.cards_to_create, card.ability.extra.xmult } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -402,6 +408,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.cards_to_create } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -456,6 +463,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.banishes } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -516,6 +524,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 10,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
@@ -570,6 +579,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.cards_to_create } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = {
