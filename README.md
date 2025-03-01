@@ -14,13 +14,13 @@ Has compatibility with [JokerDisplay](https://github.com/nh6574/JokerDisplay) ve
 
 ## Known Issues and future ideas
 
-* Still very much WIP
-* Extra Deck renders behind consumables so buttons on right-most Jokers can be tricky to press. (For now, just move it)
-* Extra Deck and summon material selection doesn't work properly with a controller
-* It hasn't been tested with other mods (other than JokerDisplay) so it might not play well with them
+- Still very much WIP
+- Extra Deck renders behind consumables so buttons on right-most Jokers can be tricky to press. (For now, just move it)
+- Extra Deck and summon material selection doesn't work properly with a controller
+- It hasn't been tested with other mods (other than JokerDisplay) so it might not play well with them
 
-* The Ghost Girls will eventually be Legendary instead of rare
-* I'm bad at game design so I will take any feedback on effect balancing
+- The Ghost Girls will eventually be Legendary instead of rare
+- I'm bad at game design so I will take any feedback on effect balancing
 
 ## Screenshots
 

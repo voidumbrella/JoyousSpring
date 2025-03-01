@@ -89,7 +89,7 @@ SMODS.Challenge({
         }
     },
     jokers = {
-        { id = "j_joy_yokai_belle",  eternal = true },
+        { id = "j_joy_yokai_belle",   eternal = true },
         { id = "j_joy_etwin_kisikil", joy_summoned = true, joy_revived = true },
     },
     unlocked = function(self)

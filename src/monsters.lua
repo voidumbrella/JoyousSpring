@@ -780,7 +780,7 @@ JoyousSpring.can_summon_with_combo = function(card, combo)
 
     if card.ability.extra.joyous_spring.summon_consumeable_conditions then
         return JoyousSpring.fulfills_condition_consumeables(
-        card.ability.extra.joyous_spring.summon_consumeable_conditions, combo)
+            card.ability.extra.joyous_spring.summon_consumeable_conditions, combo)
     else
         local conditions = card.ability.extra.joyous_spring.summon_conditions
 
@@ -839,11 +839,11 @@ JoyousSpring.get_summon_materials_consumables = function(condition, card_table)
     local card_table = card_table or G.consumeables.cards
     local any_min = condition.any and (type(condition.any) == "table" and condition.any.min or condition.any) or 0
     local tarot_min = condition.tarot and (type(condition.tarot) == "table" and condition.tarot.min or condition.tarot) or
-    0
+        0
     local planet_min = condition.planet and
-    (type(condition.planet) == "table" and condition.planet.min or condition.planet) or 0
+        (type(condition.planet) == "table" and condition.planet.min or condition.planet) or 0
     local spectral_min = condition.spectral and
-    (type(condition.spectral) == "table" and condition.spectral.min or condition.spectral) or 0
+        (type(condition.spectral) == "table" and condition.spectral.min or condition.spectral) or 0
 
     return get_consumeables(card_table, {
         any = (any_min > 0) or nil,
@@ -860,11 +860,11 @@ end
 JoyousSpring.can_summon_consumeables = function(condition, combo)
     local any_min = condition.any and (type(condition.any) == "table" and condition.any.min or condition.any) or 0
     local tarot_min = condition.tarot and (type(condition.tarot) == "table" and condition.tarot.min or condition.tarot) or
-    0
+        0
     local planet_min = condition.planet and
-    (type(condition.planet) == "table" and condition.planet.min or condition.planet) or 0
+        (type(condition.planet) == "table" and condition.planet.min or condition.planet) or 0
     local spectral_min = condition.spectral and
-    (type(condition.spectral) == "table" and condition.spectral.min or condition.spectral) or 0
+        (type(condition.spectral) == "table" and condition.spectral.min or condition.spectral) or 0
 
     local counts = get_consumeable_counts(combo)
 
@@ -882,17 +882,17 @@ JoyousSpring.fulfills_condition_consumeables = function(condition, combo)
     local any_min = condition.any and (type(condition.any) == "table" and condition.any.min or condition.any) or nil
     local any_max = condition.any and (type(condition.any) == "table" and condition.any.max or condition.any) or nil
     local tarot_min = condition.tarot and (type(condition.tarot) == "table" and condition.tarot.min or condition.tarot) or
-    nil
+        nil
     local tarot_max = condition.tarot and (type(condition.tarot) == "table" and condition.tarot.max or condition.tarot) or
-    nil
+        nil
     local planet_min = condition.planet and
-    (type(condition.planet) == "table" and condition.planet.min or condition.planet) or nil
+        (type(condition.planet) == "table" and condition.planet.min or condition.planet) or nil
     local planet_max = condition.planet and
-    (type(condition.planet) == "table" and condition.planet.max or condition.planet) or nil
+        (type(condition.planet) == "table" and condition.planet.max or condition.planet) or nil
     local spectral_min = condition.spectral and
-    (type(condition.spectral) == "table" and condition.spectral.min or condition.spectral) or nil
+        (type(condition.spectral) == "table" and condition.spectral.min or condition.spectral) or nil
     local spectral_max = condition.spectral and
-    (type(condition.spectral) == "table" and condition.spectral.max or condition.spectral) or nil
+        (type(condition.spectral) == "table" and condition.spectral.max or condition.spectral) or nil
 
     local counts = get_consumeable_counts(combo)
 
@@ -1062,7 +1062,7 @@ end
 
 ---Summons a Token with specified attributes
 ---@param key string? Token's key in JoyousSpring.token_pool
----@param edition any? 
+---@param edition any?
 ---@param atlas_key any?
 ---@param sprite_pos any?
 ---@param joyous_spring_table table? Overrides the properties in the Token's joyous_spring_table. Required if key is nil
@@ -1183,7 +1183,8 @@ JoyousSpring.banish = function(card, banish_until, func, immediate)
                         banish_until == "end_of_ante" and JoyousSpring.banish_end_of_ante_area or
                         JoyousSpring.banish_end_of_round_area
                     local area = card.area
-                    card.area.config.card_limit = card.area.config.card_limit - ((card.edition and card.edition.negative) and 1 or 0)
+                    card.area.config.card_limit = card.area.config.card_limit -
+                        ((card.edition and card.edition.negative) and 1 or 0)
                     card.area:remove_card(card)
                     time_to_banish:emplace(card)
                     G.GAME.joy_cards_banished = G.GAME.joy_cards_banished and
@@ -1215,7 +1216,8 @@ JoyousSpring.return_from_banish = function(card)
         G.jokers.config.card_limit = G.jokers.config.card_limit + ((card.edition and card.edition.negative) and 1 or 0)
     else
         G.consumeables:emplace(card)
-        G.consumeables.config.card_limit = G.consumeables.config.card_limit + ((card.edition and card.edition.negative) and 1 or 0)
+        G.consumeables.config.card_limit = G.consumeables.config.card_limit +
+            ((card.edition and card.edition.negative) and 1 or 0)
     end
 
     SMODS.calculate_context({ joy_returned = true, joy_returned_card = card, joy_returned_area = area })

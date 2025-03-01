@@ -290,9 +290,9 @@ JoyousSpring.card_collection_UIBox = function(_pool, rows, args)
                 if token_key then
                     card.ability.extra.joyous_spring.token_name = JoyousSpring.token_pool[token_key].name
                     card.ability.extra.joyous_spring.attribute = JoyousSpring.token_pool[token_key].attribute or
-                    card.ability.extra.joyous_spring.attribute
+                        card.ability.extra.joyous_spring.attribute
                     card.ability.extra.joyous_spring.monster_type = JoyousSpring.token_pool[token_key].monster_type or
-                    card.ability.extra.joyous_spring.monster_type
+                        card.ability.extra.joyous_spring.monster_type
                     card.children.center.atlas.name = JoyousSpring.token_pool[token_key].atlas
                     card.children.center.sprite_pos = JoyousSpring.token_pool[token_key].sprite_pos
                     card.children.center:reset()
@@ -308,7 +308,7 @@ JoyousSpring.card_collection_UIBox = function(_pool, rows, args)
     G.FUNCS.SMODS_card_collection_page { cycle_config = { current_option = 1 } }
 
     local t = create_UIBox_generic_options({
-        bg_colour = {G.C.JOY.MOD[1], G.C.JOY.MOD[2], G.C.JOY.MOD[3], 0.6} or nil,
+        bg_colour = { G.C.JOY.MOD[1], G.C.JOY.MOD[2], G.C.JOY.MOD[3], 0.6 } or nil,
         colour = G.C.JOY.XYZ or nil,
         back_colour = darken(G.C.JOY.MOD, 0.3) or nil,
         back_func = (args and args.back_func) or G.ACTIVE_MOD_UI and "openModUI_" .. G.ACTIVE_MOD_UI.id or

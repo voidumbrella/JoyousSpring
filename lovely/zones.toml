@@ -42,7 +42,7 @@ pattern = "elseif card.ability.set == 'Joker' then"
 position = 'before'
 match_indent = true
 payload = '''
-elseif card.ability.set == 'Joker' and JoyousSpring and JoyousSpring.is_extra_deck_monster(card) then 
+elseif card.ability.set == 'Joker' and JoyousSpring and JoyousSpring.is_extra_deck_monster(card) then
     JoyousSpring.add_to_extra_deck(card)
     JoyousSpring.open_extra_deck(false, false, 1.85)
     play_sound('card1', 0.8, 0.6)

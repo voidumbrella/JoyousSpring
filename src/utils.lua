@@ -222,7 +222,8 @@ JoyousSpring.create_random_playing_card = function(enhanced_prob, silent, colour
                     cen_pool[#cen_pool + 1] = v
                 end
             end
-            local enhanced = enhanced_prob >= 1 and (pseudorandom(seed or pseudoseed('JoyousSpring')) < 1 / enhanced_prob and true) or false
+            local enhanced = enhanced_prob >= 1 and
+                (pseudorandom(seed or pseudoseed('JoyousSpring')) < 1 / enhanced_prob and true) or false
             create_playing_card(
                 {
                     front = G.P_CARDS[_suit .. '_' .. _rank],
@@ -243,7 +244,7 @@ end
 ---@param keys string[]
 ---@param count_debuffed boolean?
 ---@return table
-JoyousSpring.get_not_owned = function (keys, count_debuffed)
+JoyousSpring.get_not_owned = function(keys, count_debuffed)
     local not_owned = {}
     for _, key in ipairs(keys) do
         if not next(SMODS.find_card(key, count_debuffed)) then
@@ -253,7 +254,7 @@ JoyousSpring.get_not_owned = function (keys, count_debuffed)
     return not_owned
 end
 
-JoyousSpring.empty_graveyard = function ()
+JoyousSpring.empty_graveyard = function()
     for _, t in pairs(JoyousSpring.graveyard) do
         t.count = 0
         t.summonable = 0

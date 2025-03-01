@@ -357,35 +357,35 @@ SMODS.Joker({
 --     loc_vars = function(self, info_queue, card)
 --         return {}
 --     end,
---     generate_ui = JoyousSpring.generate_info_ui,	
+--     generate_ui = JoyousSpring.generate_info_ui,
 --set_sprites = JoyousSpring.set_back_sprite,
-    --     config = {
-    --         extra = {
-    --             joyous_spring = {
-    --                 is_main_deck = false,
-    --                 summon_type = "FUSION",
-    --                 is_effect = true,
-    --                 is_all_attributes = true,
-    --                 is_all_materials = { "FUSION" },
-    --                 attribute = "FIRE",
-    --                 monster_type = "Dragon",
-    --                 monster_archetypes = {},
-    --                 summon_conditions = {
-    --                     {
-    --                         type = "FUSION",
-    --                         materials = {
-    --                             {},
-    --                             {},
-    --                         },
-    --                         restrictions = {
-    --                             different_rarities = true
-    --                         }
-    --                     }
-    --                 },
-    --             },
-    --         },
-    --     },
-    -- })
+--     config = {
+--         extra = {
+--             joyous_spring = {
+--                 is_main_deck = false,
+--                 summon_type = "FUSION",
+--                 is_effect = true,
+--                 is_all_attributes = true,
+--                 is_all_materials = { "FUSION" },
+--                 attribute = "FIRE",
+--                 monster_type = "Dragon",
+--                 monster_archetypes = {},
+--                 summon_conditions = {
+--                     {
+--                         type = "FUSION",
+--                         materials = {
+--                             {},
+--                             {},
+--                         },
+--                         restrictions = {
+--                             different_rarities = true
+--                         }
+--                     }
+--                 },
+--             },
+--         },
+--     },
+-- })
 
 -- Garura, Wings of Resonant Life
 

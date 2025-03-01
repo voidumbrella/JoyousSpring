@@ -33,7 +33,7 @@ pattern = 'local t =  create_UIBox_generic_options.*'
 position = 'at'
 match_indent = true
 payload = '''
-local t =  create_UIBox_generic_options({ 
+local t =  create_UIBox_generic_options({
 bg_colour = G.ACTIVE_MOD_UI and G.ACTIVE_MOD_UI.id == "JoyousSpring" and G.C.JOY and {G.C.JOY.MOD[1], G.C.JOY.MOD[2], G.C.JOY.MOD[3], 0.6} or nil,
 colour = G.ACTIVE_MOD_UI and G.ACTIVE_MOD_UI.id == "JoyousSpring" and G.C.JOY and G.C.JOY.XYZ or nil,
 back_colour = G.ACTIVE_MOD_UI and G.ACTIVE_MOD_UI.id == "JoyousSpring" and G.C.JOY and darken(G.C.JOY.MOD, 0.3) or nil,
