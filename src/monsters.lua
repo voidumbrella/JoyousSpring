@@ -1062,6 +1062,7 @@ JoyousSpring.revive_pseudorandom = function(property_list, seed, must_have_room,
             return JoyousSpring.revive(key_to_add, must_have_room, edition)
         end
     end
+    return nil
 end
 
 -- Banish
@@ -1133,7 +1134,6 @@ JoyousSpring.return_from_banish = function(card)
         G.consumeables:emplace(card)
         G.consumeables.config.card_limit = G.consumeables.config.card_limit + ((card.edition and card.edition.negative) and 1 or 0)
     end
-
 
     SMODS.calculate_context({ joy_returned = true, joy_returned_card = card, joy_returned_area = area })
 end

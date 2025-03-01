@@ -20,7 +20,7 @@ return {
 				name = "{C:joy_effect}Kitchen Dragonmaid",
 				text = {
 					"{C:attention}#1#{} free {C:green}Reroll{} for each",
-					"{C:joy_normal}\"Dragonmaid\"{} {C:attention}Joker{} when obtained",
+					"{C:joy_normal}\"Dragonmaid\"{} when obtained",
 					" ",
 					"{C:attention}Transforms{} into {C:joy_effect}\"Dragonmaid Tinkhec\"",
 					"when {C:attention}Blind{} is selected",
@@ -29,7 +29,7 @@ return {
 			j_joy_dmaid_tinkhec = {
 				name = "{C:joy_effect}Dragonmaid Tinkhec",
 				text = {
-					"{C:joy_normal}\"Dragonmaid\"{} {C:attention}Jokers{} each",
+					"{C:joy_normal}\"Dragonmaids\"{} each",
 					"give {C:mult}+#1#{} Mult",
 					" ",
 					"{C:attention}Transforms{} into {C:joy_effect}\"Kitchen Dragonmaid\"",
@@ -40,7 +40,7 @@ return {
 				name = "{C:joy_effect}Parlor Dragonmaid",
 				text = {
 					"{C:attention}#1# Booster Tag{} when obtained if you have",
-					"{C:attention}#2#{} {C:joy_normal}\"Dragonmaid\"{} {C:attention}Jokers{},",
+					"{C:attention}#2#{} {C:joy_normal}\"Dragonmaids\"{},",
 					"gaining an extra for every {C:attention}#3#{} more",
 					" ",
 					"{C:attention}Transforms{} into {C:joy_effect}\"Dragonmaid Lorpar\"",
@@ -50,7 +50,7 @@ return {
 			j_joy_dmaid_lorpar = {
 				name = "{C:joy_effect}Dragonmaid Lorpar",
 				text = {
-					"{C:joy_normal}\"Dragonmaid\"{} {C:attention}Jokers{} each",
+					"{C:joy_normal}\"Dragonmaids\"{} each",
 					"give {X:mult,C:white}X#1#{} Mult",
 					" ",
 					"{C:attention}Transforms{} into {C:joy_effect}\"Parlor Dragonmaid\"",
@@ -61,7 +61,7 @@ return {
 				name = "{C:joy_effect}Nurse Dragonmaid",
 				text = {
 					"{C:green}#1# in #2#{} chance to {C:attention}revive #3#{}",
-					"{C:blue}Common{} {C:joy_normal}\"Dragonmaid\"{} {C:attention}Joker(s){} when obtained",
+					"{C:blue}Common{} {C:joy_normal}\"Dragonmaid\"{} when obtained",
 					" ",
 					"{C:attention}Transforms{} into {C:joy_effect}\"Dragonmaid Ernus\"",
 					"when {C:attention}Blind{} is selected",
@@ -70,8 +70,8 @@ return {
 			j_joy_dmaid_ernus = {
 				name = "{C:joy_effect}Dragonmaid Ernus",
 				text = {
-					"{C:mult}+#1#{} Mult for each {C:joy_normal}\"Dragonmaid\"{}",
-					"{C:attention}Joker{} in the {C:attention}GY{}",
+					"{C:mult}+#1#{} Mult for each",
+					"{C:joy_normal}\"Dragonmaid\"{} in the {C:attention}GY{}",
 					" ",
 					"{C:attention}Transforms{} into {C:joy_effect}\"Nurse Dragonmaid\"",
 					"at end of round",
@@ -81,7 +81,7 @@ return {
 				name = "{C:joy_effect}Laundry Dragonmaid",
 				text = {
 					"Adds {C:attention}#1#{} random {C:joy_normal}Main Deck{}",
-					"{C:joy_normal}\"Dragonmaid\"{} {C:attention}Jokers{} to the {C:attention}GY{}",
+					"{C:joy_normal}\"Dragonmaids\"{} to the {C:attention}GY{}",
 					" ",
 					"{C:attention}Transforms{} into {C:joy_effect}\"Dragonmaid Nudyarl\"",
 					"when {C:attention}Blind{} is selected",
@@ -90,8 +90,8 @@ return {
 			j_joy_dmaid_nudyarl = {
 				name = "{C:joy_effect}Dragonmaid Nudyarl",
 				text = {
-					"{C:chips}+#1#{} Chips for each {C:joy_normal}\"Dragonmaid\"{}",
-					"{C:attention}Joker{} in the {C:attention}GY{}",
+					"{C:chips}+#1#{} Chips for each",
+					"{C:joy_normal}\"Dragonmaid\"{} in the {C:attention}GY{}",
 					" ",
 					"{C:attention}Transforms{} into {C:joy_effect}\"Laundry Dragonmaid\"",
 					"at end of round",
@@ -101,7 +101,7 @@ return {
 				name = "{C:joy_effect}Chamber Dragonmaid",
 				text = {
 					"{C:attention}#1# Voucher Tag{} when obtained if you have",
-					"{C:attention}#2#{} {C:joy_normal}\"Dragonmaid\"{} {C:attention}Jokers{},",
+					"{C:attention}#2#{} {C:joy_normal}\"Dragonmaids\"{},",
 					"gaining an extra for every {C:attention}#3#{} more",
 					" ",
 					"{C:attention}Transforms{} into {C:joy_effect}\"Dragonmaid Stern\"",
@@ -111,8 +111,8 @@ return {
 			j_joy_dmaid_stern = {
 				name = "{C:joy_effect}Dragonmaid Stern",
 				text = {
-					"{C:green}#1# in #2#{} chance to {C:attention}revive #3#{} {C:green}Uncommon{}",
-					"or {C:red}Rare{} {C:joy_normal}\"Dragonmaid\"{} {C:attention}Joker(s){}",
+					"{C:green}#1# in #2#{} chance to {C:attention}revive #3#{}",
+					"{C:green}Uncommon{} or {C:red}Rare{} {C:joy_normal}\"Dragonmaid\"{}",
 					"when obtained",
 					" ",
 					"{C:attention}Transforms{} into {C:joy_effect}\"Chamber Dragonmaid\"",
@@ -127,7 +127,7 @@ return {
 					"{C:inactive}(Must have room){}",
 					" ",
 					"{C:green}#1# in #2#{} chance to {C:attention}transform{} into an",
-					"{C:green}Uncommon{} {C:joy_normal}\"Dragonmaid\"{} {C:attention}Joker{}",
+					"{C:green}Uncommon{} {C:joy_normal}\"Dragonmaid\"{}",
 					"when {C:attention}Blind{} is selected",
 				},
 				joy_summon_conditions = {
@@ -137,8 +137,7 @@ return {
 			j_joy_dmaid_house = {
 				name = "{C:joy_fusion}House Dragonmaid",
 				text = {
-					"{X:mult,C:white}X#1#{} Mult for each",
-					"{C:joy_normal}\"Dragonmaid\"{} {C:attention}Joker{}",
+					"{X:mult,C:white}X#1#{} Mult for each {C:joy_normal}\"Dragonmaid\"{}",
 					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}",
 					" ",
 					"{C:attention}Jokers{} in the {C:attention}GY{} count for",
@@ -148,7 +147,7 @@ return {
 					"after {C:attention}#3#{} rounds {C:inactive}(#4#/#3#){}",
 				},
 				joy_summon_conditions = {
-					"{C:attention}2{} {C:joy_normal}\"Dragonmaid\"{} {C:attention}Jokers{}"
+					"{C:attention}2{} {C:joy_normal}\"Dragonmaids\"{}"
 				}
 			},
 			j_joy_dmaid_sheou = {
@@ -159,8 +158,8 @@ return {
 					" ",
 					"When {C:attention}Boss Blind{} is selected,",
 					"disables its effects then {C:attention}transforms{} into",
-					"{C:joy_fusion}\"House Dragonmaid\"{} and creates {C:attention}#1#{} {C:blue}Common{}",
-					"{C:joy_normal}\"Dragonmaid\"{} {C:attention}Joker{}",
+					"{C:joy_fusion}\"House Dragonmaid\"{} and creates {C:attention}#1#{}",
+					"{C:blue}Common{} {C:joy_normal}\"Dragonmaid\"{}",
 					"{C:inactive}(Must have room){}"
 				},
 			},
@@ -191,7 +190,7 @@ return {
 				text = {
 					"{C:red}+#1#{} discard each round",
 					" ",
-					"Free if you own a {C:joy_normal}\"Ki-sikil\"{} {C:attention}Joker{}"
+					"Free if you own a {C:joy_normal}\"Ki-sikil\"{}"
 				},
 			},
 			j_joy_ltwin_lilla_sweet = {
@@ -199,7 +198,7 @@ return {
 				text = {
 					"{C:blue}+#1#{} hand each round",
 					" ",
-					"Free if you own a {C:joy_normal}\"Ki-sikil\"{} {C:attention}Joker{}"
+					"Free if you own a {C:joy_normal}\"Ki-sikil\"{}"
 				},
 			},
 			j_joy_ltwin_kisikil_frost = {
@@ -207,7 +206,7 @@ return {
 				text = {
 					"{C:attention}+#1#{} hand size",
 					" ",
-					"Free if you own a {C:joy_normal}\"Lil-la\"{} {C:attention}Joker{}"
+					"Free if you own a {C:joy_normal}\"Lil-la\"{}"
 				},
 			},
 			j_joy_etwin_kisikil_deal = {
@@ -216,11 +215,11 @@ return {
 					"{C:mult}+#1#{} Mult",
 					"{C:attention}+#2#{} hand size",
 					" ",
-					"Adds {C:attention}#3#{} {C:joy_normal}Main Deck \"Lil-la\"{} {C:attention}Joker{} to the {C:attention}GY{}",
+					"Adds {C:attention}#3#{} {C:joy_normal}Main Deck \"Lil-la\"{} to the {C:attention}GY{}",
 					"when {C:attention}Blind{} is selected",
 				},
 				joy_summon_conditions = {
-					"{C:attention}1{} {C:joy_normal}\"Ki-sikil\"{} {C:attention}Joker{}"
+					"{C:attention}1{} {C:joy_normal}\"Ki-sikil\"{}"
 				}
 			},
 			j_joy_etwin_kisikil = {
@@ -229,10 +228,10 @@ return {
 					"{C:mult}+#1#{} Mult",
 					" ",
 					"Permanently gain {C:attention}+#2#{} hand size if you",
-					"own a {C:joy_normal}\"Lil-la\"{} {C:attention}Joker{} when obtained",
+					"own a {C:joy_normal}\"Lil-la\"{} when obtained",
 					" ",
-					"{C:attention}Revives #3#{} {C:joy_link}Evil★Twin Lil-la{} or {C:attention}#3#{} {C:joy_normal}\"Lil-la\"{}",
-					"{C:attention}Joker{} when {C:attention}Blind{} is selected",
+					"{C:attention}Revives #3#{} {C:joy_link}Evil★Twin Lil-la{} or {C:attention}#3#{}",
+					"{C:joy_normal}\"Lil-la\"{} when {C:attention}Blind{} is selected",
 				},
 				joy_summon_conditions = {
 					"{C:attention}2{} {C:attention}Jokers{}, including a {C:joy_normal}\"Ki-sikil\"{}"
@@ -243,10 +242,10 @@ return {
 				text = {
 					"{C:chips}+#1#{} Chips",
 					" ",
-					"{C:money}+$#2#{} if you own a {C:joy_normal}\"Ki-sikil\"{} {C:attention}Joker{} when obtained",
+					"{C:money}+$#2#{} if you own a {C:joy_normal}\"Ki-sikil\"{} when obtained",
 					" ",
-					"{C:attention}Revives #3#{} {C:joy_link}Evil★Twin Ki-sikil{} or {C:attention}#3#{} {C:joy_normal}\"Ki-sikil\"{}",
-					"{C:attention}Joker{} when {C:attention}Blind{} is selected",
+					"{C:attention}Revives #3#{} {C:joy_link}Evil★Twin Ki-sikil{} or {C:attention}#3#{}",
+					"{C:joy_normal}\"Ki-sikil\"{} when {C:attention}Blind{} is selected",
 				},
 				joy_summon_conditions = {
 					"{C:attention}2{} {C:attention}Jokers{}, including a {C:joy_normal}\"Lil-la\"{}"
@@ -258,7 +257,7 @@ return {
 					"{C:chips}+#1#{} Chips for each {C:joy_normal}\"Lil-la\"{} in the {C:attention}GY{}",
 					"{C:mult}+#2#{} Mult for each {C:joy_normal}\"Ki-sikil\"{} in the {C:attention}GY{}",
 					"{C:inactive}(Currently{} {C:chips}+#4#{} {C:inactive}Chips{} {C:mult}+#5#{} {C:inactive}Mult){}",
-					"{C:red}-#3#{} discards for each {C:joy_link}Link{} {C:attention}Joker{} when {C:attention}Blind{} is selected",
+					"{C:red}-#3#{} discards for each {C:joy_link}Link{} when {C:attention}Blind{} is selected",
 					" ",
 					"Cannot be {C:attention}revived{}",
 				},
@@ -274,7 +273,7 @@ return {
 					"at end of round",
 				},
 				joy_summon_conditions = {
-					"{C:attention}2{} {C:joy_normal}\"Evil★Twin\"{} {C:attention}Jokers{}"
+					"{C:attention}2{} {C:joy_normal}\"Evil★Twin\"{}"
 				}
 			},
 			--#endregion
@@ -290,7 +289,7 @@ return {
 			j_joy_dogma_fleur = {
 				name = "{C:joy_effect}Dogmatika Fleurdelis, the Knighted",
 				text = {
-					"{C:joy_normal}\"Dogmatika\"{} {C:attention}Jokers{} each give {C:mult}+#1#{} Mult",
+					"{C:joy_normal}\"Dogmatika\"{} each give {C:mult}+#1#{} Mult",
 				},
 			},
 			j_joy_dogma_maximus = {
@@ -303,7 +302,7 @@ return {
 			j_joy_dogma_adin = {
 				name = "{C:joy_effect}Dogmatika Adin, the Enlightened",
 				text = {
-					"Create {C:attention}#1#{} {C:joy_ritual}non-Ritual{} {C:joy_normal}\"Dogmatika\"{} {C:attention}Joker{}",
+					"Create {C:attention}#1#{} {C:joy_ritual}non-Ritual{} {C:joy_normal}\"Dogmatika\"{}",
 					"when {C:attention}Boss Blind{} is defeated",
 					"{C:inactive}(Must have room){}",
 					" ",
@@ -322,7 +321,7 @@ return {
 			j_joy_dogma_ashiyan = {
 				name = "{C:joy_effect}Dogmatika Ashiyan",
 				text = {
-					"{C:attention}Revives #1#{} {C:joy_normal}\"Dogmatika\"{} {C:attention}Joker{} when obtained",
+					"{C:attention}Revives #1#{} {C:joy_normal}\"Dogmatika\"{} when obtained",
 					" ",
 					"Free if you own a debuffed {C:joy_spell}Extra Deck{} {C:attention}Joker{}"
 				},
@@ -359,7 +358,7 @@ return {
 					"All {C:joy_spell}Extra Deck{} {C:attention}Jokers{} in the shop are debuffed and free",
 				},
 				joy_summon_conditions = {
-					"{C:attention}2{} {C:joy_normal}\"Dogmatika\"{} {C:attention}Jokers{}"
+					"{C:attention}2{} {C:joy_normal}\"Dogmatika\"{}"
 				}
 			},
 			--#endregion
@@ -422,8 +421,8 @@ return {
 			j_joy_spright_blue = {
 				name = "{C:joy_effect}Spright Blue",
 				text = {
-					"Create {C:attention}#1#{} {C:joy_normal}Main Deck \"Spright\"{}",
-					"{C:attention}Joker{} at end of round",
+					"Create {C:attention}#1#{} {C:joy_normal}Main Deck{}",
+					"{C:joy_normal}\"Spright\"{} at end of round",
 					"{C:inactive}(Must have room){}",
 					" ",
 					"Free if you own an {C:green}Uncommon{} {C:attention}Joker{}"
@@ -574,7 +573,7 @@ return {
 				text = {
 					"This card {C:attention}banishes{} until end of {C:attention}Ante{}",
 					"when {C:attention}Blind{} is selected to create {C:attention}#1#{}",
-					"{C:joy_normal}Main Deck \"Mekk-Knight\"{} {C:attention}Joker{}",
+					"{C:joy_normal}Main Deck \"Mekk-Knight\"{}",
 					"{C:inactive}(Must have room){}",
 				},
 			},
@@ -583,7 +582,7 @@ return {
 				text = {
 					"Scored card in adjacent {C:attention}columns{}",
 					"give {X:mult,C:white}X#1#{} Mult if there's a",
-					"{C:joy_normal}\"Mekk-Knight\"{} {C:attention}Joker{} in that {C:attention}column{}",
+					"{C:joy_normal}\"Mekk-Knight\"{} in that {C:attention}column{}",
 					"{C:inactive}(Currently in columns{} {C:attention}#2#{} {C:inactive}and{} {C:attention}#3#{}{C:inactive}){}",
 				},
 				joy_summon_conditions = {
@@ -596,12 +595,12 @@ return {
 					"{C:joy_normal}\"Mekk-Knight\"{} abilities apply to",
 					"all played cards",
 					" ",
-					"Once per round, sell 1 {C:joy_normal}\"Mekk-Knight\"{} {C:attention}Joker{}",
-					"to create {C:attention}#1#{} {C:joy_normal}Main Deck \"Mekk-Knight\"{} {C:attention}Joker{}",
+					"Once per round, sell 1 {C:joy_normal}\"Mekk-Knight\"{}",
+					"to create {C:attention}#1#{} {C:joy_normal}Main Deck \"Mekk-Knight\"{}",
 					"{C:inactive}(Must have room){}",
 				},
 				joy_summon_conditions = {
-					"{C:attention}3{} {C:joy_normal}\"Mekk-Knight\"{} {C:attention}Jokers{}",
+					"{C:attention}3{} {C:joy_normal}\"Mekk-Knight\"{}",
 				}
 			},
 			j_joy_mekkcrus_avramax = {
@@ -636,9 +635,8 @@ return {
 			j_joy_generaider_vala = {
 				name = "{C:joy_effect}Vala, Seidhr of the Generaider Bosses",
 				text = {
-					"This card is destroyed when a {C:attention}Boss Blind{}",
-					"is defeated to {C:attention}revive #1#{} {C:red}Rare{}",
-					"{C:joy_normal}\"Generaider\"{} {C:attention}Joker{}",
+					"This card is destroyed when a {C:attention}Boss Blind{} is defeated to",
+					"{C:attention}revive #1#{} {C:red}Rare{} {C:joy_normal}\"Generaider\"{}",
 				},
 			},
 			j_joy_generaider_harr = {
@@ -679,7 +677,7 @@ return {
 				text = {
 					"You can {C:attention}tribute #1#{} {C:joy_normal}\"Generaider\"{}",
 					"and/or {C:joy_normal}Plant{} {C:attention}Joker{} to create {C:attention}#2#{}",
-					"{C:green}Uncommon{} {C:joy_normal}\"Generaider\"{} {C:attention}Joker{}",
+					"{C:green}Uncommon{} {C:joy_normal}\"Generaider\"{}",
 					"{C:inactive}(Must have room){}",
 				},
 			},
@@ -740,7 +738,7 @@ return {
 					" ",
 					"Once per round, you can {C:attention}tribute #1#{}",
 					"{C:joy_token}\"Generaider Tokens\"{} to create {C:attention}#2#{}",
-					"not owned {C:red}Rare{} {C:joy_normal}\"Generaider\"{} {C:attention}Joker{}",
+					"not owned {C:red}Rare{} {C:joy_normal}\"Generaider\"{}",
 					"{C:inactive}(Must have room){}",
 				},
 			},
@@ -751,7 +749,7 @@ return {
 				text = {
 					"This card {C:attention}banishes{} at the end of round",
 					"until {C:attention}Blind{} is selected and",
-					"{C:attention}revives #1#{} {C:joy_spell}Extra Deck{} {C:joy_normal}\"Ghoti\"{} {C:attention}Joker{}",
+					"{C:attention}revives #1#{} {C:joy_spell}Extra Deck{} {C:joy_normal}\"Ghoti\"{}",
 				},
 			},
 			j_joy_fish_paces = {
@@ -777,7 +775,7 @@ return {
 				text = {
 					"This card {C:attention}banishes{} at the end of round",
 					"until {C:attention}Blind{} is selected and",
-					"{C:attention}revives #1#{} {C:joy_normal}Main Deck{} {C:joy_normal}\"Ghoti\"{} {C:attention}Joker{}",
+					"{C:attention}revives #1#{} {C:joy_normal}Main Deck{} {C:joy_normal}\"Ghoti\"{}",
 				},
 			},
 			j_joy_fish_ixeep = {
@@ -785,7 +783,7 @@ return {
 				text = {
 					"This card {C:attention}banishes{} at the end of round",
 					"until {C:attention}Boss Blind{} is selected and",
-					"creates {C:attention}#1#{} {C:joy_normal}Main Deck{} {C:joy_normal}\"Ghoti\"{} {C:attention}Joker{}",
+					"creates {C:attention}#1#{} {C:joy_normal}Main Deck{} {C:joy_normal}\"Ghoti\"{}",
 					"{C:inactive}(Must have room){}",
 				},
 			},
@@ -795,7 +793,7 @@ return {
 					"This card {C:attention}banishes{} at the end of round",
 					"until {C:attention}Blind{} is selected",
 					" ",
-					"Adds {C:attention}#1#{} {C:joy_normal}\"Ghoti\"{} {C:attention}Joker{}",
+					"Adds {C:attention}#1#{} {C:joy_normal}\"Ghoti\"{}",
 					"to the {C:joy_spell}Extra Deck{} after returning from",
 					"{C:attention}banishment #2#{} times",
 					"{C:inactive}(Must have room) (#3#/#2#){}",
@@ -826,7 +824,7 @@ return {
 					" ",
 					"This card {C:attention}banishes{} at the end of round",
 					"until {C:attention}Blind{} is selected and",
-					"adds {C:attention}#3#{} {C:joy_normal}\"Ghoti\"{} {C:attention}Joker{} to the {C:joy_spell}Extra Deck{}",
+					"adds {C:attention}#3#{} {C:joy_normal}\"Ghoti\"{} to the {C:joy_spell}Extra Deck{}",
 					"{C:inactive}(Must have room){}",
 				},
 				joy_summon_conditions = {
