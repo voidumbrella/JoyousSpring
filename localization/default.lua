@@ -1400,7 +1400,7 @@ return {
 			k_joy_archetype_fish = "Ghoti",
 			k_joy_archetype_psy = "PSY-Frame",
 			k_joy_archetype_runick = "Runick",
-			k_joy_archetype_misc = "Miscellaneous",
+			k_joy_archetype_misc = "Free Agents",
 			k_joy_archetype_token = "Tokens",
 			--#endregion
 		}
