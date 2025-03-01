@@ -99,6 +99,11 @@ end
 
 -- General checks
 
+---Checks if **card** fulfills **properties**
+---@param card Card
+---@param properties table
+---@param summon_type string? Optional to check if the card is a wildcard for that type of summon
+---@return boolean
 JoyousSpring.is_material = function(card, properties, summon_type)
     if summon_type and card.ability.eternal then
         return false
@@ -286,6 +291,10 @@ JoyousSpring.is_material = function(card, properties, summon_type)
     return true
 end
 
+---Checks if the center for **card_key** fulfills **properties**
+---@param card_key string
+---@param properties table
+---@return boolean
 JoyousSpring.is_material_center = function(card_key, properties)
     local card_center = G.P_CENTERS[card_key]
 
@@ -490,6 +499,10 @@ local function get_condition_min_max(condition)
     return min_materials, max_materials
 end
 
+---Checks if a card list fulfills general summon restrictions and specific restrictions in **condition**
+---@param combo_list Card[]
+---@param condition table
+---@return boolean
 JoyousSpring.is_valid_material_combo = function(combo_list, condition)
     local all_materials_count = 0
     local restrictions = condition.restrictions
@@ -584,6 +597,10 @@ local function separate_properties(condition)
     return mandatory, optional
 end
 
+---Checks if card list fulfills summon conditions
+---@param combo_list Card[]
+---@param condition table
+---@return boolean
 JoyousSpring.fulfills_conditions = function(combo_list, condition)
     if not JoyousSpring.is_valid_material_combo(combo_list, condition) then
         return false
@@ -653,6 +670,10 @@ JoyousSpring.fulfills_conditions = function(combo_list, condition)
     return check_optional_properties(remaining_cards, optional_properties, 1, visited_optional)
 end
 
+---Gets all combinations that fulfill **condition** in **card_list**
+---@param condition table
+---@param card_list Card[]
+---@return table
 JoyousSpring.get_summon_material_combo_by_condition = function(condition, card_list)
     local card_list = card_list or G.jokers.cards
     local material_combos = {}
@@ -668,6 +689,10 @@ JoyousSpring.get_summon_material_combo_by_condition = function(condition, card_l
     return material_combos
 end
 
+---Gets all combinations that fulfill the card's summon conditions in **card_list**
+---@param card Card
+---@param card_list Card[]
+---@return table?
 JoyousSpring.get_all_summon_material_combos = function(card, card_list)
     if not JoyousSpring.is_monster_card(card) or
         (not card.ability.extra.joyous_spring.summon_conditions and not card.ability.extra.joyous_spring.summon_consumeable_conditions) then
@@ -695,6 +720,10 @@ JoyousSpring.get_all_summon_material_combos = function(card, card_list)
     return material_combos
 end
 
+---Checks if there's any combination in **card_list** that fulfills **condition**
+---@param condition table
+---@param card_list Card[]
+---@return boolean
 JoyousSpring.can_summon_by_condition = function(condition, card_list)
     local card_list = card_list or G.jokers.cards
 
@@ -709,6 +738,10 @@ JoyousSpring.can_summon_by_condition = function(condition, card_list)
     return false
 end
 
+---Checks if there's any combination in **card_list** that fulfills the card's summon conditions
+---@param card Card
+---@param card_list Card[]
+---@return boolean
 JoyousSpring.can_summon = function(card, card_list)
     if not JoyousSpring.is_monster_card(card) then
         return false
@@ -735,6 +768,10 @@ JoyousSpring.can_summon = function(card, card_list)
     return false
 end
 
+---Checks if the **combo** fulfills any of the card's summon conditions
+---@param card Card
+---@param combo Card[]
+---@return boolean
 JoyousSpring.can_summon_with_combo = function(card, combo)
     if not JoyousSpring.is_monster_card(card) or not combo or #combo == 0 or
         (not card.ability.extra.joyous_spring.summon_conditions and not card.ability.extra.joyous_spring.summon_consumeable_conditions) then
@@ -794,6 +831,10 @@ local function get_consumeables(combo, args)
     return materials
 end
 
+---Gets all consumables that fulfill **condition** in **card_table**
+---@param condition table
+---@param card_table Card[]
+---@return table
 JoyousSpring.get_summon_materials_consumables = function(condition, card_table)
     local card_table = card_table or G.consumeables.cards
     local any_min = condition.any and (type(condition.any) == "table" and condition.any.min or condition.any) or 0
@@ -812,6 +853,10 @@ JoyousSpring.get_summon_materials_consumables = function(condition, card_table)
     })
 end
 
+---Checks if any consumable combination in **combo** fulfills condition
+---@param condition table
+---@param combo Card[]
+---@return boolean
 JoyousSpring.can_summon_consumeables = function(condition, combo)
     local any_min = condition.any and (type(condition.any) == "table" and condition.any.min or condition.any) or 0
     local tarot_min = condition.tarot and (type(condition.tarot) == "table" and condition.tarot.min or condition.tarot) or
@@ -829,6 +874,10 @@ JoyousSpring.can_summon_consumeables = function(condition, combo)
     return true
 end
 
+---Checks if consumable **combo** fulfills condition
+---@param condition table
+---@param combo Card[]
+---@return boolean
 JoyousSpring.fulfills_condition_consumeables = function(condition, combo)
     local any_min = condition.any and (type(condition.any) == "table" and condition.any.min or condition.any) or nil
     local any_max = condition.any and (type(condition.any) == "table" and condition.any.max or condition.any) or nil
@@ -974,6 +1023,10 @@ local function summon_from_shop(card)
     }))
 end
 
+---Performs a Special Summon from either the Extra Deck or the shop (for Rituals)
+---@param card Card Card to summon
+---@param card_list Card[] Summon materials
+---@param summon_type string
 JoyousSpring.perform_summon = function(card, card_list, summon_type)
     SMODS.calculate_context({
         joy_summon = true,
@@ -1007,6 +1060,12 @@ JoyousSpring.perform_summon = function(card, card_list, summon_type)
     end
 end
 
+---Summons a Token with specified attributes
+---@param key string? Token's key in JoyousSpring.token_pool
+---@param edition any? 
+---@param atlas_key any?
+---@param sprite_pos any?
+---@param joyous_spring_table table? Overrides the properties in the Token's joyous_spring_table. Required if key is nil
 JoyousSpring.summon_token = function(key, edition, atlas_key, sprite_pos, joyous_spring_table)
     local card = SMODS.add_card({
         key = "j_joy_token",
@@ -1036,6 +1095,11 @@ end
 
 -- Revive
 
+---Revives a card from the GY
+---@param key string
+---@param must_have_room boolean?
+---@param edition any
+---@return Card?
 JoyousSpring.revive = function(key, must_have_room, edition)
     if JoyousSpring.graveyard[key] and JoyousSpring.graveyard[key].summonable > 0 and
         (not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit)) then
@@ -1054,6 +1118,12 @@ JoyousSpring.revive = function(key, must_have_room, edition)
     return nil
 end
 
+---Revives a random card that fulfills **property_list**
+---@param property_list table
+---@param seed number
+---@param must_have_room boolean?
+---@param edition any
+---@return Card?
 JoyousSpring.revive_pseudorandom = function(property_list, seed, must_have_room, edition)
     if not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit) then
         local choices = JoyousSpring.get_materials_in_graveyard(property_list, true)
@@ -1067,6 +1137,17 @@ end
 
 -- Banish
 
+---@alias banish_time
+---| '"blind_selected"'
+---| '"boss_selected"'
+---| '"end_of_round"'
+---| '"end_of_ante"'
+
+---Banish a card until specified time
+---@param card Card
+---@param banish_until banish_time?
+---@param func function?
+---@param immediate boolean?
 JoyousSpring.banish = function(card, banish_until, func, immediate)
     if not card or not card.area then return end
     card:juice_up()
@@ -1124,6 +1205,8 @@ JoyousSpring.banish = function(card, banish_until, func, immediate)
     end
 end
 
+---Returns a card from banishment (doesn't need room)
+---@param card Card
 JoyousSpring.return_from_banish = function(card)
     local area = card.area
     area:remove_card(card)
@@ -1140,6 +1223,9 @@ end
 
 -- Modifiers
 
+---Sets cost of a card after Card:set_cost, if necessary
+---Use joy_set_cost in the center to modify that card's cost and sell_cost
+---@param card Card
 JoyousSpring.set_cost = function(card)
     if JoyousSpring.is_monster_card(card) then
         if JoyousSpring.is_perma_debuffed(card) then
@@ -1166,6 +1252,12 @@ JoyousSpring.set_cost = function(card)
     end
 end
 
+---Debuffs a hand similar to a blind
+---Use joy_set_cost in the center to check if a hand should be debuffed by that card's effect
+---@param cards Card[]
+---@param hand Card[]
+---@param handname string
+---@return boolean
 JoyousSpring.debuff_hand = function(cards, hand, handname)
     for _, joker in ipairs(G.jokers.cards) do
         if joker.config.center.joy_debuff_hand and joker.config.center.joy_debuff_hand(joker, cards, hand, handname) then
@@ -1177,6 +1269,9 @@ end
 
 -- UI
 
+---Creates counter UI for Xyz materials
+---@param card Card
+---@return UIBox
 JoyousSpring.create_UIBox_xyz_materials = function(card)
     return UIBox {
         definition = {

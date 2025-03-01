@@ -157,12 +157,16 @@ function SMODS.calculate_context(context, return_table)
     return SMODS_calculate_context_ref(context, return_table)
 end
 
+---Does global effects when a context is being calculated
+---@param context table
 JoyousSpring.calculate_context = function(context)
+    -- Global counter for destroyed cards
     if context.remove_playing_cards then
         G.GAME.joy_cards_destroyed = G.GAME.joy_cards_destroyed and
             (G.GAME.joy_cards_destroyed + #context.removed) or #context.removed
     end
 
+    -- Return from Banishment
     if context.setting_blind then
         if G.GAME.blind and G.GAME.blind:get_type() == 'Boss' then
             while #JoyousSpring.banish_boss_selected_area.cards > 0 do
@@ -184,6 +188,7 @@ JoyousSpring.calculate_context = function(context)
         end
     end
 
+    -- Add extra pack for Extra YGO Booster config
     if context.starting_shop and JoyousSpring.config.extra_ygo_booster then
         local choices = {
             "p_joy_monster_pack",
@@ -197,6 +202,9 @@ JoyousSpring.calculate_context = function(context)
     end
 end
 
+---Creates UI for a monsters type information
+---@param card Card
+---@return table
 JoyousSpring.get_type_ui = function(card)
     local joyous_spring_table = card and card.ability and card.ability.extra.joyous_spring or {}
 
@@ -401,8 +409,19 @@ JoyousSpring.get_type_ui = function(card)
     }
 end
 
----This removes the colour markup on the Joker names on the info tooltips and adds summoning conditions
+---Generates Joker's description UI. This is done to:
+---* Add type information under names
+---* Add summoning conditions to info_queue automatically
+---* Change Token's name
+---* Remove color codes from info_queue tooltip names
+---@param self table
+---@param info_queue table
+---@param card Card
+---@param desc_nodes table
+---@param specific_vars table
+---@param full_UI_table table
 JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
+    -- Change Token's name
     if card and card.config.center.key == "j_joy_token" then
         full_UI_table.name = localize { type = 'name', set = "Joker", key = card.ability and card.ability.extra.joyous_spring.token_name or "j_joy_token", nodes = {} }
     end
@@ -410,6 +429,7 @@ JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, spe
     SMODS.Center.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
 
     if desc_nodes ~= full_UI_table.main then
+        -- Remove color codes from info_queue tooltip names
         if string.len(desc_nodes.name) > 2 and string.sub(desc_nodes.name, string.len(desc_nodes.name) - 1, string.len(desc_nodes.name)) == "{}" then
             desc_nodes.name = string.sub(desc_nodes.name, 1, string.len(desc_nodes.name) - 2)
         end
@@ -418,6 +438,7 @@ JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, spe
             desc_nodes.name = real_name
         end
     else
+        -- Add type information under names
         full_UI_table.name = {
             {
                 n = G.UIT.C,
@@ -436,6 +457,7 @@ JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, spe
                 }
             }
         }
+        -- Add summoning conditions to info_queue automatically
         if G.localization.descriptions[self.set][self.key].joy_summon_conditions then
             full_UI_table.info[#full_UI_table.info + 1] = {}
             local summon_desc_nodes = full_UI_table.info[#full_UI_table.info]
@@ -445,6 +467,10 @@ JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, spe
     end
 end
 
+---Adds YGO's back to cards
+---@param self table|SMODS.Center
+---@param card Card
+---@param front table
 JoyousSpring.set_back_sprite = function(self, card, front)
     if card.children.back then card.children.back:remove() end
     card.children.back = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS["joy_Back"], { x = 0, y = 0 })

@@ -799,7 +799,7 @@ SMODS.Joker({
                         "j_joy_dmaid_nudyarl",
                         "j_joy_dmaid_stern"
                     }
-                    JoyousSpring.transform_card(card, pseudorandom_element(choices, pseudoseed("j_joy_dmaid_lady")))
+                    JoyousSpring.transform_card(card, pseudorandom_element(choices, pseudoseed("j_joy_dmaid_lady")) or j_joy_dmaid_tinkhec)
                 end
             end
         end

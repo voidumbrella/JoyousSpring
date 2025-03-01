@@ -170,7 +170,9 @@ SMODS.Joker({
                 for i = 1, card.ability.extra.cards_to_create do
                     local key_to_add = pseudorandom_element(JoyousSpring.lists.extra_deck,
                         pseudoseed("j_joy_dogma_maximus"))
-                    JoyousSpring.create_perma_debuffed_card(key_to_add, "Dogmatika", { negative = true })
+                    if key_to_add then
+                        JoyousSpring.create_perma_debuffed_card(key_to_add, "Dogmatika", { negative = true })
+                    end
                 end
             end
         end
@@ -430,8 +432,8 @@ SMODS.Joker({
                 card.ability.extra.base_h_size,
                 card.ability.extra.debuffed_ed_count,
                 math.floor((JoyousSpring.count_materials_owned({ { is_extra_deck = true, is_debuffed = true } }) +
-                    JoyousSpring.count_materials_in_graveyard({ { is_extra_deck = true } })) /
-                card.ability.extra.debuffed_ed_count)
+                        JoyousSpring.count_materials_in_graveyard({ { is_extra_deck = true } })) /
+                    card.ability.extra.debuffed_ed_count)
             }
 
         }

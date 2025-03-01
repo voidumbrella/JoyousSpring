@@ -1,3 +1,6 @@
+---Adds card to Extra deck
+---@param card string|Card Key or Card
+---@param args table?
 JoyousSpring.add_to_extra_deck = function(card, args)
     local args = args or {}
     if type(card) == "string" then
@@ -24,6 +27,8 @@ JoyousSpring.add_to_extra_deck = function(card, args)
     end
 end
 
+---Return from G.jokers to Extra Deck
+---@param card Card
 JoyousSpring.return_to_extra_deck = function(card)
     if card.area and card.area == G.jokers then
         G.jokers:remove_card(card)
@@ -1853,6 +1858,27 @@ function Controller:queue_R_cursor_press(x, y)
     if JoyousSpring.summon_material_area and next(JoyousSpring.summon_material_area.highlighted) then
         JoyousSpring.summon_material_area:unhighlight_all()
     end
+end
+
+-- Prevent other cards from spawning if the Only YGO Cards conffig is enabled
+local get_current_pool_ref = get_current_pool
+function get_current_pool(_type, _rarity, _legendary, _append)
+    local _pool, _pool_key = get_current_pool_ref(_type, _rarity, _legendary, _append)
+    local new_pool
+
+    if _type == 'Joker' and JoyousSpring.config.only_ygo_cards then
+        new_pool = {}
+        for _, key in ipairs(_pool) do
+            if key:sub(1, 5) == "j_joy" then
+                table.insert(new_pool, key)
+            end
+        end
+        if #new_pool == 0 then
+            table.insert(new_pool, "j_joker")
+        end
+        return new_pool, _pool_key
+    end
+    return _pool, _pool_key
 end
 
 local game_start_run_ref = Game.start_run

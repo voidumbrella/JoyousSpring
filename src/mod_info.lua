@@ -222,7 +222,11 @@ create_UIBox_your_collection_jokers = function()
     return create_UIBox_your_collection_jokers_ref()
 end
 
--- Modified from SMODS
+---Modified from SMODS. Creates the UI for the Joker collection sorting by archetype in JoyousSpring.collection_pool
+---@param _pool table
+---@param rows table
+---@param args table
+---@return table
 JoyousSpring.card_collection_UIBox = function(_pool, rows, args)
     args = args or {}
     args.w_mod = 1

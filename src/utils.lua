@@ -1,3 +1,7 @@
+---Changes a card's ability with a little animation
+---@param card Card
+---@param other_key string
+---@param keep_edition boolean? Not implemented, keeps it by default
 JoyousSpring.transform_card = function(card, other_key, keep_edition)
     local joyous_spring_table = card.ability.extra.joyous_spring
     local revived = joyous_spring_table.revived
@@ -33,6 +37,10 @@ JoyousSpring.get_graveyard_count = function()
     return total
 end
 
+---Get all matrerials in G.jokers that fulfill **property_list**
+---@param property_list table
+---@param different_names boolean?
+---@return table
 JoyousSpring.get_materials_owned = function(property_list, different_names)
     if not G.jokers then return {} end
 
@@ -60,10 +68,19 @@ JoyousSpring.get_materials_owned = function(property_list, different_names)
     return materials
 end
 
+---Count all matrerials in G.jokers that fulfill **property_list**
+---@param property_list table
+---@param different_names boolean?
+---@return integer
 JoyousSpring.count_materials_owned = function(property_list, different_names)
     return #JoyousSpring.get_materials_owned(property_list, different_names)
 end
 
+---Get all matrerials in graveyard that fulfill **property_list**
+---@param property_list table
+---@param to_revive boolean? Checks if it can be revived
+---@param different_names boolean?
+---@return table
 JoyousSpring.get_materials_in_graveyard = function(property_list, to_revive, different_names)
     if not JoyousSpring.graveyard then return {} end
 
@@ -93,10 +110,20 @@ JoyousSpring.get_materials_in_graveyard = function(property_list, to_revive, dif
     return materials
 end
 
+---Count all matrerials in graveyard that fulfill **property_list**
+---@param property_list table
+---@param to_revive boolean? Checks if it can be revived
+---@param different_names boolean?
+---@return integer
 JoyousSpring.count_materials_in_graveyard = function(property_list, to_revive, different_names)
     return #JoyousSpring.get_materials_in_graveyard(property_list, to_revive, different_names)
 end
 
+---Get the keys to all matrerials in G.jokers and graveyard that fulfill **property_list**
+---@param property_list table
+---@param to_revive boolean? Checks if it can be revived
+---@param different_names boolean?
+---@return table
 JoyousSpring.get_all_material_keys = function(property_list, to_revive, different_names)
     local gy = JoyousSpring.get_materials_in_graveyard(property_list, to_revive, different_names)
     local owned = JoyousSpring.get_materials_owned(property_list, different_names)
@@ -106,20 +133,32 @@ JoyousSpring.get_all_material_keys = function(property_list, to_revive, differen
     return gy
 end
 
-JoyousSpring.count_all_materials = function(property_list, different_names)
-    return JoyousSpring.count_materials_in_graveyard(property_list, different_names) +
+---Count all matrerials in G.jokers and graveyard that fulfill **property_list**
+---@param property_list table
+---@param to_revive boolean? Checks if it can be revived
+---@param different_names boolean?
+---@return integer
+JoyousSpring.count_all_materials = function(property_list, to_revive, different_names)
+    return JoyousSpring.count_materials_in_graveyard(property_list, to_revive, different_names) +
         JoyousSpring.count_materials_owned(property_list, different_names)
 end
 
+---Count all Extra Deck types (Fusion, Synchro, Xyz, Link) are owned
+---@return integer
 JoyousSpring.extra_deck_types_owned = function()
-    local fusion = (JoyousSpring.count_all_materials({ { summon_type = "FUSION" } }) > 0) and 1 or 0
-    local synchro = (JoyousSpring.count_all_materials({ { summon_type = "SYNCHRO" } }) > 0) and 1 or 0
-    local xyz = (JoyousSpring.count_all_materials({ { summon_type = "XYZ" } }) > 0) and 1 or 0
-    local link = (JoyousSpring.count_all_materials({ { summon_type = "LINK" } }) > 0) and 1 or 0
+    local fusion = (JoyousSpring.count_materials_owned({ { summon_type = "FUSION" } }) > 0) and 1 or 0
+    local synchro = (JoyousSpring.count_materials_owned({ { summon_type = "SYNCHRO" } }) > 0) and 1 or 0
+    local xyz = (JoyousSpring.count_materials_owned({ { summon_type = "XYZ" } }) > 0) and 1 or 0
+    local link = (JoyousSpring.count_materials_owned({ { summon_type = "LINK" } }) > 0) and 1 or 0
 
     return fusion + synchro + xyz + link
 end
 
+---Creates cards with "permanent" debuffs
+---@param card Card
+---@param source string?
+---@param edition any
+---@return Card
 JoyousSpring.create_perma_debuffed_card = function(card, source, edition)
     if type(card) == "string" then
         local added_card = SMODS.create_card({
@@ -144,6 +183,10 @@ JoyousSpring.create_perma_debuffed_card = function(card, source, edition)
     end
 end
 
+---Get index of value in array
+---@param array table
+---@param value any
+---@return integer?
 JoyousSpring.index_of = function(array, value)
     for i, v in ipairs(array) do
         if v == value then
@@ -153,10 +196,18 @@ JoyousSpring.index_of = function(array, value)
     return nil
 end
 
+---Gets column (index) of joker in G.jokers
+---@param joker Card
+---@return integer?
 JoyousSpring.get_joker_column = function(joker)
     return G.jokers and JoyousSpring.index_of(G.jokers.cards or {}, joker) or 0
 end
 
+---Creates a random playing card and adds it to hand
+---@param enhanced_prob number? Probability of enhancements
+---@param silent boolean?
+---@param colours table?
+---@param seed number?
 JoyousSpring.create_random_playing_card = function(enhanced_prob, silent, colours, seed)
     G.E_MANAGER:add_event(Event({
         trigger = 'after',
@@ -188,6 +239,10 @@ JoyousSpring.create_random_playing_card = function(enhanced_prob, silent, colour
     }))
 end
 
+---Get not owned card in **keys** list
+---@param keys string[]
+---@param count_debuffed boolean?
+---@return table
 JoyousSpring.get_not_owned = function (keys, count_debuffed)
     local not_owned = {}
     for _, key in ipairs(keys) do
@@ -205,11 +260,13 @@ JoyousSpring.empty_graveyard = function ()
     end
 end
 
+--- Talisman compat
 to_big = to_big or function(num)
     return num
 end
 
 if JoyousSpring.debug then
+    --- Makes shop rerolls free
     function calculate_reroll_cost(skip_increment)
         G.GAME.current_round.reroll_cost = 0
     end
