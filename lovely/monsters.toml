@@ -3,26 +3,6 @@ version = "0.1.0"
 dump_lua = true
 priority = 0
 
-# Change card back to Yu-Gi-Oh's card back
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = 'if not self.children.back then'
-position = 'before'
-match_indent = true
-payload = '''
-if JoyousSpring and JoyousSpring.is_monster_card(self) then
-print(self.config.center.key)
-    self.children.back = Sprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ASSET_ATLAS["joy_Back"], { x = 0, y = 0 })
-    self.children.back.states.hover = self.states.hover
-    self.children.back.states.click = self.states.click
-    self.children.back.states.drag = self.states.drag
-    self.children.back.states.collide.can = false
-    self.children.back:set_role({major = self, role_type = 'Glued', draw_major = self})
-    return
-end
-'''
-
 # Customize sell cost
 [[patches]]
 [patches.pattern]

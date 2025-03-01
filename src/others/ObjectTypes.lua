@@ -26,7 +26,6 @@ function SMODS.injectItems()
                 type(v.config.extra) == "table" and
                 v.config.extra.joyous_spring
             if monster_card_properties and not monster_card_properties.is_main_deck then
-                print(monster_card_properties.is_field_spell)
                 if monster_card_properties.is_field_spell then
                     SMODS.ObjectTypes["joy_field"]:inject_card(v)
                 else
