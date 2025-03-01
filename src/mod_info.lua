@@ -4,6 +4,8 @@ SMODS.current_mod.description_loc_vars = function()
 end
 
 SMODS.current_mod.custom_ui = function(modNodes)
+    modNodes[1].nodes[1].config.colour = G.C.JOY.MOD
+
     G.joy_desc_area = CardArea(
         G.ROOM.T.x + 0.2 * G.ROOM.T.w / 2, G.ROOM.T.h,
         4.25 * G.CARD_W,
@@ -302,6 +304,9 @@ JoyousSpring.card_collection_UIBox = function(_pool, rows, args)
     G.FUNCS.SMODS_card_collection_page { cycle_config = { current_option = 1 } }
 
     local t = create_UIBox_generic_options({
+        bg_colour = {G.C.JOY.MOD[1], G.C.JOY.MOD[2], G.C.JOY.MOD[3], 0.6} or nil,
+        colour = G.C.JOY.XYZ or nil,
+        back_colour = darken(G.C.JOY.MOD, 0.3) or nil,
         back_func = (args and args.back_func) or G.ACTIVE_MOD_UI and "openModUI_" .. G.ACTIVE_MOD_UI.id or
             'your_collection',
         snap_back = args.snap_back,

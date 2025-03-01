@@ -1,6 +1,7 @@
 --- GLOBALS
 
 G.C.JOY = {
+    MOD = HEX("F4A6C7"),
     NORMAL = HEX("FDDD5D"),
     EFFECT = HEX("FF8B53"),
     SPELL = HEX("1D9E74"),
