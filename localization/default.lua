@@ -877,7 +877,7 @@ return {
 				},
 				joy_summon_conditions = {
 					"{C:attention}2{} {C:joy_normal}Fish{} {C:joy_synchro}Tuners{} +",
-					"{C:attention}1{} non-{C:joy_synchro}Tuner{}",
+					"{C:attention}1{} {C:red}Rare{} non-{C:joy_synchro}Tuner{}",
 				}
 			},
 			--#endregion
