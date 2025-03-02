@@ -627,8 +627,7 @@ return {
 				name = "{C:joy_effect}Loptr, Shadow of the Generaider Bosses",
 				text = {
 					"This card is destroyed when a {C:attention}Boss Blind{}",
-					"is defeated to add {C:joy_spell}\"Generaider Boss Stage\"{}",
-					"to the {C:joy_spell}Field Spell{} area",
+					"is defeated to create {C:joy_spell}\"Generaider Boss Stage\"{}",
 					"{C:inactive}(Must have room){}",
 				},
 			},
@@ -1008,8 +1007,8 @@ return {
 				text = {
 					"{C:attention}+#1#{} consumable slot",
 					" ",
-					"Adds {C:attention}#1#{} {C:joy_spell}\"Runick Fountain\"",
-					"to the {C:joy_spell}Field Spell{} area when summoned",
+					"Create {C:attention}#1#{} {C:joy_spell}\"Runick Fountain\"",
+					"when summoned",
 					"{C:inactive}(Must have room){}",
 				},
 				joy_summon_conditions = {
@@ -1032,9 +1031,8 @@ return {
 			j_joy_runick_geri = {
 				name = "{C:joy_fusion}Geri the Runick Fangs",
 				text = {
-					"Adds {C:attention}#1#{} {C:joy_spell}\"Runick Fountain\"",
-					"to the {C:joy_spell}Field Spell{} area when summoned",
-					"if there's any in the {C:attention}GY{}",
+					"Create {C:attention}#1#{} {C:joy_spell}\"Runick Fountain\"",
+					"when summoned if there's any in the {C:attention}GY{}",
 					"{C:inactive}(Must have room){}",
 					" ",
 					"Sell this card to create up to",
