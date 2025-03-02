@@ -73,7 +73,7 @@ SMODS.Challenge({
     unlocked = function(self)
         return true
     end,
-    joy_colour = G.C.JOY.SPELL
+    joy_colour = G.C.JOY.TRAP
 })
 
 -- Monster Reborn
