@@ -104,7 +104,7 @@ SMODS.Joker({
                 revived = false,
                 is_free = false,
             },
-            mult = 50
+            mult = 25
         },
     },
     calculate = function(self, card, context)
