@@ -21,8 +21,15 @@ JoyousSpring.config = SMODS.current_mod.config
 assert(SMODS.load_file("src/utils.lua"))()
 assert(SMODS.load_file("src/mod_info.lua"))()
 assert(SMODS.load_file("src/globals.lua"))()
-assert(SMODS.load_file("src/zones.lua"))()
+assert(SMODS.load_file("src/general_ui.lua"))()
+assert(SMODS.load_file("src/card_ui.lua"))()
+assert(SMODS.load_file("src/extra_deck.lua"))()
+assert(SMODS.load_file("src/graveyard.lua"))()
+assert(SMODS.load_file("src/banishment.lua"))()
+assert(SMODS.load_file("src/pendulum.lua"))()
+assert(SMODS.load_file("src/summon.lua"))()
 assert(SMODS.load_file("src/monsters.lua"))()
+assert(SMODS.load_file("src/effects.lua"))()
 
 -- Jokers
 

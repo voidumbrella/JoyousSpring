@@ -151,332 +151,60 @@ function init_localization()
     end
 end
 
-local SMODS_calculate_context_ref = SMODS.calculate_context
-function SMODS.calculate_context(context, return_table)
-    JoyousSpring.calculate_context(context)
-    return SMODS_calculate_context_ref(context, return_table)
-end
+-- Prevent other cards from spawning if the Only YGO Cards conffig is enabled
+local get_current_pool_ref = get_current_pool
+function get_current_pool(_type, _rarity, _legendary, _append)
+    local _pool, _pool_key = get_current_pool_ref(_type, _rarity, _legendary, _append)
+    local new_pool
 
----Does global effects when a context is being calculated
----@param context table
-JoyousSpring.calculate_context = function(context)
-    -- Global counter for destroyed cards
-    if context.remove_playing_cards then
-        G.GAME.joy_cards_destroyed = G.GAME.joy_cards_destroyed and
-            (G.GAME.joy_cards_destroyed + #context.removed) or #context.removed
-    end
-
-    -- Return from Banishment
-    if context.setting_blind then
-        if G.GAME.blind and G.GAME.blind:get_type() == 'Boss' then
-            while #JoyousSpring.banish_boss_selected_area.cards > 0 do
-                JoyousSpring.return_from_banish(JoyousSpring.banish_boss_selected_area.cards[1])
+    if _type == 'Joker' and JoyousSpring.config.only_ygo_cards then
+        new_pool = {}
+        for _, key in ipairs(_pool) do
+            if key:sub(1, 5) == "j_joy" then
+                table.insert(new_pool, key)
             end
         end
-        while #JoyousSpring.banish_blind_selected_area.cards > 0 do
-            JoyousSpring.return_from_banish(JoyousSpring.banish_blind_selected_area.cards[1])
+        if #new_pool == 0 then
+            table.insert(new_pool, "j_joker")
         end
+        return new_pool, _pool_key
     end
-    if context.end_of_round and context.game_over == false then
-        if G.GAME.blind and G.GAME.blind.boss then
-            while #JoyousSpring.banish_end_of_ante_area.cards > 0 do
-                JoyousSpring.return_from_banish(JoyousSpring.banish_end_of_ante_area.cards[1])
+    return _pool, _pool_key
+end
+
+local game_start_run_ref = Game.start_run
+function Game:start_run(args)
+    if not JoyousSpring.lists then
+        JoyousSpring.lists = {}
+        JoyousSpring.lists.main_deck = {}
+        JoyousSpring.lists.extra_deck = {}
+        JoyousSpring.lists.legendary = {}
+        JoyousSpring.lists.rare = {}
+        JoyousSpring.lists.uncommon = {}
+        JoyousSpring.lists.common = {}
+        for k, v in pairs(G.P_CENTERS) do
+            if string.sub(k, 1, 6) == "j_joy_" then
+                local monster_card_properties = v.config.extra.joyous_spring
+                if monster_card_properties.is_main_deck then
+                    table.insert(JoyousSpring.lists.main_deck, k)
+                else
+                    table.insert(JoyousSpring.lists.extra_deck, k)
+                end
+                if v.rarity == 4 then
+                    table.insert(JoyousSpring.lists.legendary, k)
+                elseif v.rarity == 3 then
+                    table.insert(JoyousSpring.lists.rare, k)
+                elseif v.rarity == 2 then
+                    table.insert(JoyousSpring.lists.uncommon, k)
+                else
+                    table.insert(JoyousSpring.lists.common, k)
+                end
             end
         end
-        while #JoyousSpring.banish_end_of_round_area.cards > 0 do
-            JoyousSpring.return_from_banish(JoyousSpring.banish_end_of_round_area.cards[1])
-        end
     end
 
-    -- Add extra pack for Extra YGO Booster config
-    if context.starting_shop and JoyousSpring.config.extra_ygo_booster then
-        local choices = {
-            "p_joy_monster_pack",
-            "p_joy_jumbo_monster_pack",
-            "p_joy_mega_monster_pack",
-            "p_joy_extra_pack",
-            "p_joy_jumbo_extra_pack",
-            "p_joy_mega_extra_pack",
-        }
-        SMODS.add_booster_to_shop(pseudorandom_element(choices, pseudoseed("JoyousSpring")) or "p_joy_monster_pack")
-    end
-end
+    game_start_run_ref(self, args)
 
----Creates UI for a monsters type information
----@param card Card
----@return table
-JoyousSpring.get_type_ui = function(card)
-    local joyous_spring_table = card and card.ability and card.ability.extra.joyous_spring or {}
-
-    if joyous_spring_table.is_field_spell then
-        return {
-            {
-                n = G.UIT.O,
-                config = {
-                    object = DynaText({
-                        string = { localize("k_joy_fieldspell") },
-                        colours = { G.C.JOY.SPELL },
-                        bump = true,
-                        silent = true,
-                        pop_in = 0,
-                        pop_in_rate = 4,
-                        maxw = 5,
-                        shadow = true,
-                        y_offset = 0,
-                        spacing = math.max(0, 0.32 * (17 - #localize("k_joy_fieldspell"))),
-                        scale = (0.4 - 0.004 * #localize("k_joy_fieldspell"))
-                    })
-                }
-            }
-        }
-    end
-
-    local attribute_text = localize("k_joy_" .. (joyous_spring_table.attribute or "LIGHT"))
-    local type_text = localize("k_joy_" .. (joyous_spring_table.monster_type or "Beast"))
-    local summon_type_text = joyous_spring_table.summon_type and joyous_spring_table.summon_type ~= "NORMAL" and
-        localize("k_joy_" .. joyous_spring_table.summon_type) or nil
-    local pendulum_text = joyous_spring_table.is_pendulum and localize("k_joy_pendulum") or nil
-    local tuner_text = joyous_spring_table.is_tuner and localize("k_joy_tuner") or nil
-    local effect_text = joyous_spring_table.is_effect and localize("k_joy_effect") or localize("k_joy_normal")
-    local trap_text = joyous_spring_table.is_trap and localize("k_joy_trap") or nil
-    local full_text = attribute_text ..
-        "/" .. type_text .. "/" .. (summon_type_text or "") .. (summon_type_text and "/" or "") ..
-        (pendulum_text or "") .. (pendulum_text and "/" or "") ..
-        (tuner_text or "") .. (tuner_text and "/" or "") ..
-        effect_text .. (trap_text and "/" or "") ..
-        (trap_text or "")
-
-    local attribute = {
-        n = G.UIT.O,
-        config = {
-            object = DynaText({
-                string = { attribute_text },
-                colours = { G.C.JOY[attribute_text] },
-                bump = true,
-                silent = true,
-                pop_in = 0,
-                pop_in_rate = 4,
-                maxw = 5,
-                shadow = true,
-                y_offset = 0,
-                spacing = math.max(0, 0.32 * (17 - #full_text)),
-                scale = (0.4 - 0.004 * #full_text)
-            })
-        }
-    }
-    local type = {
-        n = G.UIT.O,
-        config = {
-            object = DynaText({
-                string = { type_text },
-                colours = { G.C.JOY.NORMAL },
-                bump = true,
-                silent = true,
-                pop_in = 0,
-                pop_in_rate = 4,
-                maxw = 5,
-                shadow = true,
-                y_offset = 0,
-                spacing = math.max(0, 0.32 * (17 - #full_text)),
-                scale = (0.4 - 0.004 * #full_text)
-            })
-        }
-    }
-    local summon_type
-    if summon_type_text then
-        summon_type = {
-            n = G.UIT.O,
-            config = {
-                object = DynaText({
-                    string = { summon_type_text },
-                    colours = { G.C.JOY[joyous_spring_table.summon_type] or G.C.JOY.FUSION },
-                    bump = true,
-                    silent = true,
-                    pop_in = 0,
-                    pop_in_rate = 4,
-                    maxw = 5,
-                    shadow = true,
-                    y_offset = 0,
-                    spacing = math.max(0, 0.32 * (17 - #full_text)),
-                    scale = (0.4 - 0.004 * #full_text)
-                })
-            }
-        }
-    end
-    local pendulum
-    if joyous_spring_table.is_pendulum then
-        pendulum = {
-            n = G.UIT.O,
-            config = {
-                object = DynaText({
-                    string = { pendulum_text },
-                    colours = { G.C.JOY.SPELL },
-                    bump = true,
-                    silent = true,
-                    pop_in = 0,
-                    pop_in_rate = 4,
-                    maxw = 5,
-                    shadow = true,
-                    y_offset = 0,
-                    spacing = math.max(0, 0.32 * (17 - #full_text)),
-                    scale = (0.4 - 0.004 * #full_text)
-                })
-            }
-        }
-    end
-    local tuner
-    if tuner_text then
-        tuner = {
-            n = G.UIT.O,
-            config = {
-                object = DynaText({
-                    string = { tuner_text },
-                    colours = { G.C.JOY.SYNCHRO },
-                    bump = true,
-                    silent = true,
-                    pop_in = 0,
-                    pop_in_rate = 4,
-                    maxw = 5,
-                    shadow = true,
-                    y_offset = 0,
-                    spacing = math.max(0, 0.32 * (17 - #full_text)),
-                    scale = (0.4 - 0.004 * #full_text)
-                })
-            }
-        }
-    end
-    local effect = {
-        n = G.UIT.O,
-        config = {
-            object = DynaText({
-                string = { effect_text },
-                colours = { joyous_spring_table.is_effect and G.C.JOY.EFFECT or G.C.JOY.NORMAL },
-                bump = true,
-                silent = true,
-                pop_in = 0,
-                pop_in_rate = 4,
-                maxw = 5,
-                shadow = true,
-                y_offset = 0,
-                spacing = math.max(0, 0.32 * (17 - #full_text)),
-                scale = (0.4 - 0.004 * #full_text)
-            })
-        }
-    }
-    local trap
-    if trap_text then
-        trap = {
-            n = G.UIT.O,
-            config = {
-                object = DynaText({
-                    string = { trap_text },
-                    colours = { G.C.JOY.TRAP },
-                    bump = true,
-                    silent = true,
-                    pop_in = 0,
-                    pop_in_rate = 4,
-                    maxw = 5,
-                    shadow = true,
-                    y_offset = 0,
-                    spacing = math.max(0, 0.32 * (17 - #full_text)),
-                    scale = (0.4 - 0.004 * #full_text)
-                })
-            }
-        }
-    end
-    local separator = {
-        n = G.UIT.T,
-        config = {
-            text = "/",
-            colour = G.C.UI.TEXT_LIGHT,
-            scale = (0.4 - 0.004 * #full_text)
-        }
-    }
-    return {
-        attribute,
-        separator,
-        type,
-        separator,
-        summon_type,
-        summon_type and separator or nil,
-        pendulum,
-        pendulum and separator or nil,
-        tuner,
-        tuner and separator or nil,
-        effect,
-        trap and separator or nil,
-        trap
-    }
-end
-
----Generates Joker's description UI. This is done to:
----* Add type information under names
----* Add summoning conditions to info_queue automatically
----* Change Token's name
----* Remove color codes from info_queue tooltip names
----@param self table
----@param info_queue table
----@param card Card
----@param desc_nodes table
----@param specific_vars table
----@param full_UI_table table
-JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
-    -- Change Token's name
-    if card and card.config.center.key == "j_joy_token" then
-        full_UI_table.name = localize { type = 'name', set = "Joker", key = card.ability and card.ability.extra.joyous_spring.token_name or "j_joy_token", nodes = {} }
-    end
-
-    SMODS.Center.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
-
-    if desc_nodes ~= full_UI_table.main then
-        -- Remove color codes from info_queue tooltip names
-        if string.len(desc_nodes.name) > 2 and string.sub(desc_nodes.name, string.len(desc_nodes.name) - 1, string.len(desc_nodes.name)) == "{}" then
-            desc_nodes.name = string.sub(desc_nodes.name, 1, string.len(desc_nodes.name) - 2)
-        end
-        if string.sub(desc_nodes.name, 1, 3) == "{C:" then
-            local _, _, _, real_name = string.find(desc_nodes.name, "{C:(.*)}(.*)")
-            desc_nodes.name = real_name
-        end
-    else
-        -- Add type information under names
-        full_UI_table.name = {
-            {
-                n = G.UIT.C,
-                config = { align = "cm", padding = 0.05 },
-                nodes = {
-                    {
-                        n = G.UIT.R,
-                        config = { align = "cm" },
-                        nodes = full_UI_table.name
-                    },
-                    {
-                        n = G.UIT.R,
-                        config = { align = "cm" },
-                        nodes = JoyousSpring.get_type_ui(card)
-                    },
-                }
-            }
-        }
-        -- Add summoning conditions to info_queue automatically
-        if G.localization.descriptions[self.set][self.key].joy_summon_conditions then
-            full_UI_table.info[#full_UI_table.info + 1] = {}
-            local summon_desc_nodes = full_UI_table.info[#full_UI_table.info]
-            summon_desc_nodes.name = localize('k_joy_summon_conditions')
-            localize { type = "joy_summon_conditions", set = self.set, key = self.key, nodes = summon_desc_nodes }
-        end
-    end
-end
-
----Adds YGO's back to cards
----@param self table|SMODS.Center
----@param card Card
----@param front table
-JoyousSpring.set_back_sprite = function(self, card, front)
-    if card.children.back then card.children.back:remove() end
-    card.children.back = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS["joy_Back"], { x = 0, y = 0 })
-    card.children.back.states.hover = card.states.hover
-    card.children.back.states.click = card.states.click
-    card.children.back.states.drag = card.states.drag
-    card.children.back.states.collide.can = false
-    card.children.back:set_role({ major = card, role_type = 'Glued', draw_major = card })
+    self.GAME.joy_create_card = JoyousSpring.debug and JoyousSpring.debug_shop_cards or self.GAME.joy_create_card or {}
+    JoyousSpring.cards_to_create = self.GAME.joy_create_card
 end

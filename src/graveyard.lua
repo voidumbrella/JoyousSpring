@@ -1,0 +1,355 @@
+---GRAVEYARD
+
+-- Revive
+
+---Revives a card from the GY
+---@param key string
+---@param must_have_room boolean?
+---@param edition any
+---@return Card?
+JoyousSpring.revive = function(key, must_have_room, edition)
+    if JoyousSpring.graveyard[key] and JoyousSpring.graveyard[key].summonable > 0 and
+        (not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit)) then
+        JoyousSpring.graveyard[key].count = JoyousSpring.graveyard[key].count - 1
+        JoyousSpring.graveyard[key].summonable = JoyousSpring.graveyard[key].summonable - 1
+        local added_card = SMODS.add_card({
+            key = key,
+            edition = edition
+        })
+        added_card.ability.extra.joyous_spring.summoned = JoyousSpring.is_extra_deck_monster(added_card) or nil
+        added_card.ability.extra.joyous_spring.revived = true
+        added_card:set_cost()
+        SMODS.calculate_context({ joy_revived = true, joy_revived_card = added_card })
+        return added_card
+    end
+    return nil
+end
+
+---Revives a random card that fulfills **property_list**
+---@param property_list table
+---@param seed number
+---@param must_have_room boolean?
+---@param edition any
+---@return Card?
+JoyousSpring.revive_pseudorandom = function(property_list, seed, must_have_room, edition)
+    if not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit) then
+        local choices = JoyousSpring.get_materials_in_graveyard(property_list, true)
+        local key_to_add = pseudorandom_element(choices, seed)
+        if key_to_add then
+            return JoyousSpring.revive(key_to_add, must_have_room, edition)
+        end
+    end
+    return nil
+end
+
+JoyousSpring.send_to_graveyard = function(card)
+    if JoyousSpring.graveyard then
+        if type(card) == "string" then
+            local not_summoned = JoyousSpring.is_material_center(card, { is_extra_deck = true })
+            if not JoyousSpring.graveyard[card] then JoyousSpring.graveyard[card] = { count = 0, summonable = 0 } end
+            JoyousSpring.graveyard[card].count = JoyousSpring.graveyard[card].count + 1
+            JoyousSpring.graveyard[card].summonable = JoyousSpring.graveyard[card].summonable + (not_summoned and 0 or 1)
+        elseif type(card) == "table" then
+            local not_summoned = JoyousSpring.is_extra_deck_monster(card) and not JoyousSpring.is_summoned(card)
+            if not JoyousSpring.graveyard[card.config.center_key] then JoyousSpring.graveyard[card.config.center_key] = { count = 0, summonable = 0 } end
+            JoyousSpring.graveyard[card.config.center_key].count = JoyousSpring.graveyard[card.config.center_key].count +
+                1
+            JoyousSpring.graveyard[card.config.center_key].summonable = JoyousSpring.graveyard[card.config.center_key]
+                .summonable + (not_summoned and 0 or 1)
+        end
+    end
+end
+
+JoyousSpring.create_overlay_graveyard = function()
+    local gy_count = 0
+    for _, _ in pairs(JoyousSpring.graveyard) do
+        gy_count = gy_count + 1
+    end
+    JoyousSpring.graveyard_area = {}
+    local num_graveyard_areas = math.min(4, math.floor(gy_count / 25) + 1)
+    for i = 1, num_graveyard_areas do
+        JoyousSpring.graveyard_area[i] = CardArea(
+            G.ROOM.T.x + 0.2 * G.ROOM.T.w / 2,
+            G.ROOM.T.h,
+            6.5 * G.CARD_W,
+            0.6 * G.CARD_H,
+            {
+                card_limit = (num_graveyard_areas == i and gy_count - 25 * (i - 1)) or 25,
+                type = 'title',
+                highlight_limit = 0,
+                card_w = G.CARD_W * 0.7,
+                draw_layers = { 'card' },
+            }
+        )
+        JoyousSpring.graveyard_area[i].monster_h_popup = true
+    end
+
+    local i = 0
+    for key, t in pairs(JoyousSpring.graveyard) do
+        local count = t.count
+        local summonable = t.summonable
+        if count > 0 then
+            local added_card = SMODS.create_card({
+                area = JoyousSpring.graveyard_area[math.min(4, math.floor(i / 25) + 1)],
+                key = key,
+                no_edition = true,
+                skip_materialize = true,
+            })
+            JoyousSpring.graveyard_area[math.min(4, math.floor(i / 25) + 1)]:emplace(added_card)
+            i = i + 1
+            -- copied from Cartomancer
+            if not added_card.children.stack_display and (count > 1 or
+                    (JoyousSpring.is_extra_deck_monster(added_card)) and count ~= summonable) then
+                added_card.children.stack_display = UIBox {
+                    definition = {
+                        n = G.UIT.ROOT,
+                        config = {
+                            minh = 0.6,
+                            maxh = 1.2,
+                            minw = 0.6,
+                            maxw = 2,
+                            r = 0.001,
+                            padding = 0.1,
+                            align = 'cm',
+                            colour = adjust_alpha(darken(G.C.BLACK, 0.2), 0.8),
+                            shadow = false,
+                            ref_table = added_card
+                        },
+                        nodes = {
+                            {
+                                n = G.UIT.R, -- node type
+                                config = {
+                                    align = 'cm',
+                                    colour = G.C.CLEAR
+                                },
+                                nodes = {
+                                    {
+                                        n = G.UIT.T, -- node type
+                                        config = {
+                                            text = 'X',
+                                            scale = 0.45,
+                                            colour = G.C.JOY.TRAP
+                                        },
+                                    },
+                                    {
+                                        n = G.UIT.T, -- node type
+                                        config = {
+                                            text = count,
+                                            scale = 0.45,
+                                            colour = G.C.UI.TEXT_LIGHT
+                                        }
+                                    }
+                                }
+                            },
+                            JoyousSpring.is_extra_deck_monster(added_card) and {
+                                n = G.UIT.R, -- node type
+                                config = {
+                                    align = 'cm',
+                                    colour = G.C.CLEAR
+                                },
+                                nodes = {
+                                    {
+                                        n = G.UIT.T, -- node type
+                                        config = {
+                                            text = 'X',
+                                            scale = 0.45,
+                                            colour = G.C.JOY.SPELL
+                                        },
+                                    },
+                                    {
+                                        n = G.UIT.T, -- node type
+                                        config = {
+                                            text = summonable,
+                                            scale = 0.45,
+                                            colour = G.C.UI.TEXT_LIGHT
+                                        }
+                                    }
+                                }
+                            } or nil,
+                        }
+                    },
+                    config = {
+                        align = "tli",
+                        bond = 'Strong',
+                        parent = added_card,
+                    },
+                    states = {
+                        collide = { can = false },
+                        drag = { can = true }
+                    }
+                }
+            end
+        end
+    end
+
+    G.FUNCS.overlay_menu({
+        definition = create_UIBox_generic_options({
+            contents = {
+                {
+                    n = G.UIT.R,
+                    config = {
+                        align = "cm",
+                        padding = 0.05,
+                        minw = 7
+                    },
+                    nodes = {
+                        {
+                            n = G.UIT.O,
+                            config = {
+                                object = DynaText({
+                                    string = { localize('k_joy_graveyard') },
+                                    colours = { G.C.UI.TEXT_LIGHT },
+                                    bump = true,
+                                    silent = true,
+                                    pop_in = 0,
+                                    pop_in_rate = 4,
+                                    minw = 10,
+                                    shadow = true,
+                                    y_offset = -0.6,
+                                    scale = 0.9
+                                })
+                            }
+                        }
+                    }
+
+                },
+                {
+                    n = G.UIT.R,
+                    config = {
+                        align = "cm",
+                        padding = 0.2,
+                        minw = 7
+                    },
+                    nodes = {
+                        {
+                            n = G.UIT.R,
+                            config = {
+                                r = 0.1,
+                                minw = 7,
+                                minh = 5,
+                                align = "cm",
+                                padding = 1,
+                                colour = G.C.BLACK
+                            },
+                            nodes = {
+                                {
+                                    n = G.UIT.C,
+                                    config = {
+                                        align = "cm",
+                                        padding = 0.07,
+                                        no_fill = true,
+                                        scale = 1
+                                    },
+                                    nodes = {
+                                        num_graveyard_areas > 0 and {
+                                            n = G.UIT.R,
+                                            config = {
+                                                align = "cm",
+                                                padding = 0.07,
+                                                no_fill = true,
+                                                scale = 1
+                                            },
+                                            nodes = {
+                                                {
+                                                    n = G.UIT.O,
+                                                    config = {
+                                                        object = JoyousSpring.graveyard_area[1]
+                                                    }
+                                                },
+                                            }
+                                        } or nil,
+                                        num_graveyard_areas > 1 and {
+                                            n = G.UIT.R,
+                                            config = {
+                                                align = "cm",
+                                                padding = 0.07,
+                                                no_fill = true,
+                                                scale = 1
+                                            },
+                                            nodes = {
+                                                {
+                                                    n = G.UIT.O,
+                                                    config = {
+                                                        object = JoyousSpring.graveyard_area[2]
+                                                    }
+                                                },
+                                            }
+                                        } or nil,
+                                        num_graveyard_areas > 2 and {
+                                            n = G.UIT.R,
+                                            config = {
+                                                align = "cm",
+                                                padding = 0.07,
+                                                no_fill = true,
+                                                scale = 1
+                                            },
+                                            nodes = {
+                                                {
+                                                    n = G.UIT.O,
+                                                    config = {
+                                                        object = JoyousSpring.graveyard_area[3]
+                                                    }
+                                                },
+                                            }
+                                        } or nil,
+                                        num_graveyard_areas > 3 and {
+                                            n = G.UIT.R,
+                                            config = {
+                                                align = "cm",
+                                                padding = 0.07,
+                                                no_fill = true,
+                                                scale = 1
+                                            },
+                                            nodes = {
+                                                {
+                                                    n = G.UIT.O,
+                                                    config = {
+                                                        object = JoyousSpring.graveyard_area[4]
+                                                    }
+                                                },
+                                            }
+                                        } or nil,
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    })
+end
+
+G.FUNCS.joy_open_graveyard = function(e)
+    JoyousSpring.create_overlay_graveyard()
+end
+
+G.FUNCS.joy_show_graveyard = function(e)
+    if JoyousSpring.graveyard and next(JoyousSpring.graveyard) then
+        G.GAME.joy_show_graveyard = true
+    end
+    if G.GAME.joy_show_graveyard then
+        e.states.visible = true
+    else
+        e.states.visible = false
+    end
+end
+
+local card_remove_ref = Card.remove
+function Card:remove()
+    if (self.area == G.jokers or self.area == JoyousSpring.extra_deck_area or self.area == JoyousSpring.field_spell_area) and
+        JoyousSpring.is_monster_card(self) and self.config.center.key ~= "j_joy_token" then
+        JoyousSpring.send_to_graveyard(self)
+    end
+    card_remove_ref(self)
+end
+
+local game_start_run_ref = Game.start_run
+function Game:start_run(args)
+    game_start_run_ref(self, args)
+
+    G.GAME.joy_show_graveyard = G.GAME.joy_show_graveyard or false
+
+    self.GAME.joy_graveyard = self.GAME.joy_graveyard or self.GAME.modifiers["joy_gy_start"] or {}
+    JoyousSpring.graveyard = self.GAME.joy_graveyard
+end

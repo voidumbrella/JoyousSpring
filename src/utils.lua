@@ -1,32 +1,3 @@
----Changes a card's ability with a little animation
----@param card Card
----@param other_key string
----@param keep_edition boolean? Not implemented, keeps it by default
-JoyousSpring.transform_card = function(card, other_key, keep_edition)
-    local joyous_spring_table = card.ability.extra.joyous_spring
-    local revived = joyous_spring_table.revived
-    local is_free = joyous_spring_table.is_free
-    local summoned = joyous_spring_table.summoned
-    local summon_materials = joyous_spring_table.summon_materials
-    local xyz_materials = joyous_spring_table.xyz_materials
-    G.E_MANAGER:add_event(Event({
-        trigger = "after",
-        delay = 0.15,
-        func = function()
-            card:set_ability(G.P_CENTERS[other_key])
-            play_sound("card1")
-            card:juice_up(0.3, 0.3)
-            local joyous_spring_table = card.ability.extra.joyous_spring
-            joyous_spring_table.revived = revived
-            joyous_spring_table.is_free = is_free
-            joyous_spring_table.summoned = summoned
-            joyous_spring_table.summon_materials = summon_materials
-            joyous_spring_table.xyz_materials = xyz_materials
-            return true
-        end,
-    }))
-end
-
 JoyousSpring.get_graveyard_count = function()
     if not JoyousSpring.graveyard then return 0 end
 
@@ -154,35 +125,6 @@ JoyousSpring.extra_deck_types_owned = function()
     return fusion + synchro + xyz + link
 end
 
----Creates cards with "permanent" debuffs
----@param card Card
----@param source string?
----@param edition any
----@return Card
-JoyousSpring.create_perma_debuffed_card = function(card, source, edition)
-    if type(card) == "string" then
-        local added_card = SMODS.create_card({
-            key = card,
-            edition = edition or {}
-        })
-        SMODS.debuff_card(added_card, true, source)
-        if JoyousSpring.is_monster_card(added_card) then
-            added_card.ability.extra.joyous_spring.perma_debuffed = true
-        end
-        added_card:set_cost()
-        added_card:add_to_deck()
-        G.jokers:emplace(added_card)
-        return added_card
-    else
-        SMODS.debuff_card(card, true, source)
-        if JoyousSpring.is_monster_card(card) then
-            card.ability.extra.joyous_spring.perma_debuffed = true
-        end
-        card:set_cost()
-        return card
-    end
-end
-
 ---Get index of value in array
 ---@param array table
 ---@param value any
@@ -201,43 +143,6 @@ end
 ---@return integer?
 JoyousSpring.get_joker_column = function(joker)
     return G.jokers and JoyousSpring.index_of(G.jokers.cards or {}, joker) or 0
-end
-
----Creates a random playing card and adds it to hand
----@param enhanced_prob number? Probability of enhancements
----@param silent boolean?
----@param colours table?
----@param seed number?
-JoyousSpring.create_random_playing_card = function(enhanced_prob, silent, colours, seed)
-    G.E_MANAGER:add_event(Event({
-        trigger = 'after',
-        delay = 0.3,
-        func = function()
-            local _rank = pseudorandom_element({ 'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K' },
-                seed or pseudoseed('JoyousSpring')) or 'A'
-            local _suit = pseudorandom_element({ 'S', 'H', 'D', 'C' }, seed or pseudoseed('JoyousSpring')) or 'S'
-            local cen_pool = {}
-            for k, v in pairs(G.P_CENTER_POOLS["Enhanced"]) do
-                if v.key ~= 'm_stone' then
-                    cen_pool[#cen_pool + 1] = v
-                end
-            end
-            local enhanced = enhanced_prob >= 1 and
-                (pseudorandom(seed or pseudoseed('JoyousSpring')) < 1 / enhanced_prob and true) or false
-            create_playing_card(
-                {
-                    front = G.P_CARDS[_suit .. '_' .. _rank],
-                    center = enhanced and pseudorandom_element(cen_pool,
-                        seed or pseudoseed('JoyousSpring')) or nil
-                },
-                G.hand,
-                nil,
-                silent,
-                colours or { G.C.JOY.EFFECT }
-            )
-            return true
-        end
-    }))
 end
 
 ---Get not owned card in **keys** list
