@@ -17,9 +17,6 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 2,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card and not card.debuff then
-            info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_ltwin_kisikil
-        end
         return { vars = { card.ability.extra.chips, card.ability.extra.cards_to_create } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
@@ -87,9 +84,6 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 2,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card and not card.debuff then
-            info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_ltwin_lilla
-        end
         return { vars = { card.ability.extra.mult, card.ability.extra.cards_to_create } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
@@ -389,6 +383,9 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 5,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_revive" }
+        end
         return { vars = { card.ability.extra.mult, card.ability.extra.h_size, card.ability.extra.revives } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
@@ -475,6 +472,9 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 5,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_revive" }
+        end
         return { vars = { card.ability.extra.chips, card.ability.extra.money, card.ability.extra.revives } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
@@ -638,9 +638,8 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 8,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card and not card.debuff then
-            info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_etwin_kisikil
-            info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_etwin_lilla
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_revive" }
         end
         return { vars = { card.ability.extra.chips, card.ability.extra.mult, card.ability.extra.revives } }
     end,

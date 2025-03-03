@@ -39,8 +39,8 @@ return {
 			j_joy_dmaid_parlor = {
 				name = "{C:joy_effect}Parlor Dragonmaid",
 				text = {
-					"{C:attention}#1# Booster Tag{} when obtained if you have",
-					"{C:attention}#2#{} {C:joy_normal}\"Dragonmaids\"{},",
+					"{C:attention}#1# Booster Tag{} when obtained",
+					"if you have {C:attention}#2#{} {C:joy_normal}\"Dragonmaids\"{},",
 					"gaining an extra for every {C:attention}#3#{} more",
 					" ",
 					"{C:attention}Transforms{} into {C:joy_effect}\"Dragonmaid Lorpar\"",
@@ -80,7 +80,7 @@ return {
 			j_joy_dmaid_laundry = {
 				name = "{C:joy_effect}Laundry Dragonmaid",
 				text = {
-					"Adds {C:attention}#1#{} random {C:joy_normal}Main Deck{}",
+					"Sends {C:attention}#1#{} random {C:joy_normal}Main Deck{}",
 					"{C:joy_normal}\"Dragonmaids\"{} to the {C:attention}GY{}",
 					" ",
 					"{C:attention}Transforms{} into {C:joy_effect}\"Dragonmaid Nudyarl\"",
@@ -215,7 +215,7 @@ return {
 					"{C:mult}+#1#{} Mult",
 					"{C:attention}+#2#{} hand size",
 					" ",
-					"Adds {C:attention}#3#{} {C:joy_normal}Main Deck \"Lil-la\"{} to the {C:attention}GY{}",
+					"Sends {C:attention}#3#{} {C:joy_normal}Main Deck \"Lil-la\"{} to the {C:attention}GY{}",
 					"when {C:attention}Blind{} is selected",
 				},
 				joy_summon_conditions = {
@@ -302,7 +302,7 @@ return {
 			j_joy_dogma_adin = {
 				name = "{C:joy_effect}Dogmatika Adin, the Enlightened",
 				text = {
-					"Create {C:attention}#1#{} {C:joy_ritual}non-Ritual{} {C:joy_normal}\"Dogmatika\"{}",
+					"Create {C:attention}#1#{} non-{C:joy_ritual}Ritual{} {C:joy_normal}\"Dogmatika\"{}",
 					"when {C:attention}Boss Blind{} is defeated",
 					"{C:inactive}(Must have room){}",
 					" ",
@@ -1179,6 +1179,7 @@ return {
 			},
 		},
 		Other = {
+			--#region Boosters
 			p_joy_monster_pack = {
 				name = "Champion Pack",
 				text = {
@@ -1221,6 +1222,33 @@ return {
 					"{C:attention}#2#{} {C:joy_spell}Special Summon{} {C:joker}Joker{} cards",
 				},
 			},
+			--#endregion
+			--#region Tooltips
+			joy_tooltip_transform = {
+				name = "Transform",
+				text = {
+					"Changes a {C:attention}Joker{} into another",
+					"Keeps any enhancements",
+				},
+			},
+			joy_tooltip_revive = {
+				name = "Revive",
+				text = {
+					"Create a card and remove it from the {C:attention}GY{}",
+					"Must have room and might have a random edition, unless specified",
+					"{s:0.9,C:inactive}({s:0.9,C:joy_spell}Extra Deck{} {s:0.9,C:inactive}and {s:0.9,C:joy_ritual}Ritual{} {s:0.9,C:attention}Jokers{} {s:0.9,C:inactive}that were not",
+					"{s:0.9,C:inactive}properly summoned can't be revived)",
+					"{s:0.9,C:inactive}(Revived Jokers have a sell value of 1)"
+				},
+			},
+			joy_tooltip_extra_deck_joker = {
+				name = "Extra Deck Joker",
+				text = {
+					"{C:joy_fusion}Fusion{}, {C:joy_synchro}Synchro{},",
+					"{C:joy_xyz}Xyz{} and {C:joy_link}Link{} {C:attention}Jokers{}"
+				},
+			},
+			--#endregion
 			--#region Glossary
 			joy_glossary_monster = {
 				name = "",
@@ -1333,6 +1361,7 @@ return {
 			k_joy_detach = "Detach",
 			k_joy_activate = "Activate",
 			k_joy_token = "Token",
+			k_joy_disable_tooltips = "Disable glossary tooltips",
 			k_joy_disable_booster_tag = "Disable Booster Tag from appearing naturally",
 			k_joy_only_ygo_cards = "Only Monster Cards appear",
 			k_joy_extra_ygo_booster = "Extra Monster Card booster each shop",

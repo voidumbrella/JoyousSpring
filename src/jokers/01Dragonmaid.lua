@@ -17,8 +17,8 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 6,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card and not card.debuff then
-            info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_tinkhec
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_transform" }
         end
         return { vars = { card.ability.extra.base_rerolls, card.ability.extra.rerolls } }
     end,
@@ -77,8 +77,8 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 6,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card and not card.debuff then
-            info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_kitchen
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_transform" }
         end
         return { vars = { card.ability.extra.mult } }
     end,
@@ -166,7 +166,9 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         if not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = G.P_TAGS.tag_joy_booster
-            info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_lorpar
+            if not JoyousSpring.config.disable_tooltips then
+                info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_transform" }
+            end
         end
         return {
             vars = { card.ability.extra.tags_to_add, card.ability.extra.dragonmaid_count,
@@ -238,8 +240,8 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 4,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card and not card.debuff then
-            info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_parlor
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_transform" }
         end
         return { vars = { card.ability.extra.xmult } }
     end,
@@ -330,8 +332,9 @@ SMODS.Joker({
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card and not card.debuff then
-            info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_ernus
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_revive" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_transform" }
         end
         return { vars = { G.GAME.probabilities.normal, card.ability.extra.odds, card.ability.extra.revives } }
     end,
@@ -401,8 +404,8 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 3,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card and not card.debuff then
-            info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_nurse
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_transform" }
         end
         return { vars = { card.ability.extra.mult } }
     end,
@@ -466,8 +469,8 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 5,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card and not card.debuff then
-            info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_nudyarl
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_transform" }
         end
         return { vars = { card.ability.extra.mill } }
     end,
@@ -530,8 +533,8 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 5,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card and not card.debuff then
-            info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_laundry
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_transform" }
         end
         return { vars = { card.ability.extra.chips } }
     end,
@@ -600,7 +603,9 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         if not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = G.P_TAGS.tag_voucher
-            info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_stern
+            if not JoyousSpring.config.disable_tooltips then
+                info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_transform" }
+            end
         end
         return {
             vars = { card.ability.extra.tags_to_add, card.ability.extra.dragonmaid_count,
@@ -672,8 +677,9 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 2,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card and not card.debuff then
-            info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_chamber
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_revive" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_transform" }
         end
         return { vars = { G.GAME.probabilities.normal, card.ability.extra.odds, card.ability.extra.revives } }
     end,
@@ -751,8 +757,8 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 9,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card and not card.debuff then
-            info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_house
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_transform" }
         end
         return {
             vars = { G.GAME.probabilities.normal, card.ability.extra.odds }
@@ -840,8 +846,8 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 7,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card and not card.debuff then
-            info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_sheou
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_transform" }
         end
         return {
             vars = {
@@ -938,8 +944,8 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 7,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card and not card.debuff then
-            info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_dmaid_house
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_transform" }
         end
         return { vars = { card.ability.extra.cards_to_create } }
     end,

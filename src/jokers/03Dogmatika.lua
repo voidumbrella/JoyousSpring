@@ -17,6 +17,9 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 2,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_extra_deck_joker" }
+        end
         return { vars = { card.ability.extra.base_xmult, card.ability.extra.xmult } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,

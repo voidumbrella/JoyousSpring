@@ -146,6 +146,17 @@ SMODS.current_mod.config_tab = function()
                                 config = { align = "cm", padding = 0.01 },
                                 nodes = {
                                     create_toggle({
+                                        label = localize('k_joy_disable_tooltips'),
+                                        ref_table = JoyousSpring.config,
+                                        ref_value = 'disable_tooltips'
+                                    })
+                                }
+                            },
+                            {
+                                n = G.UIT.R,
+                                config = { align = "cm", padding = 0.01 },
+                                nodes = {
+                                    create_toggle({
                                         label = localize('k_joy_disable_booster_tag'),
                                         ref_table = JoyousSpring.config,
                                         ref_value = 'disable_booster_tag'
