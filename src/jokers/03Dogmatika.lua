@@ -506,7 +506,12 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 10,
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.mult, 0 } }
+        local debuffed_ed_count = JoyousSpring.count_materials_owned({ { is_extra_deck = true, is_debuffed = true } })
+        if next(SMODS.find_card("j_joy_dogma_relic")) then
+            debuffed_ed_count = debuffed_ed_count +
+                JoyousSpring.count_materials_in_graveyard({ { is_extra_deck = true } })
+        end
+        return { vars = { card.ability.extra.mult, debuffed_ed_count * card.ability.extra.mult } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
