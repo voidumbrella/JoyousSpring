@@ -307,6 +307,7 @@ end
 JoyousSpring.create_overlay_graveyard = function()
     G.FUNCS.overlay_menu({
         definition = create_UIBox_generic_options({
+            back_colour = G.C.JOY.TRAP,
             contents = {
                 {
                     n = G.UIT.R,
