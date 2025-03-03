@@ -60,7 +60,7 @@ JoyousSpring.send_to_graveyard = function(card)
     end
 end
 
-JoyousSpring.create_overlay_graveyard = function()
+JoyousSpring.create_graveyard_tab = function()
     local gy_count = 0
     for _, _ in pairs(JoyousSpring.graveyard) do
         gy_count = gy_count + 1
@@ -182,37 +182,11 @@ JoyousSpring.create_overlay_graveyard = function()
         end
     end
 
-    G.FUNCS.overlay_menu({
-        definition = create_UIBox_generic_options({
-            contents = {
-                {
-                    n = G.UIT.R,
-                    config = {
-                        align = "cm",
-                        padding = 0.05,
-                        minw = 7
-                    },
-                    nodes = {
-                        {
-                            n = G.UIT.O,
-                            config = {
-                                object = DynaText({
-                                    string = { localize('k_joy_graveyard') },
-                                    colours = { G.C.UI.TEXT_LIGHT },
-                                    bump = true,
-                                    silent = true,
-                                    pop_in = 0,
-                                    pop_in_rate = 4,
-                                    minw = 10,
-                                    shadow = true,
-                                    y_offset = -0.6,
-                                    scale = 0.9
-                                })
-                            }
-                        }
-                    }
-
-                },
+    local gy_nodes = {
+        {
+            n = G.UIT.C,
+            config = { align = 'cm' },
+            nodes = {
                 {
                     n = G.UIT.R,
                     config = {
@@ -316,6 +290,46 @@ JoyousSpring.create_overlay_graveyard = function()
                     }
                 }
             }
+        }
+    }
+
+    return {
+        n = G.UIT.ROOT,
+        config = {
+            align = "cm",
+            padding = 0.05,
+            colour = G.C.CLEAR,
+        },
+        nodes = gy_nodes
+    }
+end
+
+JoyousSpring.create_overlay_graveyard = function()
+    G.FUNCS.overlay_menu({
+        definition = create_UIBox_generic_options({
+            contents = {
+                {
+                    n = G.UIT.R,
+                    nodes = {
+                        create_tabs({
+                            snap_to_nav = true,
+                            colour = G.C.JOY.TRAP,
+                            tabs = {
+                                {
+                                    label = localize('k_joy_graveyard'),
+                                    chosen = true,
+                                    tab_definition_function = JoyousSpring.create_graveyard_tab
+                                },
+                                {
+                                    label = localize('k_joy_banishment'),
+                                    chosen = false,
+                                    tab_definition_function = JoyousSpring.create_banishment_tab
+                                },
+                            }
+                        }),
+                    }
+                },
+            }
         })
     })
 end
@@ -325,7 +339,11 @@ G.FUNCS.joy_open_graveyard = function(e)
 end
 
 G.FUNCS.joy_show_graveyard = function(e)
-    if JoyousSpring.graveyard and next(JoyousSpring.graveyard) then
+    if (JoyousSpring.graveyard and next(JoyousSpring.graveyard)) or
+        (JoyousSpring.banish_blind_selected_area and #JoyousSpring.banish_blind_selected_area.cards > 0) or
+        (JoyousSpring.banish_end_of_round_area and #JoyousSpring.banish_end_of_round_area.cards > 0) or
+        (JoyousSpring.banish_boss_selected_area and #JoyousSpring.banish_boss_selected_area.cards > 0) or
+        (JoyousSpring.banish_end_of_ante_area and #JoyousSpring.banish_end_of_ante_area.cards > 0) then
         G.GAME.joy_show_graveyard = true
     end
     if G.GAME.joy_show_graveyard then

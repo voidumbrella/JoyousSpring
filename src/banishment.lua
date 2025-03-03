@@ -86,6 +86,123 @@ JoyousSpring.return_from_banish = function(card)
     SMODS.calculate_context({ joy_returned = true, joy_returned_card = card, joy_returned_area = area })
 end
 
+JoyousSpring.create_banishment_area_tabs = function(area)
+    if not JoyousSpring.banish_displays then
+        JoyousSpring.banish_displays = {}
+    end
+
+    JoyousSpring.banish_displays[#JoyousSpring.banish_displays + 1] = CardArea(
+        G.ROOM.T.x + 0.2 * G.ROOM.T.w / 2,
+        G.ROOM.T.h,
+        6.5 * G.CARD_W,
+        0.6 * G.CARD_H,
+        {
+            card_limit = 10,
+            type = 'title',
+            highlight_limit = 0,
+            card_w = G.CARD_W * 0.7,
+            draw_layers = { 'card' },
+        }
+    )
+
+    JoyousSpring.banish_displays[#JoyousSpring.banish_displays].monster_h_popup = true
+
+    for _, card in ipairs(area.cards) do
+        local added_card = copy_card(card)
+        JoyousSpring.banish_displays[#JoyousSpring.banish_displays]:emplace(added_card)
+    end
+
+    return {
+        n = G.UIT.ROOT,
+        config = {
+            align = "cm",
+            padding = 0.05,
+            colour = G.C.CLEAR,
+        },
+        nodes = {
+            {
+                n = G.UIT.R,
+                config = {
+                    align = "cm",
+                    r = 0.1,
+                    padding = 1,
+                    minh = 5,
+                    minw = 7,
+                    colour = G.C.BLACK
+                },
+                nodes = {
+                    {
+                        n = G.UIT.O,
+                        config = {
+                            object = JoyousSpring.banish_displays[#JoyousSpring.banish_displays]
+                        }
+                    },
+                }
+            }
+        }
+    }
+end
+
+JoyousSpring.create_banishment_tab = function()
+    local banish_nodes = {
+        {
+            n = G.UIT.C,
+            config = { align = 'cm' },
+            nodes = {
+                create_tabs({
+                    snap_to_nav = true,
+                    colour = G.C.JOY.TRAP,
+                    scale = 1.2,
+                    tabs = {
+                        {
+                            label = localize('k_joy_banish_blind_selected') ..
+                                " (" .. #JoyousSpring.banish_blind_selected_area.cards .. ")",
+                            chosen = true,
+                            tab_definition_function = function()
+                                return JoyousSpring.create_banishment_area_tabs(JoyousSpring.banish_blind_selected_area)
+                            end
+                        },
+                        {
+                            label = localize('k_joy_banish_end_of_round') ..
+                                " (" .. #JoyousSpring.banish_end_of_round_area.cards .. ")",
+                            chosen = false,
+                            tab_definition_function = function()
+                                return JoyousSpring.create_banishment_area_tabs(JoyousSpring.banish_end_of_round_area)
+                            end
+                        },
+                        {
+                            label = localize('k_joy_banish_boss_selected') ..
+                                " (" .. #JoyousSpring.banish_boss_selected_area.cards .. ")",
+                            chosen = false,
+                            tab_definition_function = function()
+                                return JoyousSpring.create_banishment_area_tabs(JoyousSpring.banish_boss_selected_area)
+                            end
+                        },
+                        {
+                            label = localize('k_joy_banish_end_of_ante') ..
+                                " (" .. #JoyousSpring.banish_end_of_ante_area.cards .. ")",
+                            chosen = false,
+                            tab_definition_function = function()
+                                return JoyousSpring.create_banishment_area_tabs(JoyousSpring.banish_end_of_ante_area)
+                            end
+                        },
+                    }
+                }),
+            }
+        }
+    }
+
+    return {
+        n = G.UIT.ROOT,
+        config = {
+            align = "cm",
+            padding = 0.05,
+            colour = G.C.CLEAR,
+        },
+        nodes = banish_nodes
+    }
+end
+
 local game_start_run_ref = Game.start_run
 function Game:start_run(args)
     self.joy_banish_blind_selected_area = CardArea(
