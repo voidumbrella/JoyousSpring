@@ -544,7 +544,7 @@ return {
 				name = "{C:joy_effect}Mekk-Knight Green Horizon",
 				text = {
 					"Scored card in this {C:attention}column{}",
-					"has a chance based on its rank to",
+					"has a chance {C:green}1 in <rank>{} to",
 					"retrigger that many times",
 					"{C:inactive}(Currently in column{} {C:attention}#1#{}{C:inactive}){}",
 				},
