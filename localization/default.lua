@@ -1194,7 +1194,8 @@ return {
 				text = {
 					"Destroys itself if you own a non-{C:joy_normal}Fiend{}",
 					"{C:joy_normal}Monster{} {C:attention}Joker{} when {C:attention}Blind{} is selected",
-					"and {C:attention}revives{} {C:attention}#1#{} {C:joy_normal}Fiend{} {C:attention}Joker{}"
+					"and {C:attention}revives{} {C:attention}#1#{} {C:joy_normal}Fiend{} {C:attention}Joker{}",
+					"{s:0.9,C:inactive}(This also triggers on sell)"
 				}
 			},
 			j_joy_ba_rubic = {
@@ -1202,7 +1203,8 @@ return {
 				text = {
 					"Destroys itself if you own a non-{C:joy_normal}Fiend{}",
 					"{C:joy_normal}Monster{} {C:attention}Joker{} when {C:attention}Blind{} is selected",
-					"and adds {C:attention}#1#{} {C:joy_normal}\"Burning Abyss\"{} to the {C:joy_spell}Extra Deck{}"
+					"and adds {C:attention}#1#{} {C:joy_normal}\"Burning Abyss\"{} to the {C:joy_spell}Extra Deck{}",
+					"{s:0.9,C:inactive}(This also triggers on sell)"
 				}
 			},
 			j_joy_ba_scarm = {
@@ -1212,6 +1214,7 @@ return {
 					"{C:joy_normal}Monster{} {C:attention}Joker{} when {C:attention}Blind{} is selected",
 					"and creates {C:attention}#1#{} {C:joy_normal}Main Deck Fiends{}",
 					"{C:inactive}(Must have room){}",
+					"{s:0.9,C:inactive}(This also triggers on sell)"
 				}
 			},
 			j_joy_ba_malacoda = {
