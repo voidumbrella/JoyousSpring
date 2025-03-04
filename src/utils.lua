@@ -8,10 +8,10 @@ JoyousSpring.get_graveyard_count = function()
     return total
 end
 
----Get all matrerials in G.jokers that fulfill **property_list**
----@param property_list table
+---Get all materials in G.jokers that fulfill **property_list**
+---@param property_list material_properties[]
 ---@param different_names boolean?
----@return table
+---@return Card[]
 JoyousSpring.get_materials_owned = function(property_list, different_names)
     if not G.jokers then return {} end
 
@@ -39,19 +39,19 @@ JoyousSpring.get_materials_owned = function(property_list, different_names)
     return materials
 end
 
----Count all matrerials in G.jokers that fulfill **property_list**
----@param property_list table
+---Count all materials in G.jokers that fulfill **property_list**
+---@param property_list material_properties[]
 ---@param different_names boolean?
 ---@return integer
 JoyousSpring.count_materials_owned = function(property_list, different_names)
     return #JoyousSpring.get_materials_owned(property_list, different_names)
 end
 
----Get all matrerials in graveyard that fulfill **property_list**
----@param property_list table
+---Get all materials in graveyard that fulfill **property_list**
+---@param property_list material_properties[]
 ---@param to_revive boolean? Checks if it can be revived
 ---@param different_names boolean?
----@return table
+---@return string[]
 JoyousSpring.get_materials_in_graveyard = function(property_list, to_revive, different_names)
     if not JoyousSpring.graveyard then return {} end
 
@@ -81,8 +81,8 @@ JoyousSpring.get_materials_in_graveyard = function(property_list, to_revive, dif
     return materials
 end
 
----Count all matrerials in graveyard that fulfill **property_list**
----@param property_list table
+---Count all materials in graveyard that fulfill **property_list**
+---@param property_list material_properties[]
 ---@param to_revive boolean? Checks if it can be revived
 ---@param different_names boolean?
 ---@return integer
@@ -91,10 +91,10 @@ JoyousSpring.count_materials_in_graveyard = function(property_list, to_revive, d
 end
 
 ---Get the keys to all matrerials in G.jokers and graveyard that fulfill **property_list**
----@param property_list table
+---@param property_list material_properties[]
 ---@param to_revive boolean? Checks if it can be revived
 ---@param different_names boolean?
----@return table
+---@return string[]
 JoyousSpring.get_all_material_keys = function(property_list, to_revive, different_names)
     local gy = JoyousSpring.get_materials_in_graveyard(property_list, to_revive, different_names)
     local owned = JoyousSpring.get_materials_owned(property_list, different_names)
@@ -104,14 +104,28 @@ JoyousSpring.get_all_material_keys = function(property_list, to_revive, differen
     return gy
 end
 
----Count all matrerials in G.jokers and graveyard that fulfill **property_list**
----@param property_list table
+---Count all materials in G.jokers and graveyard that fulfill **property_list**
+---@param property_list material_properties[]
 ---@param to_revive boolean? Checks if it can be revived
 ---@param different_names boolean?
 ---@return integer
 JoyousSpring.count_all_materials = function(property_list, to_revive, different_names)
     return JoyousSpring.count_materials_in_graveyard(property_list, to_revive, different_names) +
         JoyousSpring.count_materials_owned(property_list, different_names)
+end
+
+JoyousSpring.get_materials_in_collection = function(property_list)
+    local pool = {}
+    for k, _ in pairs(G.P_CENTERS) do
+        if k:sub(1, 2) == "j_" then
+            for _, property in ipairs(property_list) do
+                if JoyousSpring.is_material_center(k, property) then
+                    table.insert(pool, k)
+                end
+            end
+        end
+    end
+    return pool
 end
 
 ---Count all Extra Deck types (Fusion, Synchro, Xyz, Link) are owned

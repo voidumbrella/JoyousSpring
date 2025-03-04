@@ -118,7 +118,7 @@ end
 ---Performs a Special Summon from either the Extra Deck or the shop (for Rituals)
 ---@param card Card Card to summon
 ---@param card_list Card[] Summon materials
----@param summon_type string
+---@param summon_type summon_type
 JoyousSpring.perform_summon = function(card, card_list, summon_type)
     SMODS.calculate_context({
         joy_summon = true,
@@ -129,12 +129,20 @@ JoyousSpring.perform_summon = function(card, card_list, summon_type)
     })
     card.ability.extra.joyous_spring.summon_materials = {}
     card.ability.extra.joyous_spring.xyz_materials = 0
+    local transfer = summon_type == "XYZ" and JoyousSpring.transfer_materials_with_combo(card, card_list) or false
+    card.ability.extra.joyous_spring.xyz_materials = card.ability.extra.joyous_spring.xyz_materials or 0
     for _, joker in ipairs(card_list) do
         table.insert(card.ability.extra.joyous_spring.summon_materials, joker.config.center.key)
-
+        card.ability.extra.joyous_spring.xyz_materials = card.ability.extra.joyous_spring.xyz_materials + 1
+        if transfer and JoyousSpring.is_summon_type(joker, "XYZ") then
+            for _, material in ipairs(joker.ability.extra.joyous_spring.summon_materials) do
+                table.insert(card.ability.extra.joyous_spring.summon_materials, material)
+            end
+            card.ability.extra.joyous_spring.xyz_materials = card.ability.extra.joyous_spring.xyz_materials +
+                joker.ability.extra.joyous_spring.xyz_materials
+        end
         joker:start_dissolve()
     end
-    card.ability.extra.joyous_spring.xyz_materials = #card.ability.extra.joyous_spring.summon_materials
     if card.area == JoyousSpring.extra_deck_area then
         JoyousSpring.extra_deck_area:remove_card(card)
         card:add_to_deck()
@@ -511,6 +519,31 @@ JoyousSpring.can_summon_with_combo = function(card, combo)
 
         for _, condition in ipairs(conditions) do
             if JoyousSpring.fulfills_conditions(combo, condition) then
+                return true
+            end
+        end
+    end
+
+    return false
+end
+
+---Checks if the **combo** fulfills any of the card's summon conditions and transfers materials
+---@param card Card
+---@param combo Card[]
+---@return boolean
+JoyousSpring.transfer_materials_with_combo = function(card, combo)
+    if not JoyousSpring.is_monster_card(card) or not combo or #combo == 0 or
+        (not card.ability.extra.joyous_spring.summon_conditions and not card.ability.extra.joyous_spring.summon_consumeable_conditions) then
+        return false
+    end
+
+    if card.ability.extra.joyous_spring.summon_consumeable_conditions then
+        return false
+    else
+        local conditions = card.ability.extra.joyous_spring.summon_conditions
+
+        for _, condition in ipairs(conditions) do
+            if condition.transfer_materials and JoyousSpring.fulfills_conditions(combo, condition) then
                 return true
             end
         end

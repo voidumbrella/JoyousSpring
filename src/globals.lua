@@ -2,7 +2,7 @@
 
 G.C.JOY = {
     MOD = HEX("F4A6C7"),
-    NORMAL = HEX("FDDD5D"),
+    NORMAL = darken(HEX("FDDD5D"), 0.1),
     EFFECT = HEX("FF8B53"),
     SPELL = HEX("1D9E74"),
     PENDULUM = HEX("1D9E74"),

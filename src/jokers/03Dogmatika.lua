@@ -103,12 +103,6 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if card.facing ~= 'back' then
             if context.other_joker and JoyousSpring.is_monster_archetype(context.other_joker, "Dogmatika") then
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        context.other_joker:juice_up(0.5, 0.5)
-                        return true
-                    end,
-                }))
                 return {
                     mult = card.ability.extra.mult,
                 }

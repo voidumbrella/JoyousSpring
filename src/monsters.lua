@@ -68,7 +68,8 @@
 ---@class summon_conditions
 ---@field type summon_type
 ---@field materials material_properties[]
----@field restrictions table?
+---@field restrictions material_restrictions?
+---@field transfer_materials boolean?
 
 ---@class joyous_spring
 ---@field is_field_spell boolean?

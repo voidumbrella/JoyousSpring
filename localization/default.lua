@@ -507,7 +507,7 @@ return {
 			j_joy_spright_gigantic = {
 				name = "{C:joy_xyz}Gigantic Spright",
 				text = {
-					"{C:joy_xyz}Detach{} {C:attention}1 material{} to create",
+					"{C:joy_xyz}Detach{} {C:attention}1{}: Create",
 					"{C:attention}#1#{} {C:green}Uncommon{} {C:attention}Joker{}",
 					"{C:inactive}(Must have room){}",
 				},
@@ -723,7 +723,7 @@ return {
 					"{C:mult}+#1#{} Mult for each {C:joy_xyz}Xyz material{}",
 					"{C:inactive}(Currently{} {C:mult}+#2#{} {C:inactive}Mult){}",
 					" ",
-					"{C:joy_xyz}Detach{} {C:attention}#3# materials{} to permanently",
+					"{C:joy_xyz}Detach{} {C:attention}#3#{}: Permanently",
 					"gain {C:attention}+#4#{} hand size",
 				},
 				joy_summon_conditions = {
@@ -733,7 +733,7 @@ return {
 			j_joy_generaider_laevatein = {
 				name = "{C:joy_xyz}Laevatein, Generaider Boss of Shadows",
 				text = {
-					"{C:joy_xyz}Detach{} {C:attention}#1# materials{} to destroy all other {C:attention}Jokers{} and",
+					"{C:joy_xyz}Detach{} {C:attention}#1#{}: Destroy all other {C:attention}Jokers{} and",
 					"create a {C:joy_xyz}\"Jormungandr, Generaider Boss of Eternity\"{}",
 					"attaching all cards in the {C:attention}GY{} to it as {C:joy_xyz}Xyz materials{}",
 				},
@@ -994,7 +994,7 @@ return {
 				text = {
 					"This card and another {C:attention}Joker{}",
 					"{C:attention}banish{} at the end of round",
-					"until {C:attention}Boss Blind{} is selected",
+					"until {C:attention}Blind{} is selected",
 				},
 				joy_summon_conditions = {
 					"{C:attention}1{} {C:joy_synchro}Tuner{} +",
@@ -1102,72 +1102,199 @@ return {
 			--#endregion
 			--#region Burning Abyss
 			j_joy_ba_alich = {
-				name = "Alich, Malebranche of the Burning Abyss",
-				text = { "TBD" }
+				name = "{C:joy_effect}Alich, Malebranche of the Burning Abyss",
+				text = {
+					"Lower {C:attention}Blind{}'s requirement by {C:red}#1#%{}",
+					"when {C:attention}Blind{} is selected",
+					" ",
+					"Destroys itself if you own a non-{C:joy_normal}Fiend{}",
+					"{C:joy_normal}Monster{} {C:attention}Joker{} when {C:attention}Blind{} is selected"
+				}
 			},
 			j_joy_ba_barbar = {
-				name = "Barbar, Malebranche of the Burning Abyss",
-				text = { "TBD" }
+				name = "{C:joy_effect}Barbar, Malebranche of the Burning Abyss",
+				text = {
+					"{C:mult}+#1#{} Mult",
+					"{C:mult}+#2#{} Mult for every {C:joy_normal}Fiend{} {C:attention}Joker{} in the {C:attention}GY{}",
+					"{C:inactive}(Currently{} {C:mult}+#3#{} {C:inactive}Mult total){}",
+					" ",
+					"Destroys itself if you own a non-{C:joy_normal}Fiend{}",
+					"{C:joy_normal}Monster{} {C:attention}Joker{} when {C:attention}Blind{} is selected"
+				}
 			},
 			j_joy_ba_cagna = {
-				name = "Cagna, Malebranche of the Burning Abyss",
-				text = { "TBD" }
+				name = "{C:joy_effect}Cagna, Malebranche of the Burning Abyss",
+				text = {
+					"{C:chips}+#1#{} Chips",
+					"Send {C:attention}#2#{} {C:joy_normal}Fiend{} {C:attention}Jokers{} to the {C:attention}GY{}",
+					"when {C:attention}Blind{} is selected",
+					" ",
+					"Destroys itself if you own a non-{C:joy_normal}Fiend{}",
+					"{C:joy_normal}Monster{} {C:attention}Joker{} when {C:attention}Blind{} is selected"
+				}
 			},
 			j_joy_ba_calcab = {
-				name = "Calcab, Malebranche of the Burning Abyss",
-				text = { "TBD" }
+				name = "{C:joy_effect}Calcab, Malebranche of the Burning Abyss",
+				text = {
+					"{C:attention}+#1#{} hand size",
+					" ",
+					"Destroys itself if you own a non-{C:joy_normal}Fiend{}",
+					"{C:joy_normal}Monster{} {C:attention}Joker{} when {C:attention}Blind{} is selected"
+				}
 			},
 			j_joy_ba_cir = {
-				name = "Cir, Malebranche of the Burning Abyss",
-				text = { "TBD" }
+				name = "{C:joy_effect}Cir, Malebranche of the Burning Abyss",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult",
+					"{C:attention}Revives{} {C:attention}#2#{} {C:joy_normal}\"Burning Abyss\"{}",
+					"when {C:attention}Blind{} is selected",
+					" ",
+					"Destroys itself if you own a non-{C:joy_normal}Fiend{}",
+					"{C:joy_normal}Monster{} {C:attention}Joker{} when {C:attention}Blind{} is selected"
+				}
 			},
 			j_joy_ba_draghig = {
-				name = "Draghig, Malebranche of the Burning Abyss",
-				text = { "TBD" }
+				name = "{C:joy_effect}Draghig, Malebranche of the Burning Abyss",
+				text = {
+					"{C:joy_normal}Fiends{} each give {C:chips}+#1#{} Chips",
+					" ",
+					"Creates {C:attention}#2#{} non-{C:joy_spell}Special{} {C:joy_normal}\"Burning Abyss\"{}",
+					"when obtained",
+					"{C:inactive}(Must have room){}",
+					" ",
+					"Destroys itself if you own a non-{C:joy_normal}Fiend{}",
+					"{C:joy_normal}Monster{} {C:attention}Joker{} when {C:attention}Blind{} is selected"
+				}
 			},
 			j_joy_ba_farfa = {
-				name = "Farfa, Malebranche of the Burning Abyss",
-				text = { "TBD" }
+				name = "{C:joy_effect}Farfa, Malebranche of the Burning Abyss",
+				text = {
+					"{C:attention}Banish{} {C:attention}#1#{} other Joker when obtained",
+					"until end of round",
+					" ",
+					"Destroys itself if you own a non-{C:joy_normal}Fiend{}",
+					"{C:joy_normal}Monster{} {C:attention}Joker{} when {C:attention}Blind{} is selected"
+				}
 			},
 			j_joy_ba_graff = {
-				name = "Graff, Malebranche of the Burning Abyss",
-				text = { "TBD" }
+				name = "{C:joy_effect}Graff, Malebranche of the Burning Abyss",
+				text = {
+					"{C:joy_normal}Fiends{} each give {C:mult}+#1#{} Mult",
+					" ",
+					"Creates {C:attention}#2#{} non-{C:joy_spell}Special{} {C:joy_normal}\"Burning Abyss\"{}",
+					"when obtained",
+					"{C:inactive}(Must have room){}",
+					" ",
+					"Destroys itself if you own a non-{C:joy_normal}Fiend{}",
+					"{C:joy_normal}Monster{} {C:attention}Joker{} when {C:attention}Blind{} is selected"
+				}
 			},
 			j_joy_ba_libic = {
-				name = "Libic, Malebranche of the Burning Abyss",
-				text = { "TBD" }
+				name = "{C:joy_effect}Libic, Malebranche of the Burning Abyss",
+				text = {
+					"Destroys itself if you own a non-{C:joy_normal}Fiend{}",
+					"{C:joy_normal}Monster{} {C:attention}Joker{} when {C:attention}Blind{} is selected",
+					"and {C:attention}revives{} {C:attention}#1#{} {C:joy_normal}Fiend{} {C:attention}Joker{}"
+				}
 			},
 			j_joy_ba_rubic = {
-				name = "Rubic, Malebranche of the Burning Abyss",
-				text = { "TBD" }
+				name = "{C:joy_effect}Rubic, Malebranche of the Burning Abyss",
+				text = {
+					"Destroys itself if you own a non-{C:joy_normal}Fiend{}",
+					"{C:joy_normal}Monster{} {C:attention}Joker{} when {C:attention}Blind{} is selected",
+					"and adds {C:attention}#1#{} {C:joy_normal}\"Burning Abyss\"{} to the {C:joy_spell}Extra Deck{}"
+				}
 			},
 			j_joy_ba_scarm = {
-				name = "Scarm, Malebranche of the Burning Abyss",
-				text = { "TBD" }
+				name = "{C:joy_effect}Scarm, Malebranche of the Burning Abyss",
+				text = {
+					"Destroys itself if you own a non-{C:joy_normal}Fiend{}",
+					"{C:joy_normal}Monster{} {C:attention}Joker{} when {C:attention}Blind{} is selected",
+					"and creates {C:attention}#1#{} {C:joy_normal}Main Deck Fiends{}",
+					"{C:inactive}(Must have room){}",
+				}
 			},
 			j_joy_ba_malacoda = {
-				name = "Malacoda, Netherlord of the Burning Abyss",
-				text = { "TBD" }
+				name = "{C:joy_ritual}Malacoda, Netherlord of the Burning Abyss",
+				text = {
+					"Gains {X:mult,C:white}X#1#{} for each {C:joy_normal}Fiend{} in the {C:attention}GY{}",
+					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}",
+					" ",
+					"{C:joy_normal}\"Burning Abyss\"{} don't get destroyed by their own effects"
+				},
+				joy_summon_conditions = {
+					"{C:attention}2 Jokers{}, including a {C:joy_normal}Fiend{}",
+				}
 			},
 			j_joy_ba_cherubini = {
-				name = "Cherubini, Ebon Angel of the Burning Abyss",
-				text = { "TBD" }
+				name = "{C:joy_link}Cherubini, Ebon Angel of the Burning Abyss",
+				text = {
+					"Sends {C:attention}#1#{} {C:joy_normal}\"Burning Abyss\"{} to the {C:attention}GY{}",
+					"when {C:attention}Blind{} is selected",
+					" ",
+					"{C:joy_normal}\"Burning Abyss\"{} don't get destroyed by their own effects"
+				},
+				joy_summon_conditions = {
+					"{C:attention}2{} {C:joy_normal}Fiends{}",
+				}
 			},
 			j_joy_ba_dante = {
-				name = "Dante, Traveler of the Burning Abyss",
-				text = { "TBD" }
+				name = "{C:joy_xyz}Dante, Traveler of the Burning Abyss",
+				text = {
+					"{C:mult}+#1#{} Mult for each {C:attention}Joker{} in the {C:attention}GY{}",
+					"{C:inactive}(Currently{} {C:mult}+#2#{} {C:inactive}Mult){}",
+					" ",
+					"{C:joy_xyz}Detach{} {C:attention}#3#{}: Send {C:attention}#4#{}",
+					"random cards to the {C:attention}GY{}"
+				},
+				joy_summon_conditions = {
+					"{C:attention}2{} {C:blue}Common{} {C:attention}Jokers{}",
+				}
 			},
 			j_joy_ba_pilgrim = {
-				name = "Dante, Pilgrim of the Burning Abyss",
-				text = { "TBD" }
+				name = "{C:joy_fusion}Dante, Pilgrim of the Burning Abyss",
+				text = {
+					"{C:blue}+#1#{} Hands",
+					"{C:red}+#2#{} Discards",
+					" ",
+					"{C:joy_normal}\"Burning Abyss\"{} don't get destroyed by their own effects"
+				},
+				joy_summon_conditions = {
+					"{C:attention}3{} {C:joy_normal}\"Burning Abyss\"{}",
+					"with different names",
+				}
 			},
 			j_joy_ba_virgil = {
-				name = "Virgil, Rock Star of the Burning Abyss",
-				text = { "TBD" }
+				name = "{C:joy_synchro}Virgil, Rock Star of the Burning Abyss",
+				text = {
+					"Permanently gain {C:attention}+#1#{} hand size when obtained",
+					" ",
+					"{C:joy_normal}\"Burning Abyss\"{} don't get destroyed by their own effects"
+				},
+				joy_summon_conditions = {
+					"{C:attention}1{} {C:joy_synchro}Tuner{} +",
+					"{C:attention}1{} {C:joy_normal}Fiend{} non-{C:joy_synchro}Tuner{}",
+				}
 			},
 			j_joy_ba_beatrice = {
-				name = "Beatrice, Lady of the Eternal",
-				text = { "TBD" }
+				name = "{C:joy_xyz}Beatrice, Lady of the Eternal",
+				text = {
+					"Gains {X:mult,C:white}X#1#{} for each {C:attention}Joker{} in the {C:attention}GY{}",
+					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}",
+					" ",
+					"{C:joy_xyz}Detach{} {C:attention}#3#{}: {C:attention}Revive #4#{} {C:joy_normal}\"Burning Abyss\"{}",
+					"(or any {C:attention}Joker{} if none)",
+					" ",
+					"Sell this summoned card to add",
+					"{C:joy_xyz}\"Dante, Traveler of the Burning Abyss\"{}",
+					"and {C:joy_fusion}\"Dante, Pilgrim of the Burning Abyss\"{}",
+					"to the {C:joy_spell}Extra Deck{} {C:inactive}(Must have room){}",
+				},
+				joy_summon_conditions = {
+					"{C:attention}2{} {C:red}Rare{} {C:attention}Jokers{}",
+					"or {C:attention}1{} {C:joy_normal}\"Dante\"{}",
+					"{s:0.9,C:inactive}(If Xyz, transfer its materials)",
+				}
 			},
 			--#endregion
 			--#region Labrynth
