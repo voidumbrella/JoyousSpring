@@ -1,5 +1,6 @@
 JoyousSpring = {}
 JoyousSpring.debug = false
+JoyousSpring.dev_content = false
 JoyousSpring.debug_shop_cards = { { key = "j_joy_dogma_knight" } }
 
 SMODS.Atlas({
@@ -35,8 +36,10 @@ assert(SMODS.load_file("src/effects.lua"))()
 
 local joker_src = NFS.getDirectoryItems(SMODS.current_mod.path .. "src/jokers")
 for _, file in ipairs(joker_src) do
-    sendInfoMessage("Loading " .. file, "JoyousSpring")
-    assert(SMODS.load_file("src/jokers/" .. file))()
+    if JoyousSpring.dev_content or (tonumber(file:sub(1, 2)) <= 10) or (tonumber(file:sub(1, 2)) == 99) then
+        sendInfoMessage("Loading " .. file, "JoyousSpring")
+        assert(SMODS.load_file("src/jokers/" .. file))()
+    end
 end
 
 -- Others

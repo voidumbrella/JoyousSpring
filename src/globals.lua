@@ -151,7 +151,7 @@ function init_localization()
     end
 end
 
--- Prevent other cards from spawning if the Only YGO Cards conffig is enabled
+-- Prevent other cards from spawning if the Only YGO Cards config is enabled
 local get_current_pool_ref = get_current_pool
 function get_current_pool(_type, _rarity, _legendary, _append)
     local _pool, _pool_key = get_current_pool_ref(_type, _rarity, _legendary, _append)

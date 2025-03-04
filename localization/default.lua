@@ -276,6 +276,10 @@ return {
 					"{C:attention}2{} {C:joy_normal}\"Evil★Twin\"{}"
 				}
 			},
+			j_joy_ltwin_channel = {
+				name = "Live☆Twin Channel",
+				text = { "TBD" }
+			},
 			--#endregion
 			--#region Dogmatika
 			j_joy_dogma_ecclesia = {
@@ -360,6 +364,10 @@ return {
 				joy_summon_conditions = {
 					"{C:attention}2{} {C:joy_normal}\"Dogmatika\"{}"
 				}
+			},
+			j_joy_dogma_nation = {
+				name = "Dogmatika Nation",
+				text = { "TBD" }
 			},
 			--#endregion
 			--#region Ghost Girls
@@ -614,6 +622,10 @@ return {
 				joy_summon_conditions = {
 					"{C:attention}2+{} {C:joy_spell}Extra Deck{} summoned {C:attention}Jokers{}",
 				}
+			},
+			j_joy_mekkleg_scars = {
+				name = "World Legacy Scars",
+				text = { "TBD" }
 			},
 			--#endregion
 			--#region Generaider
@@ -877,6 +889,10 @@ return {
 					"{C:attention}1{} {C:red}Rare{} non-{C:joy_synchro}Tuner{}",
 				}
 			},
+			j_joy_fish_depths = {
+				name = "The Most Distant, Deepest Depths",
+				text = { "TBD" }
+			},
 			--#endregion
 			--#region PSY-Frame
 			j_joy_psy_driver = {
@@ -1000,6 +1016,10 @@ return {
 					"{C:attention}2{} {C:attention}Jokers{}, except {C:joy_token}Tokens{}",
 				}
 			},
+			j_joy_psy_circuit = {
+				name = "PSY-Frame Circuit",
+				text = { "TBD" }
+			},
 			--#endregion
 			--#region Runick
 			j_joy_runick_hugin = {
@@ -1080,6 +1100,654 @@ return {
 				},
 			},
 			--#endregion
+			--#region Burning Abyss
+			j_joy_ba_alich = {
+				name = "Alich, Malebranche of the Burning Abyss",
+				text = { "TBD" }
+			},
+			j_joy_ba_barbar = {
+				name = "Barbar, Malebranche of the Burning Abyss",
+				text = { "TBD" }
+			},
+			j_joy_ba_cagna = {
+				name = "Cagna, Malebranche of the Burning Abyss",
+				text = { "TBD" }
+			},
+			j_joy_ba_calcab = {
+				name = "Calcab, Malebranche of the Burning Abyss",
+				text = { "TBD" }
+			},
+			j_joy_ba_cir = {
+				name = "Cir, Malebranche of the Burning Abyss",
+				text = { "TBD" }
+			},
+			j_joy_ba_draghig = {
+				name = "Draghig, Malebranche of the Burning Abyss",
+				text = { "TBD" }
+			},
+			j_joy_ba_farfa = {
+				name = "Farfa, Malebranche of the Burning Abyss",
+				text = { "TBD" }
+			},
+			j_joy_ba_graff = {
+				name = "Graff, Malebranche of the Burning Abyss",
+				text = { "TBD" }
+			},
+			j_joy_ba_libic = {
+				name = "Libic, Malebranche of the Burning Abyss",
+				text = { "TBD" }
+			},
+			j_joy_ba_rubic = {
+				name = "Rubic, Malebranche of the Burning Abyss",
+				text = { "TBD" }
+			},
+			j_joy_ba_scarm = {
+				name = "Scarm, Malebranche of the Burning Abyss",
+				text = { "TBD" }
+			},
+			j_joy_ba_malacoda = {
+				name = "Malacoda, Netherlord of the Burning Abyss",
+				text = { "TBD" }
+			},
+			j_joy_ba_cherubini = {
+				name = "Cherubini, Ebon Angel of the Burning Abyss",
+				text = { "TBD" }
+			},
+			j_joy_ba_dante = {
+				name = "Dante, Traveler of the Burning Abyss",
+				text = { "TBD" }
+			},
+			j_joy_ba_pilgrim = {
+				name = "Dante, Pilgrim of the Burning Abyss",
+				text = { "TBD" }
+			},
+			j_joy_ba_virgil = {
+				name = "Virgil, Rock Star of the Burning Abyss",
+				text = { "TBD" }
+			},
+			j_joy_ba_beatrice = {
+				name = "Beatrice, Lady of the Eternal",
+				text = { "TBD" }
+			},
+			--#endregion
+			--#region Labrynth
+			j_joy_lab_clock = {
+				name = "Labrynth Cooclock",
+				text = { "TBD" }
+			},
+			j_joy_lab_stovie = {
+				name = "Labrynth Stovie Torbie",
+				text = { "TBD" }
+			},
+			j_joy_lab_changdra = {
+				name = "Labrynth Chandraglier",
+				text = { "TBD" }
+			},
+			j_joy_lab_ariane = {
+				name = "Ariane the Labrynth Servant",
+				text = { "TBD" }
+			},
+			j_joy_lab_arianna = {
+				name = "Arianna the Labrynth Servant",
+				text = { "TBD" }
+			},
+			j_joy_lab_arias = {
+				name = "Arias the Labrynth Butler",
+				text = { "TBD" }
+			},
+			j_joy_lab_archfiend = {
+				name = "Labrynth Archfiend",
+				text = { "TBD" }
+			},
+			j_joy_lab_lovely = {
+				name = "Lovely Labrynth of the Silver Castle",
+				text = { "TBD" }
+			},
+			j_joy_lab_lady = {
+				name = "Lady Labrynth of the Silver Castle",
+				text = { "TBD" }
+			},
+			j_joy_lab_labyrinth = {
+				name = "Labrynth Labyrinth",
+				text = { "TBD" }
+			},
+			--#endregion
+			--#region Subterror
+			j_joy_sub_fiendess = {
+				name = "Subterror Fiendess",
+				text = { "TBD" }
+			},
+			j_joy_sub_defender = {
+				name = "Subterror Nemesis Defender",
+				text = { "TBD" }
+			},
+			j_joy_sub_archer = {
+				name = "Subterror Nemesis Archer",
+				text = { "TBD" }
+			},
+			j_joy_sub_warrior = {
+				name = "Subterror Nemesis Warrior",
+				text = { "TBD" }
+			},
+			j_joy_sub_guru = {
+				name = "Subterror Guru",
+				text = { "TBD" }
+			},
+			j_joy_sub_stygo = {
+				name = "Subterror Behemoth Stygokraken",
+				text = { "TBD" }
+			},
+			j_joy_sub_drago = {
+				name = "Subterror Behemoth Dragossuary",
+				text = { "TBD" }
+			},
+			j_joy_sub_uma = {
+				name = "Subterror Behemoth Umastryx",
+				text = { "TBD" }
+			},
+			j_joy_sub_phos = {
+				name = "Subterror Behemoth Phospheroglacier",
+				text = { "TBD" }
+			},
+			j_joy_sub_volt = {
+				name = "Subterror Behemoth Voltelluric",
+				text = { "TBD" }
+			},
+			j_joy_sub_stala = {
+				name = "Subterror Behemoth Stalagmo",
+				text = { "TBD" }
+			},
+			j_joy_sub_speleo = {
+				name = "Subterror Behemoth Speleogeist",
+				text = { "TBD" }
+			},
+			j_joy_sub_ultra = {
+				name = "Subterror Behemoth Ultramafus",
+				text = { "TBD" }
+			},
+			j_joy_sub_befiendess = {
+				name = "Subterror Behemoth Fiendess",
+				text = { "TBD" }
+			},
+			j_joy_sub_city = {
+				name = "The Hidden City",
+				text = { "TBD" }
+			},
+			--#endregion
+			--#region Eldlich
+			j_joy_eld_eldlich = {
+				name = "Eldlich the Golden Lord",
+				text = { "TBD" }
+			},
+			j_joy_eld_conq = {
+				name = "Conquistador of the Golden Land",
+				text = { "TBD" }
+			},
+			j_joy_eld_guard = {
+				name = "Guardian of the Golden Land",
+				text = { "TBD" }
+			},
+			j_joy_eld_huaq = {
+				name = "Huaquero of the Golden Land",
+				text = { "TBD" }
+			},
+			j_joy_eld_exalted = {
+				name = "Eldlixir of the Exalted Golden Land",
+				text = { "TBD" }
+			},
+			j_joy_eld_mad = {
+				name = "Eldlich the Mad Golden Lord",
+				text = { "TBD" }
+			},
+			j_joy_eld_angel = {
+				name = "Angelcaido of the Golden Land",
+				text = { "TBD" }
+			},
+			--#endregion
+			--#region @Ignister
+			j_joy_ignis_achichi = {
+				name = "Achichi @Ignister",
+				text = { "TBD" }
+			},
+			j_joy_ignis_pikari = {
+				name = "Pikari @Ignister",
+				text = { "TBD" }
+			},
+			j_joy_ignis_hiyari = {
+				name = "Hiyari @Ignister",
+				text = { "TBD" }
+			},
+			j_joy_ignis_bururu = {
+				name = "Bururu @Ignister",
+				text = { "TBD" }
+			},
+			j_joy_ignis_doshin = {
+				name = "Doshin @Ignister",
+				text = { "TBD" }
+			},
+			j_joy_ignis_gatchiri = {
+				name = "Gatchiri @Ignister",
+				text = { "TBD" }
+			},
+			j_joy_ignis_gussari = {
+				name = "Gussari @Ignister",
+				text = { "TBD" }
+			},
+			j_joy_ignis_danmari = {
+				name = "Danmari @Ignister",
+				text = { "TBD" }
+			},
+			j_joy_ignis_doyon = {
+				name = "Doyon @Ignister",
+				text = { "TBD" }
+			},
+			j_joy_ignis_donyoribo = {
+				name = "Donyoribo @Ignister",
+				text = { "TBD" }
+			},
+			j_joy_ignis_backup = {
+				name = "Backup @Ignister",
+				text = { "TBD" }
+			},
+			j_joy_ignis_wizard = {
+				name = "Wizard @Ignister",
+				text = { "TBD" }
+			},
+			j_joy_ignis_kiruku = {
+				name = "Kurikulink @Ignister",
+				text = { "TBD" }
+			},
+			j_joy_ignis_leviathan = {
+				name = "Water Leviathan @Ignister",
+				text = { "TBD" }
+			},
+			j_joy_ignis_golem = {
+				name = "Earth Golem @Ignister",
+				text = { "TBD" }
+			},
+			j_joy_ignis_pegasus = {
+				name = "Wind Pegasus @Ignister",
+				text = { "TBD" }
+			},
+			j_joy_ignis_dragon = {
+				name = "Light Dragon @Ignister",
+				text = { "TBD" }
+			},
+			j_joy_ignis_phoenix = {
+				name = "Fire Phoenix @Ignister",
+				text = { "TBD" }
+			},
+			j_joy_ignis_accode = {
+				name = "Accode Talker @Ignister",
+				text = { "TBD" }
+			},
+			j_joy_ignis_infant = {
+				name = "Dark Infant @Ignister",
+				text = { "TBD" }
+			},
+			j_joy_ignis_templar = {
+				name = "Dark Templar @Ignister",
+				text = { "TBD" }
+			},
+			j_joy_ignis_arrival = {
+				name = "The Arrival Cyberse @Ignister",
+				text = { "TBD" }
+			},
+			j_joy_ignis_ailand = {
+				name = "Ignister A.I.Land",
+				text = { "TBD" }
+			},
+			--#endregion
+			--#region Solfachord
+			j_joy_solfa_cutia = {
+				name = "DoSolfachord Cutia",
+				text = { "TBD" }
+			},
+			j_joy_solfa_dreamia = {
+				name = "ReSolfachord Dreamia",
+				text = { "TBD" }
+			},
+			j_joy_solfa_eliteia = {
+				name = "MiSolfachord Eliteia",
+				text = { "TBD" }
+			},
+			j_joy_solfa_fancia = {
+				name = "FaSolfachord Fancia",
+				text = { "TBD" }
+			},
+			j_joy_solfa_gracia = {
+				name = "SolSolfachord Gracia",
+				text = { "TBD" }
+			},
+			j_joy_solfa_angelia = {
+				name = "LaSolfachord Angelia",
+				text = { "TBD" }
+			},
+			j_joy_solfa_beautia = {
+				name = "TiSolfachord Beautia",
+				text = { "TBD" }
+			},
+			j_joy_solfa_coolia = {
+				name = "DoSolfachord Coolia",
+				text = { "TBD" }
+			},
+			j_joy_solfa_musecia = {
+				name = "GranSolfachord Musecia",
+				text = { "TBD" }
+			},
+			j_joy_solfa_grancoolia = {
+				name = "GranSolfachord Coolia",
+				text = { "TBD" }
+			},
+			j_joy_solfa_harmonia = {
+				name = "Solfachord Harmonia",
+				text = { "TBD" }
+			},
+			--#endregion
+			--#region Witchcrafter
+			j_joy_witch_genni = {
+				name = "Witchcrafter Genni",
+				text = { "TBD" }
+			},
+			j_joy_witch_potterie = {
+				name = "Witchcrafter Potterie",
+				text = { "TBD" }
+			},
+			j_joy_witch_pittore = {
+				name = "Witchcrafter Pittore",
+				text = { "TBD" }
+			},
+			j_joy_witch_schmietta = {
+				name = "Witchcrafter Schmietta",
+				text = { "TBD" }
+			},
+			j_joy_witch_edel = {
+				name = "Witchcrafter Edel",
+				text = { "TBD" }
+			},
+			j_joy_witch_haine = {
+				name = "Witchcrafter Haine",
+				text = { "TBD" }
+			},
+			j_joy_witch_verre = {
+				name = "Witchcrafter Madame Verre",
+				text = { "TBD" }
+			},
+			j_joy_witch_aruru = {
+				name = "Witchcrafter Golem Aruru",
+				text = { "TBD" }
+			},
+			j_joy_witch_vicemadame = {
+				name = "Witchcrafter Vice-Madame",
+				text = { "TBD" }
+			},
+			--#endregion
+			--#region Shaddoll
+			j_joy_shaddoll_beast = {
+				name = "Shaddoll Beast",
+				text = { "TBD" }
+			},
+			j_joy_shaddoll_dragon = {
+				name = "Shaddoll Dragon",
+				text = { "TBD" }
+			},
+			j_joy_shaddoll_falco = {
+				name = "Shaddoll Falco",
+				text = { "TBD" }
+			},
+			j_joy_shaddoll_hedgehog = {
+				name = "Shaddoll Hedgehog",
+				text = { "TBD" }
+			},
+			j_joy_shaddoll_hound = {
+				name = "Shaddoll Hound",
+				text = { "TBD" }
+			},
+			j_joy_shaddoll_squamata = {
+				name = "Shaddoll Squamata",
+				text = { "TBD" }
+			},
+			j_joy_shaddoll_core = {
+				name = "Shaddoll Core",
+				text = { "TBD" }
+			},
+			j_joy_shaddoll_ariel = {
+				name = "Naelshaddoll Ariel",
+				text = { "TBD" }
+			},
+			j_joy_shaddoll_genius = {
+				name = "Nehshaddoll Genius",
+				text = { "TBD" }
+			},
+			j_joy_shaddoll_keios = {
+				name = "Qadshaddoll Keios",
+				text = { "TBD" }
+			},
+			j_joy_shaddoll_wendi = {
+				name = "Reeshaddoll Wendi",
+				text = { "TBD" }
+			},
+			j_joy_shaddoll_hollow = {
+				name = "Helshaddoll Hollow",
+				text = { "TBD" }
+			},
+			j_joy_shaddoll_anoya = {
+				name = "El Shaddoll Anoyatyllis",
+				text = { "TBD" }
+			},
+			j_joy_shaddoll_apka = {
+				name = "El Shaddoll Apkallone",
+				text = { "TBD" }
+			},
+			j_joy_shaddoll_winda = {
+				name = "El Shaddoll Winda",
+				text = { "TBD" }
+			},
+			j_joy_shaddoll_elconstruct = {
+				name = "El Shaddoll Construct",
+				text = { "TBD" }
+			},
+			j_joy_shaddoll_grysta = {
+				name = "El Shaddoll Grysta",
+				text = { "TBD" }
+			},
+			j_joy_shaddoll_shekh = {
+				name = "El Shaddoll Shekhinaga",
+				text = { "TBD" }
+			},
+			j_joy_shaddoll_wendigo = {
+				name = "El Shaddoll Wendigo",
+				text = { "TBD" }
+			},
+			j_joy_shaddoll_construct = {
+				name = "Shaddoll Construct",
+				text = { "TBD" }
+			},
+			j_joy_shaddoll_prison = {
+				name = "Curse of the Shadow Prison",
+				text = { "TBD" }
+			},
+			--#endregion
+			--#region Paleozoic
+			j_joy_paleo_canadia = {
+				name = "Paleozoic Canadia",
+				text = { "TBD" }
+			},
+			j_joy_paleo_dino = {
+				name = "Paleozoic Dinomischus",
+				text = { "TBD" }
+			},
+			j_joy_paleo_eldonia = {
+				name = "Paleozoic Eldonia",
+				text = { "TBD" }
+			},
+			j_joy_paleo_hallu = {
+				name = "Paleozoic Hallucigenia",
+				text = { "TBD" }
+			},
+			j_joy_paleo_lean = {
+				name = "Paleozoic Leanchoilia",
+				text = { "TBD" }
+			},
+			j_joy_paleo_marrella = {
+				name = "Paleozoic Marrella",
+				text = { "TBD" }
+			},
+			j_joy_paleo_oleno = {
+				name = "Paleozoic Olenoides",
+				text = { "TBD" }
+			},
+			j_joy_paleo_pikaia = {
+				name = "Paleozoic Pikaia",
+				text = { "TBD" }
+			},
+			j_joy_paleo_cambro = {
+				name = "Paleozoic Cambroraster",
+				text = { "TBD" }
+			},
+			j_joy_paleo_anomalo = {
+				name = "Paleozoic Anomalocaris",
+				text = { "TBD" }
+			},
+			j_joy_paleo_opa = {
+				name = "Paleozoic Opabinia",
+				text = { "TBD" }
+			},
+			--#endregion
+			--#region Invoked
+			j_joy_invoked_aleister = {
+				name = "Aleister the Invoker",
+				text = { "TBD" }
+			},
+			j_joy_invoked_madness = {
+				name = "Aleister the Invoker of Madness",
+				text = { "TBD" }
+			},
+			j_joy_invoked_caliga = {
+				name = "Invoked Caliga",
+				text = { "TBD" }
+			},
+			j_joy_invoked_raidjin = {
+				name = "Invoked Raidjin",
+				text = { "TBD" }
+			},
+			j_joy_invoked_cocytus = {
+				name = "Invoked Cocytus",
+				text = { "TBD" }
+			},
+			j_joy_invoked_purgatorio = {
+				name = "Invoked Purgatrio",
+				text = { "TBD" }
+			},
+			j_joy_invoked_mage = {
+				name = "Invoked Magellanica",
+				text = { "TBD" }
+			},
+			j_joy_invoked_augo = {
+				name = "Invoked Augoeides",
+				text = { "TBD" }
+			},
+			j_joy_invoked_mechaba = {
+				name = "Invoked Mechaba",
+				text = { "TBD" }
+			},
+			j_joy_invoked_elysium = {
+				name = "Invoked Elysium",
+				text = { "TBD" }
+			},
+			j_joy_invoked_meltdown = {
+				name = "Magical Meltdown",
+				text = { "TBD" }
+			},
+			--#endregion
+			--#region Danger!
+			j_joy_danger_jack = {
+				name = "Danger!? Jackalope?",
+				text = { "TBD" }
+			},
+			j_joy_danger_tsuch = {
+				name = "Danger!? Tsuchinoko?",
+				text = { "TBD" }
+			},
+			j_joy_danger_chup = {
+				name = "Danger! Chupacabra!",
+				text = { "TBD" }
+			},
+			j_joy_danger_moth = {
+				name = "Danger! Mothman!",
+				text = { "TBD" }
+			},
+			j_joy_danger_dog = {
+				name = "Danger! Dogman!",
+				text = { "TBD" }
+			},
+			j_joy_danger_ness = {
+				name = "Danger! Nessie!",
+				text = { "TBD" }
+			},
+			j_joy_danger_big = {
+				name = "Danger! Bigfoot!",
+				text = { "TBD" }
+			},
+			j_joy_danger_ogo = {
+				name = "Danger! Ogopogo!",
+				text = { "TBD" }
+			},
+			j_joy_danger_thunder = {
+				name = "Danger! Thunderbird!",
+				text = { "TBD" }
+			},
+			j_joy_danger_realm = {
+				name = "Realm of Danger!",
+				text = { "TBD" }
+			},
+			j_joy_danger_disorder = {
+				name = "Danger! Disturbance! Disorder!",
+				text = { "TBD" }
+			},
+			--#endregion
+			--#region Adamancipator
+			j_joy_adaman_analyzer = {
+				name = "Adamancipator Analyzer",
+				text = { "TBD" }
+			},
+			j_joy_adaman_researcher = {
+				name = "Adamancipator Researcher",
+				text = { "TBD" }
+			},
+			j_joy_adaman_seeker = {
+				name = "Adamancipator Seeker",
+				text = { "TBD" }
+			},
+			j_joy_adaman_crysdragite = {
+				name = "Adamancipator Crystal - Dragite",
+				text = { "TBD" }
+			},
+			j_joy_adaman_crysraptite = {
+				name = "Adamancipator Crystal - Raptite",
+				text = { "TBD" }
+			},
+			j_joy_adaman_crysleonite = {
+				name = "Adamancipator Crystal - Leonite",
+				text = { "TBD" }
+			},
+			j_joy_adaman_dragite = {
+				name = "Adamancipator Risen - Dragite",
+				text = { "TBD" }
+			},
+			j_joy_adaman_leonite = {
+				name = "Adamancipator Risen - Leonite",
+				text = { "TBD" }
+			},
+			j_joy_adaman_raptite = {
+				name = "Adamancipator Risen - Raptite",
+				text = { "TBD" }
+			},
+			j_joy_adaman_laputite = {
+				name = "Adamancipator Laputite",
+				text = { "TBD" }
+			},
+			--#endregion
 			--#region Miscellaneous
 			--#region Effect
 			j_joy_boarder = {
@@ -1102,6 +1770,88 @@ return {
 					"{C:inactive}(Currently{} {C:chips}+#2#{} {C:inactive}Chips){}",
 				},
 			},
+			j_joy_heavenlyprison = {
+				name = "Lord of the Heavenly Prison",
+				text = { "TBD" }
+			},
+			j_joy_rhino = {
+				name = "Fiendish Rhino Warrior",
+				text = { "TBD" }
+			},
+			j_joy_tourguide = {
+				name = "Tour Guide From the Underworld",
+				text = { "TBD" }
+			},
+			j_joy_backup = {
+				name = "Backup Secretary",
+				text = { "TBD" }
+			},
+			j_joy_wizard = {
+				name = "Cyberse Wizard",
+				text = { "TBD" }
+			},
+			j_joy_zenoguitar = {
+				name = "Rock Band Xenoguitar",
+				text = { "TBD" }
+			},
+			j_joy_revgolem = {
+				name = "Revival Golem",
+				text = { "TBD" }
+			},
+			j_joy_tackcrusader = {
+				name = "Tackle Crusader",
+				text = { "TBD" }
+			},
+			j_joy_doki = {
+				name = "Doki Doki",
+				text = { "TBD" }
+			},
+			j_joy_blockdragon = {
+				name = "Block Dragon",
+				text = { "TBD" }
+			},
+			--#endregion
+			--#region Trap
+			j_joy_quantumcat = {
+				name = "Quantum Cat",
+				text = { "TBD" }
+			},
+			j_joy_anguish = {
+				name = "Statue of Anguish Pattern",
+				text = { "TBD" }
+			},
+			j_joy_tiki_curse = {
+				name = "Tiki Curse",
+				text = { "TBD" }
+			},
+			j_joy_tiki_soul = {
+				name = "Tiki Soul",
+				text = { "TBD" }
+			},
+			j_joy_zoma = {
+				name = "Zoma the Spirit",
+				text = { "TBD" }
+			},
+			j_joy_zoma_earthbound = {
+				name = "Zoma the Earthbound Spirit",
+				text = { "TBD" }
+			},
+			j_joy_finished = {
+				name = "You're Finished",
+				text = { "TBD" }
+			},
+			j_joy_apophis = {
+				name = "Embodiment of Apophis",
+				text = { "TBD" }
+			},
+			j_joy_azurune = {
+				name = "Angel Statue - Azurune",
+				text = { "TBD" }
+			},
+			j_joy_crukra = {
+				name = "Crusadia Krawler",
+				text = { "TBD" }
+			},
 			--#endregion
 			--#region Pendulum
 			j_joy_eccentrick = {
@@ -1113,6 +1863,14 @@ return {
 					"{C:mult}+#2#{} Mult for every destroyed playing card this run",
 					"{C:inactive}(Currently{} {C:mult}+#3#{} {C:inactive}Mult){}",
 				},
+			},
+			j_joy_pendulumoon = {
+				name = "PenduLuMoon",
+				text = { "TBD" }
+			},
+			j_joy_couverture = {
+				name = "Patissciel Couverture",
+				text = { "TBD" }
 			},
 			--#endregion
 			--#region Ritual
@@ -1154,6 +1912,22 @@ return {
 				}
 			},
 			--#endregion
+			--#region Synchro
+			j_joy_firewall_saber = {
+				name = "Firewall Saber Dragon",
+				text = { "TBD" }
+			},
+			--#endregion
+			--#region Xyz
+			j_joy_zeus = {
+				name = "Divine Arsenal AA-ZEUS - Sky Thunder",
+				text = { "TBD" }
+			},
+			j_joy_typhon = {
+				name = "Super Starslayer TY-PHON - Sky Crisis",
+				text = { "TBD" }
+			},
+			--#endregion
 			--#region Link
 			j_joy_apollousa = {
 				name = "{C:joy_link}Apollousa, Bow of the Goddess",
@@ -1165,6 +1939,18 @@ return {
 				joy_summon_conditions = {
 					"{C:attention}2+ Jokers{} with different names",
 				}
+			},
+			j_joy_beyond = {
+				name = "Beyond the Pendulum",
+				text = { "TBD" }
+			},
+			j_joy_linkuriboh = {
+				name = "Linkuriboh",
+				text = { "TBD" }
+			},
+			j_joy_linguriboh = {
+				name = "Linguriboh",
+				text = { "TBD" }
 			},
 			--#endregion
 			--#endregion
@@ -1432,6 +2218,18 @@ return {
 			k_joy_archetype_fish = "Ghoti",
 			k_joy_archetype_psy = "PSY-Frame",
 			k_joy_archetype_runick = "Runick",
+			k_joy_archetype_ba = "Burning Abyss",
+			k_joy_archetype_lab = "Labrynth",
+			k_joy_archetype_sub = "Subterror",
+			k_joy_archetype_eld = "Eldlich",
+			k_joy_archetype_ignis = "@Ignister",
+			k_joy_archetype_solfa = "Solfachord",
+			k_joy_archetype_witch = "Witchcrafter",
+			k_joy_archetype_shaddoll = "Shaddoll",
+			k_joy_archetype_paleo = "Paleozoic",
+			k_joy_archetype_invoked = "Invoked",
+			k_joy_archetype_danger = "Danger!",
+			k_joy_archetype_adaman = "Adamancipator",
 			k_joy_archetype_misc = "Free Agents",
 			k_joy_archetype_token = "Tokens",
 			--#endregion
