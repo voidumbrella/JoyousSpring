@@ -170,14 +170,3 @@ end
 to_big = to_big or function(num)
     return num
 end
-
-if JoyousSpring.debug then
-    --- Makes shop rerolls free
-    function calculate_reroll_cost(skip_increment)
-        G.GAME.current_round.reroll_cost = 0
-    end
-
-    G.FUNCS.joy_debug_print = function(e)
-        sendDebugMessage("test")
-    end
-end
