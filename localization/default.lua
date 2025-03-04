@@ -1906,15 +1906,24 @@ return {
 			},
 			j_joy_rhino = {
 				name = "Fiendish Rhino Warrior",
-				text = { "TBD" }
+				text = {
+					"Send {C:attention}#1#{} {C:joy_normal}Fiends{} to the {C:attention}GY{} and",
+					"{C:attention}revive #2#{} {C:joy_normal}Fiend{} when used",
+					"as {C:attention}material{C:attention}",
+				}
 			},
 			j_joy_tourguide = {
 				name = "Tour Guide From the Underworld",
-				text = { "TBD" }
+				text = {
+					"Creates {C:attention}#1#{} {C:dark_edition}Negative{} {C:joy_normal}Main Deck{}",
+					"{C:blue}Common{} or {C:green}Uncommon{} {C:joy_normal}Fiend{} when obtained",
+				}
 			},
 			j_joy_backup = {
 				name = "Backup Secretary",
-				text = { "TBD" }
+				text = {
+					"TBD"
+				}
 			},
 			j_joy_wizard = {
 				name = "Cyberse Wizard",
