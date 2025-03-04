@@ -205,7 +205,7 @@ JoyousSpring.get_archetype_pool = function(pool)
         local found = false
         for archetype_index, archetype in ipairs(JoyousSpring.collection_pool) do
             for _, key in ipairs(archetype.keys) do
-                if center.original_key ~= "token" and ((center.original_key:sub(1, #key) == key) or (key == "misc" and not found)) then
+                if center.original_key ~= "token" and ((center.original_key:sub(1, #key + 1) == key .. "_") or (key == "misc" and not found)) then
                     table.insert(archetype_pool[archetype_index], center)
                     found = true
                     break
@@ -218,7 +218,25 @@ JoyousSpring.get_archetype_pool = function(pool)
             end
         end
     end
-    return archetype_pool
+
+    local paginated_archetype_pool = {}
+    local pages = 0
+    for _, archetype_table in ipairs(archetype_pool) do
+        pages = pages + 1
+        paginated_archetype_pool[#paginated_archetype_pool + 1] = { {} }
+        local index = 1
+        for _, center in ipairs(archetype_table) do
+            local current_pool = paginated_archetype_pool[#paginated_archetype_pool]
+            if #current_pool[index] == 15 then
+                index = index + 1
+                pages = pages + 1
+                current_pool[index] = {}
+            end
+            table.insert(current_pool[index], center)
+        end
+    end
+
+    return paginated_archetype_pool, pages
 end
 
 local create_UIBox_your_collection_jokers_ref = create_UIBox_your_collection_jokers
@@ -245,7 +263,7 @@ JoyousSpring.card_collection_UIBox = function(_pool, rows, args)
     args.card_scale = 1
     local deck_tables = {}
     local pool = SMODS.collection_pool(_pool)
-    local archetype_pool = JoyousSpring.get_archetype_pool(pool)
+    local archetype_pool, pages = JoyousSpring.get_archetype_pool(pool)
 
     G.your_collection = {}
     local cards_per_page = 0
@@ -270,11 +288,15 @@ JoyousSpring.card_collection_UIBox = function(_pool, rows, args)
     end
 
     local options = {}
+    local paginated_pool = {}
 
-    for i = 1, #archetype_pool do
-        table.insert(options,
-            (JoyousSpring.collection_pool[i].label and localize(JoyousSpring.collection_pool[i].label) or localize("k_joy_archetype_misc")) ..
-            ' (' .. tostring(i) .. '/' .. #archetype_pool .. ")")
+    for i, archetype_page in ipairs(archetype_pool) do
+        for j = 1, #archetype_page do
+            table.insert(paginated_pool, archetype_page[j])
+            table.insert(options,
+                (JoyousSpring.collection_pool[i].label and localize(JoyousSpring.collection_pool[i].label) or localize("k_joy_archetype_misc")) ..
+                ' (' .. tostring(#paginated_pool) .. '/' .. pages .. ")")
+        end
     end
 
     G.FUNCS.SMODS_card_collection_page = function(e)
@@ -288,7 +310,7 @@ JoyousSpring.card_collection_UIBox = function(_pool, rows, args)
         end
         for j = 1, #rows do
             for i = 1, rows[j] do
-                local center = archetype_pool[e.cycle_config.current_option][i + row_totals[j]]
+                local center = paginated_pool[e.cycle_config.current_option][i + row_totals[j]]
                 if not center then break end
                 local token_key
                 if type(center) == "string" then
