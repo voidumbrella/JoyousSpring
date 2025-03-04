@@ -1,7 +1,4 @@
 JoyousSpring = {}
-JoyousSpring.debug = false
-JoyousSpring.dev_content = false
-JoyousSpring.debug_shop_cards = { { key = "j_joy_dogma_knight" } }
 
 SMODS.Atlas({
     key = "modicon",
@@ -19,6 +16,10 @@ SMODS.Atlas({
 
 JoyousSpring.config = SMODS.current_mod.config
 
+local debug = SMODS.load_file("debug.lua")
+if debug then
+    debug()
+end
 assert(SMODS.load_file("src/utils.lua"))()
 assert(SMODS.load_file("src/mod_info.lua"))()
 assert(SMODS.load_file("src/globals.lua"))()
