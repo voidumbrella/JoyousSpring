@@ -370,9 +370,9 @@ SMODS.Joker({
         if not card.debuff then
             for _, joker in ipairs(G.jokers.cards) do
                 if joker.config.center.rarity == 1 or joker.config.center.rarity == 2 then
-                    local added_card = JoyousSpring.create_perma_debuffed_card(joker, "j_joy_yokai_mourner")
+                    local added_card = SMODS.debuff_card(card, true, "j_joy_yokai_mourner")
                     if added_card then
-                        added_card.joy_modify_cost = { cost = 0, sell_cost = 1 }
+                        added_card.joy_modify_cost = { sell_cost = 1 }
                         added_card:set_cost()
                     end
                 end
@@ -381,9 +381,9 @@ SMODS.Joker({
     end,
     joy_apply_to_jokers_added = function(card)
         if card.config.center.rarity == 1 or card.config.center.rarity == 2 then
-            local added_card = JoyousSpring.create_perma_debuffed_card(card, "j_joy_yokai_mourner")
+            SMODS.debuff_card(card, true, "j_joy_yokai_mourner")
             if added_card then
-                added_card.joy_modify_cost = { cost = 0, sell_cost = 1 }
+                added_card.joy_modify_cost = { sell_cost = 1 }
                 added_card:set_cost()
             end
         end
