@@ -45,7 +45,9 @@ Has compatibility with [JokerDisplay](https://github.com/nh6574/JokerDisplay) ve
 <img src="screenshots/implemented08.png" alt="Implemented 8" width="500">
 <img src="screenshots/implemented09.png" alt="Implemented 9" width="500">
 <img src="screenshots/implemented10.png" alt="Implemented 10" width="500">
-<img src="screenshots/implemented11.png" alt="Implemented 11" width="500">
+<img src="screenshots/implemented11.png" alt="Implemented 10" width="500">
+<img src="screenshots/implemented11_2.png" alt="Implemented 10" width="500">
+<img src="screenshots/implemented99.png" alt="Implemented 99" width="500">
 
 ## Contributing
 
