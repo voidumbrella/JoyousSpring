@@ -1,5 +1,120 @@
 --- MONSTERS
 
+---@alias summon_type
+---|'"NORMAL"'
+---|'"RITUAL"'
+---|'"FUSION"'
+---|'"SYNCHRO"'
+---|'"XYZ"'
+---|'"LINK"'
+
+---@alias attribute
+---|'"LIGHT"'
+---|'"DARK"'
+---|'"WATER"'
+---|'"FIRE"'
+---|'"EARTH"'
+---|'"WIND"'
+---|'"DIVINE"'
+
+---@class material_properties
+---@field optional boolean?
+---@field min number?
+---@field max number?
+---@field func function?
+---@field facedown boolean?
+---@field key string?
+---@field exclude_keys string[]?
+---@field is_token boolean?
+---@field exclude_tokens boolean?
+---@field rarity 1|2|3|4|string?
+---@field exclude_rarities table?
+---@field is_debuffed boolean?
+---@field exclude_debuffed boolean?
+---@field is_joker boolean?
+---@field is_monster boolean?
+---@field monster_type string?
+---@field exclude_monster_types string[]?
+---@field monster_attribute attribute?
+---@field exclude_monster_attributes attribute[]?
+---@field monster_archetypes string[]?
+---@field exclude_monster_archetypes string[]?
+---@field is_pendulum boolean?
+---@field exclude_pendulum boolean?
+---@field is_extra_deck boolean?
+---@field exclude_extra_deck boolean?
+---@field is_main_deck boolean?
+---@field exclude_main_deck boolean?
+---@field summon_type summon_type?
+---@field exclude_summon_types summon_type[]?
+---@field is_effect boolean?
+---@field is_non_effect boolean?
+---@field is_normal boolean?
+---@field is_summoned boolean?
+---@field exclude_summoned boolean?
+---@field is_tuner boolean?
+---@field exclude_tuners boolean?
+
+---@class material_restrictions
+---@field different_names boolean?
+---@field same_name boolean?
+---@field different_rarities boolean?
+---@field same_rarity boolean?
+---@field different_attributes boolean?
+---@field same_attribute boolean?
+---@field different_types boolean?
+---@field same_type boolean?
+
+---@class summon_conditions
+---@field type summon_type
+---@field materials material_properties[]
+---@field restrictions table?
+
+---@class joyous_spring
+---@field is_field_spell boolean?
+---@field is_main_deck boolean?
+---@field summon_type summon_type?
+---@field is_effect boolean?
+---@field is_tuner boolean?
+---@field is_pendulum boolean?
+---@field attribute attribute?
+---@field monster_type string?
+---@field monster_archetypes table?
+---@field is_all_attributes boolean|table?
+---@field is_all_materials { RITUAL:boolean?, FUSION:boolean?, SYNCHRO:boolean?, XYZ:boolean?, LINK:boolean? }?
+---@field summon_conditions summon_conditions[]?
+
+---Initializes joyous_spring table in Jokers
+---@param params joyous_spring
+---@return table
+JoyousSpring.init_joy_table = function(params)
+    return not params.is_field_spell and {
+        is_main_deck = params.is_main_deck or (not params.summon_type and true) or
+            (params.summon_type == "NORMAL" or params.summon_type == "RITUAL" and true) or false,
+        summon_type = params.summon_type or "NORMAL",
+        is_effect = params.is_effect or true,
+        is_tuner = params.is_tuner or false,
+        is_pendulum = params.is_pendulum or false,
+        attribute = params.attribute or "FIRE",
+        monster_type = params.monster_type or "Dragon",
+        monster_archetypes = params.monster_archetypes or {},
+        is_all_attributes = params.is_all_attributes or false,
+        is_all_materials = params.is_all_materials or {},
+        summon_conditions = params.summon_conditions or {},
+        summoned = false,
+        summon_materials = {},
+        xyz_materials = 0,
+        revived = false,
+        perma_debuffed = false,
+        is_free = false,
+        cannot_revive = false,
+    } or {
+        is_field_spell = true,
+        monster_archetypes = params.monster_archetypes or {},
+        perma_debuffed = false,
+        is_free = false,
+    }
+end
 JoyousSpring.is_monster_card = function(card)
     return card.ability and card.ability.extra and type(card.ability.extra) == "table" and
         card.ability.extra.joyous_spring or false
@@ -96,7 +211,7 @@ end
 
 ---Checks if **card** fulfills **properties**
 ---@param card Card
----@param properties table
+---@param properties material_properties
 ---@param summon_type string? Optional to check if the card is a wildcard for that type of summon
 ---@return boolean
 JoyousSpring.is_material = function(card, properties, summon_type)
@@ -107,7 +222,7 @@ JoyousSpring.is_material = function(card, properties, summon_type)
         return true
     end
     if card.facing == 'back' then
-        return false
+        return properties.facedown or false
     end
     if summon_type and JoyousSpring.is_all_materials(card, summon_type) then
         return true
@@ -288,15 +403,15 @@ end
 
 ---Checks if the center for **card_key** fulfills **properties**
 ---@param card_key string
----@param properties table
+---@param properties material_properties
 ---@return boolean
 JoyousSpring.is_material_center = function(card_key, properties)
     local card_center = G.P_CENTERS[card_key]
 
     if not card_center then return false end
 
-    if properties.func_center then
-        if not properties.func_center(card_center, properties.func_vars) then
+    if properties.func then
+        if not properties.func(card_center, properties.func_vars) then
             return false
         end
     end

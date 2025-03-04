@@ -26,15 +26,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "LIGHT",
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Dogmatika"] = true },
-                revived = false,
-                is_free = false,
             },
             base_xmult = 0.5,
             xmult = 1
@@ -97,15 +92,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "LIGHT",
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Dogmatika"] = true },
-                revived = false,
-                is_free = false,
             },
             mult = 25
         },
@@ -154,15 +144,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "LIGHT",
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Dogmatika"] = true },
-                revived = false,
-                is_free = false,
             },
             cards_to_create = 1
         },
@@ -199,15 +184,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "LIGHT",
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Dogmatika"] = true },
-                revived = false,
-                is_free = false,
             },
             cards_to_create = 1
         },
@@ -263,15 +243,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "LIGHT",
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Dogmatika"] = true },
-                revived = false,
-                is_free = false,
             },
             chips = 10
         },
@@ -335,15 +310,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "LIGHT",
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Dogmatika"] = true },
-                revived = false,
-                is_free = false,
             },
             revives = 1
         },
@@ -385,15 +355,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "LIGHT",
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Dogmatika"] = true },
-                revived = false,
-                is_free = false,
             },
             duplicates = 2
         },
@@ -445,10 +410,8 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "RITUAL",
-                is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Dogmatika"] = true },
@@ -460,11 +423,7 @@ SMODS.Joker({
                             {},
                         }
                     }
-                },
-                revived = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
+                }
             },
             base_h_size = 1,
             h_size = 0,
@@ -520,10 +479,8 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "RITUAL",
-                is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Dogmatika"] = true },
@@ -535,11 +492,7 @@ SMODS.Joker({
                             { monster_archetypes = { "Dogmatika" } },
                         }
                     }
-                },
-                revived = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
+                }
             },
             mult = 10
         },

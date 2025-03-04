@@ -25,15 +25,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -55,15 +49,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -85,15 +73,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -115,15 +97,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -145,15 +121,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -175,15 +145,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -205,15 +169,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -235,15 +193,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -265,15 +217,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -295,15 +241,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -325,15 +265,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -355,15 +289,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -385,15 +313,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -415,15 +337,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -445,15 +361,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -475,15 +385,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -505,15 +409,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -535,15 +433,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -565,15 +457,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -595,15 +481,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -625,15 +505,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -655,15 +529,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -685,15 +553,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -715,15 +577,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -745,15 +601,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -775,15 +625,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -805,15 +649,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -835,15 +673,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },

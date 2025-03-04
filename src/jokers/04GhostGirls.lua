@@ -23,17 +23,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 is_tuner = true,
                 attribute = "LIGHT",
-                monster_type = "Psychic",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_type = "Psychic"
             },
             base_xmult = 0.2,
             xmult = 1
@@ -97,17 +90,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 is_tuner = true,
                 attribute = "DARK",
-                monster_type = "Zombie",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_type = "Zombie"
             },
             xmult = 0.2
         },
@@ -160,17 +146,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 is_tuner = true,
                 attribute = "FIRE",
-                monster_type = "Zombie",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_type = "Zombie"
             },
             odds = 2,
             base_xmult = 0.5,
@@ -224,17 +203,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 is_tuner = true,
                 attribute = "EARTH",
-                monster_type = "Zombie",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_type = "Zombie"
             },
             base_xmult = 0.2,
             xmult = 1
@@ -290,17 +262,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 is_tuner = true,
                 attribute = "WATER",
-                monster_type = "Zombie",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_type = "Zombie"
             },
             base_xmult = 0.2,
             xmult = 1,
@@ -374,17 +339,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 is_tuner = true,
                 attribute = "WIND",
-                monster_type = "Zombie",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_type = "Zombie"
             },
             base_xmult = 0.2,
             xmult = 1

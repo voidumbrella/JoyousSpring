@@ -26,16 +26,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "FIRE",
                 monster_type = "Dragon",
                 monster_archetypes = { ["Dragonmaid"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
             },
             base_rerolls = 1,
             rerolls = 1
@@ -86,16 +80,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "FIRE",
                 monster_type = "Dragon",
                 monster_archetypes = { ["Dragonmaid"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
             },
             mult = 20
         },
@@ -179,16 +167,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "WIND",
                 monster_type = "Dragon",
                 monster_archetypes = { ["Dragonmaid"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
             },
             tags_to_add = 1,
             dragonmaid_count = 5,
@@ -249,16 +231,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "WIND",
                 monster_type = "Dragon",
                 monster_archetypes = { ["Dragonmaid"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
             },
             xmult = 1.1
         },
@@ -340,16 +316,10 @@ SMODS.Joker({
     end,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "EARTH",
                 monster_type = "Dragon",
                 monster_archetypes = { ["Dragonmaid"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
             },
             revives = 1,
             odds = 3
@@ -413,10 +383,7 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "EARTH",
                 monster_type = "Dragon",
                 monster_archetypes = { ["Dragonmaid"] = true },
@@ -478,16 +445,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "WATER",
                 monster_type = "Dragon",
                 monster_archetypes = { ["Dragonmaid"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
             },
             mill = 3
         },
@@ -542,16 +503,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "WATER",
                 monster_type = "Dragon",
                 monster_archetypes = { ["Dragonmaid"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
             },
             chips = 3
         },
@@ -616,16 +571,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
                 monster_type = "Dragon",
                 monster_archetypes = { ["Dragonmaid"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
             },
             tags_to_add = 1,
             dragonmaid_count = 5,
@@ -687,16 +636,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
                 monster_type = "Dragon",
                 monster_archetypes = { ["Dragonmaid"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
             },
             revives = 1,
             odds = 3
@@ -768,10 +711,8 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "FUSION",
-                is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Dragon",
                 monster_archetypes = { ["Dragonmaid"] = true },
@@ -784,11 +725,6 @@ SMODS.Joker({
                         }
                     }
                 },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
             },
             odds = 3
         },
@@ -863,10 +799,8 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "FUSION",
-                is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Dragon",
                 monster_archetypes = { ["Dragonmaid"] = true },
@@ -879,11 +813,6 @@ SMODS.Joker({
                         }
                     }
                 },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
             },
             xmult = 0.1,
             blinds = 3,
@@ -953,18 +882,11 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "FUSION",
-                is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Dragon",
                 monster_archetypes = { ["Dragonmaid"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
             },
             cards_to_create = 1
         },

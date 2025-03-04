@@ -23,16 +23,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
                 monster_type = "Thunder",
-                monster_archetypes = { ["Spright"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["Spright"] = true }
             },
             cards_to_create = 1,
         },
@@ -82,16 +76,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
                 monster_type = "Thunder",
-                monster_archetypes = { ["Spright"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["Spright"] = true }
             },
             mill = 2,
         },
@@ -137,16 +125,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "FIRE",
                 monster_type = "Thunder",
-                monster_archetypes = { ["Spright"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["Spright"] = true }
             },
             xmult = 0.1,
         },
@@ -209,16 +191,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "FIRE",
                 monster_type = "Thunder",
-                monster_archetypes = { ["Spright"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["Spright"] = true }
             },
             mult = 10,
         },
@@ -278,16 +254,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
                 monster_type = "Thunder",
-                monster_archetypes = { ["Spright"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["Spright"] = true }
             },
             chips = 15,
         },
@@ -341,10 +311,8 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "LINK",
-                is_effect = true,
                 attribute = "FIRE",
                 monster_type = "Thunder",
                 monster_archetypes = { ["Spright"] = true },
@@ -356,12 +324,7 @@ SMODS.Joker({
                             { rarity = 2 }
                         }
                     }
-                },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
+                }
             },
             revives = 1,
         },
@@ -398,10 +361,8 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "LINK",
-                is_effect = true,
                 attribute = "FIRE",
                 monster_type = "Thunder",
                 monster_archetypes = { ["Spright"] = true },
@@ -413,12 +374,7 @@ SMODS.Joker({
                             { rarity = 2 }
                         }
                     }
-                },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
+                }
             },
             base_materials = 2,
             detached = 0
@@ -496,10 +452,8 @@ SMODS.Joker({
     end,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "XYZ",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Thunder",
                 monster_archetypes = { ["Spright"] = true },
@@ -511,13 +465,7 @@ SMODS.Joker({
                             { rarity = 2, exclude_tokens = true, exclude_summon_types = { "XYZ" } }
                         },
                     }
-                },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
-                xyz_materials = 0
+                }
             },
             cards_to_create = 1
         },

@@ -20,16 +20,11 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
+            joyous_spring = JoyousSpring.init_joy_table {
                 is_effect = false,
                 attribute = "LIGHT",
                 monster_type = "Psychic",
-                monster_archetypes = { ["PSYFrame"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["PSYFrame"] = true }
             },
         },
     },
@@ -55,17 +50,11 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 is_tuner = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Psychic",
-                monster_archetypes = { ["PSYFrame"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["PSYFrame"] = true }
             },
             cards_to_create = 1,
             xmult = 1.1,
@@ -127,17 +116,11 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 is_tuner = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Psychic",
-                monster_archetypes = { ["PSYFrame"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["PSYFrame"] = true }
             },
             cards_to_create = 1,
             xmult = 1.5
@@ -198,17 +181,11 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 is_tuner = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Psychic",
-                monster_archetypes = { ["PSYFrame"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["PSYFrame"] = true }
             },
             cards_to_create = 1,
             xmult = 1.2
@@ -269,17 +246,11 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 is_tuner = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Psychic",
-                monster_archetypes = { ["PSYFrame"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["PSYFrame"] = true }
             },
             cards_to_create = 1,
             xmult = 1.2
@@ -340,17 +311,11 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 is_tuner = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Psychic",
-                monster_archetypes = { ["PSYFrame"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["PSYFrame"] = true }
             },
             cards_to_create = 1,
             xmult = 1.2
@@ -411,16 +376,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "LIGHT",
                 monster_type = "Psychic",
-                monster_archetypes = { ["PSYFrame"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["PSYFrame"] = true }
             },
             cards_to_create = 1,
         },
@@ -466,10 +425,8 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "SYNCHRO",
-                is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Psychic",
                 monster_archetypes = { ["PSYFrame"] = true },
@@ -481,12 +438,7 @@ SMODS.Joker({
                             { rarity = 1,      exclude_tuners = true,                   exclude_summon_types = { "XYZ", "LINK" } },
                         },
                     }
-                },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
+                }
             },
             banishes = 2
         },
@@ -527,10 +479,8 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "SYNCHRO",
-                is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Psychic",
                 monster_archetypes = { ["PSYFrame"] = true },
@@ -542,12 +492,7 @@ SMODS.Joker({
                             { rarity = 1,      exclude_tuners = true,                   exclude_summon_types = { "XYZ", "LINK" } },
                         },
                     }
-                },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
+                }
             },
         },
     },
@@ -582,10 +527,8 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "LINK",
-                is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Psychic",
                 monster_archetypes = { ["PSYFrame"] = true },
@@ -597,12 +540,7 @@ SMODS.Joker({
                             { exclude_tokens = true },
                         },
                     }
-                },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
+                }
             },
             cards_to_create = 1
         },

@@ -53,15 +53,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Machine",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
             xmult = 2,
             hands = {}
@@ -145,15 +139,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "FIRE",
                 monster_type = "Fiend",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
             chips = 4,
         },
@@ -192,16 +180,10 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 is_pendulum = true,
                 attribute = "LIGHT",
                 monster_type = "Fiend",
-                monster_archetypes = { ["Archfiend"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["Archfiend"] = true }
             },
             mult = 5,
             max = 2
@@ -288,9 +270,7 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
                 summon_type = "RITUAL",
-                is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Dragon",
                 monster_archetypes = {},
@@ -302,12 +282,7 @@ SMODS.Joker({
                             {},
                         }
                     }
-                },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
+                }
             },
         },
     },
@@ -369,9 +344,7 @@ SMODS.Joker({
 --     config = {
 --         extra = {
 --             joyous_spring = {
---                 is_main_deck = false,
 --                 summon_type = "FUSION",
---                 is_effect = true,
 --                 is_all_attributes = true,
 --                 is_all_materials = { "FUSION" },
 --                 attribute = "FIRE",
@@ -413,9 +386,7 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = false,
                 summon_type = "FUSION",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "WingedBeast",
                 monster_archetypes = {},
@@ -431,12 +402,7 @@ SMODS.Joker({
                             different_names = true
                         }
                     }
-                },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
+                }
             },
             h_size = 2,
             h_size_gain = 1
@@ -487,9 +453,7 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = false,
                 summon_type = "LINK",
-                is_effect = true,
                 attribute = "WIND",
                 monster_type = "Fairy",
                 monster_archetypes = {},
@@ -503,12 +467,7 @@ SMODS.Joker({
                             different_names = true
                         }
                     }
-                },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
+                }
             },
             chips_gain = 80,
             chips_loss = 40,
@@ -567,16 +526,11 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
                 is_effect = false,
                 attribute = "EARTH",
                 monster_type = "Beast",
                 monster_archetypes = {},
-                token_name = "j_joy_token",
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                token_name = "j_joy_token"
             },
         },
     },

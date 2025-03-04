@@ -26,16 +26,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "FIRE",
                 monster_type = "Fairy",
-                monster_archetypes = { ["Generaider"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["Generaider"] = true }
             },
         },
     },
@@ -69,16 +63,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "FIRE",
                 monster_type = "Fairy",
-                monster_archetypes = { ["Generaider"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["Generaider"] = true }
             },
             revives = 1
         },
@@ -123,16 +111,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
                 monster_type = "Spellcaster",
-                monster_archetypes = { ["Generaider"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["Generaider"] = true }
             },
             tributes = 2
         },
@@ -186,16 +168,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "WATER",
                 monster_type = "Wyrm",
-                monster_archetypes = { ["Generaider"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["Generaider"] = true }
             },
             tributes = 2,
             active = false
@@ -259,16 +235,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "WIND",
                 monster_type = "Warrior",
-                monster_archetypes = { ["Generaider"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["Generaider"] = true }
             },
             hand_gain = 0
         },
@@ -332,16 +302,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "LIGHT",
                 monster_type = "Rock",
-                monster_archetypes = { ["Generaider"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["Generaider"] = true }
             },
             tributes = 1
         },
@@ -399,16 +363,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "LIGHT",
                 monster_type = "Plant",
-                monster_archetypes = { ["Generaider"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["Generaider"] = true }
             },
             tributes = 1,
             cards_to_create = 1
@@ -473,16 +431,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "EARTH",
                 monster_type = "Machine",
-                monster_archetypes = { ["Generaider"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["Generaider"] = true }
             },
             tributes = 2,
             xmult = 4
@@ -551,16 +503,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "FIRE",
                 monster_type = "BeastWarrior",
-                monster_archetypes = { ["Generaider"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["Generaider"] = true }
             },
             tributes = 2,
             hands = 1,
@@ -618,16 +564,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
                 monster_type = "Zombie",
-                monster_archetypes = { ["Generaider"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["Generaider"] = true }
             },
             tributes = 3,
             revives = 1,
@@ -697,10 +637,8 @@ SMODS.Joker({
     end,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "XYZ",
-                is_effect = true,
                 attribute = "EARTH",
                 monster_type = "Reptile",
                 monster_archetypes = { ["Generaider"] = true },
@@ -711,13 +649,7 @@ SMODS.Joker({
                             { min = 2, rarity = 3, exclude_tokens = true, exclude_summon_types = { "XYZ", "LINK" } },
                         },
                     }
-                },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
-                xyz_materials = 0
+                }
             },
             mult = 100,
             detach = 2,
@@ -759,10 +691,8 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "XYZ",
-                is_effect = true,
                 attribute = "FIRE",
                 monster_type = "Fairy",
                 monster_archetypes = { ["Generaider"] = true },
@@ -777,13 +707,7 @@ SMODS.Joker({
                             { rarity = 3, exclude_tokens = true, exclude_summon_types = { "XYZ", "LINK" } },
                         },
                     }
-                },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
-                xyz_materials = 0
+                }
             },
             detach = 5
         },
@@ -824,7 +748,7 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
+            joyous_spring = JoyousSpring.init_joy_table {
                 is_field_spell = true,
                 monster_archetypes = { ["Generaider"] = true },
             },

@@ -22,16 +22,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_type = "Fiend",
+                monster_archetypes = { ["BurningAbyss"] = true }
             },
         },
     },
@@ -52,16 +46,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_type = "Fiend",
+                monster_archetypes = { ["BurningAbyss"] = true }
             },
         },
     },
@@ -82,16 +70,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_type = "Fiend",
+                monster_archetypes = { ["BurningAbyss"] = true }
             },
         },
     },
@@ -112,16 +94,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_type = "Fiend",
+                monster_archetypes = { ["BurningAbyss"] = true }
             },
         },
     },
@@ -142,16 +118,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_type = "Fiend",
+                monster_archetypes = { ["BurningAbyss"] = true }
             },
         },
     },
@@ -172,16 +142,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_type = "Fiend",
+                monster_archetypes = { ["BurningAbyss"] = true }
             },
         },
     },
@@ -202,16 +166,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_type = "Fiend",
+                monster_archetypes = { ["BurningAbyss"] = true }
             },
         },
     },
@@ -232,16 +190,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_type = "Fiend",
+                monster_archetypes = { ["BurningAbyss"] = true }
             },
         },
     },
@@ -262,16 +214,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_type = "Fiend",
+                monster_archetypes = { ["BurningAbyss"] = true }
             },
         },
     },
@@ -292,16 +238,11 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
+                is_tuner = true,
                 attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_type = "Fiend",
+                monster_archetypes = { ["BurningAbyss"] = true }
             },
         },
     },
@@ -322,16 +263,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_type = "Fiend",
+                monster_archetypes = { ["BurningAbyss"] = true }
             },
         },
     },
@@ -352,16 +287,11 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
+                summon_type = "RITUAL",
                 attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_type = "Fiend",
+                monster_archetypes = { ["BurningAbyss"] = true }
             },
         },
     },
@@ -382,16 +312,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -412,16 +336,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -442,16 +360,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -472,16 +384,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },
@@ -502,16 +408,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {},
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = {}
             },
         },
     },

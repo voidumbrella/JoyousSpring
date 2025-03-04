@@ -20,16 +20,11 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
+            joyous_spring = JoyousSpring.init_joy_table {
                 is_effect = false,
                 attribute = "LIGHT",
                 monster_type = "Psychic",
-                monster_archetypes = { ["MekkKnight"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["MekkKnight"] = true }
             },
         },
     },
@@ -55,16 +50,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "LIGHT",
                 monster_type = "Psychic",
-                monster_archetypes = { ["MekkKnight"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["MekkKnight"] = true }
             },
             mult = 2
         },
@@ -99,16 +88,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "LIGHT",
                 monster_type = "Psychic",
-                monster_archetypes = { ["MekkKnight"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["MekkKnight"] = true }
             },
         },
     },
@@ -143,16 +126,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "LIGHT",
                 monster_type = "Psychic",
-                monster_archetypes = { ["MekkKnight"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["MekkKnight"] = true }
             },
             money = 1
         },
@@ -187,16 +164,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "LIGHT",
                 monster_type = "Psychic",
-                monster_archetypes = { ["MekkKnight"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["MekkKnight"] = true }
             },
         },
     },
@@ -232,16 +203,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "LIGHT",
                 monster_type = "Psychic",
-                monster_archetypes = { ["MekkKnight"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["MekkKnight"] = true }
             },
             chips = 4
         },
@@ -290,16 +255,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "LIGHT",
                 monster_type = "Psychic",
-                monster_archetypes = { ["MekkKnight"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["MekkKnight"] = true }
             },
             chips = 20,
             mult = 20,
@@ -347,16 +306,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "LIGHT",
                 monster_type = "Psychic",
-                monster_archetypes = { ["MekkKnight"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["MekkKnight"] = true }
             },
             cards_to_create = 1
         },
@@ -405,10 +358,8 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "LINK",
-                is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Machine",
                 monster_archetypes = { ["MekkKnight"] = true },
@@ -420,12 +371,7 @@ SMODS.Joker({
                             {},
                         },
                     }
-                },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
+                }
             },
             xmult = 2
         },
@@ -464,10 +410,8 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "LINK",
-                is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Cyberse",
                 monster_archetypes = { ["MekkKnight"] = true },
@@ -480,12 +424,7 @@ SMODS.Joker({
                             { monster_archetypes = { "MekkKnight" } },
                         },
                     }
-                },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
+                }
             },
             cards_to_create = 1,
             activated = false
@@ -542,10 +481,8 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "LINK",
-                is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Cyberse",
                 monster_archetypes = { ["MekkKnight"] = true },
@@ -556,12 +493,7 @@ SMODS.Joker({
                             { min = 2, is_summoned = true, is_extra_deck = true },
                         },
                     }
-                },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
+                }
             },
             blinds = 0
         },

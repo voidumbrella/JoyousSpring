@@ -27,21 +27,14 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "FUSION",
-                is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Fairy",
                 monster_archetypes = { ["Runick"] = true },
                 summon_consumeable_conditions = {
                     tarot = 3
-                },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
+                }
             },
             extra_slots = 1,
             cards_to_create = 1
@@ -83,21 +76,14 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "FUSION",
-                is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Fairy",
                 monster_archetypes = { ["Runick"] = true },
                 summon_consumeable_conditions = {
                     tarot = 2
-                },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
+                }
             },
             extra_slots = 1,
             base_chips = 3,
@@ -153,21 +139,14 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "FUSION",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Beast",
                 monster_archetypes = { ["Runick"] = true },
                 summon_consumeable_conditions = {
                     tarot = 2
-                },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
+                }
             },
             fields_to_create = 1,
             cards_to_create = 2
@@ -216,21 +195,14 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "FUSION",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Beast",
                 monster_archetypes = { ["Runick"] = true },
                 summon_consumeable_conditions = {
                     tarot = 2
-                },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
+                }
             },
             playing_cards_to_create = 2,
             cards_to_create = 2
@@ -276,21 +248,14 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "FUSION",
-                is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Beast",
                 monster_archetypes = { ["Runick"] = true },
                 summon_consumeable_conditions = {
                     tarot = 4
-                },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
+                }
             },
             cards_to_create = 2
         },
@@ -306,7 +271,7 @@ SMODS.Joker({
                 for i = 1, card.ability.extra.cards_to_create do
                     SMODS.add_card({
                         set = 'Tarot',
-                        edition = { negative = true }
+                        edition = "e_negative"
                     })
                 end
             end
@@ -331,7 +296,7 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
+            joyous_spring = JoyousSpring.init_joy_table {
                 is_field_spell = true,
                 monster_archetypes = { ["Runick"] = true },
             },

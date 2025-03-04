@@ -23,16 +23,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
                 monster_type = "Cyberse",
                 monster_archetypes = { ["LiveTwin"] = true, ["Lilla"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
             },
             chips = 40,
             cards_to_create = 1
@@ -90,16 +84,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "LIGHT",
                 monster_type = "Cyberse",
                 monster_archetypes = { ["LiveTwin"] = true, ["Kisikil"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
             },
             mult = 10,
             cards_to_create = 1
@@ -157,16 +145,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
                 monster_type = "Zombie",
                 monster_archetypes = { ["LiveTwin"] = true, ["Lilla"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
             },
             discards = 1
         },
@@ -207,16 +189,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["LiveTwin"] = true, ["Lilla"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
             },
             hands = 1
         },
@@ -257,16 +233,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "LIGHT",
                 monster_type = "Aqua",
                 monster_archetypes = { ["LiveTwin"] = true, ["Kisikil"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
             },
             h_size = 1
         },
@@ -305,10 +275,8 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "LINK",
-                is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Fiend",
                 monster_archetypes = { ["EvilTwin"] = true, ["Kisikil"] = true },
@@ -320,11 +288,6 @@ SMODS.Joker({
                         }
                     }
                 },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
             },
             mult = 10,
             h_size = 1,
@@ -392,10 +355,8 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "LINK",
-                is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Fiend",
                 monster_archetypes = { ["EvilTwin"] = true, ["Kisikil"] = true },
@@ -408,11 +369,6 @@ SMODS.Joker({
                         }
                     }
                 },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
             },
             mult = 20,
             h_size = 1,
@@ -481,10 +437,8 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "LINK",
-                is_effect = true,
                 attribute = "DARK",
                 monster_type = "Fiend",
                 monster_archetypes = { ["EvilTwin"] = true, ["Lilla"] = true },
@@ -497,11 +451,6 @@ SMODS.Joker({
                         }
                     }
                 },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
             },
             chips = 80,
             money = 5,
@@ -576,15 +525,11 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
                 monster_type = "Fiend",
                 monster_archetypes = { ["EvilTwin"] = true, ["Kisikil"] = true, ["Lilla"] = true },
                 cannot_revive = true,
-                is_free = false,
             },
             chips = 80,
             mult = 20,
@@ -647,10 +592,8 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "LINK",
-                is_effect = true,
                 attribute = "LIGHT",
                 monster_type = "Fiend",
                 monster_archetypes = { ["EvilTwin"] = true, ["Kisikil"] = true },
@@ -663,11 +606,6 @@ SMODS.Joker({
                         }
                     }
                 },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
             },
             chips = 160,
             mult = 40,

@@ -23,16 +23,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "WATER",
                 monster_type = "Fish",
-                monster_archetypes = { ["Ghoti"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["Ghoti"] = true }
             },
             revives = 1
         },
@@ -75,17 +69,11 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 is_tuner = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "WATER",
                 monster_type = "Fish",
-                monster_archetypes = { ["Ghoti"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["Ghoti"] = true }
             },
             chips = 50
         },
@@ -122,17 +110,11 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 is_tuner = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "WATER",
                 monster_type = "Fish",
-                monster_archetypes = { ["Ghoti"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["Ghoti"] = true }
             },
             mult = 15
         },
@@ -169,17 +151,11 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 is_tuner = true,
-                summon_type = "NORMAL",
-                is_effect = true,
                 attribute = "WATER",
                 monster_type = "Fish",
-                monster_archetypes = { ["Ghoti"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["Ghoti"] = true }
             },
             revives = 1
         },
@@ -192,7 +168,6 @@ SMODS.Joker({
                     for i = 1, c.ability.extra.revives do
                         JoyousSpring.revive_pseudorandom(
                             {
-                                { is_main_deck = true, monster_archetypes = { "Ghoti" } },
                             },
                             pseudoseed("j_joy_fish_zep"),
                             true
@@ -222,16 +197,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "WATER",
                 monster_type = "Fish",
-                monster_archetypes = { ["Ghoti"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["Ghoti"] = true }
             },
             cards_to_create = 1
         },
@@ -282,16 +251,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "WATER",
                 monster_type = "Fish",
-                monster_archetypes = { ["Ghoti"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["Ghoti"] = true }
             },
             cards_to_create = 1,
             times = 3,
@@ -345,16 +308,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "WATER",
                 monster_type = "Fish",
-                monster_archetypes = { ["Ghoti"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["Ghoti"] = true }
             },
             revives = 1
         },
@@ -398,16 +355,10 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = true,
-                summon_type = "NORMAL",
-                is_effect = true,
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "WATER",
                 monster_type = "Fish",
-                monster_archetypes = { ["Ghoti"] = true },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
+                monster_archetypes = { ["Ghoti"] = true }
             },
             banishes = 1
         },
@@ -452,10 +403,8 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "SYNCHRO",
-                is_effect = true,
                 attribute = "WATER",
                 monster_type = "Fish",
                 monster_archetypes = { ["Ghoti"] = true },
@@ -467,12 +416,7 @@ SMODS.Joker({
                             { exclude_tuners = true, exclude_summon_types = { "XYZ", "LINK" } },
                         },
                     }
-                },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
+                }
             },
             chips = 5,
             cards_to_create = 1
@@ -524,10 +468,8 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "SYNCHRO",
-                is_effect = true,
                 attribute = "WATER",
                 monster_type = "Fish",
                 monster_archetypes = { ["Ghoti"] = true },
@@ -539,12 +481,7 @@ SMODS.Joker({
                             { rarity = 3,      exclude_tuners = true,                   exclude_summon_types = { "XYZ", "LINK" } },
                         },
                     }
-                },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
+                }
             },
             mult = 5,
         },
@@ -587,10 +524,8 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "SYNCHRO",
-                is_effect = true,
                 attribute = "WATER",
                 monster_type = "Fish",
                 monster_archetypes = { ["Ghoti"] = true },
@@ -602,12 +537,7 @@ SMODS.Joker({
                             { rarity = 3,      exclude_tuners = true,                   exclude_summon_types = { "XYZ", "LINK" } },
                         },
                     }
-                },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
+                }
             },
             xmult = 0.1,
         },
@@ -659,10 +589,8 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
-                is_main_deck = false,
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "SYNCHRO",
-                is_effect = true,
                 attribute = "WATER",
                 monster_type = "Fish",
                 monster_archetypes = { ["Ghoti"] = true },
@@ -675,12 +603,7 @@ SMODS.Joker({
                             { rarity = 3,      exclude_tuners = true, exclude_summon_types = { "XYZ", "LINK" } },
                         },
                     }
-                },
-                revived = false,
-                perma_debuffed = false,
-                is_free = false,
-                summoned = false,
-                summon_materials = {},
+                }
             },
         },
     },
