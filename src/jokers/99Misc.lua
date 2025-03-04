@@ -52,7 +52,7 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "LIGHT",
                 monster_type = "Machine",
                 monster_archetypes = {}
@@ -138,7 +138,7 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
+            joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "FIRE",
                 monster_type = "Fiend",
                 monster_archetypes = {}
@@ -179,7 +179,7 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
+            joyous_spring = JoyousSpring.init_joy_table {
                 is_pendulum = true,
                 attribute = "LIGHT",
                 monster_type = "Fiend",
@@ -269,7 +269,7 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "RITUAL",
                 attribute = "LIGHT",
                 monster_type = "Dragon",
@@ -343,7 +343,7 @@ SMODS.Joker({
 --set_sprites = JoyousSpring.set_back_sprite,
 --     config = {
 --         extra = {
---             joyous_spring = {
+--             joyous_spring = JoyousSpring.init_joy_table {
 --                 summon_type = "FUSION",
 --                 is_all_attributes = true,
 --                 is_all_materials = { "FUSION" },
@@ -385,7 +385,7 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "FUSION",
                 attribute = "DARK",
                 monster_type = "WingedBeast",
@@ -452,7 +452,7 @@ SMODS.Joker({
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
-            joyous_spring = {
+            joyous_spring = JoyousSpring.init_joy_table {
                 summon_type = "LINK",
                 attribute = "WIND",
                 monster_type = "Fairy",
@@ -525,7 +525,7 @@ SMODS.Joker({
     generate_ui = JoyousSpring.generate_info_ui,
     config = {
         extra = {
-            joyous_spring = {
+            joyous_spring = JoyousSpring.init_joy_table {
                 is_effect = false,
                 attribute = "EARTH",
                 monster_type = "Beast",
