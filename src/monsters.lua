@@ -1,5 +1,12 @@
 --- MONSTERS
 
+SMODS.Atlas({
+    key = "joy_Back",
+    path = "back.png",
+    px = 142,
+    py = 190
+})
+
 ---@alias summon_type
 ---|'"NORMAL"'
 ---|'"RITUAL"'

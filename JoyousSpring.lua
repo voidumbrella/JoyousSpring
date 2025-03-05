@@ -1,19 +1,5 @@
 JoyousSpring = {}
 
-SMODS.Atlas({
-    key = "modicon",
-    path = "icon.png",
-    px = 32,
-    py = 32
-})
-
-SMODS.Atlas({
-    key = "joy_Back",
-    path = "back.png",
-    px = 142,
-    py = 190
-})
-
 JoyousSpring.config = SMODS.current_mod.config
 
 local debug = SMODS.load_file("debug.lua")
