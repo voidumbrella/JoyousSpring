@@ -96,16 +96,18 @@ SMODS.Joker({
         end
     end,
     joy_apply_to_jokers_added = function(card)
-        if JoyousSpring.is_main_deck_monster(card) and card.config.center.key ~= "j_joy_boarder" then
+        if not card.debuff and JoyousSpring.is_main_deck_monster(card) and card.config.center.key ~= "j_joy_boarder" then
             SMODS.debuff_card(card, true, "j_joy_boarder")
         end
     end,
     joy_debuff_hand = function(joker, cards, hand, handname)
-        if joker.ability.extra.hands[handname] then
-            return true
-        else
-            joker.ability.extra.hands[handname] = true
-            return false
+        if not joker.debuff then
+            if joker.ability.extra.hands[handname] then
+                return true
+            else
+                joker.ability.extra.hands[handname] = true
+                return false
+            end
         end
     end,
     joker_display_def = function(JokerDisplay)
