@@ -91,6 +91,7 @@ SMODS.Atlas({
 ---@field is_all_attributes boolean|table?
 ---@field is_all_materials { RITUAL:boolean?, FUSION:boolean?, SYNCHRO:boolean?, XYZ:boolean?, LINK:boolean? }?
 ---@field summon_conditions summon_conditions[]?
+---@field summon_consumeable_conditions table?
 
 ---Initializes joyous_spring table in Jokers
 ---@param params joyous_spring
@@ -109,6 +110,7 @@ JoyousSpring.init_joy_table = function(params)
         is_all_attributes = params.is_all_attributes or false,
         is_all_materials = params.is_all_materials or {},
         summon_conditions = params.summon_conditions or {},
+        summon_consumeable_conditions = params.summon_consumeable_conditions or {},
         summoned = false,
         summon_materials = {},
         xyz_materials = 0,
