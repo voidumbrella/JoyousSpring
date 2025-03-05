@@ -679,7 +679,7 @@ return {
 				text = {
 					"You can {C:attention}tribute #1#{} {C:joy_normal}\"Generaider\"{}",
 					"and/or {C:joy_normal}Rock{} {C:attention}Joker{}",
-					"to banish a card in your consumable area",
+					"to {C:attention}banish{} a card in your consumable area",
 					"until {C:attention}Blind{} is selected",
 				},
 			},
@@ -2149,6 +2149,13 @@ return {
 			},
 			--#endregion
 			--#region Tooltips
+			joy_tooltip_related = {
+				name = "Related Cards",
+				text = {
+					"Press {C:attention}D{} to see",
+					"related cards",
+				},
+			},
 			joy_tooltip_transform = {
 				name = "Transform",
 				text = {
@@ -2160,7 +2167,8 @@ return {
 				name = "Revive",
 				text = {
 					"Create a card and remove it from the {C:attention}GY{}",
-					"Must have room and might have a random edition, unless specified",
+					"Must have room and might have",
+					"a random edition, unless specified",
 					"{s:0.9,C:inactive}({s:0.9,C:joy_spell}Extra Deck{} {s:0.9,C:inactive}and {s:0.9,C:joy_ritual}Ritual{} {s:0.9,C:attention}Jokers{} {s:0.9,C:inactive}that were not",
 					"{s:0.9,C:inactive}properly summoned can't be revived)",
 					"{s:0.9,C:inactive}(Revived Jokers have a sell value of 1)"
@@ -2171,6 +2179,62 @@ return {
 				text = {
 					"{C:joy_fusion}Fusion{}, {C:joy_synchro}Synchro{},",
 					"{C:joy_xyz}Xyz{} and {C:joy_link}Link{} {C:attention}Jokers{}"
+				},
+			},
+			joy_tooltip_main_deck_joker = {
+				name = "Main Deck Joker",
+				text = {
+					"{C:joy_normal}Normal{}, {C:joy_effect}Effect{},",
+					"and {C:joy_ritual}Ritual{} {C:attention}Jokers{}"
+				},
+			},
+			joy_tooltip_special = {
+				name = "Special Joker",
+				text = {
+					"{C:joy_ritual}Ritual{}, {C:joy_fusion}Fusion{}, {C:joy_synchro}Synchro{},",
+					"{C:joy_xyz}Xyz{} and {C:joy_link}Link{} {C:attention}Jokers{}"
+				},
+			},
+			joy_tooltip_pendulum_joker = {
+				name = "Pendulum Joker",
+				text = {
+					"Can be used as consumable",
+				},
+			},
+			joy_tooltip_banish = {
+				name = "Banish",
+				text = {
+					"Card temporarily disappears until specified time,",
+					"keeping only some effects active.",
+					"They can return even if you don't have room"
+				},
+			},
+			joy_tooltip_tribute = {
+				name = "Tribute",
+				text = {
+					"Destroy card to activate an ability",
+				},
+			},
+			joy_tooltip_material = {
+				name = "Material",
+				text = {
+					"Cards used for a summon",
+					"{C:joy_xyz}Xyz monsters{} start with a counter equal",
+					"to the number used",
+				},
+			},
+			joy_tooltip_detach = {
+				name = "Detach",
+				text = {
+					"Remove an Xyz material counter",
+					"to activate an ability",
+				},
+			},
+			joy_tooltip_token = {
+				name = "Token",
+				text = {
+					"{C:joy_normal}Monster{} card crated by abilities",
+					"It has no with no abilities of its own",
 				},
 			},
 			--#endregion
@@ -2299,6 +2363,7 @@ return {
 			k_joy_defeated = "Defeated!",
 			k_joy_banished = "Banished!",
 			k_joy_booster_group = "Monster Pack",
+			k_joy_related = "Related",
 			--#region Card types
 			k_joy_Aqua = "Aqua",
 			k_joy_Beast = "Beast",

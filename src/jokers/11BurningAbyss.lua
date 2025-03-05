@@ -28,6 +28,9 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.percent * 100 } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "BurningAbyss" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -68,6 +71,9 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult, card.ability.extra.extra_mult, card.ability.extra.mult + (card.ability.extra.extra_mult * JoyousSpring.count_materials_in_graveyard({ { monster_type = "Fiend" } })) } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "BurningAbyss" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -78,7 +84,7 @@ SMODS.Joker({
                 monster_archetypes = { ["BurningAbyss"] = true }
             },
             mult = 50,
-            extra_mult = 10
+            extra_mult = 3
         },
     },
     calculate = function(self, card, context)
@@ -107,6 +113,10 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips, card.ability.extra.mills } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_type = "Fiend" } },                  name = "Sends" },
+        { properties = { { monster_archetypes = { "BurningAbyss" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -153,6 +163,9 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.h_size } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "BurningAbyss" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -193,8 +206,14 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 4,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_revive" }
+        end
         return { vars = { card.ability.extra.xmult, card.ability.extra.revives } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "BurningAbyss" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -238,8 +257,14 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 4,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_special" }
+        end
         return { vars = { card.ability.extra.chips, card.ability.extra.creates } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "BurningAbyss" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -290,8 +315,14 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 4,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_banish" }
+        end
         return { vars = { card.ability.extra.banish } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "BurningAbyss" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -331,8 +362,14 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 4,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_special" }
+        end
         return { vars = { card.ability.extra.mult, card.ability.extra.creates } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "BurningAbyss" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -383,8 +420,14 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 3,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_revive" }
+        end
         return { vars = { card.ability.extra.revives } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "BurningAbyss" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -421,6 +464,9 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.adds } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "BurningAbyss" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -460,8 +506,15 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 3,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_main_deck_joker" }
+        end
         return { vars = { card.ability.extra.creates } }
     end,
+    joy_desc_cards = {
+        { properties = { { is_main_deck = true, monster_type = "Fiend" } }, name = "Creates" },
+        { properties = { { monster_archetypes = { "BurningAbyss" } } },     name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -507,6 +560,9 @@ SMODS.Joker({
             (card.ability.extra.xmult * JoyousSpring.count_materials_in_graveyard({ { monster_type = "Fiend" } })) }
         }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "BurningAbyss" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -552,6 +608,9 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mills } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "BurningAbyss" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -596,10 +655,24 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 8,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_material" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_detach" }
+        end
         return { vars = { card.ability.extra.mult, card.ability.extra.mult * JoyousSpring.get_graveyard_count(), card.ability.extra.detach, card.ability.extra.mills } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "BurningAbyss" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
+    update = function(self, card, dt)
+        if card.area and card.area == G.jokers then
+            if not card.children.xyz_materials and card.ability.extra.joyous_spring.xyz_materials then
+                card.children.xyz_materials = JoyousSpring.create_UIBox_xyz_materials(card)
+            end
+        end
+    end,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
@@ -651,6 +724,9 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.hands, card.ability.extra.discards } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "BurningAbyss" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -707,6 +783,9 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.h_size } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "BurningAbyss" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -745,10 +824,26 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 10,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_material" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_detach" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_revive" }
+        end
         return { vars = { card.ability.extra.xmult, 1 + (card.ability.extra.xmult * JoyousSpring.get_graveyard_count()), card.ability.extra.detach, card.ability.extra.revives } }
     end,
+    joy_desc_cards = {
+        { "j_joy_ba_dante",                                             "j_joy_ba_pilgrim", name = "Adds" },
+        { properties = { { monster_archetypes = { "BurningAbyss" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
+    update = function(self, card, dt)
+        if card.area and card.area == G.jokers then
+            if not card.children.xyz_materials and card.ability.extra.joyous_spring.xyz_materials then
+                card.children.xyz_materials = JoyousSpring.create_UIBox_xyz_materials(card)
+            end
+        end
+    end,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {

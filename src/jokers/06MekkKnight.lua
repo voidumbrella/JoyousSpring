@@ -16,6 +16,9 @@ SMODS.Joker({
     blueprint_compat = false,
     eternal_compat = true,
     cost = 1,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -46,6 +49,9 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult, JoyousSpring.get_joker_column(card) } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -84,6 +90,9 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return { vars = { JoyousSpring.get_joker_column(card) } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -122,6 +131,9 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.money, JoyousSpring.get_joker_column(card) } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -160,6 +172,9 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return { vars = { JoyousSpring.get_joker_column(card) } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -199,6 +214,9 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips, JoyousSpring.get_joker_column(card) } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -251,6 +269,9 @@ SMODS.Joker({
             },
         }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -300,8 +321,15 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 8,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_banish" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_main_deck_joker" }
+        end
         return { vars = { card.ability.extra.cards_to_create } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -354,6 +382,9 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.xmult, JoyousSpring.get_joker_column(card) - 1, JoyousSpring.get_joker_column(card) + 1 } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -404,8 +435,14 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 7,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_main_deck_joker" }
+        end
         return { vars = { card.ability.extra.cards_to_create } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -477,6 +514,9 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.blinds, #JoyousSpring.get_materials(card) } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {

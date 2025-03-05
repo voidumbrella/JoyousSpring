@@ -22,6 +22,9 @@ SMODS.Joker({
         end
         return { vars = { card.ability.extra.base_xmult, card.ability.extra.xmult } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -88,6 +91,9 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -132,8 +138,14 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 2,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_extra_deck_joker" }
+        end
         return { vars = { card.ability.extra.cards_to_create } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -172,8 +184,14 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 9,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_extra_deck_joker" }
+        end
         return { vars = { card.ability.extra.cards_to_create } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -231,8 +249,14 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 3,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_extra_deck_joker" }
+        end
         return { vars = { card.ability.extra.chips, card.ability.extra.chips * JoyousSpring.count_materials_owned({ { is_extra_deck = true, is_debuffed = true } }) } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -298,8 +322,15 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 2,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_revive" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_extra_deck_joker" }
+        end
         return { vars = { card.ability.extra.revives } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -343,8 +374,14 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 6,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_extra_deck_joker" }
+        end
         return { vars = { card.ability.extra.duplicates } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -389,6 +426,9 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 10,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_extra_deck_joker" }
+        end
         return {
             vars = {
                 card.ability.extra.base_h_size,
@@ -400,6 +440,9 @@ SMODS.Joker({
 
         }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -462,6 +505,9 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 10,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_extra_deck_joker" }
+        end
         local debuffed_ed_count = JoyousSpring.count_materials_owned({ { is_extra_deck = true, is_debuffed = true } })
         if next(SMODS.find_card("j_joy_dogma_relic")) then
             debuffed_ed_count = debuffed_ed_count +
@@ -469,6 +515,9 @@ SMODS.Joker({
         end
         return { vars = { card.ability.extra.mult, debuffed_ed_count * card.ability.extra.mult } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {

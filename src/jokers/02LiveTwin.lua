@@ -19,6 +19,10 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips, card.ability.extra.cards_to_create } }
     end,
+    joy_desc_cards = {
+        { "j_joy_ltwin_kisikil",                                                                             name = "Creates" },
+        { properties = { { monster_archetypes = { "LiveTwin" } }, { monster_archetypes = { "EvilTwin" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -80,6 +84,10 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult, card.ability.extra.cards_to_create } }
     end,
+    joy_desc_cards = {
+        { "j_joy_ltwin_lilla",                                                                               name = "Creates" },
+        { properties = { { monster_archetypes = { "LiveTwin" } }, { monster_archetypes = { "EvilTwin" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -153,6 +161,9 @@ SMODS.Joker({
             discards = 1
         },
     },
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "LiveTwin" } }, { monster_archetypes = { "EvilTwin" } } }, name = "Archetype" },
+    },
     add_to_deck = function(self, card, from_debuff)
         if not JoyousSpring.is_perma_debuffed(card) then
             G.GAME.round_resets.discards = G.GAME.round_resets.discards + card.ability.extra.discards
@@ -185,6 +196,9 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.hands } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "LiveTwin" } }, { monster_archetypes = { "EvilTwin" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -229,6 +243,9 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.h_size } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "LiveTwin" } }, { monster_archetypes = { "EvilTwin" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -269,8 +286,14 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 4,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_main_deck_joker" }
+        end
         return { vars = { card.ability.extra.mult, card.ability.extra.h_size, card.ability.extra.mill } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "LiveTwin" } }, { monster_archetypes = { "EvilTwin" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -351,6 +374,10 @@ SMODS.Joker({
         end
         return { vars = { card.ability.extra.mult, card.ability.extra.h_size, card.ability.extra.revives } }
     end,
+    joy_desc_cards = {
+        { "j_joy_etwin_lilla",                                                                               name = "Revives" },
+        { properties = { { monster_archetypes = { "LiveTwin" } }, { monster_archetypes = { "EvilTwin" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -433,6 +460,10 @@ SMODS.Joker({
         end
         return { vars = { card.ability.extra.chips, card.ability.extra.money, card.ability.extra.revives } }
     end,
+    joy_desc_cards = {
+        { "j_joy_etwin_kisikil",                                                                             name = "Revives" },
+        { properties = { { monster_archetypes = { "LiveTwin" } }, { monster_archetypes = { "EvilTwin" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -521,6 +552,9 @@ SMODS.Joker({
             }
         }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "LiveTwin" } }, { monster_archetypes = { "EvilTwin" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -588,6 +622,10 @@ SMODS.Joker({
         end
         return { vars = { card.ability.extra.chips, card.ability.extra.mult, card.ability.extra.revives } }
     end,
+    joy_desc_cards = {
+        { "j_joy_etwin_kisikil",                                                                             "j_joy_etwin_lilla", name = "Revives" },
+        { properties = { { monster_archetypes = { "LiveTwin" } }, { monster_archetypes = { "EvilTwin" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {

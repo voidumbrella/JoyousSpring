@@ -17,12 +17,12 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 10,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card and not card.debuff then
-            info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_runick_fountain
-        end
-
         return { vars = { card.ability.extra.extra_slots, card.ability.extra.cards_to_create } }
     end,
+    joy_desc_cards = {
+        { "j_joy_runick_fountain",                                name = "Creates" },
+        { properties = { { monster_archetypes = { "Runick" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -72,6 +72,9 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.extra_slots, card.ability.extra.base_chips, card.ability.extra.chips } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Runick" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -130,11 +133,12 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 10,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card and not card.debuff then
-            info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_runick_fountain
-        end
         return { vars = { card.ability.extra.fields_to_create, card.ability.extra.cards_to_create } }
     end,
+    joy_desc_cards = {
+        { "j_joy_runick_fountain",                                name = "Creates" },
+        { properties = { { monster_archetypes = { "Runick" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -191,6 +195,9 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.playing_cards_to_create, card.ability.extra.cards_to_create } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Runick" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -242,8 +249,14 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 10,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_banish" }
+        end
         return { vars = { card.ability.extra.cards_to_create } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Runick" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -292,6 +305,9 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.cards_to_destroy } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Runick" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {

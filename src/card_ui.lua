@@ -262,6 +262,9 @@ JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, spe
             summon_desc_nodes.name = localize('k_joy_summon_conditions')
             localize { type = "joy_summon_conditions", set = self.set, key = self.key, nodes = summon_desc_nodes }
         end
+        if self.joy_desc_cards then
+            table.insert(info_queue, 1, { set = "Other", key = "joy_tooltip_related" })
+        end
     end
 end
 
@@ -337,4 +340,126 @@ JoyousSpring.create_UIBox_xyz_materials = function(card)
             drag = { can = true }
         }
     }
+end
+
+SMODS.Keybind({
+    key_pressed = "d",
+    action = function(self)
+        local selected = G and G.CONTROLLER and
+            (G.CONTROLLER.focused.target or G.CONTROLLER.hovering.target)
+
+        if not selected or not JoyousSpring.is_monster_card(selected) then
+            return
+        end
+
+        JoyousSpring.create_overlay_see_related(selected)
+    end
+})
+
+---Creates overlay to see cards mentioned in the text
+---@param card table|Card|string
+JoyousSpring.create_overlay_see_related = function(card)
+    if not card then return end
+    local card_center
+    if type(card) == "string" then
+        card_center = G.P_CENTERS[card]
+    else
+        card_center = card.config.center
+    end
+
+    if not card_center or not card_center.joy_desc_cards or not type(card_center.joy_desc_cards) == "table" then return end
+
+    JoyousSpring.related_area = {}
+    local tabs = {}
+
+    for i, area_cards in ipairs(card_center.joy_desc_cards) do
+        local area_tab = {
+            label = area_cards.name or localize("k_joy_related"),
+            chosen = i == 1,
+            tab_definition_function = function(t)
+                t.area_table[#t.area_table + 1] = CardArea(
+                    0,
+                    0,
+                    G.CARD_W * 8.95,
+                    G.CARD_H,
+                    {
+                        card_limit = 10,
+                        type = 'title',
+                        highlight_limit = 0,
+                    }
+                )
+                for _, key in ipairs(t.area_cards) do
+                    local added_card = SMODS.create_card({
+                        key = key,
+                        no_edition = true,
+                        area = t.area_table[#t.area_table]
+                    })
+                    t.area_table[#t.area_table]:emplace(added_card)
+                end
+                if t.area_cards.properties then
+                    local keys_to_add = JoyousSpring.get_materials_in_collection(t.area_cards.properties)
+                    for _, key in ipairs(keys_to_add) do
+                        local added_card = SMODS.create_card({
+                            key = key,
+                            no_edition = true,
+                            area = t.area_table[#t.area_table]
+                        })
+                        t.area_table[#t.area_table]:emplace(added_card)
+                    end
+                end
+
+                return {
+                    n = G.UIT.ROOT,
+                    config = {
+                        align = "cm",
+                        padding = 0.05,
+                        colour = G.C.CLEAR,
+                    },
+                    nodes = {
+                        {
+                            n = G.UIT.R,
+                            config = {
+                                align = "cm",
+                                r = 0.1,
+                                padding = 1,
+                                minh = 5,
+                                minw = 7,
+                                colour = G.C.BLACK
+                            },
+                            nodes = {
+                                {
+                                    n = G.UIT.O,
+                                    config = {
+                                        object = t.area_table[#t.area_table]
+                                    }
+                                },
+                            }
+                        }
+                    }
+                }
+            end,
+            tab_definition_function_args = { area_table = JoyousSpring.related_area, area_cards = area_cards }
+        }
+        table.insert(tabs, area_tab)
+    end
+
+    if #tabs > 0 then
+        G.FUNCS.overlay_menu({
+            definition = create_UIBox_generic_options({
+                back_colour = G.C.JOY.TRAP,
+                contents = {
+                    {
+                        n = G.UIT.R,
+                        nodes = {
+                            create_tabs({
+                                snap_to_nav = true,
+                                colour = G.C.JOY.TRAP,
+                                tabs = tabs
+                            }),
+                        }
+                    },
+                }
+            })
+        })
+    end
 end

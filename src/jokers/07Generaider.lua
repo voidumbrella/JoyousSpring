@@ -17,11 +17,12 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 8,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card and not card.debuff then
-            info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_generaider_boss_stage
-        end
         return {}
     end,
+    joy_desc_cards = {
+        { "j_joy_generaider_boss_stage",                              name = "Creates" },
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -57,8 +58,14 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 5,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_revive" }
+        end
         return { vars = { card.ability.extra.revives } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -105,8 +112,14 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 1,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_tribute" }
+        end
         return { vars = { card.ability.extra.tributes } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -162,8 +175,14 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 1,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_tribute" }
+        end
         return { vars = { card.ability.extra.tributes } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -231,6 +250,15 @@ SMODS.Joker({
     blueprint_compat = false,
     eternal_compat = true,
     cost = 1,
+    loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_tribute" }
+        end
+        return {}
+    end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -296,8 +324,15 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 1,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_tribute" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_banish" }
+        end
         return { vars = { card.ability.extra.tributes } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -357,8 +392,14 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 1,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_tribute" }
+        end
         return { vars = { card.ability.extra.tributes, card.ability.extra.cards_to_create } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -425,8 +466,14 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 1,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_tribute" }
+        end
         return { vars = { card.ability.extra.tributes, card.ability.extra.xmult } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -497,8 +544,14 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 1,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_tribute" }
+        end
         return { vars = { card.ability.extra.tributes, card.ability.extra.hands, card.ability.extra.discards } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -558,8 +611,15 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 1,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_tribute" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_revive" }
+        end
         return { vars = { card.ability.extra.tributes, card.ability.extra.revives } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -624,8 +684,15 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 8,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_material" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_detach" }
+        end
         return { vars = { card.ability.extra.mult, card.ability.extra.joyous_spring.xyz_materials * card.ability.extra.mult, card.ability.extra.detach, card.ability.extra.hsize } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     update = function(self, card, dt)
@@ -682,11 +749,16 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 12,
     loc_vars = function(self, info_queue, card)
-        if not card.fake_card and not card.debuff then
-            info_queue[#info_queue + 1] = G.P_CENTERS.j_joy_generaider_jormungandr
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_material" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_detach" }
         end
         return { vars = { card.ability.extra.detach } }
     end,
+    joy_desc_cards = {
+        { "j_joy_generaider_jormungandr",                             name = "Creates" },
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -742,8 +814,15 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 15,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_token" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_tribute" }
+        end
         return { vars = { card.ability.extra.tributes, card.ability.extra.cards_to_create } }
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
