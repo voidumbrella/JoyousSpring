@@ -2120,14 +2120,14 @@ return {
 				},
 			},
 			p_joy_mega_monster_pack = {
-				name = "Astral Pack",
+				name = "Duelist Pack",
 				text = {
 					"Choose {C:attention}#1#{} of up to",
 					"{C:attention}#2#{} {C:joy_normal}Monster{} {C:joker}Joker{} cards",
 				},
 			},
 			p_joy_extra_pack = {
-				name = "Duelist Pack",
+				name = "Astral Pack",
 				text = {
 					"Choose {C:attention}#1#{} of up to",
 					"{C:attention}#2#{} {C:joy_spell}Special Summon{} {C:joker}Joker{} cards",
@@ -2152,7 +2152,7 @@ return {
 			joy_tooltip_related = {
 				name = "Related Cards",
 				text = {
-					"Press {C:attention}D{} to see",
+					"Press {C:attention}d{} to see",
 					"related cards",
 				},
 			},
