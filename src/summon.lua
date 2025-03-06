@@ -879,7 +879,7 @@ end
 
 JoyousSpring.create_overlay_select_summon_materials = function(card, card_list)
     local material_combos = JoyousSpring.get_all_summon_material_combos(card, card_list)
-    --print(material_combos)
+
     if material_combos then
         local material_list = SMODS.merge_lists(material_combos)
 
