@@ -354,6 +354,9 @@ SMODS.Joker({
             card.ability.extra.tarots_used = {}
         end
     end,
+    in_pool = function(self, args)
+        return args and args.source and args.source ~= "jud" and args.source ~= "sou" or false
+    end,
 })
 
 JoyousSpring.collection_pool[#JoyousSpring.collection_pool + 1] = {

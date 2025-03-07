@@ -878,7 +878,10 @@ SMODS.Joker({
         local tokens = JoyousSpring.get_materials_owned({ { key = "j_joy_token", monster_archetypes = { "Generaider" } } })
         return (#G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit and next(tokens)) and
             true or false
-    end
+    end,
+    in_pool = function(self, args)
+        return args and args.source and args.source ~= "jud" and args.source ~= "sou" or false
+    end,
 })
 
 JoyousSpring.token_pool["generaider"] = {
