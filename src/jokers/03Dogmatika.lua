@@ -162,7 +162,8 @@ SMODS.Joker({
         if card.facing ~= 'back' then
             if context.setting_blind and context.main_eval then
                 for i = 1, card.ability.extra.cards_to_create do
-                    local key_to_add = pseudorandom_element(JoyousSpring.lists.extra_deck,
+                    local key_to_add = pseudorandom_element(
+                        JoyousSpring.get_materials_in_collection({ { is_extra_deck = true } }),
                         pseudoseed("j_joy_dogma_maximus"))
                     if key_to_add then
                         JoyousSpring.create_perma_debuffed_card(key_to_add, "Dogmatika", { negative = true })

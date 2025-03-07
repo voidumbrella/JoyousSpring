@@ -96,7 +96,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if card.facing ~= 'back' then
             if context.setting_blind and context.main_eval then
-                local choices = JoyousSpring.lists.uncommon
+                local choices = JoyousSpring.get_materials_in_collection({ { rarity = 2 } })
 
                 for i = 1, card.ability.extra.mill do
                     JoyousSpring.send_to_graveyard(pseudorandom_element(choices, pseudoseed("j_joy_spright_jet")))
