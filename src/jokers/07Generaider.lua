@@ -880,7 +880,7 @@ SMODS.Joker({
             true or false
     end,
     in_pool = function(self, args)
-        return args and args.source and args.source ~= "jud" and args.source ~= "sou" or false
+        return args and args.source and args.source == "sho" or false
     end,
 })
 
