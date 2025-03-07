@@ -1248,7 +1248,9 @@ return {
 					"{C:inactive}(Currently{} {C:mult}+#2#{} {C:inactive}Mult){}",
 					" ",
 					"{C:joy_xyz}Detach{} {C:attention}#3#{}: Send {C:attention}#4#{}",
-					"random cards to the {C:attention}GY{}"
+					"random cards to the {C:attention}GY{}",
+					" ",
+					"{C:joy_normal}\"Burning Abyss\"{} don't get destroyed by their own effects"
 				},
 				joy_summon_conditions = {
 					"{C:attention}2{} {C:blue}Common{} {C:attention}Jokers{}",
@@ -1292,6 +1294,8 @@ return {
 					"{C:joy_xyz}\"Dante, Traveler of the Burning Abyss\"{}",
 					"and {C:joy_fusion}\"Dante, Pilgrim of the Burning Abyss\"{}",
 					"to the {C:joy_spell}Extra Deck{} {C:inactive}(Must have room){}",
+					" ",
+					"{C:joy_normal}\"Burning Abyss\"{} don't get destroyed by their own effects"
 				},
 				joy_summon_conditions = {
 					"{C:attention}2{} {C:red}Rare{} {C:attention}Jokers{}",
@@ -2018,7 +2022,11 @@ return {
 				text = {
 					"Sell this card to disable the current",
 					"{C:attention}Boss Blind{} and add it to",
-					"the next shop"
+					"the next shop",
+					" ",
+					"Gains {X:mult,C:white}X#1#{} for each time",
+					"this ability was used this run",
+					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}"
 				},
 				joy_summon_conditions = {
 					"{C:attention}2 Jokers{}",
@@ -2102,6 +2110,14 @@ return {
 					"to the next shop",
 				},
 			},
+			tag_joy_monster = {
+				name = "Monster Tag",
+				text = {
+					"Adds",
+					"{V:1}#1#{}",
+					"to the shop"
+				},
+			},
 		},
 		Other = {
 			--#region Boosters
@@ -2148,6 +2164,15 @@ return {
 				},
 			},
 			--#endregion
+			joy_credits = {
+				name = " ",
+				text = {
+					"{C:joy_mod}Booster Art:{} IcyEthics",
+					" ",
+					"{C:joy_mod}Special Thanks{} to the folks in",
+					"the Balatro Discord <3"
+				}
+			},
 			--#region Tooltips
 			joy_tooltip_related = {
 				name = "Related Cards",
@@ -2364,6 +2389,10 @@ return {
 			k_joy_banished = "Banished!",
 			k_joy_booster_group = "Monster Pack",
 			k_joy_related = "Related",
+			k_joy_monster_tag_default = "a Monster Joker",
+			k_joy_glossary = "Basic Glossary",
+			k_joy_summon_glosary = "Summon Glossary",
+			k_joy_credits = "Credits",
 			--#region Card types
 			k_joy_Aqua = "Aqua",
 			k_joy_Beast = "Beast",

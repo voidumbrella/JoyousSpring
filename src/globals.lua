@@ -29,6 +29,7 @@ function loc_colour(_c, _default)
     if not G.ARGS.LOC_COLOURS then
         loc_colour_ref()
     end
+    G.ARGS.LOC_COLOURS.joy_mod = G.C.JOY.MOD
     G.ARGS.LOC_COLOURS.joy_normal = G.C.JOY.NORMAL
     G.ARGS.LOC_COLOURS.joy_effect = G.C.JOY.EFFECT
     G.ARGS.LOC_COLOURS.joy_spell = G.C.JOY.SPELL

@@ -180,6 +180,13 @@ JoyousSpring.empty_graveyard = function()
     end
 end
 
+JoyousSpring.add_monster_tag = function(card_key)
+    local tag = Tag('tag_joy_monster')
+    tag.ability.monster = card_key
+    G.GAME.joy_last_monster_tag = card_key
+    add_tag(tag)
+end
+
 --- Talisman compat
 to_big = to_big or function(num)
     return num

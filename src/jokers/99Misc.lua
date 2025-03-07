@@ -268,11 +268,11 @@ SMODS.Joker({
     pos = { x = 1, y = 0 },
     rarity = 2,
     discovered = true,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
     cost = 10,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { card.ability.extra.xmult, 1 + (card.ability.extra.xmult * (G.GAME.joy_sauravis_uses or 0)) } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -293,6 +293,7 @@ SMODS.Joker({
                     }
                 }
             },
+            xmult = 2
         },
     },
     calculate = function(self, card, context)
@@ -302,8 +303,14 @@ SMODS.Joker({
                     card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil,
                         { message = localize('ph_boss_disabled') })
                     G.GAME.blind:disable()
-                    table.insert(JoyousSpring.cards_to_create, { key = "j_joy_sauravis" })
+                    JoyousSpring.add_monster_tag("j_joy_sauravis")
+                    G.GAME.joy_sauravis_uses = (G.GAME.joy_sauravis_uses or 0) + 1
                 end
+            end
+            if context.joker_main then
+                return {
+                    xmult = 1 + (card.ability.extra.xmult * (G.GAME.joy_sauravis_uses or 0) > 0)
+                }
             end
         end
     end,
