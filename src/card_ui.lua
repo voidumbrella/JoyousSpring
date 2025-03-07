@@ -403,14 +403,14 @@ JoyousSpring.create_UIBox_xyz_materials = function(card)
             },
             nodes = {
                 {
-                    n = G.UIT.R, -- node type
+                    n = G.UIT.R,
                     config = {
                         align = 'cm',
                         colour = G.C.CLEAR
                     },
                     nodes = {
                         {
-                            n = G.UIT.T, -- node type
+                            n = G.UIT.T,
                             config = {
                                 text = 'X',
                                 scale = 0.45,
@@ -418,7 +418,7 @@ JoyousSpring.create_UIBox_xyz_materials = function(card)
                             },
                         },
                         {
-                            n = G.UIT.T, -- node type
+                            n = G.UIT.T,
                             config = {
                                 ref_table = card.ability.extra.joyous_spring,
                                 ref_value = "xyz_materials",
