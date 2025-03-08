@@ -833,6 +833,7 @@ SMODS.Joker({
             },
             tributes = 2,
             cards_to_create = 1,
+            used = true,
         },
     },
     calculate = function(self, card, context)
@@ -853,6 +854,7 @@ SMODS.Joker({
             for _, selected_card in ipairs(context.joy_selection) do
                 selected_card:start_dissolve()
             end
+            card.ability.extra.used = true
             local choices = {
                 "j_joy_generaider_harr",
                 "j_joy_generaider_nidhogg",
@@ -873,10 +875,13 @@ SMODS.Joker({
                 end
             end
         end
+        if context.end_of_round and context.main_eval then
+            card.ability.extra.used = false
+        end
     end,
     joy_can_activate = function(card)
         local tokens = JoyousSpring.get_materials_owned({ { key = "j_joy_token", monster_archetypes = { "Generaider" } } })
-        return (#G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit and next(tokens)) and
+        return (not card.ability.extra.used and #G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit and next(tokens)) and
             true or false
     end,
     in_pool = function(self, args)
