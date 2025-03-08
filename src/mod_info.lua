@@ -45,13 +45,61 @@ SMODS.current_mod.custom_ui = function(modNodes)
         }))
     end
 
-    table.insert(modNodes, {
+    modNodes[#modNodes + 1] = {
         n = G.UIT.R,
         config = { align = "cm", padding = 0.07, no_fill = true },
         nodes = {
             { n = G.UIT.O, config = { object = G.joy_desc_area } }
         }
-    })
+    }
+
+    modNodes[#modNodes + 1] = {
+        n = G.UIT.R,
+        config = {
+            padding = 0.2,
+            align = "cm",
+        },
+        nodes = {
+            {
+                n = G.UIT.C,
+                config = {
+                    padding = 0.2,
+                    align = "cm",
+                },
+                nodes = {
+                    UIBox_button({
+                        colour = G.C.JOY.LINK,
+                        minw = 3.85,
+                        button = "joy_discord",
+                        label = { localize('k_joy_discord') }
+                    })
+                }
+            },
+            {
+                n = G.UIT.C,
+                config = {
+                    padding = 0.2,
+                    align = "cm",
+                },
+                nodes = {
+                    UIBox_button({
+                        colour = G.C.JOY.TRAP,
+                        minw = 3.85,
+                        button = "joy_github",
+                        label = { localize('k_joy_github') }
+                    })
+                }
+            },
+        }
+    }
+end
+
+function G.FUNCS.joy_discord(e)
+    love.system.openURL("https://discord.gg/Ac5FKpQCRV")
+end
+
+function G.FUNCS.joy_github(e)
+    love.system.openURL("https://github.com/nh6574/JoyousSpring")
 end
 
 SMODS.current_mod.extra_tabs = function()

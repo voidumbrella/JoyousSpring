@@ -964,7 +964,7 @@ G.FUNCS.joy_exit_select_material_menu = function(e)
     if not G.OVERLAY_MENU then return end
 
     local card = e.config.ref_table
-    local summon_type = card.ability.extra.joyous_spring.summon_type or "Fusion"
+    local summon_type = card.ability.extra.joyous_spring.summon_type or "FUSION"
 
     if card and JoyousSpring.summon_material_area and next(JoyousSpring.summon_material_area.highlighted) then
         local material_list = {}

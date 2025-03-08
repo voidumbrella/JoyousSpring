@@ -2428,6 +2428,8 @@ return {
 			k_joy_glossary = "Basic Glossary",
 			k_joy_summon_glosary = "Summon Glossary",
 			k_joy_credits = "Credits",
+			k_joy_discord = "Discord",
+			k_joy_github = "Github",
 			--#region Card types
 			k_joy_Aqua = "Aqua",
 			k_joy_Beast = "Beast",
