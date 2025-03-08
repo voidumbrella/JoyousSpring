@@ -12,6 +12,8 @@ Make sure to check the Glossary and the Config in Main Menu > Mods > JoyousSprin
 
 Has compatibility with [JokerDisplay](https://github.com/nh6574/JokerDisplay) version >1.8.2
 
+Check out the [Discord](https://discord.gg/Ac5FKpQCRV) for troubleshooting and chatting about the mod <3
+
 ## Known Issues and future ideas
 
 - Still very much WIP
