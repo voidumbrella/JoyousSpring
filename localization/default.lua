@@ -1364,7 +1364,7 @@ return {
 					"You can {C:attention}tribute{} this and another {C:attention}Joker{} to",
 					"{C:attention}flip #1#{} random cards in hand",
 					"face-down (and shuffle them) then create {C:attention}#2#",
-					"random Tags"
+					"random Tags if you tributed a {C:joy_normal}Fiend"
 				}
 			},
 			j_joy_lab_ariane = {
@@ -1383,7 +1383,7 @@ return {
 					"{C:attention}+#1#{} hand size next {C:attention}Blind{} for each",
 					"playing card {C:attention}flipped{} this round",
 					" ",
-					"Add an {C:blue}Common{} {C:joy_normal}\"Labrynth\"{} to the next shop",
+					"Add a {C:blue}Common{} {C:joy_normal}\"Labrynth\"{} to the next shop",
 					"if {C:attention}#2#{} or more cards are flipped this round"
 				}
 			},
@@ -1394,7 +1394,7 @@ return {
 					"playing card {C:attention}flipped{}",
 					"{C:inactive}(Currently{} {C:chips}+#2# {C:inactive}Chips){}",
 					" ",
-					"Add an {C:red}Rare{} {C:joy_normal}\"Labrynth\"{} to the next shop",
+					"Add a {C:red}Rare{} {C:joy_normal}\"Labrynth\"{} to the next shop",
 					"if {C:attention}#3#{} or more cards are flipped this round",
 					" ",
 					"Free if you own a {C:joy_normal}\"Labrynth\"{}"

@@ -79,6 +79,17 @@ end
 
 # Field Spells
 
+# Fix Field Spells giving extra joker slots
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if self.edition and self.edition.card_limit then"
+position = 'at'
+match_indent = true
+payload = '''
+if self.edition and self.edition.card_limit and (not JoyousSpring or not JoyousSpring.is_field_spell(self)) then
+'''
+
 # Change other_joker key
 [[patches]]
 [patches.pattern]
