@@ -1341,44 +1341,112 @@ return {
 			--#endregion
 			--#region Labrynth
 			j_joy_lab_clock = {
-				name = "Labrynth Cooclock",
-				text = { "TBD" }
+				name = "{C:joy_effect}Labrynth Cooclock",
+				text = {
+					"You can {C:attention}tribute{} this card to",
+					"{C:attention}flip #1#{} random card in hand",
+					"face-down (and shuffle them) then {C:attention}revive #2#",
+					"{C:blue}Common{} {C:joy_normal}\"Labrynth\"{} if possible"
+				}
 			},
 			j_joy_lab_stovie = {
-				name = "Labrynth Stovie Torbie",
-				text = { "TBD" }
+				name = "{C:joy_effect}Labrynth Stovie Torbie",
+				text = {
+					"You can {C:attention}tribute{} this and another {C:attention}Joker{} to",
+					"{C:attention}flip #1#{} random cards in hand",
+					"face-down (and shuffle them) then gain {C:money}+$#2#",
+					"if you tributed a {C:joy_normal}Fiend"
+				}
 			},
 			j_joy_lab_changdra = {
-				name = "Labrynth Chandraglier",
-				text = { "TBD" }
+				name = "{C:joy_effect}Labrynth Chandraglier",
+				text = {
+					"You can {C:attention}tribute{} this and another {C:attention}Joker{} to",
+					"{C:attention}flip #1#{} random cards in hand",
+					"face-down (and shuffle them) then create {C:attention}#2#",
+					"random Tags"
+				}
 			},
 			j_joy_lab_ariane = {
-				name = "Ariane the Labrynth Servant",
-				text = { "TBD" }
+				name = "{C:joy_effect}Ariane the Labrynth Servant",
+				text = {
+					"{C:attention}+#1#{} hand size next {C:attention}Blind{} for each",
+					"playing card {C:attention}flipped{} this round",
+					" ",
+					"Add an {C:green}Uncommon{} {C:joy_normal}\"Labrynth\"{} to the next shop",
+					"if {C:attention}#2#{} or more cards are flipped this round"
+				}
 			},
 			j_joy_lab_arianna = {
-				name = "Arianna the Labrynth Servant",
-				text = { "TBD" }
+				name = "{C:joy_effect}Arianna the Labrynth Servant",
+				text = {
+					"{C:attention}+#1#{} hand size next {C:attention}Blind{} for each",
+					"playing card {C:attention}flipped{} this round",
+					" ",
+					"Add an {C:blue}Common{} {C:joy_normal}\"Labrynth\"{} to the next shop",
+					"if {C:attention}#2#{} or more cards are flipped this round"
+				}
 			},
 			j_joy_lab_arias = {
-				name = "Arias the Labrynth Butler",
-				text = { "TBD" }
+				name = "{C:joy_effect}Arias the Labrynth Butler",
+				text = {
+					"Gains {C:chips}+#1#{} Chips for each",
+					"playing card {C:attention}flipped{}",
+					"{C:inactive}(Currently{} {C:chips}+#2# {C:inactive}Chips){}",
+					" ",
+					"Add an {C:red}Rare{} {C:joy_normal}\"Labrynth\"{} to the next shop",
+					"if {C:attention}#3#{} or more cards are flipped this round",
+					" ",
+					"Free if you own a {C:joy_normal}\"Labrynth\"{}"
+				}
 			},
 			j_joy_lab_archfiend = {
-				name = "Labrynth Archfiend",
-				text = { "TBD" }
+				name = "{C:joy_effect}Labrynth Archfiend",
+				text = {
+					"{C:mult}+#1#{} Mult for each",
+					"{C:joy_normal}Fiend{} in the {C:attention}GY{}",
+					"{C:inactive}(Currently{} {C:mult}+#2# {C:inactive}Mult){}",
+					" ",
+					"When a playing card is {C:attention}flipped{},",
+					"{C:attention}flip{} a random card in hand face-down (and shuffle them)"
+
+				}
 			},
 			j_joy_lab_lovely = {
-				name = "Lovely Labrynth of the Silver Castle",
-				text = { "TBD" }
+				name = "{C:joy_effect}Lovely Labrynth of the Silver Castle",
+				text = {
+					"{C:green}#1# in #2#{} chances of drawing cards face-down",
+					"Chances increase for each {C:joy_normal}Fiend{} owned",
+					" ",
+					"Gains {C:mult}+#3#{} Mult for each",
+					"card {C:attention}flipped{} face-down",
+					"{C:inactive}(Currently{} {C:mult}+#4# {C:inactive}Mult){}",
+					" ",
+					"Non-{C:joy_trap}Trap{} {C:joy_normal}Fiends{} can use their",
+					"non-activated abilities while face-down",
+					"{s:0.9,C:inactive}(Including this card)"
+				}
 			},
 			j_joy_lab_lady = {
-				name = "Lady Labrynth of the Silver Castle",
-				text = { "TBD" }
+				name = "{C:joy_effect}Lady Labrynth of the Silver Castle",
+				text = {
+					"Each time a card is {C:attention}flipped{} each",
+					"{C:joy_normal}\"Labrynth\"{} give {X:mult,C:white}X#1#{} more Mult",
+					"{C:inactive}(Currently{} {X:mult,C:white}+#2#{} {C:inactive}Mult){}",
+					" ",
+					"Non-{C:joy_trap}Trap{} {C:joy_normal}Fiends{} can use their",
+					"non-activated abilities while face-down",
+					"{s:0.9,C:inactive}(Including this card)"
+				}
 			},
 			j_joy_lab_labyrinth = {
-				name = "Labrynth Labyrinth",
-				text = { "TBD" }
+				name = "{C:joy_spell}Labrynth Labyrinth",
+				text = {
+					"{C:money}+$#1#{} for each {C:attention}Joker flipped{}",
+					" ",
+					"{C:green}#2# in #3#{} chance to {C:attention}flip #4#",
+					"random card in hand face-down when a playing card is {C:attention}flipped"
+				}
 			},
 			--#endregion
 			--#region Subterror
