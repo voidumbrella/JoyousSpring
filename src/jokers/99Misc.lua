@@ -309,7 +309,7 @@ SMODS.Joker({
             end
             if context.joker_main then
                 return {
-                    xmult = 1 + (card.ability.extra.xmult * (G.GAME.joy_sauravis_uses or 0) > 0)
+                    xmult = 1 + (card.ability.extra.xmult * (G.GAME.joy_sauravis_uses or 0))
                 }
             end
         end
