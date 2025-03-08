@@ -277,8 +277,15 @@ return {
 				}
 			},
 			j_joy_ltwin_channel = {
-				name = "Live☆Twin Channel",
-				text = { "TBD" }
+				name = "{C:joy_spell}Live☆Twin Channel",
+				text = {
+					"During a {C:attention}Blind{}, you can {C:attention}tribute #1#{}",
+					"{C:joy_normal}\"Ki-sikil\"{} or {C:joy_normal}\"Lil-la\"{} {C:joy_link}Link{} to",
+					"{C:attention}double{} current chips scored",
+					" ",
+					"{C:attention}Revives #2#{} {C:joy_normal}\"Ki-sikil\"{} or {C:joy_normal}\"Lil-la\"{}",
+					"at the end of the shop"
+				}
 			},
 			--#endregion
 			--#region Dogmatika
@@ -366,8 +373,16 @@ return {
 				}
 			},
 			j_joy_dogma_nation = {
-				name = "Dogmatika Nation",
-				text = { "TBD" }
+				name = "{C:joy_spell}Dogmatika Nation",
+				text = {
+					"{C:money}+$#1#{} for each debuffed {C:joy_spell}Extra Deck{} {C:attention}Joker{}",
+					"at end of round",
+					"{C:inactive}(Currently{} {C:money}+$#2#{C:inactive}){}",
+					" ",
+					"You can {C:attention}tribute #3#{} {C:joy_spell}Extra Deck{} {C:attention}Jokers{}",
+					"to create {C:attention}#4#{} {C:joy_normal}\"Dogmatika\"{}",
+					"{C:inactive}(Must have room){}",
+				}
 			},
 			--#endregion
 			--#region Ghost Girls
@@ -624,8 +639,16 @@ return {
 				}
 			},
 			j_joy_mekkleg_scars = {
-				name = "World Legacy Scars",
-				text = { "TBD" }
+				name = "{C:joy_spell}World Legacy Scars",
+				text = {
+					"Each {C:joy_normal}\"Mekk-Knight\"{} gives {C:mult}+#1#{} Mult",
+					" ",
+					"During a {C:attention}Blind{}, you can {C:attention}tribute #2#{}",
+					"{C:joy_normal}\"Mekk-Knight\"{} to gain {C:blue}+#3#{} Hand",
+					" ",
+					"Sell this card when there are #4# {C:joy_normal}\"Mekk-Knight\"{} in the {C:attention}GY",
+					"with different names to win the current {C:attention}Blind{}"
+				}
 			},
 			--#endregion
 			--#region Generaider
@@ -824,6 +847,10 @@ return {
 					"This card and #1# card in your consumable",
 					"area {C:attention}banish{} at the end of round",
 					"until {C:attention}Blind{} is selected",
+					" ",
+					"Creates {C:joy_spell}\"The Most Distant, Deepest Depths\"{}",
+					"after returning from {C:attention}banishment #2#{} times",
+					"{C:inactive}(Must have room) (#3#/#2#){}",
 				},
 			},
 			j_joy_fish_arionpos = {
@@ -890,8 +917,11 @@ return {
 				}
 			},
 			j_joy_fish_depths = {
-				name = "The Most Distant, Deepest Depths",
-				text = { "TBD" }
+				name = "{C:joy_spell}The Most Distant, Deepest Depths",
+				text = {
+					"{C:money}+$#1#{} each time a card",
+					"is {C:attention}banished",
+				}
 			},
 			--#endregion
 			--#region PSY-Frame
@@ -1017,8 +1047,13 @@ return {
 				}
 			},
 			j_joy_psy_circuit = {
-				name = "PSY-Frame Circuit",
-				text = { "TBD" }
+				name = "{C:joy_spell}PSY-Frame Circuit",
+				text = {
+					"{C:money}+$#1#{} each time a {C:joy_synchro}Synchro{} is summoned",
+					" ",
+					"{C:joy_normal}Psychic{} {C:joy_synchro}Synchros{}",
+					"become {C:dark_edition}Negative{} when summoned"
+				}
 			},
 			--#endregion
 			--#region Runick

@@ -1,7 +1,14 @@
 --- GHOTI
 SMODS.Atlas({
-    key = "joy_Ghoti",
+    key = "Ghoti",
     path = "08Ghoti.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "Ghoti02",
+    path = "08Ghoti02.png",
     px = 71,
     py = 95
 })
@@ -398,9 +405,10 @@ SMODS.Joker({
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_banish" }
         end
-        return { vars = { card.ability.extra.banishes } }
+        return { vars = { card.ability.extra.banishes, card.ability.extra.times, card.ability.extra.returned } }
     end,
     joy_desc_cards = {
+        { "j_joy_fish_depths",                                   name = "Adds" },
         { properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
@@ -412,7 +420,9 @@ SMODS.Joker({
                 monster_type = "Fish",
                 monster_archetypes = { ["Ghoti"] = true }
             },
-            banishes = 1
+            banishes = 1,
+            times = 6,
+            returned = 0
         },
     },
     calculate = function(self, card, context)
@@ -431,6 +441,17 @@ SMODS.Joker({
                             JoyousSpring.banish(to_banish, "blind_selected")
                         end
                         table.remove(choices, pos)
+                    end
+                end
+            end
+            if not context.blueprint_card and not context.retrigger_joker and
+                context.joy_returned and context.joy_returned_card == card then
+                card.ability.extra.returned = card.ability.extra.returned + 1
+                if card.ability.extra.returned >= card.ability.extra.times then
+                    card.ability.extra.returned = 0
+
+                    if #JoyousSpring.field_spell_area.cards < JoyousSpring.field_spell_area.config.card_limit then
+                        JoyousSpring.add_to_extra_deck("j_joy_fish_depths")
                     end
                 end
             end
@@ -698,6 +719,48 @@ SMODS.Joker({
                 end
             end
         end
+    end,
+})
+
+-- Ghoti02
+SMODS.Joker({
+    key = "fish_depths",
+    atlas = 'Ghoti02',
+    pos = { x = 0, y = 0 },
+    rarity = 3,
+    discovered = true,
+    blueprint_compat = false,
+    eternal_compat = true,
+    cost = 10,
+    loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_banish" }
+        end
+
+        return { vars = { card.ability.extra.money } }
+    end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
+    },
+    generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
+    config = {
+        extra = {
+            joyous_spring = JoyousSpring.init_joy_table {
+                is_field_spell = true,
+            },
+            money = 0.5,
+        },
+    },
+    calculate = function(self, card, context)
+        if context.joy_banished then
+            return {
+                dollars = card.ability.extra.money
+            }
+        end
+    end,
+    in_pool = function(self, args)
+        return args and args.source and args.source == "sho" or false
     end,
 })
 

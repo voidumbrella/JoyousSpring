@@ -95,9 +95,9 @@ SMODS.Joker({
             end
         end
     end,
-    joy_apply_to_jokers_added = function(card)
-        if not card.debuff and JoyousSpring.is_main_deck_monster(card) and card.config.center.key ~= "j_joy_boarder" then
-            SMODS.debuff_card(card, true, "j_joy_boarder")
+    joy_apply_to_jokers_added = function(card, added_card)
+        if not card.debuff and JoyousSpring.is_main_deck_monster(added_card) and added_card.config.center.key ~= "j_joy_boarder" then
+            SMODS.debuff_card(added_card, true, "j_joy_boarder")
         end
     end,
     joy_debuff_hand = function(joker, cards, hand, handname)

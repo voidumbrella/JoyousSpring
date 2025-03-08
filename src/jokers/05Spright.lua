@@ -445,14 +445,14 @@ SMODS.Joker({
             SMODS.debuff_card(joker, false, "j_joy_spright_sprind")
         end
     end,
-    joy_apply_to_jokers_added = function(card)
+    joy_apply_to_jokers_added = function(card, added_card)
         if not card.debuff then
-            if card.config.center.rarity == 2 then
-                if not card.edition then
-                    card:set_edition({ negative = true })
+            if added_card.config.center.rarity == 2 then
+                if not added_card.edition then
+                    added_card:set_edition({ negative = true })
                 end
             else
-                SMODS.debuff_card(card, true, "j_joy_spright_sprind")
+                SMODS.debuff_card(added_card, true, "j_joy_spright_sprind")
             end
         end
     end

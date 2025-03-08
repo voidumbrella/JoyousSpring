@@ -219,7 +219,12 @@ function CardArea:emplace(card, location, stay_flipped)
     if self == G.jokers then
         for _, joker in ipairs(G.jokers.cards) do
             if joker.config.center.joy_apply_to_jokers_added then
-                joker.config.center.joy_apply_to_jokers_added(card)
+                joker.config.center.joy_apply_to_jokers_added(joker, card)
+            end
+        end
+        for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
+            if joker.config.center.joy_apply_to_jokers_added then
+                joker.config.center.joy_apply_to_jokers_added(joker, card)
             end
         end
     end

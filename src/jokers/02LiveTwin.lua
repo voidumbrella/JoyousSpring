@@ -6,6 +6,13 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = "LiveTwin02",
+    path = "02LiveTwin02.png",
+    px = 71,
+    py = 95
+})
+
 -- Live☆Twin Lil-la
 SMODS.Joker({
     key = "ltwin_lilla",
@@ -695,6 +702,79 @@ SMODS.Joker({
             },
         }
     end
+})
+
+-- Live☆Twin Channel
+SMODS.Joker({
+    key = "ltwin_channel",
+    atlas = 'LiveTwin02',
+    pos = { x = 0, y = 0 },
+    rarity = 3,
+    discovered = true,
+    blueprint_compat = false,
+    eternal_compat = true,
+    cost = 10,
+    loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_tribute" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_revive" }
+        end
+        return { vars = { card.ability.extra.tributes, card.ability.extra.revives } }
+    end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "LiveTwin" } }, { monster_archetypes = { "EvilTwin" } } }, name = "Archetype" },
+    },
+    generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
+    config = {
+        extra = {
+            joyous_spring = JoyousSpring.init_joy_table {
+                is_field_spell = true,
+                monster_archetypes = { ["LiveTwin"] = true },
+            },
+            tributes = 2,
+            revives = 1,
+        },
+    },
+    calculate = function(self, card, context)
+        if context.joy_activate_effect and context.joy_activated_card == card then
+            local materials = JoyousSpring.get_materials_owned({ { summon_type = "LINK", monster_archetypes = { "Kisikil" } }, { summon_type = "LINK", monster_archetypes = { "Lilla" } } })
+            if next(materials) then
+                JoyousSpring.create_overlay_effect_selection(card, materials, card.ability.extra.tributes,
+                    card.ability.extra.tributes)
+            end
+        end
+        if context.joy_exit_effect_selection and context.joy_card == card and
+            #context.joy_selection == card.ability.extra.tributes and G.GAME.blind.in_blind then
+            for _, selected_card in ipairs(context.joy_selection) do
+                selected_card:start_dissolve()
+            end
+
+            G.GAME.chips = G.GAME.chips * 2
+            if (G.GAME.chips >= G.GAME.blind.chips) then
+                G.STATE = G.STATES.HAND_PLAYED
+                G.STATE_COMPLETE = true
+                end_round()
+            end
+        end
+        if context.ending_shop and context.main_eval then
+            for i = 1, card.ability.extra.revives do
+                JoyousSpring.revive_pseudorandom(
+                    { { monster_archetypes = { "Kisikil" } }, { monster_archetypes = { "Lilla" } } },
+                    pseudoseed("j_joy_ltwin_channel"),
+                    true
+                )
+            end
+        end
+    end,
+    joy_can_activate = function(card)
+        local materials = JoyousSpring.get_materials_owned({ { summon_type = "LINK", monster_archetypes = { "Kisikil" } }, { summon_type = "LINK", monster_archetypes = { "Lilla" } } })
+        return (G.GAME.blind.in_blind and next(materials)) and
+            true or false
+    end,
+    in_pool = function(self, args)
+        return args and args.source and args.source == "sho" or false
+    end,
 })
 
 JoyousSpring.collection_pool[#JoyousSpring.collection_pool + 1] = {

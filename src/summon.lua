@@ -143,6 +143,7 @@ JoyousSpring.perform_summon = function(card, card_list, summon_type)
         end
         joker:start_dissolve()
     end
+    card.ability.extra.joyous_spring.summoned = true
     if card.area == JoyousSpring.extra_deck_area then
         JoyousSpring.extra_deck_area:remove_card(card)
         card:add_to_deck()
@@ -152,7 +153,6 @@ JoyousSpring.perform_summon = function(card, card_list, summon_type)
     else
         summon_from_shop(card)
     end
-    card.ability.extra.joyous_spring.summoned = true
     card:set_cost()
 
     if summon_type == "XYZ" then

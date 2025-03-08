@@ -1,7 +1,15 @@
 --- DOGMATIKA
 SMODS.Atlas({
-    key = "joy_Dogmatika",
+    key = "Dogmatika",
     path = "03Dogmatika.png",
+    px = 71,
+    py = 95
+})
+
+--- DOGMATIKA
+SMODS.Atlas({
+    key = "Dogmatika02",
+    path = "03Dogmatika02.png",
     px = 71,
     py = 95
 })
@@ -581,6 +589,94 @@ SMODS.Joker({
             end
         }
     end
+})
+
+-- Dogmatika Nation
+SMODS.Joker({
+    key = "dogma_nation",
+    atlas = 'Dogmatika02',
+    pos = { x = 0, y = 0 },
+    rarity = 1,
+    discovered = true,
+    blueprint_compat = false,
+    eternal_compat = true,
+    cost = 6,
+    loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_tribute" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_extra_deck_joker" }
+        end
+        local debuffed_ed_count = JoyousSpring.count_materials_owned({ { is_extra_deck = true, is_debuffed = true } })
+        if next(SMODS.find_card("j_joy_dogma_relic")) then
+            debuffed_ed_count = debuffed_ed_count +
+                JoyousSpring.count_materials_in_graveyard({ { is_extra_deck = true } })
+        end
+        return { vars = { card.ability.extra.money, card.ability.extra.money * debuffed_ed_count, card.ability.extra.tributes, card.ability.extra.creates } }
+    end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = "Archetype" },
+    },
+    generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
+    config = {
+        extra = {
+            joyous_spring = JoyousSpring.init_joy_table {
+                is_field_spell = true,
+                monster_archetypes = { ["Dogmatika"] = true },
+            },
+            money = 1,
+            tributes = 4,
+            creates = 1,
+        },
+    },
+    calculate = function(self, card, context)
+        if context.joy_activate_effect and context.joy_activated_card == card then
+            local materials = JoyousSpring.get_materials_owned({ { is_extra_deck = true } })
+            if next(materials) then
+                JoyousSpring.create_overlay_effect_selection(card, materials, card.ability.extra.tributes,
+                    card.ability.extra.tributes)
+            end
+        end
+        if context.joy_exit_effect_selection and context.joy_card == card and
+            #context.joy_selection == card.ability.extra.tributes then
+            local tribute_amount = card.ability.extra.tributes
+            for _, joker in ipairs(context.joy_selection) do
+                tribute_amount = tribute_amount - ((joker.edition and joker.edition.negative) and 1 or 0)
+            end
+
+            if #G.jokers.cards + G.GAME.joker_buffer - tribute_amount < G.jokers.config.card_limit then
+                for _, selected_card in ipairs(context.joy_selection) do
+                    selected_card:start_dissolve()
+                end
+                local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Dogmatika" } } })
+                for i = 1, card.ability.extra.creates do
+                    local not_owned = JoyousSpring.get_not_owned(choices, true)
+                    if #G.jokers.cards + G.GAME.joker_buffer - tribute_amount < G.jokers.config.card_limit then
+                        SMODS.add_card({
+                            key = pseudorandom_element(not_owned, pseudoseed("j_joy_dogma_nation")) or
+                                "j_joy_dogma_ecclesia"
+                        })
+                    end
+                end
+            end
+        end
+    end,
+    calc_dollar_bonus = function(self, card)
+        local debuffed_ed_count = JoyousSpring.count_materials_owned({ { is_extra_deck = true, is_debuffed = true } })
+        if next(SMODS.find_card("j_joy_dogma_relic")) then
+            debuffed_ed_count = debuffed_ed_count +
+                JoyousSpring.count_materials_in_graveyard({ { is_extra_deck = true } })
+        end
+        return card.ability.extra.money * debuffed_ed_count
+    end,
+    joy_can_activate = function(card)
+        local materials = JoyousSpring.get_materials_owned({ { is_extra_deck = true } })
+        return (#G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit and next(materials)) and
+            true or false
+    end,
+    in_pool = function(self, args)
+        return args and args.source and args.source == "sho" or false
+    end,
 })
 
 JoyousSpring.collection_pool[#JoyousSpring.collection_pool + 1] = {

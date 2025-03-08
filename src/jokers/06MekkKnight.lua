@@ -1,11 +1,16 @@
 --- MEKK-KNIGHT
 SMODS.Atlas({
-    key = "joy_MekkKnight",
+    key = "MekkKnight",
     path = "06MekkKnight.png",
     px = 71,
     py = 95
 })
-
+SMODS.Atlas({
+    key = "MekkKnight02",
+    path = "06MekkKnight02.png",
+    px = 71,
+    py = 95
+})
 -- Mekk-Knight Avram
 SMODS.Joker({
     key = "mekk_avram",
@@ -557,7 +562,80 @@ SMODS.Joker({
     end,
 })
 
+-- World Legacy Scars
+SMODS.Joker({
+    key = "mekkleg_scars",
+    atlas = 'MekkKnight02',
+    pos = { x = 0, y = 0 },
+    rarity = 1,
+    discovered = true,
+    blueprint_compat = false,
+    eternal_compat = true,
+    cost = 6,
+    loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_tribute" }
+        end
+
+        return { vars = { card.ability.extra.mult, card.ability.extra.tributes, card.ability.extra.hands, card.ability.extra.mekk_count } }
+    end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
+    },
+    generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
+    config = {
+        extra = {
+            joyous_spring = JoyousSpring.init_joy_table {
+                is_field_spell = true,
+                monster_archetypes = { ["WorldLegacy"] = true },
+            },
+            mult = 50,
+            tributes = 1,
+            hands = 1,
+            mekk_count = 8,
+        },
+    },
+    calculate = function(self, card, context)
+        if context.joy_activate_effect and context.joy_activated_card == card then
+            local materials = JoyousSpring.get_materials_owned({ { monster_archetypes = { "MekkKnight" } } })
+            if next(materials) then
+                JoyousSpring.create_overlay_effect_selection(card, materials, card.ability.extra.tributes,
+                    card.ability.extra.tributes)
+            end
+        end
+        if context.joy_exit_effect_selection and context.joy_card == card and
+            #context.joy_selection == card.ability.extra.tributes and G.GAME.blind.in_blind then
+            for _, selected_card in ipairs(context.joy_selection) do
+                selected_card:start_dissolve()
+            end
+            ease_hands_played(card.ability.extra.hands)
+        end
+        if context.other_joker and JoyousSpring.is_monster_archetype(context.other_joker, "MekkKnight") then
+            return {
+                mult = card.ability.extra.mult,
+            }
+        end
+        if context.selling_self and G.GAME.blind.in_blind and JoyousSpring.count_materials_in_graveyard({ { monster_archetypes = { "MekkKnight" } } }, false, true) >= card.ability.extra.mekk_count then
+            G.GAME.chips = G.GAME.blind.chips
+            G.STATE = G.STATES.HAND_PLAYED
+            G.STATE_COMPLETE = true
+            end_round()
+            return {
+                message = localize("k_joy_defeated")
+            }
+        end
+    end,
+    joy_can_activate = function(card)
+        local materials = JoyousSpring.get_materials_owned({ { monster_archetypes = { "MekkKnight" } } })
+        return (G.GAME.blind.in_blind and next(materials)) and true or false
+    end,
+    in_pool = function(self, args)
+        return args and args.source and args.source == "sho" or false
+    end,
+})
+
 JoyousSpring.collection_pool[#JoyousSpring.collection_pool + 1] = {
-    keys = { "mekk", "mekkcrus" },
+    keys = { "mekk", "mekkcrus", "mekkleg" },
     label = "k_joy_archetype_mekk"
 }

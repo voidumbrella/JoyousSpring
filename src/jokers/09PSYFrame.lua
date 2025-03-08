@@ -1,11 +1,16 @@
 --- PSY-FRAME
 SMODS.Atlas({
-    key = "joy_PSYFrame",
+    key = "PSYFrame",
     path = "09PSYFrame.png",
     px = 71,
     py = 95
 })
-
+SMODS.Atlas({
+    key = "PSYFrame02",
+    path = "09PSYFrame02.png",
+    px = 71,
+    py = 95
+})
 -- PSY-Frame Driver
 SMODS.Joker({
     key = "psy_driver",
@@ -626,6 +631,55 @@ SMODS.Joker({
         end
     end,
 })
+
+-- PSY-Frame Circuit
+SMODS.Joker({
+    key = "psy_circuit",
+    atlas = 'PSYFrame02',
+    pos = { x = 0, y = 0 },
+    rarity = 1,
+    discovered = true,
+    blueprint_compat = false,
+    eternal_compat = true,
+    cost = 6,
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.money } }
+    end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "PSYFrame" } } }, name = "Archetype" },
+    },
+    generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
+    config = {
+        extra = {
+            joyous_spring = JoyousSpring.init_joy_table {
+                is_field_spell = true,
+                monster_archetypes = { ["PSYFrame"] = true },
+            },
+            money = 10,
+        },
+    },
+    calculate = function(self, card, context)
+        if context.joy_summon and JoyousSpring.is_summon_type(context.joy_card, "SYNCHRO") then
+            return {
+                dollars = card.ability.extra.money
+            }
+        end
+    end,
+    joy_apply_to_jokers_added = function(card, added_card)
+        if not card.debuff then
+            if JoyousSpring.is_monster_type(added_card, "Psychic") and JoyousSpring.is_summon_type(added_card, "SYNCHRO") and JoyousSpring.is_summoned(added_card) then
+                if not added_card.edition then
+                    added_card:set_edition({ negative = true })
+                end
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return args and args.source and args.source == "sho" or false
+    end,
+})
+
 
 JoyousSpring.collection_pool[#JoyousSpring.collection_pool + 1] = {
     keys = { "psy" },
