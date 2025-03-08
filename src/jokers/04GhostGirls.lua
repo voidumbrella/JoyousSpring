@@ -301,6 +301,7 @@ SMODS.Joker({
                 if card.ability.extra.consumable_count > 0 then
                     card.ability.extra.consumable_count = 0
                 else
+                    JoyousSpring.defeated_by = card.config.center.key
                     G.STATE = G.STATES.GAME_OVER
                     G.STATE_COMPLETE = false
                 end

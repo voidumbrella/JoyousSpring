@@ -70,3 +70,42 @@ if G.GAME.joy_create_card and #G.GAME.joy_create_card > 0 then
     return joy_forced_card
 end
 '''
+
+# Game Over text (stolen from LobCorp <3)
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "local label_scale = 0.5"
+position = "before"
+payload = '''
+if score == 'defeated_by' and JoyousSpring and JoyousSpring.defeated_by then
+    local center = G.P_CENTERS[JoyousSpring.defeated_by]
+    local text = localize{type = 'name_text', key = JoyousSpring.defeated_by, set = "Joker"}
+    local name_color = "joy_normal"
+    if string.len(text) > 2 and string.sub(text, string.len(text) - 1, string.len(text)) == "{}" then
+        text = string.sub(text, 1, string.len(text) - 2)
+    end
+    if string.sub(text, 1, 3) == "{C:" then
+        local _, _, color, real_name = string.find(text, "{C:(.*)}(.*)")
+        text = real_name
+        name_color = color or name_color
+    end
+    local sprite = Sprite(0, 0, 1.4*(71/95), 1.4, G.ASSET_ATLAS[center.atlas], center.pos)
+    JoyousSpring.defeated_by = nil
+    sprite:define_draw_steps({
+        {shader = 'dissolve', shadow_height = 0.05},
+        {shader = 'dissolve'}
+    })
+
+    score_tab[1].nodes[1].config.object:remove()
+    score_tab[2].nodes[1].config.object:remove()
+    score_tab = {
+        {n=G.UIT.R, config={align = "cm", minh = 0.6}, nodes={
+            {n=G.UIT.O, config={object = DynaText({string = text, colours = {G.ARGS.LOC_COLOURS[name_color]},shadow = true, float = true , scale = 0.35})}}
+        }},
+        {n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes={
+            {n=G.UIT.O, config={object = sprite}}
+        }},
+    }
+end'''
+match_indent = true
