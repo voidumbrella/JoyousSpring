@@ -158,7 +158,7 @@ end
 
 JoyousSpring.is_extra_deck_monster = function(card)
     return JoyousSpring.is_monster_card(card) and
-        not card.ability.extra.joyous_spring.is_main_deck
+        not card.ability.extra.joyous_spring.is_main_deck and not card.ability.extra.joyous_spring.is_field_spell
 end
 
 JoyousSpring.is_summon_type = function(card, summon_type)
@@ -532,7 +532,7 @@ JoyousSpring.is_material_center = function(card_key, properties)
         end
     end
     if properties.is_extra_deck or properties.exclude_main_deck then
-        if monster_card_properties.is_main_deck then
+        if monster_card_properties.is_main_deck or monster_card_properties.is_field_spell then
             return false
         end
     end
