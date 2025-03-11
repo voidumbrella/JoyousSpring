@@ -1387,7 +1387,7 @@ return {
 					"{C:attention}+#1#{} hand size next {C:attention}Blind{} for each",
 					"playing card {C:attention}flipped{} this round",
 					" ",
-					"Add an {C:blue}Common{} {C:joy_normal}\"Labrynth\"{} to the next shop",
+					"Add a {C:blue}Common{} {C:joy_normal}\"Labrynth\"{} to the next shop",
 					"if {C:attention}#2#{} or more cards are flipped this round"
 				}
 			},
@@ -1398,7 +1398,7 @@ return {
 					"playing card {C:attention}flipped{}",
 					"{C:inactive}(Currently{} {C:chips}+#2# {C:inactive}Chips){}",
 					" ",
-					"Add an {C:red}Rare{} {C:joy_normal}\"Labrynth\"{} to the next shop",
+					"Add a {C:red}Rare{} {C:joy_normal}\"Labrynth\"{} to the next shop",
 					"if {C:attention}#3#{} or more cards are flipped this round",
 					" ",
 					"Free if you own a {C:joy_normal}\"Labrynth\"{}"
