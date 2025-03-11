@@ -1345,8 +1345,9 @@ return {
 				text = {
 					"You can {C:attention}tribute{} this card to",
 					"{C:attention}flip #1#{} random card in hand",
-					"face-down (and shuffle them) then {C:attention}revive #2#",
-					"{C:blue}Common{} {C:joy_normal}\"Labrynth\"{} if possible"
+					"face-down (and shuffle them) and it permanently",
+					"gains {C:mult}+#2#{} Mult when scored then",
+					"{C:attention}revive #3# {C:blue}Common{} {C:joy_normal}\"Labrynth\"{} if possible"
 				}
 			},
 			j_joy_lab_stovie = {
@@ -1354,8 +1355,9 @@ return {
 				text = {
 					"You can {C:attention}tribute{} this and another {C:attention}Joker{} to",
 					"{C:attention}flip #1#{} random cards in hand",
-					"face-down (and shuffle them) then gain {C:money}+$#2#",
-					"if you tributed a {C:joy_normal}Fiend"
+					"face-down (and shuffle them) and it permanently",
+					"gains {C:chips}+#2#{} Chips when scored then",
+					"gain {C:money}+$#3#{} if you tributed a {C:joy_normal}Fiend"
 				}
 			},
 			j_joy_lab_changdra = {
@@ -1363,8 +1365,10 @@ return {
 				text = {
 					"You can {C:attention}tribute{} this and another {C:attention}Joker{} to",
 					"{C:attention}flip #1#{} random cards in hand",
-					"face-down (and shuffle them) then create {C:attention}#2#",
-					"random Tags"
+					"face-down (and shuffle them) and it permanently",
+					"gains {C:money}+$#2#{} when scored then",
+					"create {C:attention}#3#{} random Tags if you",
+					"tributed a {C:joy_normal}Fiend"
 				}
 			},
 			j_joy_lab_ariane = {
@@ -1444,8 +1448,8 @@ return {
 				text = {
 					"{C:money}+$#1#{} for each {C:attention}Joker flipped{}",
 					" ",
-					"{C:green}#2# in #3#{} chance to {C:attention}flip #4#",
-					"random card in hand face-down when a playing card is {C:attention}flipped"
+					"{C:green}#2# in #3#{} chance to {C:attention}flip #4# random card in hand face-down",
+					"(and shuffle them) when a playing card is {C:attention}flipped"
 				}
 			},
 			--#endregion

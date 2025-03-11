@@ -231,6 +231,10 @@ function CardArea:emplace(card, location, stay_flipped)
     cardarea_emplace_ref(self, card, location, stay_flipped)
 end
 
+JoyousSpring.stay_flipped = function(card)
+    return false
+end
+
 --#endregion
 
 --#region UI
