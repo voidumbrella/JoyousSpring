@@ -243,8 +243,26 @@ function CardArea:emplace(card, location, stay_flipped)
     cardarea_emplace_ref(self, card, location, stay_flipped)
 end
 
-JoyousSpring.stay_flipped = function(card)
-    return false
+JoyousSpring.stay_flipped = function(card, stay_flipped)
+    local keep_flipped = stay_flipped or false
+    if G.jokers then
+        for _, joker in ipairs(G.jokers.cards) do
+            if joker.config.center.joy_stay_flipped then
+                keep_flipped = joker.config.center.joy_stay_flipped(card)
+            end
+        end
+    end
+    if JoyousSpring.field_spell_area then
+        for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
+            if joker.config.center.joy_stay_flipped then
+                keep_flipped = joker.config.center.joy_stay_flipped(card)
+            end
+        end
+    end
+    if keep_flipped then
+        SMODS.calculate_context({ joy_card_flipped = card })
+    end
+    return keep_flipped
 end
 
 --#endregion

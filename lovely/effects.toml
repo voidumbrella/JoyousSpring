@@ -109,3 +109,16 @@ if score == 'defeated_by' and JoyousSpring and JoyousSpring.defeated_by then
     }
 end'''
 match_indent = true
+
+# Flip cards drawn
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = "local stay_flipped = G.GAME and G.GAME.blind and G.GAME.blind:stay_flipped(self, card)"
+position = 'after'
+match_indent = true
+payload = '''
+if self == G.hand then
+    stay_flipped = JoyousSpring.stay_flipped(card)
+end
+'''
