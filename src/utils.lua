@@ -173,6 +173,7 @@ JoyousSpring.get_not_owned = function(keys, count_debuffed)
     return not_owned
 end
 
+---Empties the graveyard
 JoyousSpring.empty_graveyard = function()
     for _, t in pairs(JoyousSpring.graveyard) do
         t.count = 0
@@ -180,11 +181,32 @@ JoyousSpring.empty_graveyard = function()
     end
 end
 
+---Adds a tag that creates a joker with *card_key* to the shop
+---@param card_key string
 JoyousSpring.add_monster_tag = function(card_key)
     local tag = Tag('tag_joy_monster')
     tag.ability.monster = card_key
     G.GAME.joy_last_monster_tag = card_key
     add_tag(tag)
+end
+
+---Flips a random card in *card_list*
+---@param card_list table|Card[]
+---@param facing? 'front'|'back' If card has to be facing a direction for it to be flipped
+---@param seed? string
+---@return table|Card|nil
+JoyousSpring.flip_random_card = function(card_list, facing, seed)
+    local facing_cards = {}
+    for j, card in ipairs(card_list) do
+        if not facing or card.facing == facing then
+            facing_cards[#facing_cards + 1] = card
+        end
+    end
+    local pick = pseudorandom_element(facing_cards, pseudoseed(seed or "JoyousSpring"))
+    if pick then
+        pick:flip()
+    end
+    return pick
 end
 
 --- Talisman compat
