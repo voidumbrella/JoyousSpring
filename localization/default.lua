@@ -895,6 +895,7 @@ return {
 					" ",
 					"{C:attention}Revives{} as many different {C:joy_normal}Fish{}",
 					"{C:attention}Jokers{} as possible when summoned",
+					"{s:0.9,C:inactive}(Except its materials)",
 					" ",
 					"This card {C:attention}banishes{} at the end of round",
 					"until {C:attention}Blind{} is selected",
