@@ -117,7 +117,7 @@ JoyousSpring.init_joy_table = function(params)
         revived = false,
         perma_debuffed = false,
         is_free = false,
-        cannot_revive = false,
+        cannot_revive = params.cannot_revive or false,
     } or {
         is_field_spell = true,
         monster_archetypes = params.monster_archetypes or {},
