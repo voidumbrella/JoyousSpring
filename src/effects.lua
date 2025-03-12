@@ -189,6 +189,11 @@ JoyousSpring.debuff_hand = function(cards, hand, handname)
             return true
         end
     end
+    for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
+        if joker.config.center.joy_debuff_hand and joker.config.center.joy_debuff_hand(joker, cards, hand, handname) then
+            return true
+        end
+    end
     return false
 end
 
@@ -208,6 +213,13 @@ function create_card_for_shop(area)
         for _, joker in ipairs(G.jokers.cards) do
             if joker.config.center.joy_create_card_for_shop then
                 joker.config.center.joy_create_card_for_shop(card, area)
+            end
+        end
+        if JoyousSpring.field_spell_area then
+            for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
+                if joker.config.center.joy_create_card_for_shop then
+                    joker.config.center.joy_create_card_for_shop(card, area)
+                end
             end
         end
     end
