@@ -59,7 +59,7 @@ JoyousSpring.create_sell_and_use_buttons = function(card, args)
             }
         }
     end
-    if args.detach then
+    if args.detach and card.facing ~= 'back' then
         detach = {
             n = G.UIT.C,
             config = { align = "cr" },
@@ -75,7 +75,7 @@ JoyousSpring.create_sell_and_use_buttons = function(card, args)
             }
         }
     end
-    if args.use then
+    if args.use and card.facing ~= 'back' then
         use = {
             n = G.UIT.C,
             config = { align = "cr" },
@@ -92,7 +92,7 @@ JoyousSpring.create_sell_and_use_buttons = function(card, args)
             }
         }
     end
-    if args.activate then
+    if args.activate and card.facing ~= 'back' then
         activate = {
             n = G.UIT.C,
             config = { align = "cr" },
