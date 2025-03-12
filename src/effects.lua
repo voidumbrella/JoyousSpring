@@ -200,7 +200,9 @@ end
 G.FUNCS.joy_detach_material = function(e)
     local card = e.config.ref_table
     local detach = card.ability.extra.detach or 1
-    if JoyousSpring.get_xyz_materials(card) >= detach then
+    if not ((G.play and #G.play.cards > 0) or
+            (G.CONTROLLER.locked) or
+            (G.GAME.STOP_USE and G.GAME.STOP_USE > 0)) and JoyousSpring.get_xyz_materials(card) >= detach then
         card.ability.extra.joyous_spring.xyz_materials = card.ability.extra.joyous_spring.xyz_materials - detach
         SMODS.calculate_context({ joy_detach = true, joy_detaching_card = card })
     end
@@ -248,14 +250,14 @@ JoyousSpring.stay_flipped = function(card, stay_flipped)
     if G.jokers then
         for _, joker in ipairs(G.jokers.cards) do
             if joker.config.center.joy_stay_flipped then
-                keep_flipped = joker.config.center.joy_stay_flipped(card)
+                keep_flipped = joker.config.center.joy_stay_flipped(joker, card)
             end
         end
     end
     if JoyousSpring.field_spell_area then
         for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
             if joker.config.center.joy_stay_flipped then
-                keep_flipped = joker.config.center.joy_stay_flipped(card)
+                keep_flipped = joker.config.center.joy_stay_flipped(joker, card)
             end
         end
     end

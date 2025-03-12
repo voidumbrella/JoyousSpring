@@ -216,7 +216,11 @@ JoyousSpring.has_activated_effect = function(card)
 end
 
 JoyousSpring.can_activate = function(card)
-    return JoyousSpring.has_activated_effect(card) and card.config.center.joy_can_activate(card) or false
+    return not ((G.play and #G.play.cards > 0) or
+            (G.CONTROLLER.locked) or
+            (G.GAME.STOP_USE and G.GAME.STOP_USE > 0)) and (not card.debuff and card.facing ~= 'back') and
+        JoyousSpring.has_activated_effect(card) and
+        card.config.center.joy_can_activate(card) or false
 end
 
 ---Checks if **card** fulfills **properties**
