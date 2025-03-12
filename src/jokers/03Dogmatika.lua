@@ -671,7 +671,8 @@ SMODS.Joker({
     end,
     joy_can_activate = function(card)
         local materials = JoyousSpring.get_materials_owned({ { is_extra_deck = true } })
-        return (#G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit and next(materials)) and
+        return not card.debuff and
+            (#G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit and next(materials)) and
             true or false
     end,
     in_pool = function(self, args)

@@ -628,7 +628,7 @@ SMODS.Joker({
     end,
     joy_can_activate = function(card)
         local materials = JoyousSpring.get_materials_owned({ { monster_archetypes = { "MekkKnight" } } })
-        return (G.GAME.blind.in_blind and next(materials)) and true or false
+        return not card.debuff and (G.GAME.blind.in_blind and next(materials)) and true or false
     end,
     in_pool = function(self, args)
         return args and args.source and args.source == "sho" or false

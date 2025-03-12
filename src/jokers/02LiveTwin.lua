@@ -769,7 +769,7 @@ SMODS.Joker({
     end,
     joy_can_activate = function(card)
         local materials = JoyousSpring.get_materials_owned({ { summon_type = "LINK", monster_archetypes = { "Kisikil" } }, { summon_type = "LINK", monster_archetypes = { "Lilla" } } })
-        return (G.GAME.blind.in_blind and next(materials)) and
+        return not card.debuff and (G.GAME.blind.in_blind and next(materials)) and
             true or false
     end,
     in_pool = function(self, args)

@@ -156,7 +156,8 @@ SMODS.Joker({
         local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
         local spellcasters = JoyousSpring.get_materials_owned({ { monster_type = "Spellcaster" } })
         local tokens = SMODS.merge_lists({ generaiders, spellcasters })
-        return (G.GAME.blind and ((not G.GAME.blind.disabled) and (G.GAME.blind.boss)) and next(tokens)) and
+        return not card.debuff and
+            (G.GAME.blind and ((not G.GAME.blind.disabled) and (G.GAME.blind.boss)) and next(tokens)) and
             true or false
     end,
     in_pool = function(self, args)
@@ -232,7 +233,7 @@ SMODS.Joker({
         local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
         local wyrms = JoyousSpring.get_materials_owned({ { monster_type = "Wyrm" } })
         local tokens = SMODS.merge_lists({ generaiders, wyrms })
-        return (not card.ability.extra.active and next(tokens)) and
+        return not card.debuff and (not card.ability.extra.active and next(tokens)) and
             true or false
     end,
     in_pool = function(self, args)
@@ -306,7 +307,7 @@ SMODS.Joker({
         local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
         local warriors = JoyousSpring.get_materials_owned({ { monster_type = "Warrior" } })
         local tokens = SMODS.merge_lists({ generaiders, warriors })
-        return (next(tokens)) and true or false
+        return not card.debuff and (next(tokens)) and true or false
     end,
     in_pool = function(self, args)
         return args and args.source and args.source == "JoyousSpring" or false
@@ -373,7 +374,7 @@ SMODS.Joker({
         local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
         local rocks = JoyousSpring.get_materials_owned({ { monster_type = "Rock" } })
         local tokens = SMODS.merge_lists({ generaiders, rocks })
-        return (#G.consumeables.cards > 0 and next(tokens)) and
+        return not card.debuff and (#G.consumeables.cards > 0 and next(tokens)) and
             true or false
     end,
     in_pool = function(self, args)
@@ -447,7 +448,8 @@ SMODS.Joker({
         local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
         local plants = JoyousSpring.get_materials_owned({ { monster_type = "Plant" } })
         local tokens = SMODS.merge_lists({ generaiders, plants })
-        return (#G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit and next(tokens)) and
+        return not card.debuff and
+            (#G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit and next(tokens)) and
             true or false
     end,
     in_pool = function(self, args)
@@ -525,7 +527,7 @@ SMODS.Joker({
         local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
         local machines = JoyousSpring.get_materials_owned({ { monster_type = "Machine" } })
         local tokens = SMODS.merge_lists({ generaiders, machines })
-        return (not card.ability.extra.active and next(tokens)) and
+        return not card.debuff and (not card.ability.extra.active and next(tokens)) and
             true or false
     end,
     in_pool = function(self, args)
@@ -593,7 +595,7 @@ SMODS.Joker({
         local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
         local beastwarriors = JoyousSpring.get_materials_owned({ { monster_type = "BeastWarrior" } })
         local tokens = SMODS.merge_lists({ generaiders, beastwarriors })
-        return (G.GAME.blind and G.GAME.blind.in_blind and next(tokens)) and true or false
+        return not card.debuff and (G.GAME.blind and G.GAME.blind.in_blind and next(tokens)) and true or false
     end,
     in_pool = function(self, args)
         return args and args.source and args.source == "JoyousSpring" or false
@@ -666,7 +668,7 @@ SMODS.Joker({
         local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
         local zombies = JoyousSpring.get_materials_owned({ { monster_type = "Zombie" } })
         local tokens = SMODS.merge_lists({ generaiders, zombies })
-        return (G.GAME.blind and G.GAME.blind.in_blind and next(tokens)) and true or false
+        return not card.debuff and (G.GAME.blind and G.GAME.blind.in_blind and next(tokens)) and true or false
     end,
     in_pool = function(self, args)
         return args and args.source and args.source == "JoyousSpring" or false
@@ -881,7 +883,8 @@ SMODS.Joker({
     end,
     joy_can_activate = function(card)
         local tokens = JoyousSpring.get_materials_owned({ { key = "j_joy_token", monster_archetypes = { "Generaider" } } })
-        return (not card.ability.extra.used and #G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit and next(tokens)) and
+        return not card.debuff and
+            (not card.ability.extra.used and #G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit and next(tokens)) and
             true or false
     end,
     in_pool = function(self, args)
