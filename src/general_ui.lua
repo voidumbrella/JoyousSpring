@@ -384,7 +384,7 @@ function Card:highlight(is_highlighted)
         end
     else
         card_highlight_ref(self, is_highlighted)
-        if self.area and JoyousSpring.is_extra_deck_monster(self) and
+        if self.area and (JoyousSpring.is_extra_deck_monster(self) or JoyousSpring.is_field_spell(self)) and
             (self.area == G.shop_jokers and G.shop_jokers or self.area == G.pack_cards and G.pack_cards) then
             JoyousSpring.open_extra_deck(false, is_highlighted)
         end

@@ -16,7 +16,7 @@ JoyousSpring.revive = function(key, must_have_room, edition)
             key = key,
             edition = edition
         })
-        added_card.ability.extra.joyous_spring.summoned = JoyousSpring.is_extra_deck_monster(added_card) or nil
+        added_card.ability.extra.joyous_spring.summoned = JoyousSpring.is_extra_deck_monster(added_card) or false
         added_card.ability.extra.joyous_spring.revived = true
         added_card:set_cost()
         SMODS.calculate_context({ joy_revived = true, joy_revived_card = added_card })
