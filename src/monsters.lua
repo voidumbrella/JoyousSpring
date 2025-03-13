@@ -588,7 +588,7 @@ end
 -- Hooks
 
 local card_flip_ref = Card.flip
-function Card:flip()
+function Card:flip(source)
     if not JoyousSpring.is_summon_type(self, "LINK") and self.config.center_key ~= "j_joy_token" then
         card_flip_ref(self)
         local is_play_area = false
@@ -599,7 +599,11 @@ function Card:flip()
             end
         end
         if is_play_area or (G.hand and self.area == G.hand) then
-            SMODS.calculate_context({ joy_card_flipped = self })
+            SMODS.calculate_context({
+                joy_card_flipped = self,
+                joy_source = source and type(source) == "table" and
+                    JoyousSpring.is_monster_card(source) and source or nil
+            })
         end
     end
 end

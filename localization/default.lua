@@ -1376,31 +1376,34 @@ return {
 				name = "{C:joy_effect}Ariane the Labrynth Servant",
 				text = {
 					"{C:attention}+#1#{} hand size next {C:attention}Blind{} for each",
-					"playing card {C:attention}flipped{} this round",
+					"playing card {C:attention}flipped{} this round while owned",
 					" ",
 					"Add an {C:green}Uncommon{} {C:joy_normal}\"Labrynth\"{} to the next shop",
-					"if {C:attention}#2#{} or more cards are flipped this round"
+					"if {C:attention}#2#{} or more playing cards are flipped this round while owned",
+					"{s:0.9,C:inactive}(Flipped this round #3#)"
 				}
 			},
 			j_joy_lab_arianna = {
 				name = "{C:joy_effect}Arianna the Labrynth Servant",
 				text = {
 					"{C:attention}+#1#{} hand size next {C:attention}Blind{} for each",
-					"playing card {C:attention}flipped{} this round",
+					"playing card {C:attention}flipped{} this round while owned",
 					" ",
 					"Add a {C:blue}Common{} {C:joy_normal}\"Labrynth\"{} to the next shop",
-					"if {C:attention}#2#{} or more cards are flipped this round"
+					"if {C:attention}#2#{} or more playing cards are flipped this round while owned",
+					"{s:0.9,C:inactive}(Flipped this round #3#)"
 				}
 			},
 			j_joy_lab_arias = {
 				name = "{C:joy_effect}Arias the Labrynth Butler",
 				text = {
 					"Gains {C:chips}+#1#{} Chips for each",
-					"playing card {C:attention}flipped{}",
+					"playing card {C:attention}flipped{} while owned",
 					"{C:inactive}(Currently{} {C:chips}+#2# {C:inactive}Chips){}",
 					" ",
 					"Add a {C:red}Rare{} {C:joy_normal}\"Labrynth\"{} to the next shop",
-					"if {C:attention}#3#{} or more cards are flipped this round",
+					"if {C:attention}#3#{} or more playing cards are flipped this round while owned",
+					"{s:0.9,C:inactive}(Flipped this round #4#)",
 					" ",
 					"Free if you own a {C:joy_normal}\"Labrynth\"{}"
 				}
@@ -1426,10 +1429,6 @@ return {
 					"Gains {C:mult}+#3#{} Mult for each",
 					"card {C:attention}flipped{} face-down",
 					"{C:inactive}(Currently{} {C:mult}+#4# {C:inactive}Mult){}",
-					" ",
-					"Non-{C:joy_trap}Trap{} {C:joy_normal}Fiends{} can use their",
-					"non-activated abilities while face-down",
-					"{s:0.9,C:inactive}(Including this card)"
 				}
 			},
 			j_joy_lab_lady = {
@@ -1437,11 +1436,11 @@ return {
 				text = {
 					"Each time a card is {C:attention}flipped{} each",
 					"{C:joy_normal}\"Labrynth\"{} give {X:mult,C:white}X#1#{} more Mult",
-					"{C:inactive}(Currently{} {X:mult,C:white}+#2#{} {C:inactive}Mult){}",
-					" ",
-					"Non-{C:joy_trap}Trap{} {C:joy_normal}Fiends{} can use their",
-					"non-activated abilities while face-down",
-					"{s:0.9,C:inactive}(Including this card)"
+					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}",
+					-- " ",
+					-- "Non-{C:joy_trap}Trap{} {C:joy_normal}Fiends{} can use their",
+					-- "non-activated abilities while face-down",
+					-- "{s:0.9,C:inactive}(Including this card)"
 				}
 			},
 			j_joy_lab_labyrinth = {
@@ -1450,7 +1449,7 @@ return {
 					"{C:money}+$#1#{} for each {C:attention}Joker flipped{}",
 					" ",
 					"{C:green}#2# in #3#{} chance to {C:attention}flip #4# random card in hand face-down",
-					"(and shuffle them) when a playing card is {C:attention}flipped"
+					"(and shuffle them) when a playing card is {C:attention}flipped",
 				}
 			},
 			--#endregion

@@ -247,10 +247,14 @@ end
 
 JoyousSpring.stay_flipped = function(card, stay_flipped)
     local keep_flipped = stay_flipped or false
+    local source
     if G.jokers then
         for _, joker in ipairs(G.jokers.cards) do
             if joker.config.center.joy_stay_flipped then
                 keep_flipped = joker.config.center.joy_stay_flipped(joker, card)
+                if keep_flipped and not source then
+                    source = joker
+                end
             end
         end
     end
@@ -258,11 +262,14 @@ JoyousSpring.stay_flipped = function(card, stay_flipped)
         for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
             if joker.config.center.joy_stay_flipped then
                 keep_flipped = joker.config.center.joy_stay_flipped(joker, card)
+                if keep_flipped and not source then
+                    source = joker
+                end
             end
         end
     end
     if keep_flipped then
-        SMODS.calculate_context({ joy_card_flipped = card })
+        SMODS.calculate_context({ joy_card_flipped = card, joy_source = source })
     end
     return keep_flipped
 end

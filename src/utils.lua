@@ -195,7 +195,7 @@ end
 ---@param facing? 'front'|'back' If card has to be facing a direction for it to be flipped
 ---@param seed? string
 ---@return table|Card|nil
-JoyousSpring.flip_random_card = function(card_list, facing, seed)
+JoyousSpring.flip_random_card = function(source_card, card_list, facing, seed)
     local facing_cards = {}
     for j, card in ipairs(card_list) do
         if not facing or card.facing == facing then
@@ -204,9 +204,36 @@ JoyousSpring.flip_random_card = function(card_list, facing, seed)
     end
     local pick = pseudorandom_element(facing_cards, pseudoseed(seed or "JoyousSpring"))
     if pick then
-        pick:flip()
+        pick:flip(source_card)
     end
     return pick
+end
+
+---Add random tag. Stolen from Cryptid
+JoyousSpring.add_random_tag = function()
+    local tag_key = get_next_tag_key("JoyousSpring")
+    if tag_key == "tag_boss" then
+        i = i - 1 --skip these, as they can cause bugs with pack opening from other tags
+    else
+        local tag = Tag(tag_key)
+        if tag.name == "Orbital Tag" then
+            local _poker_hands = {}
+            for k, v in pairs(G.GAME.hands) do
+                if v.visible then
+                    _poker_hands[#_poker_hands + 1] = k
+                end
+            end
+            tag.ability.orbital_hand = pseudorandom_element(_poker_hands, pseudoseed("cry_pickle_orbital"))
+        end
+        add_tag(tag)
+    end
+end
+
+---Checks if a card is a playing card
+---@param card table|Card
+---@return boolean
+JoyousSpring.is_playing_card = function(card)
+    return card and (card.ability.set == 'Enhanced' or card.ability.set == 'Default') and true or false
 end
 
 --- Talisman compat
