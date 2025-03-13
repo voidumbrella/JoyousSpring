@@ -2299,7 +2299,7 @@ return {
 			joy_tooltip_revive = {
 				name = "Revive",
 				text = {
-					"Create a card and remove it from the {C:attention}GY{}",
+					"Create and remove a random card from the {C:attention}GY{}",
 					"Must have room and might have",
 					"a random edition, unless specified",
 					"{s:0.9,C:inactive}({s:0.9,C:joy_spell}Extra Deck{} {s:0.9,C:inactive}and {s:0.9,C:joy_ritual}Ritual{} {s:0.9,C:attention}Jokers{} {s:0.9,C:inactive}that were not",
@@ -2387,7 +2387,7 @@ return {
 			joy_glossary_revive = {
 				name = "",
 				text = {
-					"{C:attention,s:1.3}Revive{}: Create a card from the {C:attention}GY{} and remove it from there. Must have room and might have a random edition, unless specified",
+					"{C:attention,s:1.3}Revive{}: Create and remove a random card from the {C:attention}GY{}. Must have room and might have a random edition, unless specified",
 					"{C:joy_spell}Extra Deck{} and {C:joy_ritual}Ritual{} {C:attention}Jokers{} that were not properly summoned can't be revived",
 					"Revived Jokers have a sell value of 1"
 				},
@@ -2495,6 +2495,8 @@ return {
 			k_joy_splash = "Splash!",
 			k_joy_defeated = "Defeated!",
 			k_joy_banished = "Banished!",
+			k_joy_flip = "Flip!",
+			k_joy_revive = "Revive!",
 			k_joy_booster_group = "Monster Pack",
 			k_joy_related = "Related",
 			k_joy_monster_tag_default = "a Monster Joker",
