@@ -119,6 +119,6 @@ position = 'after'
 match_indent = true
 payload = '''
 if self == G.hand then
-    stay_flipped = JoyousSpring.stay_flipped(card)
+    stay_flipped = JoyousSpring.stay_flipped(card, stay_flipped)
 end
 '''
