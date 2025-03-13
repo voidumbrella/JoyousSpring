@@ -1,4 +1,4 @@
---- RUNICK
+--- INVOKED
 SMODS.Atlas({
     key = "invoked",
     path = "20Invoked.png",
@@ -18,14 +18,17 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                monster_type = "Spellcaster",
+                monster_archetypes = { ["Aleister"] = true }
             },
         },
     },
@@ -42,14 +45,17 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                monster_type = "Spellcaster",
+                monster_archetypes = { ["Aleister"] = true }
             },
         },
     },
@@ -66,14 +72,17 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                monster_type = "Beast",
+                monster_archetypes = { ["Invoked"] = true }
             },
         },
     },
@@ -90,14 +99,17 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                attribute = "WIND",
+                monster_type = "Warrior",
+                monster_archetypes = { ["Invoked"] = true }
             },
         },
     },
@@ -114,14 +126,17 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                attribute = "WATER",
+                monster_type = "Dragon",
+                monster_archetypes = { ["Invoked"] = true }
             },
         },
     },
@@ -138,14 +153,17 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                attribute = "FIRE",
+                monster_type = "Fiend",
+                monster_archetypes = { ["Invoked"] = true }
             },
         },
     },
@@ -162,6 +180,9 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
@@ -169,7 +190,7 @@ SMODS.Joker({
             joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = {}
+                monster_archetypes = { ["Invoked"] = true }
             },
         },
     },
@@ -186,14 +207,17 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                attribute = "EARTH",
+                monster_type = "Rock",
+                monster_archetypes = { ["Invoked"] = true }
             },
         },
     },
@@ -210,14 +234,17 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                attribute = "LIGHT",
+                monster_type = "Machine",
+                monster_archetypes = { ["Invoked"] = true }
             },
         },
     },
@@ -234,14 +261,17 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                attribute = "LIGHT",
+                monster_type = "Fairy",
+                monster_archetypes = { ["Invoked"] = true }
             },
         },
     },
@@ -258,14 +288,15 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                is_field_spell = true
             },
         },
     },

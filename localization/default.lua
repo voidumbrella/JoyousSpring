@@ -1379,7 +1379,7 @@ return {
 					"playing card {C:attention}flipped{} this round while owned",
 					" ",
 					"Add an {C:green}Uncommon{} {C:joy_normal}\"Labrynth\"{} to the next shop",
-					"if {C:attention}#2#{} or more playing cards are flipped this round while owned",
+					"if {C:attention}#2#{} or more cards are flipped this round while owned",
 					"{s:0.9,C:inactive}(Flipped this round #3#)"
 				}
 			},
@@ -1390,7 +1390,7 @@ return {
 					"playing card {C:attention}flipped{} this round while owned",
 					" ",
 					"Add a {C:blue}Common{} {C:joy_normal}\"Labrynth\"{} to the next shop",
-					"if {C:attention}#2#{} or more playing cards are flipped this round while owned",
+					"if {C:attention}#2#{} or more cards are flipped this round while owned",
 					"{s:0.9,C:inactive}(Flipped this round #3#)"
 				}
 			},
@@ -1402,7 +1402,7 @@ return {
 					"{C:inactive}(Currently{} {C:chips}+#2# {C:inactive}Chips){}",
 					" ",
 					"Add a {C:red}Rare{} {C:joy_normal}\"Labrynth\"{} to the next shop",
-					"if {C:attention}#3#{} or more playing cards are flipped this round while owned",
+					"if {C:attention}#3#{} or more cards are flipped this round while owned",
 					"{s:0.9,C:inactive}(Flipped this round #4#)",
 					" ",
 					"Free if you own a {C:joy_normal}\"Labrynth\"{}"
@@ -1437,10 +1437,10 @@ return {
 					"Each time a card is {C:attention}flipped{} each",
 					"{C:joy_normal}\"Labrynth\"{} give {X:mult,C:white}X#1#{} more Mult",
 					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}",
-					-- " ",
-					-- "Non-{C:joy_trap}Trap{} {C:joy_normal}Fiends{} can use their",
-					-- "non-activated abilities while face-down",
-					-- "{s:0.9,C:inactive}(Including this card)"
+					" ",
+					"Non-{C:joy_trap}Trap{} {C:joy_normal}Fiends{} can use their",
+					"non-activated abilities while face-down",
+					"{s:0.9,C:inactive}(Including this card)"
 				}
 			},
 			j_joy_lab_labyrinth = {
@@ -1456,63 +1456,160 @@ return {
 			--#region Subterror
 			j_joy_sub_fiendess = {
 				name = "Subterror Fiendess",
-				text = { "TBD" }
+				text = {
+					"Once per round, you can {C:attention}flip{} this card and another {C:attention}Joker{} face-down",
+					"to {C:attention}revive #1#{} {C:joy_normal}\"Subterror\"{} as {C:dark_edition}Negative{}"
+				}
 			},
 			j_joy_sub_defender = {
 				name = "Subterror Nemesis Defender",
-				text = { "TBD" }
+				text = {
+					"{C:chips}+#1#{} Chips for each {C:joy_normal}\"Subterror\"{} or face-down {C:attention}Joker{}",
+					"{C:inactive}(Currently{} {C:chips}+#2#{} {C:inactive}Chips){}",
+					" ",
+					"Sell this card to {C:attention}flip{} all cards face-up"
+				}
 			},
 			j_joy_sub_archer = {
 				name = "Subterror Nemesis Archer",
-				text = { "TBD" }
+				text = {
+					"Once per round, you can {C:attention}flip{} this card and another {C:attention}Joker{} face-down",
+					"to {C:attention}create #1#{} {C:dark_edition}Negative{} {C:blue}Common{} or {C:green}Uncommon{} {C:joy_normal}\"Subterror\"{}"
+				}
 			},
 			j_joy_sub_warrior = {
 				name = "Subterror Nemesis Warrior",
-				text = { "TBD" }
+				text = {
+					"You can {C:attention}tribute{} this card and another {C:attention}Joker{}",
+					"to {C:attention}revive #1#{} {C:joy_normal}\"Subterror Behemoth\"{} or {C:joy_normal}\"Subterror\"{} if none",
+					" ",
+					"{C:joy_effect}FLIP{}: Send {C:attention}#2#{} {C:joy_normal}\"Subterror Behemoth\"{} to the {C:attention}GY{}"
+				}
 			},
 			j_joy_sub_guru = {
 				name = "Subterror Guru",
-				text = { "TBD" }
+				text = {
+					"Once per round, you can {C:attention}flip{} this card and another #1# {C:attention}Jokers{} face-down:",
+					"This card gives {X:mult,C:white}X#2#{} Mult for each {C:attention}flipped{} face-down and",
+					"{C:attention}+#3#{} hand size for each {C:attention}flipped{} face-up this round",
+					"{s:0.9,C:inactive}(Even if face-down)",
+					" ",
+					"{C:joy_effect}FLIP{}: {C:attention}Create #4#{} {C:blue}Common{} or {C:green}Uncommon{} {C:joy_normal}\"Subterror\"{}",
+					"{C:inactive}(Must have room)",
+					" ",
+					"{C:attention}Flips{} face-up when {C:attention}Blind{} is selected",
+					"{s:0.9,C:inactive}(Even if face-down)",
+				}
 			},
 			j_joy_sub_stygo = {
 				name = "Subterror Behemoth Stygokraken",
-				text = { "TBD" }
+				text = {
+					"{C:joy_effect}FLIP{}: Each face-down card gives {X:mult,C:white}X#1#{} this round",
+					" ",
+					"{C:attention}Flips{} face-up when {C:attention}Boss Blind{} is defeated",
+					"{s:0.9,C:inactive}(Even if face-down)",
+				}
 			},
 			j_joy_sub_drago = {
 				name = "Subterror Behemoth Dragossuary",
-				text = { "TBD" }
+				text = {
+					"{C:joy_effect}FLIP{}: Give a {C:joy_normal}\"Subterror\"{} or face-down {C:attention}Joker{} a random edition",
+					" ",
+					"{C:attention}Flips{} face-up when {C:attention}Boss Blind{} is defeated",
+					"{s:0.9,C:inactive}(Even if face-down)",
+				}
 			},
 			j_joy_sub_uma = {
 				name = "Subterror Behemoth Umastryx",
-				text = { "TBD" }
+				text = {
+					"{C:joy_effect}FLIP{}: {C:attention}Banish #1#{} other {C:attention}Jokers{} at end of round",
+					"until {C:attention}Blind{} is selected",
+					" ",
+					"{C:attention}Flips{} face-up when {C:attention}Boss Blind{} is defeated",
+					"{s:0.9,C:inactive}(Even if face-down)",
+				}
 			},
 			j_joy_sub_phos = {
 				name = "Subterror Behemoth Phospheroglacier",
-				text = { "TBD" }
+				text = {
+					"{C:chips}+#1#{} Chips for each {C:joy_normal}\"Subterror\"{} or {C:joy_normal}Aqua{} in the {C:attention}GY{}",
+					"{C:inactive}(Currently{} {C:chips}+#2#{} {C:inactive}Chips){}",
+					" ",
+					"{C:joy_effect}FLIP{}: Send {C:attention}#3#{} {C:joy_normal}\"Subterror\"{} to the {C:attention}GY{}",
+					" ",
+					"{C:attention}Flips{} face-up when {C:attention}Boss Blind{} is defeated",
+					"{s:0.9,C:inactive}(Even if face-down)",
+				}
 			},
 			j_joy_sub_volt = {
 				name = "Subterror Behemoth Voltelluric",
-				text = { "TBD" }
+				text = {
+					"{C:mult}+#1#{} Mult for each face-down card",
+					"{C:inactive}(Currently{} {C:mult}+#2#{} {C:inactive}Mult){}",
+					" ",
+					"{C:joy_effect}FLIP{}: {C:attention}Flips{} all cards in hand face-down (and shuffles them)",
+					" ",
+					"{C:attention}Flips{} face-up when {C:attention}Boss Blind{} is defeated",
+					"{s:0.9,C:inactive}(Even if face-down)",
+				}
 			},
 			j_joy_sub_stala = {
 				name = "Subterror Behemoth Stalagmo",
-				text = { "TBD" }
+				text = {
+					"{C:joy_effect}FLIP{}: Draw {C:attention}#1#{} cards face-down",
+					" ",
+					"{C:attention}Flips{} face-up when {C:attention}Boss Blind{} is defeated",
+					"{s:0.9,C:inactive}(Even if face-down)",
+				}
 			},
 			j_joy_sub_speleo = {
 				name = "Subterror Behemoth Speleogeist",
-				text = { "TBD" }
+				text = {
+					"Gains {X:mult,C:white}X#1#{} Mult each time a card is {C:attention}flipped{}",
+					"{s:0.9,C:inactive}(Even if face-down)",
+					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}",
+					" ",
+					"{C:joy_effect}FLIP{}: {C:attention}Flip{} all other {C:attention}Jokers{} face-up",
+					" ",
+					"{C:attention}Flips{} face-up when {C:attention}Boss Blind{} is defeated",
+					"{s:0.9,C:inactive}(Even if face-down)",
+				}
 			},
 			j_joy_sub_ultra = {
 				name = "Subterror Behemoth Ultramafus",
-				text = { "TBD" }
+				text = {
+					"{C:chips}+#1#{} Chips for each face-down card",
+					"{C:inactive}(Currently{} {C:chips}+#2#{} {C:inactive}Chips){}",
+					" ",
+					"{C:joy_effect}FLIP{}: {C:attention}Flip{} all other {C:attention}Jokers{} face-down",
+					" ",
+					"{C:attention}Flips{} face-up when {C:attention}Boss Blind{} is defeated",
+					"{s:0.9,C:inactive}(Even if face-down)",
+				}
 			},
 			j_joy_sub_befiendess = {
 				name = "Subterror Behemoth Fiendess",
-				text = { "TBD" }
+				text = {
+					"{C:chips}+#1#{} Chips for each {C:attention}material{} used for its summon and",
+					"{C:mult}+#2#{} Mult for each {C:joy_normal}\"Subterror\"{} used",
+					"{C:inactive}(Currently{} {C:chips}+#3#{} {C:inactive}Chips and {C:mult}+#4#{} {C:inactive}Mult){}",
+					" ",
+					"Once per round, you can {C:attention}flip #5# Jokers{} face-down to {C:attention}create #6#",
+					"{C:joy_normal}\"Subterror Behemoth\"{}",
+					"{C:inactive}(Must have room){}"
+				},
+				joy_summon_conditions = {
+					"{C:attention}2+{} face-down {C:attention}Jokers"
+				}
 			},
 			j_joy_sub_city = {
-				name = "The Hidden City",
-				text = { "TBD" }
+				name = "{C:joy_spell}The Hidden City",
+				text = {
+					"Once per round, you can {C:attention}flip{} a {C:attention}Joker",
+					" ",
+					"{C:money}+$#1#{} when a {C:joy_normal}Monster{} {C:attention}Joker{} is {C:attention}flipped{} face-down",
+					"or when a non-{C:joy_normal}Monster{} {C:attention}Joker{} is {C:attention}flipped{} face-up"
+				}
 			},
 			--#endregion
 			--#region Eldlich
@@ -2483,6 +2580,7 @@ return {
 			k_joy_banish_end_of_ante = "End of Ante",
 			k_joy_select_materials = "Select Materials",
 			k_joy_select_tributes = "Select Tributes",
+			k_joy_select = "Select",
 			k_joy_summon = "Summon",
 			k_joy_detach = "Detach",
 			k_joy_activate = "Activate",
@@ -2495,6 +2593,7 @@ return {
 			k_joy_defeated = "Defeated!",
 			k_joy_banished = "Banished!",
 			k_joy_flip = "Flip!",
+			k_joy_set = "Set!",
 			k_joy_revive = "Revive!",
 			k_joy_booster_group = "Monster Pack",
 			k_joy_related = "Related",

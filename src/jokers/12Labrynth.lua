@@ -1,4 +1,4 @@
---- RUNICK
+--- LABRYNTH
 SMODS.Atlas({
     key = "lab",
     path = "12Labrynth.png",
@@ -6,6 +6,7 @@ SMODS.Atlas({
     py = 95
 })
 
+-- Labrynth Cooclock
 SMODS.Joker({
     key = "lab_clock",
     atlas = 'lab',
@@ -41,7 +42,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card then
                 if context.joy_activate_effect and context.joy_activated_card == card then
                     card.ability.extra.any_flipped = false
@@ -113,6 +114,8 @@ SMODS.Joker({
         return G.GAME.blind.in_blind or false
     end,
 })
+
+-- Labrynth Stovie Torbie
 SMODS.Joker({
     key = "lab_stovie",
     atlas = 'lab',
@@ -148,7 +151,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card then
                 if context.joy_activate_effect and context.joy_activated_card == card then
                     local materials = {}
@@ -233,6 +236,8 @@ SMODS.Joker({
     end,
 
 })
+
+-- Labrynth Chandraglier
 SMODS.Joker({
     key = "lab_changdra",
     atlas = 'lab',
@@ -268,7 +273,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card then
                 if context.joy_activate_effect and context.joy_activated_card == card then
                     local materials = {}
@@ -329,8 +334,10 @@ SMODS.Joker({
                                                     G.hand:shuffle("j_joy_lab_changdra")
                                                 end
 
-                                                for i = 1, card.ability.extra.creates do
-                                                    JoyousSpring.add_random_tag()
+                                                if fiend_tributed then
+                                                    for i = 1, card.ability.extra.creates do
+                                                        JoyousSpring.add_random_tag()
+                                                    end
                                                 end
 
                                                 return true
@@ -355,6 +362,8 @@ SMODS.Joker({
         return #G.jokers.cards > 1 and G.GAME.blind.in_blind or false
     end,
 })
+
+-- Ariane the Labrynth Servant
 SMODS.Joker({
     key = "lab_ariane",
     atlas = 'lab',
@@ -382,26 +391,31 @@ SMODS.Joker({
             h_size = 1,
             flipped = 5,
             count = 0,
+            pcard_count = 0,
             active = true,
             hand_size_changed = 0
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.setting_blind and context.main_eval then
-                if card.ability.extra.count > 0 then
-                    card.ability.extra.hand_size_changed = card.ability.extra.h_size * card.ability.extra.count
+                if card.ability.extra.pcard_count > 0 then
+                    card.ability.extra.hand_size_changed = card.ability.extra.h_size * card.ability.extra.pcard_count
                     G.hand:change_size(card.ability.extra.hand_size_changed)
                 end
                 card.ability.extra.count = 0
+                card.ability.extra.pcard_count = 0
             end
         end
         if context.joy_card_flipped and JoyousSpring.is_playing_card(context.joy_card_flipped) then
+            if JoyousSpring.is_playing_card(context.joy_card_flipped) then
+                card.ability.extra.pcard_count = card.ability.extra.pcard_count + 1
+            end
             card.ability.extra.count = card.ability.extra.count + 1
-            if card.facing ~= 'back' and not card.ability.extra.active and card.ability.extra.count > card.ability.extra.flipped then
+            if JoyousSpring.can_use_abilities(card) and not card.ability.extra.active and card.ability.extra.count > card.ability.extra.flipped then
                 local choices = JoyousSpring.get_materials_in_collection({ { rarity = 2, monster_archetypes = { "Labrynth" } } })
                 local pick = pseudorandom_element(choices, pseudoseed("j_joy_lab_ariane"))
-                print(pick)
+
                 JoyousSpring.add_monster_tag(pick or "j_joy_lab_arianna")
                 card.ability.extra.active = true
             end
@@ -417,10 +431,12 @@ SMODS.Joker({
     remove_from_deck = function(self, card, from_debuff)
         if card.ability.extra.hand_size_changed > 0 then
             G.hand:change_size(-card.ability.extra.hand_size_changed)
-            card.ability.extra.hand_size_changed = false
+            card.ability.extra.hand_size_changed = 0
         end
     end
 })
+
+-- Arianna the Labrynth Servant
 SMODS.Joker({
     key = "lab_arianna",
     atlas = 'lab',
@@ -448,23 +464,28 @@ SMODS.Joker({
             h_size = 1,
             flipped = 5,
             count = 0,
+            pcard_count = 0,
             active = true,
             hand_size_changed = 0
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.setting_blind and context.main_eval then
-                if card.ability.extra.count > 0 then
-                    card.ability.extra.hand_size_changed = card.ability.extra.h_size * card.ability.extra.count
+                if card.ability.extra.pcard_count > 0 then
+                    card.ability.extra.hand_size_changed = card.ability.extra.h_size * card.ability.extra.pcard_count
                     G.hand:change_size(card.ability.extra.hand_size_changed)
                 end
                 card.ability.extra.count = 0
+                card.ability.extra.pcard_count = 0
             end
         end
-        if context.joy_card_flipped and JoyousSpring.is_playing_card(context.joy_card_flipped) then
+        if context.joy_card_flipped then
+            if JoyousSpring.is_playing_card(context.joy_card_flipped) then
+                card.ability.extra.pcard_count = card.ability.extra.pcard_count + 1
+            end
             card.ability.extra.count = card.ability.extra.count + 1
-            if card.facing ~= 'back' and not card.ability.extra.active and card.ability.extra.count > card.ability.extra.flipped then
+            if JoyousSpring.can_use_abilities(card) and not card.ability.extra.active and card.ability.extra.count > card.ability.extra.flipped then
                 local choices = JoyousSpring.get_materials_in_collection({ { rarity = 1, monster_archetypes = { "Labrynth" } } })
                 local pick = pseudorandom_element(choices, pseudoseed("j_joy_lab_arianna"))
                 JoyousSpring.add_monster_tag(pick or "j_joy_lab_clock")
@@ -482,10 +503,12 @@ SMODS.Joker({
     remove_from_deck = function(self, card, from_debuff)
         if card.ability.extra.hand_size_changed > 0 then
             G.hand:change_size(-card.ability.extra.hand_size_changed)
-            card.ability.extra.hand_size_changed = false
+            card.ability.extra.hand_size_changed = 0
         end
     end
 })
+
+-- Arias the Labrynth Butler
 SMODS.Joker({
     key = "lab_arias",
     atlas = 'lab',
@@ -518,7 +541,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.setting_blind and context.main_eval then
                 card.ability.extra.count = 0
             end
@@ -528,10 +551,12 @@ SMODS.Joker({
                 }
             end
         end
-        if context.joy_card_flipped and JoyousSpring.is_playing_card(context.joy_card_flipped) then
+        if context.joy_card_flipped then
+            if JoyousSpring.is_playing_card(context.joy_card_flipped) then
+                card.ability.extra.total_count = card.ability.extra.total_count + 1
+            end
             card.ability.extra.count = card.ability.extra.count + 1
-            card.ability.extra.total_count = card.ability.extra.total_count + 1
-            if card.facing ~= 'back' and not card.ability.extra.active and card.ability.extra.count > card.ability.extra.flipped then
+            if JoyousSpring.can_use_abilities(card) and not card.ability.extra.active and card.ability.extra.count > card.ability.extra.flipped then
                 local choices = JoyousSpring.get_materials_in_collection({ { rarity = 3, monster_archetypes = { "Labrynth" } } })
                 local pick = pseudorandom_element(choices, pseudoseed("j_joy_lab_arianna"))
                 JoyousSpring.add_monster_tag(pick or "j_joy_lab_lovely")
@@ -543,6 +568,8 @@ SMODS.Joker({
         end
     end,
 })
+
+-- Labrynth Archfiend
 SMODS.Joker({
     key = "lab_archfiend",
     atlas = 'lab',
@@ -572,7 +599,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.joker_main then
                 return {
                     mult = card.ability.extra.mult *
@@ -628,6 +655,8 @@ SMODS.Joker({
         end
     end
 })
+
+-- Lovely Labrynth of the Silver Castle
 SMODS.Joker({
     key = "lab_lovely",
     atlas = 'lab',
@@ -653,12 +682,12 @@ SMODS.Joker({
                 monster_archetypes = { ["Labrynth"] = true }
             },
             odds = 8,
-            extra_mult = 5,
+            extra_mult = 3,
             mult = 0
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.joker_main then
                 return {
                     mult = card.ability.extra.mult *
@@ -676,6 +705,8 @@ SMODS.Joker({
             math.max(1, card.ability.extra.odds - JoyousSpring.count_materials_owned({ { monster_type = "Fiend" } }))
     end
 })
+
+-- Lady Labrynth of the Silver Castle
 SMODS.Joker({
     key = "lab_lady",
     atlas = 'lab',
@@ -701,24 +732,28 @@ SMODS.Joker({
                 monster_archetypes = { ["Labrynth"] = true }
             },
             xmult = 0,
-            extra_xmult = 0.1
+            extra_xmult = 0.05
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
-            if context.other_joker and JoyousSpring.is_monster_archetype(context.other_joker, "Labrynth") then
-                if card.ability.extra.xmult > 0 then
-                    return {
-                        xmult = 1 + card.ability.extra.xmult,
-                    }
-                end
-            end
-            if context.joy_card_flipped then
-                card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.extra_xmult
+        if context.other_joker and JoyousSpring.is_monster_archetype(context.other_joker, "Labrynth") then
+            if card.ability.extra.xmult > 0 then
+                return {
+                    xmult = 1 + card.ability.extra.xmult,
+                }
             end
         end
+        if context.joy_card_flipped then
+            card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.extra_xmult
+        end
     end,
+    joy_allow_ability = function(card, other_card)
+        return not JoyousSpring.is_trap_monster(other_card) and JoyousSpring.is_monster_type(other_card, "Fiend") and
+            true or false
+    end
 })
+
+-- Labrynth Labyrinth
 SMODS.Joker({
     key = "lab_labyrinth",
     atlas = 'lab',
@@ -748,7 +783,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.joy_card_flipped and not (context.joy_source and context.joy_source.config.center.key == "j_joy_lab_labyrinth") then
                 if context.joy_card_flipped.ability.set == "Joker" then
                     return {

@@ -31,7 +31,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
+        { "j_joy_fish_depths", properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -46,7 +46,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval then
                 local func = function(c)
@@ -83,7 +83,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.chips } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
+        { "j_joy_fish_depths", properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -99,7 +99,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.banish(card, "blind_selected")
@@ -130,7 +130,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.mult } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
+        { "j_joy_fish_depths", properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -146,7 +146,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.banish(card, "blind_selected")
@@ -179,7 +179,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
+        { "j_joy_fish_depths", properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -195,7 +195,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval then
                 local func = function(c)
@@ -231,7 +231,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.cards_to_create } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
+        { "j_joy_fish_depths", properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -246,7 +246,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval then
                 local func = function(c)
@@ -291,7 +291,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.cards_to_create, card.ability.extra.times, card.ability.extra.returned } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
+        { "j_joy_fish_depths", properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -308,7 +308,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.banish(card, "blind_selected")
@@ -355,7 +355,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
+        { "j_joy_fish_depths", properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -370,7 +370,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval then
                 local func = function(c)
@@ -408,8 +408,8 @@ SMODS.Joker({
         return { vars = { card.ability.extra.banishes, card.ability.extra.times, card.ability.extra.returned } }
     end,
     joy_desc_cards = {
-        { "j_joy_fish_depths",                                   name = "Adds" },
-        { properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
+        { "j_joy_fish_depths", name = "Adds" },
+        { "j_joy_fish_depths", properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -426,7 +426,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.banish(card, "blind_selected")
@@ -476,7 +476,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.chips, card.ability.extra.chips * (G.GAME.joy_cards_banished or 0), card.ability.extra.cards_to_create } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
+        { "j_joy_fish_depths", properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -502,7 +502,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval then
                 local func = function(c)
@@ -547,7 +547,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.mult, card.ability.extra.mult * (G.GAME.joy_cards_banished or 0) } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
+        { "j_joy_fish_depths", properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -572,7 +572,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.banish(card, "blind_selected")
@@ -610,7 +610,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.xmult, 1 + (card.ability.extra.xmult * (G.GAME.joy_cards_banished or 0)) } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
+        { "j_joy_fish_depths", properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -635,7 +635,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.banish(card, "blind_selected")
@@ -684,7 +684,7 @@ SMODS.Joker({
         return {}
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
+        { "j_joy_fish_depths", properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -709,7 +709,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.banish(card, "blind_selected")
@@ -740,7 +740,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.money } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
+        { "j_joy_fish_depths", properties = { { monster_archetypes = { "Ghoti" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,

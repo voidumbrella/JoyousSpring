@@ -1,4 +1,4 @@
---- RUNICK
+--- ELDLICH
 SMODS.Atlas({
     key = "eld",
     path = "14Eldlich.png",
@@ -18,14 +18,17 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Eldlich" } }, { monster_archetypes = { "GoldenLand" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                attribute = "LIGHT",
+                monster_type = "Zombie",
+                monster_archetypes = { ["Eldlich"] = true }
             },
         },
     },
@@ -42,14 +45,18 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Eldlich" } }, { monster_archetypes = { "GoldenLand" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                is_trap = true,
+                attribute = "LIGHT",
+                monster_type = "Zombie",
+                monster_archetypes = { ["GoldenLand"] = true }
             },
         },
     },
@@ -66,14 +73,18 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Eldlich" } }, { monster_archetypes = { "GoldenLand" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                is_trap = true,
+                attribute = "LIGHT",
+                monster_type = "Zombie",
+                monster_archetypes = { ["GoldenLand"] = true }
             },
         },
     },
@@ -90,14 +101,18 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Eldlich" } }, { monster_archetypes = { "GoldenLand" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                is_trap = true,
+                attribute = "LIGHT",
+                monster_type = "Zombie",
+                monster_archetypes = { ["GoldenLand"] = true }
             },
         },
     },
@@ -114,14 +129,18 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Eldlich" } }, { monster_archetypes = { "GoldenLand" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                is_trap = true,
+                attribute = "LIGHT",
+                monster_type = "Zombie",
+                monster_archetypes = { ["GoldenLand"] = true, ["Eldlixir"] = true }
             },
         },
     },
@@ -138,14 +157,17 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Eldlich" } }, { monster_archetypes = { "GoldenLand" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                attribute = "LIGHT",
+                monster_type = "Zombie",
+                monster_archetypes = { ["Eldlich"] = true }
             },
         },
     },
@@ -162,14 +184,17 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Eldlich" } }, { monster_archetypes = { "GoldenLand" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                attribute = "LIGHT",
+                monster_type = "Zombie",
+                monster_archetypes = { ["GoldenLand"] = true }
             },
         },
     },

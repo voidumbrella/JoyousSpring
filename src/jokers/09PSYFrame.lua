@@ -76,7 +76,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and context.setting_blind and context.main_eval then
                 local _, driver = next(SMODS.find_card("j_joy_psy_driver", true))
                 if not driver then
@@ -147,7 +147,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and context.setting_blind and context.main_eval then
                 local _, driver = next(SMODS.find_card("j_joy_psy_driver", true))
                 if not driver then
@@ -218,7 +218,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and context.setting_blind and context.main_eval then
                 local _, driver = next(SMODS.find_card("j_joy_psy_driver", true))
                 if not driver then
@@ -289,7 +289,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and context.setting_blind and context.main_eval then
                 local _, driver = next(SMODS.find_card("j_joy_psy_driver", true))
                 if not driver then
@@ -360,7 +360,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and context.setting_blind and context.main_eval then
                 local _, driver = next(SMODS.find_card("j_joy_psy_driver", true))
                 if not driver then
@@ -430,7 +430,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and context.joy_returned and context.joy_returned_card == card then
                 local choices = {
                     "j_joy_psy_alpha",
@@ -495,7 +495,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.banish(card, "blind_selected")
                 local choices = {}
@@ -557,7 +557,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.banish(card, "blind_selected")
                 local choices = JoyousSpring.get_materials_owned({ { exclude_keys = { "j_joy_psy_omega" } } })
@@ -612,7 +612,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.joy_returned and JoyousSpring.is_monster_type(context.joy_returned_card, "Psychic") then
                 local choices = {

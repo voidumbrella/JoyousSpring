@@ -26,55 +26,7 @@ SMODS.Joker({
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
-            },
-        },
-    },
-})
-SMODS.Joker({
-    key = "rhino",
-    atlas = 'Misc03',
-    pos = { x = 2, y = 0 },
-    rarity = 1,
-    discovered = true,
-    blueprint_compat = false,
-    eternal_compat = true,
-    cost = 0,
-    loc_vars = function(self, info_queue, card)
-        return {}
-    end,
-    generate_ui = JoyousSpring.generate_info_ui,
-    set_sprites = JoyousSpring.set_back_sprite,
-    config = {
-        extra = {
-            joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
-            },
-        },
-    },
-})
-SMODS.Joker({
-    key = "tourguide",
-    atlas = 'Misc03',
-    pos = { x = 4, y = 0 },
-    rarity = 1,
-    discovered = true,
-    blueprint_compat = false,
-    eternal_compat = true,
-    cost = 0,
-    loc_vars = function(self, info_queue, card)
-        return {}
-    end,
-    generate_ui = JoyousSpring.generate_info_ui,
-    set_sprites = JoyousSpring.set_back_sprite,
-    config = {
-        extra = {
-            joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
+                monster_type = "Rock",
                 monster_archetypes = {}
             },
         },
@@ -97,7 +49,7 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
+                attribute = "LIGHT",
                 monster_type = "Cyberse",
                 monster_archetypes = {}
             },
@@ -121,7 +73,7 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
+                attribute = "LIGHT",
                 monster_type = "Cyberse",
                 monster_archetypes = {}
             },
@@ -145,8 +97,8 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
+                attribute = "EARTH",
+                monster_type = "Rock",
                 monster_archetypes = {}
             },
         },
@@ -169,8 +121,8 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
+                attribute = "EARTH",
+                monster_type = "Rock",
                 monster_archetypes = {}
             },
         },
@@ -193,8 +145,8 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
+                attribute = "EARTH",
+                monster_type = "Rock",
                 monster_archetypes = {}
             },
         },
@@ -217,8 +169,8 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
+                attribute = "EARTH",
+                monster_type = "Rock",
                 monster_archetypes = {}
             },
         },
@@ -241,8 +193,8 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
+                attribute = "EARTH",
+                monster_type = "Rock",
                 monster_archetypes = {}
             },
         },
@@ -265,8 +217,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
+                is_trap = true,
+                attribute = "LIGHT",
+                monster_type = "Beast",
                 monster_archetypes = {}
             },
         },
@@ -289,8 +242,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
+                is_trap = true,
+                attribute = "EARTH",
+                monster_type = "Rock",
                 monster_archetypes = {}
             },
         },
@@ -313,8 +267,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
+                is_trap = true,
                 attribute = "DARK",
-                monster_type = "Cyberse",
+                monster_type = "Rock",
                 monster_archetypes = {}
             },
         },
@@ -337,8 +292,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
+                is_trap = true,
+                attribute = "LIGHT",
+                monster_type = "Rock",
                 monster_archetypes = {}
             },
         },
@@ -361,8 +317,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
+                is_trap = true,
                 attribute = "DARK",
-                monster_type = "Cyberse",
+                monster_type = "Zombie",
                 monster_archetypes = {}
             },
         },
@@ -385,8 +342,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
+                is_trap = true,
                 attribute = "DARK",
-                monster_type = "Cyberse",
+                monster_type = "Zombie",
                 monster_archetypes = {}
             },
         },
@@ -409,6 +367,7 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
+                is_trap = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
                 monster_archetypes = {}
@@ -433,8 +392,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
+                is_trap = true,
+                attribute = "EARTH",
+                monster_type = "Reptile",
                 monster_archetypes = {}
             },
         },
@@ -457,8 +417,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
+                is_trap = true,
+                attribute = "LIGHT",
+                monster_type = "Fairy",
                 monster_archetypes = {}
             },
         },
@@ -481,8 +442,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
+                is_trap = true,
+                attribute = "EARTH",
+                monster_type = "Insect",
                 monster_archetypes = {}
             },
         },
@@ -505,8 +467,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
+                is_pendulum = true,
+                attribute = "LIGHT",
+                monster_type = "Spellcaster",
                 monster_archetypes = {}
             },
         },
@@ -529,8 +492,9 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
+                is_pendulum = true,
                 attribute = "DARK",
-                monster_type = "Cyberse",
+                monster_type = "Fairy",
                 monster_archetypes = {}
             },
         },
@@ -577,8 +541,8 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
+                attribute = "LIGHT",
+                monster_type = "Machine",
                 monster_archetypes = {}
             },
         },
@@ -602,7 +566,7 @@ SMODS.Joker({
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
-                monster_type = "Cyberse",
+                monster_type = "Fiend",
                 monster_archetypes = {}
             },
         },
@@ -626,7 +590,7 @@ SMODS.Joker({
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
-                monster_type = "Cyberse",
+                monster_type = "Spellcaster",
                 monster_archetypes = {}
             },
         },

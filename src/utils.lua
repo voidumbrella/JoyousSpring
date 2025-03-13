@@ -236,6 +236,29 @@ JoyousSpring.is_playing_card = function(card)
     return card and (card.ability.set == 'Enhanced' or card.ability.set == 'Default') and true or false
 end
 
+---Calculate flips effect activation
+---@param card Card|table
+---@param context CalcContext|table
+---@return boolean `true` if it just activated its flip effect
+JoyousSpring.calculate_flip_effect = function(card, context)
+    if not context.blueprint_card then
+        if (context.joy_card_flipped and context.joy_card_flipped == card and card.facing == "front") or
+            (context.selling_blind and context.main_eval and JoyousSpring.flip_effect_active(card)) then
+            card.ability.extra.joyous_spring.flip_active = true
+            SMODS.calculate_effect({ message = localize("k_joy_flip") }, card)
+            return true
+        end
+        if context.end_of_round and context.main_eval and context.game_over == false then
+            card.ability.extra.joyous_spring.flip_active = false
+            if JoyousSpring.should_trap_flip(card) then
+                card:flip()
+                SMODS.calculate_effect({ message = localize("k_joy_set") }, card)
+            end
+        end
+    end
+    return false
+end
+
 --- Talisman compat
 to_big = to_big or function(num)
     return num

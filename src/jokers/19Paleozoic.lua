@@ -1,4 +1,4 @@
---- RUNICK
+--- PALEOZOIC
 SMODS.Atlas({
     key = "paleo",
     path = "19Paleozoic.png",
@@ -18,14 +18,18 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                is_trap = true,
+                attribute = "WATER",
+                monster_type = "Aqua",
+                monster_archetypes = { ["Paleozoic"] = true }
             },
         },
     },
@@ -42,14 +46,18 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                is_trap = true,
+                attribute = "WATER",
+                monster_type = "Aqua",
+                monster_archetypes = { ["Paleozoic"] = true }
             },
         },
     },
@@ -66,14 +74,18 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                is_trap = true,
+                attribute = "WATER",
+                monster_type = "Aqua",
+                monster_archetypes = { ["Paleozoic"] = true }
             },
         },
     },
@@ -90,14 +102,18 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                is_trap = true,
+                attribute = "WATER",
+                monster_type = "Aqua",
+                monster_archetypes = { ["Paleozoic"] = true }
             },
         },
     },
@@ -114,14 +130,18 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                is_trap = true,
+                attribute = "WATER",
+                monster_type = "Aqua",
+                monster_archetypes = { ["Paleozoic"] = true }
             },
         },
     },
@@ -138,14 +158,18 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                is_trap = true,
+                attribute = "WATER",
+                monster_type = "Aqua",
+                monster_archetypes = { ["Paleozoic"] = true }
             },
         },
     },
@@ -162,14 +186,18 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                is_trap = true,
+                attribute = "WATER",
+                monster_type = "Aqua",
+                monster_archetypes = { ["Paleozoic"] = true }
             },
         },
     },
@@ -186,14 +214,18 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                is_trap = true,
+                attribute = "WATER",
+                monster_type = "Aqua",
+                monster_archetypes = { ["Paleozoic"] = true }
             },
         },
     },
@@ -210,14 +242,17 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                attribute = "WATER",
+                monster_type = "Aqua",
+                monster_archetypes = { ["Paleozoic"] = true }
             },
         },
     },
@@ -234,14 +269,17 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                attribute = "WATER",
+                monster_type = "Aqua",
+                monster_archetypes = { ["Paleozoic"] = true }
             },
         },
     },
@@ -258,14 +296,17 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                attribute = "WATER",
+                monster_type = "Aqua",
+                monster_archetypes = { ["Paleozoic"] = true }
             },
         },
     },

@@ -66,7 +66,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.joker_main then
                 return {
                     xmult = 1 +
@@ -128,6 +128,7 @@ SMODS.Joker({
     end
 })
 
+-- Gren Maju Da Eiza
 SMODS.Joker({
     key = "grenmaju",
     atlas = 'Misc02',
@@ -156,11 +157,106 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.joker_main then
                 return {
                     chips = card.ability.extra.chips * (G.GAME.joy_cards_banished or 0)
                 }
+            end
+        end
+    end,
+})
+
+-- Fiendish Rhino Warrior
+SMODS.Joker({
+    key = "rhino",
+    atlas = 'Misc03',
+    pos = { x = 2, y = 0 },
+    rarity = 1,
+    discovered = true,
+    blueprint_compat = false,
+    eternal_compat = true,
+    cost = 4,
+    loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_revive" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_material" }
+        end
+        return { vars = { card.ability.extra.mills, card.ability.extra.revives } }
+    end,
+    joy_desc_cards = {
+        { properties = { { monster_type = "Fiend" } }, name = "Sends" },
+    },
+    generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
+    config = {
+        extra = {
+            joyous_spring = JoyousSpring.init_joy_table {
+                attribute = "EARTH",
+                monster_type = "Fiend",
+                monster_archetypes = {}
+            },
+            mills = 5,
+            revives = 1
+        },
+    },
+    calculate = function(self, card, context)
+        if context.joy_summon and context.main_eval and not context.blueprint_card then
+            for _, joker in ipairs(context.joy_summon_materials) do
+                if joker == card then
+                    local choices = JoyousSpring.get_materials_in_collection({ { monster_type = "Fiend" } })
+                    for _ = 1, card.ability.extra.mills do
+                        local key_to_send = pseudorandom_element(choices, pseudoseed("j_joy_rhino"))
+                        JoyousSpring.send_to_graveyard(key_to_send or "j_joy_ba_cagna")
+                    end
+                    JoyousSpring.revive_pseudorandom({ { monster_type = "Fiend" } }, pseudoseed("j_joy_rhino"))
+                    break
+                end
+            end
+        end
+    end,
+})
+
+-- Tour Guide From the Underworld
+SMODS.Joker({
+    key = "tourguide",
+    atlas = 'Misc03',
+    pos = { x = 4, y = 0 },
+    rarity = 2,
+    discovered = true,
+    blueprint_compat = false,
+    eternal_compat = true,
+    cost = 6,
+    loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_main_deck_joker" }
+        end
+        return { vars = { card.ability.extra.adds } }
+    end,
+    joy_desc_cards = {
+        { properties = { { is_main_deck = true, monster_type = "Fiend" } }, name = "Creates" },
+    },
+    generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
+    config = {
+        extra = {
+            joyous_spring = JoyousSpring.init_joy_table {
+                attribute = "DARK",
+                monster_type = "Fiend",
+                monster_archetypes = {}
+            },
+            adds = 1
+        },
+    },
+    add_to_deck = function(self, card, from_debuff)
+        if not card.debuff and not from_debuff then
+            local choices = JoyousSpring.get_materials_in_collection({ { monster_type = "Fiend", rarity = 1, is_main_deck = true }, { monster_type = "Fiend", rarity = 2, is_main_deck = true } })
+            for _ = 1, card.ability.extra.adds do
+                local key_to_add = pseudorandom_element(choices, pseudoseed("j_joy_tourguide"))
+                SMODS.add_card({
+                    key = key_to_add or "j_joy_ba_graff",
+                    edition = "e_negative"
+                })
             end
         end
     end,
@@ -199,7 +295,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.joker_main then
                 return {
                     mult = card.ability.extra.mult * (G.GAME.joy_cards_destroyed or 0)
@@ -297,7 +393,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and context.selling_self then
                 if G.GAME.blind and ((not G.GAME.blind.disabled) and (G.GAME.blind:get_type() == 'Boss')) then
                     card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil,
@@ -497,7 +593,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.joker_main then
                 return {
                     chips = card.ability.extra.chips
@@ -570,98 +666,6 @@ SMODS.Joker({
 })
 
 --#endregion
-
-SMODS.Joker({
-    key = "rhino",
-    atlas = 'Misc03',
-    pos = { x = 2, y = 0 },
-    rarity = 1,
-    discovered = true,
-    blueprint_compat = false,
-    eternal_compat = true,
-    cost = 4,
-    loc_vars = function(self, info_queue, card)
-        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
-            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_revive" }
-            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_material" }
-        end
-        return { vars = { card.ability.extra.mills, card.ability.extra.revives } }
-    end,
-    joy_desc_cards = {
-        { properties = { { monster_type = "Fiend" } }, name = "Sends" },
-    },
-    generate_ui = JoyousSpring.generate_info_ui,
-    set_sprites = JoyousSpring.set_back_sprite,
-    config = {
-        extra = {
-            joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "EARTH",
-                monster_type = "Fiend",
-                monster_archetypes = {}
-            },
-            mills = 5,
-            revives = 1
-        },
-    },
-    calculate = function(self, card, context)
-        if context.joy_summon and context.main_eval and not context.blueprint_card then
-            for _, joker in ipairs(context.joy_summon_materials) do
-                if joker == card then
-                    local choices = JoyousSpring.get_materials_in_collection({ { monster_type = "Fiend" } })
-                    for _ = 1, card.ability.extra.mills do
-                        local key_to_send = pseudorandom_element(choices, pseudoseed("j_joy_rhino"))
-                        JoyousSpring.send_to_graveyard(key_to_send or "j_joy_ba_cagna")
-                    end
-                    JoyousSpring.revive_pseudorandom({ { monster_type = "Fiend" } }, pseudoseed("j_joy_rhino"))
-                    break
-                end
-            end
-        end
-    end,
-})
-SMODS.Joker({
-    key = "tourguide",
-    atlas = 'Misc03',
-    pos = { x = 4, y = 0 },
-    rarity = 2,
-    discovered = true,
-    blueprint_compat = false,
-    eternal_compat = true,
-    cost = 6,
-    loc_vars = function(self, info_queue, card)
-        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
-            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_main_deck_joker" }
-        end
-        return { vars = { card.ability.extra.adds } }
-    end,
-    joy_desc_cards = {
-        { properties = { { is_main_deck = true, monster_type = "Fiend" } }, name = "Creates" },
-    },
-    generate_ui = JoyousSpring.generate_info_ui,
-    set_sprites = JoyousSpring.set_back_sprite,
-    config = {
-        extra = {
-            joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Fiend",
-                monster_archetypes = {}
-            },
-            adds = 1
-        },
-    },
-    add_to_deck = function(self, card, from_debuff)
-        if not card.debuff and not from_debuff then
-            local choices = JoyousSpring.get_materials_in_collection({ { monster_type = "Fiend", rarity = 1, is_main_deck = true }, { monster_type = "Fiend", rarity = 2, is_main_deck = true } })
-            for _ = 1, card.ability.extra.adds do
-                local key_to_add = pseudorandom_element(choices, pseudoseed("j_joy_tourguide"))
-                SMODS.add_card({
-                    key = key_to_add or "j_joy_ba_graff",
-                    edition = "e_negative"
-                })
-            end
-        end
-    end,
-})
 
 JoyousSpring.collection_pool[#JoyousSpring.collection_pool + 1] = {
     keys = { "misc" },

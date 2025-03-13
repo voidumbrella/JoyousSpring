@@ -47,7 +47,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.selling_card and JoyousSpring.is_extra_deck_monster(context.card) then
                 card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.base_xmult
@@ -115,7 +115,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.other_joker and JoyousSpring.is_monster_archetype(context.other_joker, "Dogmatika") then
                 return {
                     mult = card.ability.extra.mult,
@@ -167,7 +167,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.setting_blind and context.main_eval then
                 for i = 1, card.ability.extra.cards_to_create do
                     local key_to_add = pseudorandom_element(
@@ -214,7 +214,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.end_of_round and context.game_over == false and context.main_eval then
                 if G.GAME.blind.boss then
                     local choices = {
@@ -279,7 +279,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.joker_main then
                 local debuffed_ed_count = JoyousSpring.count_materials_owned({ { is_extra_deck = true, is_debuffed = true } })
                 if next(SMODS.find_card("j_joy_dogma_relic")) then
@@ -404,7 +404,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.end_of_round and context.game_over == false and context.main_eval then
                 for i = 1, card.ability.extra.duplicates do
                     local choices = next(SMODS.find_card("j_joy_dogma_relic")) and
@@ -477,7 +477,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.hand_drawn and not context.blueprint_card and not context.retrigger_joker then
                 local debuffed_ed_count = JoyousSpring.count_materials_owned({ { is_extra_deck = true, is_debuffed = true } }) +
                     JoyousSpring.count_materials_in_graveyard({ { is_extra_deck = true } })
@@ -550,7 +550,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.joker_main then
                 local debuffed_ed_count = JoyousSpring.count_materials_owned({ { is_extra_deck = true, is_debuffed = true } })
                 if next(SMODS.find_card("j_joy_dogma_relic")) then
@@ -565,11 +565,11 @@ SMODS.Joker({
             end
         end
     end,
-    joy_create_card_for_shop = function(card, area)
-        if card and JoyousSpring.is_extra_deck_monster(card) and next(SMODS.find_card("j_joy_dogma_knight")) then
-            card.ability.extra.joyous_spring.is_free = true
-            JoyousSpring.create_perma_debuffed_card(card, "Dogmatika")
-            card:set_cost()
+    joy_create_card_for_shop = function(card, other_card, area)
+        if other_card and JoyousSpring.is_extra_deck_monster(other_card) and next(SMODS.find_card("j_joy_dogma_knight")) then
+            other_card.ability.extra.joyous_spring.is_free = true
+            JoyousSpring.create_perma_debuffed_card(other_card, "Dogmatika")
+            other_card:set_cost()
         end
     end,
     joker_display_def = function(JokerDisplay)

@@ -58,7 +58,7 @@ function get_current_pool(_type, _rarity, _legendary, _append)
     local _pool, _pool_key = get_current_pool_ref(_type, _rarity, _legendary, _append)
     local new_pool
 
-    if _type == 'Joker' and JoyousSpring.config.only_ygo_cards then
+    if not _legendary and _type == 'Joker' and JoyousSpring.config.only_ygo_cards then
         new_pool = {}
         for _, key in ipairs(_pool) do
             if key:sub(1, 5) == "j_joy" then

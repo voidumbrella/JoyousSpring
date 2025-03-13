@@ -185,12 +185,12 @@ end
 ---@return boolean
 JoyousSpring.debuff_hand = function(cards, hand, handname)
     for _, joker in ipairs(G.jokers.cards) do
-        if joker.config.center.joy_debuff_hand and joker.config.center.joy_debuff_hand(joker, cards, hand, handname) then
+        if not joker.debuff and joker.config.center.joy_debuff_hand and joker.config.center.joy_debuff_hand(joker, cards, hand, handname) then
             return true
         end
     end
     for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
-        if joker.config.center.joy_debuff_hand and joker.config.center.joy_debuff_hand(joker, cards, hand, handname) then
+        if not joker.debuff and joker.config.center.joy_debuff_hand and joker.config.center.joy_debuff_hand(joker, cards, hand, handname) then
             return true
         end
     end
@@ -213,14 +213,14 @@ function create_card_for_shop(area)
     local card = create_card_for_shop_ref(area)
     if card and G.jokers then
         for _, joker in ipairs(G.jokers.cards) do
-            if joker.config.center.joy_create_card_for_shop then
-                joker.config.center.joy_create_card_for_shop(card, area)
+            if not joker.debuff and joker.config.center.joy_create_card_for_shop then
+                joker.config.center.joy_create_card_for_shop(joker, card, area)
             end
         end
         if JoyousSpring.field_spell_area then
             for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
-                if joker.config.center.joy_create_card_for_shop then
-                    joker.config.center.joy_create_card_for_shop(card, area)
+                if not joker.debuff and joker.config.center.joy_create_card_for_shop then
+                    joker.config.center.joy_create_card_for_shop(joker, card, area)
                 end
             end
         end
@@ -232,12 +232,12 @@ local cardarea_emplace_ref = CardArea.emplace
 function CardArea:emplace(card, location, stay_flipped)
     if self == G.jokers then
         for _, joker in ipairs(G.jokers.cards) do
-            if joker.config.center.joy_apply_to_jokers_added then
+            if not joker.debuff and joker.config.center.joy_apply_to_jokers_added then
                 joker.config.center.joy_apply_to_jokers_added(joker, card)
             end
         end
         for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
-            if joker.config.center.joy_apply_to_jokers_added then
+            if not joker.debuff and joker.config.center.joy_apply_to_jokers_added then
                 joker.config.center.joy_apply_to_jokers_added(joker, card)
             end
         end
@@ -248,9 +248,10 @@ end
 JoyousSpring.stay_flipped = function(card, stay_flipped)
     local keep_flipped = stay_flipped or false
     local source
+
     if G.jokers then
         for _, joker in ipairs(G.jokers.cards) do
-            if joker.config.center.joy_stay_flipped then
+            if not joker.debuff and joker.config.center.joy_stay_flipped then
                 keep_flipped = joker.config.center.joy_stay_flipped(joker, card)
                 if keep_flipped and not source then
                     source = joker
@@ -260,7 +261,7 @@ JoyousSpring.stay_flipped = function(card, stay_flipped)
     end
     if JoyousSpring.field_spell_area then
         for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
-            if joker.config.center.joy_stay_flipped then
+            if not joker.debuff and joker.config.center.joy_stay_flipped then
                 keep_flipped = joker.config.center.joy_stay_flipped(joker, card)
                 if keep_flipped and not source then
                     source = joker
@@ -418,7 +419,7 @@ JoyousSpring.create_UIBox_effect_selection = function(card, text, select_text)
                                                     {
                                                         n = G.UIT.T,
                                                         config = {
-                                                            text = select_text or localize('k_joy_summon'),
+                                                            text = select_text or localize('k_joy_select'),
                                                             scale = 0.5,
                                                             colour = G.C.UI.TEXT_LIGHT,
                                                             shadow = true,

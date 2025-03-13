@@ -35,7 +35,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval and G.GAME.blind.boss then
                 if #JoyousSpring.field_spell_area.cards < JoyousSpring.field_spell_area.config.card_limit then
@@ -79,7 +79,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval and G.GAME.blind.boss then
                 if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit +
@@ -133,7 +133,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' and not context.blueprint_card then
+        if JoyousSpring.can_use_abilities(card) and not context.blueprint_card then
             if context.joy_activate_effect and context.joy_activated_card == card then
                 local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
                 local spellcasters = JoyousSpring.get_materials_owned({ { monster_type = "Spellcaster" } })
@@ -198,7 +198,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card then
                 if context.joy_activate_effect and context.joy_activated_card == card then
                     local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
@@ -273,7 +273,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card then
                 if context.joy_activate_effect and context.joy_activated_card == card then
                     local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
@@ -347,7 +347,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' and not context.blueprint_card then
+        if JoyousSpring.can_use_abilities(card) and not context.blueprint_card then
             if context.joy_activate_effect and context.joy_activated_card == card then
                 local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
                 local rocks = JoyousSpring.get_materials_owned({ { monster_type = "Rock" } })
@@ -415,7 +415,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' and not context.blueprint_card then
+        if JoyousSpring.can_use_abilities(card) and not context.blueprint_card then
             if context.joy_activate_effect and context.joy_activated_card == card then
                 local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
                 local plants = JoyousSpring.get_materials_owned({ { monster_type = "Plant" } })
@@ -491,7 +491,7 @@ SMODS.Joker({
         active = false
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card then
                 if context.joy_activate_effect and context.joy_activated_card == card then
                     local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
@@ -569,7 +569,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card then
                 if context.joy_activate_effect and context.joy_activated_card == card then
                     local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
@@ -636,7 +636,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card then
                 if context.joy_activate_effect and context.joy_activated_card == card then
                     local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
@@ -726,7 +726,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.joy_detach and context.joy_detaching_card == card then
                 G.hand:change_size(card.ability.extra.hsize)
@@ -787,7 +787,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.joy_detach and context.joy_detaching_card == card then
                 for _, joker in ipairs(G.jokers.cards) do

@@ -33,7 +33,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.destroy_card and context.cardarea == G.play then
                 card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.base_xmult
@@ -102,7 +102,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.joker_main then
                 return {
                     xmult = 1 +
@@ -160,7 +160,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and context.joy_no_draw then
                 card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.base_xmult
                 return {
@@ -219,7 +219,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and context.joy_revived then
                 card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.base_xmult
                 return {
@@ -279,7 +279,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker then
                 if context.setting_blind and context.main_eval then
                     local eval = function(card)
@@ -356,7 +356,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and context.selling_card then
                 if context.card.debuff then
                     card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.base_xmult

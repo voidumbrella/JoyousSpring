@@ -7,6 +7,17 @@ SMODS.Atlas({
     py = 190
 })
 
+--#region LSP
+
+---@class SMODS.Joker
+---@field joy_set_cost? fun(Card:table|Card) Sets its own cost and sell cost inside Card:set_cost()
+---@field joy_can_activate? fun(Card:table|Card):boolean? Returns `true` if the activated ability can be used
+---@field joy_allow_ability? fun(card:table|Card,other_card:table|Card):boolean? Returns `true` if *other_card* is allowed to use abilities while facedown by *card*
+---@field joy_create_card_for_shop? fun(card:table|Card, other_card:table|Card, area:CardArea) Used to modify *other_Card* when it's created for the shop
+---@field joy_apply_to_jokers_added? fun(card:table|Card,added_card:table|Card) Used to modify *added_card* when obtained
+---@field joy_stay_flipped? fun(card:table|Card,playing_card:table|Card):boolean? Determines if *playing_card* should stay flipped facedown when drawn from deck
+---@field joy_debuff_hand? fun(card:table|Card,full_hand:Card[]|table[],poker_hands:table<string, Card[]|table[]>, scoring_name:string):boolean? Returns `true` if played hand should be debuffed, similar to a Blind
+
 ---@alias summon_type
 ---|'"NORMAL"'
 ---|'"RITUAL"'
@@ -24,6 +35,34 @@ SMODS.Atlas({
 ---|'"WIND"'
 ---|'"DIVINE"'
 
+---@alias monster_type
+---|'"Aqua"'
+---|'"Beast"'
+---|'"BeastWarrior"'
+---|'"CreatorGod"'
+---|'"Cyberse"'
+---|'"Dinosaur"'
+---|'"DivineBeast"'
+---|'"Dragon"'
+---|'"Fairy"'
+---|'"Fiend"'
+---|'"Fish"'
+---|'"Illusion"'
+---|'"Insect"'
+---|'"Machine"'
+---|'"Plant"'
+---|'"Psychic"'
+---|'"Pyro"'
+---|'"Reptile"'
+---|'"Rock"'
+---|'"SeaSerpent"'
+---|'"Spellcaster"'
+---|'"Thunder"'
+---|'"Warrior"'
+---|'"WingedBeast"'
+---|'"Wyrm"'
+---|'"Zombie"'
+
 ---@class material_properties
 ---@field optional boolean?
 ---@field min number?
@@ -40,8 +79,8 @@ SMODS.Atlas({
 ---@field exclude_debuffed boolean?
 ---@field is_joker boolean?
 ---@field is_monster boolean?
----@field monster_type string?
----@field exclude_monster_types string[]?
+---@field monster_type monster_type?
+---@field exclude_monster_types monster_type[]?
 ---@field monster_attribute attribute?
 ---@field exclude_monster_attributes attribute[]?
 ---@field monster_archetypes string[]?
@@ -85,13 +124,17 @@ SMODS.Atlas({
 ---@field is_effect boolean?
 ---@field is_tuner boolean?
 ---@field is_pendulum boolean?
+---@field is_trap boolean?
 ---@field attribute attribute?
----@field monster_type string?
+---@field monster_type monster_type?
 ---@field monster_archetypes table?
 ---@field is_all_attributes boolean|table?
 ---@field is_all_materials { RITUAL:boolean?, FUSION:boolean?, SYNCHRO:boolean?, XYZ:boolean?, LINK:boolean? }?
 ---@field summon_conditions summon_conditions[]?
 ---@field summon_consumeable_conditions table?
+---@field cannot_revive boolean?
+
+--#endregion
 
 ---Initializes joyous_spring table in Jokers
 ---@param params joyous_spring
@@ -104,6 +147,7 @@ JoyousSpring.init_joy_table = function(params)
         is_effect = params.is_effect or true,
         is_tuner = params.is_tuner or false,
         is_pendulum = params.is_pendulum or false,
+        is_trap = params.is_trap or false,
         attribute = params.attribute or "FIRE",
         monster_type = params.monster_type or "Dragon",
         monster_archetypes = params.monster_archetypes or {},
@@ -118,6 +162,7 @@ JoyousSpring.init_joy_table = function(params)
         perma_debuffed = false,
         is_free = false,
         cannot_revive = params.cannot_revive or false,
+        flip_active = false,
     } or {
         is_field_spell = true,
         monster_archetypes = params.monster_archetypes or {},
@@ -168,6 +213,10 @@ end
 
 JoyousSpring.is_pendulum_monster = function(card)
     return JoyousSpring.is_monster_card(card) and card.ability.extra.joyous_spring.is_pendulum or false
+end
+
+JoyousSpring.is_trap_monster = function(card)
+    return JoyousSpring.is_monster_card(card) and card.ability.extra.joyous_spring.is_trap or false
 end
 
 JoyousSpring.is_tuner_monster = function(card)
@@ -221,6 +270,53 @@ JoyousSpring.can_activate = function(card)
             (G.GAME.STOP_USE and G.GAME.STOP_USE > 0)) and (not card.debuff and card.facing ~= 'back') and
         JoyousSpring.has_activated_effect(card) and
         card.config.center.joy_can_activate(card) or false
+end
+
+JoyousSpring.can_use_abilities = function(card)
+    if card.facing == 'front' then return true end
+    for _, joker in ipairs(G.jokers.cards) do
+        if not joker.debuff and joker.config.center.joy_allow_ability and joker.config.center.joy_allow_ability(joker, card) then
+            return true
+        end
+    end
+    for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
+        if not joker.debuff and joker.config.center.joy_allow_ability and joker.config.center.joy_allow_ability(joker, card) then
+            return true
+        end
+    end
+    return false
+end
+
+JoyousSpring.should_trap_flip = function(card)
+    if not JoyousSpring.is_trap_monster(card) then
+        return false
+    end
+
+    for _, joker in ipairs(G.jokers.cards) do
+        if not joker.debuff and joker.config.center.joy_prevent_trap_flip and joker.config.center.joy_prevent_trap_flip(joker, card) then
+            return false
+        end
+    end
+    for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
+        if not joker.debuff and joker.config.center.joy_prevent_trap_flip and joker.config.center.joy_prevent_trap_flip(joker, card) then
+            return false
+        end
+    end
+    return true
+end
+
+JoyousSpring.flip_effect_active = function(card)
+    for _, joker in ipairs(G.jokers.cards) do
+        if not joker.debuff and joker.config.center.joy_flip_effect_active and joker.config.center.joy_flip_effect_active(joker, card) then
+            return true
+        end
+    end
+    for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
+        if not joker.debuff and joker.config.center.joy_flip_effect_active and joker.config.center.joy_flip_effect_active(joker, card) then
+            return true
+        end
+    end
+    return false
 end
 
 ---Checks if **card** fulfills **properties**
