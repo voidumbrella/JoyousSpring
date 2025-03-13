@@ -560,6 +560,14 @@ SMODS.Joker({
             end
         end
     end,
+    add_to_deck = function(self, card, from_debuff)
+        if not card.debuff and G.STATE == G.STATES.SELECTING_HAND then
+            G.GAME.chips = G.GAME.blind.chips
+            G.STATE = G.STATES.HAND_PLAYED
+            G.STATE_COMPLETE = true
+            end_round()
+        end
+    end
 })
 
 -- World Legacy Scars
