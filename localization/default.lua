@@ -1040,7 +1040,7 @@ return {
 					" ",
 					"Add {C:attention}#1#{} {C:joy_normal}\"PSY-Frame\"",
 					"to the {C:joy_spell}Extra Deck{} when a {C:joy_normal}Psychic{}",
-					"{C:attention}Joker{} is {C:attention}banished{}",
+					"{C:attention}Joker{} returns from {C:attention}banishment{}",
 					"{C:inactive}(Must have room){}",
 				},
 				joy_summon_conditions = {
