@@ -709,7 +709,7 @@ return {
 			j_joy_generaider_mardel = {
 				name = "{C:joy_effect}Mardel, Generaider Boss of Light",
 				text = {
-					"You can {C:attention}tribute #1#{} {C:joy_normal}\"Generaider\"{}",
+					"Once per round, you can {C:attention}tribute #1#{} {C:joy_normal}\"Generaider\"{}",
 					"and/or {C:joy_normal}Plant{} {C:attention}Joker{} to create {C:attention}#2#{}",
 					"{C:green}Uncommon{} {C:joy_normal}\"Generaider\"{}",
 					"{C:inactive}(Must have room){}",

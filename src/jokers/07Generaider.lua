@@ -411,12 +411,13 @@ SMODS.Joker({
                 monster_archetypes = { ["Generaider"] = true }
             },
             tributes = 1,
-            cards_to_create = 1
+            cards_to_create = 1,
+            activated = false
         },
     },
     calculate = function(self, card, context)
         if JoyousSpring.can_use_abilities(card) and not context.blueprint_card then
-            if context.joy_activate_effect and context.joy_activated_card == card then
+            if not card.ability.extra.activated and context.joy_activate_effect and context.joy_activated_card == card then
                 local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
                 local plants = JoyousSpring.get_materials_owned({ { monster_type = "Plant" } })
                 local tokens = SMODS.merge_lists({ generaiders, plants })
@@ -425,8 +426,9 @@ SMODS.Joker({
                         card.ability.extra.tributes)
                 end
             end
-            if context.joy_exit_effect_selection and context.joy_card == card and
+            if not card.ability.extra.activated and context.joy_exit_effect_selection and context.joy_card == card and
                 #context.joy_selection == card.ability.extra.tributes then
+                card.ability.extra.activated = true
                 for _, selected_card in ipairs(context.joy_selection) do
                     selected_card:start_dissolve()
                 end
@@ -443,12 +445,15 @@ SMODS.Joker({
                 end
             end
         end
+        if context.end_of_round and context.game_over == false and context.main_eval then
+            card.ability.extra.activated = false
+        end
     end,
     joy_can_activate = function(card)
         local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
         local plants = JoyousSpring.get_materials_owned({ { monster_type = "Plant" } })
         local tokens = SMODS.merge_lists({ generaiders, plants })
-        return not card.debuff and
+        return not card.debuff and not card.ability.extra.activated and
             (#G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit and next(tokens)) and
             true or false
     end,
