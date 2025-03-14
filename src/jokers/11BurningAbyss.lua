@@ -22,7 +22,7 @@ SMODS.Joker({
     pos = { x = 0, y = 0 },
     rarity = 1,
     discovered = true,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
     cost = 4,
     loc_vars = function(self, info_queue, card)
@@ -46,7 +46,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if JoyousSpring.can_use_abilities(card) then
             if context.setting_blind and context.main_eval then
-                if ba_die() then
+                if ba_die() and not context.blueprint then
                     card:start_dissolve()
                 else
                     G.GAME.blind.chips = math.floor(G.GAME.blind.chips - G.GAME.blind.chips * card.ability.extra.percent)
@@ -65,7 +65,7 @@ SMODS.Joker({
     pos = { x = 1, y = 0 },
     rarity = 1,
     discovered = true,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
     cost = 4,
     loc_vars = function(self, info_queue, card)
@@ -89,7 +89,7 @@ SMODS.Joker({
     },
     calculate = function(self, card, context)
         if JoyousSpring.can_use_abilities(card) then
-            if context.setting_blind and context.main_eval and ba_die() then
+            if context.setting_blind and context.main_eval and ba_die() and not context.blueprint then
                 card:start_dissolve()
             end
             if context.joker_main then
@@ -107,7 +107,7 @@ SMODS.Joker({
     pos = { x = 2, y = 0 },
     rarity = 1,
     discovered = true,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
     cost = 4,
     loc_vars = function(self, info_queue, card)
@@ -133,7 +133,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if JoyousSpring.can_use_abilities(card) then
             if context.setting_blind and context.main_eval then
-                if ba_die() then
+                if ba_die() and not context.blueprint then
                     card:start_dissolve()
                 else
                     local choices = JoyousSpring.get_materials_in_collection({ { monster_type = "Fiend" } })
@@ -180,7 +180,7 @@ SMODS.Joker({
     },
     calculate = function(self, card, context)
         if JoyousSpring.can_use_abilities(card) then
-            if context.setting_blind and context.main_eval and ba_die() then
+            if context.setting_blind and context.main_eval and ba_die() and not context.blueprint then
                 card:start_dissolve()
             end
         end
@@ -202,7 +202,7 @@ SMODS.Joker({
     pos = { x = 4, y = 0 },
     rarity = 1,
     discovered = true,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
     cost = 4,
     loc_vars = function(self, info_queue, card)
@@ -230,7 +230,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if JoyousSpring.can_use_abilities(card) then
             if context.setting_blind and context.main_eval then
-                if ba_die() then
+                if ba_die() and not context.blueprint then
                     card:start_dissolve()
                 else
                     for _ = 1, card.ability.extra.revives do
@@ -253,7 +253,7 @@ SMODS.Joker({
     pos = { x = 0, y = 1 },
     rarity = 1,
     discovered = true,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
     cost = 4,
     loc_vars = function(self, info_queue, card)
@@ -280,7 +280,7 @@ SMODS.Joker({
     },
     calculate = function(self, card, context)
         if JoyousSpring.can_use_abilities(card) then
-            if context.setting_blind and context.main_eval and ba_die() then
+            if context.setting_blind and context.main_eval and ba_die() and not context.blueprint then
                 card:start_dissolve()
             end
             if context.other_joker and JoyousSpring.is_monster_type(context.other_joker, "Fiend") then
@@ -337,7 +337,7 @@ SMODS.Joker({
     },
     calculate = function(self, card, context)
         if JoyousSpring.can_use_abilities(card) then
-            if context.setting_blind and context.main_eval and ba_die() then
+            if context.setting_blind and context.main_eval and ba_die() and not context.blueprint then
                 card:start_dissolve()
             end
         end
@@ -358,7 +358,7 @@ SMODS.Joker({
     pos = { x = 2, y = 1 },
     rarity = 1,
     discovered = true,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
     cost = 4,
     loc_vars = function(self, info_queue, card)
@@ -385,7 +385,7 @@ SMODS.Joker({
     },
     calculate = function(self, card, context)
         if JoyousSpring.can_use_abilities(card) then
-            if context.setting_blind and context.main_eval and ba_die() then
+            if context.setting_blind and context.main_eval and ba_die() and not context.blueprint then
                 card:start_dissolve()
             end
             if context.other_joker and JoyousSpring.is_monster_type(context.other_joker, "Fiend") then
@@ -442,7 +442,7 @@ SMODS.Joker({
     },
     calculate = function(self, card, context)
         if JoyousSpring.can_use_abilities(card) then
-            if context.selling_self or (context.setting_blind and context.main_eval and ba_die()) then
+            if (context.selling_self or (context.setting_blind and context.main_eval and ba_die())) and not context.blueprint then
                 card:start_dissolve()
                 for _ = 1, card.ability.extra.revives do
                     JoyousSpring.revive_pseudorandom({ { monster_type = "Fiend" } },
@@ -482,7 +482,7 @@ SMODS.Joker({
     },
     calculate = function(self, card, context)
         if JoyousSpring.can_use_abilities(card) then
-            if context.selling_self or (context.setting_blind and context.main_eval and ba_die()) then
+            if (context.selling_self or (context.setting_blind and context.main_eval and ba_die())) and not context.blueprint then
                 card:start_dissolve()
 
                 local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "BurningAbyss" }, is_extra_deck = true } })
@@ -529,7 +529,7 @@ SMODS.Joker({
     },
     calculate = function(self, card, context)
         if JoyousSpring.can_use_abilities(card) then
-            if context.selling_self or (context.setting_blind and context.main_eval and ba_die()) then
+            if (context.selling_self or (context.setting_blind and context.main_eval and ba_die())) and not context.blueprint then
                 card:start_dissolve()
                 local choices = JoyousSpring.get_materials_in_collection({ { monster_type = "Fiend", is_main_deck = true, exclude_keys = { "j_joy_ba_scarm" } } })
                 for _ = 1, card.ability.extra.creates do
@@ -551,7 +551,7 @@ SMODS.Joker({
     pos = { x = 1, y = 2 },
     rarity = 3,
     discovered = true,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
     cost = 8,
     loc_vars = function(self, info_queue, card)
@@ -602,7 +602,7 @@ SMODS.Joker({
     pos = { x = 1, y = 3 },
     rarity = 2,
     discovered = true,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
     cost = 6,
     loc_vars = function(self, info_queue, card)
@@ -651,7 +651,7 @@ SMODS.Joker({
     pos = { x = 4, y = 2 },
     rarity = 3,
     discovered = true,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
     cost = 8,
     loc_vars = function(self, info_queue, card)
@@ -703,6 +703,7 @@ SMODS.Joker({
                     local key_to_send = pseudorandom_element(choices, pseudoseed("j_joy_ba_dante"))
                     JoyousSpring.send_to_graveyard(key_to_send or "j_joy_ba_cir")
                 end
+                JoyousSpring.ease_detach(card)
             end
             if context.joker_main then
                 return {
@@ -820,7 +821,7 @@ SMODS.Joker({
     pos = { x = 0, y = 3 },
     rarity = 3,
     discovered = true,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
     cost = 10,
     loc_vars = function(self, info_queue, card)
@@ -874,15 +875,18 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and context.joy_detach and context.joy_detaching_card == card then
+                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+                    JoyousSpring.ease_detach(card)
+                end
                 for _ = 1, card.ability.extra.revives do
                     local revived = JoyousSpring.revive_pseudorandom({ { monster_archetypes = { "BurningAbyss" } } },
                         pseudoseed("j_joy_ba_beatrice"), true)
                     if not revived then
-                        JoyousSpring.revive_pseudorandom({ {} }, pseudoseed("j_joy_ba_beatrice"), true)
+                        revived = JoyousSpring.revive_pseudorandom({ {} }, pseudoseed("j_joy_ba_beatrice"), true)
                     end
                 end
             end
-            if context.selling_self then
+            if context.selling_self and not context.blueprint then
                 if #JoyousSpring.extra_deck_area.cards + 1 < JoyousSpring.extra_deck_area.config.card_limit then
                     JoyousSpring.add_to_extra_deck("j_joy_ba_dante")
                     JoyousSpring.add_to_extra_deck("j_joy_ba_pilgrim")

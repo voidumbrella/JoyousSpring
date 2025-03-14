@@ -81,6 +81,7 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
+                is_tuner = true,
                 attribute = "DARK",
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Shaddoll"] = true }

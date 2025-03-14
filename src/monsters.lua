@@ -688,7 +688,7 @@ function Card:flip(source)
     if not JoyousSpring.is_summon_type(self, "LINK") and self.config.center_key ~= "j_joy_token" then
         card_flip_ref(self)
         local is_play_area = false
-        for _, area in ipairs(SMODS.get_card_areas('jokers', nil)) do
+        for _, area in ipairs(SMODS.get_card_areas('jokers')) do
             if self.area == area then
                 is_play_area = true
                 break

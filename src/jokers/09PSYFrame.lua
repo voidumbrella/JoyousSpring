@@ -432,13 +432,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and context.joy_returned and context.joy_returned_card == card then
-                local choices = {
-                    "j_joy_psy_alpha",
-                    "j_joy_psy_beta",
-                    "j_joy_psy_gamma",
-                    "j_joy_psy_delta",
-                    "j_joy_psy_epsilon",
-                }
+                local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "PSYFrame" }, is_main_deck = true, is_effect = true, exclude_keys = { "j_joy_psy_multithreader" } } })
 
                 for i = 1, card.ability.extra.cards_to_create do
                     local key_to_add, _ = pseudorandom_element(choices, pseudoseed("j_joy_psy_multithreader"))
@@ -615,11 +609,7 @@ SMODS.Joker({
         if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.joy_returned and JoyousSpring.is_monster_type(context.joy_returned_card, "Psychic") then
-                local choices = {
-                    "j_joy_psy_zeta",
-                    "j_joy_psy_omega",
-                    "j_joy_psy_lambda",
-                }
+                local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "PSYFrame" }, is_extra_deck = true, exclude_keys = { "j_joy_psy_lambda" } } })
 
                 for i = 1, card.ability.extra.cards_to_create do
                     local key_to_add, _ = pseudorandom_element(choices, pseudoseed("j_joy_psy_lambda"))

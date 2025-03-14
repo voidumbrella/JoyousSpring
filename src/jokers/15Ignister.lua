@@ -107,6 +107,7 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
+                is_tuner = true,
                 attribute = "WIND",
                 monster_type = "Cyberse",
                 monster_archetypes = { ["Ignister"] = true }
@@ -296,6 +297,7 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
+                is_tuner = true,
                 attribute = "DARK",
                 monster_type = "Cyberse",
                 monster_archetypes = { ["Ignister"] = true }

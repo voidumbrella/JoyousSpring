@@ -63,6 +63,7 @@ SMODS.Joker({
                     added_card.joy_from_lilla = true
                     added_card:add_to_deck()
                     G.jokers:emplace(added_card)
+                    card:juice_up()
                 end
             end
         end
@@ -128,6 +129,7 @@ SMODS.Joker({
                     added_card.joy_from_kisikil = true
                     added_card:add_to_deck()
                     G.jokers:emplace(added_card)
+                    card:juice_up()
                 end
             end
         end
@@ -332,15 +334,14 @@ SMODS.Joker({
                 }
             end
             if context.setting_blind and context.main_eval then
-                local choices = {
-                    "j_joy_ltwin_lilla",
-                    "j_joy_ltwin_lilla_treat",
-                    "j_joy_ltwin_lilla_sweet",
-                }
+                local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Lilla" }, is_main_deck = true } })
 
                 for i = 1, card.ability.extra.mill do
                     JoyousSpring.send_to_graveyard(pseudorandom_element(choices, pseudoseed("j_joy_etwin_kisikil_deal")))
                 end
+                return {
+                    message = localize("k_joy_mill")
+                }
             end
         end
     end,
@@ -417,18 +418,26 @@ SMODS.Joker({
                 }
             end
             if context.setting_blind and context.main_eval then
+                local has_revived = false
                 if JoyousSpring.graveyard["j_joy_etwin_lilla"] and JoyousSpring.graveyard["j_joy_etwin_lilla"].summonable > 0 then
                     for i = 1, card.ability.extra.revives do
-                        JoyousSpring.revive("j_joy_etwin_lilla", true)
+                        local revived_card = JoyousSpring.revive("j_joy_etwin_lilla", true)
+                        has_revived = revived_card and true or has_revived
                     end
                 else
                     for i = 1, card.ability.extra.revives do
-                        JoyousSpring.revive_pseudorandom(
+                        local revived_card = JoyousSpring.revive_pseudorandom(
                             { { monster_archetypes = { "Lilla" } } },
                             pseudoseed("j_joy_etwin_kisikil"),
                             true
                         )
+                        has_revived = revived_card and true or has_revived
                     end
+                end
+                if has_revived then
+                    return {
+                        message = localize("k_joy_revive")
+                    }
                 end
             end
         end
@@ -503,18 +512,26 @@ SMODS.Joker({
                 }
             end
             if context.setting_blind and context.main_eval then
+                local has_revived = false
                 if JoyousSpring.graveyard["j_joy_etwin_kisikil"] and JoyousSpring.graveyard["j_joy_etwin_kisikil"].summonable > 0 then
                     for i = 1, card.ability.extra.revives do
-                        JoyousSpring.revive("j_joy_etwin_kisikil", true)
+                        local revived_card = JoyousSpring.revive("j_joy_etwin_kisikil", true)
+                        has_revived = revived_card and true or has_revived
                     end
                 else
                     for i = 1, card.ability.extra.revives do
-                        JoyousSpring.revive_pseudorandom(
+                        local revived_card = JoyousSpring.revive_pseudorandom(
                             { { monster_archetypes = { "Kisikil" } } },
                             pseudoseed("j_joy_etwin_lilla"),
                             true
                         )
+                        has_revived = revived_card and true or has_revived
                     end
+                end
+                if has_revived then
+                    return {
+                        message = localize("k_joy_revive")
+                    }
                 end
             end
         end
@@ -583,6 +600,7 @@ SMODS.Joker({
                 local links_owned = JoyousSpring.count_materials_owned({ { summon_type = "LINK" } })
                 if links_owned and links_owned > 0 then
                     ease_discard(-links_owned)
+                    card:juice_up()
                 end
             end
             if context.joker_main then
@@ -663,24 +681,34 @@ SMODS.Joker({
                 context.end_of_round and context.game_over == false and context.main_eval then
                 if #JoyousSpring.extra_deck_area.cards < JoyousSpring.extra_deck_area.config.card_limit +
                     ((card.edition and card.edition.negative) and 1 or 0) then
-                    JoyousSpring.return_to_extra_deck(card)
                     local is_lilla_owned = JoyousSpring.count_materials_owned({ { monster_archetypes = { "Lilla" } } }) >
                         0
                     local kisikil_summoned = {}
+                    local has_revived = false
                     if JoyousSpring.graveyard["j_joy_etwin_kisikil"] and JoyousSpring.graveyard["j_joy_etwin_kisikil"].summonable > 0 then
                         for i = 1, card.ability.extra.revives do
-                            table.insert(kisikil_summoned, JoyousSpring.revive("j_joy_etwin_kisikil", true))
+                            local revived_card = JoyousSpring.revive("j_joy_etwin_kisikil", true)
+                            if revived_card then
+                                table.insert(kisikil_summoned, revived_card)
+                                has_revived = true
+                            end
                         end
                     end
                     if JoyousSpring.graveyard["j_joy_etwin_lilla"] and JoyousSpring.graveyard["j_joy_etwin_lilla"].summonable > 0 then
                         for i = 1, card.ability.extra.revives do
-                            JoyousSpring.revive("j_joy_etwin_lilla", true)
+                            local revived_card = JoyousSpring.revive("j_joy_etwin_lilla", true)
+                            if revived_card then
+                                has_revived = true
+                            end
                         end
                     end
                     if not is_lilla_owned then
                         for _, joker in ipairs(kisikil_summoned) do
                             joker.config.center:add_to_deck(joker)
                         end
+                    end
+                    if has_revived then
+                        JoyousSpring.return_to_extra_deck(card)
                     end
                 end
             end
@@ -756,6 +784,10 @@ SMODS.Joker({
                 G.STATE_COMPLETE = true
                 end_round()
             end
+
+            return {
+                message = localize("k_joy_activated_ex")
+            }
         end
         if context.ending_shop and context.main_eval then
             for i = 1, card.ability.extra.revives do

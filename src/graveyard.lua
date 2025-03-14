@@ -45,14 +45,14 @@ end
 JoyousSpring.send_to_graveyard = function(card)
     if JoyousSpring.graveyard then
         if type(card) == "string" then
-            local not_summoned = JoyousSpring.is_material_center(card, { is_extra_deck = true })
+            local not_summoned = JoyousSpring.is_material_center(card, { exclude_summon_types = { "NORMAL" } })
             local cannot_revive = G.P_CENTERS[card].config.extra.joyous_spring.cannot_revive or not_summoned
             if not JoyousSpring.graveyard[card] then JoyousSpring.graveyard[card] = { count = 0, summonable = 0 } end
             JoyousSpring.graveyard[card].count = JoyousSpring.graveyard[card].count + 1
             JoyousSpring.graveyard[card].summonable = JoyousSpring.graveyard[card].summonable +
                 (cannot_revive and 0 or 1)
         elseif type(card) == "table" then
-            local not_summoned = JoyousSpring.is_extra_deck_monster(card) and not JoyousSpring.is_summoned(card)
+            local not_summoned = not JoyousSpring.is_summon_type(card, "NORMAL") and not JoyousSpring.is_summoned(card)
             local cannot_revive = card.ability.extra.joyous_spring.cannot_revive or not_summoned
             if not JoyousSpring.graveyard[card.config.center_key] then JoyousSpring.graveyard[card.config.center_key] = { count = 0, summonable = 0 } end
             JoyousSpring.graveyard[card.config.center_key].count = JoyousSpring.graveyard[card.config.center_key].count +

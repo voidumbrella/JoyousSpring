@@ -26,6 +26,7 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
+                is_tuner = true,
                 attribute = "EARTH",
                 monster_type = "Rock",
                 monster_archetypes = { ["Adamancipator"] = true }
@@ -53,6 +54,7 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
+                is_tuner = true,
                 attribute = "EARTH",
                 monster_type = "Rock",
                 monster_archetypes = { ["Adamancipator"] = true }
@@ -80,6 +82,7 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
+                is_tuner = true,
                 attribute = "EARTH",
                 monster_type = "Rock",
                 monster_archetypes = { ["Adamancipator"] = true }

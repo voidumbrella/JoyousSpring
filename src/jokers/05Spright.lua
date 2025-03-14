@@ -40,13 +40,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if JoyousSpring.can_use_abilities(card) then
             if context.end_of_round and context.game_over == false and context.main_eval then
-                local choices = {
-                    "j_joy_spright_blue",
-                    "j_joy_spright_jet",
-                    "j_joy_spright_carrot",
-                    "j_joy_spright_red",
-                    "j_joy_spright_pixies",
-                }
+                local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Spright" }, is_main_deck = true, exclude_keys = { "j_joy_spright_blue" } } })
 
                 for i = 1, card.ability.extra.cards_to_create do
                     if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
@@ -512,6 +506,9 @@ SMODS.Joker({
             if not context.blueprint_card and not context.retrigger_joker and
                 context.joy_detach and context.joy_detaching_card == card then
                 local choices, _ = get_current_pool("Joker", "Uncommon", nil, "JoyousSpring")
+                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+                    JoyousSpring.ease_detach(card)
+                end
 
                 for i = 1, card.ability.extra.cards_to_create do
                     if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then

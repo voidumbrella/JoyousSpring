@@ -250,15 +250,7 @@ SMODS.Joker({
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval then
                 local func = function(c)
-                    local choices = {
-                        "j_joy_fish_keaf",
-                        "j_joy_fish_paces",
-                        "j_joy_fish_shif",
-                        "j_joy_fish_zep",
-                        "j_joy_fish_eanoc",
-                        "j_joy_fish_psiics",
-                        "j_joy_fish_snopios",
-                    }
+                    local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Ghoti" }, is_main_deck = true, exclude_keys = { "j_joy_fish_ixeep" } } })
 
                     for i = 1, c.ability.extra.cards_to_create do
                         if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
@@ -318,12 +310,7 @@ SMODS.Joker({
                 card.ability.extra.returned = card.ability.extra.returned + 1
                 if card.ability.extra.returned >= card.ability.extra.times then
                     card.ability.extra.returned = 0
-                    local choices = {
-                        "j_joy_fish_arionpos",
-                        "j_joy_fish_askaan",
-                        "j_joy_fish_guoglim",
-                        "j_joy_fish_deepbeyond",
-                    }
+                    local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Ghoti" }, is_extra_deck = true } })
 
                     for i = 1, card.ability.extra.cards_to_create do
                         local key_to_add, _ = pseudorandom_element(choices, pseudoseed("j_joy_fish_eanoc"))
@@ -506,11 +493,7 @@ SMODS.Joker({
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval then
                 local func = function(c)
-                    local choices = {
-                        "j_joy_fish_askaan",
-                        "j_joy_fish_guoglim",
-                        "j_joy_fish_deepbeyond",
-                    }
+                    local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Ghoti" }, is_extra_deck = true } })
 
                     for i = 1, c.ability.extra.cards_to_create do
                         local key_to_add, _ = pseudorandom_element(choices, pseudoseed("j_joy_fish_arionpos"))

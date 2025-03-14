@@ -241,22 +241,64 @@ end
 ---@param context CalcContext|table
 ---@return boolean `true` if it just activated its flip effect
 JoyousSpring.calculate_flip_effect = function(card, context)
-    if not context.blueprint_card then
-        if (context.joy_card_flipped and context.joy_card_flipped == card and card.facing == "front") or
-            (context.selling_blind and context.main_eval and JoyousSpring.flip_effect_active(card)) then
-            card.ability.extra.joyous_spring.flip_active = true
-            SMODS.calculate_effect({ message = localize("k_joy_flip") }, card)
-            return true
-        end
-        if context.end_of_round and context.main_eval and context.game_over == false then
-            card.ability.extra.joyous_spring.flip_active = false
-            if JoyousSpring.should_trap_flip(card) then
-                card:flip()
-                SMODS.calculate_effect({ message = localize("k_joy_set") }, card)
-            end
+    if (context.joy_card_flipped and context.joy_card_flipped == card and card.facing == "front") or
+        (context.selling_blind and context.main_eval and JoyousSpring.flip_effect_active(card)) then
+        card.ability.extra.joyous_spring.flip_active = true
+        SMODS.calculate_effect({ message = localize("k_joy_flip") }, card)
+        return true
+    end
+    if not context.blueprint_card and context.end_of_round and context.main_eval and context.game_over == false then
+        card.ability.extra.joyous_spring.flip_active = false
+        if JoyousSpring.should_trap_flip(card) then
+            card:flip()
+            SMODS.calculate_effect({ message = localize("k_joy_set") }, card)
         end
     end
     return false
+end
+
+---Detach material from Joker
+---@param card Card|table
+---@param value integer?
+JoyousSpring.ease_detach = function(card, value)
+    if not JoyousSpring.is_summon_type(card, "XYZ") then
+        return
+    end
+    local value = value or card.ability.extra.detach or 1
+    card.ability.extra.joyous_spring.xyz_materials = max(0, card.ability.extra.joyous_spring.xyz_materials - value)
+end
+
+---Flip all cards in all areas or in *area*
+---@param flip_direction 'front'|'back'?
+---@param areas CardArea[]|table[]?
+JoyousSpring.flip_all_cards = function(flip_direction, areas)
+    local flip_areas = areas or { G.jokers, G.consumeables, G.hand }
+
+    for _, area in ipairs(flip_areas) do
+        for _, card in ipairs(area.cards) do
+            if not flip_direction or card.facing ~= flip_direction then
+                card:flip()
+            end
+        end
+    end
+end
+
+---Counts all cards in *areas* (or all areas) flipped in *flip_direction*
+---@param flip_direction 'front'|'back'?
+---@param areas CardArea[]|table[]?
+---@return integer
+JoyousSpring.count_flipped = function(flip_direction, areas)
+    local flip_areas = areas or { G.jokers, G.consumeables, G.hand }
+    local flip_direction = flip_direction or 'back'
+    local count = 0
+    for _, area in ipairs(flip_areas) do
+        for _, card in ipairs(area.cards) do
+            if card.facing == flip_direction then
+                count = count + 1
+            end
+        end
+    end
+    return count
 end
 
 --- Talisman compat

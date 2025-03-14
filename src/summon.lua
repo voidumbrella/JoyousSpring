@@ -196,24 +196,34 @@ end
 
 --#region Summon calculations
 
-local function get_combinations(list)
+local function get_combinations(list, condition, max_size)
     local result = {}
+    local n = #list
+    local stack = { { index = 1, combo = {} } } -- Stack-based approach instead of recursion
+    local max_size = max_size or 5
 
-    local function generate_combination(start, current_combo)
-        if #current_combo > 5 then return end
-        table.insert(result, { unpack(current_combo) })
+    while #stack > 0 do
+        local state = table.remove(stack)
+        local i, current_combo = state.index, state.combo
 
-        for i = start, #list do
-            table.insert(current_combo, list[i])
-            generate_combination(i + 1, current_combo)
-            table.remove(current_combo)
+        if #current_combo > 0 and JoyousSpring.is_valid_material_combo(current_combo, condition) then
+            table.insert(result, { unpack(current_combo) }) -- Store only valid combos
+        end
+
+        if #current_combo < max_size then
+            for j = i, n do
+                local new_combo = { unpack(current_combo) }
+                table.insert(new_combo, list[j])
+                table.insert(stack, { index = j + 1, combo = new_combo })
+            end
         end
     end
 
-    generate_combination(1, {})
-
     return result
 end
+
+
+
 
 local function get_condition_min_max(condition)
     local min_materials = 0
@@ -411,7 +421,7 @@ JoyousSpring.get_summon_material_combo_by_condition = function(condition, card_l
     local card_list = card_list or G.jokers.cards
     local material_combos = {}
 
-    local current_combos = get_combinations(card_list)
+    local current_combos = get_combinations(card_list, condition)
 
     for _, combination in ipairs(current_combos) do
         if JoyousSpring.fulfills_conditions(combination, condition) then
@@ -460,7 +470,7 @@ end
 JoyousSpring.can_summon_by_condition = function(condition, card_list)
     local card_list = card_list or G.jokers.cards
 
-    local current_combos = get_combinations(card_list)
+    local current_combos = get_combinations(card_list, condition)
 
     for _, combination in ipairs(current_combos) do
         if JoyousSpring.fulfills_conditions(combination, condition) then
@@ -913,6 +923,10 @@ JoyousSpring.create_overlay_select_summon_materials = function(card, card_list)
                 end
             end
             JoyousSpring.summon_material_area:emplace(added_joker)
+            if joker.facing == 'back' then
+                added_joker.facing = 'back'
+                added_joker.sprite_facing = 'back'
+            end
             if joker.ability.set == 'Joker' then
                 for i, og_joker in ipairs(G.jokers.cards) do
                     if og_joker == joker then
@@ -999,6 +1013,9 @@ function Controller:queue_R_cursor_press(x, y)
 
     if JoyousSpring.summon_material_area and next(JoyousSpring.summon_material_area.highlighted) then
         JoyousSpring.summon_material_area:unhighlight_all()
+    end
+    if JoyousSpring.summon_effect_area and next(JoyousSpring.summon_effect_area.highlighted) then
+        JoyousSpring.summon_effect_area:unhighlight_all()
     end
 end
 

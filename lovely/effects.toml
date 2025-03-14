@@ -122,3 +122,14 @@ if self == G.hand then
     stay_flipped = JoyousSpring.stay_flipped(card, stay_flipped)
 end
 '''
+
+# Keep cards flipped
+[[patches]]
+[patches.pattern]
+target = "blind.lua"
+pattern = "if v.facing == 'back' then v:flip() end"
+position = 'at'
+match_indent = true
+payload = '''
+if self.name == 'Amber Acorn' and v.facing == 'back' then v:flip() end
+'''

@@ -203,7 +203,6 @@ G.FUNCS.joy_detach_material = function(e)
     if not ((G.play and #G.play.cards > 0) or
             (G.CONTROLLER.locked) or
             (G.GAME.STOP_USE and G.GAME.STOP_USE > 0)) and JoyousSpring.get_xyz_materials(card) >= detach then
-        card.ability.extra.joyous_spring.xyz_materials = card.ability.extra.joyous_spring.xyz_materials - detach
         SMODS.calculate_context({ joy_detach = true, joy_detaching_card = card })
     end
 end
@@ -509,6 +508,10 @@ JoyousSpring.create_overlay_effect_selection = function(card, card_list, min, ma
             end
         end
         JoyousSpring.summon_effect_area:emplace(added_joker)
+        if joker.facing == 'back' then
+            added_joker.facing = 'back'
+            added_joker.sprite_facing = 'back'
+        end
         if joker.ability.set == 'Joker' then
             for i, og_joker in ipairs(G.jokers.cards) do
                 if og_joker == joker then

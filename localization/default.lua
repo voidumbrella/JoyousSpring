@@ -1473,7 +1473,7 @@ return {
 			j_joy_sub_archer = {
 				name = "Subterror Nemesis Archer",
 				text = {
-					"Once per round, you can {C:attention}flip{} this card and another {C:attention}Joker{} face-down",
+					"Once per ante, you can {C:attention}flip{} this card and another {C:attention}Joker{} face-down",
 					"to {C:attention}create #1#{} {C:dark_edition}Negative{} {C:blue}Common{} or {C:green}Uncommon{} {C:joy_normal}\"Subterror\"{}"
 				}
 			},
@@ -1489,9 +1489,10 @@ return {
 			j_joy_sub_guru = {
 				name = "Subterror Guru",
 				text = {
-					"Once per round, you can {C:attention}flip{} this card and another #1# {C:attention}Jokers{} face-down:",
-					"This card gives {X:mult,C:white}X#2#{} Mult for each {C:attention}flipped{} face-down and",
-					"{C:attention}+#3#{} hand size for each {C:attention}flipped{} face-up this round",
+					"Once per round during a {C:attention}Blind{},",
+					"you can {C:attention}flip{} this card and #1# other {C:attention}Jokers{} face-down:",
+					"This round, this card gives {X:mult,C:white}X#2#{} Mult for each {C:attention}flipped{} face-down",
+					"and {C:attention}+#3#{} hand size for each {C:attention}flipped{} face-up",
 					"{s:0.9,C:inactive}(Even if face-down)",
 					" ",
 					"{C:joy_effect}FLIP{}: {C:attention}Create #4#{} {C:blue}Common{} or {C:green}Uncommon{} {C:joy_normal}\"Subterror\"{}",
@@ -2584,6 +2585,7 @@ return {
 			k_joy_summon = "Summon",
 			k_joy_detach = "Detach",
 			k_joy_activate = "Activate",
+			k_joy_activated_ex = "Activated!",
 			k_joy_token = "Token",
 			k_joy_disable_tooltips = "Disable glossary tooltips",
 			k_joy_disable_booster_tag = "Disable Booster Tag from appearing naturally",
@@ -2595,6 +2597,9 @@ return {
 			k_joy_flip = "Flip!",
 			k_joy_set = "Set!",
 			k_joy_revive = "Revive!",
+			k_joy_mill = "Mill!",
+			k_joy_add = "Add!",
+			k_joy_return = "Return!",
 			k_joy_booster_group = "Monster Pack",
 			k_joy_related = "Related",
 			k_joy_monster_tag_default = "a Monster Joker",

@@ -354,15 +354,7 @@ SMODS.Joker({
                 if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit +
                     ((card.edition and card.edition.negative) and 0 or 1) then
                     JoyousSpring.banish(card, "end_of_ante")
-                    local choices = {
-                        "j_joy_mekk_avram",
-                        "j_joy_mekk_red",
-                        "j_joy_mekk_orange",
-                        "j_joy_mekk_yellow",
-                        "j_joy_mekk_green",
-                        "j_joy_mekk_blue",
-                        "j_joy_mekk_indigo",
-                    }
+                    local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "MekkKnight" }, is_main_deck = true, exclude_keys = { "j_joy_mekk_purple" } } })
                     for i = 1, card.ability.extra.cards_to_create do
                         SMODS.add_card({
                             key = pseudorandom_element(choices, pseudoseed("j_joy_mekk_purple"))
@@ -476,16 +468,7 @@ SMODS.Joker({
         if JoyousSpring.can_use_abilities(card) then
             if not card.ability.extra.activated and context.selling_card and JoyousSpring.is_monster_archetype(context.card, "MekkKnight") then
                 card.ability.extra.activated = true
-                local choices = {
-                    "j_joy_mekk_avram",
-                    "j_joy_mekk_red",
-                    "j_joy_mekk_orange",
-                    "j_joy_mekk_yellow",
-                    "j_joy_mekk_green",
-                    "j_joy_mekk_blue",
-                    "j_joy_mekk_indigo",
-                    "j_joy_mekk_purple",
-                }
+                local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "MekkKnight" }, is_main_deck = true } })
                 for i = 1, card.ability.extra.cards_to_create do
                     if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit +
                         ((context.card.edition and context.card.edition.negative) and 0 or 1) then

@@ -33,14 +33,26 @@ end
 ---@param card Card
 JoyousSpring.return_to_extra_deck = function(card)
     if card.area and card.area == G.jokers then
-        G.jokers:remove_card(card)
-        card:remove_from_deck()
-        card.ability.extra.joyous_spring.summoned = false
-        card:set_cost()
-        JoyousSpring.extra_deck_area:emplace(card)
-        if JokerDisplay then
-            card:joker_display_remove()
-        end
+        SMODS.calculate_effect({
+            message = localize("k_joy_return"),
+            func = function()
+                G.E_MANAGER:add_event(Event({
+                    trigger = "after",
+                    delay = 0.3,
+                    func = function()
+                        G.jokers:remove_card(card)
+                        card:remove_from_deck()
+                        card.ability.extra.joyous_spring.summoned = false
+                        card:set_cost()
+                        JoyousSpring.extra_deck_area:emplace(card)
+                        if JokerDisplay then
+                            card:joker_display_remove()
+                        end
+                        return true
+                    end,
+                }))
+            end
+        }, card)
     end
 end
 

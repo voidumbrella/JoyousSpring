@@ -432,10 +432,7 @@ SMODS.Joker({
                 for _, selected_card in ipairs(context.joy_selection) do
                     selected_card:start_dissolve()
                 end
-                local choices = {
-                    "j_joy_generaider_loptr",
-                    "j_joy_generaider_vala",
-                }
+                local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Generaider" }, rarity = 2 } })
                 for i = 1, card.ability.extra.cards_to_create do
                     if #G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit then
                         SMODS.add_card({
@@ -734,6 +731,7 @@ SMODS.Joker({
         if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.joy_detach and context.joy_detaching_card == card then
+                JoyousSpring.ease_detach(card)
                 G.hand:change_size(card.ability.extra.hsize)
             end
             if context.joker_main then
@@ -805,6 +803,7 @@ SMODS.Joker({
                 })
                 added_card.ability.extra.joyous_spring.xyz_materials = JoyousSpring.get_graveyard_count()
                 JoyousSpring.empty_graveyard()
+                JoyousSpring.ease_detach(card)
             end
         end
     end,
@@ -862,16 +861,7 @@ SMODS.Joker({
                 selected_card:start_dissolve()
             end
             card.ability.extra.used = true
-            local choices = {
-                "j_joy_generaider_harr",
-                "j_joy_generaider_nidhogg",
-                "j_joy_generaider_frodi",
-                "j_joy_generaider_utgarda",
-                "j_joy_generaider_mardel",
-                "j_joy_generaider_dovelgus",
-                "j_joy_generaider_naglfar",
-                "j_joy_generaider_hela",
-            }
+            local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Generaider" }, rarity = 3 } })
             for i = 1, card.ability.extra.cards_to_create do
                 local not_owned = JoyousSpring.get_not_owned(choices, true)
                 if #G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit then

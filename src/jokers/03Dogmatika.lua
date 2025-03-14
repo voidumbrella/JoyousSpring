@@ -217,15 +217,7 @@ SMODS.Joker({
         if JoyousSpring.can_use_abilities(card) then
             if context.end_of_round and context.game_over == false and context.main_eval then
                 if G.GAME.blind.boss then
-                    local choices = {
-                        "j_joy_dogma_ecclesia",
-                        "j_joy_dogma_fleur",
-                        "j_joy_dogma_maximus",
-                        "j_joy_dogma_adin",
-                        "j_joy_dogma_theo",
-                        "j_joy_dogma_ashiyan",
-                        "j_joy_dogma_nexus",
-                    }
+                    local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Dogmatika" }, summon_type = "NORMAL" } })
 
                     for i = 1, card.ability.extra.cards_to_create do
                         if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
