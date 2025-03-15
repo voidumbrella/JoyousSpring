@@ -212,21 +212,23 @@ end
 ---Add random tag. Stolen from Cryptid
 JoyousSpring.add_random_tag = function()
     local tag_key = get_next_tag_key("JoyousSpring")
-    if tag_key == "tag_boss" then
-        i = i - 1 --skip these, as they can cause bugs with pack opening from other tags
-    else
-        local tag = Tag(tag_key)
-        if tag.name == "Orbital Tag" then
-            local _poker_hands = {}
-            for k, v in pairs(G.GAME.hands) do
-                if v.visible then
-                    _poker_hands[#_poker_hands + 1] = k
-                end
-            end
-            tag.ability.orbital_hand = pseudorandom_element(_poker_hands, pseudoseed("cry_pickle_orbital"))
-        end
-        add_tag(tag)
+    local i = 0
+    while tag_key == "tag_boss" and i < 6 do
+        tag_key = get_next_tag_key("JoyousSpring")
+        i = i + 1
     end
+    tag_key = tag_key ~= "tag_boss" and tag_key or "tag_double"
+    local tag = Tag(tag_key)
+    if tag.name == "Orbital Tag" then
+        local _poker_hands = {}
+        for k, v in pairs(G.GAME.hands) do
+            if v.visible then
+                _poker_hands[#_poker_hands + 1] = k
+            end
+        end
+        tag.ability.orbital_hand = pseudorandom_element(_poker_hands, pseudoseed("cry_pickle_orbital"))
+    end
+    add_tag(tag)
 end
 
 ---Checks if a card is a playing card
