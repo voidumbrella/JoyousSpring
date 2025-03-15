@@ -486,6 +486,7 @@ SMODS.PokerHand({
     mult = 8,
     l_chips = 15,
     l_mult = 2,
+    visible = false,
     example = {
         { 'H_K', true, 'm_gold' },
         { 'S_2', true, 'm_gold' },
