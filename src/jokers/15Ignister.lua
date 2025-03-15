@@ -6,6 +6,7 @@ SMODS.Atlas({
     py = 95
 })
 
+-- Achichi @Ignister
 SMODS.Joker({
     key = "ignis_achichi",
     atlas = 'ignis',
@@ -16,7 +17,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 15, 1 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -33,6 +34,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Pikari @Ignister
 SMODS.Joker({
     key = "ignis_pikari",
     atlas = 'ignis',
@@ -43,7 +46,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 3, 1 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -60,6 +63,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Hiyari @Ignister
 SMODS.Joker({
     key = "ignis_hiyari",
     atlas = 'ignis',
@@ -70,7 +75,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 1, 1, 1 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -87,6 +92,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Bururu @Ignister
 SMODS.Joker({
     key = "ignis_bururu",
     atlas = 'ignis',
@@ -97,7 +104,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 3, 1 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -115,6 +122,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Doshin @Ignister
 SMODS.Joker({
     key = "ignis_doshin",
     atlas = 'ignis',
@@ -125,7 +134,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 20, 1 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -142,6 +151,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Gatchiri @Ignister
 SMODS.Joker({
     key = "ignis_gatchiri",
     atlas = 'ignis',
@@ -152,7 +163,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 1.1 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -169,6 +180,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Gussari @Ignister
 SMODS.Joker({
     key = "ignis_gussari",
     atlas = 'ignis',
@@ -179,7 +192,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 30 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -196,6 +209,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Danmari @Ignister
 SMODS.Joker({
     key = "ignis_danmari",
     atlas = 'ignis',
@@ -206,7 +221,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 5 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -223,6 +238,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Doyon @Ignister
 SMODS.Joker({
     key = "ignis_doyon",
     atlas = 'ignis',
@@ -233,7 +250,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 1, 1 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -250,6 +267,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Donyoribo @Ignister
 SMODS.Joker({
     key = "ignis_donyoribo",
     atlas = 'ignis',
@@ -260,7 +279,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 2, 1 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -277,6 +296,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Backup @Ignister
 SMODS.Joker({
     key = "ignis_backup",
     atlas = 'ignis',
@@ -287,7 +308,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 1 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -305,6 +326,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Wizard @Ignister
 SMODS.Joker({
     key = "ignis_wizard",
     atlas = 'ignis',
@@ -315,7 +338,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 2 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -332,6 +355,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Kurikulink @Ignister
 SMODS.Joker({
     key = "ignis_kiruku",
     atlas = 'ignis',
@@ -342,7 +367,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = {} }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -359,6 +384,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Water Leviathan @Ignister
 SMODS.Joker({
     key = "ignis_leviathan",
     atlas = 'ignis',
@@ -369,7 +396,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 1, 100, 10 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -386,6 +413,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Earth Golem @Ignister
 SMODS.Joker({
     key = "ignis_golem",
     atlas = 'ignis',
@@ -396,7 +425,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 1, 1 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -413,6 +442,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Wind Pegasus @Ignister
 SMODS.Joker({
     key = "ignis_pegasus",
     atlas = 'ignis',
@@ -423,7 +454,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 1, 1, 6 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -440,6 +471,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Light Dragon @Ignister
 SMODS.Joker({
     key = "ignis_dragon",
     atlas = 'ignis',
@@ -450,7 +483,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 1, 1 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -467,6 +500,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Fire Phoenix @Ignister
 SMODS.Joker({
     key = "ignis_phoenix",
     atlas = 'ignis',
@@ -477,7 +512,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 1, 1, 0.1, 0.05 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -494,6 +529,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Accode Talker @Ignister
 SMODS.Joker({
     key = "ignis_accode",
     atlas = 'ignis',
@@ -504,7 +541,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 3, 3 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -521,6 +558,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Dark Infant @Ignister
 SMODS.Joker({
     key = "ignis_infant",
     atlas = 'ignis',
@@ -531,7 +570,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 1 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -548,6 +587,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Dark Templar @Ignister
 SMODS.Joker({
     key = "ignis_templar",
     atlas = 'ignis',
@@ -558,7 +599,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 1 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -575,6 +616,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- The Arrival Cyberse @Ignister
 SMODS.Joker({
     key = "ignis_arrival",
     atlas = 'ignis',
@@ -585,7 +628,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 6, 25, 1, 1000, 250, 1, 4, 5 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -602,6 +645,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Ignister A.I.Land
 SMODS.Joker({
     key = "ignis_ailand",
     atlas = 'ignis',
@@ -612,7 +657,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 1, 6 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -623,7 +668,7 @@ SMODS.Joker({
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
                 is_field_spell = true,
-                monster_archetypes = { ["Ignister"] = true }
+                monster_archetypes = {}
             },
         },
     },

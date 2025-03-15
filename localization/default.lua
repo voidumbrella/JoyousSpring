@@ -1815,7 +1815,7 @@ return {
 			j_joy_ignis_backup = {
 				name = "{C:joy_effect}Backup @Ignister",
 				text = {
-					"Add {C:dark_edition}Negative{} to 1 other random {C:joy_normal}Cyberse{} when obtained",
+					"Add {C:dark_edition}Negative{} to {C:attention}#1#{} other random {C:joy_normal}Cyberse{} when obtained",
 					" ",
 					"Add {C:dark_edition}Negative{} to a {C:joy_normal}Cyberse{} summoned",
 					"using this card as {C:attention}material{} if possible"
@@ -1844,6 +1844,7 @@ return {
 					"Add {C:attention}#1#{} {C:joy_normal}\"@Ignister\"{} to the {C:joy_spell}Extra Deck when summoned",
 					" ",
 					"{C:chips}+#2#{} Chips for each {C:attention}attribute{} used for its summon",
+					"Amount increases by {C:chips}+#3#{} when a {C:joy_link}Link{} is summoned",
 					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability"
 				}
 			},
@@ -1861,9 +1862,8 @@ return {
 				text = {
 					"Add {C:attention}#1#{} {C:joy_normal}\"@Ignister\"{} to the {C:joy_spell}Extra Deck when summoned",
 					" ",
-					"{C:attention}Banish{} this card and #2# other {C:attention}Joker{} or {C:attention}Consumable{}",
-					"for each {C:attention}attribute{} used for its summon at end of round",
-					"until {C:attention}Blind{} is selected",
+					"{C:green}#2# in #3#{} chance to retrigger playing cards",
+					"Chances increase for each {C:attention}attribute{} used for its summon",
 					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability",
 				}
 			},
@@ -1872,7 +1872,8 @@ return {
 				text = {
 					"Add {C:attention}#1#{} {C:joy_normal}\"@Ignister\"{} to the {C:joy_spell}Extra Deck when summoned",
 					" ",
-					"Scored cards gain {C:money}+$#2#{} when held in hand for each {C:attention}attribute{} used for its summon",
+					"Scored cards gain {C:money}+$#2#{} when held in hand",
+					"for each {C:attention}attribute{} used for its summon",
 					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability",
 				}
 			},
@@ -1885,6 +1886,7 @@ return {
 					"when used as {C:attention}material{} for a {C:joy_normal}Cyberse",
 					" ",
 					"Scored cards gain {X:mult,C:white}X#3#{} extra Mult for each {C:attention}attribute{} used for its summon",
+					"Amount increases {X:mult,C:white}X#4#{} when a {C:joy_link}Link{} is summoned",
 					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability",
 				}
 			},
@@ -1899,7 +1901,7 @@ return {
 			j_joy_ignis_infant = {
 				name = "{C:joy_link}Dark Infant @Ignister",
 				text = {
-					"Create {C:attention}#1#{} {C:joy_spell}\"Ignister A.I.Land\" when summoned",
+					"Create {C:attention}#1#{} {C:joy_spell}\"Ignister A.I.Land\"{} when summoned",
 					"{C:inactive}(Must have room){}",
 					" ",
 					"Can be used as any {C:attention}material{} for a {C:joy_link}Link",
