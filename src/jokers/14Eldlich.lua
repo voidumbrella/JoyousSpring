@@ -467,7 +467,7 @@ SMODS.Joker({
                     { negative = true }
                 )
             end
-            if context.joy_card_flipped and JoyousSpring.is_trap_monster(context.joy_card_flipped) and context.joy_card_flipped.facing == 'front' then
+            if context.joy_flip_activated and JoyousSpring.is_trap_monster(context.joy_flip_activated) then
                 JoyousSpring.level_up_hand(card, "joy_eldlixir")
             end
             if context.before and context.main_eval and next(context.poker_hands["joy_eldlixir"]) then

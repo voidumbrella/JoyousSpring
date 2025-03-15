@@ -245,6 +245,7 @@ JoyousSpring.calculate_flip_effect = function(card, context)
         (context.setting_blind and context.main_eval and JoyousSpring.flip_effect_active(card)) then
         card.ability.extra.joyous_spring.flip_active = true
         SMODS.calculate_effect({ message = localize("k_joy_flip") }, card)
+        SMODS.calculate_context({ joy_flip_activated = card, joy_other_context = context })
         return true
     end
     if not context.blueprint_card and context.end_of_round and context.main_eval and context.game_over == false then

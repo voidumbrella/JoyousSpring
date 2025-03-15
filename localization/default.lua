@@ -1702,7 +1702,7 @@ return {
 				name = "{C:joy_fusion}Angelcaido of the Golden Land",
 				text = {
 					"Enables {C:attention}Eldlixir{} hands",
-					"Levels up when {C:joy_trap}Traps{} {C:attention}flip{} face-up",
+					"Levels up when {C:joy_trap}Traps{} {C:joy_effect}FLIP{} ability activates",
 					" ",
 					"Send {C:attention}#1#{} {C:joy_effect}\"Eldlich the Golden Lord\"{} to the {C:attention}GY{}",
 					"if played hand contains an {C:attention}Eldlixir{}",
