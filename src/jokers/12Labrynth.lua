@@ -407,7 +407,7 @@ SMODS.Joker({
                 card.ability.extra.pcard_count = 0
             end
         end
-        if context.joy_card_flipped and JoyousSpring.is_playing_card(context.joy_card_flipped) then
+        if context.joy_card_flipped then
             if JoyousSpring.is_playing_card(context.joy_card_flipped) then
                 card.ability.extra.pcard_count = card.ability.extra.pcard_count + 1
             end
@@ -690,8 +690,7 @@ SMODS.Joker({
         if JoyousSpring.can_use_abilities(card) then
             if context.joker_main then
                 return {
-                    mult = card.ability.extra.mult *
-                        JoyousSpring.count_materials_in_graveyard({ { monster_type = "Fiend" } })
+                    mult = card.ability.extra.mult
                 }
             end
             if context.joy_card_flipped and context.joy_card_flipped.facing == 'back' then

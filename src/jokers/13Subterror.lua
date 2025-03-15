@@ -339,9 +339,11 @@ SMODS.Joker({
             card:flip(card)
         end
         if context.joker_main then
-            return {
-                xmult = card.ability.extra.current_xmult
-            }
+            if card.ability.extra.current_xmult > 0 then
+                return {
+                    xmult = card.ability.extra.current_xmult
+                }
+            end
         end
         if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card then
@@ -955,7 +957,7 @@ SMODS.Joker({
     add_to_deck = function(self, card, from_debuff)
         local mult_count = 0
         for _, material in ipairs(JoyousSpring.get_materials(card)) do
-            if JoyousSpring.is_material_center(material, { { monster_archetypes = { "Subterror" } } }) then
+            if JoyousSpring.is_material_center(material, { monster_archetypes = { "Subterror" } }) then
                 mult_count = mult_count + 1
             end
         end
