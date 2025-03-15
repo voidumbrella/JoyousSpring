@@ -228,7 +228,7 @@ return {
 					"{C:mult}+#1#{} Mult",
 					" ",
 					"Permanently gain {C:attention}+#2#{} hand size if you",
-					"own a {C:joy_normal}\"Lil-la\"{} when obtained",
+					"own a {C:joy_normal}\"Lil-la\"{} when summoned",
 					" ",
 					"{C:attention}Revives #3#{} {C:joy_link}Evil★Twin Lil-la{} or {C:attention}#3#{}",
 					"{C:joy_normal}\"Lil-la\"{} when {C:attention}Blind{} is selected",
@@ -242,7 +242,7 @@ return {
 				text = {
 					"{C:chips}+#1#{} Chips",
 					" ",
-					"{C:money}+$#2#{} if you own a {C:joy_normal}\"Ki-sikil\"{} when obtained",
+					"{C:money}+$#2#{} if you own a {C:joy_normal}\"Ki-sikil\"{} when summoned",
 					" ",
 					"{C:attention}Revives #3#{} {C:joy_link}Evil★Twin Ki-sikil{} or {C:attention}#3#{}",
 					"{C:joy_normal}\"Ki-sikil\"{} when {C:attention}Blind{} is selected",
@@ -1308,7 +1308,7 @@ return {
 			j_joy_ba_virgil = {
 				name = "{C:joy_synchro}Virgil, Rock Star of the Burning Abyss",
 				text = {
-					"Permanently gain {C:attention}+#1#{} hand size when obtained",
+					"Permanently gain {C:attention}+#1#{} hand size when summoned",
 					" ",
 					"{C:joy_normal}\"Burning Abyss\"{} don't get destroyed by their own effects"
 				},
@@ -1702,7 +1702,7 @@ return {
 				name = "{C:joy_fusion}Angelcaido of the Golden Land",
 				text = {
 					"Enables {C:attention}Eldlixir{} hands",
-					"Levels up when {C:joy_trap}Traps{} {C:joy_effect}FLIP{} ability activates",
+					"Levels up when {C:joy_trap}Trap{} {C:joy_effect}FLIP{} abilities activate",
 					" ",
 					"Send {C:attention}#1#{} {C:joy_effect}\"Eldlich the Golden Lord\"{} to the {C:attention}GY{}",
 					"if played hand contains an {C:attention}Eldlixir{}",
@@ -1717,96 +1717,226 @@ return {
 			--#endregion
 			--#region @Ignister
 			j_joy_ignis_achichi = {
-				name = "Achichi @Ignister",
-				text = { "TBD" }
+				name = "{C:joy_effect}Achichi @Ignister",
+				text = {
+					"{C:mult}+#1#{} Mult",
+					" ",
+					"{C:attention}Creates #2#{} {C:blue}Common{} {C:joy_normal}\"@Ignister\"",
+					"when obtained",
+					"{C:inactive}(Must have room){}",
+				}
 			},
 			j_joy_ignis_pikari = {
-				name = "Pikari @Ignister",
-				text = { "TBD" }
+				name = "{C:joy_effect}Pikari @Ignister",
+				text = {
+					"{C:money}+$#1#{} at end of round",
+					" ",
+					"Creates {C:attention}#2#{} random {C:tarot}Tarot",
+					"when obtained",
+					"{C:inactive}(Must have room){}",
+				}
 			},
 			j_joy_ignis_hiyari = {
-				name = "Hiyari @Ignister",
-				text = { "TBD" }
+				name = "{C:joy_effect}Hiyari @Ignister",
+				text = {
+					"{C:attention}+#1#{} hand size",
+					" ",
+					"Once per round, you can {C:attention}tribute #2#{} {C:joy_normal}Cyberse{}",
+					"to create {C:attention}#3#{} {C:green}Uncommon{} {C:joy_normal}\"@Ignister\"",
+					"{C:inactive}(Must have room){}",
+					" ",
+					"Free if you own an {C:joy_normal}\"@Ignister\""
+				}
 			},
 			j_joy_ignis_bururu = {
-				name = "Bururu @Ignister",
-				text = { "TBD" }
+				name = "{C:joy_effect}Bururu @Ignister",
+				text = {
+					"Send {C:attention}#1#{} {C:joy_normal}\"@Ignister\"{} to the {C:attention}GY{} when obtained",
+					" ",
+					"{C:attention}Revive #2#{} {C:joy_normal}Main Deck \"@Ignister\"{} as {C:dark_edition}Negative",
+					"when used as {C:attention}material{} for a {C:joy_normal}Cyberse"
+				}
 			},
 			j_joy_ignis_doshin = {
-				name = "Doshin @Ignister",
-				text = { "TBD" }
+				name = "{C:joy_effect}Doshin @Ignister",
+				text = {
+					"{C:chips}+#1#{} Chips",
+					" ",
+					"{C:attention}Revive #2#{} {C:joy_spell}Extra Deck{} {C:joy_normal}\"@Ignister\"{}",
+					"when used as {C:attention}material{} for a {C:joy_normal}Cyberse"
+				}
 			},
 			j_joy_ignis_gatchiri = {
-				name = "Gatchiri @Ignister",
-				text = { "TBD" }
+				name = "{C:joy_effect}Gatchiri @Ignister",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult",
+					" ",
+					"Can be used as any material for a {C:joy_link}Link",
+					" ",
+					"A {C:joy_normal}Cyberse{} summoned using this card as {C:attention}material{} gains this ability:",
+					"{s:0.9}Can't be debuffed or {s:0.9,C:attention}flipped {s:0.9}face-down"
+				}
 			},
 			j_joy_ignis_gussari = {
-				name = "Gussari @Ignister",
-				text = { "TBD" }
+				name = "{C:joy_effect}Gussari @Ignister",
+				text = {
+					"Can be used as any material for a {C:joy_link}Link",
+					" ",
+					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability:",
+					"{s:0.9,C:mult}+#1# {s:0.9}Mult for each {s:0.9,C:attention}material {s:0.9}used for its summon",
+				}
 			},
 			j_joy_ignis_danmari = {
-				name = "Danmari @Ignister",
-				text = { "TBD" }
+				name = "{C:joy_effect}Danmari @Ignister",
+				text = {
+					"Can be used as any material for a {C:joy_link}Link",
+					" ",
+					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability:",
+					"{s:0.9}Lower {s:0.9,C:attention}Blind{}{s:0.9}'s requirement by {s:0.9,C:red}#1#%{}",
+				}
 			},
 			j_joy_ignis_doyon = {
-				name = "Doyon @Ignister",
-				text = { "TBD" }
+				name = "{C:joy_effect}Doyon @Ignister",
+				text = {
+					"{C:attention}Revive #1#{} {C:joy_normal}Main Deck \"@Ignister\"{} when obtained",
+					" ",
+					"Adds {C:attention}#2#{} {C:joy_normal}\"@Ignister\"{} to the {C:joy_spell}Extra Deck",
+					"when used as {C:attention}material{} for a {C:joy_normal}Cyberse"
+				}
 			},
 			j_joy_ignis_donyoribo = {
-				name = "Donyoribo @Ignister",
-				text = { "TBD" }
+				name = "{C:joy_effect}Donyoribo @Ignister",
+				text = {
+					"{C:money}+$#1#{} each time an {C:joy_normal}\"@Ignister\"{} is bought",
+					" ",
+					"Sell this card to {C:attention}banish #2#{} {C:joy_normal}\"@Ignister\"{} until end of round"
+				}
 			},
 			j_joy_ignis_backup = {
-				name = "Backup @Ignister",
-				text = { "TBD" }
+				name = "{C:joy_effect}Backup @Ignister",
+				text = {
+					"Add {C:dark_edition}Negative{} to 1 other random {C:joy_normal}Cyberse{} when obtained",
+					" ",
+					"Add {C:dark_edition}Negative{} to a {C:joy_normal}Cyberse{} summoned",
+					"using this card as {C:attention}material{} if possible"
+				}
 			},
 			j_joy_ignis_wizard = {
-				name = "Wizard @Ignister",
-				text = { "TBD" }
+				name = "{C:joy_effect}Wizard @Ignister",
+				text = {
+					"You can {C:attention}tribute{} this card to {C:attention}revive{} up to {C:attention}#1#{}",
+					"{C:joy_normal}Cyberse{} with different names",
+					"If you control a summoned {C:joy_spell}Extra Deck{} {C:joy_normal}Cyberse{},",
+					"{C:attention}revives{} an extra {C:joy_normal}\"@Ignister\"{} as {C:dark_edition}Negative"
+				}
 			},
 			j_joy_ignis_kiruku = {
-				name = "Kurikulink @Ignister",
-				text = { "TBD" }
+				name = "{C:joy_effect}Kurikulink @Ignister",
+				text = {
+					"Sell this card to disable the current {C:attention}Boss Blind",
+					" ",
+					"Add it to the next shop if you own a summoned {C:joy_spell}Extra Deck{} {C:joy_normal}Cyberse{}"
+				}
 			},
 			j_joy_ignis_leviathan = {
-				name = "Water Leviathan @Ignister",
-				text = { "TBD" }
+				name = "{C:joy_ritual}Water Leviathan @Ignister",
+				text = {
+					"Add {C:attention}#1#{} {C:joy_normal}\"@Ignister\"{} to the {C:joy_spell}Extra Deck when summoned",
+					" ",
+					"{C:chips}+#2#{} Chips for each {C:attention}attribute{} used for its summon",
+					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability"
+				}
 			},
 			j_joy_ignis_golem = {
-				name = "Earth Golem @Ignister",
-				text = { "TBD" }
+				name = "{C:joy_fusion}Earth Golem @Ignister",
+				text = {
+					"Add {C:attention}#1#{} {C:joy_normal}\"@Ignister\"{} to the {C:joy_spell}Extra Deck when summoned",
+					" ",
+					"{C:attention}+#2# Joker{} slot for each {C:attention}attribute{} used for its summon",
+					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability"
+				}
 			},
 			j_joy_ignis_pegasus = {
-				name = "Wind Pegasus @Ignister",
-				text = { "TBD" }
+				name = "{C:joy_synchro}Wind Pegasus @Ignister",
+				text = {
+					"Add {C:attention}#1#{} {C:joy_normal}\"@Ignister\"{} to the {C:joy_spell}Extra Deck when summoned",
+					" ",
+					"{C:attention}Banish{} this card and #2# other {C:attention}Joker{} or {C:attention}Consumable{}",
+					"for each {C:attention}attribute{} used for its summon at end of round",
+					"until {C:attention}Blind{} is selected",
+					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability",
+				}
 			},
 			j_joy_ignis_dragon = {
-				name = "Light Dragon @Ignister",
-				text = { "TBD" }
+				name = "{C:joy_xyz}Light Dragon @Ignister",
+				text = {
+					"Add {C:attention}#1#{} {C:joy_normal}\"@Ignister\"{} to the {C:joy_spell}Extra Deck when summoned",
+					" ",
+					"Scored cards gain {C:money}+$#2#{} when held in hand for each {C:attention}attribute{} used for its summon",
+					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability",
+				}
 			},
 			j_joy_ignis_phoenix = {
-				name = "Fire Phoenix @Ignister",
-				text = { "TBD" }
+				name = "{C:joy_link}Fire Phoenix @Ignister",
+				text = {
+					"Add {C:attention}#1#{} {C:joy_normal}\"@Ignister\"{} to the {C:joy_spell}Extra Deck when summoned",
+					" ",
+					"Creates {C:attention}#2#{} {C:dark_edition}Negative{} Debuffed {C:joy_link}\"Fire Phoenix @Ignister\"{}",
+					"when used as {C:attention}material{} for a {C:joy_normal}Cyberse",
+					" ",
+					"Scored cards gain {X:mult,C:white}X#3#{} extra Mult for each {C:attention}attribute{} used for its summon",
+					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability",
+				}
 			},
 			j_joy_ignis_accode = {
-				name = "Accode Talker @Ignister",
-				text = { "TBD" }
+				name = "{C:joy_link}Accode Talker @Ignister",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult for each {C:joy_link}Link",
+					" ",
+					"{C:attention}Revive #2#{} {C:joy_link}Links{} when summoned"
+				}
 			},
 			j_joy_ignis_infant = {
-				name = "Dark Infant @Ignister",
-				text = { "TBD" }
+				name = "{C:joy_link}Dark Infant @Ignister",
+				text = {
+					"Create {C:attention}#1#{} {C:joy_spell}\"Ignister A.I.Land\" when summoned",
+					"{C:inactive}(Must have room){}",
+					" ",
+					"Can be used as any {C:attention}material{} for a {C:joy_link}Link",
+					"and can be treated as any {C:attention}attribute"
+				}
 			},
 			j_joy_ignis_templar = {
-				name = "Dark Templar @Ignister",
-				text = { "TBD" }
+				name = "{C:joy_link}Dark Templar @Ignister",
+				text = {
+					"{C:attention}Revive{} as many {C:joy_normal}\"@Ignister\"{} as possible",
+					"with different names as {C:dark_edition}Negative{} and debuffed",
+					" ",
+					"{C:attention}Revive #1#{} {C:joy_normal}Main Deck Cyberse{} when used as {C:attention}material{} for a {C:joy_normal}Cyberse{}"
+				}
 			},
 			j_joy_ignis_arrival = {
-				name = "The Arrival Cyberse @Ignister",
-				text = { "TBD" }
+				name = "{C:joy_link}The Arrival Cyberse @Ignister",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult for each {C:attention}attribute{} used for its summon",
+					" ",
+					"Gains abilities based on the {C:attention}materials{} used for its summon",
+					"{C:joy_light}LIGHT{}: {C:money}+$#2#{} at end of round",
+					"{C:joy_dark}DARK{}: Create {C:attention}#3#{} {C:spectral}Spectral{} at end of round {s:0.8,C:inactive}(Must have room)",
+					"{C:joy_water}WATER{}: {C:chips}+#4#{} Chips",
+					"{C:joy_fire}FIRE{}: {C:mult}+#5#{} Mult",
+					"{C:joy_wind}WIND{}: {C:green}#6# in #7#{} chance to turn scored cards into {C:attention}Glass{} cards",
+					"{C:joy_earth}EARTH{}: {C:attention}+#8#{} hand size"
+				}
 			},
 			j_joy_ignis_ailand = {
-				name = "Ignister A.I.Land",
-				text = { "TBD" }
+				name = "{C:joy_spell}Ignister A.I.Land",
+				text = {
+					"Gain {C:attention}#1# Bug Tag{} when an {C:joy_normal}\"@Ignister\"{} is used as {C:attention}material",
+					" ",
+					"If you own {C:attention}Jokers{} with {C:attention}#2#{} different {C:attention}attributes{} at end of round,",
+					"{C:attention}banish{} all {C:joy_normal}Cyberse{} until {C:attention}Blind{} is selected"
+				}
 			},
 			--#endregion
 			--#region Solfachord
@@ -2649,6 +2779,14 @@ return {
 				},
 			},
 			--#endregion
+		},
+		JoyPokerHand = {
+			phd_joy_eldlixir = {
+				name = "Eldlixir",
+				text = {
+					"5 {C:attention}Gold{} cards",
+				},
+			}
 		}
 	},
 	misc = {
