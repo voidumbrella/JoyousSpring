@@ -11,12 +11,15 @@ SMODS.Joker({
     key = "eld_eldlich",
     atlas = 'eld',
     pos = { x = 0, y = 0 },
-    rarity = 1,
+    rarity = 3,
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    cost = 0,
+    cost = 12,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_tribute" }
+        end
         return { vars = { card.ability.extra.money, card.ability.extra.tributes, card.ability.extra.creates } }
     end,
     joy_desc_cards = {
@@ -97,12 +100,16 @@ SMODS.Joker({
     key = "eld_conq",
     atlas = 'eld',
     pos = { x = 1, y = 0 },
-    rarity = 1,
+    rarity = 2,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 8,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_trap" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_flip" }
+        end
         return { vars = { card.ability.extra.chips, card.ability.extra.discards } }
     end,
     joy_desc_cards = {
@@ -167,12 +174,16 @@ SMODS.Joker({
     key = "eld_guard",
     atlas = 'eld',
     pos = { x = 0, y = 1 },
-    rarity = 1,
+    rarity = 2,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 8,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_trap" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_flip" }
+        end
         return { vars = { card.ability.extra.mult, card.ability.extra.hands } }
     end,
     joy_desc_cards = {
@@ -237,12 +248,17 @@ SMODS.Joker({
     key = "eld_huaq",
     atlas = 'eld',
     pos = { x = 2, y = 0 },
-    rarity = 1,
+    rarity = 2,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 8,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_trap" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_flip" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_banish" }
+        end
         return { vars = { card.ability.extra.chips, card.ability.extra.banishes } }
     end,
     joy_desc_cards = {
@@ -297,12 +313,17 @@ SMODS.Joker({
     key = "eld_exalted",
     atlas = 'eld',
     pos = { x = 1, y = 1 },
-    rarity = 1,
+    rarity = 2,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 8,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_trap" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_flip" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_revive" }
+        end
         return { vars = { card.ability.extra.mult, card.ability.extra.revives } }
     end,
     joy_desc_cards = {
@@ -357,12 +378,16 @@ SMODS.Joker({
     key = "eld_mad",
     atlas = 'eld',
     pos = { x = 2, y = 1 },
-    rarity = 1,
+    rarity = 3,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 12,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_trap" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_flip" }
+        end
         return { vars = { card.ability.extra.xmult } }
     end,
     joy_desc_cards = {
@@ -423,15 +448,22 @@ SMODS.Joker({
     key = "eld_angel",
     atlas = 'eld',
     pos = { x = 0, y = 2 },
-    rarity = 1,
+    rarity = 2,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 6,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_trap" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_flip" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_revive" }
+        end
+        info_queue[#info_queue + 1] = JoyousSpring.PokerHandDummies["phd_joy_eldlixir"]
         return { vars = { card.ability.extra.mills, card.ability.extra.revives } }
     end,
     joy_desc_cards = {
+        { "j_joy_eld_eldlich",                                                                                name = "Sends" },
         { properties = { { monster_archetypes = { "Eldlich" } }, { monster_archetypes = { "GoldenLand" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
@@ -478,37 +510,6 @@ SMODS.Joker({
             end
         end
     end,
-})
-
-SMODS.PokerHand({
-    key = "eldlixir",
-    chips = 100,
-    mult = 8,
-    l_chips = 15,
-    l_mult = 2,
-    visible = false,
-    example = {
-        { 'H_K', true, 'm_gold' },
-        { 'S_2', true, 'm_gold' },
-        { 'S_7', true, 'm_gold' },
-        { 'H_9', true, 'm_gold' },
-        { 'C_A', true, 'm_gold' },
-    },
-    evaluate = function(parts, hand)
-        if #hand == 5 and next(SMODS.find_card("j_joy_eld_angel")) then
-            local all_gold = true
-            for _, card in ipairs(hand) do
-                if not SMODS.has_enhancement(card, 'm_gold') then
-                    all_gold = false
-                    break
-                end
-            end
-            if all_gold then
-                return { hand }
-            end
-        end
-        return {}
-    end
 })
 
 JoyousSpring.collection_pool[#JoyousSpring.collection_pool + 1] = {
