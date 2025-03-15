@@ -1623,32 +1623,96 @@ return {
 			--#endregion
 			--#region Eldlich
 			j_joy_eld_eldlich = {
-				name = "Eldlich the Golden Lord",
-				text = { "TBD" }
+				name = "{C:joy_effect}Eldlich the Golden Lord",
+				text = {
+					"{C:attention}Gold{} cards give {C:money}+$#1#{} when scored for each",
+					"{C:joy_normal}Zombie{} owned or in the {C:attention}GY{}",
+					" ",
+					"Scored cards become {C:attention}Gold{} cards after scoring",
+					" ",
+					"Once per round, you can {C:attention}tribute #2#{} {C:joy_normal}Zombie{} or {C:joy_trap}Trap{} {C:attention}Joker",
+					"to {C:attention}create #3#{} {C:joy_normal}Main Deck \"Golden Land\"{}",
+					"{C:inactive}(Must have room){}",
+				}
 			},
 			j_joy_eld_conq = {
-				name = "Conquistador of the Golden Land",
-				text = { "TBD" }
+				name = "{C:joy_trap}Conquistador of the Golden Land",
+				text = {
+					"{C:attention}Gold{} cards give {C:chips}+#1#{} Chips when scored for each",
+					"{C:joy_normal}Zombie{} owned or in the {C:attention}GY{}",
+					" ",
+					"Retrigger all scored cards with an enhancement once",
+					"including cards held in hand if an {C:joy_normal}\"Eldlich\"{} is owned",
+					" ",
+					"{C:joy_effect}FLIP{}: {C:red}+#2#{} Discard this round"
+				}
 			},
 			j_joy_eld_guard = {
-				name = "Guardian of the Golden Land",
-				text = { "TBD" }
+				name = "{C:joy_trap}Guardian of the Golden Land",
+				text = {
+					"{C:attention}Gold{} cards give {C:mult}+#1#{} Mult when scored for each",
+					"{C:joy_normal}Zombie{} owned or in the {C:attention}GY{}",
+					" ",
+					"Retrigger all scored cards with an enhancement once",
+					"including cards held in hand if an {C:joy_normal}\"Eldlich\"{} is owned",
+					" ",
+					"{C:joy_effect}FLIP{}: {C:blue}+#2#{} Hand this round"
+				}
 			},
 			j_joy_eld_huaq = {
-				name = "Huaquero of the Golden Land",
-				text = { "TBD" }
+				name = "{C:joy_trap}Huaquero of the Golden Land",
+				text = {
+					"{C:attention}Gold{} cards give {C:chips}+#1#{} Chips when scored for each",
+					"{C:joy_normal}Zombie{} owned or in the {C:attention}GY{}",
+					" ",
+					"Retrigger all scored cards with an enhancement once",
+					"including cards held in hand if an {C:joy_normal}\"Eldlich\"{} is owned",
+					" ",
+					"{C:joy_effect}FLIP{}: {C:attention}Banish #2#{} {C:joy_normal}Zombie{} at end of round",
+					"until {C:attention}Blind{} is selected"
+				}
 			},
 			j_joy_eld_exalted = {
-				name = "Eldlixir of the Exalted Golden Land",
-				text = { "TBD" }
+				name = "{C:joy_trap}Eldlixir of the Exalted Golden Land",
+				text = {
+					"{C:attention}Gold{} cards give {C:mult}+#1#{} Mult when scored for each",
+					"{C:joy_normal}Zombie{} owned or in the {C:attention}GY{}",
+					" ",
+					"Retrigger all scored cards with an enhancement once",
+					"including cards held in hand if an {C:joy_normal}\"Eldlich\"{} is owned",
+					" ",
+					"{C:joy_effect}FLIP{}: {C:attention}Revive #2#{} {C:joy_normal}\"Golden Land\"{} or {C:attention}#2#{} {C:joy_trap}Trap{} if none"
+				}
 			},
 			j_joy_eld_mad = {
-				name = "Eldlich the Mad Golden Lord",
-				text = { "TBD" }
+				name = "{C:joy_fusion}Eldlich the Mad Golden Lord",
+				text = {
+					"{C:attention}Gold{} cards give an extra {X:mult,C:white}X#1#{} Mult when scored for each",
+					"{C:joy_normal}Zombie{} owned or in the {C:attention}GY{}",
+					" ",
+					"All played cards become {C:attention}Gold{} cards after scoring",
+					" ",
+					"{C:joy_trap}Traps{} don't {C:attention}flip{} face-down by their own abilities and keep their {C:joy_effect}FLIP{} abilities",
+				},
+				joy_summon_conditions = {
+					"{C:attention}1{} {C:joy_normal}\"Eldlich\"{} + {C:attention}1{} {C:joy_normal}Zombie{}"
+				}
 			},
 			j_joy_eld_angel = {
-				name = "Angelcaido of the Golden Land",
-				text = { "TBD" }
+				name = "{C:joy_fusion}Angelcaido of the Golden Land",
+				text = {
+					"Enables {C:attention}Eldlixir{} hands",
+					"Levels up when {C:joy_trap}Traps{} {C:attention}flip{} face-up",
+					" ",
+					"Send {C:attention}#1#{} {C:joy_effect}\"Eldlich the Golden Lord\"{} to the {C:attention}GY{}",
+					"if played hand contains an {C:attention}Eldlixir{}",
+					" ",
+					"{C:attention}Revive #2#{} {C:joy_normal}\"Eldlich\"{} as {C:dark_edition}Negative{} if",
+					"this owned card is sent to the {C:attention}GY{}"
+				},
+				joy_summon_conditions = {
+					"{C:attention}1{} {C:joy_normal}\"Eldlich\"{} + {C:attention}1{} {C:joy_normal}Zombie{}"
+				}
 			},
 			--#endregion
 			--#region @Ignister
@@ -2457,8 +2521,8 @@ return {
 				name = "Material",
 				text = {
 					"Cards used for a summon",
-					"{C:joy_xyz}Xyz monsters{} start with a counter equal",
-					"to the number used",
+					"{C:inactive}({}{C:joy_xyz}Xyz monsters{} {C:inactive}start with a counter equal{}",
+					"{C:inactive}to the number used){}",
 				},
 			},
 			joy_tooltip_detach = {
@@ -2473,6 +2537,26 @@ return {
 				text = {
 					"{C:joy_normal}Monster{} card crated by abilities",
 					"It has no with no abilities of its own",
+				},
+			},
+			joy_tooltip_flip = {
+				name = "FLIP ability",
+				text = {
+					"Triggers when card is {C:attention}flipped{} face-up",
+					"and lasts until the next end of round",
+				},
+			},
+			joy_tooltip_trap = {
+				name = "Trap Joker",
+				text = {
+					"{C:attention}Flips{} when obtained",
+					"and at every end of round",
+				},
+			},
+			joy_tooltip_monster = {
+				name = "Monster Joker",
+				text = {
+					"{C:attention}Jokers{} from {C:joy_mod}JoyousSpring",
 				},
 			},
 			--#endregion
@@ -2577,6 +2661,15 @@ return {
 			ch_c_joy_gy_start = {
 				"Start with some cards in the {C:attention}GY{}",
 			},
+		},
+		poker_hands = {
+			joy_eldlixir = "Eldlixir"
+		},
+		poker_hand_descriptions = {
+			joy_eldlixir = {
+				"5 Gold cards",
+				"(Must be enabled by an ability)"
+			}
 		},
 		dictionary = {
 			k_joy_extra_deck = "Extra Deck",

@@ -242,7 +242,7 @@ end
 ---@return boolean `true` if it just activated its flip effect
 JoyousSpring.calculate_flip_effect = function(card, context)
     if (context.joy_card_flipped and context.joy_card_flipped == card and card.facing == "front") or
-        (context.selling_blind and context.main_eval and JoyousSpring.flip_effect_active(card)) then
+        (context.setting_blind and context.main_eval and JoyousSpring.flip_effect_active(card)) then
         card.ability.extra.joyous_spring.flip_active = true
         SMODS.calculate_effect({ message = localize("k_joy_flip") }, card)
         return true
@@ -251,7 +251,9 @@ JoyousSpring.calculate_flip_effect = function(card, context)
         card.ability.extra.joyous_spring.flip_active = false
         if JoyousSpring.should_trap_flip(card) then
             card:flip(card)
-            SMODS.calculate_effect({ message = localize("k_joy_set") }, card)
+            if card.facing == 'back' then
+                SMODS.calculate_effect({ message = localize("k_joy_set") }, card)
+            end
         end
     end
     return false
@@ -305,6 +307,28 @@ JoyousSpring.count_flipped = function(flip_direction, areas)
         end
     end
     return count
+end
+
+---Levels up hand (with proper animation)
+---@param card Card|table
+---@param hand_key string
+---@param instant boolean?
+---@param amount integer?
+JoyousSpring.level_up_hand = function(card, hand_key, instant, amount)
+    if not instant then
+        update_hand_text({ sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3 },
+            {
+                handname = localize(hand_key, 'poker_hands'),
+                chips = G.GAME.hands[hand_key].chips,
+                mult = G.GAME.hands[hand_key].mult,
+                level = G.GAME.hands[hand_key].level
+            })
+    end
+    level_up_hand(card, hand_key, instant, amount)
+    if not instant then
+        update_hand_text({ sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 },
+            { mult = 0, chips = 0, handname = '', level = '' })
+    end
 end
 
 --- Talisman compat

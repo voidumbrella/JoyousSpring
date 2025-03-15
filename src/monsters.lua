@@ -17,6 +17,9 @@ SMODS.Atlas({
 ---@field joy_apply_to_jokers_added? fun(card:table|Card,added_card:table|Card) Used to modify *added_card* when obtained
 ---@field joy_stay_flipped? fun(card:table|Card,playing_card:table|Card):boolean? Determines if *playing_card* should stay flipped facedown when drawn from deck
 ---@field joy_debuff_hand? fun(card:table|Card,full_hand:Card[]|table[],poker_hands:table<string, Card[]|table[]>, scoring_name:string):boolean? Returns `true` if played hand should be debuffed, similar to a Blind
+---@field joy_allow_ability? fun(card:table|Card, other_card:table|Card):boolean? Determines if *other_card* can use abilities while face-down
+---@field joy_prevent_trap_flip? fun(card:table|Card, other_card:table|Card):boolean? Determines if the Trap *other_card* should flip at end of round
+---@field joy_flip_effect_active? fun(card:table|Card, other_card:table|Card):boolean? Determines if the FLIP ability of *other_card* should activate at the start of Blind
 
 ---@alias summon_type
 ---|'"NORMAL"'
@@ -100,6 +103,8 @@ SMODS.Atlas({
 ---@field exclude_summoned boolean?
 ---@field is_tuner boolean?
 ---@field exclude_tuners boolean?
+---@field is_trap boolean?
+---@field exclude_traps boolean?
 ---@field has_edition boolean?
 ---@field exclude_edition boolean?
 
@@ -409,7 +414,7 @@ JoyousSpring.is_material = function(card, properties, summon_type)
         return not JoyousSpring.is_monster_card(card)
     end
     if not JoyousSpring.is_monster_card(card) then
-        return not (properties.is_monster or properties.monster_type or properties.monster_attribute or properties.monster_archetypes or properties.is_pendulum or properties.summon_type or properties.is_effect or properties.is_non_effect or properties.is_normal or properties.is_extra_deck or properties.is_main_deck or properties.is_summoned or properties.is_tuner) or
+        return not (properties.is_monster or properties.monster_type or properties.monster_attribute or properties.monster_archetypes or properties.is_pendulum or properties.summon_type or properties.is_effect or properties.is_non_effect or properties.is_normal or properties.is_extra_deck or properties.is_main_deck or properties.is_summoned or properties.is_tuner or properties.is_trap) or
             false
     end
     if properties.monster_type then
@@ -527,6 +532,16 @@ JoyousSpring.is_material = function(card, properties, summon_type)
             return false
         end
     end
+    if properties.is_trap then
+        if not JoyousSpring.is_trap_monster(card) then
+            return false
+        end
+    end
+    if properties.exclude_traps then
+        if JoyousSpring.is_trap_monster(card) then
+            return false
+        end
+    end
     return true
 end
 
@@ -589,12 +604,12 @@ JoyousSpring.is_material_center = function(card_key, properties)
     if properties.is_joker then
         return not monster_card_properties
     end
-    if properties.is_monster or properties.monster_type or properties.monster_attribute or properties.monster_archetypes or properties.is_pendulum or properties.summon_type or properties.is_effect or properties.is_non_effect or properties.is_normal then
+    if properties.is_monster or properties.monster_type or properties.monster_attribute or properties.monster_archetypes or properties.is_pendulum or properties.summon_type or properties.is_effect or properties.is_non_effect or properties.is_normal or properties.is_tuner or properties.is_trap then
         if not monster_card_properties then
             return false
         end
     end
-    if properties.exclude_monster_types or properties.exclude_monster_attributes or properties.exclude_monster_archetypes or properties.exclude_pendulum or properties.exclude_summon_types then
+    if properties.exclude_monster_types or properties.exclude_monster_attributes or properties.exclude_monster_archetypes or properties.exclude_pendulum or properties.exclude_summon_types or properties.exclude_tuners or properties.exclude_traps then
         if not monster_card_properties then
             return true
         end
@@ -694,6 +709,16 @@ JoyousSpring.is_material_center = function(card_key, properties)
     end
     if properties.exclude_tuners then
         if monster_card_properties.is_tuner then
+            return false
+        end
+    end
+    if properties.is_trap then
+        if not monster_card_properties.is_trap then
+            return false
+        end
+    end
+    if properties.exclude_traps then
+        if monster_card_properties.is_trap then
             return false
         end
     end

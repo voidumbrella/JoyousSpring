@@ -369,7 +369,7 @@ SMODS.Joker({
                 end
             end
             if has_revived then
-                SMODS.calculate_effect({ message = localize("k_joy_revive"), card })
+                SMODS.calculate_effect({ message = localize("k_joy_revive") }, card)
             end
         end
     end,
@@ -504,7 +504,7 @@ SMODS.Joker({
             for i = 1, card.ability.extra.mill do
                 JoyousSpring.send_to_graveyard(pseudorandom_element(choices, pseudoseed("j_joy_dmaid_laundry")))
             end
-            SMODS.calculate_effect({ message = localize("k_joy_mill"), card })
+            SMODS.calculate_effect({ message = localize("k_joy_mill") }, card)
         end
     end,
 })
@@ -709,7 +709,7 @@ SMODS.Joker({
                 end
             end
             if has_revived then
-                SMODS.calculate_effect({ message = localize("k_joy_revive"), card })
+                SMODS.calculate_effect({ message = localize("k_joy_revive") }, card)
             end
         end
     end,
@@ -793,7 +793,7 @@ SMODS.Joker({
         if not from_debuff and not card.debuff then
             if #JoyousSpring.extra_deck_area.cards < JoyousSpring.extra_deck_area.config.card_limit then
                 JoyousSpring.add_to_extra_deck("j_joy_dmaid_house")
-                SMODS.calculate_effect({ message = localize("k_joy_add"), card })
+                SMODS.calculate_effect({ message = localize("k_joy_add") }, card)
             end
         end
     end,

@@ -29,7 +29,7 @@ end
 ---@param property_list table
 ---@param seed number
 ---@param must_have_room boolean?
----@param edition any
+---@param edition any?
 ---@return Card?
 JoyousSpring.revive_pseudorandom = function(property_list, seed, must_have_room, edition)
     if not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit) then
@@ -47,6 +47,13 @@ JoyousSpring.send_to_graveyard = function(card)
         if type(card) == "string" then
             local not_summoned = JoyousSpring.is_material_center(card, { exclude_summon_types = { "NORMAL" } })
             local cannot_revive = G.P_CENTERS[card].config.extra.joyous_spring.cannot_revive or not_summoned
+            SMODS.calculate_context({
+                joy_sent_to_gy = true,
+                joy_key = card,
+                joy_from_field = false,
+                joy_summoned =
+                    not not_summoned
+            })
             if not JoyousSpring.graveyard[card] then JoyousSpring.graveyard[card] = { count = 0, summonable = 0 } end
             JoyousSpring.graveyard[card].count = JoyousSpring.graveyard[card].count + 1
             JoyousSpring.graveyard[card].summonable = JoyousSpring.graveyard[card].summonable +
@@ -54,6 +61,14 @@ JoyousSpring.send_to_graveyard = function(card)
         elseif type(card) == "table" then
             local not_summoned = not JoyousSpring.is_summon_type(card, "NORMAL") and not JoyousSpring.is_summoned(card)
             local cannot_revive = card.ability.extra.joyous_spring.cannot_revive or not_summoned
+            SMODS.calculate_context({
+                joy_sent_to_gy = true,
+                joy_card = card,
+                joy_key = card.config.center.key,
+                joy_from_field = card.area and card.area == G.jokers or false,
+                joy_summoned = not
+                    not_summoned
+            })
             if not JoyousSpring.graveyard[card.config.center_key] then JoyousSpring.graveyard[card.config.center_key] = { count = 0, summonable = 0 } end
             JoyousSpring.graveyard[card.config.center_key].count = JoyousSpring.graveyard[card.config.center_key].count +
                 1

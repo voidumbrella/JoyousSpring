@@ -472,7 +472,7 @@ function CardArea:align_cards()
     cardarea_align_cards_ref(self)
     if self.config.type == 'joker' then --or self.joy_demo_area
         for k, card in ipairs(self.cards) do
-            if not card.states.drag.is and JoyousSpring.is_monster_card(card) and card.facing == 'back' then
+            if not card.states.drag.is and JoyousSpring.is_monster_card(card) and not JoyousSpring.is_trap_monster(card) and card.facing == 'back' then
                 card.T.r = card.T.r + math.pi / 2
             end
         end

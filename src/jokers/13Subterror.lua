@@ -17,6 +17,9 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 6,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_revive" }
+        end
         return { vars = { card.ability.extra.revives } }
     end,
     joy_desc_cards = {
@@ -228,6 +231,11 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 6,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_tribute" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_revive" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_flip" }
+        end
         return { vars = { card.ability.extra.revives, card.ability.extra.mills } }
     end,
     joy_desc_cards = {
@@ -311,7 +319,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 10,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 2, 2, 1, 1 } }
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_flip" }
+        end
+        return { vars = { card.ability.extra.flips, card.ability.extra.xmult, card.ability.extra.h_size, card.ability.extra.creates } }
     end,
     joy_desc_cards = {
         { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = "Archetype" },
@@ -427,7 +438,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 10,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1.5 } }
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_flip" }
+        end
+        return { vars = { card.ability.extra.xmult } }
     end,
     joy_desc_cards = {
         { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = "Archetype" },
@@ -480,6 +494,9 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 5,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_flip" }
+        end
         return { vars = {} }
     end,
     joy_desc_cards = {
@@ -529,6 +546,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 7,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_flip" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_banish" }
+        end
         return { vars = { card.ability.extra.banishes } }
     end,
     joy_desc_cards = {
@@ -584,6 +605,9 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 6,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_flip" }
+        end
         return { vars = { card.ability.extra.chips, card.ability.extra.chips * JoyousSpring.count_materials_in_graveyard({ { monster_type = "Aqua" }, { monster_archetypes = { "Subterror" } } }), card.ability.extra.mills } }
     end,
     joy_desc_cards = {
@@ -640,6 +664,9 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 7,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_flip" }
+        end
         return {
             vars = { card.ability.extra.mult, card.ability.extra.mult *
             JoyousSpring.count_flipped('back') }
@@ -694,6 +721,9 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 8,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_flip" }
+        end
         return { vars = { card.ability.extra.draws } }
     end,
     joy_desc_cards = {
@@ -757,6 +787,9 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 9,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_flip" }
+        end
         return { vars = { card.ability.extra.extra_xmult, 1 + card.ability.extra.xmult } }
     end,
     joy_desc_cards = {
@@ -814,6 +847,9 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 9,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_flip" }
+        end
         return {
             vars = { card.ability.extra.chips, card.ability.extra.chips *
             JoyousSpring.count_flipped('back') }
@@ -872,6 +908,9 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 10,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_material" }
+        end
         return { vars = { card.ability.extra.chips, card.ability.extra.mult, card.ability.extra.current_chips, card.ability.extra.current_mult, 2, 1 } }
     end,
     joy_desc_cards = {
@@ -977,6 +1016,9 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 6,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_monster" }
+        end
         return { vars = { card.ability.extra.money } }
     end,
     joy_desc_cards = {
