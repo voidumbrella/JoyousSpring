@@ -241,7 +241,7 @@ function CardArea:emplace(card, location, stay_flipped)
             end
         end
     end
-    cardarea_emplace_ref(self, card, location, stay_flipped)
+    cardarea_emplace_ref(self, card, location, JoyousSpring.is_monster_card(card) or stay_flipped)
 end
 
 JoyousSpring.stay_flipped = function(card, stay_flipped)

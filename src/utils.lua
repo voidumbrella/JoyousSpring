@@ -250,7 +250,7 @@ JoyousSpring.calculate_flip_effect = function(card, context)
     if not context.blueprint_card and context.end_of_round and context.main_eval and context.game_over == false then
         card.ability.extra.joyous_spring.flip_active = false
         if JoyousSpring.should_trap_flip(card) then
-            card:flip()
+            card:flip(card)
             SMODS.calculate_effect({ message = localize("k_joy_set") }, card)
         end
     end
@@ -269,16 +269,22 @@ JoyousSpring.ease_detach = function(card, value)
 end
 
 ---Flip all cards in all areas or in *area*
+---@param source Card?
 ---@param flip_direction 'front'|'back'?
 ---@param areas CardArea[]|table[]?
-JoyousSpring.flip_all_cards = function(flip_direction, areas)
+JoyousSpring.flip_all_cards = function(source, flip_direction, areas)
     local flip_areas = areas or { G.jokers, G.consumeables, G.hand }
 
     for _, area in ipairs(flip_areas) do
+        local any_flipped = false
         for _, card in ipairs(area.cards) do
             if not flip_direction or card.facing ~= flip_direction then
-                card:flip()
+                card:flip(source)
+                any_flipped = true
             end
+        end
+        if flip_direction == 'back' and any_flipped then
+            area:shuffle(source and source.config.center.key or "JoyousSpring")
         end
     end
 end

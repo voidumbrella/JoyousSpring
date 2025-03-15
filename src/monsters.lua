@@ -100,6 +100,8 @@ SMODS.Atlas({
 ---@field exclude_summoned boolean?
 ---@field is_tuner boolean?
 ---@field exclude_tuners boolean?
+---@field has_edition boolean?
+---@field exclude_edition boolean?
 
 ---@class material_restrictions
 ---@field different_names boolean?
@@ -319,6 +321,10 @@ JoyousSpring.flip_effect_active = function(card)
     return false
 end
 
+JoyousSpring.is_flip_active = function(card)
+    return JoyousSpring.is_monster_card(card) and card.ability.extra.joyous_spring.flip_active
+end
+
 ---Checks if **card** fulfills **properties**
 ---@param card Card
 ---@param properties material_properties
@@ -331,8 +337,15 @@ JoyousSpring.is_material = function(card, properties, summon_type)
     if not next(properties) then
         return true
     end
-    if card.facing == 'back' then
-        return properties.facedown or false
+    if properties.has_edition then
+        if not card:get_edition() then
+            return false
+        end
+    end
+    if properties.exclude_edition then
+        if card:get_edition() then
+            return false
+        end
     end
     if summon_type and JoyousSpring.is_all_materials(card, summon_type) then
         return true
@@ -363,6 +376,9 @@ JoyousSpring.is_material = function(card, properties, summon_type)
         if card.config.center_key == "j_joy_token" then
             return false
         end
+    end
+    if card.facing == 'back' then
+        return properties.facedown or false
     end
     if properties.rarity then
         if card.config.center.rarity ~= properties.rarity then

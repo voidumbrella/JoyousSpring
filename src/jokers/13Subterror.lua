@@ -11,11 +11,11 @@ SMODS.Joker({
     key = "sub_fiendess",
     atlas = 'sub',
     pos = { x = 0, y = 0 },
-    rarity = 1,
+    rarity = 2,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 6,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.revives } }
     end,
@@ -55,9 +55,9 @@ SMODS.Joker({
                 if not card.ability.extra.activated and context.joy_exit_effect_selection and context.joy_card == card and
                     #context.joy_selection == card.ability.extra.flips then
                     for _, selected_card in ipairs(context.joy_selection) do
-                        selected_card:flip()
+                        selected_card:flip(card)
                     end
-                    card:flip()
+                    card:flip(card)
                     for i = 1, card.ability.extra.revives do
                         JoyousSpring.revive_pseudorandom(
                             { { monster_archetypes = { "Subterror" } } },
@@ -99,7 +99,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    cost = 0,
+    cost = 5,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips, card.ability.extra.chips * (JoyousSpring.count_flipped('back', { G.jokers }) + JoyousSpring.count_materials_owned({ { monster_archetypes = { "Subterror" } } })) } }
     end,
@@ -127,7 +127,7 @@ SMODS.Joker({
                 }
             end
             if context.selling_self and not context.blueprint then
-                JoyousSpring.flip_all_cards('front')
+                JoyousSpring.flip_all_cards(card, 'front')
             end
         end
     end
@@ -138,11 +138,11 @@ SMODS.Joker({
     key = "sub_archer",
     atlas = 'sub',
     pos = { x = 2, y = 0 },
-    rarity = 1,
+    rarity = 2,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 8,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.creates } }
     end,
@@ -182,9 +182,9 @@ SMODS.Joker({
                 if not card.ability.extra.activated and context.joy_exit_effect_selection and context.joy_card == card and
                     #context.joy_selection == card.ability.extra.flips then
                     for _, selected_card in ipairs(context.joy_selection) do
-                        selected_card:flip()
+                        selected_card:flip(card)
                     end
-                    card:flip()
+                    card:flip(card)
                     local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Subterror" }, exclude_keys = { "j_joy_sub_archer" }, rarity = 1 }, { monster_archetypes = { "Subterror" }, exclude_keys = { "j_joy_sub_archer" }, rarity = 2 } })
                     for _ = 1, card.ability.extra.creates do
                         local key_to_add = pseudorandom_element(choices, pseudoseed("j_joy_sub_archer"))
@@ -226,7 +226,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    cost = 0,
+    cost = 6,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.revives, card.ability.extra.mills } }
     end,
@@ -276,7 +276,7 @@ SMODS.Joker({
                             true
                         )
                         if not revived_card then
-                            JoyousSpring.revive_pseudorandom(
+                            revived_card = JoyousSpring.revive_pseudorandom(
                                 { { monster_archetypes = { "Subterror" } } },
                                 pseudoseed("j_joy_sub_warrior"),
                                 true
@@ -288,14 +288,15 @@ SMODS.Joker({
             if JoyousSpring.calculate_flip_effect(card, context) then
                 local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "SubterrorBehemoth" } } })
 
-                for i = 1, card.ability.extra.mill do
+                for i = 1, card.ability.extra.mills do
                     JoyousSpring.send_to_graveyard(pseudorandom_element(choices, pseudoseed("j_joy_sub_warrior")))
                 end
             end
         end
     end,
     joy_can_activate = function(card)
-        return #G.jokers.cards > 1
+        return #G.jokers.cards > 1 and JoyousSpring.count_materials_in_graveyard(
+            { { monster_archetypes = { "SubterrorBehemoth" } }, { monster_archetypes = { "Subterror" } } }, true) > 0
     end,
 })
 
@@ -304,11 +305,11 @@ SMODS.Joker({
     key = "sub_guru",
     atlas = 'sub',
     pos = { x = 0, y = 1 },
-    rarity = 1,
+    rarity = 3,
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    cost = 0,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
         return { vars = { 2, 2, 1, 1 } }
     end,
@@ -335,7 +336,7 @@ SMODS.Joker({
     },
     calculate = function(self, card, context)
         if context.setting_blind and context.main_eval and card.facing == 'back' then
-            card:flip()
+            card:flip(card)
         end
         if context.joker_main then
             return {
@@ -361,10 +362,10 @@ SMODS.Joker({
                     #context.joy_selection == card.ability.extra.flips then
                     local flips = { front = 0, back = 0 }
                     for _, selected_card in ipairs(context.joy_selection) do
-                        selected_card:flip()
+                        selected_card:flip(card)
                         flips[selected_card.facing] = flips[selected_card.facing] + 1
                     end
-                    card:flip()
+                    card:flip(card)
                     flips[card.facing] = flips[card.facing] + 1
 
                     card.ability.extra.current_xmult = card.ability.extra.xmult * flips.back
@@ -404,7 +405,7 @@ SMODS.Joker({
                 faceup_joker = faceup_joker + 1
             end
         end
-        return faceup_joker >= 2
+        return faceup_joker >= card.ability.extra.flips
     end,
     remove_from_deck = function(self, card, from_debuff)
         if card.ability.extra.current_h_size > 0 then
@@ -412,15 +413,17 @@ SMODS.Joker({
         end
     end
 })
+
+-- Subterror Behemoth Stygokraken
 SMODS.Joker({
     key = "sub_stygo",
     atlas = 'sub',
     pos = { x = 1, y = 1 },
-    rarity = 1,
+    rarity = 3,
     discovered = true,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
-    cost = 0,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
         return { vars = { 1.5 } }
     end,
@@ -436,18 +439,44 @@ SMODS.Joker({
                 monster_type = "SeaSerpent",
                 monster_archetypes = { ["Subterror"] = true, ["SubterrorBehemoth"] = true }
             },
+            xmult = 1.5
         },
     },
+    calculate = function(self, card, context)
+        if JoyousSpring.can_use_abilities(card) then
+            JoyousSpring.calculate_flip_effect(card, context)
+            if JoyousSpring.is_flip_active(card) then
+                if (context.individual and context.cardarea == G.hand) or context.other_joker or context.other_consumeable then
+                    local other_card = context.other_card or context.other_joker or context.other_consumeable
+                    if other_card and other_card.facing == 'back' then
+                        return {
+                            xmult = card.ability.extra.xmult
+                        }
+                    end
+                end
+            end
+        end
+        if context.end_of_round and context.game_over == false and context.main_eval and G.GAME.blind.boss then
+            card:flip(card)
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if not card.debuff and not from_debuff then
+            card:flip(card)
+        end
+    end
 })
+
+-- Subterror Behemoth Dragossuary
 SMODS.Joker({
     key = "sub_drago",
     atlas = 'sub',
     pos = { x = 2, y = 1 },
     rarity = 1,
     discovered = true,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
-    cost = 0,
+    cost = 5,
     loc_vars = function(self, info_queue, card)
         return { vars = {} }
     end,
@@ -465,18 +494,40 @@ SMODS.Joker({
             },
         },
     },
+    calculate = function(self, card, context)
+        if JoyousSpring.can_use_abilities(card) then
+            if JoyousSpring.calculate_flip_effect(card, context) then
+                local choices = JoyousSpring.get_materials_owned({ { facedown = true, exclude_edition = true }, { monster_archetypes = { "Subterror" }, exclude_edition = true } })
+                local pick = pseudorandom_element(choices, pseudoseed("j_joy_sub_drago"))
+                if pick then
+                    local edition = poll_edition("j_joy_sub_drago", nil, nil, true) or 'e_foil'
+                    pick:set_edition(edition)
+                end
+            end
+        end
+        if context.end_of_round and context.game_over == false and context.main_eval and G.GAME.blind.boss then
+            card:flip(card)
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if not card.debuff and not from_debuff then
+            card:flip(card)
+        end
+    end
 })
+
+-- Subterror Behemoth Umastryx
 SMODS.Joker({
     key = "sub_uma",
     atlas = 'sub',
     pos = { x = 3, y = 1 },
-    rarity = 1,
+    rarity = 2,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 7,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 2 } }
+        return { vars = { card.ability.extra.banishes } }
     end,
     joy_desc_cards = {
         { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = "Archetype" },
@@ -490,20 +541,48 @@ SMODS.Joker({
                 monster_type = "Reptile",
                 monster_archetypes = { ["Subterror"] = true, ["SubterrorBehemoth"] = true }
             },
+            banishes = 2
         },
     },
+    calculate = function(self, card, context)
+        if JoyousSpring.can_use_abilities(card) then
+            if JoyousSpring.is_flip_active(card) and not context.blueprint_card and context.end_of_round and context.game_over == false and context.main_eval then
+                local choices = JoyousSpring.get_materials_owned({ { exclude_keys = { "j_joy_sub_uma" } } })
+                local to_banish, index = pseudorandom_element(choices, pseudoseed("j_joy_sub_uma"))
+                table.remove(choices, index)
+                local to_banish2 = pseudorandom_element(choices, pseudoseed("j_joy_sub_uma"))
+                if to_banish then
+                    JoyousSpring.banish(to_banish, "blind_selected")
+                end
+                if to_banish2 then
+                    JoyousSpring.banish(to_banish2, "blind_selected")
+                end
+            end
+            JoyousSpring.calculate_flip_effect(card, context)
+        end
+        if context.end_of_round and context.game_over == false and context.main_eval and G.GAME.blind.boss then
+            card:flip(card)
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if not card.debuff and not from_debuff then
+            card:flip(card)
+        end
+    end
 })
+
+-- Subterror Behemoth Phospheroglacier
 SMODS.Joker({
     key = "sub_phos",
     atlas = 'sub',
     pos = { x = 0, y = 2 },
     rarity = 1,
     discovered = true,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
-    cost = 0,
+    cost = 6,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 30, 0, 5 } }
+        return { vars = { card.ability.extra.chips, card.ability.extra.chips * JoyousSpring.count_materials_in_graveyard({ { monster_type = "Aqua" }, { monster_archetypes = { "Subterror" } } }), card.ability.extra.mills } }
     end,
     joy_desc_cards = {
         { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = "Archetype" },
@@ -517,20 +596,52 @@ SMODS.Joker({
                 monster_type = "Aqua",
                 monster_archetypes = { ["Subterror"] = true, ["SubterrorBehemoth"] = true }
             },
+            chips = 30,
+            mills = 5
         },
     },
+    calculate = function(self, card, context)
+        if JoyousSpring.can_use_abilities(card) then
+            if JoyousSpring.calculate_flip_effect(card, context) then
+                local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Subterror" } } })
+
+                for i = 1, card.ability.extra.mills do
+                    JoyousSpring.send_to_graveyard(pseudorandom_element(choices, pseudoseed("j_joy_sub_warrior")))
+                end
+            end
+            if context.joker_main then
+                return {
+                    chips = card.ability.extra.chips *
+                        JoyousSpring.count_materials_in_graveyard({ { monster_type = "Aqua" }, { monster_archetypes = { "Subterror" } } })
+                }
+            end
+        end
+        if context.end_of_round and context.game_over == false and context.main_eval and G.GAME.blind.boss then
+            card:flip(card)
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if not card.debuff and not from_debuff then
+            card:flip(card)
+        end
+    end
 })
+
+-- Subterror Behemoth Voltelluric
 SMODS.Joker({
     key = "sub_volt",
     atlas = 'sub',
     pos = { x = 1, y = 2 },
     rarity = 1,
     discovered = true,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
-    cost = 0,
+    cost = 7,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 50, 0 } }
+        return {
+            vars = { card.ability.extra.mult, card.ability.extra.mult *
+            JoyousSpring.count_flipped('back') }
+        }
     end,
     joy_desc_cards = {
         { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = "Archetype" },
@@ -544,20 +655,44 @@ SMODS.Joker({
                 monster_type = "Thunder",
                 monster_archetypes = { ["Subterror"] = true, ["SubterrorBehemoth"] = true }
             },
+            mult = 50
         },
     },
+    calculate = function(self, card, context)
+        if context.first_hand_drawn and G.GAME.blind.boss then
+            card:flip(card)
+        end
+        if JoyousSpring.can_use_abilities(card) then
+            if JoyousSpring.calculate_flip_effect(card, context) then
+                JoyousSpring.flip_all_cards(card, 'back', { G.hand })
+            end
+            if context.joker_main then
+                return {
+                    mult = card.ability.extra.mult *
+                        JoyousSpring.count_flipped('back')
+                }
+            end
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if not card.debuff and not from_debuff then
+            card:flip(card)
+        end
+    end
 })
+
+-- Subterror Behemoth Stalagmo
 SMODS.Joker({
     key = "sub_stala",
     atlas = 'sub',
     pos = { x = 2, y = 2 },
-    rarity = 1,
+    rarity = 2,
     discovered = true,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
-    cost = 0,
+    cost = 8,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 5 } }
+        return { vars = { card.ability.extra.draws } }
     end,
     joy_desc_cards = {
         { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = "Archetype" },
@@ -571,20 +706,56 @@ SMODS.Joker({
                 monster_type = "Rock",
                 monster_archetypes = { ["Subterror"] = true, ["SubterrorBehemoth"] = true }
             },
+            draws = 5,
+            stay_flipped = fals,
+            draw_count = 0
         },
     },
+    calculate = function(self, card, context)
+        if context.setting_blind and context.main_eval and G.GAME.blind.boss then
+            card:flip(card)
+        end
+        if JoyousSpring.can_use_abilities(card) then
+            if JoyousSpring.calculate_flip_effect(card, context) and G.GAME.blind.in_blind then
+                card.ability.extra.stay_flipped = true
+                for i = 1, card.ability.extra.draws do
+                    draw_card(G.deck, G.hand, i * 100 / card.ability.extra.draws, 'up', false, nil, 0, nil, true)
+                end
+            end
+        end
+        if context.end_of_round and context.game_over == false and context.main_eval then
+            card.ability.extra.stay_flipped = false
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if not card.debuff and not from_debuff then
+            card:flip(card)
+        end
+    end,
+    joy_stay_flipped = function(card, playing_card)
+        if card.ability.extra.stay_flipped then
+            card.ability.extra.draw_count = card.ability.extra.draw_count + 1
+            if card.ability.extra.draw_count >= card.ability.extra.draws or (#G.deck.cards == 0) then
+                card.ability.extra.stay_flipped = false
+            end
+            return true
+        end
+        return false
+    end
 })
+
+-- Subterror Behemoth Speleogeist
 SMODS.Joker({
     key = "sub_speleo",
     atlas = 'sub',
     pos = { x = 3, y = 2 },
-    rarity = 1,
+    rarity = 3,
     discovered = true,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
-    cost = 0,
+    cost = 9,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 0.1, 1 } }
+        return { vars = { card.ability.extra.extra_xmult, 1 + card.ability.extra.xmult } }
     end,
     joy_desc_cards = {
         { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = "Archetype" },
@@ -598,20 +769,53 @@ SMODS.Joker({
                 monster_type = "Fiend",
                 monster_archetypes = { ["Subterror"] = true, ["SubterrorBehemoth"] = true }
             },
+            xmult = 0,
+            extra_xmult = 0.1
         },
     },
+    calculate = function(self, card, context)
+        if JoyousSpring.can_use_abilities(card) then
+            if JoyousSpring.calculate_flip_effect(card, context) then
+                for _, joker in ipairs(G.jokers.cards) do
+                    if card ~= joker and joker.facing == 'back' then
+                        joker:flip(card)
+                    end
+                end
+            end
+            if context.joker_main then
+                if card.ability.extra.xmult > 0 then
+                    return {
+                        xmult = 1 + card.ability.extra.xmult,
+                    }
+                end
+            end
+        end
+        if context.joy_card_flipped then
+            card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.extra_xmult
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if not card.debuff and not from_debuff then
+            card:flip(card)
+        end
+    end
 })
+
+-- Subterror Behemoth Ultramafus
 SMODS.Joker({
     key = "sub_ultra",
     atlas = 'sub',
     pos = { x = 0, y = 3 },
-    rarity = 1,
+    rarity = 3,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 9,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 200, 0 } }
+        return {
+            vars = { card.ability.extra.chips, card.ability.extra.chips *
+            JoyousSpring.count_flipped('back') }
+        }
     end,
     joy_desc_cards = {
         { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = "Archetype" },
@@ -625,20 +829,48 @@ SMODS.Joker({
                 monster_type = "Pyro",
                 monster_archetypes = { ["Subterror"] = true, ["SubterrorBehemoth"] = true }
             },
+            chips = 200
         },
     },
+    calculate = function(self, card, context)
+        if JoyousSpring.can_use_abilities(card) then
+            if JoyousSpring.calculate_flip_effect(card, context) then
+                for _, joker in ipairs(G.jokers.cards) do
+                    if card ~= joker and joker.facing == 'front' then
+                        joker:flip(card)
+                    end
+                end
+            end
+            if context.joker_main then
+                return {
+                    chips = card.ability.extra.chips *
+                        JoyousSpring.count_flipped('back')
+                }
+            end
+        end
+        if context.end_of_round and context.game_over == false and context.main_eval and G.GAME.blind.boss then
+            card:flip(card)
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if not card.debuff and not from_debuff then
+            card:flip(card)
+        end
+    end
 })
+
+-- Subterror Behemoth Fiendess
 SMODS.Joker({
     key = "sub_befiendess",
     atlas = 'sub',
     pos = { x = 2, y = 3 },
-    rarity = 1,
+    rarity = 3,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 100, 50, 0, 0, 2, 1 } }
+        return { vars = { card.ability.extra.chips, card.ability.extra.mult, card.ability.extra.current_chips, card.ability.extra.current_mult, 2, 1 } }
     end,
     joy_desc_cards = {
         { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = "Archetype" },
@@ -648,13 +880,91 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
+                summon_type = "LINK",
                 attribute = "EARTH",
                 monster_type = "Wyrm",
-                monster_archetypes = { ["Subterror"] = true, ["SubterrorBehemoth"] = true }
+                monster_archetypes = { ["Subterror"] = true, ["SubterrorBehemoth"] = true },
+                summon_conditions = {
+                    {
+                        type = "LINK",
+                        materials = {
+                            { facedown = true, min = 2 },
+                        },
+                    }
+                }
             },
+            chips = 100,
+            mult = 50,
+            current_chips = 0,
+            current_mult = 0,
+            flips = 3,
+            creates = 1
         },
     },
+    calculate = function(self, card, context)
+        if JoyousSpring.can_use_abilities(card) then
+            if not context.blueprint_card then
+                if not card.ability.extra.activated and context.joy_activate_effect and context.joy_activated_card == card then
+                    local targets = JoyousSpring.get_materials_owned({ { exclude_tokens = true, exclude_summon_types = { "LINK" } } })
+                    local materials = {}
+                    for i, joker in ipairs(targets) do
+                        if joker ~= card and joker.facing == 'front' then
+                            materials[#materials + 1] = joker
+                        end
+                    end
+                    if next(materials) then
+                        JoyousSpring.create_overlay_effect_selection(card, materials, card.ability.extra.flips,
+                            card.ability.extra.flips, localize("k_joy_select"))
+                    end
+                end
+                if not card.ability.extra.activated and context.joy_exit_effect_selection and context.joy_card == card and
+                    #context.joy_selection == card.ability.extra.flips then
+                    for _, selected_card in ipairs(context.joy_selection) do
+                        selected_card:flip(card)
+                    end
+                    local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "SubterrorBehemoth" }, exclude_keys = { "j_joy_sub_befiendess" } } })
+                    for _ = 1, card.ability.extra.creates do
+                        if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+                            local key_to_add = pseudorandom_element(choices, pseudoseed("j_joy_sub_befiendess"))
+                            SMODS.add_card({
+                                key = key_to_add or "j_joy_sub_stygo",
+                            })
+                        end
+                    end
+                    card.ability.extra.activated = true
+                end
+            end
+        end
+        if context.end_of_round and context.game_over == false and context.main_eval and G.GAME.blind.boss then
+            card.ability.extra.activated = false
+        end
+    end,
+    joy_can_activate = function(card)
+        if card.ability.extra.activated then
+            return false
+        end
+        local targets = JoyousSpring.get_materials_owned({ { exclude_tokens = true, exclude_summon_types = { "LINK" } } })
+        local faceup_joker = 0
+        for _, joker in ipairs(targets) do
+            if joker ~= card and joker.facing == 'front' then
+                faceup_joker = faceup_joker + 1
+            end
+        end
+        return faceup_joker >= card.ability.extra.flips
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        local mult_count = 0
+        for _, material in ipairs(JoyousSpring.get_materials(card)) do
+            if JoyousSpring.is_material_center(material, { { monster_archetypes = { "Subterror" } } }) then
+                mult_count = mult_count + 1
+            end
+        end
+        card.ability.extra.current_chips = card.ability.extra.chips * #JoyousSpring.get_materials(card)
+        card.ability.extra.current_mult = card.ability.extra.mult * mult_count
+    end
 })
+
+-- The Hidden City
 SMODS.Joker({
     key = "sub_city",
     atlas = 'sub',
@@ -663,9 +973,9 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 6,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1 } }
+        return { vars = { card.ability.extra.money } }
     end,
     joy_desc_cards = {
         { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = "Archetype" },
@@ -677,8 +987,47 @@ SMODS.Joker({
             joyous_spring = JoyousSpring.init_joy_table {
                 is_field_spell = true,
             },
+            flips = 1,
+            money = 1
         },
     },
+    calculate = function(self, card, context)
+        if JoyousSpring.can_use_abilities(card) then
+            if not context.blueprint_card then
+                if not card.ability.extra.activated and context.joy_activate_effect and context.joy_activated_card == card then
+                    local materials = JoyousSpring.get_materials_owned({ { facedown = true }, { exclude_tokens = true, exclude_summon_types = { "LINK" } } })
+                    if next(materials) then
+                        JoyousSpring.create_overlay_effect_selection(card, materials, card.ability.extra.flips,
+                            card.ability.extra.flips, localize("k_joy_select"))
+                    end
+                end
+                if not card.ability.extra.activated and context.joy_exit_effect_selection and context.joy_card == card and
+                    #context.joy_selection == card.ability.extra.flips then
+                    for _, selected_card in ipairs(context.joy_selection) do
+                        selected_card:flip(card)
+                    end
+                    card.ability.extra.activated = true
+                end
+            end
+            if context.joy_card_flipped then
+                if (context.joy_card_flipped.facing == "back") == JoyousSpring.is_monster_card(context.joy_card_flipped) then
+                    return {
+                        dollars = card.ability.extra.money
+                    }
+                end
+            end
+        end
+        if context.end_of_round and context.game_over == false and context.main_eval then
+            card.ability.extra.activated = false
+        end
+    end,
+    joy_can_activate = function(card)
+        if card.ability.extra.activated then
+            return false
+        end
+        return JoyousSpring.count_materials_owned({ { facedown = true }, { exclude_tokens = true, exclude_summon_types = { "LINK" } } }) >
+            0
+    end,
 })
 
 JoyousSpring.collection_pool[#JoyousSpring.collection_pool + 1] = {
