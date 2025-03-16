@@ -258,6 +258,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 7,
     loc_vars = function(self, info_queue, card)
+        local has_spectrum = next(SMODS.find_card("j_joy_mekk_spectrum"))
         return {
             vars = {
                 card.ability.extra.chips,
@@ -265,11 +266,16 @@ SMODS.Joker({
                 card.ability.extra.xmult,
                 card.ability.extra.money,
                 colours = {
-                    JoyousSpring.get_joker_column(card) == 1 and G.C.UI.TEXT_DARK or G.C.UI.TEXT_INACTIVE,
-                    JoyousSpring.get_joker_column(card) == 2 and G.C.UI.TEXT_DARK or G.C.UI.TEXT_INACTIVE,
-                    JoyousSpring.get_joker_column(card) == 3 and G.C.UI.TEXT_DARK or G.C.UI.TEXT_INACTIVE,
-                    JoyousSpring.get_joker_column(card) == 4 and G.C.UI.TEXT_DARK or G.C.UI.TEXT_INACTIVE,
-                    JoyousSpring.get_joker_column(card) >= 5 and G.C.UI.TEXT_DARK or G.C.UI.TEXT_INACTIVE
+                    (has_spectrum or JoyousSpring.get_joker_column(card) == 1) and G.C.UI.TEXT_DARK or
+                    G.C.UI.TEXT_INACTIVE,
+                    (has_spectrum or JoyousSpring.get_joker_column(card) == 2) and G.C.UI.TEXT_DARK or
+                    G.C.UI.TEXT_INACTIVE,
+                    (has_spectrum or JoyousSpring.get_joker_column(card) == 3) and G.C.UI.TEXT_DARK or
+                    G.C.UI.TEXT_INACTIVE,
+                    (has_spectrum or JoyousSpring.get_joker_column(card) == 4) and G.C.UI.TEXT_DARK or
+                    G.C.UI.TEXT_INACTIVE,
+                    (has_spectrum or JoyousSpring.get_joker_column(card) >= 5) and G.C.UI.TEXT_DARK or
+                    G.C.UI.TEXT_INACTIVE
                 }
             },
         }
@@ -295,14 +301,17 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if JoyousSpring.can_use_abilities(card) then
             if context.joker_main then
+                local has_spectrum = next(SMODS.find_card("j_joy_mekk_spectrum"))
                 return {
-                    chips = JoyousSpring.get_joker_column(card) == 2 and card.ability.extra.chips or nil,
-                    mult = JoyousSpring.get_joker_column(card) == 3 and card.ability.extra.mult or nil,
-                    xmult = JoyousSpring.get_joker_column(card) == 4 and card.ability.extra.xmult or nil
+                    chips = (has_spectrum or JoyousSpring.get_joker_column(card) == 2) and card.ability.extra.chips or
+                        nil,
+                    mult = (has_spectrum or JoyousSpring.get_joker_column(card) == 3) and card.ability.extra.mult or nil,
+                    xmult = (has_spectrum or JoyousSpring.get_joker_column(card) == 4) and card.ability.extra.xmult or
+                        nil
                 }
             end
             if context.repetition and context.cardarea == G.play then
-                if JoyousSpring.get_joker_column(card) == 1 then
+                if next(SMODS.find_card("j_joy_mekk_spectrum")) or JoyousSpring.get_joker_column(card) == 1 then
                     return {
                         repetitions = 1
                     }
@@ -311,7 +320,8 @@ SMODS.Joker({
         end
     end,
     calc_dollar_bonus = function(self, card)
-        return JoyousSpring.get_joker_column(card) >= 5 and card.ability.extra.money or nil
+        return (next(SMODS.find_card("j_joy_mekk_spectrum")) or JoyousSpring.get_joker_column(card) >= 5) and
+            card.ability.extra.money or nil
     end,
 })
 

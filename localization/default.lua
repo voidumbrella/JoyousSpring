@@ -2603,7 +2603,8 @@ return {
 					"Create and remove a random card from the {C:attention}GY{}",
 					"Must have room and might have",
 					"a random edition, unless specified",
-					"{s:0.9,C:inactive}({s:0.9,C:joy_spell}Extra Deck{} {s:0.9,C:inactive}and {s:0.9,C:joy_ritual}Ritual{} {s:0.9,C:attention}Jokers{} {s:0.9,C:inactive}that were not",
+					"{s:0.9,C:inactive}({s:0.9,C:joy_spell}Extra Deck{} {s:0.9,C:attention}Jokers{} {s:0.9,C:inactive}that were not",
+					--"{s:0.9,C:inactive}({s:0.9,C:joy_spell}Extra Deck{} {s:0.9,C:inactive}and {s:0.9,C:joy_ritual}Ritual{} {s:0.9,C:attention}Jokers{} {s:0.9,C:inactive}that were not",
 					"{s:0.9,C:inactive}properly summoned can't be revived)",
 					"{s:0.9,C:inactive}(Revived Jokers have a sell value of 1)"
 				},
@@ -2709,7 +2710,8 @@ return {
 				name = "",
 				text = {
 					"{C:attention,s:1.3}Revive{}: Create and remove a random card from the {C:attention}GY{}. Must have room and might have a random edition, unless specified",
-					"{C:joy_spell}Extra Deck{} and {C:joy_ritual}Ritual{} {C:attention}Jokers{} that were not properly summoned can't be revived",
+					"{C:joy_spell}Extra Deck{} {C:attention}Jokers{} that were not properly summoned can't be revived",
+					--"{C:joy_spell}Extra Deck{} and {C:joy_ritual}Ritual{} {C:attention}Jokers{} that were not properly summoned can't be revived",
 					"Revived Jokers have a sell value of 1"
 				},
 			},
