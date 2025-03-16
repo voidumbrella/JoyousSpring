@@ -658,11 +658,11 @@ SMODS.Joker({
     key = "sub_volt",
     atlas = 'sub',
     pos = { x = 1, y = 2 },
-    rarity = 1,
+    rarity = 3,
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    cost = 7,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_flip" }
