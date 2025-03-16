@@ -43,7 +43,7 @@ JoyousSpring.revive_pseudorandom = function(property_list, seed, must_have_room,
 end
 
 JoyousSpring.send_to_graveyard = function(card)
-    if JoyousSpring.graveyard then
+    if JoyousSpring.graveyard and not JoyousSpring.delete_run then
         if type(card) == "string" then
             local not_summoned = JoyousSpring.is_material_center(card, { exclude_summon_types = { "NORMAL" } })
             local cannot_revive = G.P_CENTERS[card].config.extra.joyous_spring.cannot_revive or not_summoned
@@ -76,6 +76,14 @@ JoyousSpring.send_to_graveyard = function(card)
                 .summonable + (cannot_revive and 0 or 1)
         end
     end
+end
+
+-- Prevent GY from doing stuff at the end of the run
+local game_delete_run_ref = Game.delete_run
+function Game:delete_run()
+    JoyousSpring.delete_run = true
+    game_delete_run_ref(self)
+    JoyousSpring.delete_run = nil
 end
 
 JoyousSpring.create_graveyard_tab = function()
