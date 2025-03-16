@@ -271,7 +271,7 @@ JoyousSpring.ease_detach = function(card, value)
         return
     end
     local value = value or card.ability.extra.detach or 1
-    card.ability.extra.joyous_spring.xyz_materials = max(0, card.ability.extra.joyous_spring.xyz_materials - value)
+    card.ability.extra.joyous_spring.xyz_materials = math.max(0, card.ability.extra.joyous_spring.xyz_materials - value)
 end
 
 ---Flip all cards in all areas or in *area*
