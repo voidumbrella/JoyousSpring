@@ -89,7 +89,6 @@ SMODS.Joker({
                 break
             end
         end
-        print(faceup_joker)
         return faceup_joker
     end,
 })
