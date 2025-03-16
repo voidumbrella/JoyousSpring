@@ -11,8 +11,9 @@ end
 ---Get all materials in G.jokers that fulfill **property_list**
 ---@param property_list material_properties[]
 ---@param different_names boolean?
+---@param for_tribute boolean?
 ---@return Card[]
-JoyousSpring.get_materials_owned = function(property_list, different_names)
+JoyousSpring.get_materials_owned = function(property_list, different_names, for_tribute)
     if not G.jokers then return {} end
 
     local materials = {}
@@ -28,7 +29,7 @@ JoyousSpring.get_materials_owned = function(property_list, different_names)
                 if keys[joker.config.center_key] and different_names then
                     break
                 end
-                if JoyousSpring.is_material(joker, property) then
+                if JoyousSpring.is_material(joker, property, for_tribute and "TRIBUTE" or nil) then
                     table.insert(materials, joker)
                     keys[joker.config.center_key] = true
                     break

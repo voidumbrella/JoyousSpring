@@ -599,7 +599,7 @@ SMODS.Joker({
     },
     calculate = function(self, card, context)
         if context.joy_activate_effect and context.joy_activated_card == card then
-            local materials = JoyousSpring.get_materials_owned({ { monster_archetypes = { "MekkKnight" } } })
+            local materials = JoyousSpring.get_materials_owned({ { monster_archetypes = { "MekkKnight" } } }, false, true)
             if next(materials) then
                 JoyousSpring.create_overlay_effect_selection(card, materials, card.ability.extra.tributes,
                     card.ability.extra.tributes)
@@ -628,8 +628,11 @@ SMODS.Joker({
         end
     end,
     joy_can_activate = function(card)
-        local materials = JoyousSpring.get_materials_owned({ { monster_archetypes = { "MekkKnight" } } })
-        return not card.debuff and (G.GAME.blind.in_blind and next(materials)) and true or false
+        if not G.GAME.blind.in_blind then
+            return false
+        end
+        local materials = JoyousSpring.get_materials_owned({ { monster_archetypes = { "MekkKnight" } } }, false, true)
+        return next(materials) and true or false
     end,
     in_pool = function(self, args)
         return args and args.source and args.source == "sho" or false

@@ -623,8 +623,8 @@ SMODS.Joker({
     },
     calculate = function(self, card, context)
         if context.joy_activate_effect and context.joy_activated_card == card then
-            local materials = JoyousSpring.get_materials_owned({ { is_extra_deck = true } })
-            if next(materials) then
+            local materials = JoyousSpring.get_materials_owned({ { is_extra_deck = true } }, false, true)
+            if #materials >= card.ability.extra.tributes then
                 JoyousSpring.create_overlay_effect_selection(card, materials, card.ability.extra.tributes,
                     card.ability.extra.tributes)
             end
@@ -662,10 +662,11 @@ SMODS.Joker({
         return card.ability.extra.money * debuffed_ed_count
     end,
     joy_can_activate = function(card)
-        local materials = JoyousSpring.get_materials_owned({ { is_extra_deck = true } })
-        return not card.debuff and
-            (#G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit and next(materials)) and
-            true or false
+        if not (#G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit) then
+            return false
+        end
+        local materials = JoyousSpring.get_materials_owned({ { is_extra_deck = true } }, false, true)
+        return #materials >= card.ability.extra.tributes
     end,
     in_pool = function(self, args)
         return args and args.source and args.source == "sho" or false

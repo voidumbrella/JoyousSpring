@@ -60,7 +60,8 @@ SMODS.Joker({
             end
             if not context.blueprint then
                 if not card.ability.extra.activated and context.joy_activate_effect and context.joy_activated_card == card then
-                    local materials = JoyousSpring.get_materials_owned({ { monster_type = "Zombie" }, { is_trap = true } })
+                    local materials = JoyousSpring.get_materials_owned(
+                        { { monster_type = "Zombie" }, { is_trap = true } }, false, true)
                     if next(materials) then
                         JoyousSpring.create_overlay_effect_selection(card, materials, card.ability.extra.tributes,
                             card.ability.extra.tributes)
@@ -88,10 +89,12 @@ SMODS.Joker({
         end
     end,
     joy_can_activate = function(card)
-        local materials = JoyousSpring.get_materials_owned({ { monster_type = "Zombie" }, { is_trap = true } })
-        return not card.ability.extra.activated and
-            (#G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit and next(materials)) and
-            true or false
+        if card.ability.extra.activated or not (#G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit) then
+            return false
+        end
+        local materials = JoyousSpring.get_materials_owned({ { monster_type = "Zombie" }, { is_trap = true } }, false,
+            true)
+        return next(materials) and true or false
     end,
 })
 

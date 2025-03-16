@@ -262,7 +262,7 @@ SMODS.Joker({
                     local targets = G.jokers.cards
                     local materials = {}
                     for i, joker in ipairs(targets) do
-                        if joker ~= card then
+                        if joker ~= card and not joker.ability.eternal then
                             materials[#materials + 1] = joker
                         end
                     end
@@ -303,7 +303,14 @@ SMODS.Joker({
         end
     end,
     joy_can_activate = function(card)
-        return #G.jokers.cards > 1 and JoyousSpring.count_materials_in_graveyard(
+        local targets = G.jokers.cards
+        local materials = {}
+        for i, joker in ipairs(targets) do
+            if joker ~= card and not joker.ability.eternal then
+                materials[#materials + 1] = joker
+            end
+        end
+        return next(materials) and JoyousSpring.count_materials_in_graveyard(
             { { monster_archetypes = { "SubterrorBehemoth" } }, { monster_archetypes = { "Subterror" } } }, true) > 0
     end,
 })
