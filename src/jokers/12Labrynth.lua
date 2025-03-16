@@ -430,7 +430,7 @@ SMODS.Joker({
                 card.ability.extra.pcard_count = card.ability.extra.pcard_count + 1
             end
             card.ability.extra.count = card.ability.extra.count + 1
-            if JoyousSpring.can_use_abilities(card) and not card.ability.extra.active and card.ability.extra.count > card.ability.extra.flipped then
+            if JoyousSpring.can_use_abilities(card) and not card.ability.extra.active and card.ability.extra.count >= card.ability.extra.flipped then
                 local choices = JoyousSpring.get_materials_in_collection({ { rarity = 2, monster_archetypes = { "Labrynth" } } })
                 local pick = pseudorandom_element(choices, pseudoseed("j_joy_lab_ariane"))
 
@@ -503,7 +503,7 @@ SMODS.Joker({
                 card.ability.extra.pcard_count = card.ability.extra.pcard_count + 1
             end
             card.ability.extra.count = card.ability.extra.count + 1
-            if JoyousSpring.can_use_abilities(card) and not card.ability.extra.active and card.ability.extra.count > card.ability.extra.flipped then
+            if JoyousSpring.can_use_abilities(card) and not card.ability.extra.active and card.ability.extra.count >= card.ability.extra.flipped then
                 local choices = JoyousSpring.get_materials_in_collection({ { rarity = 1, monster_archetypes = { "Labrynth" } } })
                 local pick = pseudorandom_element(choices, pseudoseed("j_joy_lab_arianna"))
                 JoyousSpring.add_monster_tag(pick or "j_joy_lab_clock")
