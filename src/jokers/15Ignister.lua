@@ -179,6 +179,16 @@ SMODS.Joker({
             },
         },
     },
+    joy_can_transfer_ability = function(self, other_card)
+        return true
+    end,
+    joy_transfer_ability_calculate = function(self, other_card, context)
+        if context.joker_main then
+            return {
+                mult = 10
+            }
+        end
+    end
 })
 
 -- Gussari @Ignister

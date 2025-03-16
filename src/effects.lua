@@ -274,6 +274,53 @@ JoyousSpring.stay_flipped = function(card, stay_flipped)
     return keep_flipped
 end
 
+JoyousSpring.transfer_abilities = function(card, material_key)
+    local material_center = G.P_CENTERS[material_key]
+    if not card or not material_center or not material_center.joy_can_transfer_ability or not material_center.joy_transfer_ability_calculate then
+        return
+    end
+    if material_center:joy_transfer_ability(card) then
+        card.ability.extra.joyous_spring.material_effects[material_key] = true
+    end
+end
+
+---Calculate transfered abilities
+---@param card Card|table
+---@param context CalcContext
+---@param effects table?
+---@return table?
+JoyousSpring.calculate_transfer_abilities = function(card, context, effects)
+    if not next(card.ability.extra.joyous_spring.material_effects) then
+        return effects
+    end
+    local transfer_effects = {}
+
+    for material_key, _ in pairs(card.ability.extra.joyous_spring.material_effects) do
+        local material_center = G.P_CENTERS[material_key]
+
+        if material_center then
+            local material_effect = material_center:joy_transfer_ability_calculate(card, context)
+            if material_effect then
+                transfer_effects[#transfer_effects + 1] = material_effect
+            end
+        end
+    end
+
+    if #transfer_effects == 0 then return effects end
+
+    if not effects then effects = table.remove(transfer_effects, 1) end
+
+    local main_effect = effects
+    for _, eff in ipairs(transfer_effects) do
+        while main_effect.extra ~= nil do
+            main_effect = main_effect.extra
+        end
+        main_effect.extra = eff
+    end
+
+    return effects
+end
+
 --#endregion
 
 --#region UI

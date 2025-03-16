@@ -10,8 +10,8 @@ SMODS.Atlas({
 --#region LSP
 
 ---@class SMODS.Joker
----@field joy_set_cost? fun(Card:table|Card) Sets its own cost and sell cost inside Card:set_cost()
----@field joy_can_activate? fun(Card:table|Card):boolean? Returns `true` if the activated ability can be used
+---@field joy_set_cost? fun(card:table|Card) Sets its own cost and sell cost inside Card:set_cost()
+---@field joy_can_activate? fun(card:table|Card):boolean? Returns `true` if the activated ability can be used
 ---@field joy_allow_ability? fun(card:table|Card,other_card:table|Card):boolean? Returns `true` if *other_card* is allowed to use abilities while facedown by *card*
 ---@field joy_create_card_for_shop? fun(card:table|Card, other_card:table|Card, area:CardArea) Used to modify *other_Card* when it's created for the shop
 ---@field joy_apply_to_jokers_added? fun(card:table|Card,added_card:table|Card) Used to modify *added_card* when obtained
@@ -20,6 +20,8 @@ SMODS.Atlas({
 ---@field joy_allow_ability? fun(card:table|Card, other_card:table|Card):boolean? Determines if *other_card* can use abilities while face-down
 ---@field joy_prevent_trap_flip? fun(card:table|Card, other_card:table|Card):boolean? Determines if the Trap *other_card* should flip at end of round
 ---@field joy_flip_effect_active? fun(card:table|Card, other_card:table|Card):boolean? Determines if the FLIP ability of *other_card* should activate at the start of Blind
+---@field joy_can_transfer_ability? fun(self:SMODS.Center|table, other_card:Card|table):boolean? Determines if *self* transfers its ability to *other_card*
+---@field joy_transfer_ability_calculate? fun(self:SMODS.Center|table, other_card:Card|table, context:CalcContext):table? Similar to `calculate` but for transfered abilities. `self` is the center for the material and `other_card` is the card witht he effect
 
 ---@alias summon_type
 ---|'"NORMAL"'
@@ -164,6 +166,7 @@ JoyousSpring.init_joy_table = function(params)
         summon_consumeable_conditions = params.summon_consumeable_conditions or nil,
         summoned = false,
         summon_materials = {},
+        material_effects = {},
         xyz_materials = 0,
         revived = false,
         perma_debuffed = false,
