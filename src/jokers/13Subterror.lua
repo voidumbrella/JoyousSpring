@@ -1053,7 +1053,7 @@ SMODS.Joker({
                     card.ability.extra.activated = true
                 end
             end
-            if context.joy_card_flipped then
+            if context.joy_card_flipped and context.joy_card_flipped.ability.set == "Joker" then
                 if (context.joy_card_flipped.facing == "back") == JoyousSpring.is_monster_card(context.joy_card_flipped) then
                     return {
                         dollars = card.ability.extra.money
