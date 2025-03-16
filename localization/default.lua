@@ -1434,8 +1434,8 @@ return {
 			j_joy_lab_lady = {
 				name = "{C:joy_effect}Lady Labrynth of the Silver Castle",
 				text = {
-					"Each time a card is {C:attention}flipped{} each",
-					"{C:joy_normal}\"Labrynth\"{} give {X:mult,C:white}X#1#{} more Mult",
+					"Gains {X:mult,C:white}X#1#{} Mult",
+					"each time a card is {C:attention}flipped{}",
 					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}",
 					" ",
 					"Non-{C:joy_trap}Trap{} {C:joy_normal}Fiends{} can use their",

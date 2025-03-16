@@ -731,11 +731,11 @@ SMODS.Joker({
                 monster_archetypes = { ["Labrynth"] = true }
             },
             xmult = 0,
-            extra_xmult = 0.05
+            extra_xmult = 0.1
         },
     },
     calculate = function(self, card, context)
-        if context.other_joker and JoyousSpring.is_monster_archetype(context.other_joker, "Labrynth") then
+        if context.joker_main then
             if card.ability.extra.xmult > 0 then
                 return {
                     xmult = 1 + card.ability.extra.xmult,
