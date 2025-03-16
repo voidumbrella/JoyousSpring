@@ -36,7 +36,7 @@ SMODS.Joker({
             },
             flips = 1,
             revives = 1,
-            activated = true
+            activated = false
         },
     },
     calculate = function(self, card, context)
@@ -89,6 +89,7 @@ SMODS.Joker({
                 break
             end
         end
+        print(faceup_joker)
         return faceup_joker
     end,
 })
