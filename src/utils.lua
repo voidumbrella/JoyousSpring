@@ -246,6 +246,9 @@ end
 JoyousSpring.calculate_flip_effect = function(card, context)
     if (context.joy_card_flipped and context.joy_card_flipped == card and card.facing == "front") or
         (context.setting_blind and context.main_eval and JoyousSpring.flip_effect_active(card)) then
+        if card.facing == 'back' then
+            card:flip(card)
+        end
         card.ability.extra.joyous_spring.flip_active = true
         SMODS.calculate_effect({ message = localize("k_joy_flip") }, card)
         SMODS.calculate_context({ joy_flip_activated = card, joy_other_context = context })

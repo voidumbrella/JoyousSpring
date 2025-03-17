@@ -439,7 +439,7 @@ SMODS.Joker({
         end
     end,
     joy_prevent_trap_flip = function(card, other_card)
-        return true
+        return other_card.facing == 'front'
     end,
     joy_flip_effect_active = function(card, other_card)
         return JoyousSpring.is_trap_monster(other_card)
@@ -451,7 +451,7 @@ SMODS.Joker({
     key = "eld_angel",
     atlas = 'eld',
     pos = { x = 0, y = 2 },
-    rarity = 2,
+    rarity = 1,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
@@ -482,8 +482,8 @@ SMODS.Joker({
                     {
                         type = "FUSION",
                         materials = {
-                            { monster_archetypes = { "Eldlich" } },
-                            { monster_type = "Zombie" }
+                            { is_trap = true },
+                            {}
                         }
                     }
                 },

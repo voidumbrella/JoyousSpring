@@ -1711,7 +1711,7 @@ return {
 					"this owned card is sent to the {C:attention}GY{}"
 				},
 				joy_summon_conditions = {
-					"{C:attention}1{} {C:joy_normal}\"Eldlich\"{} + {C:attention}1{} {C:joy_normal}Zombie{}"
+					"{C:attention}2 Jokers{}, including a {C:joy_trap}Trap{}"
 				}
 			},
 			--#endregion
