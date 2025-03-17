@@ -945,7 +945,7 @@ SMODS.Joker({
             mult = 50,
             current_chips = 0,
             current_mult = 0,
-            flips = 3,
+            flips = 2,
             creates = 1
         },
     },
@@ -981,6 +981,12 @@ SMODS.Joker({
                     end
                     card.ability.extra.activated = true
                 end
+            end
+            if context.joker_main then
+                return {
+                    chips = card.ability.extra.current_chips,
+                    mult = card.ability.extra.current_mult
+                }
             end
         end
         if context.end_of_round and context.game_over == false and context.main_eval and G.GAME.blind.boss then
