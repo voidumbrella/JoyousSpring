@@ -256,7 +256,7 @@ JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, spe
             }
         }
 
-        if card.ability.extra.joyous_spring.material_effects and next(card.ability.extra.joyous_spring.material_effects) then
+        if card and not card.debuff and card.ability.extra.joyous_spring.material_effects and next(card.ability.extra.joyous_spring.material_effects) then
             desc_nodes[#desc_nodes + 1] = {
                 {
                     n = G.UIT.B,
@@ -280,6 +280,16 @@ JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, spe
                 },
             }
             for material_key, config in pairs(card.ability.extra.joyous_spring.material_effects) do
+                local joy_loc_string = localize { type = 'name_text', set = "Joker", key = material_key }
+                local joy_colour
+                if string.len(joy_loc_string) > 2 and string.sub(joy_loc_string, string.len(joy_loc_string) - 1, string.len(joy_loc_string)) == "{}" then
+                    joy_loc_string = string.sub(joy_loc_string, 1, string.len(joy_loc_string) - 2)
+                end
+                if string.sub(joy_loc_string, 1, 3) == "{C:" then
+                    local _, _, colour, real_name = string.find(joy_loc_string, "{C:(.*)}(.*)")
+                    joy_colour = colour
+                    joy_loc_string = real_name
+                end
                 desc_nodes[#desc_nodes + 1] = {
                     {
                         n = G.UIT.R,
@@ -288,9 +298,9 @@ JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, spe
                             {
                                 n = G.UIT.T,
                                 config = {
-                                    text = localize { type = "name_text", set = "Joker", key = material_key },
-                                    scale = 0.3,
-                                    colour = G.C.JOY.EFFECT,
+                                    text = joy_loc_string,
+                                    scale = 0.27,
+                                    colour = G.ARGS.LOC_COLOURS[joy_colour] or G.C.JOY.EFFECT,
                                 },
                             }
                         }
@@ -299,7 +309,7 @@ JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, spe
 
                 local material_center = G.P_CENTERS[material_key]
                 if material_center and G.localization.descriptions["Joker"][material_key].joy_transfer_ability then
-                    localize { type = "joy_transfer_ability", set = "Joker", key = material_key, nodes = desc_nodes, vars = material_center.joy_transfer_loc_vars and material_center:joy_transfer_loc_vars(info_queue, card, config).vars or {} }
+                    localize { type = "joy_transfer_ability", set = "Joker", key = material_key, nodes = desc_nodes, vars = material_center.joy_transfer_loc_vars and material_center:joy_transfer_loc_vars(info_queue, card, config).vars or {}, scale = 0.9 }
                 end
             end
         end
