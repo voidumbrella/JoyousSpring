@@ -279,8 +279,9 @@ JoyousSpring.transfer_abilities = function(card, material_key)
     if not card or not material_center or not material_center.joy_can_transfer_ability or not material_center.joy_transfer_ability_calculate then
         return
     end
-    if material_center:joy_transfer_ability(card) then
-        card.ability.extra.joyous_spring.material_effects[material_key] = true
+    if material_center:joy_can_transfer_ability(card) then
+        card.ability.extra.joyous_spring.material_effects[material_key] = material_center.joy_transfer_config and
+            material_center:joy_transfer_config(card) or {}
     end
 end
 
@@ -290,16 +291,16 @@ end
 ---@param effects table?
 ---@return table?
 JoyousSpring.calculate_transfer_abilities = function(card, context, effects)
-    if not next(card.ability.extra.joyous_spring.material_effects) then
+    if not card.ability.extra.joyous_spring.material_effects or not next(card.ability.extra.joyous_spring.material_effects) then
         return effects
     end
     local transfer_effects = {}
 
-    for material_key, _ in pairs(card.ability.extra.joyous_spring.material_effects) do
+    for material_key, config in pairs(card.ability.extra.joyous_spring.material_effects) do
         local material_center = G.P_CENTERS[material_key]
 
         if material_center then
-            local material_effect = material_center:joy_transfer_ability_calculate(card, context)
+            local material_effect = material_center:joy_transfer_ability_calculate(card, context, config)
             if material_effect then
                 transfer_effects[#transfer_effects + 1] = material_effect
             end
