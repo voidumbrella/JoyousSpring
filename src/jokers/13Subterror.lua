@@ -835,6 +835,9 @@ SMODS.Joker({
         if context.joy_card_flipped then
             card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.extra_xmult
         end
+        if context.end_of_round and context.game_over == false and context.main_eval and G.GAME.blind.boss then
+            card:flip(card)
+        end
     end,
     add_to_deck = function(self, card, from_debuff)
         if not card.debuff and not from_debuff then
