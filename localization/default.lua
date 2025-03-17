@@ -1775,6 +1775,9 @@ return {
 					" ",
 					"A {C:joy_normal}Cyberse{} summoned using this card as {C:attention}material{} gains this ability:",
 					"{s:0.9}Can't be debuffed or {s:0.9,C:attention}flipped {s:0.9}face-down"
+				},
+				joy_transfer_ability = {
+					"{C:mult}+#1# Mult{}"
 				}
 			},
 			j_joy_ignis_gussari = {
@@ -1784,6 +1787,9 @@ return {
 					" ",
 					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability:",
 					"{s:0.9,C:mult}+#1# {s:0.9}Mult for each {s:0.9,C:attention}material {s:0.9}used for its summon",
+				},
+				joy_transfer_ability = {
+					"{C:chips}+#1# Chips{}"
 				}
 			},
 			j_joy_ignis_danmari = {

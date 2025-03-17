@@ -182,12 +182,18 @@ SMODS.Joker({
     joy_can_transfer_ability = function(self, other_card)
         return true
     end,
-    joy_transfer_ability_calculate = function(self, other_card, context)
+    joy_transfer_ability_calculate = function(self, other_card, context, config)
         if context.joker_main then
             return {
-                mult = 10
+                mult = config.mult
             }
         end
+    end,
+    joy_transfer_config = function(self, other_card)
+        return { mult = 10 }
+    end,
+    joy_transfer_loc_vars = function(self, info_queue, card, config)
+        return { vars = { config.mult } }
     end
 })
 
@@ -218,6 +224,22 @@ SMODS.Joker({
             },
         },
     },
+    joy_can_transfer_ability = function(self, other_card)
+        return true
+    end,
+    joy_transfer_ability_calculate = function(self, other_card, context, config)
+        if context.joker_main then
+            return {
+                chips = config.chips
+            }
+        end
+    end,
+    joy_transfer_config = function(self, other_card)
+        return { chips = 10 }
+    end,
+    joy_transfer_loc_vars = function(self, info_queue, card, config)
+        return { vars = { config.chips } }
+    end
 })
 
 -- Danmari @Ignister

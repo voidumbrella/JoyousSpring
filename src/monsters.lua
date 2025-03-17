@@ -21,7 +21,9 @@ SMODS.Atlas({
 ---@field joy_prevent_trap_flip? fun(card:table|Card, other_card:table|Card):boolean? Determines if the Trap *other_card* should flip at end of round
 ---@field joy_flip_effect_active? fun(card:table|Card, other_card:table|Card):boolean? Determines if the FLIP ability of *other_card* should activate at the start of Blind
 ---@field joy_can_transfer_ability? fun(self:SMODS.Center|table, other_card:Card|table):boolean? Determines if *self* transfers its ability to *other_card*
----@field joy_transfer_ability_calculate? fun(self:SMODS.Center|table, other_card:Card|table, context:CalcContext):table? Similar to `calculate` but for transfered abilities. `self` is the center for the material and `other_card` is the card witht he effect
+---@field joy_transfer_ability_calculate? fun(self:SMODS.Center|table, other_card:Card|table, context:CalcContext, config:table):table? Similar to `calculate` but for transfered abilities. `self` is the center for the material and `other_card` is the card witht he effect
+---@field joy_transfer_config? fun(self:SMODS.Center|table, other_card:Card|table):table? Similar to `config`, it returns the initial config table for the transfered ability
+---@field joy_transfer_loc_vars? fun(self: SMODS.Center|table, info_queue: table, card: Card|table, config: table): table? Similar to `loc_vars` but for the transfered ability text
 
 ---@alias summon_type
 ---|'"NORMAL"'

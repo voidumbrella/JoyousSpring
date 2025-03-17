@@ -255,6 +255,55 @@ JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, spe
                 }
             }
         }
+
+        if card.ability.extra.joyous_spring.material_effects and next(card.ability.extra.joyous_spring.material_effects) then
+            desc_nodes[#desc_nodes + 1] = {
+                {
+                    n = G.UIT.B,
+                    config = { align = "cm", w = 0, h = 0.3 },
+                },
+            }
+            desc_nodes[#desc_nodes + 1] = {
+                {
+                    n = G.UIT.R,
+                    config = { align = "cm" },
+                    nodes = {
+                        {
+                            n = G.UIT.T,
+                            config = {
+                                text = "Transfered abilities:",
+                                scale = 0.3,
+                                colour = G.C.UI.TEXT_INACTIVE,
+                            },
+                        },
+                    }
+                },
+            }
+            for material_key, config in pairs(card.ability.extra.joyous_spring.material_effects) do
+                desc_nodes[#desc_nodes + 1] = {
+                    {
+                        n = G.UIT.R,
+                        config = { align = "cm" },
+                        nodes = {
+                            {
+                                n = G.UIT.T,
+                                config = {
+                                    text = localize { type = "name_text", set = "Joker", key = material_key },
+                                    scale = 0.3,
+                                    colour = G.C.JOY.EFFECT,
+                                },
+                            }
+                        }
+                    },
+                }
+
+                local material_center = G.P_CENTERS[material_key]
+                if material_center and G.localization.descriptions["Joker"][material_key].joy_transfer_ability then
+                    localize { type = "joy_transfer_ability", set = "Joker", key = material_key, nodes = desc_nodes, vars = material_center.joy_transfer_loc_vars and material_center:joy_transfer_loc_vars(info_queue, card, config).vars or {} }
+                end
+            end
+        end
+
         -- Add summoning conditions to info_queue automatically
         if G.localization.descriptions[self.set][self.key].joy_summon_conditions then
             full_UI_table.info[#full_UI_table.info + 1] = {}
@@ -275,12 +324,12 @@ function localize(args, misc_cat)
     end
 
     local loc_target = nil
-    if args.type == 'joy_summon_conditions' then
+    if args.type == 'joy_summon_conditions' or args.type == 'joy_transfer_ability' then
         loc_target = G.localization.descriptions[(args.set or args.node.config.center.set)]
             [args.key or args.node.config.center.key]
 
         if loc_target then
-            for _, lines in ipairs(loc_target.joy_summon_conditions_parsed) do
+            for _, lines in ipairs(loc_target[args.type .. "_parsed"]) do
                 local final_line = {}
                 for _, part in ipairs(lines) do
                     local assembled_string = ''
@@ -363,6 +412,12 @@ function init_localization()
             center.joy_summon_conditions_parsed = {}
             for _, line in ipairs(center.joy_summon_conditions) do
                 center.joy_summon_conditions_parsed[#center.joy_summon_conditions_parsed + 1] = loc_parse_string(line)
+            end
+        end
+        if center.joy_transfer_ability then
+            center.joy_transfer_ability_parsed = {}
+            for _, line in ipairs(center.joy_transfer_ability) do
+                center.joy_transfer_ability_parsed[#center.joy_transfer_ability_parsed + 1] = loc_parse_string(line)
             end
         end
     end
