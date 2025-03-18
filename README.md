@@ -1,6 +1,6 @@
 # JoyousSpring - Balatro Mod
 
-Balatro mod that adds modern Yu-Gi-Oh! cards to Balatro.
+Balatro mod that adds modern Yu-Gi-Oh! cards to the game.
 
 ## Installation
 
