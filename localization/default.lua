@@ -2550,6 +2550,11 @@ return {
 				},
 			},
 		},
+		Planet = {
+			c_joy_cursed_eldland = {
+				name = "{C:joy_spell}Cursed Eldland"
+			}
+		},
 		Other = {
 			--#region Boosters
 			p_joy_monster_pack = {

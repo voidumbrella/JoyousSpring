@@ -11,7 +11,7 @@ local ba_die = function()
     if next(SMODS.find_card("j_joy_ba_malacoda")) or next(SMODS.find_card("j_joy_ba_cherubini")) or next(SMODS.find_card("j_joy_ba_pilgrim")) or next(SMODS.find_card("j_joy_ba_virgil")) or next(SMODS.find_card("j_joy_ba_dante")) or next(SMODS.find_card("j_joy_ba_beatrice")) then
         return false
     end
-    if JoyousSpring.count_materials_owned({ { is_monster = true, exclude_monster_types = { "Fiend" } } }) > 0 then
+    if JoyousSpring.count_materials_owned({ { is_monster = true, exclude_monster_types = { "Fiend" }, exclude_traps = true } }) > 0 then
         return true
     end
 end
