@@ -80,6 +80,21 @@ SMODS.Joker({
             end
         end
     end,
+    joker_display_def = function(JokerDisplay)
+        return {
+            reminder_text = {
+                { text = "(" },
+                { ref_table = "card.joker_display_values", ref_value = "localized_text" },
+                { text = " " },
+                { ref_table = "card.joker_display_values", ref_value = "column" },
+                { text = ")" },
+            },
+            calc_function = function(card)
+                card.joker_display_values.localized_text = localize("k_joy_column")
+                card.joker_display_values.column = JoyousSpring.get_joker_column(card)
+            end
+        }
+    end
 })
 
 -- Mekk-Knight Orange Sunset

@@ -2838,6 +2838,8 @@ return {
 			k_joy_summon_conditions = "Summoning Conditions",
 			k_joy_graveyard = "Graveyard",
 			k_joy_banishment = "Banishment",
+			k_joy_column = "Column",
+			k_joy_flipped = "Flipped:",
 			k_joy_banish_blind_selected = "Start of Blind",
 			k_joy_banish_end_of_round = "End of Round",
 			k_joy_banish_boss_selected = "Start of Boss Blind",
