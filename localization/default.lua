@@ -1777,7 +1777,7 @@ return {
 					"{s:0.9}Can't be debuffed or {s:0.9,C:attention}flipped {s:0.9}face-down"
 				},
 				joy_transfer_ability = {
-					"{C:mult}+#1# Mult{}"
+					"Can't be debuffed or {C:attention}flipped{} face-down"
 				}
 			},
 			j_joy_ignis_gussari = {
@@ -1852,6 +1852,10 @@ return {
 					"{C:chips}+#2#{} Chips for each {C:attention}attribute{} used for its summon",
 					"Amount increases by {C:chips}+#3#{} when a {C:joy_link}Link{} is summoned",
 					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability"
+				},
+				joy_transfer_ability = {
+					"{C:chips}+#1#{} Chips for each {C:attention}attribute{} used for its summon",
+					"Amount increases by {C:chips}+#2#{} when a {C:joy_link}Link{} is summoned",
 				}
 			},
 			j_joy_ignis_golem = {
@@ -1871,6 +1875,10 @@ return {
 					"{C:green}#2# in #3#{} chance to retrigger playing cards",
 					"Chances increase for each {C:attention}attribute{} used for its summon",
 					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability",
+				},
+				joy_transfer_ability = {
+					"{C:green}#1# in #2#{} chance to retrigger playing cards",
+					"Chances increase for each {C:attention}attribute{} used for its summon",
 				}
 			},
 			j_joy_ignis_dragon = {
@@ -1881,6 +1889,10 @@ return {
 					"Scored cards gain {C:money}+$#2#{} when held in hand",
 					"for each {C:attention}attribute{} used for its summon",
 					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability",
+				},
+				joy_transfer_ability = {
+					"Scored cards gain {C:money}+$#1#{} when held in hand",
+					"for each {C:attention}attribute{} used for its summon",
 				}
 			},
 			j_joy_ignis_phoenix = {
@@ -1894,6 +1906,10 @@ return {
 					"Scored cards gain {X:mult,C:white}X#3#{} extra Mult for each {C:attention}attribute{} used for its summon",
 					"Amount increases {X:mult,C:white}X#4#{} when a {C:joy_link}Link{} is summoned",
 					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability",
+				},
+				joy_transfer_ability = {
+					"Scored cards gain {X:mult,C:white}X#1#{} extra Mult for each {C:attention}attribute{} used for its summon",
+					"Amount increases {X:mult,C:white}X#1#{} when a {C:joy_link}Link{} is summoned",
 				}
 			},
 			j_joy_ignis_accode = {
@@ -2828,6 +2844,7 @@ return {
 			k_joy_banish_end_of_ante = "End of Ante",
 			k_joy_select_materials = "Select Materials",
 			k_joy_select_tributes = "Select Tributes",
+			k_joy_transferred_abilities = "Transferred Abilities:",
 			k_joy_select = "Select",
 			k_joy_summon = "Summon",
 			k_joy_detach = "Detach",

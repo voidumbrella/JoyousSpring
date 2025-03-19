@@ -271,7 +271,7 @@ JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, spe
                         {
                             n = G.UIT.T,
                             config = {
-                                text = "Transfered abilities:",
+                                text = localize("k_joy_transferred_abilities"),
                                 scale = 0.3,
                                 colour = G.C.UI.TEXT_INACTIVE,
                             },

@@ -193,7 +193,7 @@ SMODS.Joker({
         return { mult = 10 }
     end,
     joy_transfer_loc_vars = function(self, info_queue, card, config)
-        return { vars = { config.mult } }
+        return { vars = {} }
     end
 })
 
@@ -444,6 +444,17 @@ SMODS.Joker({
             },
         },
     },
+    joy_can_transfer_ability = function(self, other_card)
+        return true
+    end,
+    joy_transfer_ability_calculate = function(self, other_card, context, config)
+    end,
+    joy_transfer_config = function(self, other_card)
+        return { chips = 100, increase = 10 }
+    end,
+    joy_transfer_loc_vars = function(self, info_queue, card, config)
+        return { vars = { config.chips, config.increase } }
+    end
 })
 
 -- Earth Golem @Ignister
@@ -502,6 +513,17 @@ SMODS.Joker({
             },
         },
     },
+    joy_can_transfer_ability = function(self, other_card)
+        return true
+    end,
+    joy_transfer_ability_calculate = function(self, other_card, context, config)
+    end,
+    joy_transfer_config = function(self, other_card)
+        return { chips = 100, increase = 10 }
+    end,
+    joy_transfer_loc_vars = function(self, info_queue, card, config)
+        return { vars = { 1, 6 } }
+    end
 })
 
 -- Light Dragon @Ignister
@@ -531,6 +553,17 @@ SMODS.Joker({
             },
         },
     },
+    joy_can_transfer_ability = function(self, other_card)
+        return true
+    end,
+    joy_transfer_ability_calculate = function(self, other_card, context, config)
+    end,
+    joy_transfer_config = function(self, other_card)
+        return { chips = 100, increase = 10 }
+    end,
+    joy_transfer_loc_vars = function(self, info_queue, card, config)
+        return { vars = { 1 } }
+    end
 })
 
 -- Fire Phoenix @Ignister
@@ -560,6 +593,17 @@ SMODS.Joker({
             },
         },
     },
+    joy_can_transfer_ability = function(self, other_card)
+        return true
+    end,
+    joy_transfer_ability_calculate = function(self, other_card, context, config)
+    end,
+    joy_transfer_config = function(self, other_card)
+        return { chips = 100, increase = 10 }
+    end,
+    joy_transfer_loc_vars = function(self, info_queue, card, config)
+        return { vars = { 0.1, 0.05 } }
+    end
 })
 
 -- Accode Talker @Ignister
@@ -670,9 +714,18 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
+                summon_type = "LINK",
                 attribute = "DARK",
                 monster_type = "Cyberse",
-                monster_archetypes = { ["Ignister"] = true }
+                monster_archetypes = { ["Ignister"] = true },
+                summon_conditions = {
+                    {
+                        type = "LINK",
+                        materials = {
+                            { min = 2 },
+                        },
+                    }
+                }
             },
         },
     },
