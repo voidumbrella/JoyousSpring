@@ -48,7 +48,7 @@ SMODS.Joker({
                         }))
                     end
                 end
-                return { remove = true, message = localize('k_upgrade_ex') }
+                return { remove = true, message = localize('k_upgrade_ex'), message_card = card }
             end
 
             if context.joker_main then

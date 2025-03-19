@@ -61,7 +61,7 @@ SMODS.Joker({
                 monster_type = "Machine",
                 monster_archetypes = {}
             },
-            xmult = 5,
+            xmult = 2,
             hands = {}
         },
     },
