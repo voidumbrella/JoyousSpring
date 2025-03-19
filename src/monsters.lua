@@ -15,8 +15,6 @@ SMODS.Atlas({
 ---@field joy_allow_ability? fun(card:table|Card,other_card:table|Card):boolean? Returns `true` if *other_card* is allowed to use abilities while facedown by *card*
 ---@field joy_create_card_for_shop? fun(card:table|Card, other_card:table|Card, area:CardArea) Used to modify *other_Card* when it's created for the shop
 ---@field joy_apply_to_jokers_added? fun(card:table|Card,added_card:table|Card) Used to modify *added_card* when obtained
----@field joy_stay_flipped? fun(card:table|Card,playing_card:table|Card):boolean? Determines if *playing_card* should stay flipped facedown when drawn from deck
----@field joy_debuff_hand? fun(card:table|Card,full_hand:Card[]|table[],poker_hands:table<string, Card[]|table[]>, scoring_name:string):boolean? Returns `true` if played hand should be debuffed, similar to a Blind
 ---@field joy_allow_ability? fun(card:table|Card, other_card:table|Card):boolean? Determines if *other_card* can use abilities while face-down
 ---@field joy_prevent_trap_flip? fun(card:table|Card, other_card:table|Card):boolean? Determines if the Trap *other_card* should flip at end of round
 ---@field joy_flip_effect_active? fun(card:table|Card, other_card:table|Card):boolean? Determines if the FLIP ability of *other_card* should activate at the start of Blind

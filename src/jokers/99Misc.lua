@@ -61,7 +61,7 @@ SMODS.Joker({
                 monster_type = "Machine",
                 monster_archetypes = {}
             },
-            xmult = 2,
+            xmult = 5,
             hands = {}
         },
     },
@@ -78,6 +78,16 @@ SMODS.Joker({
                 local types_owned = JoyousSpring.extra_deck_types_owned() + 1
                 ease_hands_played(types_owned - G.GAME.current_round.hands_left, true)
                 card.ability.extra.hands = {}
+            end
+            if context.debuff_hand and context.main_eval then
+                if card.ability.extra.hands[context.scoring_name] then
+                    return {
+                        debuff = true
+                    }
+                end
+            end
+            if context.after and context.main_eval then
+                card.ability.extra.hands[context.scoring_name] = true
             end
         end
     end,
@@ -98,16 +108,6 @@ SMODS.Joker({
     joy_apply_to_jokers_added = function(card, added_card)
         if not card.debuff and JoyousSpring.is_main_deck_monster(added_card) and added_card.config.center.key ~= "j_joy_boarder" then
             SMODS.debuff_card(added_card, true, "j_joy_boarder")
-        end
-    end,
-    joy_debuff_hand = function(joker, cards, hand, handname)
-        if not joker.debuff then
-            if joker.ability.extra.hands[handname] then
-                return true
-            else
-                joker.ability.extra.hands[handname] = true
-                return false
-            end
         end
     end,
     joker_display_def = function(JokerDisplay)

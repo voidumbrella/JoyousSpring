@@ -714,13 +714,16 @@ SMODS.Joker({
             if context.joy_card_flipped and context.joy_card_flipped.facing == 'back' then
                 card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.extra_mult
             end
+            if context.stay_flipped and context.to_area == G.hand and
+                pseudorandom("j_joy_lab_lovely") <
+                G.GAME.probabilities.normal /
+                math.max(1, card.ability.extra.odds - JoyousSpring.count_materials_owned({ { monster_type = "Fiend" } })) then
+                return {
+                    stay_flipped = true
+                }
+            end
         end
     end,
-    joy_stay_flipped = function(card, playing_card)
-        return pseudorandom("j_joy_lab_lovely") <
-            G.GAME.probabilities.normal /
-            math.max(1, card.ability.extra.odds - JoyousSpring.count_materials_owned({ { monster_type = "Fiend" } }))
-    end
 })
 
 -- Lady Labrynth of the Silver Castle

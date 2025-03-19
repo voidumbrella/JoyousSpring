@@ -177,30 +177,10 @@ JoyousSpring.set_cost = function(card)
     end
 end
 
----Debuffs a hand similar to a blind
----Use joy_debuff_hand in the center to check if a hand should be debuffed by that card's effect
----@param cards Card[]
----@param hand Card[]
----@param handname string
----@return boolean
-JoyousSpring.debuff_hand = function(cards, hand, handname)
-    for _, joker in ipairs(G.jokers.cards) do
-        if not joker.debuff and joker.config.center.joy_debuff_hand and joker.config.center.joy_debuff_hand(joker, cards, hand, handname) then
-            return true
-        end
-    end
-    for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
-        if not joker.debuff and joker.config.center.joy_debuff_hand and joker.config.center.joy_debuff_hand(joker, cards, hand, handname) then
-            return true
-        end
-    end
-    return false
-end
-
 G.FUNCS.joy_detach_material = function(e)
     local card = e.config.ref_table
     local detach = card.ability.extra.detach or 1
-    if not ((G.play and #G.play.cards > 0) or
+    if not card.debuff and not ((G.play and #G.play.cards > 0) or
             (G.CONTROLLER.locked) or
             (G.GAME.STOP_USE and G.GAME.STOP_USE > 0)) and JoyousSpring.get_xyz_materials(card) >= detach then
         SMODS.calculate_context({ joy_detach = true, joy_detaching_card = card })
@@ -244,34 +224,13 @@ function CardArea:emplace(card, location, stay_flipped)
     cardarea_emplace_ref(self, card, location, JoyousSpring.is_monster_card(card) or stay_flipped)
 end
 
-JoyousSpring.stay_flipped = function(card, stay_flipped)
-    local keep_flipped = stay_flipped or false
-    local source
-
-    if G.jokers then
-        for _, joker in ipairs(G.jokers.cards) do
-            if not joker.debuff and joker.config.center.joy_stay_flipped then
-                keep_flipped = joker.config.center.joy_stay_flipped(joker, card)
-                if keep_flipped and not source then
-                    source = joker
-                end
-            end
-        end
+local stay_flipped_ref = Blind.stay_flipped
+function Blind:stay_flipped(to_area, card, from_area)
+    local ret = stay_flipped_ref(self, to_area, card, from_area)
+    if ret then
+        SMODS.calculate_context({ joy_card_flipped = card })
     end
-    if JoyousSpring.field_spell_area then
-        for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
-            if not joker.debuff and joker.config.center.joy_stay_flipped then
-                keep_flipped = joker.config.center.joy_stay_flipped(joker, card)
-                if keep_flipped and not source then
-                    source = joker
-                end
-            end
-        end
-    end
-    if keep_flipped then
-        SMODS.calculate_context({ joy_card_flipped = card, joy_source = source })
-    end
-    return keep_flipped
+    return ret
 end
 
 JoyousSpring.transfer_abilities = function(card, material_key, other_card)
@@ -415,7 +374,10 @@ function Card:calculate_dollar_bonus()
     local ret = card_calculate_dollar_bonus_ref(self)
 
     if JoyousSpring.is_monster_card(self) then
-        ret = (ret or 0) + JoyousSpring.transfer_calc_dollar_bonus(self)
+        local add = JoyousSpring.transfer_calc_dollar_bonus(self)
+        if add > 0 then
+            ret = (ret or 0) + JoyousSpring.transfer_calc_dollar_bonus(self)
+        end
     end
 
     return ret

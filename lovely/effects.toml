@@ -35,18 +35,6 @@ payload = '''
 SMODS.calculate_context({joy_selecting_hand = true})
 '''
 
-# Hand debuff
-# TODO: See if I want it to not call SMODS.calculate_context after
-[[patches]]
-[patches.pattern]
-target = "functions/state_events.lua"
-pattern = "if not G.GAME.blind:debuff_hand(G.play.cards, poker_hands, text) then"
-position = 'at'
-match_indent = true
-payload = '''
-if not G.GAME.blind:debuff_hand(G.play.cards, poker_hands, text) and not JoyousSpring.debuff_hand(G.play.cards, poker_hands, text) then
-'''
-
 # Add to next shop
 [[patches]]
 [patches.pattern]
@@ -109,27 +97,3 @@ if score == 'defeated_by' and JoyousSpring and JoyousSpring.defeated_by then
     }
 end'''
 match_indent = true
-
-# Flip cards drawn
-[[patches]]
-[patches.pattern]
-target = "cardarea.lua"
-pattern = "local stay_flipped = G.GAME and G.GAME.blind and G.GAME.blind:stay_flipped(self, card)"
-position = 'after'
-match_indent = true
-payload = '''
-if self == G.hand then
-    stay_flipped = JoyousSpring.stay_flipped(card, stay_flipped)
-end
-'''
-
-# Keep cards flipped
-[[patches]]
-[patches.pattern]
-target = "blind.lua"
-pattern = "if v.facing == 'back' then v:flip() end"
-position = 'at'
-match_indent = true
-payload = '''
-if self.name == 'Amber Acorn' and v.facing == 'back' then v:flip() end
-'''
