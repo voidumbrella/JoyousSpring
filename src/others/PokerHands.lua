@@ -101,12 +101,20 @@ JoyousSpring.PokerHandDummy {
     end,
 }
 
+SMODS.Atlas({
+    key = "joy_p_eldland",
+    path = "14p_eldland.png",
+    px = 71,
+    py = 95
+})
+
 SMODS.Consumable {
     set = 'Planet',
     key = 'cursed_eldland',
+    atlas = 'joy_p_eldland',
     discovered = true,
-    config = { hand_type = 'joy_eldlixir' },
-    pos = { x = 9, y = 3 },
+    config = { hand_type = 'joy_eldlixir', softlock = true },
+    pos = { x = 0, y = 0 },
     set_card_type_badge = function(self, card, badges)
         badges[1] = create_badge(localize('k_planet'), get_type_colour(self or card.config, card), nil, 1.2)
     end,
