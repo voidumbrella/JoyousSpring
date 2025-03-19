@@ -274,24 +274,28 @@ JoyousSpring.stay_flipped = function(card, stay_flipped)
     return keep_flipped
 end
 
-JoyousSpring.transfer_abilities = function(card, material_key)
+JoyousSpring.transfer_abilities = function(card, material_key, other_card)
     local material_center = G.P_CENTERS[material_key]
-    if not card or not material_center or not material_center.joy_can_transfer_ability or not material_center.joy_transfer_ability_calculate then
+    if not card or not material_center or not material_center.joy_can_transfer_ability or (other_card and other_card.debuff) then
         return
     end
     if material_center:joy_can_transfer_ability(card) then
         card.ability.extra.joyous_spring.material_effects[material_key] = material_center.joy_transfer_config and
             material_center:joy_transfer_config(card) or {}
+        if material_center.joy_transfer_add_to_deck then
+            material_center:joy_transfer_add_to_deck(card,
+                card.ability.extra.joyous_spring.material_effects[material_key], other_card, false)
+        end
     end
 end
 
----Calculate transfered abilities
+---Calculate transferred abilities
 ---@param card Card|table
 ---@param context CalcContext
 ---@param effects table?
 ---@return table?
 JoyousSpring.calculate_transfer_abilities = function(card, context, effects)
-    if not card.ability.extra.joyous_spring.material_effects or not next(card.ability.extra.joyous_spring.material_effects) then
+    if card.debuff or (not card.ability.extra.joyous_spring.material_effects or not next(card.ability.extra.joyous_spring.material_effects)) then
         return effects
     end
     local transfer_effects = {}
@@ -299,7 +303,7 @@ JoyousSpring.calculate_transfer_abilities = function(card, context, effects)
     for material_key, config in pairs(card.ability.extra.joyous_spring.material_effects) do
         local material_center = G.P_CENTERS[material_key]
 
-        if material_center then
+        if material_center and material_center.joy_transfer_ability_calculate then
             local material_effect = material_center:joy_transfer_ability_calculate(card, context, config)
             if material_effect then
                 transfer_effects[#transfer_effects + 1] = material_effect
@@ -320,6 +324,101 @@ JoyousSpring.calculate_transfer_abilities = function(card, context, effects)
     end
 
     return effects
+end
+
+local card_calculate_joker_ref = Card.calculate_joker
+function Card:calculate_joker(context)
+    if JoyousSpring.is_monster_card(self) then
+        if self.debuff then return nil end
+        local obj = self.config.center
+        local o, t
+
+        if obj.calculate and type(obj.calculate) == 'function' then
+            o, t = obj:calculate(self, context)
+        end
+
+        o = JoyousSpring.calculate_transfer_abilities(self, context, o)
+        if o or t then return o, t end
+    else
+        card_calculate_joker_ref(self, context)
+    end
+end
+
+JoyousSpring.transfer_add_to_deck = function(card, from_debuff)
+    if card.debuff or (not card.ability.extra.joyous_spring.material_effects or not next(card.ability.extra.joyous_spring.material_effects)) then
+        return
+    end
+
+    for material_key, config in pairs(card.ability.extra.joyous_spring.material_effects) do
+        local material_center = G.P_CENTERS[material_key]
+
+        if material_center and material_center.joy_transfer_add_to_deck then
+            material_center:joy_transfer_add_to_deck(card, config, nil, from_debuff)
+        end
+    end
+end
+
+local card_add_to_deck_ref = Card.add_to_deck
+function Card:add_to_deck(from_debuff)
+    local not_added = not self.added_to_deck
+    card_add_to_deck_ref(self, from_debuff)
+
+    if JoyousSpring.is_monster_card(self) and not_added then
+        JoyousSpring.transfer_add_to_deck(self, from_debuff)
+    end
+end
+
+JoyousSpring.transfer_remove_from_deck = function(card, from_debuff)
+    if card.debuff or (not card.ability.extra.joyous_spring.material_effects or not next(card.ability.extra.joyous_spring.material_effects)) then
+        return
+    end
+
+    for material_key, config in pairs(card.ability.extra.joyous_spring.material_effects) do
+        local material_center = G.P_CENTERS[material_key]
+
+        if material_center and material_center.joy_transfer_remove_from_deck then
+            material_center:joy_transfer_remove_from_deck(card, config, from_debuff)
+        end
+    end
+end
+
+local card_remove_from_deck_ref = Card.remove_from_deck
+function Card:remove_from_deck(from_debuff)
+    local added = self.added_to_deck
+    card_remove_from_deck_ref(self, from_debuff)
+
+    if JoyousSpring.is_monster_card(self) and added then
+        JoyousSpring.transfer_remove_from_deck(self, from_debuff)
+    end
+end
+
+JoyousSpring.transfer_calc_dollar_bonus = function(card)
+    if card.debuff or (not card.ability.extra.joyous_spring.material_effects or not next(card.ability.extra.joyous_spring.material_effects)) then
+        return 0
+    end
+
+    local bonus = 0
+
+    for material_key, config in pairs(card.ability.extra.joyous_spring.material_effects) do
+        local material_center = G.P_CENTERS[material_key]
+
+        if material_center and material_center.joy_transfer_calc_dollar_bonus then
+            bonus = bonus + (material_center:joy_transfer_calc_dollar_bonus(card, config) or 0)
+        end
+    end
+
+    return bonus
+end
+
+local card_calculate_dollar_bonus_ref = Card.calculate_dollar_bonus
+function Card:calculate_dollar_bonus()
+    local ret = card_calculate_dollar_bonus_ref(self)
+
+    if JoyousSpring.is_monster_card(self) then
+        ret = (ret or 0) + JoyousSpring.transfer_calc_dollar_bonus(self)
+    end
+
+    return ret
 end
 
 --#endregion

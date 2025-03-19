@@ -133,29 +133,3 @@ match_indent = true
 payload = '''
 if self.name == 'Amber Acorn' and v.facing == 'back' then v:flip() end
 '''
-
-# Transfer effects
-[[patches]]
-[patches.pattern]
-target = 'card.lua'
-pattern = "local o, t = obj:calculate(self, context)"
-position = 'after'
-match_indent = true
-payload = '''
-if JoyousSpring.is_monster_card(self) then
-    o = JoyousSpring.calculate_transfer_abilities(self, context, o)
-end
-'''
-
-[[patches]]
-[patches.pattern]
-target = 'card.lua'
-pattern = "if self.ability.set == \"Joker\" and self:can_calculate() then"
-position = 'before'
-match_indent = true
-payload = '''
-if JoyousSpring.is_monster_card(self) then
-    local o = JoyousSpring.calculate_transfer_abilities(self, context)
-    if o then return o end
-end
-'''
