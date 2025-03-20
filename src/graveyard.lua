@@ -41,7 +41,7 @@ end
 ---@return Card?
 JoyousSpring.revive_pseudorandom = function(property_list, seed, must_have_room, edition, card_limit_modif,
                                             different_names)
-    if not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit + card_limit_modif) then
+    if not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit + (card_limit_modif or 0)) then
         local choices = JoyousSpring.get_materials_in_graveyard(property_list, true, different_names)
         local key_to_add = pseudorandom_element(choices, seed)
         if key_to_add then

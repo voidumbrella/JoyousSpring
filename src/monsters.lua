@@ -185,7 +185,7 @@ JoyousSpring.init_joy_table = function(params)
     }
 end
 JoyousSpring.is_monster_card = function(card)
-    return card.ability and card.ability.extra and type(card.ability.extra) == "table" and
+    return card and card.ability and card.ability.extra and type(card.ability.extra) == "table" and
         card.ability.extra.joyous_spring or false
 end
 
@@ -295,6 +295,7 @@ JoyousSpring.can_activate = function(card)
 end
 
 JoyousSpring.can_use_abilities = function(card)
+    if not card then return false end
     if card.facing == 'front' then return true end
     for _, joker in ipairs(G.jokers.cards) do
         if not joker.debuff and joker.config.center.joy_allow_ability and joker.config.center.joy_allow_ability(joker, card) then

@@ -1720,8 +1720,8 @@ return {
 				text = {
 					"{C:mult}+#1#{} Mult",
 					" ",
-					"{C:attention}Creates #2#{} {C:blue}Common{} {C:joy_normal}\"@Ignister\"",
-					"when obtained",
+					"{C:attention}Creates #2#{} {C:blue}Common{} {C:joy_normal}Main Deck",
+					"{C:joy_normal}\"@Ignister\" when obtained",
 					"{C:inactive}(Must have room){}",
 				}
 			},
@@ -1741,7 +1741,7 @@ return {
 					"{C:attention}+#1#{} hand size",
 					" ",
 					"Once per round, you can {C:attention}tribute #2#{} {C:joy_normal}Cyberse{}",
-					"to create {C:attention}#3#{} {C:green}Uncommon{} {C:joy_normal}\"@Ignister\"",
+					"to create {C:attention}#3#{} {C:joy_normal}Main Deck {C:green}Uncommon{} {C:joy_normal}\"@Ignister\"",
 					"{C:inactive}(Must have room){}",
 					" ",
 					"Free if you own an {C:joy_normal}\"@Ignister\""
@@ -1791,7 +1791,7 @@ return {
 				},
 				joy_transfer_ability = {
 					"{C:mult}+#1#{} Mult for each {C:attention}material{} used for its summon",
-					"{C:inactive}(Currently {C:mult}+#2#{} Mult {C:inactive})"
+					"{C:inactive}(Currently {C:mult}+#2#{} {C:inactive}Mult)"
 				}
 			},
 			j_joy_ignis_danmari = {
@@ -1856,11 +1856,13 @@ return {
 					" ",
 					"{C:chips}+#2#{} Chips for each {C:attention}attribute{} used for its summon",
 					"Amount increases by {C:chips}+#3#{} when a {C:joy_link}Link{} is summoned",
+					"{C:inactive}(Currently {C:chips}+#4# {C:inactive}Chips)",
 					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability"
 				},
 				joy_transfer_ability = {
 					"{C:chips}+#1#{} Chips for each {C:attention}attribute{} used for its summon",
 					"Amount increases by {C:chips}+#2#{} when a {C:joy_link}Link{} is summoned",
+					"{C:inactive}(Currently {C:chips}+#3# {C:inactive}Chips)",
 				},
 				joy_summon_conditions = {
 					"{C:attention}2+ {C:joy_normal}Cyberse{}"
@@ -1869,13 +1871,15 @@ return {
 			j_joy_ignis_golem = {
 				name = "{C:joy_fusion}Earth Golem @Ignister",
 				text = {
-					"Add {C:attention}#1#{} {C:joy_normal}\"@Ignister\"{} to the {C:joy_spell}Extra Deck when summoned",
+					"Add {C:attention}#1#{} {C:joy_normal}\"@Ignister\"{} to the {C:joy_spell}Extra Deck{} when summoned",
 					" ",
 					"{C:attention}+#2# Joker{} slot for each {C:attention}attribute{} used for its summon",
+					"{C:inactive}(Currently {C:attention}+#3#{C:inactive})",
 					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability"
 				},
 				joy_transfer_ability = {
-					"{C:attention}+#1# Joker{} slot for each {C:attention}attribute{} used for its summon"
+					"{C:attention}+#1# Joker{} slot for each {C:attention}attribute{} used for its summon",
+					"{C:inactive}(Currently {C:attention}+#2#{C:inactive})",
 				},
 				joy_summon_conditions = {
 					"{C:attention}2+ {C:joy_normal}Cyberse{}"
@@ -1905,11 +1909,13 @@ return {
 					" ",
 					"Scored cards gain {C:money}+$#2#{} when held in hand at end of round",
 					"for each {C:attention}attribute{} used for its summon",
+					"{C:inactive}(Currently {C:money}+$#3#{C:inactive})",
 					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability",
 				},
 				joy_transfer_ability = {
 					"Scored cards gain {C:money}+$#1#{} when held in hand",
 					"for each {C:attention}attribute{} used for its summon",
+					"{C:inactive}(Currently {C:money}+$#2#{C:inactive})",
 				},
 				joy_summon_conditions = {
 					"{C:attention}2+ {C:joy_normal}Cyberse{}"
@@ -1925,11 +1931,13 @@ return {
 					" ",
 					"Scored cards gain {X:mult,C:white}X#3#{} extra Mult for each {C:attention}attribute{} used for its summon",
 					"Amount increases {X:mult,C:white}X#4#{} when a {C:joy_link}Link{} is summoned",
+					"{C:inactive}(Currently {X:mult,C:white}X#5#{} {C:inactive}Mult)",
 					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability",
 				},
 				joy_transfer_ability = {
 					"Scored cards gain {X:mult,C:white}X#1#{} extra Mult for each {C:attention}attribute{} used for its summon",
-					"Amount increases {X:mult,C:white}X#1#{} when a {C:joy_link}Link{} is summoned",
+					"Amount increases {X:mult,C:white}X#2#{} when a {C:joy_link}Link{} is summoned",
+					"{C:inactive}(Currently {X:mult,C:white}X#3#{} {C:inactive}Mult)",
 				},
 				joy_summon_conditions = {
 					"{C:attention}2+ {C:joy_normal}Cyberse{}"

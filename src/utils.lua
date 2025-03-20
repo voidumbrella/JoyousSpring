@@ -344,6 +344,7 @@ end
 JoyousSpring.create_pseudorandom = function(property_list, seed, must_have_room, not_owned, edition, card_limit_modif)
     if not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit + (card_limit_modif or 0)) then
         local choices = JoyousSpring.get_materials_in_collection(property_list)
+
         if not_owned then
             choices = JoyousSpring.get_not_owned(choices)
         end
