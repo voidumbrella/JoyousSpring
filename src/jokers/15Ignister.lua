@@ -11,11 +11,11 @@ SMODS.Joker({
     key = "ignis_achichi",
     atlas = 'ignis',
     pos = { x = 0, y = 0 },
-    rarity = 2,
+    rarity = 1,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 5,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult, card.ability.extra.creates } }
     end,
@@ -65,7 +65,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 5,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.dollars, card.ability.extra.creates } }
     end,
@@ -110,7 +110,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 6,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.h_size, card.ability.extra.tributes, card.ability.extra.creates } }
     end,
@@ -203,7 +203,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 3,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mills, card.ability.extra.revives } }
     end,
@@ -259,7 +259,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 2,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips, card.ability.extra.revives } }
     end,
@@ -306,11 +306,11 @@ SMODS.Joker({
     key = "ignis_gatchiri",
     atlas = 'ignis',
     pos = { x = 1, y = 1 },
-    rarity = 1,
+    rarity = 2,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 7,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.xmult } }
     end,
@@ -356,11 +356,11 @@ SMODS.Joker({
     key = "ignis_gussari",
     atlas = 'ignis',
     pos = { x = 2, y = 1 },
-    rarity = 1,
+    rarity = 2,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 5,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult } }
     end,
@@ -417,11 +417,11 @@ SMODS.Joker({
     key = "ignis_danmari",
     atlas = 'ignis',
     pos = { x = 2, y = 0 },
-    rarity = 1,
+    rarity = 2,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 4,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.percent * 100 } }
     end,
@@ -467,11 +467,11 @@ SMODS.Joker({
     key = "ignis_doyon",
     atlas = 'ignis',
     pos = { x = 0, y = 1 },
-    rarity = 1,
+    rarity = 2,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 4,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.revives, card.ability.extra.adds } }
     end,
@@ -523,11 +523,11 @@ SMODS.Joker({
     key = "ignis_donyoribo",
     atlas = 'ignis',
     pos = { x = 3, y = 0 },
-    rarity = 1,
+    rarity = 2,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 8,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.money, card.ability.extra.banishes } }
     end,
@@ -578,11 +578,11 @@ SMODS.Joker({
     key = "ignis_backup",
     atlas = 'ignis',
     pos = { x = 0, y = 2 },
-    rarity = 1,
+    rarity = 2,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 5,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.to_negative } }
     end,
@@ -636,11 +636,11 @@ SMODS.Joker({
     key = "ignis_wizard",
     atlas = 'ignis',
     pos = { x = 2, y = 2 },
-    rarity = 1,
+    rarity = 2,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 5,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.revives } }
     end,
@@ -688,11 +688,11 @@ SMODS.Joker({
     key = "ignis_kiruku",
     atlas = 'ignis',
     pos = { x = 1, y = 2 },
-    rarity = 1,
+    rarity = 3,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 12,
     loc_vars = function(self, info_queue, card)
         return { vars = {} }
     end,
@@ -732,11 +732,11 @@ SMODS.Joker({
     key = "ignis_leviathan",
     atlas = 'ignis',
     pos = { x = 4, y = 2 },
-    rarity = 1,
+    rarity = 3,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.adds, card.ability.extra.chips, card.ability.extra.extra_chips, card.ability.extra.current_chips } }
     end,
@@ -830,11 +830,11 @@ SMODS.Joker({
     key = "ignis_golem",
     atlas = 'ignis',
     pos = { x = 0, y = 3 },
-    rarity = 1,
+    rarity = 3,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.adds, card.ability.extra.slots, card.ability.extra.slots * JoyousSpring.get_attribute_count(JoyousSpring.get_materials(card)) } }
     end,
@@ -906,11 +906,11 @@ SMODS.Joker({
     key = "ignis_pegasus",
     atlas = 'ignis',
     pos = { x = 1, y = 3 },
-    rarity = 1,
+    rarity = 2,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.adds, G.GAME.probabilities.normal, card.ability.extra.odds } }
     end,
@@ -991,11 +991,11 @@ SMODS.Joker({
     key = "ignis_dragon",
     atlas = 'ignis',
     pos = { x = 2, y = 3 },
-    rarity = 1,
+    rarity = 3,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.adds, card.ability.extra.money, card.ability.extra.money * JoyousSpring.get_attribute_count(JoyousSpring.get_materials(card)) } }
     end,
@@ -1084,11 +1084,11 @@ SMODS.Joker({
     key = "ignis_phoenix",
     atlas = 'ignis',
     pos = { x = 3, y = 3 },
-    rarity = 1,
+    rarity = 3,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.adds, card.ability.extra.creates, card.ability.extra.xmult, card.ability.extra.extra_xmult, card.ability.extra.current_xmult } }
     end,
@@ -1204,11 +1204,11 @@ SMODS.Joker({
     key = "ignis_accode",
     atlas = 'ignis',
     pos = { x = 4, y = 3 },
-    rarity = 1,
+    rarity = 3,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.xmult, card.ability.extra.xmult * JoyousSpring.count_materials_owned({ { summon_type = "LINK" } }), card.ability.extra.revives } }
     end,
@@ -1262,11 +1262,11 @@ SMODS.Joker({
     key = "ignis_infant",
     atlas = 'ignis',
     pos = { x = 0, y = 4 },
-    rarity = 1,
+    rarity = 3,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
         return { vars = { 1 } }
     end,
@@ -1309,11 +1309,11 @@ SMODS.Joker({
     key = "ignis_templar",
     atlas = 'ignis',
     pos = { x = 1, y = 4 },
-    rarity = 1,
+    rarity = 3,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 15,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.revives } }
     end,
@@ -1376,11 +1376,11 @@ SMODS.Joker({
     key = "ignis_arrival",
     atlas = 'ignis',
     pos = { x = 2, y = 4 },
-    rarity = 1,
+    rarity = 3,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 20,
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
@@ -1505,11 +1505,11 @@ SMODS.Joker({
     key = "ignis_ailand",
     atlas = 'ignis',
     pos = { x = 3, y = 2 },
-    rarity = 1,
+    rarity = 3,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 12,
     loc_vars = function(self, info_queue, card)
         return { vars = { 1, 6 } }
     end,
