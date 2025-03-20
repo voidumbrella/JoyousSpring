@@ -1221,8 +1221,6 @@ SMODS.Joker({
                             { summon_type = "LINK" },
                             { summon_type = "LINK" },
                             { summon_type = "LINK" },
-                            { summon_type = "LINK" },
-                            { summon_type = "LINK" },
                         },
                     }
                 }

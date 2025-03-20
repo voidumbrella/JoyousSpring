@@ -19,11 +19,11 @@ SMODS.Joker({
     key = "dogma_ecclesia",
     atlas = 'Dogmatika',
     pos = { x = 0, y = 0 },
-    rarity = 1,
+    rarity = 2,
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    cost = 2,
+    cost = 7,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_extra_deck_joker" }
@@ -42,7 +42,7 @@ SMODS.Joker({
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Dogmatika"] = true },
             },
-            base_xmult = 0.5,
+            base_xmult = 0.05,
             xmult = 1
         },
     },

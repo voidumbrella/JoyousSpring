@@ -292,8 +292,7 @@ return {
 			j_joy_dogma_ecclesia = {
 				name = "{C:joy_effect}Dogmatika Ecclesia, the Virtuous",
 				text = {
-					"Gains {X:mult,C:white}X#1#{} Mult for each {C:joy_spell}Extra Deck{} {C:attention}Joker{} sold,",
-					"resets when {C:attention}Boss Blind{} is defeated",
+					"Gains {X:mult,C:white}X#1#{} Mult for each {C:joy_spell}Extra Deck{} {C:attention}Joker{} sold",
 					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}"
 				},
 			},
@@ -1945,7 +1944,7 @@ return {
 					"{C:attention}Revive #3#{} {C:joy_link}Links{} when summoned"
 				},
 				joy_summon_conditions = {
-					"{C:attention}5 {C:joy_link}Links{}"
+					"{C:attention}3 {C:joy_link}Links{}"
 				}
 			},
 			j_joy_ignis_infant = {
@@ -2548,9 +2547,9 @@ return {
 			j_joy_apollousa = {
 				name = "{C:joy_link}Apollousa, Bow of the Goddess",
 				text = {
-					"{C:chips}+#1#{} Chips for each {C:attention}material{}",
+					"{C:mult}+#1#{} Mult for each {C:attention}material{}",
 					"used for its summon, reduces by {C:red}#2#{} each round",
-					"{C:inactive}(Currently{} {C:chips}+#3#{} {C:inactive}Chips){}",
+					"{C:inactive}(Currently{} {C:mult}+#3#{} {C:inactive}Mult){}",
 				},
 				joy_summon_conditions = {
 					"{C:attention}2+ Jokers{} with different names",
