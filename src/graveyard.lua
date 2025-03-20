@@ -7,15 +7,21 @@
 ---@param must_have_room boolean?
 ---@param edition any
 ---@return Card?
-JoyousSpring.revive = function(key, must_have_room, edition)
+JoyousSpring.revive = function(key, must_have_room, edition, debuff_source)
     if JoyousSpring.graveyard[key] and JoyousSpring.graveyard[key].summonable > 0 and
         (not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit)) then
         JoyousSpring.graveyard[key].count = JoyousSpring.graveyard[key].count - 1
         JoyousSpring.graveyard[key].summonable = JoyousSpring.graveyard[key].summonable - 1
-        local added_card = SMODS.add_card({
+        local added_card = SMODS.create_card({
             key = key,
             edition = edition
         })
+        if debuff_source then
+            SMODS.debuff_card(added_card, true, debuff_source)
+        end
+        added_card:add_to_deck()
+        G.jokers:emplace(added_card)
+
         added_card.ability.extra.joyous_spring.summoned = JoyousSpring.is_extra_deck_monster(added_card) or false
         added_card.ability.extra.joyous_spring.revived = true
         added_card:set_cost()

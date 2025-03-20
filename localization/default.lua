@@ -1862,6 +1862,9 @@ return {
 				joy_transfer_ability = {
 					"{C:chips}+#1#{} Chips for each {C:attention}attribute{} used for its summon",
 					"Amount increases by {C:chips}+#2#{} when a {C:joy_link}Link{} is summoned",
+				},
+				joy_summon_conditions = {
+					"{C:attention}2+ {C:joy_normal}Cyberse{}"
 				}
 			},
 			j_joy_ignis_golem = {
@@ -1871,6 +1874,12 @@ return {
 					" ",
 					"{C:attention}+#2# Joker{} slot for each {C:attention}attribute{} used for its summon",
 					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability"
+				},
+				joy_transfer_ability = {
+					"{C:attention}+#1# Joker{} slot for each {C:attention}attribute{} used for its summon"
+				},
+				joy_summon_conditions = {
+					"{C:attention}2+ {C:joy_normal}Cyberse{}"
 				}
 			},
 			j_joy_ignis_pegasus = {
@@ -1885,6 +1894,9 @@ return {
 				joy_transfer_ability = {
 					"{C:green}#1# in #2#{} chance to retrigger playing cards",
 					"Chances increase for each {C:attention}attribute{} used for its summon",
+				},
+				joy_summon_conditions = {
+					"{C:attention}1{} {C:joy_synchro}Tuner{} + {C:attention}1+ {C:joy_normal}Cyberse{}"
 				}
 			},
 			j_joy_ignis_dragon = {
@@ -1899,6 +1911,9 @@ return {
 				joy_transfer_ability = {
 					"Scored cards gain {C:money}+$#1#{} when held in hand",
 					"for each {C:attention}attribute{} used for its summon",
+				},
+				joy_summon_conditions = {
+					"{C:attention}2+ {C:joy_normal}Cyberse{}"
 				}
 			},
 			j_joy_ignis_phoenix = {
@@ -1916,6 +1931,9 @@ return {
 				joy_transfer_ability = {
 					"Scored cards gain {X:mult,C:white}X#1#{} extra Mult for each {C:attention}attribute{} used for its summon",
 					"Amount increases {X:mult,C:white}X#1#{} when a {C:joy_link}Link{} is summoned",
+				},
+				joy_summon_conditions = {
+					"{C:attention}2+ {C:joy_normal}Cyberse{}"
 				}
 			},
 			j_joy_ignis_accode = {
@@ -1925,6 +1943,9 @@ return {
 					"{C:inactive}(Currently {X:mult,C:white}X#2#{} {C:inactive}Mult)",
 					" ",
 					"{C:attention}Revive #3#{} {C:joy_link}Links{} when summoned"
+				},
+				joy_summon_conditions = {
+					"{C:attention}5 {C:joy_link}Links{}"
 				}
 			},
 			j_joy_ignis_infant = {
@@ -1935,6 +1956,9 @@ return {
 					" ",
 					"Can be used as any {C:attention}material{} for a {C:joy_link}Link",
 					"and can be treated as any {C:attention}attribute"
+				},
+				joy_summon_conditions = {
+					"{C:attention}1 {C:joy_normal}Cyberse{}"
 				}
 			},
 			j_joy_ignis_templar = {
@@ -1944,20 +1968,27 @@ return {
 					"with different names as {C:dark_edition}Negative{} and debuffed when summoned",
 					" ",
 					"{C:attention}Revive #1#{} {C:joy_normal}Main Deck Cyberse{} when used as {C:attention}material{} for a {C:joy_normal}Cyberse{}"
+				},
+				joy_summon_conditions = {
+					"{C:attention}3 {C:joy_normal}\"@Ignister\"{}"
 				}
 			},
 			j_joy_ignis_arrival = {
 				name = "{C:joy_link}The Arrival Cyberse @Ignister",
 				text = {
 					"{X:mult,C:white}X#1#{} Mult for each {C:attention}attribute{} used for its summon",
+					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult)",
 					" ",
 					"Gains abilities based on the {C:attention}materials{} used for its summon",
-					"{C:joy_light}LIGHT{}: {C:money}+$#2#{} at end of round",
-					"{C:joy_dark}DARK{}: Create {C:attention}#3#{} {C:spectral}Spectral{} at end of round {s:0.8,C:inactive}(Must have room)",
-					"{C:joy_water}WATER{}: {C:chips}+#4#{} Chips",
-					"{C:joy_fire}FIRE{}: {C:mult}+#5#{} Mult",
-					"{C:joy_wind}WIND{}: {C:green}#6# in #7#{} chance to turn scored cards into {C:attention}Glass{} cards",
-					"{C:joy_earth}EARTH{}: {C:attention}+#8#{} hand size"
+					"{V:1}LIGHT{V:3}: {V:2}+$#3#{V:3} at end of round",
+					"{V:4}DARK{V:7}: Create {V:5}#4#{} {V:6}Spectral{V:7} at end of round {s:0.8,C:inactive}(Must have room)",
+					"{V:8}WATER{V:10}: {V:9}+#5#{V:10} Chips",
+					"{V:11}FIRE{V:13}: {V:12}+#6#{V:13} Mult",
+					"{V:14}WIND{V:17}: {V:15}#7# in #8#{V:17} chance to create a {V:16}Negative{V:17} copy of a used consumable",
+					"{V:18}EARTH{V:20}: {V:19}+#9#{V:20} hand size"
+				},
+				joy_summon_conditions = {
+					"{C:attention}5 {C:joy_normal}Cyberse{}"
 				}
 			},
 			j_joy_ignis_ailand = {

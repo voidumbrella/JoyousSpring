@@ -358,7 +358,7 @@ JoyousSpring.create_pseudorandom = function(property_list, seed, must_have_room,
     return nil
 end
 
-JoyousSpring.get_material_attributes = function(card_list, count_debuffed)
+JoyousSpring.get_material_attributes = function(card_list, ignore_debuffed)
     local attributes = {
         LIGHT = false,
         DARK = false,
@@ -369,7 +369,7 @@ JoyousSpring.get_material_attributes = function(card_list, count_debuffed)
         DIVINE = false
     }
     for _, card in ipairs(card_list) do
-        if type(card) == "table" and (not count_debuffed or not card.debuff) and JoyousSpring.is_monster_card(card) then
+        if type(card) == "table" and (not ignore_debuffed or not card.debuff) and JoyousSpring.is_monster_card(card) then
             if not JoyousSpring.is_all_attributes(card) then
                 attributes[card.ability.extra.joyous_spring.attribute] = true
             end
@@ -383,7 +383,7 @@ JoyousSpring.get_material_attributes = function(card_list, count_debuffed)
         end
     end
     for _, card in ipairs(card_list) do
-        if type(card) == "table" and (not count_debuffed or not card.debuff) and JoyousSpring.is_monster_card(card) then
+        if type(card) == "table" and (not ignore_debuffed or not card.debuff) and JoyousSpring.is_monster_card(card) then
             if JoyousSpring.is_all_attributes(card) then
                 for k, v in pairs(attributes) do
                     if not v then
@@ -410,9 +410,9 @@ JoyousSpring.get_material_attributes = function(card_list, count_debuffed)
     return attributes
 end
 
-JoyousSpring.get_attribute_count = function(card_list, count_debuffed)
+JoyousSpring.get_attribute_count = function(card_list, ignore_debuffed)
     local count = 0
-    local attributes = JoyousSpring.get_material_attributes(card_list, count_debuffed)
+    local attributes = JoyousSpring.get_material_attributes(card_list, ignore_debuffed)
     for k, v in pairs(attributes) do
         if v then
             count = count + 1
