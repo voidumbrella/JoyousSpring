@@ -1535,6 +1535,7 @@ SMODS.Joker({
                         local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Ignister" }, is_main_deck = true } })
                         key_to_add = pseudorandom_element(choices, pseudoseed("j_joy_ignis_ailand"))
                         JoyousSpring.add_monster_tag(key_to_add or "j_joy_ignis_achichi")
+                        break
                     end
                 end
             end
@@ -1544,6 +1545,8 @@ SMODS.Joker({
                     for i, joker in ipairs(G.jokers.cards) do
                         if JoyousSpring.is_monster_type(joker, "Cyberse") then
                             JoyousSpring.banish(joker, "blind_selected")
+                        else
+                            SMODS.debuff_card(joker, true, "j_joy_ignis_ailand")
                         end
                     end
                 end
