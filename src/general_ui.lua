@@ -483,7 +483,7 @@ local game_start_run_ref = Game.start_run
 function Game:start_run(args)
     game_start_run_ref(self, args)
 
-    self.extra_buttons = UIBox {
+    self.joy_extra_buttons = UIBox {
         definition = {
             n = G.UIT.ROOT,
             config = {

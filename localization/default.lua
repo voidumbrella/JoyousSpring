@@ -1973,6 +1973,7 @@ return {
 				text = {
 					"{C:attention}Revive{} as many {C:joy_normal}\"@Ignister\"{} as possible",
 					"with different names as {C:dark_edition}Negative{} and debuffed when summoned",
+					"{s:0.9,C:inactive}(Except its materials)",
 					" ",
 					"{C:attention}Revive #1#{} {C:joy_normal}Main Deck Cyberse{} when used as {C:attention}material{} for a {C:joy_normal}Cyberse{}"
 				},
@@ -2001,10 +2002,12 @@ return {
 			j_joy_ignis_ailand = {
 				name = "{C:joy_spell}Ignister A.I.Land",
 				text = {
-					"Gain {C:attention}#1# Bug Tag{} when an {C:joy_normal}\"@Ignister\"{} is used as {C:attention}material",
+					"Gain {C:attention}#1#{} {C:joy_normal}Main Deck \"@Ignister\"{} to the shop",
+					"when an {C:joy_normal}\"@Ignister\"{} is used as {C:attention}material",
 					" ",
 					"If you own {C:attention}Jokers{} with {C:attention}#2#{} different {C:attention}attributes{} at end of round,",
-					"{C:attention}banish{} all {C:joy_normal}Cyberse{} until {C:attention}Blind{} is selected"
+					"{C:attention}banish{} all {C:joy_normal}Cyberse{} until {C:attention}Blind{} is selected",
+					"but debuffs all non-{C:joy_normal}Cyberse{}"
 				}
 			},
 			--#endregion
@@ -2895,6 +2898,8 @@ return {
 			k_joy_banish_boss_selected = "Start of Boss Blind",
 			k_joy_banish_end_of_ante = "End of Ante",
 			k_joy_select_materials = "Select Materials",
+			k_joy_summon_warning =
+			"Due to limitations, this list might not contain a valid material combination",
 			k_joy_select_tributes = "Select Tributes",
 			k_joy_transferred_abilities = "Transferred Abilities:",
 			k_joy_select = "Select",

@@ -202,7 +202,7 @@ local function get_combinations(list, condition, max_size)
     local result = {}
     local n = #list
     local stack = { { index = 1, combo = {} } } -- Stack-based approach instead of recursion
-    local max_size = max_size or 5
+    local max_size = max_size or 7
 
     while #stack > 0 do
         local state = table.remove(stack)
@@ -421,16 +421,20 @@ end
 ---@return table
 JoyousSpring.get_summon_material_combo_by_condition = function(condition, card_list)
     local card_list = card_list or G.jokers.cards
-    local material_combos = {}
+    local material_combos
 
-    local current_combos = get_combinations(card_list, condition)
+    if #card_list <= 15 then
+        material_combos = {}
+        local current_combos = get_combinations(card_list, condition)
 
-    for _, combination in ipairs(current_combos) do
-        if JoyousSpring.fulfills_conditions(combination, condition) then
-            table.insert(material_combos, combination)
+        for _, combination in ipairs(current_combos) do
+            if JoyousSpring.fulfills_conditions(combination, condition) then
+                table.insert(material_combos, combination)
+            end
         end
+    else
+        material_combos = JoyousSpring.get_all_fulfilling(card_list, condition)
     end
-
     return material_combos
 end
 
@@ -438,20 +442,21 @@ end
 ---@param card Card
 ---@param card_list Card[]?
 ---@return table?
+---@return boolean?
 JoyousSpring.get_all_summon_material_combos = function(card, card_list)
     if not JoyousSpring.is_monster_card(card) or
         (not card.ability.extra.joyous_spring.summon_conditions and not card.ability.extra.joyous_spring.summon_consumeable_conditions) then
         return nil
     end
-
+    local card_table
     local material_combos = {}
     if card.ability.extra.joyous_spring.summon_consumeable_conditions then
-        local card_table = card_list or G.consumeables.cards
+        card_table = card_list or G.consumeables.cards
         table.insert(material_combos,
             JoyousSpring.get_summon_materials_consumables(card.ability.extra.joyous_spring.summon_consumeable_conditions,
                 card_table))
     else
-        local card_table = card_list or G.jokers.cards
+        card_table = card_list or G.jokers.cards
         local conditions = card.ability.extra.joyous_spring.summon_conditions
 
         for _, condition in ipairs(conditions) do
@@ -462,7 +467,7 @@ JoyousSpring.get_all_summon_material_combos = function(card, card_list)
         end
     end
 
-    return material_combos
+    return material_combos, card_table and #card_table > 15 or false
 end
 
 ---Checks if there's any combination in **card_list** that fulfills **condition**
@@ -472,12 +477,18 @@ end
 JoyousSpring.can_summon_by_condition = function(condition, card_list)
     local card_list = card_list or G.jokers.cards
 
-    local current_combos = get_combinations(card_list, condition)
+    if #card_list <= 15 then
+        local current_combos = get_combinations(card_list, condition)
 
-    for _, combination in ipairs(current_combos) do
-        if JoyousSpring.fulfills_conditions(combination, condition) then
-            return true
+        for _, combination in ipairs(current_combos) do
+            if JoyousSpring.fulfills_conditions(combination, condition) then
+                return true
+            end
         end
+    else
+        local material_combos = JoyousSpring.get_all_fulfilling(card_list, condition)
+        local mandatory, _ = separate_properties(condition)
+        return #material_combos >= #mandatory
     end
 
     return false
@@ -537,6 +548,24 @@ JoyousSpring.can_summon_with_combo = function(card, combo)
     end
 
     return false
+end
+
+JoyousSpring.get_all_fulfilling = function(card_list, condition)
+    local materials = {}
+    local property_list = condition.materials
+    for _, joker in ipairs(card_list) do
+        if not property_list or #property_list == 0 then
+            table.insert(materials, joker)
+        else
+            for _, property in ipairs(property_list) do
+                if JoyousSpring.is_material(joker, property) then
+                    table.insert(materials, { joker })
+                    break
+                end
+            end
+        end
+    end
+    return materials
 end
 
 ---Checks if the **combo** fulfills any of the card's summon conditions and transfers materials
@@ -684,7 +713,7 @@ end
 
 --#region UI
 
-JoyousSpring.create_UIBox_select_summon_materials = function(card)
+JoyousSpring.create_UIBox_select_summon_materials = function(card, is_quick)
     local summon_type = card.ability.extra.joyous_spring.summon_type or "FUSION"
 
     local colour = G.C.JOY[summon_type] or G.C.JOY.FUSION
@@ -746,10 +775,20 @@ JoyousSpring.create_UIBox_select_summon_materials = function(card)
                                                 scale = 0.8
                                             })
                                         }
-                                    }
+                                    },
                                 }
-
                             },
+                            is_quick and {
+                                n = G.UIT.R,
+                                config = {
+                                    align = "cm",
+                                    padding = 0.05,
+                                    minw = 7
+                                },
+                                nodes = {
+                                    { n = G.UIT.T, config = { text = localize("k_joy_summon_warning"), scale = 0.35, colour = G.C.UI.TEXT_LIGHT } }
+                                },
+                            } or nil,
                             {
                                 n = G.UIT.R,
                                 config = {
@@ -890,14 +929,18 @@ JoyousSpring.create_UIBox_select_summon_materials = function(card)
 end
 
 JoyousSpring.create_overlay_select_summon_materials = function(card, card_list)
-    local material_combos = JoyousSpring.get_all_summon_material_combos(card, card_list)
+    local material_combos, is_quick = JoyousSpring.get_all_summon_material_combos(card, card_list)
 
     if material_combos then
         local material_list = SMODS.merge_lists(material_combos)
 
         local highlight_limit = 1
-        for _, combo in ipairs(material_combos) do
-            highlight_limit = #combo > highlight_limit and #combo or highlight_limit
+        if not is_quick then
+            for _, combo in ipairs(material_combos) do
+                highlight_limit = #combo > highlight_limit and #combo or highlight_limit
+            end
+        else
+            highlight_limit = 7
         end
         JoyousSpring.summon_material_area = CardArea(
             0,
@@ -945,7 +988,7 @@ JoyousSpring.create_overlay_select_summon_materials = function(card, card_list)
         end
 
         G.FUNCS.overlay_menu({
-            definition = JoyousSpring.create_UIBox_select_summon_materials(card)
+            definition = JoyousSpring.create_UIBox_select_summon_materials(card, is_quick)
         })
     end
 end

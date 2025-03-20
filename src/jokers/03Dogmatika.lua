@@ -643,7 +643,8 @@ SMODS.Joker({
             debuffed_ed_count = debuffed_ed_count +
                 JoyousSpring.count_materials_in_graveyard({ { is_extra_deck = true } })
         end
-        return card.ability.extra.money * debuffed_ed_count
+        local ret = card.ability.extra.money * debuffed_ed_count
+        return ret > 0 and ret or nil
     end,
     joy_can_activate = function(card)
         if not (#G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit) then
