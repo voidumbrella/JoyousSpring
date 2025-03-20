@@ -61,16 +61,6 @@ SMODS.Joker({
                 }
             end
         end
-        if not context.blueprint_card and not context.retrigger_joker and
-            context.end_of_round and context.game_over == false and context.main_eval then
-            if G.GAME.blind.boss and card.ability.extra.xmult > 1 then
-                card.ability.extra.xmult = 1
-                return {
-                    message = localize('k_reset'),
-                    colour = G.C.RED
-                }
-            end
-        end
     end,
     joker_display_def = function(JokerDisplay)
         return {

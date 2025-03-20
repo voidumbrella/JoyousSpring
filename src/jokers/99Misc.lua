@@ -584,24 +584,24 @@ SMODS.Joker({
                     }
                 }
             },
-            chips_gain = 80,
-            chips_loss = 40,
-            chips = 0
+            mult_gain = 80,
+            mult_loss = 80,
+            mult = 0
         },
     },
     calculate = function(self, card, context)
         if JoyousSpring.can_use_abilities(card) then
             if context.joker_main then
                 return {
-                    chips = card.ability.extra.chips
+                    mult = card.ability.extra.mult
                 }
             end
             if context.end_of_round and context.game_over == false and context.main_eval then
-                if card.ability.extra.chips > 0 then
-                    card.ability.extra.chips = card.ability.extra.chips - card.ability.extra.chips_loss
-                    card.ability.extra.chips = (card.ability.extra.chips >= 0 and card.ability.extra.chips) or 0
+                if card.ability.extra.mult > 0 then
+                    card.ability.extra.mult = card.ability.extra.mult - card.ability.extra.mult_loss
+                    card.ability.extra.mult = (card.ability.extra.mult >= 0 and card.ability.extra.mult) or 0
                     return {
-                        message = localize { type = 'variable', key = 'a_chips_minus', vars = { card.ability.extra.chips_loss } },
+                        message = localize { type = 'variable', key = 'a_chips_minus', vars = { card.ability.extra.mult_loss } },
                         colour = G.C.CHIPS
                     }
                 end
@@ -610,16 +610,16 @@ SMODS.Joker({
     end,
     add_to_deck = function(self, card, from_debuff)
         if not card.debuff and not from_debuff then
-            card.ability.extra.chips = card.ability.extra.chips_gain * #JoyousSpring.get_materials(card)
+            card.ability.extra.mult = card.ability.extra.mult_gain * #JoyousSpring.get_materials(card)
         end
     end,
     joker_display_def = function(JokerDisplay)
         return {
             text = {
                 { text = "+" },
-                { ref_table = "card.ability.extra", ref_value = "chips", retrigger_type = "mult" }
+                { ref_table = "card.ability.extra", ref_value = "mult", retrigger_type = "mult" }
             },
-            text_config = { colour = G.C.CHIPS },
+            text_config = { colour = G.C.MULT },
         }
     end
 })
