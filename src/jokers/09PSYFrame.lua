@@ -432,15 +432,10 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and context.joy_returned and context.joy_returned_card == card then
-                local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "PSYFrame" }, is_main_deck = true, is_effect = true, exclude_keys = { "j_joy_psy_multithreader" } } })
-
                 for i = 1, card.ability.extra.cards_to_create do
-                    local key_to_add, _ = pseudorandom_element(choices, pseudoseed("j_joy_psy_multithreader"))
-                    if key_to_add and #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
-                        SMODS.add_card({
-                            key = key_to_add
-                        })
-                    end
+                    JoyousSpring.create_pseudorandom(
+                        { { monster_archetypes = { "PSYFrame" }, is_main_deck = true, is_effect = true, exclude_keys = { "j_joy_psy_multithreader" } } },
+                        pseudoseed("j_joy_psy_multithreader"), true)
                 end
             end
         end

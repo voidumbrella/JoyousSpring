@@ -567,9 +567,9 @@ return {
 				name = "{C:joy_effect}Mekk-Knight Green Horizon",
 				text = {
 					"Scored card in this {C:attention}column{}",
-					"has a chance {C:green}1 in <rank>{} to",
+					"has a chance {C:green}#1# in <rank>{} to",
 					"retrigger that many times",
-					"{C:inactive}(Currently in column{} {C:attention}#1#{}{C:inactive}){}",
+					"{C:inactive}(Currently in column{} {C:attention}#2#{}{C:inactive}){}",
 				},
 			},
 			j_joy_mekk_blue = {
@@ -1783,13 +1783,16 @@ return {
 			j_joy_ignis_gussari = {
 				name = "{C:joy_effect}Gussari @Ignister",
 				text = {
+					"{C:mult}+#1#{} Mult",
+					" ",
 					"Can be used as any material for a {C:joy_link}Link",
 					" ",
 					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability:",
 					"{s:0.9,C:mult}+#1# {s:0.9}Mult for each {s:0.9,C:attention}material {s:0.9}used for its summon",
 				},
 				joy_transfer_ability = {
-					"{C:chips}+#1# Chips{}"
+					"{C:mult}+#1#{} Mult for each {C:attention}material{} used for its summon",
+					"{C:inactive}(Currently {C:mult}+#2#{} Mult {C:inactive})"
 				}
 			},
 			j_joy_ignis_danmari = {
@@ -1798,7 +1801,10 @@ return {
 					"Can be used as any material for a {C:joy_link}Link",
 					" ",
 					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability:",
-					"{s:0.9}Lower {s:0.9,C:attention}Blind{}{s:0.9}'s requirement by {s:0.9,C:red}#1#%{}",
+					"{s:0.9}Lowers {s:0.9,C:attention}Blind{}{s:0.9}'s requirement by {s:0.9,C:red}#1#%{}",
+				},
+				joy_transfer_ability = {
+					"Lowers {C:attention}Blind{}'s requirement by {C:red}#1#%{}",
 				}
 			},
 			j_joy_ignis_doyon = {
@@ -1815,7 +1821,8 @@ return {
 				text = {
 					"{C:money}+$#1#{} each time an {C:joy_normal}\"@Ignister\"{} is bought",
 					" ",
-					"Sell this card to {C:attention}banish #2#{} {C:joy_normal}\"@Ignister\"{} until end of round"
+					"Sell this card to {C:attention}banish #2#{} {C:joy_normal}\"@Ignister\"{}",
+					"until {C:attention}Blind{} is selected"
 				}
 			},
 			j_joy_ignis_backup = {
@@ -1839,9 +1846,8 @@ return {
 			j_joy_ignis_kiruku = {
 				name = "{C:joy_effect}Kurikulink @Ignister",
 				text = {
-					"Sell this card to disable the current {C:attention}Boss Blind",
-					" ",
-					"Add it to the next shop if you own a summoned {C:joy_spell}Extra Deck{} {C:joy_normal}Cyberse{}"
+					"Sell this card to disable the current {C:attention}Boss Blind and",
+					"add it to the next shop if you own a summoned {C:joy_spell}Extra Deck{} {C:joy_normal}Cyberse{}"
 				}
 			},
 			j_joy_ignis_leviathan = {
@@ -1886,7 +1892,7 @@ return {
 				text = {
 					"Add {C:attention}#1#{} {C:joy_normal}\"@Ignister\"{} to the {C:joy_spell}Extra Deck when summoned",
 					" ",
-					"Scored cards gain {C:money}+$#2#{} when held in hand",
+					"Scored cards gain {C:money}+$#2#{} when held in hand at end of round",
 					"for each {C:attention}attribute{} used for its summon",
 					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability",
 				},
@@ -1916,8 +1922,9 @@ return {
 				name = "{C:joy_link}Accode Talker @Ignister",
 				text = {
 					"{X:mult,C:white}X#1#{} Mult for each {C:joy_link}Link",
+					"{C:inactive}(Currently {X:mult,C:white}X#2#{} {C:inactive}Mult)",
 					" ",
-					"{C:attention}Revive #2#{} {C:joy_link}Links{} when summoned"
+					"{C:attention}Revive #3#{} {C:joy_link}Links{} when summoned"
 				}
 			},
 			j_joy_ignis_infant = {
@@ -1934,7 +1941,7 @@ return {
 				name = "{C:joy_link}Dark Templar @Ignister",
 				text = {
 					"{C:attention}Revive{} as many {C:joy_normal}\"@Ignister\"{} as possible",
-					"with different names as {C:dark_edition}Negative{} and debuffed",
+					"with different names as {C:dark_edition}Negative{} and debuffed when summoned",
 					" ",
 					"{C:attention}Revive #1#{} {C:joy_normal}Main Deck Cyberse{} when used as {C:attention}material{} for a {C:joy_normal}Cyberse{}"
 				}

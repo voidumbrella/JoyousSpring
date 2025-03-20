@@ -25,7 +25,7 @@ JoyousSpring.PokerHandDummy = SMODS.Center:extend {
     end
 }
 
--- Eldlixir
+--#region Eldlixir
 SMODS.PokerHand({
     key = "eldlixir",
     chips = 100,
@@ -126,3 +126,4 @@ SMODS.Consumable {
         G.localization.descriptions[self.set][self.key].text = target_text
     end
 }
+--#endregion

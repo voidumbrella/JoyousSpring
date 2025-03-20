@@ -190,7 +190,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 4,
     loc_vars = function(self, info_queue, card)
-        return { vars = { JoyousSpring.get_joker_column(card) } }
+        return { vars = { G.GAME.probabilities.normal, JoyousSpring.get_joker_column(card) } }
     end,
     joy_desc_cards = {
         { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
@@ -379,11 +379,12 @@ SMODS.Joker({
                 if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit +
                     ((card.edition and card.edition.negative) and 0 or 1) then
                     JoyousSpring.banish(card, "end_of_ante")
-                    local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "MekkKnight" }, is_main_deck = true, exclude_keys = { "j_joy_mekk_purple" } } })
+
                     for i = 1, card.ability.extra.cards_to_create do
-                        SMODS.add_card({
-                            key = pseudorandom_element(choices, pseudoseed("j_joy_mekk_purple"))
-                        })
+                        JoyousSpring.create_pseudorandom(
+                            { { monster_archetypes = { "MekkKnight" }, is_main_deck = true, exclude_keys = { "j_joy_mekk_purple" } } },
+                            pseudoseed("j_joy_mekk_purple"), true, false, nil,
+                            (card.edition and card.edition.negative) and 0 or 1)
                     end
                 end
             end
@@ -493,14 +494,11 @@ SMODS.Joker({
         if JoyousSpring.can_use_abilities(card) then
             if not card.ability.extra.activated and context.selling_card and JoyousSpring.is_monster_archetype(context.card, "MekkKnight") then
                 card.ability.extra.activated = true
-                local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "MekkKnight" }, is_main_deck = true } })
+
                 for i = 1, card.ability.extra.cards_to_create do
-                    if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit +
-                        ((context.card.edition and context.card.edition.negative) and 0 or 1) then
-                        SMODS.add_card({
-                            key = pseudorandom_element(choices, pseudoseed("j_joy_mekk_spectrum"))
-                        })
-                    end
+                    JoyousSpring.create_pseudorandom(
+                        { { monster_archetypes = { "MekkKnight" }, is_main_deck = true } },
+                        pseudoseed("j_joy_mekk_spectrum"), true)
                 end
             end
             if context.end_of_round and context.game_over == false and context.main_eval then

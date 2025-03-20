@@ -948,14 +948,10 @@ SMODS.Joker({
                 context.setting_blind and context.main_eval then
                 if G.GAME.blind and ((not G.GAME.blind.disabled) and (G.GAME.blind.boss)) then
                     G.GAME.blind:disable()
-                    local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Dragonmaid" }, rarity = 1 } })
 
                     for i = 1, card.ability.extra.cards_to_create do
-                        if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
-                            SMODS.add_card({
-                                key = pseudorandom_element(choices, pseudoseed("j_joy_dmaid_sheou"))
-                            })
-                        end
+                        JoyousSpring.create_pseudorandom({ { monster_archetypes = { "Dragonmaid" }, rarity = 1 } },
+                            pseudoseed("j_joy_dmaid_sheou"), true)
                     end
                     JoyousSpring.transform_card(card, "j_joy_dmaid_house")
                     return { message = localize('ph_boss_disabled') }

@@ -83,7 +83,7 @@ JoyousSpring.transform_card = function(card, other_key, keep_edition)
 end
 
 ---Creates cards with "permanent" debuffs
----@param card Card
+---@param card Card|string
 ---@param source string?
 ---@param edition any
 ---@return Card
@@ -233,7 +233,7 @@ function Blind:stay_flipped(to_area, card, from_area)
     return ret
 end
 
-JoyousSpring.transfer_abilities = function(card, material_key, other_card)
+JoyousSpring.transfer_abilities = function(card, material_key, other_card, materials)
     local material_center = G.P_CENTERS[material_key]
     if not card or not material_center or not material_center.joy_can_transfer_ability or (other_card and other_card.debuff) then
         return
@@ -243,7 +243,7 @@ JoyousSpring.transfer_abilities = function(card, material_key, other_card)
             material_center:joy_transfer_config(card) or {}
         if material_center.joy_transfer_add_to_deck then
             material_center:joy_transfer_add_to_deck(card,
-                card.ability.extra.joyous_spring.material_effects[material_key], other_card, false)
+                card.ability.extra.joyous_spring.material_effects[material_key], other_card, false, materials)
         end
     end
 end

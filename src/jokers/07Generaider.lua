@@ -428,13 +428,10 @@ SMODS.Joker({
                 for _, selected_card in ipairs(context.joy_selection) do
                     selected_card:start_dissolve()
                 end
-                local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Generaider" }, rarity = 2 } })
                 for i = 1, card.ability.extra.cards_to_create do
-                    if #G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit then
-                        SMODS.add_card({
-                            key = pseudorandom_element(choices, pseudoseed("j_joy_generaider_mardel"))
-                        })
-                    end
+                    JoyousSpring.create_pseudorandom(
+                        { { monster_archetypes = { "Generaider" }, rarity = 2 } },
+                        pseudoseed("j_joy_generaider_mardel"), true)
                 end
             end
         end
@@ -842,8 +839,10 @@ SMODS.Joker({
     },
     calculate = function(self, card, context)
         if context.setting_blind and context.main_eval then
-            while #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit do
+            local i = 0
+            while (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit) or (i > 20) do
                 JoyousSpring.summon_token("generaider")
+                i = i + 1
             end
         end
         if context.joy_activate_effect and context.joy_activated_card == card then
@@ -859,15 +858,11 @@ SMODS.Joker({
                 selected_card:start_dissolve()
             end
             card.ability.extra.used = true
-            local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Generaider" }, rarity = 3 } })
+
             for i = 1, card.ability.extra.cards_to_create do
-                local not_owned = JoyousSpring.get_not_owned(choices, true)
-                if #G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit then
-                    SMODS.add_card({
-                        key = pseudorandom_element(not_owned, pseudoseed("j_joy_generaider_boss_stage")) or
-                            "j_joy_generaider_utgarda"
-                    })
-                end
+                JoyousSpring.create_pseudorandom(
+                    { { monster_archetypes = { "Generaider" }, rarity = 3 } },
+                    pseudoseed("j_joy_generaider_boss_stage"), true, true)
             end
         end
         if context.end_of_round and context.main_eval then

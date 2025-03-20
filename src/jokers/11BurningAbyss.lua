@@ -292,15 +292,11 @@ SMODS.Joker({
     end,
     add_to_deck = function(self, card, from_debuff)
         if not card.debuff and not from_debuff and JoyousSpring.can_use_abilities(card) then
-            local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "BurningAbyss" }, is_main_deck = true, exclude_summon_types = { "RITUAL" }, exclude_keys = { "j_joy_ba_draghig" } } })
             for _ = 1, card.ability.extra.creates do
-                local key_to_add = pseudorandom_element(choices, pseudoseed("j_joy_ba_draghig"))
-                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit -
-                    ((card.edition and card.edition.negative) and 0 or 1) then
-                    SMODS.add_card({
-                        key = key_to_add or "j_joy_ba_alich"
-                    })
-                end
+                JoyousSpring.create_pseudorandom(
+                    { { monster_archetypes = { "BurningAbyss" }, is_main_deck = true, exclude_summon_types = { "RITUAL" }, exclude_keys = { "j_joy_ba_draghig" } } },
+                    pseudoseed("j_joy_ba_draghig"), true, false, nil,
+                    (card.edition and card.edition.negative) and 0 or -1)
             end
         end
     end,
@@ -397,15 +393,11 @@ SMODS.Joker({
     end,
     add_to_deck = function(self, card, from_debuff)
         if not card.debuff and not from_debuff and JoyousSpring.can_use_abilities(card) then
-            local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "BurningAbyss" }, is_main_deck = true, exclude_summon_types = { "RITUAL" }, exclude_keys = { "j_joy_ba_draghig" } } })
             for _ = 1, card.ability.extra.creates do
-                local key_to_add = pseudorandom_element(choices, pseudoseed("j_joy_ba_draghig"))
-                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit -
-                    ((card.edition and card.edition.negative) and 0 or 1) then
-                    SMODS.add_card({
-                        key = key_to_add or "j_joy_ba_alich"
-                    })
-                end
+                JoyousSpring.create_pseudorandom(
+                    { { monster_archetypes = { "BurningAbyss" }, is_main_deck = true, exclude_summon_types = { "RITUAL" }, exclude_keys = { "j_joy_ba_graff" } } },
+                    pseudoseed("j_joy_ba_graff"), true, false, nil,
+                    (card.edition and card.edition.negative) and 0 or -1)
             end
         end
     end,
@@ -531,15 +523,12 @@ SMODS.Joker({
         if JoyousSpring.can_use_abilities(card) then
             if (context.selling_self or (context.setting_blind and context.main_eval and ba_die())) and not context.blueprint then
                 card:start_dissolve()
-                local choices = JoyousSpring.get_materials_in_collection({ { monster_type = "Fiend", is_main_deck = true, exclude_keys = { "j_joy_ba_scarm" } } })
+
                 for _ = 1, card.ability.extra.creates do
-                    local key_to_add = pseudorandom_element(choices, pseudoseed("j_joy_ba_draghig"))
-                    if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit +
-                        ((card.edition and card.edition.negative) and 0 or 1) then
-                        SMODS.add_card({
-                            key = key_to_add or "j_joy_ba_alich"
-                        })
-                    end
+                    JoyousSpring.create_pseudorandom(
+                        { { monster_type = "Fiend", is_main_deck = true, exclude_keys = { "j_joy_ba_scarm" } } },
+                        pseudoseed("j_joy_ba_scarm"), true, false, nil,
+                        (card.edition and card.edition.negative) and 0 or 1)
                 end
             end
         end

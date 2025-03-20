@@ -217,14 +217,10 @@ SMODS.Joker({
         if JoyousSpring.can_use_abilities(card) then
             if context.end_of_round and context.game_over == false and context.main_eval then
                 if G.GAME.blind.boss then
-                    local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Dogmatika" }, summon_type = "NORMAL" } })
-
                     for i = 1, card.ability.extra.cards_to_create do
-                        if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
-                            SMODS.add_card({
-                                key = pseudorandom_element(choices, pseudoseed("j_joy_dogma_adin"))
-                            })
-                        end
+                        JoyousSpring.create_pseudorandom(
+                            { { monster_archetypes = { "Dogmatika" }, summon_type = "NORMAL" } },
+                            pseudoseed("j_joy_dogma_adin"), true)
                     end
                 end
             end
@@ -640,14 +636,12 @@ SMODS.Joker({
                 for _, selected_card in ipairs(context.joy_selection) do
                     selected_card:start_dissolve()
                 end
-                local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Dogmatika" } } })
+
                 for i = 1, card.ability.extra.creates do
-                    local not_owned = JoyousSpring.get_not_owned(choices, true)
                     if #G.jokers.cards + G.GAME.joker_buffer - tribute_amount < G.jokers.config.card_limit then
-                        SMODS.add_card({
-                            key = pseudorandom_element(not_owned, pseudoseed("j_joy_dogma_nation")) or
-                                "j_joy_dogma_ecclesia"
-                        })
+                        JoyousSpring.create_pseudorandom(
+                            { { monster_archetypes = { "Dogmatika" } } },
+                            pseudoseed("j_joy_dogma_nation"), true, true)
                     end
                 end
             end

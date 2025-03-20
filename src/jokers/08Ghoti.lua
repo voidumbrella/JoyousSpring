@@ -250,14 +250,10 @@ SMODS.Joker({
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval then
                 local func = function(c)
-                    local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Ghoti" }, is_main_deck = true, exclude_keys = { "j_joy_fish_ixeep" } } })
-
                     for i = 1, c.ability.extra.cards_to_create do
-                        if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
-                            SMODS.add_card({
-                                key = pseudorandom_element(choices, pseudoseed("j_joy_fish_ixeep"))
-                            })
-                        end
+                        JoyousSpring.create_pseudorandom(
+                            { { monster_archetypes = { "Ghoti" }, is_main_deck = true, exclude_keys = { "j_joy_fish_ixeep" } } },
+                            pseudoseed("j_joy_fish_ixeep"), true)
                     end
                 end
                 JoyousSpring.banish(card, "boss_selected", func)

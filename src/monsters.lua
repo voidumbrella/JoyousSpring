@@ -22,7 +22,7 @@ SMODS.Atlas({
 ---@field joy_transfer_ability_calculate? fun(self:SMODS.Center|table, other_card:Card|table, context:CalcContext, config:table):table? Similar to `calculate` but for transferred abilities. `self` is the center for the material and `other_card` is the card with the effect
 ---@field joy_transfer_config? fun(self:SMODS.Center|table, other_card:Card|table):table? Similar to `config`, it returns the initial config table for the transferred ability
 ---@field joy_transfer_loc_vars? fun(self: SMODS.Center|table, info_queue: table, card: Card|table, config: table): table? Similar to `loc_vars` but for the transferred ability text
----@field joy_transfer_add_to_deck? fun(self:SMODS.Center|table, other_card:Card|table, config:table, card:Card|table?, from_debuff:boolean) Similar to `add_to_deck` but for transferred abilities. `self` is the center for the material and `other_card` is the card with the effect, `card` is the transfering material which only exists when transferred
+---@field joy_transfer_add_to_deck? fun(self:SMODS.Center|table, other_card:Card|table, config:table, card:Card|table?, from_debuff:boolean, materials:table[]|Card[]?) Similar to `add_to_deck` but for transferred abilities. `self` is the center for the material and `other_card` is the card with the effect, `card` is the transfering material which only exists when transferred
 ---@field joy_transfer_remove_from_deck? fun(self:SMODS.Center|table, other_card:Card|table, config:table, from_debuff:boolean) Similar to `remove_from_deck` but for transferred abilities. `self` is the center for the material and `other_card` is the card with the effect
 ---@field joy_transfer_calc_dollar_bonus? fun(self:SMODS.Center|table, other_card:Card|table, config:table) Similar to `calc_dollar_bonus` but for transferred abilities. `self` is the center for the material and `other_card` is the card with the effect
 
@@ -176,6 +176,7 @@ JoyousSpring.init_joy_table = function(params)
         is_free = false,
         cannot_revive = params.cannot_revive or false,
         flip_active = false,
+        cannot_flip = true
     } or {
         is_field_spell = true,
         monster_archetypes = params.monster_archetypes or {},
@@ -249,6 +250,10 @@ JoyousSpring.is_all_materials = function(card, summon_type)
         card.ability.extra.joyous_spring.is_all_materials[summon_type]
 end
 
+JoyousSpring.is_all_attributes = function(card)
+    return JoyousSpring.is_monster_card(card) and card.ability.extra.joyous_spring.is_all_attributes or false
+end
+
 JoyousSpring.is_summoned = function(card)
     return JoyousSpring.is_monster_card(card) and card.ability.extra.joyous_spring.summoned or false
 end
@@ -275,6 +280,10 @@ end
 
 JoyousSpring.has_activated_effect = function(card)
     return JoyousSpring.is_monster_card(card) and card.config.center.joy_can_activate and true or false
+end
+
+JoyousSpring.cannot_flip = function(card)
+    return JoyousSpring.is_monster_card(card) and card.ability.extra.joyous_spring.cannot_flip or false
 end
 
 JoyousSpring.can_activate = function(card)
@@ -735,7 +744,7 @@ end
 
 local card_flip_ref = Card.flip
 function Card:flip(source)
-    if not JoyousSpring.is_summon_type(self, "LINK") and self.config.center_key ~= "j_joy_token" then
+    if not JoyousSpring.is_summon_type(self, "LINK") and self.config.center_key ~= "j_joy_token" and not JoyousSpring.cannot_flip(self) then
         card_flip_ref(self)
         local is_play_area = false
         for _, area in ipairs(SMODS.get_card_areas('jokers')) do

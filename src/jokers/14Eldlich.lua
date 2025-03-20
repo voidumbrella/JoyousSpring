@@ -73,13 +73,11 @@ SMODS.Joker({
                     for _, selected_card in ipairs(context.joy_selection) do
                         selected_card:start_dissolve()
                     end
-                    local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "GoldenLand" }, is_main_deck = true } })
+
                     for i = 1, card.ability.extra.creates do
-                        if #G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit then
-                            SMODS.add_card({
-                                key = pseudorandom_element(choices, pseudoseed("j_joy_eld_eldlich"))
-                            })
-                        end
+                        JoyousSpring.create_pseudorandom(
+                            { { monster_archetypes = { "GoldenLand" }, is_main_deck = true } },
+                            pseudoseed("j_joy_eld_eldlich"), true)
                     end
                 end
             end

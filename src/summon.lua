@@ -133,7 +133,7 @@ JoyousSpring.perform_summon = function(card, card_list, summon_type)
     card.ability.extra.joyous_spring.xyz_materials = card.ability.extra.joyous_spring.xyz_materials or 0
     for _, joker in ipairs(card_list) do
         table.insert(card.ability.extra.joyous_spring.summon_materials, joker.config.center.key)
-        JoyousSpring.transfer_abilities(card, joker.config.center.key)
+        JoyousSpring.transfer_abilities(card, joker.config.center.key, joker, card_list)
 
         card.ability.extra.joyous_spring.xyz_materials = card.ability.extra.joyous_spring.xyz_materials + 1
         if transfer and JoyousSpring.is_summon_type(joker, "XYZ") then

@@ -30,10 +30,13 @@ end
 ---@param seed number
 ---@param must_have_room boolean?
 ---@param edition any?
+---@param card_limit_modif integer?
+---@param different_names boolean?
 ---@return Card?
-JoyousSpring.revive_pseudorandom = function(property_list, seed, must_have_room, edition)
-    if not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit) then
-        local choices = JoyousSpring.get_materials_in_graveyard(property_list, true)
+JoyousSpring.revive_pseudorandom = function(property_list, seed, must_have_room, edition, card_limit_modif,
+                                            different_names)
+    if not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit + card_limit_modif) then
+        local choices = JoyousSpring.get_materials_in_graveyard(property_list, true, different_names)
         local key_to_add = pseudorandom_element(choices, seed)
         if key_to_add then
             return JoyousSpring.revive(key_to_add, must_have_room, edition)

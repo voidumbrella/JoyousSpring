@@ -188,14 +188,9 @@ SMODS.Joker({
                         selected_card:flip(card)
                     end
                     card:flip(card)
-                    local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Subterror" }, exclude_keys = { "j_joy_sub_archer" }, rarity = 1 }, { monster_archetypes = { "Subterror" }, exclude_keys = { "j_joy_sub_archer" }, rarity = 2 } })
-                    for _ = 1, card.ability.extra.creates do
-                        local key_to_add = pseudorandom_element(choices, pseudoseed("j_joy_sub_archer"))
-                        SMODS.add_card({
-                            key = key_to_add or "j_joy_sub_warrior",
-                            edition = "e_negative"
-                        })
-                    end
+                    JoyousSpring.create_pseudorandom(
+                        { { monster_archetypes = { "Subterror" }, exclude_keys = { "j_joy_sub_archer" }, rarity = 1 }, { monster_archetypes = { "Subterror" }, exclude_keys = { "j_joy_sub_archer" }, rarity = 2 } },
+                        pseudoseed("j_joy_sub_archer"), false, false, "e_negative")
                     card.ability.extra.activated = true
                 end
             end
@@ -395,14 +390,10 @@ SMODS.Joker({
                     card.ability.extra.activated = true
                 end
                 if JoyousSpring.calculate_flip_effect(card, context) then
-                    local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Subterror" }, exclude_keys = { "j_joy_sub_guru" }, rarity = 1 }, { monster_archetypes = { "Subterror" }, exclude_keys = { "j_joy_sub_guru" }, rarity = 2 } })
                     for _ = 1, card.ability.extra.creates do
-                        if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
-                            local key_to_add = pseudorandom_element(choices, pseudoseed("j_joy_sub_guru"))
-                            SMODS.add_card({
-                                key = key_to_add or "j_joy_sub_warrior"
-                            })
-                        end
+                        JoyousSpring.create_pseudorandom(
+                            { { monster_archetypes = { "Subterror" }, exclude_keys = { "j_joy_sub_guru" }, rarity = 1 }, { monster_archetypes = { "Subterror" }, exclude_keys = { "j_joy_sub_guru" }, rarity = 2 } },
+                            pseudoseed("j_joy_sub_guru"), true)
                     end
                 end
             end
@@ -973,14 +964,11 @@ SMODS.Joker({
                     for _, selected_card in ipairs(context.joy_selection) do
                         selected_card:flip(card)
                     end
-                    local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "SubterrorBehemoth" }, exclude_keys = { "j_joy_sub_befiendess" } } })
+
                     for _ = 1, card.ability.extra.creates do
-                        if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
-                            local key_to_add = pseudorandom_element(choices, pseudoseed("j_joy_sub_befiendess"))
-                            SMODS.add_card({
-                                key = key_to_add or "j_joy_sub_stygo",
-                            })
-                        end
+                        JoyousSpring.create_pseudorandom(
+                            { { monster_archetypes = { "SubterrorBehemoth" }, exclude_keys = { "j_joy_sub_befiendess" } } },
+                            pseudoseed("j_joy_sub_befiendess"), true)
                     end
                     card.ability.extra.activated = true
                 end
@@ -1048,7 +1036,7 @@ SMODS.Joker({
                 is_field_spell = true,
             },
             flips = 1,
-            money = 1
+            money = 5
         },
     },
     calculate = function(self, card, context)

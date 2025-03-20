@@ -171,6 +171,9 @@ JoyousSpring.get_not_owned = function(keys, count_debuffed)
             table.insert(not_owned, key)
         end
     end
+    if #not_owned == 0 then
+        not_owned = { keys[1] }
+    end
     return not_owned
 end
 
@@ -336,6 +339,86 @@ JoyousSpring.level_up_hand = function(card, hand_key, instant, amount)
         update_hand_text({ sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 },
             { mult = 0, chips = 0, handname = '', level = '' })
     end
+end
+
+JoyousSpring.create_pseudorandom = function(property_list, seed, must_have_room, not_owned, edition, card_limit_modif)
+    if not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit + (card_limit_modif or 0)) then
+        local choices = JoyousSpring.get_materials_in_collection(property_list)
+        if not_owned then
+            choices = JoyousSpring.get_not_owned(choices)
+        end
+        local key_to_add = pseudorandom_element(choices, seed or pseudoseed("JoyousSpring"))
+        if key_to_add then
+            return SMODS.add_card({
+                key = key_to_add,
+                edition = edition
+            })
+        end
+    end
+    return nil
+end
+
+JoyousSpring.get_material_attributes = function(card_list, count_debuffed)
+    local attributes = {
+        LIGHT = false,
+        DARK = false,
+        WATER = false,
+        FIRE = false,
+        EARTH = false,
+        WIND = false,
+        DIVINE = false
+    }
+    for _, card in ipairs(card_list) do
+        if type(card) == "table" and (not count_debuffed or not card.debuff) and JoyousSpring.is_monster_card(card) then
+            if not JoyousSpring.is_all_attributes(card) then
+                attributes[card.ability.extra.joyous_spring.attribute] = true
+            end
+        else
+            local card_center = G.P_CENTERS[card]
+            if card_center and card_center.config and card_center.config.extra and
+                type(card_center.config.extra) == "table" and
+                card_center.config.extra.joyous_spring and not card_center.config.extra.joyous_spring.is_all_attributes then
+                attributes[card_center.config.extra.joyous_spring.attribute] = true
+            end
+        end
+    end
+    for _, card in ipairs(card_list) do
+        if type(card) == "table" and (not count_debuffed or not card.debuff) and JoyousSpring.is_monster_card(card) then
+            if JoyousSpring.is_all_attributes(card) then
+                for k, v in pairs(attributes) do
+                    if not v then
+                        attributes[k] = true
+                        break
+                    end
+                end
+            end
+        else
+            local card_center = G.P_CENTERS[card]
+            if card_center and card_center.config and card_center.config.extra and
+                type(card_center.config.extra) == "table" and
+                card_center.config.extra.joyous_spring and card_center.config.extra.joyous_spring.is_all_attributes then
+                for k, v in pairs(attributes) do
+                    if not v then
+                        attributes[k] = true
+                        break
+                    end
+                end
+            end
+        end
+    end
+
+    return attributes
+end
+
+JoyousSpring.get_attribute_count = function(card_list, count_debuffed)
+    local count = 0
+    local attributes = JoyousSpring.get_material_attributes(card_list, count_debuffed)
+    for k, v in pairs(attributes) do
+        if v then
+            count = count + 1
+        end
+    end
+    return count
 end
 
 --- Talisman compat

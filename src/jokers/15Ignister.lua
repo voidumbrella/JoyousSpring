@@ -17,7 +17,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 15, 1 } }
+        return { vars = { card.ability.extra.mult, card.ability.extra.creates } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -31,8 +31,29 @@ SMODS.Joker({
                 monster_type = "Cyberse",
                 monster_archetypes = { ["Ignister"] = true }
             },
+            mult = 15,
+            creates = 1
         },
     },
+    calculate = function(self, card, context)
+        if JoyousSpring.can_use_abilities(card) then
+            if context.joker_main then
+                return {
+                    mult = card.ability.extra.mult
+                }
+            end
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if not card.debuff and not from_debuff then
+            for i = 1, card.ability.extra.creates do
+                JoyousSpring.create_pseudorandom(
+                    { rarity = 1, monster_archetypes = { "Ignister" } },
+                    pseudoseed("j_joy_ignis_achichi"), true, false, nil,
+                    ((card.edition and card.edition.negative) and 0 or -1))
+            end
+        end
+    end
 })
 
 -- Pikari @Ignister
@@ -46,7 +67,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 3, 1 } }
+        return { vars = { card.ability.extra.dollars, card.ability.extra.creates } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -60,8 +81,24 @@ SMODS.Joker({
                 monster_type = "Cyberse",
                 monster_archetypes = { ["Ignister"] = true }
             },
+            dollars = 3,
+            creates = 1
         },
     },
+    calc_dollar_bonus = function(self, card)
+        return card.ability.extra.dollars
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if not card.debuff and not from_debuff then
+            for i = 1, card.ability.extra.creates do
+                if #G.consumeables.cards < G.consumeables.config.card_limit then
+                    SMODS.add_card({
+                        set = 'Tarot'
+                    })
+                end
+            end
+        end
+    end
 })
 
 -- Hiyari @Ignister
@@ -75,7 +112,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1, 1, 1 } }
+        return { vars = { card.ability.extra.h_size, card.ability.extra.tributes, card.ability.extra.creates } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -89,8 +126,69 @@ SMODS.Joker({
                 monster_type = "Cyberse",
                 monster_archetypes = { ["Ignister"] = true }
             },
+            h_size = 1,
+            tributes = 1,
+            creates = 1,
+            activated = false
         },
     },
+    calculate = function(self, card, context)
+        if JoyousSpring.can_use_abilities(card) then
+            if not context.blueprint_card and not card.ability.extra.activated then
+                if context.joy_activate_effect and context.joy_activated_card == card then
+                    local targets = G.jokers.cards
+                    local materials = {}
+                    for i, joker in ipairs(targets) do
+                        if joker ~= card and not joker.ability.eternal then
+                            materials[#materials + 1] = joker
+                        end
+                    end
+                    if next(materials) then
+                        JoyousSpring.create_overlay_effect_selection(card, materials, card.ability.extra.tributes,
+                            card.ability.extra.tributes)
+                    end
+                end
+                if context.joy_exit_effect_selection and context.joy_card == card and
+                    #context.joy_selection == card.ability.extra.tributes then
+                    card.ability.extra.activated = true
+                    card:start_dissolve()
+                    for i = 1, card.ability.extra.creates do
+                        JoyousSpring.create_pseudorandom(
+                            { rarity = 2, monster_archetypes = { "Ignister" } },
+                            pseudoseed("j_joy_ignis_hiyari"), true)
+                    end
+                end
+            end
+        end
+    end,
+    joy_can_activate = function(card)
+        if card.ability.extra.activated then
+            return false
+        end
+        local targets = G.jokers.cards
+        local materials = {}
+        for i, joker in ipairs(targets) do
+            if joker ~= card and not joker.ability.eternal then
+                materials[#materials + 1] = joker
+            end
+        end
+        return next(materials)
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if not JoyousSpring.is_perma_debuffed(card) then
+            G.hand:change_size(card.ability.extra.h_size)
+        end
+    end,
+    remove_from_deck = function(self, card, from_debuff)
+        if not JoyousSpring.is_perma_debuffed(card) then
+            G.hand:change_size(-card.ability.extra.h_size)
+        end
+    end,
+    joy_set_cost = function(card)
+        if JoyousSpring.count_materials_owned({ { monster_archetypes = { "Ignister" } } }) > 0 then
+            card.cost = 0
+        end
+    end
 })
 
 -- Bururu @Ignister
@@ -104,7 +202,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 3, 1 } }
+        return { vars = { card.ability.extra.mills, card.ability.extra.revives } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -119,8 +217,34 @@ SMODS.Joker({
                 monster_type = "Cyberse",
                 monster_archetypes = { ["Ignister"] = true }
             },
+            mills = 3,
+            revives = 1
         },
     },
+    calculate = function(self, card, context)
+        if context.joy_summon and context.main_eval and not context.blueprint_card and JoyousSpring.is_monster_type(context.joy_card, "Cyberse") then
+            for _, joker in ipairs(context.joy_summon_materials) do
+                if joker == card then
+                    for i = 1, card.ability.extra.revives do
+                        JoyousSpring.revive_pseudorandom(
+                            { { monster_archetypes = { "Ignister" }, is_main_deck = true } },
+                            pseudoseed("j_joy_ignis_bururu"), false, "e_negative")
+                    end
+                    break
+                end
+            end
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if not card.debuff and not from_debuff then
+            local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Ignister" } } })
+
+            for i = 1, card.ability.extra.mills do
+                JoyousSpring.send_to_graveyard(pseudorandom_element(choices, pseudoseed("j_joy_ignis_bururu")))
+            end
+            SMODS.calculate_effect({ message = localize("k_joy_mill") }, card)
+        end
+    end
 })
 
 -- Doshin @Ignister
@@ -134,7 +258,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 20, 1 } }
+        return { vars = { card.ability.extra.chips, card.ability.extra.revives } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -148,8 +272,30 @@ SMODS.Joker({
                 monster_type = "Cyberse",
                 monster_archetypes = { ["Ignister"] = true }
             },
+            chips = 50,
+            revives = 1
         },
     },
+    calculate = function(self, card, context)
+        if context.joy_summon and context.main_eval and not context.blueprint_card and JoyousSpring.is_monster_type(context.joy_card, "Cyberse") then
+            for _, joker in ipairs(context.joy_summon_materials) do
+                if joker == card then
+                    for i = 1, card.ability.extra.revives do
+                        JoyousSpring.revive_pseudorandom(
+                            { { monster_archetypes = { "Ignister" }, is_extra_deck = true } },
+                            pseudoseed("j_joy_ignis_doshin"), true, nil,
+                            (card.edition and card.edition.negative) and 0 or 1)
+                    end
+                    break
+                end
+            end
+        end
+        if JoyousSpring.can_use_abilities(card) and context.joker_main then
+            return {
+                chips = card.ability.extra.chips
+            }
+        end
+    end,
 })
 
 -- Gatchiri @Ignister
@@ -163,7 +309,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1.1 } }
+        return { vars = { card.ability.extra.xmult } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -173,24 +319,29 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
+                is_all_materials = { LINK = true },
                 attribute = "EARTH",
                 monster_type = "Cyberse",
                 monster_archetypes = { ["Ignister"] = true }
             },
+            xmult = 1.1
         },
     },
-    joy_can_transfer_ability = function(self, other_card)
-        return true
-    end,
-    joy_transfer_ability_calculate = function(self, other_card, context, config)
-        if context.joker_main then
-            return {
-                mult = config.mult
-            }
+    calculate = function(self, card, context)
+        if JoyousSpring.can_use_abilities(card) then
+            if context.joker_main then
+                return {
+                    xmult = card.ability.extra.xmult
+                }
+            end
         end
     end,
-    joy_transfer_config = function(self, other_card)
-        return { mult = 10 }
+    joy_can_transfer_ability = function(self, other_card)
+        return JoyousSpring.is_monster_type(other_card, "Cyberse")
+    end,
+    joy_transfer_add_to_deck = function(self, other_card, config, card, from_debuff)
+        other_card.ability.extra.joyous_spring.cannot_flip = true
+        SMODS.debuff_card(other_card, 'prevent_debuff', 'j_joy_ignis_gatchiri')
     end,
     joy_transfer_loc_vars = function(self, info_queue, card, config)
         return { vars = {} }
@@ -208,7 +359,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 30 } }
+        return { vars = { card.ability.extra.mult } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -218,27 +369,43 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
+                is_all_materials = { LINK = true },
                 attribute = "EARTH",
                 monster_type = "Cyberse",
                 monster_archetypes = { ["Ignister"] = true }
             },
+            mult = 30
         },
     },
+    calculate = function(self, card, context)
+        if JoyousSpring.can_use_abilities(card) then
+            if context.joker_main then
+                return {
+                    mult = card.ability.extra.mult
+                }
+            end
+        end
+    end,
     joy_can_transfer_ability = function(self, other_card)
-        return true
+        return JoyousSpring.is_summon_type(other_card, "LINK")
+    end,
+    joy_transfer_add_to_deck = function(self, other_card, config, card, from_debuff, materials)
+        if materials then
+            config.current_mult = #materials * config.mult
+        end
     end,
     joy_transfer_ability_calculate = function(self, other_card, context, config)
-        if context.joker_main then
+        if JoyousSpring.can_use_abilities(other_card) and context.joker_main then
             return {
-                chips = config.chips
+                mult = config.current_mult
             }
         end
     end,
     joy_transfer_config = function(self, other_card)
-        return { chips = 10 }
+        return { mult = 30, current_mult = 0 }
     end,
     joy_transfer_loc_vars = function(self, info_queue, card, config)
-        return { vars = { config.chips } }
+        return { vars = { config.mult, config.current_mult } }
     end
 })
 
@@ -253,7 +420,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 5 } }
+        return { vars = { card.ability.extra.percent * 100 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -267,8 +434,34 @@ SMODS.Joker({
                 monster_type = "Cyberse",
                 monster_archetypes = { ["Ignister"] = true }
             },
+            percent = 0.05
         },
     },
+    joy_can_transfer_ability = function(self, other_card)
+        return JoyousSpring.is_summon_type(other_card, "LINK")
+    end,
+    joy_transfer_add_to_deck = function(self, other_card, config, card, from_debuff, materials)
+        if materials then
+            config.current_mult = #materials * config.mult
+        end
+    end,
+    joy_transfer_ability_calculate = function(self, other_card, context, config)
+        if JoyousSpring.can_use_abilities(other_card) then
+            if context.setting_blind and context.main_eval then
+                G.GAME.blind.chips = math.floor(G.GAME.blind.chips - G.GAME.blind.chips * config.percent)
+                G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+                return {
+                    message = localize("k_active_ex")
+                }
+            end
+        end
+    end,
+    joy_transfer_config = function(self, other_card)
+        return { percent = 0.05 }
+    end,
+    joy_transfer_loc_vars = function(self, info_queue, card, config)
+        return { vars = { config.percent * 100 } }
+    end
 })
 
 -- Doyon @Ignister
@@ -282,7 +475,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1, 1 } }
+        return { vars = { card.ability.extra.revives, card.ability.extra.adds } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -296,8 +489,35 @@ SMODS.Joker({
                 monster_type = "Cyberse",
                 monster_archetypes = { ["Ignister"] = true }
             },
+            revives = 1,
+            adds = 1
         },
     },
+    calculate = function(self, card, context)
+        if context.joy_summon and context.main_eval and not context.blueprint_card and JoyousSpring.is_monster_type(context.joy_card, "Cyberse") then
+            for _, joker in ipairs(context.joy_summon_materials) do
+                if joker == card then
+                    local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Ignister" }, is_extra_deck = true } })
+                    for i = 1, card.ability.extra.adds do
+                        local key_to_add, _ = pseudorandom_element(choices, pseudoseed("j_joy_ignis_doyon"))
+                        if key_to_add and #JoyousSpring.extra_deck_area.cards < JoyousSpring.extra_deck_area.config.card_limit then
+                            JoyousSpring.add_to_extra_deck(key_to_add)
+                        end
+                    end
+                    break
+                end
+            end
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if not card.debuff and not from_debuff then
+            for i = 1, card.ability.extra.revives do
+                JoyousSpring.revive_pseudorandom(
+                    { { monster_archetypes = { "Ignister" }, is_main_deck = true } },
+                    pseudoseed("j_joy_ignis_bururu"), true, nil, (card.edition and card.edition.negative) and 0 or -1)
+            end
+        end
+    end
 })
 
 -- Donyoribo @Ignister
@@ -311,7 +531,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 2, 1 } }
+        return { vars = { card.ability.extra.money, card.ability.extra.banishes } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -326,7 +546,33 @@ SMODS.Joker({
                 monster_archetypes = { ["Ignister"] = true }
             },
         },
+        money = 2,
+        banishes = 1
     },
+    calculate = function(self, card, context)
+        if JoyousSpring.can_use_abilities(card) then
+            if context.buying_card and JoyousSpring.is_monster_archetype(context.card, "Ignister") then
+                return {
+                    dollars = card.ability.extra.money
+                }
+            end
+            if context.selling_self then
+                local materials = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Ignister" } } })
+                local choices = {}
+                for i, joker in ipairs(materials) do
+                    if joker ~= card then
+                        table.insert(choices, joker)
+                    end
+                end
+                for i = 1, card.ability.extra.banishes do
+                    local to_banish = pseudorandom_element(choices, pseudoseed("j_joy_ignis_donyoribo"))
+                    if to_banish then
+                        JoyousSpring.banish(to_banish, "blind_selected")
+                    end
+                end
+            end
+        end
+    end
 })
 
 -- Backup @Ignister
@@ -340,7 +586,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1 } }
+        return { vars = { card.ability.extra.to_negative } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -355,8 +601,36 @@ SMODS.Joker({
                 monster_type = "Cyberse",
                 monster_archetypes = { ["Ignister"] = true }
             },
+            to_negative = 1
         },
     },
+    calculate = function(self, card, context)
+        if context.joy_summon and context.main_eval and not context.blueprint_card and JoyousSpring.is_monster_type(context.joy_card, "Cyberse") and not context.joy_card.edition then
+            for _, joker in ipairs(context.joy_summon_materials) do
+                if joker == card then
+                    context.joy_card:set_edition({ negative = true })
+                    break
+                end
+            end
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if not card.debuff and not from_debuff then
+            local materials = JoyousSpring.get_materials_owned({ { monster_type = "Cyberse" } })
+            local choices = {}
+            for i, joker in ipairs(materials) do
+                if joker ~= card and not joker.edition then
+                    table.insert(choices, joker)
+                end
+            end
+            for i = 1, card.ability.extra.to_negative do
+                local to_negative = pseudorandom_element(choices, pseudoseed("j_joy_ignis_backup"))
+                if to_negative then
+                    to_negative:set_edition({ negative = true })
+                end
+            end
+        end
+    end
 })
 
 -- Wizard @Ignister
@@ -370,7 +644,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 2 } }
+        return { vars = { card.ability.extra.revives } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -384,8 +658,31 @@ SMODS.Joker({
                 monster_type = "Cyberse",
                 monster_archetypes = { ["Ignister"] = true }
             },
+            revives = 2,
         },
     },
+    calculate = function(self, card, context)
+        if JoyousSpring.can_use_abilities(card) then
+            if not context.blueprint_card then
+                if context.joy_activate_effect and context.joy_activated_card == card and not card.ability.eternal then
+                    card:start_dissolve()
+                    for i = 1, card.ability.extra.revives do
+                        JoyousSpring.revive_pseudorandom({ { monster_type = "Cyberse" } },
+                            pseudoseed("j_joy_ignis_wizard"), true, nil,
+                            (card.edition and card.edition.negative) and 0 or 1, true)
+                    end
+                    if JoyousSpring.count_materials_owned({ { monster_type = "Cyberse", is_summoned = true, is_extra_deck = true } }) > 0 then
+                        JoyousSpring.revive_pseudorandom({ { monster_archetypes = { "Ignister" } } },
+                            pseudoseed("j_joy_ignis_wizard"), false, "e_negative")
+                    end
+                end
+            end
+        end
+    end,
+    joy_can_activate = function(card)
+        return not card.ability.eternal and JoyousSpring.count_materials_in_graveyard({ { monster_type = "Cyberse" } },
+            true) > 0 or false
+    end,
 })
 
 -- Kurikulink @Ignister
@@ -415,6 +712,21 @@ SMODS.Joker({
             },
         },
     },
+    calculate = function(self, card, context)
+        if JoyousSpring.can_use_abilities(card) then
+            if not context.blueprint_card and context.selling_self then
+                if G.GAME.blind and ((not G.GAME.blind.disabled) and (G.GAME.blind:get_type() == 'Boss')) then
+                    card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil,
+                        { message = localize('ph_boss_disabled') })
+                    G.GAME.blind:disable()
+
+                    if JoyousSpring.count_materials_owned({ { monster_type = "Cyberse", is_summoned = true, is_extra_deck = true } }) > 0 then
+                        JoyousSpring.add_monster_tag("j_joy_ignis_kiruku")
+                    end
+                end
+            end
+        end
+    end,
 })
 
 -- Water Leviathan @Ignister
@@ -428,7 +740,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1, 100, 10 } }
+        return { vars = { card.ability.extra.adds, card.ability.extra.chips, card.ability.extra.extra_chips } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -442,18 +754,67 @@ SMODS.Joker({
                 monster_type = "Cyberse",
                 monster_archetypes = { ["Ignister"] = true }
             },
+            adds = 1,
+            chips = 100,
+            extra_chips = 10,
+            current_chips = 0
         },
     },
+    calculate = function(self, card, context)
+        if JoyousSpring.can_use_abilities(card) then
+            if context.joy_summon and context.main_eval and not context.blueprint_card and JoyousSpring.is_summon_type(context.joy_card, "LINK") then
+                card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.extra_chips
+                card.ability.extra.current_chips = card.ability.extra.chips *
+                    JoyousSpring.get_attribute_count(JoyousSpring.get_materials(card))
+            end
+            if context.joker_main then
+                return {
+                    chips = card.ability.extra.current_chips
+                }
+            end
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if not card.debuff and not from_debuff then
+            for i = 1, card.ability.extra.adds do
+                local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Ignister" }, is_extra_deck = true } })
+                for i = 1, card.ability.extra.adds do
+                    local key_to_add, _ = pseudorandom_element(choices, pseudoseed("j_joy_ignis_leviathan"))
+                    if key_to_add and #JoyousSpring.extra_deck_area.cards < JoyousSpring.extra_deck_area.config.card_limit then
+                        JoyousSpring.add_to_extra_deck(key_to_add)
+                    end
+                end
+            end
+        end
+        card.ability.extra.current_chips = card.ability.extra.chips *
+            JoyousSpring.get_attribute_count(JoyousSpring.get_materials(card))
+    end,
     joy_can_transfer_ability = function(self, other_card)
-        return true
+        return JoyousSpring.is_summon_type(other_card, "LINK")
+    end,
+    joy_transfer_add_to_deck = function(self, other_card, config, card, from_debuff, materials)
+        config.current_chips = config.chips *
+            JoyousSpring.get_attribute_count(JoyousSpring.get_materials(other_card))
     end,
     joy_transfer_ability_calculate = function(self, other_card, context, config)
+        if JoyousSpring.can_use_abilities(other_card) then
+            if context.joy_summon and context.main_eval and not context.blueprint_card and JoyousSpring.is_summon_type(context.joy_card, "LINK") then
+                config.chips = config.chips + config.extra_chips
+                config.current_chips = config.chips *
+                    JoyousSpring.get_attribute_count(JoyousSpring.get_materials(other_card))
+            end
+            if context.joker_main then
+                return {
+                    chips = config.current_chips
+                }
+            end
+        end
     end,
     joy_transfer_config = function(self, other_card)
-        return { chips = 100, increase = 10 }
+        return { chips = 100, extra_chips = 10, current_chips = 0 }
     end,
     joy_transfer_loc_vars = function(self, info_queue, card, config)
-        return { vars = { config.chips, config.increase } }
+        return { vars = { config.chips, config.extra_chips } }
     end
 })
 
@@ -468,7 +829,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1, 1 } }
+        return { vars = { card.ability.extra.adds, card.ability.extra.slots } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -482,8 +843,23 @@ SMODS.Joker({
                 monster_type = "Cyberse",
                 monster_archetypes = { ["Ignister"] = true }
             },
+            adds = 1,
+            slots = 1
         },
     },
+    add_to_deck = function(self, card, from_debuff)
+        if not card.debuff and not from_debuff then
+            for i = 1, card.ability.extra.adds do
+                local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Ignister" }, is_extra_deck = true } })
+                for i = 1, card.ability.extra.adds do
+                    local key_to_add, _ = pseudorandom_element(choices, pseudoseed("j_joy_ignis_golem"))
+                    if key_to_add and #JoyousSpring.extra_deck_area.cards < JoyousSpring.extra_deck_area.config.card_limit then
+                        JoyousSpring.add_to_extra_deck(key_to_add)
+                    end
+                end
+            end
+        end
+    end,
 })
 
 -- Wind Pegasus @Ignister
@@ -497,7 +873,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1, 1, 6 } }
+        return { vars = { card.ability.extra.adds, G.GAME.probabilities.normal, card.ability.extra.odds } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -511,18 +887,53 @@ SMODS.Joker({
                 monster_type = "Cyberse",
                 monster_archetypes = { ["Ignister"] = true }
             },
+            adds = 1,
+            odds = 6
         },
     },
+    calculate = function(self, card, context)
+        if JoyousSpring.can_use_abilities(card) then
+            if context.repetition and context.cardarea == G.play then
+                if pseudorandom("j_joy_ignis_pegasus") < G.GAME.probabilities.normal / math.max(1, context.other_card.base.odds - JoyousSpring.get_attribute_count(JoyousSpring.get_materials(card))) then
+                    return {
+                        repetitions = 1
+                    }
+                end
+            end
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if not card.debuff and not from_debuff then
+            for i = 1, card.ability.extra.adds do
+                local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Ignister" }, is_extra_deck = true } })
+                for i = 1, card.ability.extra.adds do
+                    local key_to_add, _ = pseudorandom_element(choices, pseudoseed("j_joy_ignis_pegasus"))
+                    if key_to_add and #JoyousSpring.extra_deck_area.cards < JoyousSpring.extra_deck_area.config.card_limit then
+                        JoyousSpring.add_to_extra_deck(key_to_add)
+                    end
+                end
+            end
+        end
+    end,
     joy_can_transfer_ability = function(self, other_card)
-        return true
+        return JoyousSpring.is_summon_type(other_card, "LINK")
     end,
     joy_transfer_ability_calculate = function(self, other_card, context, config)
+        if JoyousSpring.can_use_abilities(other_card) then
+            if context.repetition and context.cardarea == G.play then
+                if pseudorandom("j_joy_ignis_pegasus") < G.GAME.probabilities.normal / math.max(1, context.other_card.base.odds - JoyousSpring.get_attribute_count(JoyousSpring.get_materials(other_card))) then
+                    return {
+                        repetitions = 1
+                    }
+                end
+            end
+        end
     end,
     joy_transfer_config = function(self, other_card)
-        return { chips = 100, increase = 10 }
+        return { odds = 6 }
     end,
     joy_transfer_loc_vars = function(self, info_queue, card, config)
-        return { vars = { 1, 6 } }
+        return { vars = { G.GAME.probabilities.normal, config.odds } }
     end
 })
 
@@ -537,7 +948,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1, 1 } }
+        return { vars = { card.ability.extra.adds, card.ability.extra.money } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -551,18 +962,55 @@ SMODS.Joker({
                 monster_type = "Cyberse",
                 monster_archetypes = { ["Ignister"] = true }
             },
+            adds = 1,
+            money = 1
         },
     },
+    calculate = function(self, card, context)
+        if JoyousSpring.can_use_abilities(card) then
+            if context.individual and context.cardarea == G.play then
+                context.other_card.ability.perma_h_dollars = (context.other_card.ability.perma_h_dollars or 0) +
+                    (card.ability.extra.money * JoyousSpring.get_attribute_count(JoyousSpring.get_materials(card)))
+                return {
+                    extra = { message = localize('k_upgrade_ex'), colour = G.C.MONEY },
+                    card = card
+                }
+            end
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if not card.debuff and not from_debuff then
+            for i = 1, card.ability.extra.adds do
+                local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Ignister" }, is_extra_deck = true } })
+                for i = 1, card.ability.extra.adds do
+                    local key_to_add, _ = pseudorandom_element(choices, pseudoseed("j_joy_ignis_dragon"))
+                    if key_to_add and #JoyousSpring.extra_deck_area.cards < JoyousSpring.extra_deck_area.config.card_limit then
+                        JoyousSpring.add_to_extra_deck(key_to_add)
+                    end
+                end
+            end
+        end
+    end,
     joy_can_transfer_ability = function(self, other_card)
-        return true
+        return JoyousSpring.is_summon_type(other_card, "LINK")
     end,
     joy_transfer_ability_calculate = function(self, other_card, context, config)
+        if JoyousSpring.can_use_abilities(other_card) then
+            if context.individual and context.cardarea == G.play then
+                context.other_card.ability.perma_h_dollars = (context.other_card.ability.perma_h_dollars or 0) +
+                    (config.money * JoyousSpring.get_attribute_count(JoyousSpring.get_materials(other_card)))
+                return {
+                    extra = { message = localize('k_upgrade_ex'), colour = G.C.MONEY },
+                    card = other_card
+                }
+            end
+        end
     end,
     joy_transfer_config = function(self, other_card)
-        return { chips = 100, increase = 10 }
+        return { money = 1 }
     end,
     joy_transfer_loc_vars = function(self, info_queue, card, config)
-        return { vars = { 1 } }
+        return { vars = { config.money } }
     end
 })
 
@@ -577,7 +1025,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1, 1, 0.1, 0.05 } }
+        return { vars = { card.ability.extra.adds, card.ability.extra.creates, card.ability.extra.xmult, card.ability.extra.extra_xmult } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -591,18 +1039,89 @@ SMODS.Joker({
                 monster_type = "Cyberse",
                 monster_archetypes = { ["Ignister"] = true }
             },
+            adds = 1,
+            creates = 1,
+            xmult = 0.1,
+            extra_xmult = 0.05,
+            current_xmult = 0
         },
     },
+    calculate = function(self, card, context)
+        if JoyousSpring.can_use_abilities(card) then
+            if context.individual and context.cardarea == G.play then
+                context.other_card.ability.perma_x_mult = (context.other_card.ability.perma_x_mult or 1) +
+                    card.ability.extra.current_xmult
+                return {
+                    extra = { message = localize('k_upgrade_ex'), colour = G.C.MULT },
+                    card = card
+                }
+            end
+            if context.joy_summon and context.main_eval and not context.blueprint_card and JoyousSpring.is_summon_type(context.joy_card, "LINK") then
+                card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.extra_xmult
+                card.ability.extra.current_xmult = card.ability.extra.xmult *
+                    JoyousSpring.get_attribute_count(JoyousSpring.get_materials(card))
+            end
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if not card.debuff and not from_debuff then
+            for i = 1, card.ability.extra.adds do
+                local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Ignister" }, is_extra_deck = true } })
+                for i = 1, card.ability.extra.adds do
+                    local key_to_add, _ = pseudorandom_element(choices, pseudoseed("j_joy_ignis_phoenix"))
+                    if key_to_add and #JoyousSpring.extra_deck_area.cards < JoyousSpring.extra_deck_area.config.card_limit then
+                        JoyousSpring.add_to_extra_deck(key_to_add)
+                    end
+                end
+            end
+        end
+        card.ability.extra.current_xmult = card.ability.extra.xmult *
+            JoyousSpring.get_attribute_count(JoyousSpring.get_materials(card))
+    end,
     joy_can_transfer_ability = function(self, other_card)
-        return true
+        return JoyousSpring.is_summon_type(other_card, "LINK")
+    end,
+    joy_transfer_add_to_deck = function(self, other_card, config, card, from_debuff, materials)
+        config.current_xmult = config.xmult *
+            JoyousSpring.get_attribute_count(JoyousSpring.get_materials(other_card))
     end,
     joy_transfer_ability_calculate = function(self, other_card, context, config)
+        if JoyousSpring.can_use_abilities(other_card) then
+            if context.individual and context.cardarea == G.play then
+                context.other_card.ability.perma_x_mult = (context.other_card.ability.perma_x_mult or 1) +
+                    config.current_xmult
+                return {
+                    extra = { message = localize('k_upgrade_ex'), colour = G.C.MULT },
+                    card = other_card
+                }
+            end
+            if context.joy_summon and context.main_eval and not context.blueprint_card then
+                if JoyousSpring.is_monster_type(context.joy_card, "Cyberse") then
+                    for _, joker in ipairs(context.joy_summon_materials) do
+                        if joker == card then
+                            JoyousSpring.create_perma_debuffed_card("j_joy_ignis_phoenix", "j_joy_ignis_phoenix",
+                                "e_negative")
+                            break
+                        end
+                    end
+                end
+                if JoyousSpring.is_summon_type(context.joy_card, "LINK") then
+                    config.xmult = config.xmult + config.extra_xmult
+                    config.current_xmult = config.xmult *
+                        JoyousSpring.get_attribute_count(JoyousSpring.get_materials(other_card))
+                end
+            end
+        end
     end,
     joy_transfer_config = function(self, other_card)
-        return { chips = 100, increase = 10 }
+        return {
+            xmult = 0.1,
+            extra_xmult = 0.05,
+            current_xmult = 0
+        }
     end,
     joy_transfer_loc_vars = function(self, info_queue, card, config)
-        return { vars = { 0.1, 0.05 } }
+        return { vars = { config.money } }
     end
 })
 
@@ -617,7 +1136,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 3, 3 } }
+        return { vars = { card.ability.extra.xmult, card.ability.extra.xmult * JoyousSpring.count_materials_owned({ { summon_type = "LINK" } }), card.ability.extra.revives } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Ignister" } } }, name = "Archetype" },
@@ -631,8 +1150,26 @@ SMODS.Joker({
                 monster_type = "Cyberse",
                 monster_archetypes = { ["Ignister"] = true }
             },
+            xmult = 3,
+            revives = 3
         },
     },
+    calculate = function(self, card, context)
+        if JoyousSpring.can_use_abilities(other_card) then
+            return {
+                xmult = card.ability.extra.xmult * JoyousSpring.count_materials_owned({ { summon_type = "LINK" } })
+            }
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if not card.debuff and not from_debuff then
+            for i = 1, card.ability.extra.revives do
+                JoyousSpring.revive_pseudorandom(
+                    { { summon_type = "LINK" } },
+                    pseudoseed("j_joy_ignis_accode"), true, nil, (card.edition and card.edition.negative) and 0 or -1)
+            end
+        end
+    end
 })
 
 -- Dark Infant @Ignister
@@ -685,12 +1222,21 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
+                is_all_attributes = true,
+                is_all_materials = { LINK = true },
                 attribute = "DARK",
                 monster_type = "Cyberse",
                 monster_archetypes = { ["Ignister"] = true }
             },
         },
     },
+    add_to_deck = function(self, card, from_debuff)
+        if not card.debuff and not from_debuff then
+            if #JoyousSpring.field_spell_area.cards < JoyousSpring.field_spell_area.config.card_limit then
+                JoyousSpring.add_to_extra_deck("j_joy_ignis_ailand")
+            end
+        end
+    end
 })
 
 -- The Arrival Cyberse @Ignister

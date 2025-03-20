@@ -250,13 +250,10 @@ SMODS.Joker({
     },
     add_to_deck = function(self, card, from_debuff)
         if not card.debuff and not from_debuff then
-            local choices = JoyousSpring.get_materials_in_collection({ { monster_type = "Fiend", rarity = 1, is_main_deck = true }, { monster_type = "Fiend", rarity = 2, is_main_deck = true } })
             for _ = 1, card.ability.extra.adds do
-                local key_to_add = pseudorandom_element(choices, pseudoseed("j_joy_tourguide"))
-                SMODS.add_card({
-                    key = key_to_add or "j_joy_ba_graff",
-                    edition = "e_negative"
-                })
+                JoyousSpring.create_pseudorandom(
+                    { { monster_type = "Fiend", rarity = 1, is_main_deck = true }, { monster_type = "Fiend", rarity = 2, is_main_deck = true } },
+                    pseudoseed("j_joy_tourguide"), false, false, "e_negative")
             end
         end
     end,
