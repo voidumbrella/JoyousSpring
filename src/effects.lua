@@ -239,9 +239,10 @@ JoyousSpring.transfer_abilities = function(card, material_key, other_card, mater
         return
     end
     if material_center:joy_can_transfer_ability(card) then
+        local was_material = card.ability.extra.joyous_spring.material_effects[material_key] and true or false
         card.ability.extra.joyous_spring.material_effects[material_key] = material_center.joy_transfer_config and
             material_center:joy_transfer_config(card) or {}
-        if material_center.joy_transfer_add_to_deck then
+        if not was_material and material_center.joy_transfer_add_to_deck then
             material_center:joy_transfer_add_to_deck(card,
                 card.ability.extra.joyous_spring.material_effects[material_key], other_card, false, materials)
         end
