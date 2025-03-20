@@ -261,7 +261,23 @@ JoyousSpring.is_valid_material_combo = function(combo_list, condition)
 
     for _, card in ipairs(combo_list) do
         if summon_type and JoyousSpring.is_all_materials(card, summon_type) then
-            all_materials_count = all_materials_count + 1
+            local fulfills_conditions = false
+            local property_list = condition.materials
+
+            if not property_list or #property_list == 0 then
+                fulfills_conditions = true
+            else
+                for _, property in ipairs(property_list) do
+                    if JoyousSpring.is_material(card, property) then
+                        fulfills_conditions = true
+                        break
+                    end
+                end
+            end
+
+            if not fulfills_conditions then
+                all_materials_count = all_materials_count + 1
+            end
         end
         if all_materials_count > 1 then
             return false
@@ -555,7 +571,7 @@ JoyousSpring.get_all_fulfilling = function(card_list, condition)
     local property_list = condition.materials
     for _, joker in ipairs(card_list) do
         if not property_list or #property_list == 0 then
-            table.insert(materials, joker)
+            table.insert(materials, { joker })
         else
             for _, property in ipairs(property_list) do
                 if JoyousSpring.is_material(joker, property) then

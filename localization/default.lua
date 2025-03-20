@@ -1721,7 +1721,7 @@ return {
 					"{C:mult}+#1#{} Mult",
 					" ",
 					"{C:attention}Creates #2#{} {C:blue}Common{} {C:joy_normal}Main Deck",
-					"{C:joy_normal}\"@Ignister\" when obtained",
+					"{C:joy_normal}\"@Ignister\"{} when obtained",
 					"{C:inactive}(Must have room){}",
 				}
 			},
@@ -1845,14 +1845,14 @@ return {
 			j_joy_ignis_kiruku = {
 				name = "{C:joy_effect}Kurikulink @Ignister",
 				text = {
-					"Sell this card to disable the current {C:attention}Boss Blind and",
+					"Sell this card to disable the current {C:attention}Boss Blind{} and",
 					"add it to the next shop if you own a summoned {C:joy_spell}Extra Deck{} {C:joy_normal}Cyberse{}"
 				}
 			},
 			j_joy_ignis_leviathan = {
 				name = "{C:joy_ritual}Water Leviathan @Ignister",
 				text = {
-					"Add {C:attention}#1#{} {C:joy_normal}\"@Ignister\"{} to the {C:joy_spell}Extra Deck when summoned",
+					"Add {C:attention}#1#{} {C:joy_normal}\"@Ignister\"{} to the {C:joy_spell}Extra Deck{} when summoned",
 					" ",
 					"{C:chips}+#2#{} Chips for each {C:attention}attribute{} used for its summon",
 					"Amount increases by {C:chips}+#3#{} when a {C:joy_link}Link{} is summoned",
@@ -1888,7 +1888,7 @@ return {
 			j_joy_ignis_pegasus = {
 				name = "{C:joy_synchro}Wind Pegasus @Ignister",
 				text = {
-					"Add {C:attention}#1#{} {C:joy_normal}\"@Ignister\"{} to the {C:joy_spell}Extra Deck when summoned",
+					"Add {C:attention}#1#{} {C:joy_normal}\"@Ignister\"{} to the {C:joy_spell}Extra Deck{} when summoned",
 					" ",
 					"{C:green}#2# in #3#{} chance to retrigger playing cards",
 					"Chances increase for each {C:attention}attribute{} used for its summon",
@@ -1905,7 +1905,7 @@ return {
 			j_joy_ignis_dragon = {
 				name = "{C:joy_xyz}Light Dragon @Ignister",
 				text = {
-					"Add {C:attention}#1#{} {C:joy_normal}\"@Ignister\"{} to the {C:joy_spell}Extra Deck when summoned",
+					"Add {C:attention}#1#{} {C:joy_normal}\"@Ignister\"{} to the {C:joy_spell}Extra Deck{} when summoned",
 					" ",
 					"Scored cards gain {C:money}+$#2#{} when held in hand at end of round",
 					"for each {C:attention}attribute{} used for its summon",
@@ -1924,7 +1924,7 @@ return {
 			j_joy_ignis_phoenix = {
 				name = "{C:joy_link}Fire Phoenix @Ignister",
 				text = {
-					"Add {C:attention}#1#{} {C:joy_normal}\"@Ignister\"{} to the {C:joy_spell}Extra Deck when summoned",
+					"Add {C:attention}#1#{} {C:joy_normal}\"@Ignister\"{} to the {C:joy_spell}Extra Deck{} when summoned",
 					" ",
 					"Creates {C:attention}#2#{} {C:dark_edition}Negative{} Debuffed {C:joy_link}\"Fire Phoenix @Ignister\"{}",
 					"when used as {C:attention}material{} for a {C:joy_normal}Cyberse",
@@ -1989,7 +1989,7 @@ return {
 					" ",
 					"Gains abilities based on the {C:attention}materials{} used for its summon",
 					"{V:1}LIGHT{V:3}: {V:2}+$#3#{V:3} at end of round",
-					"{V:4}DARK{V:7}: Create {V:5}#4#{} {V:6}Spectral{V:7} at end of round {s:0.8,C:inactive}(Must have room)",
+					"{V:4}DARK{V:7}: Create {V:5}#4#{} {V:6}Spectral{V:7} at end of round {s:0.9,C:inactive}(Must have room)",
 					"{V:8}WATER{V:10}: {V:9}+#5#{V:10} Chips",
 					"{V:11}FIRE{V:13}: {V:12}+#6#{V:13} Mult",
 					"{V:14}WIND{V:17}: {V:15}#7# in #8#{V:17} chance to create a {V:16}Negative{V:17} copy of a used consumable",
@@ -3001,6 +3001,12 @@ return {
 			k_joy_archetype_adaman = "Adamancipator",
 			k_joy_archetype_misc = "Free Agents",
 			k_joy_archetype_token = "Tokens",
+			--#endregion
+			--#region Specific
+			k_joy_arrival_text1 = ": Lowers ",
+			k_joy_arrival_text2 = "Blind",
+			k_joy_arrival_text3 = "'s requirement by ",
+			k_joy_arrival_text4 = "50%",
 			--#endregion
 		}
 	},
