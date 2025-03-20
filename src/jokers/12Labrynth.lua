@@ -626,7 +626,6 @@ SMODS.Joker({
             end
             if context.joy_card_flipped and JoyousSpring.is_playing_card(context.joy_card_flipped) and not (context.joy_source and context.joy_source.config.center.key == "j_joy_lab_archfiend") then
                 return {
-                    message = localize("k_joy_flip"),
                     func = function()
                         G.E_MANAGER:add_event(Event({
                             trigger = 'after',
@@ -659,6 +658,7 @@ SMODS.Joker({
                                             if card.ability.extra.any_flipped then
                                                 card.ability.extra.any_flipped = false
                                                 G.hand:shuffle("j_joy_lab_archfiend")
+                                                SMODS.calculate_effect({ message = localize("k_joy_flip") }, card)
                                             end
                                             return true
                                         end)
