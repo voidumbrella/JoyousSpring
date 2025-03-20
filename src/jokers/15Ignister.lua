@@ -440,11 +440,6 @@ SMODS.Joker({
     joy_can_transfer_ability = function(self, other_card)
         return JoyousSpring.is_summon_type(other_card, "LINK")
     end,
-    joy_transfer_add_to_deck = function(self, other_card, config, card, from_debuff, materials)
-        if materials then
-            config.current_mult = #materials * config.mult
-        end
-    end,
     joy_transfer_ability_calculate = function(self, other_card, context, config)
         if JoyousSpring.can_use_abilities(other_card) then
             if context.setting_blind and context.main_eval then
