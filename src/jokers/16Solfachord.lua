@@ -14,9 +14,9 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 6,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 1, 8, 0, 1, 3 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
@@ -42,9 +42,9 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 5,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 2, 7, 0 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
@@ -70,9 +70,9 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 5,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 3, 6, 0, 1, 20 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
@@ -98,9 +98,9 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 6,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 4, 5, 0, 1, 21 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
@@ -122,13 +122,13 @@ SMODS.Joker({
     key = "solfa_gracia",
     atlas = 'solfa',
     pos = { x = 1, y = 1 },
-    rarity = 1,
+    rarity = 3,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 9,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 5, 4, 1, 10 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
@@ -150,13 +150,13 @@ SMODS.Joker({
     key = "solfa_angelia",
     atlas = 'solfa',
     pos = { x = 2, y = 1 },
-    rarity = 1,
+    rarity = 3,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 8,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 6, 3, 1, 9 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
@@ -178,13 +178,13 @@ SMODS.Joker({
     key = "solfa_beautia",
     atlas = 'solfa',
     pos = { x = 3, y = 1 },
-    rarity = 1,
+    rarity = 3,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 9,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 7, 2, 0, 2 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
@@ -206,13 +206,13 @@ SMODS.Joker({
     key = "solfa_coolia",
     atlas = 'solfa',
     pos = { x = 0, y = 2 },
-    rarity = 1,
+    rarity = 3,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 8,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 8, 1, 0 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
@@ -229,18 +229,21 @@ SMODS.Joker({
             },
         },
     },
+    add_to_deck = function(self, card, from_debuff)
+        G.hand.config.highlighted_limit = 6
+    end
 })
 SMODS.Joker({
     key = "solfa_musecia",
     atlas = 'solfa',
     pos = { x = 2, y = 2 },
-    rarity = 1,
+    rarity = 2,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 1, 3 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
@@ -261,13 +264,13 @@ SMODS.Joker({
     key = "solfa_grancoolia",
     atlas = 'solfa',
     pos = { x = 1, y = 2 },
-    rarity = 1,
+    rarity = 2,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 100, 0, 50, 3 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
@@ -288,13 +291,13 @@ SMODS.Joker({
     key = "solfa_harmonia",
     atlas = 'solfa',
     pos = { x = 0, y = 0 },
-    rarity = 1,
+    rarity = 2,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 0,
+    cost = 12,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 1, 1, 5 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },

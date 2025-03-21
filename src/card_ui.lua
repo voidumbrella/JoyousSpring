@@ -256,6 +256,17 @@ JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, spe
             }
         }
 
+        if card and not card.debuff and G.localization.descriptions[self.set][self.key].joy_consumable then
+            full_UI_table.joy_consumable = {}
+            full_UI_table.joy_consumable.background_colour = lighten(G.C.JOY.PENDULUM, 0.7)
+            local loc_vars = {}
+            if self.loc_vars and type(self.loc_vars) == 'function' then
+                loc_vars = self:loc_vars({}, card) or {}
+            end
+            localize { type = "joy_consumable", set = self.set, key = self.key, nodes = full_UI_table.joy_consumable, vars = loc_vars.vars or {} }
+            table.insert(info_queue, 1, { set = "Other", key = "joy_tooltip_pendulum_joker" })
+        end
+
         if card and not card.debuff and card.ability.extra.joyous_spring.material_effects and next(card.ability.extra.joyous_spring.material_effects) then
             desc_nodes[#desc_nodes + 1] = {
                 {
@@ -334,7 +345,7 @@ function localize(args, misc_cat)
     end
 
     local loc_target = nil
-    if args.type == 'joy_summon_conditions' or args.type == 'joy_transfer_ability' then
+    if args.type == 'joy_summon_conditions' or args.type == 'joy_transfer_ability' or args.type == 'joy_consumable' then
         loc_target = G.localization.descriptions[(args.set or args.node.config.center.set)]
             [args.key or args.node.config.center.key]
 
@@ -428,6 +439,12 @@ function init_localization()
             center.joy_transfer_ability_parsed = {}
             for _, line in ipairs(center.joy_transfer_ability) do
                 center.joy_transfer_ability_parsed[#center.joy_transfer_ability_parsed + 1] = loc_parse_string(line)
+            end
+        end
+        if center.joy_consumable then
+            center.joy_consumable_parsed = {}
+            for _, line in ipairs(center.joy_consumable) do
+                center.joy_consumable_parsed[#center.joy_consumable_parsed + 1] = loc_parse_string(line)
             end
         end
     end

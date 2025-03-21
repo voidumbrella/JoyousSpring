@@ -2013,48 +2013,158 @@ return {
 			--#endregion
 			--#region Solfachord
 			j_joy_solfa_cutia = {
-				name = "DoSolfachord Cutia",
-				text = { "TBD" }
+				name = "{C:joy_pendulum}DoSolfachord Cutia",
+				joy_consumable = {
+					"Change rank of up to {C:attention}#1#{} selected cards to {C:attention}8{}",
+					"and level up {C:attention}Full House{}, {C:attention}Straight{} and {C:attention}Two Pair{} by {C:attention}#1#",
+				},
+				text = {
+					"Scored cards with even rank give {C:mult}+#2#{} Mult for each {C:joy_normal}\"Solfachord\"",
+					"{C:inactive}(Currently{} {C:mult}+#3#{} {C:inactive}Mult){}",
+					" ",
+					"Once per round, {C:attention}create #4#{} {C:joy_pendulum}Pendulum{} {C:joy_normal}\"Solfachord\"{}",
+					"after {C:attention}#5#{} {C:joy_pendulum}Pendulum{} are consumed",
+					"{C:inactive}(Must have room){}",
+				}
 			},
 			j_joy_solfa_dreamia = {
-				name = "ReSolfachord Dreamia",
-				text = { "TBD" }
+				name = "{C:joy_pendulum}ReSolfachord Dreamia",
+				joy_consumable = {
+					"Change rank of up to {C:attention}#1#{} selected cards to {C:attention}7{}",
+					"and level up {C:attention}Full House{}, {C:attention}Straight{} and {C:attention}Two Pair{} by {C:attention}#1#",
+				},
+				text = {
+					"Scored cards with odd rank give {C:mult}+#2#{} Mult for each {C:joy_normal}\"Solfachord\"",
+					"{C:inactive}(Currently{} {C:mult}+#3#{} {C:inactive}Mult){}",
+					" ",
+					"Free if you own a {C:joy_pendulum}Pendulum"
+				}
 			},
 			j_joy_solfa_eliteia = {
-				name = "MiSolfachord Eliteia",
-				text = { "TBD" }
+				name = "{C:joy_pendulum}MiSolfachord Eliteia",
+				joy_consumable = {
+					"Change rank of up to {C:attention}#1#{} selected cards to {C:attention}6{}",
+					"and level up {C:attention}Full House{}, {C:attention}Straight{} and {C:attention}Two Pair{} by {C:attention}#1#",
+				},
+				text = {
+					"Gains {C:chips}+#2#{} Chips for each scored card with even rank",
+					"{C:inactive}(Currently{} {C:chips}+#3#{} {C:inactive}Chips){}",
+					" ",
+					"Add {C:attention}#4#{} {C:joy_normal}\"Solfachord\"{} to the {C:joy_spell}Extra Deck{}",
+					"after {C:attention}#5#{} even cards are scored",
+					"{C:inactive}(Must have room){}",
+				}
 			},
 			j_joy_solfa_fancia = {
-				name = "FaSolfachord Fancia",
-				text = { "TBD" }
+				name = "{C:joy_pendulum}FaSolfachord Fancia",
+				joy_consumable = {
+					"Change rank of up to {C:attention}#1#{} selected cards to {C:attention}5{}",
+					"and level up {C:attention}Full House{}, {C:attention}Straight{} and {C:attention}Two Pair{} by {C:attention}#1#",
+				},
+				text = {
+					"Gains {C:chips}+#2#{} Chips for each scored card with odd rank",
+					"{C:inactive}(Currently{} {C:chips}+#3#{} {C:inactive}Chips){}",
+					" ",
+					"{C:attention}Create #4#{} {C:joy_normal}\"Solfachord\"{} after {C:attention}#5#{} odd cards are scored",
+					"{C:inactive}(Must have room){}",
+				}
 			},
 			j_joy_solfa_gracia = {
-				name = "SolSolfachord Gracia",
-				text = { "TBD" }
+				name = "{C:joy_pendulum}SolSolfachord Gracia",
+				joy_consumable = {
+					"Change rank of up to {C:attention}#1#{} selected cards to {C:attention}4{}",
+					"and level up {C:attention}Full House{}, {C:attention}Straight{} and {C:attention}Two Pair{} by {C:attention}#1#",
+				},
+				text = {
+					"Retrigger each even card {C:attention}#2#{} times",
+					" ",
+					"{C:attention}Create #3#{} {C:joy_spell}\"Solfachord Harmonia\"{}",
+					"after {C:attention}#4#{} even cards are scored",
+					"{C:inactive}(Must have room){}",
+				}
 			},
 			j_joy_solfa_angelia = {
-				name = "LaSolfachord Angelia",
-				text = { "TBD" }
+				name = "{C:joy_pendulum}LaSolfachord Angelia",
+				joy_consumable = {
+					"Change rank of up to {C:attention}#1#{} selected cards to {C:attention}3{}",
+					"and level up {C:attention}Full House{}, {C:attention}Straight{} and {C:attention}Two Pair{} by {C:attention}#1#",
+				},
+				text = {
+					"Retrigger each odd card {C:attention}#2#{} times",
+					" ",
+					"{C:attention}Revive #3#{} {C:joy_normal}\"Solfachord\"{} after {C:attention}#4#{} even cards are scored",
+				}
 			},
 			j_joy_solfa_beautia = {
-				name = "TiSolfachord Beautia",
-				text = { "TBD" }
+				name = "{C:joy_pendulum}TiSolfachord Beautia",
+				joy_consumable = {
+					"Change rank of up to {C:attention}#1#{} selected cards to {C:attention}2{}",
+					"and level up {C:attention}Full House{}, {C:attention}Straight{} and {C:attention}Two Pair{} by {C:attention}#1#",
+				},
+				text = {
+					"Scored cards with even rank give an extra",
+					"{X:chips,C:white}X#2#{} Chips for each {C:joy_normal}\"Solfachord\"{}",
+					"{C:inactive}(Currently {X:chips,C:white}X#3#{} {C:inactive}extra Chips)",
+					" ",
+					"{C:attention}Banish #4#{} {C:joy_pendulum}Pendulum{} at end of round",
+					"until {C:attention}Blind{} is selected"
+				},
 			},
 			j_joy_solfa_coolia = {
-				name = "DoSolfachord Coolia",
-				text = { "TBD" }
+				name = "{C:joy_pendulum}DoSolfachord Coolia",
+				joy_consumable = {
+					"Change rank of up to {C:attention}#1#{} selected cards to {C:attention}Aces{}",
+					"and level up {C:attention}Full House{}, {C:attention}Straight{} and {C:attention}Two Pair{} by {C:attention}#1#",
+				},
+				text = {
+					"Scored cards with odd rank give an extra",
+					"{X:mult,C:white}X#2#{} Mult for each {C:joy_normal}\"Solfachord\"{}",
+					"{C:inactive}(Currently {X:mult,C:white}X#3#{} {C:inactive}extra Mult)",
+					" ",
+					"Cards in the {C:attention}GY{} count for {C:joy_normal}\"Solfachord\"{} abilities",
+				},
 			},
 			j_joy_solfa_musecia = {
-				name = "GranSolfachord Musecia",
-				text = { "TBD" }
+				name = "{C:joy_link}GranSolfachord Musecia",
+				text = {
+					"Playing cards affected by {C:joy_normal}\"Solfachord\"{} consumable abilities",
+					"gain a random edition if possible",
+					" ",
+					"Once per round, {C:attention}create #1#{} {C:dark_edition}Negative{} {C:joy_pendulum}Pendulum{} {C:joy_normal}\"Solfachord\"{}",
+					"after {C:attention}#2#{} {C:joy_pendulum}Pendulum{} are consumed",
+					" ",
+					"If scoring hand contains both even and odd ranks,",
+					"all scored cards count as both for {C:joy_normal}\"Solfachord\"{} abilities",
+					" ",
+					"{C:joy_pendulum}Pendulum{} count for {C:joy_normal}\"Solfachord\"{} abilities"
+				}
 			},
 			j_joy_solfa_grancoolia = {
-				name = "GranSolfachord Coolia",
-				text = { "TBD" }
+				name = "{C:joy_link}GranSolfachord Coolia",
+				text = {
+					"{C:chips}+#1#{} Chips for each {C:joy_pendulum}Pendulum{}",
+					"{C:inactive}(Currently {C:chips}+#2#{} {C:inactive}Chips)",
+					" ",
+					"Playing cards affected by {C:joy_normal}\"Solfachord\"{} consumable abilities",
+					"gain a random seal if possible",
+					" ",
+					"{C:money}+$#3#{} after {C:attention}#4#{} {C:joy_pendulum}Pendulum{} are consumed",
+					" ",
+					"If scoring hand contains both even and odd ranks,",
+					"all cards held in hand count as scored for {C:joy_normal}\"Solfachord\"{} abilities",
+				}
 			},
 			j_joy_solfa_harmonia = {
-				name = "Solfachord Harmonia",
-				text = { "TBD" }
+				name = "{C:joy_spell}Solfachord Harmonia",
+				text = {
+					"Once per round, you can {C:attention}revive #1#{} {C:joy_pendulum}Pendulum",
+					" ",
+					"{C:attention}Create #2# Strength{} {C:tarot}Tarot{} after a {C:joy_pendulum}Pendulum{} is consumed",
+					"{C:inactive}(Must have room){}",
+					" ",
+					"All even cards become {C:attention}Gold{} and all odd cards become {C:attention}Steel{} after scoring",
+					"if #3# {C:joy_normal}\"Solfachord\"{} with different names are owned, ignoring other abilities"
+				}
 			},
 			--#endregion
 			--#region Witchcrafter
@@ -2478,10 +2588,10 @@ return {
 			--#region Pendulum
 			j_joy_eccentrick = {
 				name = "{C:joy_pendulum}Archfiend Eccentrick",
+				joy_consumable = {
+					"Destroys up to {C:attention}#1#{} selected cards",
+				},
 				text = {
-					"{C:joy_pendulum}Consumable effect:{}",
-					"{C:joy_pendulum}Destroys up to{} {C:attention}#1#{} {C:joy_pendulum}selected cards{}",
-					" ",
 					"{C:mult}+#2#{} Mult for every destroyed playing card this run",
 					"{C:inactive}(Currently{} {C:mult}+#3#{} {C:inactive}Mult){}",
 				},
@@ -2792,7 +2902,8 @@ return {
 				name = "",
 				text = {
 					"{C:attention,s:1.3}Banish{}: Card temporarily disappears until specified time, keeping only some effects active.",
-					"They can return even if you don't have room, unless specified"
+					"They can return even if you don't have room, unless specified",
+					"{C:attention}Banished{} cards return before all other abilities activate"
 				},
 			},
 			joy_glossary_transform = {
