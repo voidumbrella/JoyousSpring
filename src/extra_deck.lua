@@ -213,13 +213,31 @@ function Card:remove_from_area()
         self.edition and self.edition.card_limit then
         JoyousSpring.field_spell_area.config.card_limit =
             JoyousSpring.field_spell_area.config.card_limit - self.edition.card_limit
+        if JoyousSpring.field_spell_area.config.card_limit < 1 then
+            JoyousSpring.field_spell_area.config.card_limit = 1
+        end
     end
     if self.area == JoyousSpring.extra_deck_area and
         self.edition and self.edition.card_limit then
         JoyousSpring.extra_deck_area.config.card_limit =
             JoyousSpring.extra_deck_area.config.card_limit - self.edition.card_limit
+        if JoyousSpring.extra_deck_area.config.card_limit < 5 then
+            JoyousSpring.extra_deck_area.config.card_limit = 5
+        end
     end
     card_remove_from_area_ref(self)
+end
+
+local card_set_edition_ref = Card.set_edition
+function Card:set_edition(edition, immediate, silent)
+    if edition and edition.negative and JoyousSpring.is_monster_card(card) and card.area then
+        if card.area == JoyousSpring.extra_deck_area then
+            JoyousSpring.extra_deck_area.config.card_limit = JoyousSpring.extra_deck_area.config.card_limit + 1
+        elseif card.area == JoyousSpring.field_spell_area then
+            JoyousSpring.field_spell_area.config.card_limit = JoyousSpring.field_spell_area.config.card_limit + 1
+        end
+    end
+    card_set_edition_ref(self, edition, immediate, silent)
 end
 
 local cardarea_remove_ref = CardArea.remove
