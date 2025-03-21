@@ -256,6 +256,7 @@ JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, spe
             }
         }
 
+        -- Pendulum ability
         if card and not card.debuff and G.localization.descriptions[self.set][self.key].joy_consumable then
             full_UI_table.joy_consumable = {}
             full_UI_table.joy_consumable.background_colour = lighten(G.C.JOY.PENDULUM, 0.7)
@@ -267,6 +268,7 @@ JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, spe
             table.insert(info_queue, 1, { set = "Other", key = "joy_tooltip_pendulum_joker" })
         end
 
+        -- Transferred ability
         if card and not card.debuff and card.ability.extra.joyous_spring.material_effects and next(card.ability.extra.joyous_spring.material_effects) then
             desc_nodes[#desc_nodes + 1] = {
                 {
@@ -332,6 +334,8 @@ JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, spe
             summon_desc_nodes.name = localize('k_joy_summon_conditions')
             localize { type = "joy_summon_conditions", set = self.set, key = self.key, nodes = summon_desc_nodes }
         end
+
+        -- Add tooltip if it has a related cards menu
         if self.joy_desc_cards then
             table.insert(info_queue, 1, { set = "Other", key = "joy_tooltip_related" })
         end
