@@ -305,15 +305,7 @@ SMODS.Joker({
         for i = #G.hand.highlighted, 1, -1 do
             destroyed_cards[#destroyed_cards + 1] = G.hand.highlighted[i]
         end
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = 0.4,
-            func = function()
-                play_sound('tarot1')
-                card:juice_up(0.3, 0.5)
-                return true
-            end
-        }))
+        JoyousSpring.pre_consumable_use(card, true)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.2,
@@ -329,7 +321,7 @@ SMODS.Joker({
                 return true
             end
         }))
-        delay(0.3)
+        JoyousSpring.post_consumable_highlighted_use()
         SMODS.calculate_context({ remove_playing_cards = true, removed = destroyed_cards })
     end,
     can_use = function(self, card)

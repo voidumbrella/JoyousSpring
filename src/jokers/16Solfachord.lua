@@ -6,6 +6,35 @@ SMODS.Atlas({
     py = 95
 })
 
+local solfa_use = function(self, card, area, copier)
+    local destroyed_cards = {}
+    for i = #G.hand.highlighted, 1, -1 do
+        destroyed_cards[#destroyed_cards + 1] = G.hand.highlighted[i]
+    end
+    JoyousSpring.pre_consumable_use(card,
+        #G.hand.highlighted > 0 and #G.hand.highlighted <= card.ability.extra.change)
+
+    if #G.hand.highlighted > 0 and #G.hand.highlighted <= card.ability.extra.change then
+        JoyousSpring.pre_consumable_change_use()
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                for _, pcard in ipairs(G.hand.highlighted) do
+                    assert(SMODS.change_base(pcard, nil, card.ability.extra.rank))
+                end
+                return true
+            end
+        }))
+        JoyousSpring.post_consumable_change_use()
+    end
+
+    JoyousSpring.level_up_hand(card, "Full House", false, card.ability.extra.change)
+    JoyousSpring.level_up_hand(card, "Straight", false, card.ability.extra.change)
+    JoyousSpring.level_up_hand(card, "Two Pair", false, card.ability.extra.change)
+end
+
+-- DoSolfachord Cutia
 SMODS.Joker({
     key = "solfa_cutia",
     atlas = 'solfa',
@@ -31,9 +60,20 @@ SMODS.Joker({
                 monster_type = "Fairy",
                 monster_archetypes = { ["Solfachord"] = true }
             },
+            change = 1,
+            rank = '8',
+            mult = 8,
+            creates = 1,
+            consumed = 3
         },
     },
+    use = solfa_use,
+    can_use = function(self, card)
+        return true
+    end,
 })
+
+-- ReSolfachord Dreamia
 SMODS.Joker({
     key = "solfa_dreamia",
     atlas = 'solfa',
@@ -59,9 +99,17 @@ SMODS.Joker({
                 monster_type = "Fairy",
                 monster_archetypes = { ["Solfachord"] = true }
             },
+            change = 2,
+            rank = '7',
         },
     },
+    use = solfa_use,
+    can_use = function(self, card)
+        return true
+    end,
 })
+
+-- MiSolfachord Eliteia
 SMODS.Joker({
     key = "solfa_eliteia",
     atlas = 'solfa',
@@ -87,9 +135,17 @@ SMODS.Joker({
                 monster_type = "Fairy",
                 monster_archetypes = { ["Solfachord"] = true }
             },
+            change = 3,
+            rank = '6',
         },
     },
+    use = solfa_use,
+    can_use = function(self, card)
+        return true
+    end,
 })
+
+-- FaSolfachord Fancia
 SMODS.Joker({
     key = "solfa_fancia",
     atlas = 'solfa',
@@ -115,9 +171,17 @@ SMODS.Joker({
                 monster_type = "Fairy",
                 monster_archetypes = { ["Solfachord"] = true }
             },
+            change = 4,
+            rank = '5',
         },
     },
+    use = solfa_use,
+    can_use = function(self, card)
+        return true
+    end,
 })
+
+-- SolSolfachord Gracia
 SMODS.Joker({
     key = "solfa_gracia",
     atlas = 'solfa',
@@ -143,9 +207,17 @@ SMODS.Joker({
                 monster_type = "Fairy",
                 monster_archetypes = { ["Solfachord"] = true }
             },
+            change = 5,
+            rank = '4',
         },
     },
+    use = solfa_use,
+    can_use = function(self, card)
+        return true
+    end,
 })
+
+-- LaSolfachord Angelia
 SMODS.Joker({
     key = "solfa_angelia",
     atlas = 'solfa',
@@ -171,6 +243,8 @@ SMODS.Joker({
                 monster_type = "Fairy",
                 monster_archetypes = { ["Solfachord"] = true }
             },
+            change = 6,
+            rank = '3',
         },
     },
     add_to_deck = function(self, card, from_debuff)
@@ -181,8 +255,14 @@ SMODS.Joker({
     end,
     joy_set_hand_highlight_limit = function(card)
         return 6
-    end
+    end,
+    use = solfa_use,
+    can_use = function(self, card)
+        return true
+    end,
 })
+
+-- TiSolfachord Beautia
 SMODS.Joker({
     key = "solfa_beautia",
     atlas = 'solfa',
@@ -208,6 +288,8 @@ SMODS.Joker({
                 monster_type = "Fairy",
                 monster_archetypes = { ["Solfachord"] = true }
             },
+            change = 7,
+            rank = '2',
         },
     },
     add_to_deck = function(self, card, from_debuff)
@@ -218,8 +300,14 @@ SMODS.Joker({
     end,
     joy_set_hand_highlight_limit = function(card)
         return 7
-    end
+    end,
+    use = solfa_use,
+    can_use = function(self, card)
+        return true
+    end,
 })
+
+-- DoSolfachord Coolia
 SMODS.Joker({
     key = "solfa_coolia",
     atlas = 'solfa',
@@ -245,7 +333,8 @@ SMODS.Joker({
                 monster_type = "Fairy",
                 monster_archetypes = { ["Solfachord"] = true }
             },
-            selects = 8,
+            change = 8,
+            rank = 'Ace',
             highlight_change = 0
         },
     },
@@ -257,8 +346,14 @@ SMODS.Joker({
     end,
     joy_set_hand_highlight_limit = function(card)
         return 8
-    end
+    end,
+    use = solfa_use,
+    can_use = function(self, card)
+        return true
+    end,
 })
+
+-- GranSolfachord Musecia
 SMODS.Joker({
     key = "solfa_musecia",
     atlas = 'solfa',
@@ -286,6 +381,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- GranSolfachord Coolia
 SMODS.Joker({
     key = "solfa_grancoolia",
     atlas = 'solfa',
@@ -313,6 +410,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Solfachord Harmonia
 SMODS.Joker({
     key = "solfa_harmonia",
     atlas = 'solfa',
