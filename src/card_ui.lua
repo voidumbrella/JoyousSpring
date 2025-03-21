@@ -259,7 +259,7 @@ JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, spe
         -- Pendulum ability
         if card and not card.debuff and G.localization.descriptions[self.set][self.key].joy_consumable then
             full_UI_table.joy_consumable = {}
-            full_UI_table.joy_consumable.background_colour = lighten(G.C.JOY.PENDULUM, 0.7)
+            full_UI_table.joy_consumable.background_colour = lighten(G.C.JOY.SPELL, 0.7)
             local loc_vars = {}
             if self.loc_vars and type(self.loc_vars) == 'function' then
                 loc_vars = self:loc_vars({}, card) or {}

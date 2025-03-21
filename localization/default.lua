@@ -2013,7 +2013,7 @@ return {
 			--#endregion
 			--#region Solfachord
 			j_joy_solfa_cutia = {
-				name = "{C:joy_pendulum}DoSolfachord Cutia",
+				name = "{C:joy_pendulum_effect}DoSolfachord Cutia",
 				joy_consumable = {
 					"Change rank of up to {C:attention}#1#{} selected cards to {C:attention}8{}",
 					"and level up {C:attention}Full House{}, {C:attention}Straight{} and {C:attention}Two Pair{} by {C:attention}#1#",
@@ -2028,7 +2028,7 @@ return {
 				}
 			},
 			j_joy_solfa_dreamia = {
-				name = "{C:joy_pendulum}ReSolfachord Dreamia",
+				name = "{C:joy_pendulum_effect}ReSolfachord Dreamia",
 				joy_consumable = {
 					"Change rank of up to {C:attention}#1#{} selected cards to {C:attention}7{}",
 					"and level up {C:attention}Full House{}, {C:attention}Straight{} and {C:attention}Two Pair{} by {C:attention}#1#",
@@ -2041,7 +2041,7 @@ return {
 				}
 			},
 			j_joy_solfa_eliteia = {
-				name = "{C:joy_pendulum}MiSolfachord Eliteia",
+				name = "{C:joy_pendulum_effect}MiSolfachord Eliteia",
 				joy_consumable = {
 					"Change rank of up to {C:attention}#1#{} selected cards to {C:attention}6{}",
 					"and level up {C:attention}Full House{}, {C:attention}Straight{} and {C:attention}Two Pair{} by {C:attention}#1#",
@@ -2056,7 +2056,7 @@ return {
 				}
 			},
 			j_joy_solfa_fancia = {
-				name = "{C:joy_pendulum}FaSolfachord Fancia",
+				name = "{C:joy_pendulum_effect}FaSolfachord Fancia",
 				joy_consumable = {
 					"Change rank of up to {C:attention}#1#{} selected cards to {C:attention}5{}",
 					"and level up {C:attention}Full House{}, {C:attention}Straight{} and {C:attention}Two Pair{} by {C:attention}#1#",
@@ -2070,7 +2070,7 @@ return {
 				}
 			},
 			j_joy_solfa_gracia = {
-				name = "{C:joy_pendulum}SolSolfachord Gracia",
+				name = "{C:joy_pendulum_effect}SolSolfachord Gracia",
 				joy_consumable = {
 					"Change rank of up to {C:attention}#1#{} selected cards to {C:attention}4{}",
 					"and level up {C:attention}Full House{}, {C:attention}Straight{} and {C:attention}Two Pair{} by {C:attention}#1#",
@@ -2084,7 +2084,7 @@ return {
 				}
 			},
 			j_joy_solfa_angelia = {
-				name = "{C:joy_pendulum}LaSolfachord Angelia",
+				name = "{C:joy_pendulum_effect}LaSolfachord Angelia",
 				joy_consumable = {
 					"Change rank of up to {C:attention}#1#{} selected cards to {C:attention}3{}",
 					"and level up {C:attention}Full House{}, {C:attention}Straight{} and {C:attention}Two Pair{} by {C:attention}#1#",
@@ -2096,7 +2096,7 @@ return {
 				}
 			},
 			j_joy_solfa_beautia = {
-				name = "{C:joy_pendulum}TiSolfachord Beautia",
+				name = "{C:joy_pendulum_effect}TiSolfachord Beautia",
 				joy_consumable = {
 					"Change rank of up to {C:attention}#1#{} selected cards to {C:attention}2{}",
 					"and level up {C:attention}Full House{}, {C:attention}Straight{} and {C:attention}Two Pair{} by {C:attention}#1#",
@@ -2111,7 +2111,7 @@ return {
 				},
 			},
 			j_joy_solfa_coolia = {
-				name = "{C:joy_pendulum}DoSolfachord Coolia",
+				name = "{C:joy_pendulum_effect}DoSolfachord Coolia",
 				joy_consumable = {
 					"Change rank of up to {C:attention}#1#{} selected cards to {C:attention}Aces{}",
 					"and level up {C:attention}Full House{}, {C:attention}Straight{} and {C:attention}Two Pair{} by {C:attention}#1#",
@@ -2587,7 +2587,7 @@ return {
 			--#endregion
 			--#region Pendulum
 			j_joy_eccentrick = {
-				name = "{C:joy_pendulum}Archfiend Eccentrick",
+				name = "{C:joy_pendulum_effect}Archfiend Eccentrick",
 				joy_consumable = {
 					"Destroys up to {C:attention}#1#{} selected cards",
 				},
