@@ -4,6 +4,8 @@
 
 local SMODS_calculate_context_ref = SMODS.calculate_context
 function SMODS.calculate_context(context, return_table)
+    -- The area seems to be destryoed too early when the game restarts
+    if JoyousSpring.field_spell_area and not JoyousSpring.field_spell_area.cards then return {} end
     JoyousSpring.calculate_context(context)
     return SMODS_calculate_context_ref(context, return_table)
 end
@@ -232,6 +234,33 @@ function Blind:stay_flipped(to_area, card, from_area)
     end
     return ret
 end
+
+JoyousSpring.calculate_hand_highlight_limit = function(count_card, remove_card)
+    G.GAME.joy_original_hand_limit = G.GAME.joy_original_hand_limit or G.hand.config.highlighted_limit or 5
+    local maxlimit = -1
+    if count_card and not count_card.debuff and count_card.config.center.joy_set_hand_highlight_limit then
+        local new_limit = count_card.config.center.joy_set_hand_highlight_limit(joker) or -1
+        maxlimit = (new_limit > maxlimit) and new_limit or maxlimit
+    end
+    for _, joker in ipairs(G.jokers.cards) do
+        if joker ~= remove_card and not joker.debuff and joker.config.center.joy_set_hand_highlight_limit then
+            local new_limit = joker.config.center.joy_set_hand_highlight_limit(joker) or -1
+            maxlimit = (new_limit > maxlimit) and new_limit or maxlimit
+        end
+    end
+    for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
+        if joker ~= remove_card and not joker.debuff and joker.config.center.joy_set_hand_highlight_limit then
+            local new_limit = joker.config.center.joy_set_hand_highlight_limit(joker)
+            maxlimit = (new_limit > maxlimit) and new_limit or maxlimit
+        end
+    end
+
+    G.hand.config.highlighted_limit = (maxlimit > -1) and maxlimit or G.GAME.joy_original_hand_limit
+end
+
+--#endregion
+
+--#region Transfer Abilities
 
 JoyousSpring.transfer_abilities = function(card, material_key, other_card, materials)
     local material_center = G.P_CENTERS[material_key]
