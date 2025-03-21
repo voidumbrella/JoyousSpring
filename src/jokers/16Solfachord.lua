@@ -173,6 +173,15 @@ SMODS.Joker({
             },
         },
     },
+    add_to_deck = function(self, card, from_debuff)
+        JoyousSpring.calculate_hand_highlight_limit(card)
+    end,
+    remove_from_deck = function(self, card, from_debuff)
+        JoyousSpring.calculate_hand_highlight_limit(nil, card)
+    end,
+    joy_set_hand_highlight_limit = function(card)
+        return 6
+    end
 })
 SMODS.Joker({
     key = "solfa_beautia",
@@ -201,6 +210,15 @@ SMODS.Joker({
             },
         },
     },
+    add_to_deck = function(self, card, from_debuff)
+        JoyousSpring.calculate_hand_highlight_limit(card)
+    end,
+    remove_from_deck = function(self, card, from_debuff)
+        JoyousSpring.calculate_hand_highlight_limit(nil, card)
+    end,
+    joy_set_hand_highlight_limit = function(card)
+        return 7
+    end
 })
 SMODS.Joker({
     key = "solfa_coolia",
@@ -232,14 +250,13 @@ SMODS.Joker({
         },
     },
     add_to_deck = function(self, card, from_debuff)
-        card.ability.extra.highlight_change = card.ability.extra.selects - G.hand.config.highlighted_limit
-        G.hand.config.highlighted_limit = G.hand.config.highlighted_limit + card.ability.extra.highlight_change
+        JoyousSpring.calculate_hand_highlight_limit(card)
     end,
     remove_from_deck = function(self, card, from_debuff)
-        G.hand.config.highlighted_limit = G.hand.config.highlighted_limit - card.ability.extra.highlight_change
-        if G.hand.config.highlighted_limit < 5 then
-            G.hand.config.highlighted_limit = 5
-        end
+        JoyousSpring.calculate_hand_highlight_limit(nil, card)
+    end,
+    joy_set_hand_highlight_limit = function(card)
+        return 8
     end
 })
 SMODS.Joker({
