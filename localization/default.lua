@@ -1921,7 +1921,7 @@ return {
 				},
 				joy_summon_conditions = {
 					"{C:attention}1{} {C:joy_synchro}Tuner{} +",
-					"{C:attention}1+ {C:joy_normal}Cyberse{}",
+					"{C:attention}1+ non-{C:joy_synchro}Tuner{} {C:joy_normal}Cyberse{}",
 					"{s:0.9,C:inactive}(Except {s:0.9,C:joy_xyz}Xyz{s:0.9,C:inactive} or {s:0.9,C:joy_link}Links{}{s:0.9,C:inactive})",
 				}
 			},

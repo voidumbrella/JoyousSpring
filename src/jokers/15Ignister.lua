@@ -984,8 +984,8 @@ SMODS.Joker({
                     {
                         type = "SYNCHRO",
                         materials = {
-                            { is_tuner = true, exclude_summon_types = { "XYZ", "LINK" } },
-                            { min = 1,         monster_type = "Cyberse",                exclude_summon_types = { "XYZ", "LINK" } },
+                            { is_tuner = true,       exclude_summon_types = { "XYZ", "LINK" } },
+                            { exclude_tuners = true, min = 1,                                 monster_type = "Cyberse", exclude_summon_types = { "XYZ", "LINK" } },
                         },
                     }
                 }
