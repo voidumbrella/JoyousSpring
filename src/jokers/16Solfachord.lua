@@ -184,7 +184,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 9,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 7, 2, 0, 2 } }
+        return { vars = { 7, 0.2, 0, 2 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
@@ -212,7 +212,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 8,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 8, 1, 0 } }
+        return { vars = { 8, 0.1, 0 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
@@ -227,10 +227,19 @@ SMODS.Joker({
                 monster_type = "Fairy",
                 monster_archetypes = { ["Solfachord"] = true }
             },
+            selects = 8,
+            highlight_change = 0
         },
     },
     add_to_deck = function(self, card, from_debuff)
-        G.hand.config.highlighted_limit = 6
+        card.ability.extra.highlight_change = card.ability.extra.selects - G.hand.config.highlighted_limit
+        G.hand.config.highlighted_limit = G.hand.config.highlighted_limit + card.ability.extra.highlight_change
+    end,
+    remove_from_deck = function(self, card, from_debuff)
+        G.hand.config.highlighted_limit = G.hand.config.highlighted_limit - card.ability.extra.highlight_change
+        if G.hand.config.highlighted_limit < 5 then
+            G.hand.config.highlighted_limit = 5
+        end
     end
 })
 SMODS.Joker({

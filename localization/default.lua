@@ -131,7 +131,8 @@ return {
 					"when {C:attention}Blind{} is selected",
 				},
 				joy_summon_conditions = {
-					"{C:attention}2{} {C:attention}Jokers{}, including a {C:joy_normal}\"Dragonmaid\"{}"
+					"{C:attention}2{} {C:attention}Jokers{},",
+					"including a {C:joy_normal}\"Dragonmaid\"{}"
 				}
 			},
 			j_joy_dmaid_house = {
@@ -234,7 +235,8 @@ return {
 					"{C:joy_normal}\"Lil-la\"{} when {C:attention}Blind{} is selected",
 				},
 				joy_summon_conditions = {
-					"{C:attention}2{} {C:attention}Jokers{}, including a {C:joy_normal}\"Ki-sikil\"{}"
+					"{C:attention}2{} {C:attention}Jokers{},",
+					"including a {C:joy_normal}\"Ki-sikil\"{}"
 				}
 			},
 			j_joy_etwin_lilla = {
@@ -248,7 +250,8 @@ return {
 					"{C:joy_normal}\"Ki-sikil\"{} when {C:attention}Blind{} is selected",
 				},
 				joy_summon_conditions = {
-					"{C:attention}2{} {C:attention}Jokers{}, including a {C:joy_normal}\"Lil-la\"{}"
+					"{C:attention}2{} {C:attention}Jokers{},",
+					"including a {C:joy_normal}\"Lil-la\"{}"
 				}
 			},
 			j_joy_etwin_kisikil_lilla = {
@@ -355,7 +358,8 @@ return {
 					"count for {C:joy_normal}\"Dogmatika\"{} abilities {C:inactive}(as debuffed){}"
 				},
 				joy_summon_conditions = {
-					"{C:attention}2 Jokers{}, including a {C:joy_normal}\"Dogmatika\"{}"
+					"{C:attention}2 Jokers{},",
+					"including a {C:joy_normal}\"Dogmatika\"{}"
 				}
 			},
 			j_joy_dogma_knight = {
@@ -527,7 +531,8 @@ return {
 				},
 				joy_summon_conditions = {
 					"{C:attention}2{} {C:green}Uncommon{} {C:attention}Jokers{}",
-					"({C:joy_link}Links{} allowed)"
+					"{s:0.9,C:inactive}(Except {s:0.9,C:joy_xyz}Xyz{s:0.9,C:inactive} or {s:0.9,C:joy_token}Tokens{s:0.9,C:inactive})",
+					"{s:0.9,C:inactive}({s:0.9,C:joy_link}Links{} {s:0.9,C:inactive}allowed)"
 				}
 			},
 			--#endregion
@@ -750,6 +755,8 @@ return {
 				},
 				joy_summon_conditions = {
 					"{C:attention}2+{} {C:red}Rare{} {C:attention}Jokers{}",
+					"{s:0.9,C:inactive}(Except {s:0.9,C:joy_xyz}Xyz{s:0.9,C:inactive}, {s:0.9,C:joy_link}Links{}",
+					"{s:0.9,C:inactive}or {s:0.9,C:joy_token}Tokens{s:0.9,C:inactive})"
 				}
 			},
 			j_joy_generaider_laevatein = {
@@ -761,6 +768,8 @@ return {
 				},
 				joy_summon_conditions = {
 					"{C:attention}5{} {C:red}Rare{} {C:attention}Jokers{}",
+					"{s:0.9,C:inactive}(Except {s:0.9,C:joy_xyz}Xyz{s:0.9,C:inactive}, {s:0.9,C:joy_link}Links{}",
+					"{s:0.9,C:inactive}or {s:0.9,C:joy_token}Tokens{s:0.9,C:inactive})"
 				}
 			},
 			j_joy_generaider_boss_stage = {
@@ -867,6 +876,7 @@ return {
 				joy_summon_conditions = {
 					"{C:attention}1{} {C:joy_normal}Fish{} {C:joy_synchro}Tuner{} +",
 					"{C:attention}1{} non-{C:joy_synchro}Tuner{}",
+					"{s:0.9,C:inactive}(Except {s:0.9,C:joy_xyz}Xyz{s:0.9,C:inactive} or {s:0.9,C:joy_link}Links{}{s:0.9,C:inactive})",
 				}
 			},
 			j_joy_fish_askaan = {
@@ -883,6 +893,7 @@ return {
 				joy_summon_conditions = {
 					"{C:attention}1{} {C:joy_synchro}Tuner{} +",
 					"{C:attention}1{} {C:red}Rare{} non-{C:joy_synchro}Tuner{}",
+					"{s:0.9,C:inactive}(Except {s:0.9,C:joy_xyz}Xyz{s:0.9,C:inactive} or {s:0.9,C:joy_link}Links{}{s:0.9,C:inactive})",
 				}
 			},
 			j_joy_fish_guoglim = {
@@ -902,6 +913,7 @@ return {
 				joy_summon_conditions = {
 					"{C:attention}1{} {C:joy_synchro}Tuner{} +",
 					"{C:attention}1{} {C:red}Rare{} non-{C:joy_synchro}Tuner{}",
+					"{s:0.9,C:inactive}(Except {s:0.9,C:joy_xyz}Xyz{s:0.9,C:inactive} or {s:0.9,C:joy_link}Links{}{s:0.9,C:inactive})",
 				}
 			},
 			j_joy_fish_deepbeyond = {
@@ -914,6 +926,7 @@ return {
 				joy_summon_conditions = {
 					"{C:attention}2{} {C:joy_normal}Fish{} {C:joy_synchro}Tuners{} +",
 					"{C:attention}1{} {C:red}Rare{} non-{C:joy_synchro}Tuner{}",
+					"{s:0.9,C:inactive}(Except {s:0.9,C:joy_xyz}Xyz{s:0.9,C:inactive} or {s:0.9,C:joy_link}Links{}{s:0.9,C:inactive})",
 				}
 			},
 			j_joy_fish_depths = {
@@ -1017,6 +1030,7 @@ return {
 				joy_summon_conditions = {
 					"{C:attention}1{} {C:joy_synchro}Tuner{} +",
 					"{C:attention}1{} {C:blue}Common{} non-{C:joy_synchro}Tuner{}",
+					"{s:0.9,C:inactive}(Except {s:0.9,C:joy_xyz}Xyz{s:0.9,C:inactive} or {s:0.9,C:joy_link}Links{}{s:0.9,C:inactive})",
 				}
 			},
 			j_joy_psy_omega = {
@@ -1029,10 +1043,11 @@ return {
 				joy_summon_conditions = {
 					"{C:attention}1{} {C:joy_synchro}Tuner{} +",
 					"{C:attention}1{} {C:blue}Common{} non-{C:joy_synchro}Tuner{}",
+					"{s:0.9,C:inactive}(Except {s:0.9,C:joy_xyz}Xyz{s:0.9,C:inactive} or {s:0.9,C:joy_link}Links{}{s:0.9,C:inactive})",
 				}
 			},
 			j_joy_psy_lambda = {
-				name = "{C:joy_synchro}PSY-Framelord Lambda",
+				name = "{C:joy_link}PSY-Framelord Lambda",
 				text = {
 					"{C:joy_normal}\"PSY-Frame\"{} abilities are active",
 					"without {C:attention}banishing{} {C:joy_normal}\"PSY-Frame Driver\"",
@@ -1043,7 +1058,8 @@ return {
 					"{C:inactive}(Must have room){}",
 				},
 				joy_summon_conditions = {
-					"{C:attention}2{} {C:attention}Jokers{}, except {C:joy_token}Tokens{}",
+					"{C:attention}2{} {C:attention}Jokers{},",
+					"except {C:joy_token}Tokens{}",
 				}
 			},
 			j_joy_psy_circuit = {
@@ -1261,7 +1277,8 @@ return {
 					"{C:joy_normal}\"Burning Abyss\"{} don't get destroyed by their own effects"
 				},
 				joy_summon_conditions = {
-					"{C:attention}2 Jokers{}, including a {C:joy_normal}Fiend{}",
+					"{C:attention}2 Jokers{},",
+					"including a {C:joy_normal}Fiend{}",
 				}
 			},
 			j_joy_ba_cherubini = {
@@ -1289,6 +1306,8 @@ return {
 				},
 				joy_summon_conditions = {
 					"{C:attention}2{} {C:blue}Common{} {C:attention}Jokers{}",
+					"{s:0.9,C:inactive}(Except {s:0.9,C:joy_xyz}Xyz{s:0.9,C:inactive}, {s:0.9,C:joy_link}Links{}",
+					"{s:0.9,C:inactive}or {s:0.9,C:joy_token}Tokens{s:0.9,C:inactive})"
 				}
 			},
 			j_joy_ba_pilgrim = {
@@ -1314,6 +1333,7 @@ return {
 				joy_summon_conditions = {
 					"{C:attention}1{} {C:joy_synchro}Tuner{} +",
 					"{C:attention}1{} {C:joy_normal}Fiend{} non-{C:joy_synchro}Tuner{}",
+					"{s:0.9,C:inactive}(Except {s:0.9,C:joy_xyz}Xyz{s:0.9,C:inactive} or {s:0.9,C:joy_link}Links{}{s:0.9,C:inactive})",
 				}
 			},
 			j_joy_ba_beatrice = {
@@ -1334,8 +1354,9 @@ return {
 				},
 				joy_summon_conditions = {
 					"{C:attention}2{} {C:red}Rare{} {C:attention}Jokers{}",
+					"{s:0.9,C:inactive}(Except {s:0.9,C:joy_xyz}Xyz{s:0.9,C:inactive}, {s:0.9,C:joy_link}Links{} {s:0.9,C:inactive}or {s:0.9,C:joy_token}Tokens{s:0.9,C:inactive})",
 					"or {C:attention}1{} {C:joy_normal}\"Dante\"{}",
-					"{s:0.9,C:inactive}(If Xyz, transfer its materials)",
+					"{s:0.9,C:inactive}(If {s:0.9,C:joy_xyz}Xyz{s:0.9,C:inactive}, transfer its materials)",
 				}
 			},
 			--#endregion
@@ -1899,7 +1920,9 @@ return {
 					"Chances increase for each {C:attention}attribute{} used for its summon",
 				},
 				joy_summon_conditions = {
-					"{C:attention}1{} {C:joy_synchro}Tuner{} + {C:attention}1+ {C:joy_normal}Cyberse{}"
+					"{C:attention}1{} {C:joy_synchro}Tuner{} +",
+					"{C:attention}1+ {C:joy_normal}Cyberse{}",
+					"{s:0.9,C:inactive}(Except {s:0.9,C:joy_xyz}Xyz{s:0.9,C:inactive} or {s:0.9,C:joy_link}Links{}{s:0.9,C:inactive})",
 				}
 			},
 			j_joy_ignis_dragon = {
@@ -1918,7 +1941,9 @@ return {
 					"{C:inactive}(Currently {C:money}+$#2#{C:inactive})",
 				},
 				joy_summon_conditions = {
-					"{C:attention}2+ {C:joy_normal}Cyberse{}"
+					"{C:attention}2+ {C:joy_normal}Cyberse{}",
+					"{s:0.9,C:inactive}(Except {s:0.9,C:joy_xyz}Xyz{s:0.9,C:inactive}, {s:0.9,C:joy_link}Links{}",
+					"{s:0.9,C:inactive}or {s:0.9,C:joy_token}Tokens{s:0.9,C:inactive})"
 				}
 			},
 			j_joy_ignis_phoenix = {
@@ -2137,6 +2162,9 @@ return {
 					"all scored cards count as both for {C:joy_normal}\"Solfachord\"{} abilities",
 					" ",
 					"{C:joy_pendulum}Pendulum{} count for {C:joy_normal}\"Solfachord\"{} abilities"
+				},
+				joy_summon_conditions = {
+					"{C:attention}2 {C:joy_pendulum}Pendulum"
 				}
 			},
 			j_joy_solfa_grancoolia = {
@@ -2152,6 +2180,10 @@ return {
 					" ",
 					"If scoring hand contains both even and odd ranks,",
 					"all cards held in hand count as scored for {C:joy_normal}\"Solfachord\"{} abilities",
+				},
+				joy_summon_conditions = {
+					"{C:attention}3 Jokers{},",
+					"including a {C:joy_pendulum}Pendulum"
 				}
 			},
 			j_joy_solfa_harmonia = {
@@ -2838,7 +2870,7 @@ return {
 				name = "Material",
 				text = {
 					"Cards used for a summon",
-					"{C:inactive}({}{C:joy_xyz}Xyz monsters{} {C:inactive}start with a counter equal{}",
+					"{C:inactive}({}{C:joy_xyz}Xyz Jokers{} {C:inactive}start with a counter equal{}",
 					"{C:inactive}to the number used){}",
 				},
 			},
