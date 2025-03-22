@@ -139,7 +139,7 @@ SMODS.Joker({
                         JoyousSpring.count_all_materials({ { monster_type = "Zombie" } })
                 }
             end
-            if context.repetition and (context.cardarea == G.play or (context.cardarea == G.hand and JoyousSpring.count_materials_owned({ { monster_archetypes = { "Eldlich" } } }) > 0)) and next(SMODS.get_enhancements(context.other_card)) then
+            if context.repetition and (context.cardarea == G.play or (context.cardarea == G.hand and JoyousSpring.count_materials_owned({ { monster_archetypes = { "Eldlich" } } }) > 0)) and next(SMODS.get_enhancements(context.other_card) or {}) then
                 return {
                     repetitions = 1
                 }
@@ -213,7 +213,7 @@ SMODS.Joker({
                         JoyousSpring.count_all_materials({ { monster_type = "Zombie" } })
                 }
             end
-            if context.repetition and (context.cardarea == G.play or (context.cardarea == G.hand and JoyousSpring.count_materials_owned({ { monster_archetypes = { "Eldlich" } } }) > 0)) and next(SMODS.get_enhancements(context.other_card)) then
+            if context.repetition and (context.cardarea == G.play or (context.cardarea == G.hand and JoyousSpring.count_materials_owned({ { monster_archetypes = { "Eldlich" } } }) > 0)) and next(SMODS.get_enhancements(context.other_card) or {}) then
                 return {
                     repetitions = 1
                 }
@@ -287,7 +287,7 @@ SMODS.Joker({
                         JoyousSpring.count_all_materials({ { monster_type = "Zombie" } })
                 }
             end
-            if context.repetition and (context.cardarea == G.play or (context.cardarea == G.hand and JoyousSpring.count_materials_owned({ { monster_archetypes = { "Eldlich" } } }) > 0)) and next(SMODS.get_enhancements(context.other_card)) then
+            if context.repetition and (context.cardarea == G.play or (context.cardarea == G.hand and JoyousSpring.count_materials_owned({ { monster_archetypes = { "Eldlich" } } }) > 0)) and next(SMODS.get_enhancements(context.other_card) or {}) then
                 return {
                     repetitions = 1
                 }
@@ -352,7 +352,7 @@ SMODS.Joker({
                         JoyousSpring.count_all_materials({ { monster_type = "Zombie" } })
                 }
             end
-            if context.repetition and (context.cardarea == G.play or (context.cardarea == G.hand and JoyousSpring.count_materials_owned({ { monster_archetypes = { "Eldlich" } } }) > 0)) and next(SMODS.get_enhancements(context.other_card)) then
+            if context.repetition and (context.cardarea == G.play or (context.cardarea == G.hand and JoyousSpring.count_materials_owned({ { monster_archetypes = { "Eldlich" } } }) > 0)) and next(SMODS.get_enhancements(context.other_card) or {}) then
                 return {
                     repetitions = 1
                 }

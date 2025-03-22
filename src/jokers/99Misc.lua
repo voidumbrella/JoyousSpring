@@ -291,15 +291,6 @@ SMODS.Joker({
             max = 2
         },
     },
-    calculate = function(self, card, context)
-        if JoyousSpring.can_use_abilities(card) then
-            if context.joker_main then
-                return {
-                    mult = card.ability.extra.mult * (G.GAME.joy_cards_destroyed or 0)
-                }
-            end
-        end
-    end,
     use = function(self, card, area, copier)
         local destroyed_cards = {}
         for i = #G.hand.highlighted, 1, -1 do
@@ -326,6 +317,15 @@ SMODS.Joker({
     end,
     can_use = function(self, card)
         return card.ability.extra.max >= #G.hand.highlighted and #G.hand.highlighted >= 1
+    end,
+    calculate = function(self, card, context)
+        if JoyousSpring.can_use_abilities(card) then
+            if context.joker_main then
+                return {
+                    mult = card.ability.extra.mult * (G.GAME.joy_cards_destroyed or 0)
+                }
+            end
+        end
     end,
     joker_display_def = function(JokerDisplay)
         return {

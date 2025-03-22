@@ -2049,7 +2049,7 @@ return {
 					" ",
 					"Once per round, {C:attention}create #4#{} {C:joy_pendulum}Pendulum{} {C:joy_normal}\"Solfachord\"{}",
 					"after {C:attention}#5#{} {C:joy_pendulum}Pendulum{} are consumed",
-					"{C:inactive}(Must have room){}",
+					"{C:inactive}(#6#/#5#) (Must have room){}",
 				}
 			},
 			j_joy_solfa_dreamia = {
@@ -2077,7 +2077,7 @@ return {
 					" ",
 					"Add {C:attention}#4#{} {C:joy_normal}\"Solfachord\"{} to the {C:joy_spell}Extra Deck{}",
 					"after {C:attention}#5#{} even cards are scored",
-					"{C:inactive}(Must have room){}",
+					"{C:inactive}(#6#/#5#) (Must have room){}",
 				}
 			},
 			j_joy_solfa_fancia = {
@@ -2091,7 +2091,7 @@ return {
 					"{C:inactive}(Currently{} {C:chips}+#3#{} {C:inactive}Chips){}",
 					" ",
 					"{C:attention}Create #4#{} {C:joy_normal}\"Solfachord\"{} after {C:attention}#5#{} odd cards are scored",
-					"{C:inactive}(Must have room){}",
+					"{C:inactive}(#6#/#5#) (Must have room){}",
 				}
 			},
 			j_joy_solfa_gracia = {
@@ -2105,7 +2105,7 @@ return {
 					" ",
 					"{C:attention}Create #3#{} {C:joy_spell}\"Solfachord Harmonia\"{}",
 					"after {C:attention}#4#{} even cards are scored",
-					"{C:inactive}(Must have room){}",
+					"{C:inactive}(#5#/#4#) (Must have room){}",
 				}
 			},
 			j_joy_solfa_angelia = {
@@ -2118,6 +2118,7 @@ return {
 					"Retrigger each odd card {C:attention}#2#{} times",
 					" ",
 					"{C:attention}Revive #3#{} {C:joy_normal}\"Solfachord\"{} after {C:attention}#4#{} even cards are scored",
+					"{C:inactive}(#5#/#4#){}",
 				}
 			},
 			j_joy_solfa_beautia = {
@@ -2129,7 +2130,7 @@ return {
 				text = {
 					"Scored cards with even rank give an extra",
 					"{X:chips,C:white}X#2#{} Chips for each {C:joy_normal}\"Solfachord\"{}",
-					"{C:inactive}(Currently {X:chips,C:white}X#3#{} {C:inactive}extra Chips)",
+					"{C:inactive}(Currently {X:chips,C:white}X#3#{} {C:inactive}Chips)",
 					" ",
 					"{C:attention}Banish #4#{} {C:joy_pendulum}Pendulum{} at end of round",
 					"until {C:attention}Blind{} is selected"
@@ -2144,7 +2145,7 @@ return {
 				text = {
 					"Scored cards with odd rank give an extra",
 					"{X:mult,C:white}X#2#{} Mult for each {C:joy_normal}\"Solfachord\"{}",
-					"{C:inactive}(Currently {X:mult,C:white}X#3#{} {C:inactive}extra Mult)",
+					"{C:inactive}(Currently {X:mult,C:white}X#3#{} {C:inactive}Mult)",
 					" ",
 					"Cards in the {C:attention}GY{} count for {C:joy_normal}\"Solfachord\"{} abilities",
 				},
@@ -2156,7 +2157,7 @@ return {
 					"gain a random edition if possible",
 					" ",
 					"Once per round, {C:attention}create #1#{} {C:dark_edition}Negative{} {C:joy_pendulum}Pendulum{} {C:joy_normal}\"Solfachord\"{}",
-					"after {C:attention}#2#{} {C:joy_pendulum}Pendulum{} are consumed",
+					"after {C:attention}#2#{} {C:joy_pendulum}Pendulum{} are consumed {C:inactive}(#3#/#2#){}",
 					" ",
 					"If scoring hand contains both even and odd ranks,",
 					"all scored cards count as both for {C:joy_normal}\"Solfachord\"{} abilities",
@@ -2176,7 +2177,7 @@ return {
 					"Playing cards affected by {C:joy_normal}\"Solfachord\"{} consumable abilities",
 					"gain a random seal if possible",
 					" ",
-					"{C:money}+$#3#{} after {C:attention}#4#{} {C:joy_pendulum}Pendulum{} are consumed",
+					"{C:money}+$#3#{} after {C:attention}#4#{} {C:joy_pendulum}Pendulum{} are consumed {C:inactive}(#4#/#3#){}",
 					" ",
 					"If scoring hand contains both even and odd ranks,",
 					"all cards held in hand count as scored for {C:joy_normal}\"Solfachord\"{} abilities",
@@ -2189,7 +2190,7 @@ return {
 			j_joy_solfa_harmonia = {
 				name = "{C:joy_spell}Solfachord Harmonia",
 				text = {
-					"Once per round, you can {C:attention}revive #1#{} {C:joy_pendulum}Pendulum",
+					"{C:attention}Revives #1#{} {C:joy_pendulum}Pendulum{} when {C:attention}Blind{} is selected",
 					" ",
 					"{C:attention}Create #2# Strength{} {C:tarot}Tarot{} after a {C:joy_pendulum}Pendulum{} is consumed",
 					"{C:inactive}(Must have room){}",
