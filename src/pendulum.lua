@@ -134,6 +134,7 @@ G.FUNCS.joy_use_card = function(e)
             trigger = 'after',
             delay = 0.2,
             func = function()
+                JoyousSpring.send_to_graveyard(card)
                 card:start_dissolve()
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',

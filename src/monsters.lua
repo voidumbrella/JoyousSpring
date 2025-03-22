@@ -567,7 +567,6 @@ end
 ---@return boolean
 JoyousSpring.is_material_center = function(card_key, properties)
     local card_center = G.P_CENTERS[card_key]
-
     if not card_center then return false end
 
     if properties.func then
@@ -612,7 +611,6 @@ JoyousSpring.is_material_center = function(card_key, properties)
     if properties.is_debuffed then
         return false
     end
-
     local monster_card_properties = card_center.config and card_center.config.extra and
         type(card_center.config.extra) == "table" and
         card_center.config.extra.joyous_spring
