@@ -64,7 +64,7 @@ function Game:init_game_object()
 end
 
 function SMODS.current_mod.reset_game_globals(run_start)
-    ret.current_round.joy_tributed_cards = {}
+    G.GAME.current_round.joy_tributed_cards = {}
 end
 
 JoyousSpring.count_as_tributed = function(card)
