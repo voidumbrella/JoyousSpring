@@ -2028,7 +2028,7 @@ return {
 			j_joy_ignis_ailand = {
 				name = "{C:joy_spell}Ignister A.I.Land",
 				text = {
-					"Gain {C:attention}#1#{} {C:joy_normal}Main Deck \"@Ignister\"{} to the shop",
+					"Add {C:attention}#1#{} {C:joy_normal}Main Deck \"@Ignister\"{} to the shop",
 					"when an {C:joy_normal}\"@Ignister\"{} is used as {C:attention}material",
 					" ",
 					"If you own {C:attention}Jokers{} with {C:attention}#2#{} different {C:attention}attributes{} at end of round,",
