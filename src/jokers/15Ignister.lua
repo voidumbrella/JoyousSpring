@@ -146,7 +146,7 @@ SMODS.Joker({
                     local targets = JoyousSpring.get_materials_owned({ { monster_type = "Cyberse" } }, false, true)
                     local materials = {}
                     for i, joker in ipairs(targets) do
-                        if joker ~= card and not joker.ability.eternal then
+                        if not joker.ability.eternal then
                             materials[#materials + 1] = joker
                         end
                     end
@@ -178,7 +178,7 @@ SMODS.Joker({
         local targets = JoyousSpring.get_materials_owned({ { monster_type = "Cyberse" } }, false, true)
         local materials = {}
         for i, joker in ipairs(targets) do
-            if joker ~= card and not joker.ability.eternal then
+            if not joker.ability.eternal then
                 materials[#materials + 1] = joker
             end
         end
