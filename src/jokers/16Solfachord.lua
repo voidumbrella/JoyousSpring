@@ -397,6 +397,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.change, card.ability.extra.repetitions, card.ability.extra.creates, card.ability.extra.scored, card.ability.extra.currently_scored } }
     end,
     joy_desc_cards = {
+        { "j_joy_solfa_harmonia",                                     name = "Creates" },
         { properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
@@ -480,6 +481,9 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 8,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_revive" }
+        end
         return { vars = { card.ability.extra.change, card.ability.extra.repetitions, card.ability.extra.revives, card.ability.extra.scored, card.ability.extra.currently_scored } }
     end,
     joy_desc_cards = {
@@ -574,6 +578,9 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 9,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_banish" }
+        end
         return { vars = { card.ability.extra.change, card.ability.extra.xchips, 1 + card.ability.extra.xchips * solfa_count(), card.ability.extra.banishes } }
     end,
     joy_desc_cards = {
@@ -848,6 +855,9 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 12,
     loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_revive" }
+        end
         return { vars = { card.ability.extra.revives, card.ability.extra.creates, card.ability.extra.solfa_owned } }
     end,
     joy_desc_cards = {

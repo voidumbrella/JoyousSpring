@@ -2048,7 +2048,7 @@ return {
 					"Scored cards with even rank give {C:mult}+#2#{} Mult for each {C:joy_normal}\"Solfachord\"",
 					"{C:inactive}(Currently{} {C:mult}+#3#{} {C:inactive}Mult){}",
 					" ",
-					"Once per round, {C:attention}Create #4#{} {C:joy_pendulum}Pendulum{} {C:joy_normal}\"Solfachord\"{}",
+					"Once per round, {C:attention}create #4#{} {C:joy_pendulum}Pendulum{} {C:joy_normal}\"Solfachord\"{}",
 					"after {C:attention}#5#{} {C:joy_pendulum}Pendulum{} are consumed",
 					"{C:inactive}(#6#/#5#) (Must have room){}",
 				}
@@ -2233,7 +2233,7 @@ return {
 			j_joy_witch_pittore = {
 				name = "{C:joy_effect}Witchcrafter Pittore",
 				text = {
-					"{C:chips}+#1#{} Chips for each for each {C:tarot}Tarot",
+					"{C:chips}+#1#{} Chips for each {C:tarot}Tarot",
 					"{C:attention}tributed{} this round",
 					"{C:inactive}(Currently {C:chips}+#2#{} {C:inactive}Chips)",
 					" ",
@@ -2254,7 +2254,7 @@ return {
 					"{C:inactive}(Currently {C:mult}+#2#{} {C:inactive}Mult)",
 					" ",
 					"Create {C:attention}#3#{} {C:tarot}Tarot{}",
-					"after playing first hand of round",
+					"when playing first hand of round",
 					"{C:inactive}(Must have room){}",
 					" ",
 					"You can {C:attention}tribute{} this card and {C:attention}#4#{} {C:tarot}Tarot",
@@ -2291,11 +2291,11 @@ return {
 			j_joy_witch_verre = {
 				name = "{C:joy_effect}Witchcrafter Madame Verre",
 				text = {
+					"Create all {C:tarot}Tarot{} {C:attention}tributed{} this round as {C:dark_edition}Negative{} when obtained",
+					" ",
 					"{X:mult,C:white}X#1#{} Mult for each for each {C:tarot}Tarot",
 					"{C:attention}tributed{} this round",
 					"{C:inactive}(Currently {X:mult,C:white}X#2#{} {C:inactive}Mult)",
-					" ",
-					"Create all {C:tarot}Tarot{} {C:attention}tributed{} this round as {C:dark_edition}Negative{}",
 				}
 			},
 			j_joy_witch_aruru = {
@@ -2305,7 +2305,8 @@ return {
 					"{C:attention}tributed{} this round",
 					"{C:inactive}(Currently {C:mult}+#2#{} {C:inactive}Mult)",
 					" ",
-					"Used {C:tarot}Tarot{} cards count as tributed for abilities",
+					"Used {C:tarot}Tarot{} cards while this card is owned",
+					"count as tributed for abilities",
 					" ",
 					"Free if you own a {C:joy_normal}\"Witchcrafter\"{}",
 				}
@@ -2320,6 +2321,9 @@ return {
 					"Once per round, create {C:attention}#1#{} {C:joy_effect}\"Witchcrafter Genni\"{}",
 					"when {C:attention}#2#{} {C:tarot}Tarot{} cards are used",
 					"{C:inactive}(#3#/#2#) (Must have room){}",
+				},
+				joy_summon_conditions = {
+					"{C:attention}2{} {C:joy_normal}Spellcasters",
 				}
 			},
 			--#endregion

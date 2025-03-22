@@ -11,6 +11,7 @@ SMODS.Atlas({
 
 ---@class SMODS.Joker
 ---@field joy_set_cost? fun(card:table|Card) Sets its own cost and sell cost inside Card:set_cost()
+---@field joy_modify_cost? fun(card:table|Card, other_card:table|Card) Like joy_set_cost but for another card
 ---@field joy_can_activate? fun(card:table|Card):boolean? Returns `true` if the activated ability can be used
 ---@field joy_allow_ability? fun(card:table|Card,other_card:table|Card):boolean? Returns `true` if *other_card* is allowed to use abilities while facedown by *card*
 ---@field joy_create_card_for_shop? fun(card:table|Card, other_card:table|Card, area:CardArea) Used to modify *other_Card* when it's created for the shop

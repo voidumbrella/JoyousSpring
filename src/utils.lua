@@ -422,15 +422,23 @@ JoyousSpring.get_attribute_count = function(card_list, ignore_debuffed)
     return count
 end
 
-JoyousSpring.count_set_tributed = function(set, this_run)
-    local count = 0
+JoyousSpring.get_set_tributed = function(set, this_run)
+    local list = {}
     local tribute_table = this_run and G.GAME.joy_tributed_cards or G.GAME.current_round.joy_tributed_cards
 
-    for _, value in pairs(tribute_table) do
-        count = count + ((not set or set == value.set) and 1 or 0)
+    for key, value in pairs(tribute_table) do
+        if not set or (set == value.set) then
+            for i = 1, value.count do
+                table.insert(list, key)
+            end
+        end
     end
 
-    return count
+    return list
+end
+
+JoyousSpring.count_set_tributed = function(set, this_run)
+    return #JoyousSpring.get_set_tributed(set, this_run)
 end
 
 JoyousSpring.get_consumable_set = function(set)
@@ -438,7 +446,7 @@ JoyousSpring.get_consumable_set = function(set)
 
     if G.consumeables then
         for _, card in ipairs(G.consumeables.cards) do
-            if not set or card.ability.set == set then
+            if not set or (card.ability.set == set) then
                 table.insert(list, card)
             end
         end
