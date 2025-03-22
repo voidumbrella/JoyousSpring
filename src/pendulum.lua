@@ -4,7 +4,7 @@
 
 G.FUNCS.joy_can_use = function(e)
     local card = e.config.ref_table
-    if card.config.center.can_use and card.config.center:can_use(card) then
+    if JoyousSpring.can_use(card) then
         e.config.colour = G.C.JOY.PENDULUM
         e.config.button = 'joy_use_card'
     else
@@ -16,7 +16,7 @@ end
 G.FUNCS.joy_can_buy_and_use = function(e)
     local card = e.config.ref_table
     if (((to_big(card.cost) > to_big(G.GAME.dollars - G.GAME.bankrupt_at)) and (card.cost > 0)) or
-            not (card.config.center.can_use and card.config.center:can_use(card))) then
+            not JoyousSpring.can_use(card)) then
         e.UIBox.states.visible = false
         e.config.colour = G.C.UI.BACKGROUND_INACTIVE
         e.config.button = nil
