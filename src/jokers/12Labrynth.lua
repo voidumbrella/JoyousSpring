@@ -98,7 +98,7 @@ SMODS.Joker({
                                     trigger = 'after',
                                     delay = 0.8,
                                     func = (function()
-                                        JoyousSpring.tribute(card)
+                                        JoyousSpring.tribute(card, card)
 
                                         return true
                                     end)
@@ -216,8 +216,8 @@ SMODS.Joker({
                                                 return true
                                             end)
                                         }))
-                                        JoyousSpring.tribute(context.joy_selection)
-                                        JoyousSpring.tribute(card)
+                                        JoyousSpring.tribute(card, context.joy_selection)
+                                        JoyousSpring.tribute(card, card)
 
                                         return true
                                     end)
@@ -350,8 +350,8 @@ SMODS.Joker({
                                                 return true
                                             end)
                                         }))
-                                        JoyousSpring.tribute(context.joy_selection)
-                                        JoyousSpring.tribute(card)
+                                        JoyousSpring.tribute(card, context.joy_selection)
+                                        JoyousSpring.tribute(card, card)
 
                                         return true
                                     end)

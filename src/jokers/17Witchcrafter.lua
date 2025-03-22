@@ -82,7 +82,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.chips, 0, card.ability.extra.creates_tarot, card.ability.extra.consumeables, 0, card.ability.extra.tributes, card.ability.extra.creates } }
+        return { vars = { card.ability.extra.chips, card.ability.extra.current_chips, card.ability.extra.creates_tarot, card.ability.extra.consumeables, 0, card.ability.extra.tributes, card.ability.extra.creates } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Witchcrafter" } } }, name = "Archetype" },
@@ -97,6 +97,7 @@ SMODS.Joker({
                 monster_archetypes = { ["Witchcrafter"] = true }
             },
             chips = 100,
+            current_chips = 0,
             creates_tarot = 1,
             consumables = 2,
             tributes = 1,
@@ -116,7 +117,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.mult, 0, card.ability.extra.creates_tarot, card.ability.extra.tributes, card.ability.extra.creates } }
+        return { vars = { card.ability.extra.mult, card.ability.extra.current_mult, card.ability.extra.creates_tarot, card.ability.extra.tributes, card.ability.extra.creates } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Witchcrafter" } } }, name = "Archetype" },
@@ -131,6 +132,7 @@ SMODS.Joker({
                 monster_archetypes = { ["Witchcrafter"] = true }
             },
             mult = 25,
+            current_mult = 0,
             creates_tarot = 1,
             tributes = 1,
             creates = 1
@@ -216,7 +218,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.xmult, 1 } }
+        return { vars = { card.ability.extra.xmult, card.ability.extra.current_xmult } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Witchcrafter" } } }, name = "Archetype" },
@@ -230,7 +232,8 @@ SMODS.Joker({
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Witchcrafter"] = true }
             },
-            xmult = 1.5
+            xmult = 1.5,
+            current_xmult = 1
         },
     },
 })
@@ -246,7 +249,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.mult, 0 } }
+        return { vars = { card.ability.extra.mult, card.ability.extra.current_mult } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Witchcrafter" } } }, name = "Archetype" },
@@ -261,6 +264,7 @@ SMODS.Joker({
                 monster_archetypes = { ["Witchcrafter"] = true }
             },
             mult = 5,
+            current_mult = 0
         },
     },
 })

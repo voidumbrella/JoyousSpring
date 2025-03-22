@@ -86,10 +86,11 @@ JoyousSpring.count_as_tributed = function(card)
         [card.config.center.key].count + 1
 end
 
-JoyousSpring.tribute = function(card_list)
-    for _, card in ipairs(card_list) do
-        JoyousSpring.count_as_tributed(card)
-        card:start_dissolve()
+JoyousSpring.tribute = function(card, card_list)
+    for _, material in ipairs(card_list) do
+        JoyousSpring.count_as_tributed(material)
+        SMODS.calculate_context({ joy_tributed = true, joy_card = material, joy_source = card })
+        material:start_dissolve()
     end
 end
 

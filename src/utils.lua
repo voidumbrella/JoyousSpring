@@ -422,6 +422,17 @@ JoyousSpring.get_attribute_count = function(card_list, ignore_debuffed)
     return count
 end
 
+JoyousSpring.count_set_tributed = function(set, this_run)
+    local count = 0
+    local tribute_table = this_run and G.GAME.joy_tributed_cards or G.GAME.current_round.joy_tributed_cards
+
+    for _, value in pairs(tribute_table) do
+        count = count + ((not set or set == value.set) and 1 or 0)
+    end
+
+    return count
+end
+
 --- Talisman compat
 to_big = to_big or function(num)
     return num

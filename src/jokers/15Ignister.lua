@@ -158,7 +158,7 @@ SMODS.Joker({
                 if context.joy_exit_effect_selection and context.joy_card == card and
                     #context.joy_selection == card.ability.extra.tributes then
                     card.ability.extra.activated = true
-                    JoyousSpring.tribute(context.joy_selection)
+                    JoyousSpring.tribute(card, context.joy_selection)
 
                     for i = 1, card.ability.extra.creates do
                         JoyousSpring.create_pseudorandom(
@@ -703,7 +703,7 @@ SMODS.Joker({
         if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card then
                 if context.joy_activate_effect and context.joy_activated_card == card and not card.ability.eternal then
-                    JoyousSpring.tribute(card)
+                    JoyousSpring.tribute(card, card)
                     for i = 1, card.ability.extra.revives do
                         JoyousSpring.revive_pseudorandom({ { monster_type = "Cyberse" } },
                             pseudoseed("j_joy_ignis_wizard"), true, nil,
