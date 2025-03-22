@@ -269,7 +269,7 @@ SMODS.Joker({
                 if context.joy_exit_effect_selection and context.joy_card == card and
                     #context.joy_selection == card.ability.extra.tributes then
                     JoyousSpring.tribute(card, context.joy_selection)
-                    JoyousSpring.tribute(card, card)
+                    JoyousSpring.tribute(card, { card })
                     for i = 1, card.ability.extra.revives do
                         local revived_card = JoyousSpring.revive_pseudorandom(
                             { { monster_archetypes = { "SubterrorBehemoth" } } },

@@ -703,7 +703,7 @@ SMODS.Joker({
         if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card then
                 if context.joy_activate_effect and context.joy_activated_card == card and not card.ability.eternal then
-                    JoyousSpring.tribute(card, card)
+                    JoyousSpring.tribute(card, { card })
                     for i = 1, card.ability.extra.revives do
                         JoyousSpring.revive_pseudorandom({ { monster_type = "Cyberse" } },
                             pseudoseed("j_joy_ignis_wizard"), true, nil,

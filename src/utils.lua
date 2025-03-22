@@ -433,6 +433,24 @@ JoyousSpring.count_set_tributed = function(set, this_run)
     return count
 end
 
+JoyousSpring.get_consumable_set = function(set)
+    local list = {}
+
+    if G.consumeables then
+        for _, card in ipairs(G.consumeables.cards) do
+            if not set or card.ability.set == set then
+                table.insert(list, card)
+            end
+        end
+    end
+
+    return list
+end
+
+JoyousSpring.get_consumable_count = function(set)
+    return #JoyousSpring.get_consumable_set(set)
+end
+
 --- Talisman compat
 to_big = to_big or function(num)
     return num

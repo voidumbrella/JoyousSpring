@@ -36,6 +36,37 @@ SMODS.Joker({
             creates = 1
         },
     },
+    calculate = function(self, card, context)
+        if JoyousSpring.can_use_abilities(card) and not context.blueprint_card then
+            if not card.ability.extra.activated and context.joy_activate_effect and context.joy_activated_card == card then
+                local materials = JoyousSpring.get_consumable_set("Tarot")
+                if #materials >= card.ability.extra.tributes then
+                    JoyousSpring.create_overlay_effect_selection(card, materials, card.ability.extra.tributes,
+                        card.ability.extra.tributes)
+                end
+            end
+            if not card.ability.extra.activated and context.joy_exit_effect_selection and context.joy_card == card and
+                #context.joy_selection == card.ability.extra.tributes then
+                JoyousSpring.tribute(card, context.joy_selection)
+                JoyousSpring.tribute(card, { card })
+
+                for i = 1, card.ability.extra.creates do
+                    if #G.jokers.cards + G.GAME.joker_buffer - ((card.edition and card.edition.negative) and 0 or 1) < G.jokers.config.card_limit then
+                        SMODS.add_card({
+                            key = "j_joy_witch_potterie"
+                        })
+                    end
+                end
+            end
+        end
+    end,
+    joy_can_activate = function(card)
+        if not (#G.jokers.cards + G.GAME.joker_buffer - ((card.edition and card.edition.negative) and 0 or 1) < G.jokers.config.card_limit) then
+            return false
+        end
+        local materials = JoyousSpring.get_consumable_count("Tarot")
+        return materials >= card.ability.extra.tributes
+    end,
 })
 
 -- Witchcrafter Potterie

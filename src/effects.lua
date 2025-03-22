@@ -56,6 +56,7 @@ JoyousSpring.calculate_context = function(context)
 end
 
 JoyousSpring.tribute = function(card, card_list)
+    if not card_list then return end
     for _, material in ipairs(card_list) do
         SMODS.calculate_context({ joy_tributed = true, joy_card = material, joy_source = card })
         material:start_dissolve()
