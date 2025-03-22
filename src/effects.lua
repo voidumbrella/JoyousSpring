@@ -55,40 +55,8 @@ JoyousSpring.calculate_context = function(context)
     end
 end
 
-local game_init_game_object_ref = Game.init_game_object
-function Game:init_game_object()
-    local ret = game_init_game_object_ref(self)
-    ret.joy_tributed_cards = {}
-    ret.current_round.joy_tributed_cards = {}
-    return ret
-end
-
-function SMODS.current_mod.reset_game_globals(run_start)
-    G.GAME.current_round.joy_tributed_cards = {}
-end
-
-JoyousSpring.count_as_tributed = function(card)
-    if not G.GAME.joy_tributed_cards[card.config.center.key] then
-        G.GAME.joy_tributed_cards[card.config.center.key] = {
-            set = card.ability.set,
-            count = 0
-        }
-    end
-    if not G.GAME.current_round.joy_tributed_cards[card.config.center.key] then
-        G.GAME.current_round.joy_tributed_cards[card.config.center.key] = {
-            set = card.ability.set,
-            count = 0
-        }
-    end
-    G.GAME.joy_tributed_cards[card.config.center.key].count = G.GAME.joy_tributed_cards[card.config.center.key]
-        .count + 1
-    G.GAME.current_round.joy_tributed_cards[card.config.center.key].count = G.GAME.current_round.joy_tributed_cards
-        [card.config.center.key].count + 1
-end
-
 JoyousSpring.tribute = function(card, card_list)
     for _, material in ipairs(card_list) do
-        JoyousSpring.count_as_tributed(material)
         SMODS.calculate_context({ joy_tributed = true, joy_card = material, joy_source = card })
         material:start_dissolve()
     end
