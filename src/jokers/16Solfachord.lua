@@ -297,12 +297,11 @@ SMODS.Joker({
                         end
                     end
                 end
-
-                if context.joker_main then
-                    return {
-                        chips = card.ability.extra.current_chips
-                    }
-                end
+            end
+            if context.joker_main then
+                return {
+                    chips = card.ability.extra.current_chips
+                }
             end
         end
     end,
@@ -374,12 +373,11 @@ SMODS.Joker({
                             pseudoseed("j_joy_solfa_fancia"), true)
                     end
                 end
-
-                if context.joker_main then
-                    return {
-                        chips = card.ability.extra.current_chips
-                    }
-                end
+            end
+            if context.joker_main then
+                return {
+                    chips = card.ability.extra.current_chips
+                }
             end
         end
     end,
