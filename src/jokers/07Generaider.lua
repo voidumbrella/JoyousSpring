@@ -839,8 +839,15 @@ SMODS.Joker({
     },
     calculate = function(self, card, context)
         if context.setting_blind and context.main_eval then
+            local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" }, exclude_tokens = true } })
+            local count = 0
+            for _, joker in ipairs(generaiders) do
+                if not joker.edition or not joker.edition.negative then
+                    count = count + 1
+                end
+            end
             local i = 0
-            while (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit) or (i > 20) do
+            while (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit + count) or (i > 20) do
                 JoyousSpring.summon_token("generaider")
                 i = i + 1
             end
