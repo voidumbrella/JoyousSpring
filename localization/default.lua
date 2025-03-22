@@ -2305,8 +2305,7 @@ return {
 					"{C:attention}tributed{} this round",
 					"{C:inactive}(Currently {C:mult}+#2#{} {C:inactive}Mult)",
 					" ",
-					"Used {C:tarot}Tarot{} count as tributed for",
-					"{C:joy_normal}\"Witchcrafter\"{} abilities",
+					"Used {C:tarot}Tarot{} cards count as tributed for abilities",
 					" ",
 					"Free if you own a {C:joy_normal}\"Witchcrafter\"{}",
 				}

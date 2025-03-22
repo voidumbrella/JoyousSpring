@@ -67,24 +67,28 @@ function SMODS.current_mod.reset_game_globals(run_start)
     ret.current_round.joy_tributed_cards = {}
 end
 
+JoyousSpring.count_as_tributed = function(card)
+    if not G.GAME.joy_tributed_cards[card.config.center.key] then
+        G.GAME.joy_tributed_cards[card.config.center.key] = {
+            set = card.ability.set,
+            count = 0
+        }
+    end
+    if not G.GAME.current_round.joy_tributed_cards[card.config.center.key] then
+        G.GAME.current_round.joy_tributed_cards[card.config.center.key] = {
+            set = card.ability.set,
+            count = 0
+        }
+    end
+    G.GAME.joy_tributed_cards[card.config.center.key].count = G.GAME.joy_tributed_cards[card.config.center.key]
+        .count + 1
+    G.GAME.current_round.joy_tributed_cards[card.config.center.key].count = G.GAME.current_round.joy_tributed_cards
+        [card.config.center.key].count + 1
+end
+
 JoyousSpring.tribute = function(card_list)
     for _, card in ipairs(card_list) do
-        if not G.GAME.joy_tributed_cards[card.config.center.key] then
-            G.GAME.joy_tributed_cards[card.config.center.key] = {
-                set = card.ability.set,
-                count = 0
-            }
-        end
-        if not G.GAME.current_round.joy_tributed_cards[card.config.center.key] then
-            G.GAME.current_round.joy_tributed_cards[card.config.center.key] = {
-                set = card.ability.set,
-                count = 0
-            }
-        end
-        G.GAME.joy_tributed_cards[card.config.center.key].count = G.GAME.joy_tributed_cards[card.config.center.key]
-            .count + 1
-        G.GAME.current_round.joy_tributed_cards[card.config.center.key].count = G.GAME.current_round.joy_tributed_cards
-            [card.config.center.key].count + 1
+        JoyousSpring.count_as_tributed(card)
         card:start_dissolve()
     end
 end
