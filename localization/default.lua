@@ -2022,7 +2022,7 @@ return {
 					"{V:18}EARTH{V:20}: {V:19}+#9#{V:20} hand size"
 				},
 				joy_summon_conditions = {
-					"{C:attention}5 {C:joy_normal}Cyberse{}"
+					"{C:attention}5+ {C:joy_normal}Cyberse{}"
 				}
 			},
 			j_joy_ignis_ailand = {
