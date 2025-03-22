@@ -11,7 +11,7 @@ SMODS.Joker({
     key = "generaider_loptr",
     atlas = 'Generaider',
     pos = { x = 0, y = 0 },
-    rarity = 2,
+    rarity = 1,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
@@ -430,7 +430,7 @@ SMODS.Joker({
                 end
                 for i = 1, card.ability.extra.cards_to_create do
                     JoyousSpring.create_pseudorandom(
-                        { { monster_archetypes = { "Generaider" }, rarity = 2 } },
+                        { { monster_archetypes = { "Generaider" }, rarity = 1 }, { monster_archetypes = { "Generaider" }, rarity = 2 } },
                         pseudoseed("j_joy_generaider_mardel"), true)
                 end
             end
