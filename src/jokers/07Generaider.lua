@@ -144,9 +144,7 @@ SMODS.Joker({
             end
             if context.joy_exit_effect_selection and context.joy_card == card and
                 #context.joy_selection == card.ability.extra.tributes then
-                for _, selected_card in ipairs(context.joy_selection) do
-                    selected_card:start_dissolve()
-                end
+                JoyousSpring.tribute(context.joy_selection)
                 G.GAME.blind:disable()
             end
         end
@@ -209,9 +207,7 @@ SMODS.Joker({
                 end
                 if context.joy_exit_effect_selection and context.joy_card == card and
                     #context.joy_selection == card.ability.extra.tributes then
-                    for _, selected_card in ipairs(context.joy_selection) do
-                        selected_card:start_dissolve()
-                    end
+                    JoyousSpring.tribute(context.joy_selection)
                     card.ability.extra.active = true
                 end
                 if context.end_of_round and context.game_over == false and context.main_eval then
@@ -284,9 +280,7 @@ SMODS.Joker({
                 if context.joy_exit_effect_selection and context.joy_card == card and
                     #context.joy_selection > 0 then
                     local count = #context.joy_selection
-                    for _, selected_card in ipairs(context.joy_selection) do
-                        selected_card:start_dissolve()
-                    end
+                    JoyousSpring.tribute(context.joy_selection)
                     G.hand:change_size(count)
                     card.ability.extra.hand_gain = card.ability.extra.hand_gain + count
                 end
@@ -355,9 +349,7 @@ SMODS.Joker({
             end
             if context.joy_exit_effect_selection and context.joy_card == card and
                 #context.joy_selection == card.ability.extra.tributes then
-                for _, selected_card in ipairs(context.joy_selection) do
-                    selected_card:start_dissolve()
-                end
+                JoyousSpring.tribute(context.joy_selection)
                 local choices = G.consumeables.cards
                 local to_banish = pseudorandom_element(choices, pseudoseed("j_joy_generaider_utgarda"))
                 if to_banish then
@@ -425,9 +417,7 @@ SMODS.Joker({
             if not card.ability.extra.activated and context.joy_exit_effect_selection and context.joy_card == card and
                 #context.joy_selection == card.ability.extra.tributes then
                 card.ability.extra.activated = true
-                for _, selected_card in ipairs(context.joy_selection) do
-                    selected_card:start_dissolve()
-                end
+                JoyousSpring.tribute(context.joy_selection)
                 for i = 1, card.ability.extra.cards_to_create do
                     JoyousSpring.create_pseudorandom(
                         { { monster_archetypes = { "Generaider" }, rarity = 1 }, { monster_archetypes = { "Generaider" }, rarity = 2 } },
@@ -498,9 +488,7 @@ SMODS.Joker({
                 end
                 if context.joy_exit_effect_selection and context.joy_card == card and
                     #context.joy_selection == card.ability.extra.tributes then
-                    for _, selected_card in ipairs(context.joy_selection) do
-                        selected_card:start_dissolve()
-                    end
+                    JoyousSpring.tribute(context.joy_selection)
                     card.ability.extra.active = true
                 end
                 if context.end_of_round and context.game_over == false and context.main_eval then
@@ -576,9 +564,7 @@ SMODS.Joker({
                 end
                 if context.joy_exit_effect_selection and context.joy_card == card and
                     #context.joy_selection == card.ability.extra.tributes then
-                    for _, selected_card in ipairs(context.joy_selection) do
-                        selected_card:start_dissolve()
-                    end
+                    JoyousSpring.tribute(context.joy_selection)
                     ease_hands_played(card.ability.extra.hands)
                     ease_discard(card.ability.extra.discards)
                 end
@@ -644,9 +630,7 @@ SMODS.Joker({
                 end
                 if context.joy_exit_effect_selection and context.joy_card == card and
                     #context.joy_selection == card.ability.extra.tributes then
-                    for _, selected_card in ipairs(context.joy_selection) do
-                        selected_card:start_dissolve()
-                    end
+                    JoyousSpring.tribute(context.joy_selection)
                     for i = 1, card.ability.extra.revives do
                         JoyousSpring.revive_pseudorandom(
                             { { rarity = 3, monster_archetypes = { "Generaider" } } },
@@ -861,9 +845,7 @@ SMODS.Joker({
         end
         if context.joy_exit_effect_selection and context.joy_card == card and
             #context.joy_selection == card.ability.extra.tributes then
-            for _, selected_card in ipairs(context.joy_selection) do
-                selected_card:start_dissolve()
-            end
+            JoyousSpring.tribute(context.joy_selection)
             card.ability.extra.used = true
 
             for i = 1, card.ability.extra.cards_to_create do

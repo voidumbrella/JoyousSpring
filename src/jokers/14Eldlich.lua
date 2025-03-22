@@ -70,9 +70,7 @@ SMODS.Joker({
                 if not card.ability.extra.activated and context.joy_exit_effect_selection and context.joy_card == card and
                     #context.joy_selection == card.ability.extra.tributes then
                     card.ability.extra.activated = true
-                    for _, selected_card in ipairs(context.joy_selection) do
-                        selected_card:start_dissolve()
-                    end
+                    JoyousSpring.tribute(context.joy_selection)
 
                     for i = 1, card.ability.extra.creates do
                         JoyousSpring.create_pseudorandom(

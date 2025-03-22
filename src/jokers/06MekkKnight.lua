@@ -620,9 +620,7 @@ SMODS.Joker({
         end
         if context.joy_exit_effect_selection and context.joy_card == card and
             #context.joy_selection == card.ability.extra.tributes and G.GAME.blind.in_blind then
-            for _, selected_card in ipairs(context.joy_selection) do
-                selected_card:start_dissolve()
-            end
+            JoyousSpring.tribute(context.joy_selection)
             ease_hands_played(card.ability.extra.hands)
         end
         if context.other_joker and JoyousSpring.is_monster_archetype(context.other_joker, "MekkKnight") then

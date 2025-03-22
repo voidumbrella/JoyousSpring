@@ -98,7 +98,7 @@ SMODS.Joker({
                                     trigger = 'after',
                                     delay = 0.8,
                                     func = (function()
-                                        card:start_dissolve()
+                                        JoyousSpring.tribute(card)
 
                                         return true
                                     end)
@@ -216,10 +216,8 @@ SMODS.Joker({
                                                 return true
                                             end)
                                         }))
-                                        for _, selected_card in ipairs(context.joy_selection) do
-                                            selected_card:start_dissolve()
-                                        end
-                                        card:start_dissolve()
+                                        JoyousSpring.tribute(context.joy_selection)
+                                        JoyousSpring.tribute(card)
 
                                         return true
                                     end)
@@ -352,10 +350,8 @@ SMODS.Joker({
                                                 return true
                                             end)
                                         }))
-                                        for _, selected_card in ipairs(context.joy_selection) do
-                                            selected_card:start_dissolve()
-                                        end
-                                        card:start_dissolve()
+                                        JoyousSpring.tribute(context.joy_selection)
+                                        JoyousSpring.tribute(card)
 
                                         return true
                                     end)

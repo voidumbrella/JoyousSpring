@@ -2320,7 +2320,7 @@ return {
 					" ",
 					"Once per round, create {C:attention}#1#{} {C:joy_effect}\"Witchcrafter Genni\"{}",
 					"when {C:attention}#2#{} {C:tarot}Tarot{} cards are used",
-					"{C:inactive}(Must have room){}",
+					"{C:inactive}(#3#/#2#) (Must have room){}",
 				}
 			},
 			--#endregion

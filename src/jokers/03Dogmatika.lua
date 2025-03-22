@@ -623,9 +623,7 @@ SMODS.Joker({
             end
 
             if #G.jokers.cards + G.GAME.joker_buffer - tribute_amount < G.jokers.config.card_limit then
-                for _, selected_card in ipairs(context.joy_selection) do
-                    selected_card:start_dissolve()
-                end
+                JoyousSpring.tribute(context.joy_selection)
 
                 for i = 1, card.ability.extra.creates do
                     if #G.jokers.cards + G.GAME.joker_buffer - tribute_amount < G.jokers.config.card_limit then
