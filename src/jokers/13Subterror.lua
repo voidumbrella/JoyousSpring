@@ -43,7 +43,7 @@ SMODS.Joker({
         if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card then
                 if not card.ability.extra.activated and context.joy_activate_effect and context.joy_activated_card == card then
-                    local targets = JoyousSpring.get_materials_owned({ { exclude_tokens = true, exclude_summon_types = { "LINK" } } })
+                    local targets = JoyousSpring.get_materials_owned({ { can_flip = true } })
                     local materials = {}
                     for i, joker in ipairs(targets) do
                         if joker ~= card and joker.facing == 'front' then
@@ -81,7 +81,7 @@ SMODS.Joker({
         if card.ability.extra.activated then
             return false
         end
-        local targets = JoyousSpring.get_materials_owned({ { exclude_tokens = true, exclude_summon_types = { "LINK" } } })
+        local targets = JoyousSpring.get_materials_owned({ { can_flip = true } })
         local faceup_joker = false
         for _, joker in ipairs(targets) do
             if joker ~= card and joker.facing == 'front' then
@@ -170,7 +170,7 @@ SMODS.Joker({
         if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card then
                 if not card.ability.extra.activated and context.joy_activate_effect and context.joy_activated_card == card then
-                    local targets = JoyousSpring.get_materials_owned({ { exclude_tokens = true, exclude_summon_types = { "LINK" } } })
+                    local targets = JoyousSpring.get_materials_owned({ { can_flip = true } })
                     local materials = {}
                     for i, joker in ipairs(targets) do
                         if joker ~= card and joker.facing == 'front' then
@@ -203,7 +203,7 @@ SMODS.Joker({
         if card.ability.extra.activated then
             return false
         end
-        local targets = JoyousSpring.get_materials_owned({ { exclude_tokens = true, exclude_summon_types = { "LINK" } } })
+        local targets = JoyousSpring.get_materials_owned({ { can_flip = true } })
         local faceup_joker = false
         for _, joker in ipairs(targets) do
             if joker ~= card and joker.facing == 'front' then
@@ -361,7 +361,7 @@ SMODS.Joker({
         if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card then
                 if not card.ability.extra.activated and context.joy_activate_effect and context.joy_activated_card == card then
-                    local targets = JoyousSpring.get_materials_owned({ { facedown = true }, { exclude_tokens = true, exclude_summon_types = { "LINK" } } })
+                    local targets = JoyousSpring.get_materials_owned({ { facedown = true }, { can_flip = true } })
                     local materials = {}
                     for i, joker in ipairs(targets) do
                         if joker ~= card then
@@ -409,7 +409,7 @@ SMODS.Joker({
         if card.ability.extra.activated or not G.GAME.blind.in_blind then
             return false
         end
-        local targets = JoyousSpring.get_materials_owned({ { facedown = true }, { exclude_tokens = true, exclude_summon_types = { "LINK" } } })
+        local targets = JoyousSpring.get_materials_owned({ { facedown = true }, { can_flip = true } })
         local faceup_joker = 0
         for _, joker in ipairs(targets) do
             if joker ~= card then
@@ -947,7 +947,7 @@ SMODS.Joker({
         if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card then
                 if not card.ability.extra.activated and context.joy_activate_effect and context.joy_activated_card == card then
-                    local targets = JoyousSpring.get_materials_owned({ { exclude_tokens = true, exclude_summon_types = { "LINK" } } })
+                    local targets = JoyousSpring.get_materials_owned({ { can_flip = true } })
                     local materials = {}
                     for i, joker in ipairs(targets) do
                         if joker ~= card and joker.facing == 'front' then
@@ -988,7 +988,7 @@ SMODS.Joker({
         if card.ability.extra.activated then
             return false
         end
-        local targets = JoyousSpring.get_materials_owned({ { exclude_tokens = true, exclude_summon_types = { "LINK" } } })
+        local targets = JoyousSpring.get_materials_owned({ { can_flip = true } })
         local faceup_joker = 0
         for _, joker in ipairs(targets) do
             if joker ~= card and joker.facing == 'front' then
@@ -1043,7 +1043,7 @@ SMODS.Joker({
         if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card then
                 if not card.ability.extra.activated and context.joy_activate_effect and context.joy_activated_card == card then
-                    local materials = JoyousSpring.get_materials_owned({ { facedown = true }, { exclude_tokens = true, exclude_summon_types = { "LINK" } } })
+                    local materials = JoyousSpring.get_materials_owned({ { facedown = true }, { can_flip = true } })
                     if next(materials) then
                         JoyousSpring.create_overlay_effect_selection(card, materials, card.ability.extra.flips,
                             card.ability.extra.flips, localize("k_joy_select"))
@@ -1073,7 +1073,7 @@ SMODS.Joker({
         if card.ability.extra.activated then
             return false
         end
-        return JoyousSpring.count_materials_owned({ { facedown = true }, { exclude_tokens = true, exclude_summon_types = { "LINK" } } }) >
+        return JoyousSpring.count_materials_owned({ { facedown = true }, { can_flip = true } }) >
             0
     end,
 })

@@ -112,6 +112,8 @@ SMODS.Atlas({
 ---@field exclude_traps boolean?
 ---@field has_edition boolean?
 ---@field exclude_edition boolean?
+---@field can_flip boolean?
+---@field cannot_flip boolean?
 
 ---@class material_restrictions
 ---@field different_names boolean?
@@ -176,7 +178,7 @@ JoyousSpring.init_joy_table = function(params)
         is_free = false,
         cannot_revive = params.cannot_revive or false,
         flip_active = false,
-        cannot_flip = true
+        cannot_flip = false
     } or {
         is_field_spell = true,
         monster_archetypes = params.monster_archetypes or {},
@@ -430,7 +432,7 @@ JoyousSpring.is_material = function(card, properties, summon_type)
         return not JoyousSpring.is_monster_card(card)
     end
     if not JoyousSpring.is_monster_card(card) then
-        return not (properties.is_monster or properties.monster_type or properties.monster_attribute or properties.monster_archetypes or properties.is_pendulum or properties.summon_type or properties.is_effect or properties.is_non_effect or properties.is_normal or properties.is_extra_deck or properties.is_main_deck or properties.is_summoned or properties.is_tuner or properties.is_trap) or
+        return not (properties.is_monster or properties.monster_type or properties.monster_attribute or properties.monster_archetypes or properties.is_pendulum or properties.summon_type or properties.is_effect or properties.is_non_effect or properties.is_normal or properties.is_extra_deck or properties.is_main_deck or properties.is_summoned or properties.is_tuner or properties.is_trap or properties.cannot_flip) or
             false
     end
     if properties.monster_type then
@@ -555,6 +557,16 @@ JoyousSpring.is_material = function(card, properties, summon_type)
     end
     if properties.exclude_traps then
         if JoyousSpring.is_trap_monster(card) then
+            return false
+        end
+    end
+    if properties.cannot_flip then
+        if not JoyousSpring.cannot_flip(card) and not JoyousSpring.is_summon_type(card, "LINK") and card.config.center_key ~= "j_joy_token" then
+            return false
+        end
+    end
+    if properties.can_flip then
+        if JoyousSpring.cannot_flip(card) or JoyousSpring.is_summon_type(card, "LINK") or card.config.center_key == "j_joy_token" then
             return false
         end
     end
