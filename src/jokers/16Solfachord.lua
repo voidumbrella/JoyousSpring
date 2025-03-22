@@ -870,7 +870,13 @@ SMODS.Joker({
         if JoyousSpring.can_use_abilities(card) then
             if context.setting_blind and context.main_eval then
                 for i = 1, card.ability.extra.revives do
-                    JoyousSpring.revive_pseudorandom({ { is_pendulum = true } }, pseudoseed("j_joy_solfa_harmonia"), true)
+                    local revived_card = JoyousSpring.revive_pseudorandom({ { monster_archetypes = { "Solfachord" } } },
+                        pseudoseed("j_joy_solfa_harmonia"), true)
+
+                    if not revived_card then
+                        JoyousSpring.revive_pseudorandom({ { is_pendulum = true } }, pseudoseed("j_joy_solfa_harmonia"),
+                            true)
+                    end
                 end
             end
             if context.using_consumeable and JoyousSpring.is_pendulum_monster(context.consumeable) then

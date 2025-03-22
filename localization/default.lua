@@ -1107,7 +1107,7 @@ return {
 					"when summoned if there's any in the {C:attention}GY{}",
 					"{C:inactive}(Must have room){}",
 					" ",
-					"Sell this card to create up to",
+					"Sell this summoned card to create up to",
 					"{C:attention}#2#{} {C:tarot}Tarot{} cards",
 				},
 				joy_summon_conditions = {
@@ -1120,7 +1120,7 @@ return {
 					"Adds {C:attention}#1#{} random {C:attention}playing cards{}",
 					"when a {C:tarot}Tarot{} card is used during a {C:attention}Blind{}",
 					" ",
-					"Sell this card to create up to",
+					"Sell this summoned card to create up to",
 					"{C:attention}#2#{} {C:tarot}Tarot{} cards",
 				},
 				joy_summon_conditions = {
@@ -2048,7 +2048,7 @@ return {
 					"Scored cards with even rank give {C:mult}+#2#{} Mult for each {C:joy_normal}\"Solfachord\"",
 					"{C:inactive}(Currently{} {C:mult}+#3#{} {C:inactive}Mult){}",
 					" ",
-					"Once per round, {C:attention}create #4#{} {C:joy_pendulum}Pendulum{} {C:joy_normal}\"Solfachord\"{}",
+					"Once per round, {C:attention}Create #4#{} {C:joy_pendulum}Pendulum{} {C:joy_normal}\"Solfachord\"{}",
 					"after {C:attention}#5#{} {C:joy_pendulum}Pendulum{} are consumed",
 					"{C:inactive}(#6#/#5#) (Must have room){}",
 				}
@@ -2178,7 +2178,7 @@ return {
 					"Playing cards affected by {C:joy_normal}\"Solfachord\"{} consumable abilities",
 					"gain a random seal if possible",
 					" ",
-					"{C:money}+$#3#{} after {C:attention}#4#{} {C:joy_pendulum}Pendulum{} are consumed {C:inactive}(#4#/#3#){}",
+					"{C:money}+$#3#{} after {C:attention}#4#{} {C:joy_pendulum}Pendulum{} are consumed {C:inactive}(#5#/#4#){}",
 					" ",
 					"If scoring hand contains both even and odd ranks,",
 					"all cards held in hand count as scored for {C:joy_normal}\"Solfachord\"{} abilities",
@@ -2191,7 +2191,8 @@ return {
 			j_joy_solfa_harmonia = {
 				name = "{C:joy_spell}Solfachord Harmonia",
 				text = {
-					"{C:attention}Revives #1#{} {C:joy_pendulum}Pendulum{} when {C:attention}Blind{} is selected",
+					"{C:attention}Revives #1#{} {C:joy_normal}\"Solfachord\"{} (or {C:joy_pendulum}Pendulum{} if none)",
+					"when {C:attention}Blind{} is selected",
 					" ",
 					"{C:attention}Create #2# Strength{} {C:tarot}Tarot{} after a {C:joy_pendulum}Pendulum{} is consumed",
 					"{C:inactive}(Must have room){}",
@@ -2203,40 +2204,124 @@ return {
 			--#endregion
 			--#region Witchcrafter
 			j_joy_witch_genni = {
-				name = "Witchcrafter Genni",
-				text = { "TBD" }
+				name = "{C:joy_effect}Witchcrafter Genni",
+				text = {
+					"Creates {C:attention}#1#{} {C:tarot}Tarot",
+					"when obtained",
+					"{C:inactive}(Must have room){}",
+					" ",
+					"You can {C:attention}tribute{} this card and {C:attention}#2#{} {C:tarot}Tarot",
+					"to create {C:attention}#3#{} {C:joy_effect}\"Witchcrafter Potterie\"{}",
+					"{C:inactive}(Must have room){}",
+				}
 			},
 			j_joy_witch_potterie = {
-				name = "Witchcrafter Potterie",
-				text = { "TBD" }
+				name = "{C:joy_effect}Witchcrafter Potterie",
+				text = {
+					"Creates {C:attention}#1#{} {C:tarot}Tarot",
+					"when obtained if Consumable area is empty",
+					"{C:inactive}(Must have room){}",
+					" ",
+					"This card and {C:attention}#2#{} {C:tarot}Tarot{} cards {C:attention}banish{}",
+					"at end of round until {C:attention}Blind{} selected",
+					" ",
+					"You can {C:attention}tribute{} this card and {C:attention}#3#{} {C:tarot}Tarot",
+					"to create {C:attention}#4#{} {C:joy_effect}\"Witchcrafter Pittore\"{}",
+					"{C:inactive}(Must have room){}",
+				}
 			},
 			j_joy_witch_pittore = {
-				name = "Witchcrafter Pittore",
-				text = { "TBD" }
+				name = "{C:joy_effect}Witchcrafter Pittore",
+				text = {
+					"{C:chips}+#1#{} Chips for each for each {C:tarot}Tarot",
+					"{C:attention}tributed{} this round",
+					"{C:inactive}(Currently {C:chips}+#2#{} {C:inactive}Chips)",
+					" ",
+					"Once per round, create {C:attention}#3#{} {C:tarot}Tarot{}",
+					"when {C:attention}#4#{} consumables are used",
+					"{C:inactive}(#5#/#4#) (Must have room){}",
+					" ",
+					"You can {C:attention}tribute{} this card and {C:attention}#6#{} {C:tarot}Tarot",
+					"to create {C:attention}#7#{} {C:joy_effect}\"Witchcrafter Schmietta\"{}",
+					"{C:inactive}(Must have room){}",
+				}
 			},
 			j_joy_witch_schmietta = {
-				name = "Witchcrafter Schmietta",
-				text = { "TBD" }
+				name = "{C:joy_effect}Witchcrafter Schmietta",
+				text = {
+					"{C:mult}+#1#{} Mult for each for each {C:tarot}Tarot",
+					"{C:attention}tributed{} this round",
+					"{C:inactive}(Currently {C:mult}+#2#{} {C:inactive}Mult)",
+					" ",
+					"Create {C:attention}#3#{} {C:tarot}Tarot{}",
+					"after playing first hand of round",
+					"{C:inactive}(Must have room){}",
+					" ",
+					"You can {C:attention}tribute{} this card and {C:attention}#4#{} {C:tarot}Tarot",
+					"to create {C:attention}#5#{} {C:joy_effect}\"Witchcrafter Edel\"{}",
+					"{C:inactive}(Must have room){}",
+				}
 			},
 			j_joy_witch_edel = {
-				name = "Witchcrafter Edel",
-				text = { "TBD" }
+				name = "{C:joy_effect}Witchcrafter Edel",
+				text = {
+					"Once per round, create {C:attention}#1#{} {C:joy_effect}\"Witchcrafter Genni\"{}",
+					"when {C:attention}#2#{} hands are played",
+					"{C:inactive}(#3#/#2#) (Must have room){}",
+					" ",
+					"You can {C:attention}tribute{} this card and {C:attention}#4#{} {C:tarot}Tarot",
+					"to create {C:attention}#5#{} {C:joy_effect}\"Witchcrafter Haine\"{}",
+					"{C:inactive}(Must have room){}",
+				}
 			},
 			j_joy_witch_haine = {
-				name = "Witchcrafter Haine",
-				text = { "TBD" }
+				name = "{C:joy_effect}Witchcrafter Haine",
+				text = {
+					"{C:money}+$#1#{} for each for each {C:tarot}Tarot",
+					"{C:attention}tributed{} this round when obtained",
+					" ",
+					"Create {C:attention}#2#{} {C:dark_edition}Negative {C:tarot}Tarot{}",
+					"if it's the last hand of round",
+					" ",
+					"You can {C:attention}tribute{} this card and {C:attention}#3#{} {C:tarot}Tarot",
+					"to create {C:attention}#4#{} {C:joy_effect}\"Witchcrafter Madame Verre\"{}",
+					"{C:inactive}(Must have room){}",
+				}
 			},
 			j_joy_witch_verre = {
-				name = "Witchcrafter Madame Verre",
-				text = { "TBD" }
+				name = "{C:joy_effect}Witchcrafter Madame Verre",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult for each for each {C:tarot}Tarot",
+					"{C:attention}tributed{} this round",
+					"{C:inactive}(Currently {X:mult,C:white}X#2#{} {C:inactive}Mult)",
+					" ",
+					"Create all {C:tarot}Tarot{} {C:attention}tributed{} this round as {C:dark_edition}Negative{}",
+				}
 			},
 			j_joy_witch_aruru = {
-				name = "Witchcrafter Golem Aruru",
-				text = { "TBD" }
+				name = "{C:joy_effect}Witchcrafter Golem Aruru",
+				text = {
+					"{C:mult}+#1#{} Mult for each for each {C:tarot}Tarot",
+					"{C:attention}tributed{} this round",
+					"{C:inactive}(Currently {C:mult}+#2#{} {C:inactive}Mult)",
+					" ",
+					"Used {C:tarot}Tarot{} count as tributed for",
+					"{C:joy_normal}\"Witchcrafter\"{} abilities",
+					" ",
+					"Free if you own a {C:joy_normal}\"Witchcrafter\"{}",
+				}
 			},
 			j_joy_witch_vicemadame = {
-				name = "Witchcrafter Vice-Madame",
-				text = { "TBD" }
+				name = "{C:joy_fusion}Witchcrafter Vice-Madame",
+				text = {
+					"{C:tarot}Arcana Packs{} are free",
+					" ",
+					"{C:joy_normal}\"Witchcrafter\"{} Chips and Mult don't reset each round",
+					" ",
+					"Once per round, create {C:attention}#1#{} {C:joy_effect}\"Witchcrafter Genni\"{}",
+					"when {C:attention}#2#{} {C:tarot}Tarot{} cards are used",
+					"{C:inactive}(Must have room){}",
+				}
 			},
 			--#endregion
 			--#region Shaddoll
