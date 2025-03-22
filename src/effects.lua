@@ -329,7 +329,7 @@ function Card:calculate_joker(context)
         o = JoyousSpring.calculate_transfer_abilities(self, context, o)
         if o or t then return o, t end
     else
-        card_calculate_joker_ref(self, context)
+        return card_calculate_joker_ref(self, context)
     end
 end
 
