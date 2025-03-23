@@ -350,7 +350,7 @@ JoyousSpring.create_pseudorandom = function(property_list, seed, must_have_room,
         end
         local key_to_add = pseudorandom_element(choices, seed or pseudoseed("JoyousSpring"))
         if key_to_add then
-            return SMODS.add_card({
+            return JoyousSpring.create_summon({
                 key = key_to_add,
                 edition = edition
             })

@@ -146,20 +146,45 @@ JoyousSpring.perform_summon = function(card, card_list, summon_type)
         joker:start_dissolve()
     end
     card.ability.extra.joyous_spring.summoned = true
-    if card.area == JoyousSpring.extra_deck_area then
-        JoyousSpring.extra_deck_area:remove_card(card)
-        card:add_to_deck()
-        G.jokers:emplace(card)
-    elseif card.area == G.pack_cards then
-        summon_from_booster(card)
-    else
-        summon_from_shop(card)
-    end
+
+    G.E_MANAGER:add_event(Event({
+        func = function()
+            if card.area == JoyousSpring.extra_deck_area then
+                JoyousSpring.extra_deck_area:remove_card(card)
+                card:add_to_deck()
+                G.jokers:emplace(card)
+            elseif card.area == G.pack_cards then
+                summon_from_booster(card)
+            else
+                summon_from_shop(card)
+            end
+            return true
+        end
+    }))
+
     card:set_cost()
 
     if summon_type == "XYZ" then
         card.children.xyz_materials = JoyousSpring.create_UIBox_xyz_materials(card)
     end
+end
+
+JoyousSpring.create_summon = function(add_params, must_have_room)
+    local card = SMODS.create_card(add_params)
+    G.E_MANAGER:add_event(Event({
+        func = function()
+            print((#G.jokers.cards + G.GAME.joker_buffer) .. " < " .. G.jokers.config.card_limit)
+            if not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit) then
+                card:add_to_deck()
+                G.jokers:emplace(card)
+            else
+                card:remove()
+                card = nil
+            end
+            return true
+        end
+    }))
+    return card
 end
 
 ---Summons a Token with specified attributes
@@ -169,7 +194,7 @@ end
 ---@param sprite_pos any?
 ---@param joyous_spring_table table? Overrides the properties in the Token's joyous_spring_table. Required if key is nil
 JoyousSpring.summon_token = function(key, edition, atlas_key, sprite_pos, joyous_spring_table)
-    local card = SMODS.add_card({
+    local card = JoyousSpring.create_summon({
         key = "j_joy_token",
         edition = edition,
         no_edition = not edition and true or nil
@@ -223,9 +248,6 @@ local function get_combinations(list, condition, max_size)
 
     return result
 end
-
-
-
 
 local function get_condition_min_max(condition)
     local min_materials = 0
@@ -510,34 +532,48 @@ JoyousSpring.can_summon_by_condition = function(condition, card_list)
     return false
 end
 
+JoyousSpring.get_min_summon_materials = function(card)
+    local conditions = card.ability.extra.joyous_spring.summon_conditions
+    local min = 7
+    for _, condition in ipairs(conditions) do
+        local mandatory, _ = separate_properties(condition)
+        min = (#mandatory < min) and #mandatory or min
+    end
+    return min
+end
+
 ---Checks if there's any combination in **card_list** that fulfills the card's summon conditions
 ---@param card Card
 ---@param card_list Card[]?
 ---@return boolean
+---@return boolean _ If it has room
 JoyousSpring.can_summon = function(card, card_list)
     if not JoyousSpring.is_monster_card(card) then
-        return false
+        return false, false
     end
     if not card.ability.extra.joyous_spring.summon_conditions and not card.ability.extra.joyous_spring.summon_consumeable_conditions then
-        return true
+        return true, true
     end
 
     if card.ability.extra.joyous_spring.summon_consumeable_conditions then
         local card_table = card_list or G.consumeables.cards
-        return JoyousSpring.can_summon_consumeables(card.ability.extra.joyous_spring.summon_consumeable_conditions,
-            card_table)
+        return JoyousSpring.can_summon_consumeables(card, card.ability.extra.joyous_spring.summon_consumeable_conditions,
+                card_table),
+            (card.edition and card.edition.negative and true) or
+            (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit)
     else
         local card_table = card_list or G.jokers.cards
         local conditions = card.ability.extra.joyous_spring.summon_conditions
 
         for _, condition in ipairs(conditions) do
             if JoyousSpring.can_summon_by_condition(condition, card_table) then
-                return true
+                return true, (card.edition and card.edition.negative and true) or
+                    (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit + JoyousSpring.get_min_summon_materials(card))
             end
         end
     end
 
-    return false
+    return false, false
 end
 
 ---Checks if the **combo** fulfills any of the card's summon conditions
@@ -558,7 +594,14 @@ JoyousSpring.can_summon_with_combo = function(card, combo)
 
         for _, condition in ipairs(conditions) do
             if JoyousSpring.fulfills_conditions(combo, condition) then
-                return true
+                local materials = 0
+                for _, material in ipairs(combo) do
+                    if material.ability.set == "Joker" and not (material.edition and material.edition.negative) then
+                        materials = materials + 1
+                    end
+                end
+                return (card.edition and card.edition.negative) or
+                    (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit + materials)
             end
         end
     end
@@ -669,10 +712,11 @@ JoyousSpring.get_summon_materials_consumables = function(condition, card_table)
 end
 
 ---Checks if any consumable combination in **combo** fulfills condition
+---@param card Card|table
 ---@param condition table
 ---@param combo Card[]
 ---@return boolean
-JoyousSpring.can_summon_consumeables = function(condition, combo)
+JoyousSpring.can_summon_consumeables = function(card, condition, combo)
     local any_min = condition.any and (type(condition.any) == "table" and condition.any.min or condition.any) or 0
     local tarot_min = condition.tarot and (type(condition.tarot) == "table" and condition.tarot.min or condition.tarot) or
         0
@@ -686,7 +730,8 @@ JoyousSpring.can_summon_consumeables = function(condition, combo)
     if counts.any < any_min or counts.tarot < tarot_min or counts.planet < planet_min or counts.spectral < spectral_min then
         return false
     end
-    return true
+    return (card.edition and card.edition.negative and true) or
+        (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit)
 end
 
 ---Checks if consumable **combo** fulfills condition

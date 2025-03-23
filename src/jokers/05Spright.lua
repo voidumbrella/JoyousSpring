@@ -350,7 +350,7 @@ SMODS.Joker({
                     JoyousSpring.revive_pseudorandom(
                         { { rarity = 2 } },
                         pseudoseed("j_joy_spright_elf"),
-                        true
+                        true, nil, (card.edition and card.edition.negative and 0 or -1)
                     )
                 end
             end
@@ -515,9 +515,9 @@ SMODS.Joker({
                             center = pseudorandom_element(choices,
                                 pseudoseed("j_joy_spright_gigantic" .. '_resample' .. it))
                         end
-                        SMODS.add_card({
+                        JoyousSpring.create_summon({
                             key = center
-                        })
+                        }, true)
                     end
                 end
             end

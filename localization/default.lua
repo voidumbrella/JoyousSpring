@@ -906,7 +906,6 @@ return {
 					" ",
 					"{C:attention}Revives{} as many different {C:joy_normal}Fish{}",
 					"{C:attention}Jokers{} as possible when summoned",
-					"{s:0.9,C:inactive}(Except its materials)",
 					" ",
 					"This card {C:attention}banishes{} at the end of round",
 					"until {C:attention}Blind{} is selected",
@@ -1994,7 +1993,6 @@ return {
 				text = {
 					"{C:attention}Revive{} as many {C:joy_normal}\"@Ignister\"{} as possible",
 					"with different names as {C:dark_edition}Negative{} and debuffed when summoned",
-					"{s:0.9,C:inactive}(Except its materials)",
 					" ",
 					"{C:attention}Revive #1#{} {C:joy_normal}Main Deck Cyberse{} when used as {C:attention}material{} for a {C:joy_normal}Cyberse{}"
 				},

@@ -777,9 +777,9 @@ SMODS.Joker({
                         joker:start_dissolve()
                     end
                 end
-                local added_card = SMODS.add_card({
+                local added_card = JoyousSpring.create_summon({
                     key = "j_joy_generaider_jormungandr"
-                })
+                }, true)
                 added_card.ability.extra.joyous_spring.xyz_materials = JoyousSpring.get_graveyard_count()
                 JoyousSpring.empty_graveyard()
                 JoyousSpring.ease_detach(card)

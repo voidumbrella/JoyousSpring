@@ -141,8 +141,13 @@ JoyousSpring.create_perma_debuffed_card = function(card, source, edition)
             added_card.ability.extra.joyous_spring.perma_debuffed = true
         end
         added_card:set_cost()
-        added_card:add_to_deck()
-        G.jokers:emplace(added_card)
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                card:add_to_deck()
+                G.jokers:emplace(added_card)
+                return true
+            end
+        }))
         return added_card
     else
         SMODS.debuff_card(card, true, source)

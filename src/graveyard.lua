@@ -12,6 +12,7 @@ JoyousSpring.revive = function(key, must_have_room, edition, debuff_source)
         (not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit)) then
         JoyousSpring.graveyard[key].count = JoyousSpring.graveyard[key].count - 1
         JoyousSpring.graveyard[key].summonable = JoyousSpring.graveyard[key].summonable - 1
+
         local added_card = SMODS.create_card({
             key = key,
             edition = edition
@@ -19,8 +20,13 @@ JoyousSpring.revive = function(key, must_have_room, edition, debuff_source)
         if debuff_source then
             SMODS.debuff_card(added_card, true, debuff_source)
         end
-        added_card:add_to_deck()
-        G.jokers:emplace(added_card)
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                added_card:add_to_deck()
+                G.jokers:emplace(added_card)
+                return true
+            end
+        }))
 
         added_card.ability.extra.joyous_spring.summoned = JoyousSpring.is_extra_deck_monster(added_card) or false
         added_card.ability.extra.joyous_spring.revived = true

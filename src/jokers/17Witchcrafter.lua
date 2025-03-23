@@ -55,16 +55,9 @@ SMODS.Joker({
                 JoyousSpring.tribute(card, { card })
 
                 for i = 1, card.ability.extra.creates do
-                    if #G.jokers.cards + G.GAME.joker_buffer - ((card.edition and card.edition.negative) and 0 or 1) < G.jokers.config.card_limit then
-                        G.E_MANAGER:add_event(Event({
-                            func = function()
-                                SMODS.add_card({
-                                    key = "j_joy_witch_potterie"
-                                })
-                                return true
-                            end
-                        }))
-                    end
+                    JoyousSpring.create_summon({
+                        key = "j_joy_witch_potterie"
+                    }, true)
                 end
             end
         end
@@ -140,11 +133,9 @@ SMODS.Joker({
                 JoyousSpring.tribute(card, { card })
 
                 for i = 1, card.ability.extra.creates do
-                    if #G.jokers.cards + G.GAME.joker_buffer - ((card.edition and card.edition.negative) and 0 or 1) < G.jokers.config.card_limit then
-                        SMODS.add_card({
-                            key = "j_joy_witch_pittore"
-                        })
-                    end
+                    JoyousSpring.create_summon({
+                        key = "j_joy_witch_pittore"
+                    }, true)
                 end
             end
             if not context.blueprint_card and context.end_of_round and context.game_over == false and context.main_eval then
@@ -242,11 +233,9 @@ SMODS.Joker({
                     JoyousSpring.tribute(card, { card })
 
                     for i = 1, card.ability.extra.creates do
-                        if #G.jokers.cards + G.GAME.joker_buffer - ((card.edition and card.edition.negative) and 0 or 1) < G.jokers.config.card_limit then
-                            SMODS.add_card({
-                                key = "j_joy_witch_schmietta"
-                            })
-                        end
+                        JoyousSpring.create_summon({
+                            key = "j_joy_witch_schmietta"
+                        }, true)
                     end
                 end
                 if not card.ability.extra.activated and context.using_consumeable then
@@ -351,11 +340,9 @@ SMODS.Joker({
                     JoyousSpring.tribute(card, { card })
 
                     for i = 1, card.ability.extra.creates do
-                        if #G.jokers.cards + G.GAME.joker_buffer - ((card.edition and card.edition.negative) and 0 or 1) < G.jokers.config.card_limit then
-                            SMODS.add_card({
-                                key = "j_joy_witch_edel"
-                            })
-                        end
+                        JoyousSpring.create_summon({
+                            key = "j_joy_witch_edel"
+                        }, true)
                     end
                 end
                 if context.before and context.main_eval and G.GAME.current_round.hands_played == 0 then
@@ -452,11 +439,9 @@ SMODS.Joker({
                 JoyousSpring.tribute(card, { card })
 
                 for i = 1, card.ability.extra.creates do
-                    if #G.jokers.cards + G.GAME.joker_buffer - ((card.edition and card.edition.negative) and 0 or 1) < G.jokers.config.card_limit then
-                        SMODS.add_card({
-                            key = "j_joy_witch_haine"
-                        })
-                    end
+                    JoyousSpring.create_summon({
+                        key = "j_joy_witch_haine"
+                    }, true)
                 end
             end
             if not card.ability.extra.activated and context.before and context.main_eval then
@@ -464,11 +449,9 @@ SMODS.Joker({
                 if card.ability.extra.hands_played >= card.ability.extra.hands_to_play then
                     card.ability.extra.activated = true
                     for i = 1, card.ability.extra.creates_genni do
-                        if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
-                            SMODS.add_card({
-                                key = "j_joy_witch_genni"
-                            })
-                        end
+                        JoyousSpring.create_summon({
+                            key = "j_joy_witch_genni"
+                        }, true)
                     end
                 end
             end
@@ -537,11 +520,9 @@ SMODS.Joker({
                 JoyousSpring.tribute(card, { card })
 
                 for i = 1, card.ability.extra.creates do
-                    if #G.jokers.cards + G.GAME.joker_buffer - ((card.edition and card.edition.negative) and 0 or 1) < G.jokers.config.card_limit then
-                        SMODS.add_card({
-                            key = "j_joy_witch_verre"
-                        })
-                    end
+                    JoyousSpring.create_summon({
+                        key = "j_joy_witch_verre"
+                    }, true)
                 end
             end
             if context.after and G.GAME.current_round.hands_left == 0 then
@@ -756,11 +737,9 @@ SMODS.Joker({
                     card.ability.extra.consumables_used = card.ability.extra.consumables_used + 1
                     if card.ability.extra.consumables_used >= card.ability.extra.consumables then
                         for i = 1, card.ability.extra.creates do
-                            if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
-                                SMODS.add_card({
-                                    key = "j_joy_witch_genni"
-                                })
-                            end
+                            JoyousSpring.create_summon({
+                                key = "j_joy_witch_genni"
+                            }, true)
                         end
                         card.ability.extra.activated = true
                     end

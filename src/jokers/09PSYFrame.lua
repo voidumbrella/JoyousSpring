@@ -102,12 +102,9 @@ SMODS.Joker({
     add_to_deck = function(self, card, from_debuff)
         if not card.debuff and not from_debuff then
             for i = 1, card.ability.extra.cards_to_create do
-                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit -
-                    ((card.edition and card.edition.negative) and 0 or 1) then
-                    SMODS.add_card({
-                        key = "j_joy_psy_driver"
-                    })
-                end
+                JoyousSpring.create_summon({
+                    key = "j_joy_psy_driver"
+                }, true)
             end
         end
     end,
@@ -173,12 +170,9 @@ SMODS.Joker({
     add_to_deck = function(self, card, from_debuff)
         if not card.debuff and not from_debuff then
             for i = 1, card.ability.extra.cards_to_create do
-                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit -
-                    ((card.edition and card.edition.negative) and 0 or 1) then
-                    SMODS.add_card({
-                        key = "j_joy_psy_driver"
-                    })
-                end
+                JoyousSpring.create_summon({
+                    key = "j_joy_psy_driver"
+                }, true)
             end
         end
     end,
@@ -244,12 +238,9 @@ SMODS.Joker({
     add_to_deck = function(self, card, from_debuff)
         if not card.debuff and not from_debuff then
             for i = 1, card.ability.extra.cards_to_create do
-                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit -
-                    ((card.edition and card.edition.negative) and 0 or 1) then
-                    SMODS.add_card({
-                        key = "j_joy_psy_driver"
-                    })
-                end
+                JoyousSpring.create_summon({
+                    key = "j_joy_psy_driver"
+                }, true)
             end
         end
     end,
@@ -315,12 +306,9 @@ SMODS.Joker({
     add_to_deck = function(self, card, from_debuff)
         if not card.debuff and not from_debuff then
             for i = 1, card.ability.extra.cards_to_create do
-                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit -
-                    ((card.edition and card.edition.negative) and 0 or 1) then
-                    SMODS.add_card({
-                        key = "j_joy_psy_driver"
-                    })
-                end
+                JoyousSpring.create_summon({
+                    key = "j_joy_psy_driver"
+                }, true)
             end
         end
     end,
@@ -386,12 +374,9 @@ SMODS.Joker({
     add_to_deck = function(self, card, from_debuff)
         if not card.debuff and not from_debuff then
             for i = 1, card.ability.extra.cards_to_create do
-                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit -
-                    ((card.edition and card.edition.negative) and 0 or 1) then
-                    SMODS.add_card({
-                        key = "j_joy_psy_driver"
-                    })
-                end
+                JoyousSpring.create_summon({
+                    key = "j_joy_psy_driver"
+                }, true)
             end
         end
     end,
