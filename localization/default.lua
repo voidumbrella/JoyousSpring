@@ -2454,48 +2454,123 @@ return {
 			--#endregion
 			--#region Invoked
 			j_joy_invoked_aleister = {
-				name = "Aleister the Invoker",
-				text = { "TBD" }
+				name = "{C:joy_effect}Aleister the Invoker",
+				text = {
+					"You can {C:attention}tribute #1#{} other {C:attention}Joker",
+					"to {C:attention}transform{} this card into an {C:joy_normal}\"Invoked\"",
+					"{C:inactive}(This is treated as a fusion)",
+					" ",
+					"A {C:joy_fusion}Fusion{} summoned using this card as material gains this ability:",
+					"{s:0.9,C:chips}+#2#{} {s:0.9}Chips for each {s:0.9,C:joy_fusion}Fusion{} {s:0.9}summoned this run"
+				}
 			},
 			j_joy_invoked_madness = {
-				name = "Aleister the Invoker of Madness",
-				text = { "TBD" }
+				name = "{C:joy_link}Aleister the Invoker of Madness",
+				text = {
+					"You can {C:attention}tribute #1#{} other {C:attention}Joker",
+					"to {C:attention}transform{} this card into an {C:joy_normal}\"Invoked\"",
+					"{C:inactive}(This is treated as a fusion)",
+					" ",
+					"Create {C:attention}#2#{} {C:joy_spell}\"Magical Meltdown\"{} when used as material for a {C:joy_fusion}Fusion{}",
+					"{C:inactive}(Must have room)",
+					" ",
+					"A {C:joy_fusion}Fusion{} summoned using this card as material gains this ability:",
+					"{s:0.9,C:mult}+#3#{} {s:0.9}Mult for each {s:0.9,C:joy_fusion}Fusion{} {s:0.9}summoned this run"
+				}
 			},
 			j_joy_invoked_caliga = {
-				name = "Invoked Caliga",
-				text = { "TBD" }
+				name = "{C:joy_fusion}Invoked Caliga",
+				text = {
+					"You can {C:attention}tribute #1#{} other {C:attention}Jokers",
+					"to {C:attention}transform{} this card into {C:joy_effect}\"Aleister the Invoker\"",
+					" ",
+					"Gains {X:mult,C:white}X#2#{} Mult for each {C:attention}Joker{} {C:attention}tributed{} this run",
+					"{C:inactive}(Currently{} {X:mult,C:white}X#3#{} {C:inactive}Mult){}",
+					" ",
+					"Reduce price of {C:joy_effect}Monster Packs{} by {C:money}$#4#"
+				}
 			},
 			j_joy_invoked_raidjin = {
-				name = "Invoked Raidjin",
-				text = { "TBD" }
+				name = "{C:joy_fusion}Invoked Raidjin",
+				text = {
+					"You can {C:attention}tribute #1#{} other {C:attention}Jokers",
+					"to {C:attention}transform{} this card into {C:joy_effect}\"Aleister the Invoker\"",
+					" ",
+					"Gains {X:mult,C:white}X#2#{} Mult for each {C:attention}Joker{} {C:attention}flipped{} this run",
+					"{C:inactive}(Currently{} {X:mult,C:white}X#3#{} {C:inactive}Mult){}",
+					" ",
+					"{C:attention}Flip #4# Joker{} face-up when {C:attention}Blind{} is selected",
+					"{C:attention}Flip #4# Joker{} face-up at end of round",
+				}
 			},
 			j_joy_invoked_cocytus = {
-				name = "Invoked Cocytus",
-				text = { "TBD" }
+				name = "{C:joy_fusion}Invoked Cocytus",
+				text = {
+					"You can {C:attention}tribute #1#{} other {C:attention}Jokers",
+					"to {C:attention}transform{} this card into {C:joy_effect}\"Aleister the Invoker\"",
+					" ",
+					"Reduce {C:attention}Blind{}'s requirement by {C:red}#2#%",
+				}
 			},
 			j_joy_invoked_purgatorio = {
-				name = "Invoked Purgatrio",
-				text = { "TBD" }
+				name = "{C:joy_fusion}Invoked Purgatrio",
+				text = {
+					"You can {C:attention}tribute #1#{} other {C:attention}Jokers",
+					"to {C:attention}transform{} this card into {C:joy_effect}\"Aleister the Invoker\"",
+					" ",
+					"Each {C:attention}Joker{} gives {X:mult,C:white}X#2#{} Mult",
+				}
 			},
 			j_joy_invoked_mage = {
-				name = "Invoked Magellanica",
-				text = { "TBD" }
+				name = "{C:joy_fusion}Invoked Magellanica",
+				text = {
+					"You can {C:attention}tribute #1#{} other {C:attention}Jokers",
+					"to {C:attention}transform{} this card into {C:joy_effect}\"Aleister the Invoker\"",
+					" ",
+					"{C:mult}+#2#{} Mult",
+				}
 			},
 			j_joy_invoked_augo = {
-				name = "Invoked Augoeides",
-				text = { "TBD" }
+				name = "{C:joy_fusion}Invoked Augoeides",
+				text = {
+					"You can {C:attention}tribute #1#{} other {C:attention}Jokers",
+					"to {C:attention}transform{} this card into {C:joy_effect}\"Aleister the Invoker\"",
+					" ",
+					"Gains {X:mult,C:white}X#2#{} Mult for each {C:joy_fusion}Fusion{} in the {C:attention}GY{}",
+					" ",
+					"Send {C:attention}#3#{} {C:joy_fusion}Fusion{} to the {C:attention}GY{} when {C:attention}Blind{} is selected",
+				}
 			},
 			j_joy_invoked_mechaba = {
-				name = "Invoked Mechaba",
-				text = { "TBD" }
+				name = "{C:joy_fusion}Invoked Mechaba",
+				text = {
+					"You can {C:attention}tribute #1#{} other {C:attention}Jokers",
+					"to {C:attention}transform{} this card into {C:joy_effect}\"Aleister the Invoker\"",
+					" ",
+					"Disables effect of {C:attention}Boss Blind{} after {C:attention}#2#{} cards are sold",
+				}
 			},
 			j_joy_invoked_elysium = {
-				name = "Invoked Elysium",
-				text = { "TBD" }
+				name = "{C:joy_fusion}Invoked Elysium",
+				text = {
+					"You can {C:attention}tribute #1#{} other {C:attention}Jokers",
+					"to {C:attention}transform{} this card into {C:joy_effect}\"Aleister the Invoker\"",
+					" ",
+					"Gains abilities of each {C:joy_normal}\"Invoked\"{} in the {C:attention}GY{}",
+					" ",
+					"Treated as any {C:attention}material{} for a {C:joy_fusion}Fusion"
+				}
 			},
 			j_joy_invoked_meltdown = {
-				name = "Magical Meltdown",
-				text = { "TBD" }
+				name = "{C:joy_spell}Magical Meltdown",
+				text = {
+					"You can {C:attention}tribute #1#{} {C:joy_fusion}Fusions{} to create {C:attention}#2#{} {C:joy_effect}\"Aleister the Invoker\"",
+					" ",
+					"Gains {X:mult,C:white}X#3#{} Mult for each {C:joy_fusion}fusion{} summoned this run",
+					"{C:inactive}(Currently{} {X:mult,C:white}X#4#{} {C:inactive}Mult){}",
+					" ",
+					"{C:joy_fusion}Fusions{} can't be flipped or debuffed"
+				}
 			},
 			--#endregion
 			--#region Danger!

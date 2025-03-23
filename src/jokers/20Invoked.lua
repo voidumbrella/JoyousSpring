@@ -17,7 +17,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 1, 20 } }
     end,
     joy_desc_cards = {
         { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
@@ -46,7 +46,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 1, 1, 10 } }
     end,
     joy_desc_cards = {
         { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
@@ -64,7 +64,7 @@ SMODS.Joker({
     },
 })
 
--- Invoked Raidjin
+-- Invoked Caliga
 SMODS.Joker({
     key = "invoked_caliga",
     atlas = 'invoked',
@@ -75,7 +75,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 2, 0.1, 1, 2 } }
     end,
     joy_desc_cards = {
         { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
@@ -104,7 +104,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 2, 0.1, 1, 1 } }
     end,
     joy_desc_cards = {
         { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
@@ -133,7 +133,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 2, 10 } }
     end,
     joy_desc_cards = {
         { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
@@ -162,7 +162,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 2, 2 } }
     end,
     joy_desc_cards = {
         { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
@@ -191,7 +191,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 2, 150 } }
     end,
     joy_desc_cards = {
         { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
@@ -220,7 +220,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 2, 0.1, 1 } }
     end,
     joy_desc_cards = {
         { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
@@ -249,7 +249,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 2, 3 } }
     end,
     joy_desc_cards = {
         { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
@@ -278,7 +278,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 2 } }
     end,
     joy_desc_cards = {
         { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
@@ -307,7 +307,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 2, 1, 0.1, 1 } }
     end,
     joy_desc_cards = {
         { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
