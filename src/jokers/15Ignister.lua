@@ -168,6 +168,9 @@ SMODS.Joker({
                 end
             end
         end
+        if context.end_of_round and context.game_over == false and context.main_eval then
+            card.ability.extra.activated = false
+        end
     end,
     joy_can_activate = function(card)
         if card.ability.extra.activated then
