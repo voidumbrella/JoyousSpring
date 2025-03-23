@@ -6,6 +6,7 @@ SMODS.Atlas({
     py = 95
 })
 
+-- Aleister the Invoker
 SMODS.Joker({
     key = "invoked_aleister",
     atlas = 'invoked',
@@ -33,6 +34,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Aleister the Invoker of Madness
 SMODS.Joker({
     key = "invoked_madness",
     atlas = 'invoked',
@@ -60,6 +63,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Invoked Raidjin
 SMODS.Joker({
     key = "invoked_caliga",
     atlas = 'invoked',
@@ -87,6 +92,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Invoked Raidjin
 SMODS.Joker({
     key = "invoked_raidjin",
     atlas = 'invoked',
@@ -114,6 +121,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Invoked Cocytus
 SMODS.Joker({
     key = "invoked_cocytus",
     atlas = 'invoked',
@@ -141,6 +150,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Invoked Purgatrio
 SMODS.Joker({
     key = "invoked_purgatorio",
     atlas = 'invoked',
@@ -168,6 +179,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Invoked Magellanica
 SMODS.Joker({
     key = "invoked_mage",
     atlas = 'invoked',
@@ -195,6 +208,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Invoked Augoeides
 SMODS.Joker({
     key = "invoked_augo",
     atlas = 'invoked',
@@ -222,6 +237,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Invoked Mechaba
 SMODS.Joker({
     key = "invoked_mechaba",
     atlas = 'invoked',
@@ -249,6 +266,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Invoked Elysium
 SMODS.Joker({
     key = "invoked_elysium",
     atlas = 'invoked',
@@ -276,6 +295,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Magical Meltdown
 SMODS.Joker({
     key = "invoked_meltdown",
     atlas = 'invoked',

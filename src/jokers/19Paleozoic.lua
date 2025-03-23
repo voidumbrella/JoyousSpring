@@ -6,6 +6,7 @@ SMODS.Atlas({
     py = 95
 })
 
+-- Paleozoic Canadia
 SMODS.Joker({
     key = "paleo_canadia",
     atlas = 'paleo',
@@ -34,6 +35,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Paleozoic Dinomischus
 SMODS.Joker({
     key = "paleo_dino",
     atlas = 'paleo',
@@ -62,6 +65,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Paleozoic Eldonia
 SMODS.Joker({
     key = "paleo_eldonia",
     atlas = 'paleo',
@@ -90,6 +95,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Paleozoic Hallucigenia
 SMODS.Joker({
     key = "paleo_hallu",
     atlas = 'paleo',
@@ -118,6 +125,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Paleozoic Leanchoilia
 SMODS.Joker({
     key = "paleo_lean",
     atlas = 'paleo',
@@ -146,6 +155,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Paleozoic Marrella
 SMODS.Joker({
     key = "paleo_marrella",
     atlas = 'paleo',
@@ -174,6 +185,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Paleozoic Olenoides
 SMODS.Joker({
     key = "paleo_oleno",
     atlas = 'paleo',
@@ -202,6 +215,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Paleozoic Pikaia
 SMODS.Joker({
     key = "paleo_pikaia",
     atlas = 'paleo',
@@ -230,6 +245,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Paleozoic Cambroraster
 SMODS.Joker({
     key = "paleo_cambro",
     atlas = 'paleo',
@@ -257,6 +274,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Paleozoic Anomalocaris
 SMODS.Joker({
     key = "paleo_anomalo",
     atlas = 'paleo',
@@ -284,6 +303,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Paleozoic Opabinia
 SMODS.Joker({
     key = "paleo_opa",
     atlas = 'paleo',

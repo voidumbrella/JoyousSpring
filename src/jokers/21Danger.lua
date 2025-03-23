@@ -6,7 +6,7 @@ SMODS.Atlas({
     py = 95
 })
 
-
+-- Danger!? Jackalope?
 SMODS.Joker({
     key = "danger_jack",
     atlas = 'danger',
@@ -34,6 +34,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Danger!? Tsuchinoko?
 SMODS.Joker({
     key = "danger_tsuch",
     atlas = 'danger',
@@ -61,6 +63,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Danger! Chupacabra!
 SMODS.Joker({
     key = "danger_chup",
     atlas = 'danger',
@@ -88,6 +92,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Danger! Mothman!
 SMODS.Joker({
     key = "danger_moth",
     atlas = 'danger',
@@ -115,6 +121,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Danger! Dogman!
 SMODS.Joker({
     key = "danger_dog",
     atlas = 'danger',
@@ -142,6 +150,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Danger! Nessie!
 SMODS.Joker({
     key = "danger_ness",
     atlas = 'danger',
@@ -169,6 +179,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Danger! Bigfoot!
 SMODS.Joker({
     key = "danger_big",
     atlas = 'danger',
@@ -196,6 +208,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Danger! Ogopogo!
 SMODS.Joker({
     key = "danger_ogo",
     atlas = 'danger',
@@ -223,6 +237,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Danger! Thunderbird!
 SMODS.Joker({
     key = "danger_thunder",
     atlas = 'danger',
@@ -250,6 +266,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Realm of Danger!
 SMODS.Joker({
     key = "danger_realm",
     atlas = 'danger',
@@ -276,6 +294,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Danger! Disturbance! Disorder!
 SMODS.Joker({
     key = "danger_disorder",
     atlas = 'danger',

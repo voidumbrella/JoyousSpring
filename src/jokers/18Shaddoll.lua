@@ -6,7 +6,7 @@ SMODS.Atlas({
     py = 95
 })
 
-
+-- Shaddoll Beast
 SMODS.Joker({
     key = "shaddoll_beast",
     atlas = 'shaddoll',
@@ -34,6 +34,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Shaddoll Dragon
 SMODS.Joker({
     key = "shaddoll_dragon",
     atlas = 'shaddoll',
@@ -61,6 +63,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Shaddoll Falco
 SMODS.Joker({
     key = "shaddoll_falco",
     atlas = 'shaddoll',
@@ -89,6 +93,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Shaddoll Hedgehog
 SMODS.Joker({
     key = "shaddoll_hedgehog",
     atlas = 'shaddoll',
@@ -116,6 +122,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Shaddoll Hound
 SMODS.Joker({
     key = "shaddoll_hound",
     atlas = 'shaddoll',
@@ -143,6 +151,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Shaddoll Squamata
 SMODS.Joker({
     key = "shaddoll_squamata",
     atlas = 'shaddoll',
@@ -170,6 +180,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Shaddoll Core
 SMODS.Joker({
     key = "shaddoll_core",
     atlas = 'shaddoll',
@@ -197,6 +209,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Naelshaddoll Ariel
 SMODS.Joker({
     key = "shaddoll_ariel",
     atlas = 'shaddoll',
@@ -224,6 +238,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Nehshaddoll Genius
 SMODS.Joker({
     key = "shaddoll_genius",
     atlas = 'shaddoll',
@@ -251,6 +267,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Qadshaddoll Keios
 SMODS.Joker({
     key = "shaddoll_keios",
     atlas = 'shaddoll',
@@ -278,6 +296,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Reeshaddoll Wendi
 SMODS.Joker({
     key = "shaddoll_wendi",
     atlas = 'shaddoll',
@@ -305,6 +325,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Helshaddoll Hollow
 SMODS.Joker({
     key = "shaddoll_hollow",
     atlas = 'shaddoll',
@@ -332,6 +354,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- El Shaddoll Anoyatyllis
 SMODS.Joker({
     key = "shaddoll_anoya",
     atlas = 'shaddoll',
@@ -359,6 +383,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- El Shaddoll Apkallone
 SMODS.Joker({
     key = "shaddoll_apka",
     atlas = 'shaddoll',
@@ -386,6 +412,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- El Shaddoll Winda
 SMODS.Joker({
     key = "shaddoll_winda",
     atlas = 'shaddoll',
@@ -413,6 +441,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- El Shaddoll Construct
 SMODS.Joker({
     key = "shaddoll_elconstruct",
     atlas = 'shaddoll',
@@ -440,6 +470,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- El Shaddoll Grysta
 SMODS.Joker({
     key = "shaddoll_grysta",
     atlas = 'shaddoll',
@@ -467,6 +499,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- El Shaddoll Shekhinaga
 SMODS.Joker({
     key = "shaddoll_shekh",
     atlas = 'shaddoll',
@@ -494,6 +528,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- El Shaddoll Wendigo
 SMODS.Joker({
     key = "shaddoll_wendigo",
     atlas = 'shaddoll',
@@ -521,6 +557,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Shaddoll Construct
 SMODS.Joker({
     key = "shaddoll_construct",
     atlas = 'shaddoll',
@@ -548,6 +586,8 @@ SMODS.Joker({
         },
     },
 })
+
+-- Curse of the Shadow Prison
 SMODS.Joker({
     key = "shaddoll_prison",
     atlas = 'shaddoll',
