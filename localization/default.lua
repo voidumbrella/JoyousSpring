@@ -950,8 +950,7 @@ return {
 			j_joy_psy_alpha = {
 				name = "{C:joy_effect}PSY-Framegear Alpha",
 				text = {
-					"Create {C:attention}#1#{} {C:joy_normal}\"PSY-Frame Driver\"",
-					"when obtained, if not owned",
+					"Create {C:attention}#1#{} {C:joy_normal}\"PSY-Frame Driver\" when obtained",
 					"{C:inactive}(Must have room){}",
 					" ",
 					"{C:attention}Banish a{} {C:joy_normal}\"PSY-Frame Driver\"",
@@ -962,8 +961,7 @@ return {
 			j_joy_psy_beta = {
 				name = "{C:joy_effect}PSY-Framegear Beta",
 				text = {
-					"Create {C:attention}#1#{} {C:joy_normal}\"PSY-Frame Driver\"",
-					"when obtained, if not owned",
+					"Create {C:attention}#1#{} {C:joy_normal}\"PSY-Frame Driver\" when obtained",
 					"{C:inactive}(Must have room){}",
 					" ",
 					"{C:attention}Banish a{} {C:joy_normal}\"PSY-Frame Driver\"",
@@ -974,8 +972,7 @@ return {
 			j_joy_psy_gamma = {
 				name = "{C:joy_effect}PSY-Framegear Gamma",
 				text = {
-					"Create {C:attention}#1#{} {C:joy_normal}\"PSY-Frame Driver\"",
-					"when obtained, if not owned",
+					"Create {C:attention}#1#{} {C:joy_normal}\"PSY-Frame Driver\" when obtained",
 					"{C:inactive}(Must have room){}",
 					" ",
 					"{C:attention}Banish a{} {C:joy_normal}\"PSY-Frame Driver\"",
@@ -986,8 +983,7 @@ return {
 			j_joy_psy_delta = {
 				name = "{C:joy_effect}PSY-Framegear Delta",
 				text = {
-					"Create {C:attention}#1#{} {C:joy_normal}\"PSY-Frame Driver\"",
-					"when obtained, if not owned",
+					"Create {C:attention}#1#{} {C:joy_normal}\"PSY-Frame Driver\" when obtained",
 					"{C:inactive}(Must have room){}",
 					" ",
 					"{C:attention}Banish a{} {C:joy_normal}\"PSY-Frame Driver\"",
@@ -999,8 +995,7 @@ return {
 			j_joy_psy_epsilon = {
 				name = "{C:joy_effect}PSY-Framegear Epsilon",
 				text = {
-					"Create {C:attention}#1#{} {C:joy_normal}\"PSY-Frame Driver\"",
-					"when obtained, if not owned",
+					"Create {C:attention}#1#{} {C:joy_normal}\"PSY-Frame Driver\" when obtained",
 					"{C:inactive}(Must have room){}",
 					" ",
 					"{C:attention}Banish a{} {C:joy_normal}\"PSY-Frame Driver\"",
