@@ -777,7 +777,7 @@ return {
 				text = {
 					"Creates as many {C:joy_token}\"Generaider Tokens\"{}",
 					"as possible when {C:attention}Blind{} is selected",
-					"{C:inactive}(\"Generaiders\" are trated as Negative){}",
+					"{C:inactive}(\"Generaiders\" are treated as Negative){}",
 					" ",
 					"Once per round, you can {C:attention}tribute #1#{}",
 					"{C:joy_token}\"Generaider Tokens\"{} to create {C:attention}#2#{}",

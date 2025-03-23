@@ -353,7 +353,7 @@ JoyousSpring.create_pseudorandom = function(property_list, seed, must_have_room,
             return JoyousSpring.create_summon({
                 key = key_to_add,
                 edition = edition
-            })
+            }, must_have_room)
         end
     end
     return nil

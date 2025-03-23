@@ -831,7 +831,7 @@ SMODS.Joker({
                 end
             end
             local i = 0
-            while (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit + count) or (i > 20) do
+            while (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit - i + count) and (i < 20) do
                 JoyousSpring.summon_token("generaider")
                 i = i + 1
             end
@@ -851,7 +851,7 @@ SMODS.Joker({
             for i = 1, card.ability.extra.cards_to_create do
                 JoyousSpring.create_pseudorandom(
                     { { monster_archetypes = { "Generaider" }, rarity = 3 } },
-                    pseudoseed("j_joy_generaider_boss_stage"), true, true)
+                    pseudoseed("j_joy_generaider_boss_stage"), true, true, nil, #context.joy_selection)
             end
         end
         if context.end_of_round and context.main_eval then
