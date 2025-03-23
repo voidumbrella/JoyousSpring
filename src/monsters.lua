@@ -301,7 +301,8 @@ end
 JoyousSpring.can_use = function(card)
     return not ((G.play and #G.play.cards > 0) or
             (G.CONTROLLER.locked) or
-            (G.GAME.STOP_USE and G.GAME.STOP_USE > 0)) and (not card.debuff and card.facing ~= 'back') and
+            (G.GAME.STOP_USE and G.GAME.STOP_USE > 0)) and
+        (not card.ability.eternal and not card.debuff and card.facing ~= 'back') and
         G.STATE ~= G.STATES.HAND_PLAYED and G.STATE ~= G.STATES.DRAW_TO_HAND and G.STATE ~= G.STATES.PLAY_TAROT and
         card.config.center.can_use and card.config.center:can_use(card) or false
 end
