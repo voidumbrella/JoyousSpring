@@ -598,8 +598,8 @@ return {
 			j_joy_mekk_purple = {
 				name = "{C:joy_effect}Mekk-Knight Purple Nightfall",
 				text = {
-					"This card {C:attention}banishes{} until end of {C:attention}Ante{}",
-					"when {C:attention}Blind{} is selected to create {C:attention}#1#{}",
+					"This card {C:attention}banishes{} when {C:attention}Blind{} is selected",
+					"until {C:attention}Boss Blind{} is defeated to create {C:attention}#1#{}",
 					"{C:joy_normal}Main Deck \"Mekk-Knight\"{}",
 					"{C:inactive}(Must have room){}",
 				},
