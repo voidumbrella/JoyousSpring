@@ -459,7 +459,7 @@ SMODS.Joker({
                     end
                 end
             end
-            if not card.ability.extra.activated and context.before and context.main_eval and G.GAME.current_round.hands_played == 0 then
+            if not card.ability.extra.activated and context.before and context.main_eval then
                 card.ability.extra.hands_played = card.ability.extra.hands_played + 1
                 if card.ability.extra.hands_played >= card.ability.extra.hands_to_play then
                     card.ability.extra.activated = true
