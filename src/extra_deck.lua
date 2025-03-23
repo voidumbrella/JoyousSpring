@@ -100,14 +100,21 @@ JoyousSpring.open_extra_deck = function(forced, open, delay_close)
             trigger = "after",
             delay = 0.15 + (delay_close or 0),
             func = function()
-                G.joy_extra_deck.alignment.offset.y = -5
-                G.jokers.states.visible = true
-                G.consumeables.states.visible = true
+                G.E_MANAGER:add_event(Event({
+                    trigger = "ease",
+                    delay = 0.5,
+                    ref_table = G.joy_extra_deck.alignment.offset,
+                    ref_value = "y",
+                    ease_to = -5,
+                }))
                 G.E_MANAGER:add_event(Event({
                     blockable = false,
                     trigger = "after",
-                    delay = 0.15,
+                    delay = 0.5,
                     func = function()
+                        G.consumeables.states.visible = true
+                        G.jokers.states.visible = true
+                        G.joy_extra_deck.alignment.offset.y = -5
                         G.joy_extra_deck.states.visible = false
                         JoyousSpring.extra_deck_area:unhighlight_all()
                         JoyousSpring.field_spell_area:unhighlight_all()
