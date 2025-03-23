@@ -17,11 +17,13 @@ JoyousSpring.revive = function(key, must_have_room, edition, debuff_source)
             key = key,
             edition = edition
         })
+        added_card.states.visible = false
         if debuff_source then
             SMODS.debuff_card(added_card, true, debuff_source)
         end
         G.E_MANAGER:add_event(Event({
             func = function()
+                added_card.states.visible = true
                 added_card:add_to_deck()
                 G.jokers:emplace(added_card)
                 return true
