@@ -123,7 +123,7 @@ return {
 				name = "{C:joy_fusion}Lady's Dragonmaid",
 				text = {
 					"Adds {C:joy_fusion}\"House Dragonmaid\"{} to the",
-					"{C:joy_spell}Extra Deck{} when obtained",
+					"{C:joy_spell}Extra Deck{} when summoned",
 					"{C:inactive}(Must have room){}",
 					" ",
 					"{C:green}#1# in #2#{} chance to {C:attention}transform{} into an",
