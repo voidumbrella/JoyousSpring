@@ -108,16 +108,12 @@ function get_current_pool(_type, _rarity, _legendary, _append)
     local new_pool
 
     if not _legendary and _type == 'Joker' and JoyousSpring.config.only_ygo_cards then
-        new_pool = {}
-        for _, key in ipairs(_pool) do
-            if key:sub(1, 5) == "j_joy" then
-                table.insert(new_pool, key)
+        for i = 1, #_pool do
+            local key = _pool[i]
+            if key:sub(1, 5) ~= "j_joy" and key ~= "j_joker" then
+                _pool[i] = "UNAVAILABLE"
             end
         end
-        if #new_pool == 0 then
-            table.insert(new_pool, "j_joker")
-        end
-        return new_pool, _pool_key
     end
     return _pool, _pool_key
 end
