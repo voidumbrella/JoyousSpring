@@ -175,7 +175,7 @@ JoyousSpring.create_random_playing_card = function(enhanced_prob, silent, colour
             end
             local enhanced = enhanced_prob >= 1 and
                 (pseudorandom(seed or pseudoseed('JoyousSpring')) < 1 / enhanced_prob and true) or false
-            create_playing_card(
+            local added_card = create_playing_card(
                 {
                     front = G.P_CARDS[_suit .. '_' .. _rank],
                     center = enhanced and pseudorandom_element(cen_pool,
@@ -186,6 +186,7 @@ JoyousSpring.create_random_playing_card = function(enhanced_prob, silent, colour
                 silent,
                 colours or { G.C.JOY.EFFECT }
             )
+            SMODS.calculate_context({ playing_card_added = true, cards = { added_card } })
             return true
         end
     }))
