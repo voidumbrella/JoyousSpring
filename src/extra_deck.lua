@@ -276,7 +276,7 @@ function Game:start_run(args)
         self.CARD_W * 4.95,
         self.CARD_H * 0.95,
         {
-            card_limit = 5,
+            card_limit = self.GAME.modifiers["joy_extra_deck_slots"] or 5,
             type = 'extra_deck',
             highlight_limit = 1,
         }

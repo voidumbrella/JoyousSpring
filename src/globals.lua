@@ -115,6 +115,18 @@ function get_current_pool(_type, _rarity, _legendary, _append)
             end
         end
     end
+    if G.GAME.modifiers["joy_no_extra_deck_jokers"] then
+        for i = 1, #_pool do
+            local key = _pool[i]
+            local center = G.P_CENTERS[key]
+
+            if ((center or {}).config or {}).extra and type(center.config.extra) == "table" and center.config.extra.joyous_spring then
+                if not center.config.extra.joyous_spring.is_main_deck then
+                    _pool[i] = "UNAVAILABLE"
+                end
+            end
+        end
+    end
     return _pool, _pool_key
 end
 

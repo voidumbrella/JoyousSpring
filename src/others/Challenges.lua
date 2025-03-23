@@ -97,3 +97,18 @@ SMODS.Challenge({
     end,
     joy_colour = G.C.JOY.SPELL
 })
+
+-- Domain of the True Monarchs
+SMODS.Challenge({
+    key = "domain",
+    rules = {
+        custom = {
+            { id = "joy_extra_deck_slots",     value = 0 },
+            { id = "joy_no_extra_deck_jokers", value = true }
+        },
+    },
+    unlocked = function(self)
+        return true
+    end,
+    joy_colour = G.C.JOY.SPELL
+})
