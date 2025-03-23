@@ -201,8 +201,8 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
+                attribute = "EARTH",
+                monster_type = "Rock",
                 monster_archetypes = { ["Invoked"] = true }
             },
         },
@@ -230,8 +230,8 @@ SMODS.Joker({
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "EARTH",
-                monster_type = "Rock",
+                attribute = "LIGHT",
+                monster_type = "Fairy",
                 monster_archetypes = { ["Invoked"] = true }
             },
         },
