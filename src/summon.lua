@@ -171,10 +171,11 @@ end
 
 JoyousSpring.create_summon = function(add_params, must_have_room)
     local card = SMODS.create_card(add_params)
+    card.states.visible = false
     G.E_MANAGER:add_event(Event({
         func = function()
-            print((#G.jokers.cards + G.GAME.joker_buffer) .. " < " .. G.jokers.config.card_limit)
             if not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit) then
+                card.states.visible = true
                 card:add_to_deck()
                 G.jokers:emplace(card)
             else
