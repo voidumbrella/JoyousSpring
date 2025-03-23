@@ -1505,7 +1505,7 @@ return {
 				name = "{C:joy_effect}Subterror Guru",
 				text = {
 					"Once per round during a {C:attention}Blind{},",
-					"you can {C:attention}flip{} this card and #1# other {C:attention}Jokers{} face-down:",
+					"you can {C:attention}flip{} this card and #1# other {C:attention}Jokers{}:",
 					"This round, this card gives {X:mult,C:white}X#2#{} Mult for each {C:attention}flipped{} face-down",
 					"and {C:attention}+#3#{} hand size for each {C:attention}flipped{} face-up",
 					"{s:0.9,C:inactive}(Even if face-down)",
