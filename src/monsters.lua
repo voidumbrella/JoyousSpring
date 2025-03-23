@@ -159,7 +159,7 @@ JoyousSpring.init_joy_table = function(params)
         is_main_deck = params.is_main_deck or (not params.summon_type and true) or
             (params.summon_type == "NORMAL" or params.summon_type == "RITUAL" and true) or false,
         summon_type = params.summon_type or "NORMAL",
-        is_effect = params.is_effect or true,
+        is_effect = params.is_effect or false,
         is_tuner = params.is_tuner or false,
         is_pendulum = params.is_pendulum or false,
         is_trap = params.is_trap or false,
