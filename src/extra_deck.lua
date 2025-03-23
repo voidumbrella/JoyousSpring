@@ -65,6 +65,7 @@ JoyousSpring.create_UIBox_extra_deck = function()
                 n = G.UIT.O,
                 config = {
                     object = JoyousSpring.extra_deck_area,
+                    draw_layer = 1
                 }
             },
             {
