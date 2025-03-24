@@ -2111,7 +2111,7 @@ return {
 				text = {
 					"Retrigger each odd card {C:attention}#2#{} times",
 					" ",
-					"{C:attention}Revive #3#{} {C:joy_normal}\"Solfachord\"{} after {C:attention}#4#{} even cards are scored",
+					"{C:attention}Revive #3#{} {C:joy_normal}\"Solfachord\"{} after {C:attention}#4#{} odd cards are scored",
 					"{C:inactive}(#5#/#4#){}",
 				}
 			},
