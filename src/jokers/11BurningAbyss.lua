@@ -23,7 +23,7 @@ SMODS.Joker({
     rarity = 1,
     discovered = true,
     blueprint_compat = true,
-    eternal_compat = true,
+    eternal_compat = false,
     cost = 4,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.percent * 100 } }
@@ -66,7 +66,7 @@ SMODS.Joker({
     rarity = 1,
     discovered = true,
     blueprint_compat = true,
-    eternal_compat = true,
+    eternal_compat = false,
     cost = 4,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult, card.ability.extra.extra_mult, card.ability.extra.mult + (card.ability.extra.extra_mult * JoyousSpring.count_materials_in_graveyard({ { monster_type = "Fiend" } })) } }
@@ -108,7 +108,7 @@ SMODS.Joker({
     rarity = 1,
     discovered = true,
     blueprint_compat = true,
-    eternal_compat = true,
+    eternal_compat = false,
     cost = 4,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips, card.ability.extra.mills } }
@@ -158,7 +158,7 @@ SMODS.Joker({
     rarity = 1,
     discovered = true,
     blueprint_compat = false,
-    eternal_compat = true,
+    eternal_compat = false,
     cost = 4,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.h_size } }
@@ -203,7 +203,7 @@ SMODS.Joker({
     rarity = 1,
     discovered = true,
     blueprint_compat = true,
-    eternal_compat = true,
+    eternal_compat = false,
     cost = 4,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
@@ -254,7 +254,7 @@ SMODS.Joker({
     rarity = 1,
     discovered = true,
     blueprint_compat = true,
-    eternal_compat = true,
+    eternal_compat = false,
     cost = 4,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
@@ -308,7 +308,7 @@ SMODS.Joker({
     rarity = 1,
     discovered = true,
     blueprint_compat = false,
-    eternal_compat = true,
+    eternal_compat = false,
     cost = 4,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
@@ -355,7 +355,7 @@ SMODS.Joker({
     rarity = 1,
     discovered = true,
     blueprint_compat = true,
-    eternal_compat = true,
+    eternal_compat = false,
     cost = 4,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
@@ -409,7 +409,7 @@ SMODS.Joker({
     rarity = 1,
     discovered = true,
     blueprint_compat = false,
-    eternal_compat = true,
+    eternal_compat = false,
     cost = 3,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
@@ -451,7 +451,7 @@ SMODS.Joker({
     rarity = 1,
     discovered = true,
     blueprint_compat = false,
-    eternal_compat = true,
+    eternal_compat = false,
     cost = 3,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.adds } }
@@ -495,7 +495,7 @@ SMODS.Joker({
     rarity = 1,
     discovered = true,
     blueprint_compat = false,
-    eternal_compat = true,
+    eternal_compat = false,
     cost = 3,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
