@@ -722,7 +722,7 @@ return {
 			j_joy_generaider_dovelgus = {
 				name = "{C:joy_effect}Dovelgus, Generaider Boss of Iron",
 				text = {
-					"You can {C:attention}tribute #1#{} {C:joy_normal}\"Generaider\"{}",
+					"Once per round, you can {C:attention}tribute #1#{} {C:joy_normal}\"Generaider\"{}",
 					"and/or {C:joy_normal}Machine{} {C:attention}Jokers{}",
 					"to make each {C:joy_normal}\"Generaider\"{} and {C:joy_normal}Machine{}",
 					"give {X:mult,C:white}X#2#{} Mult this round",
