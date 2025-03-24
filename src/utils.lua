@@ -342,20 +342,19 @@ JoyousSpring.level_up_hand = function(card, hand_key, instant, amount)
 end
 
 JoyousSpring.create_pseudorandom = function(property_list, seed, must_have_room, not_owned, edition, card_limit_modif)
-    if not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit + (card_limit_modif or 0)) then
-        local choices = JoyousSpring.get_materials_in_collection(property_list)
+    local choices = JoyousSpring.get_materials_in_collection(property_list)
 
-        if not_owned then
-            choices = JoyousSpring.get_not_owned(choices)
-        end
-        local key_to_add = pseudorandom_element(choices, seed or pseudoseed("JoyousSpring"))
-        if key_to_add then
-            return JoyousSpring.create_summon({
-                key = key_to_add,
-                edition = edition
-            }, must_have_room)
-        end
+    if not_owned then
+        choices = JoyousSpring.get_not_owned(choices)
     end
+    local key_to_add = pseudorandom_element(choices, seed or pseudoseed("JoyousSpring"))
+    if key_to_add then
+        return JoyousSpring.create_summon({
+            key = key_to_add,
+            edition = edition
+        }, must_have_room)
+    end
+
     return nil
 end
 
