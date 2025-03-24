@@ -108,3 +108,15 @@ match_indent = true
 payload = '''
 if G.GAME.current_round.discards_left <= 0 or #G.hand.highlighted <= 0 or #G.hand.highlighted > 5 then
 '''
+
+# Keep cards flipped
+
+[[patches]]
+[patches.pattern]
+target = "blind.lua"
+pattern = "if v.facing == 'back' then v:flip() end"
+position = 'at'
+match_indent = true
+payload = '''
+if self.name == 'Amber Acorn' and v.facing == 'back' then v:flip() end
+'''
