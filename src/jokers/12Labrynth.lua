@@ -84,7 +84,7 @@ SMODS.Joker({
                                             if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit +
                                                 ((card.edition and card.edition.negative) and 0 or 1) then
                                                 JoyousSpring.revive_pseudorandom(
-                                                    { { rarity = 1, monster_archetypes = { "Labrynth" } } },
+                                                    { { rarity = 1, monster_archetypes = { "Labrynth" }, exclude_keys = { "j_joy_lab_clock" } } },
                                                     pseudoseed("j_joy_lab_clock"),
                                                     false
                                                 )
