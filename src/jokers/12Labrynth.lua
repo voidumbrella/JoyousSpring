@@ -581,6 +581,11 @@ SMODS.Joker({
             card.ability.extra.active = false
         end
     end,
+    joy_set_cost = function(card)
+        if JoyousSpring.count_materials_owned({ { monster_archetypes = { "Labrynth" } } }) > 0 then
+            card.cost = 0
+        end
+    end,
 })
 
 -- Labrynth Archfiend

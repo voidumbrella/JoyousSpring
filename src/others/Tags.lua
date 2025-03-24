@@ -67,6 +67,7 @@ SMODS.Tag({
                     return true
                 end)
             tag.triggered = true
+            joy_forced_card:set_cost()
             return joy_forced_card
         end
     end,
