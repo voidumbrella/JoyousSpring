@@ -247,8 +247,8 @@ end
 ---@param context CalcContext|table
 ---@return boolean `true` if it just activated its flip effect
 JoyousSpring.calculate_flip_effect = function(card, context)
-    if (context.joy_card_flipped and context.joy_card_flipped == card and card.facing == "front") or
-        (context.setting_blind and context.main_eval and JoyousSpring.flip_effect_active(card)) then
+    if not card.ability.extra.joyous_spring.flip_active and ((context.joy_card_flipped and context.joy_card_flipped == card and card.facing == "front") or
+            (context.setting_blind and context.main_eval and JoyousSpring.flip_effect_active(card))) then
         if card.facing == 'back' then
             card:flip(card)
         end

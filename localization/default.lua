@@ -2408,48 +2408,122 @@ return {
 			--#endregion
 			--#region Paleozoic
 			j_joy_paleo_canadia = {
-				name = "Paleozoic Canadia",
-				text = { "TBD" }
+				name = "{C:joy_trap}Paleozoic Canadia",
+				text = {
+					"Gains {C:mult}+#1#{} Mult for each {C:attention}Joker{} {C:attention}flipped",
+					"{s:0.9,C:inactive}(Even while face-down)",
+					"{C:inactive}(Currently {C:mult}+#2# {C:inactive}Mult)",
+					" ",
+					"{C:joy_effect}FLIP{}: {C:attention}Revive #3#{} {C:joy_normal}\"Paleozoic\"",
+					" ",
+					"Can't be debuffed"
+				}
 			},
 			j_joy_paleo_dino = {
-				name = "Paleozoic Dinomischus",
-				text = { "TBD" }
+				name = "{C:joy_trap}Paleozoic Dinomischus",
+				text = {
+					"{C:joy_effect}FLIP{}: This card and {C:attention}#1#{} other {C:joy_trap}Trap{} {C:attention}banish{} at end of round",
+					"until {C:attention}Blind{} is selected and {C:attention}revive #2#{} {C:joy_normal}\"Paleozoic\"",
+					" ",
+					"Can't be debuffed"
+				}
 			},
 			j_joy_paleo_eldonia = {
-				name = "Paleozoic Eldonia",
-				text = { "TBD" }
+				name = "{C:joy_trap}Paleozoic Eldonia",
+				text = {
+					"{C:joy_effect}FLIP{}: {C:chips}+#1#{} Chips this round",
+					"and {C:attention}revive #2#{} {C:joy_normal}\"Paleozoic\"",
+					" ",
+					"Can't be debuffed"
+				}
 			},
 			j_joy_paleo_hallu = {
-				name = "Paleozoic Hallucigenia",
-				text = { "TBD" }
+				name = "{C:joy_trap}Paleozoic Hallucigenia",
+				text = {
+					"{C:joy_effect}FLIP{}: {C:mult}+#1#{} Mult this round",
+					"and {C:attention}revive #2#{} {C:joy_normal}\"Paleozoic\"",
+					" ",
+					"Can't be debuffed"
+				}
 			},
 			j_joy_paleo_lean = {
-				name = "Paleozoic Leanchoilia",
-				text = { "TBD" }
+				name = "{C:joy_trap}Paleozoic Leanchoilia",
+				text = {
+					"Gains {C:chips}+#1#{} Chips for each {C:attention}Joker{} {C:attention}flipped",
+					"{s:0.9,C:inactive}(Even while face-down)",
+					"{C:inactive}(Currently {C:chips}+#2# {C:inactive}Chips)",
+					" ",
+					"{C:joy_effect}FLIP{}: {C:attention}Revive #3#{} {C:joy_normal}\"Paleozoic\"",
+					" ",
+					"Can't be debuffed"
+				}
 			},
 			j_joy_paleo_marrella = {
-				name = "Paleozoic Marrella",
-				text = { "TBD" }
+				name = "{C:joy_trap}Paleozoic Marrella",
+				text = {
+					"{C:joy_effect}FLIP{}: {C:attention}Revive #1#{} {C:joy_normal}\"Paleozoic\" ",
+					"and send {C:attention}#2#{} {C:joy_trap}Trap{} {C:joy_normal}\"Paleozoic\"{} to the {C:attention}GY",
+					" ",
+					"Can't be debuffed"
+				}
 			},
 			j_joy_paleo_oleno = {
-				name = "Paleozoic Olenoides",
-				text = { "TBD" }
+				name = "{C:joy_trap}Paleozoic Olenoides",
+				text = {
+					"{C:joy_effect}FLIP{}: {C:red}+#1#{} Discard this round",
+					"and {C:attention}revive #2#{} {C:joy_normal}\"Paleozoic\"",
+					" ",
+					"Can't be debuffed"
+				}
 			},
 			j_joy_paleo_pikaia = {
-				name = "Paleozoic Pikaia",
-				text = { "TBD" }
+				name = "{C:joy_trap}Paleozoic Pikaia",
+				text = {
+					"{C:joy_effect}FLIP{}: {C:attention}+#1#{} hand size this round",
+					"and {C:attention}revive #2#{} {C:joy_normal}\"Paleozoic\"",
+					" ",
+					"Can't be debuffed"
+				}
 			},
 			j_joy_paleo_cambro = {
-				name = "Paleozoic Cambroraster",
-				text = { "TBD" }
+				name = "{C:joy_link}Paleozoic Cambroraster",
+				text = {
+					"Add {C:attention}#1#{} {C:joy_xyz}Xyz{} {C:joy_normal}\"Paleozoic\"{} to the {C:joy_spell}Extra Deck{} when summoned",
+					" ",
+					"{C:joy_normal}\"Paleozoic\"{} {C:attention}revive{} other cards as {C:dark_edition}Negative",
+					" ",
+					"Can't be debuffed"
+				},
+				joy_summon_conditions = {
+					"{C:attention}2{} {C:joy_normal}\"Paleozoic\"{}",
+				}
 			},
 			j_joy_paleo_anomalo = {
-				name = "Paleozoic Anomalocaris",
-				text = { "TBD" }
+				name = "{C:joy_xyz}Paleozoic Anomalocaris",
+				text = {
+					"{C:joy_xyz}Detach{} {C:attention}#1#{}: Gains {X:mult,C:white}X#2#{} Mult this round",
+					"{C:inactive}(Currently {X:mult,C:white}X#3#{} {C:inactive}Mult)",
+					" ",
+					"Attach {C:attention}#4# material{} to this card when a {C:joy_trap}Trap{} is flipped face-up",
+					" ",
+					"Can't be debuffed"
+				},
+				joy_summon_conditions = {
+					"{C:attention}3+{} {C:joy_trap}Traps{}",
+				}
 			},
 			j_joy_paleo_opa = {
-				name = "Paleozoic Opabinia",
-				text = { "TBD" }
+				name = "{C:joy_xyz}Paleozoic Opabinia",
+				text = {
+					"{C:joy_xyz}Detach{} {C:attention}#1#{}: Create {C:attention}#2#{} {C:joy_normal}Main Deck \"Paleozoic\"{}",
+					" ",
+					"{C:joy_trap}Traps{} are {C:attention}flipped{} face-up when {C:attention}Blind{} is selected",
+					" ",
+					"Can't be debuffed"
+				},
+				joy_summon_conditions = {
+					"{C:attention}2{} {C:joy_water}Water{} {C:attention}Jokers{}",
+				}
 			},
 			--#endregion
 			--#region Invoked

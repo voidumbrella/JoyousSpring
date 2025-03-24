@@ -143,15 +143,15 @@ SMODS.Joker({
                 }
             end
         end
-        if JoyousSpring.calculate_flip_effect(card, context) then
-            card.ability.extra.activated = true
-            G.GAME.round_resets.discards = G.GAME.round_resets.discards + card.ability.extra.discards
-            ease_discard(card.ability.extra.discards)
-        end
         if card.ability.extra.activated and context.end_of_round and context.game_over == false and context.main_eval then
             card.ability.extra.activated = false
             G.GAME.round_resets.discards = G.GAME.round_resets.discards - card.ability.extra.discards
             ease_discard(-card.ability.extra.discards)
+        end
+        if JoyousSpring.calculate_flip_effect(card, context) and not card.ability.extra.activated then
+            card.ability.extra.activated = true
+            G.GAME.round_resets.discards = G.GAME.round_resets.discards + card.ability.extra.discards
+            ease_discard(card.ability.extra.discards)
         end
     end,
     add_to_deck = function(self, card, from_debuff)
@@ -217,15 +217,15 @@ SMODS.Joker({
                 }
             end
         end
-        if JoyousSpring.calculate_flip_effect(card, context) then
-            card.ability.extra.activated = true
-            G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.hands
-            ease_hands_played(card.ability.extra.hands)
-        end
         if card.ability.extra.activated and context.end_of_round and context.game_over == false and context.main_eval then
             card.ability.extra.activated = false
             G.GAME.round_resets.hands = G.GAME.round_resets.hands - card.ability.extra.hands
             ease_hands_played(-card.ability.extra.hands)
+        end
+        if JoyousSpring.calculate_flip_effect(card, context) and not card.ability.extra.activated then
+            card.ability.extra.activated = true
+            G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.hands
+            ease_hands_played(card.ability.extra.hands)
         end
     end,
     add_to_deck = function(self, card, from_debuff)
