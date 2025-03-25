@@ -350,7 +350,7 @@ SMODS.Joker({
                     JoyousSpring.revive_pseudorandom(
                         { { rarity = 2 } },
                         pseudoseed("j_joy_spright_elf"),
-                        true, nil, (card.edition and card.edition.negative and 0 or -1)
+                        true, nil, (card.edition and card.edition.negative and 0 or 1)
                     )
                 end
             end
