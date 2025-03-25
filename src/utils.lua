@@ -119,9 +119,14 @@ JoyousSpring.get_materials_in_collection = function(property_list)
     local pool = {}
     for k, _ in pairs(G.P_CENTERS) do
         if k:sub(1, 2) == "j_" then
-            for _, property in ipairs(property_list) do
-                if JoyousSpring.is_material_center(k, property) then
-                    table.insert(pool, k)
+            if not property_list or #property_list == 0 then
+                table.insert(pool, k)
+            else
+                for _, property in ipairs(property_list) do
+                    if JoyousSpring.is_material_center(k, property) then
+                        table.insert(pool, k)
+                        break
+                    end
                 end
             end
         end
