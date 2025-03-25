@@ -40,7 +40,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.setting_blind and context.main_eval then
                 JoyousSpring.transform_card(card, "j_joy_dmaid_tinkhec")
@@ -60,6 +60,7 @@ SMODS.Joker({
             end
             G.GAME.current_round.free_rerolls = G.GAME.current_round.free_rerolls + card.ability.extra.rerolls
             calculate_reroll_cost(true)
+            card:juice_up()
         end
     end,
 })
@@ -97,7 +98,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.transform_card(card, "j_joy_dmaid_kitchen")
@@ -190,7 +191,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.setting_blind and context.main_eval then
                 JoyousSpring.transform_card(card, "j_joy_dmaid_lorpar")
@@ -219,6 +220,7 @@ SMODS.Joker({
                     add_tag(Tag('tag_joy_booster'))
                 end
             end
+            card:juice_up()
         end
     end,
 })
@@ -256,7 +258,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.transform_card(card, "j_joy_dmaid_parlor")
@@ -346,7 +348,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.setting_blind and context.main_eval then
                 JoyousSpring.transform_card(card, "j_joy_dmaid_ernus")
@@ -355,14 +357,19 @@ SMODS.Joker({
     end,
     add_to_deck = function(self, card, from_debuff)
         if not from_debuff and not card.debuff then
+            local has_revived = false
             if pseudorandom("j_joy_dmaid_nurse") < G.GAME.probabilities.normal / card.ability.extra.odds then
                 for i = 1, card.ability.extra.revives do
-                    JoyousSpring.revive_pseudorandom(
+                    local revived_card = JoyousSpring.revive_pseudorandom(
                         { { rarity = 1, monster_archetypes = { "Dragonmaid" } } },
                         pseudoseed("j_joy_dmaid_nurse"),
-                        true
+                        true, nil, (card.edition and card.edition.negative and 0 or -1)
                     )
+                    has_revived = (revived_card and true) or has_revived
                 end
+            end
+            if has_revived then
+                SMODS.calculate_effect({ message = localize("k_joy_revive") }, card)
             end
         end
     end,
@@ -416,7 +423,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.transform_card(card, "j_joy_dmaid_nurse")
@@ -483,7 +490,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.setting_blind and context.main_eval then
                 JoyousSpring.transform_card(card, "j_joy_dmaid_nudyarl")
@@ -492,22 +499,12 @@ SMODS.Joker({
     end,
     add_to_deck = function(self, card, from_debuff)
         if not from_debuff and not card.debuff then
-            local choices = {
-                "j_joy_dmaid_kitchen",
-                "j_joy_dmaid_tinkhec",
-                "j_joy_dmaid_parlor",
-                "j_joy_dmaid_lorpar",
-                "j_joy_dmaid_nurse",
-                "j_joy_dmaid_ernus",
-                "j_joy_dmaid_laundry",
-                "j_joy_dmaid_nudyarl",
-                "j_joy_dmaid_chamber",
-                "j_joy_dmaid_stern"
-            }
+            local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Dragonmaid" }, is_main_deck = true } })
 
             for i = 1, card.ability.extra.mill do
                 JoyousSpring.send_to_graveyard(pseudorandom_element(choices, pseudoseed("j_joy_dmaid_laundry")))
             end
+            SMODS.calculate_effect({ message = localize("k_joy_mill") }, card)
         end
     end,
 })
@@ -545,7 +542,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.transform_card(card, "j_joy_dmaid_laundry")
@@ -619,7 +616,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.setting_blind and context.main_eval then
                 JoyousSpring.transform_card(card, "j_joy_dmaid_stern")
@@ -687,7 +684,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.transform_card(card, "j_joy_dmaid_chamber")
@@ -696,17 +693,23 @@ SMODS.Joker({
     end,
     add_to_deck = function(self, card, from_debuff)
         if not from_debuff and not card.debuff then
+            local has_revived = false
             if pseudorandom("j_joy_dmaid_stern") < G.GAME.probabilities.normal / card.ability.extra.odds then
                 for i = 1, card.ability.extra.revives do
+                    local revived_card
                     JoyousSpring.revive_pseudorandom(
                         {
                             { rarity = 2, monster_archetypes = { "Dragonmaid" } },
                             { rarity = 3, monster_archetypes = { "Dragonmaid" } },
                         },
                         pseudoseed("j_joy_dmaid_stern"),
-                        true
+                        true, nil, (card.edition and card.edition.negative and 0 or -1)
                     )
+                    has_revived = revived_card and true or has_revived
                 end
+            end
+            if has_revived then
+                SMODS.calculate_effect({ message = localize("k_joy_revive") }, card)
             end
         end
     end,
@@ -775,17 +778,11 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.setting_blind and context.main_eval then
                 if pseudorandom("j_joy_dmaid_lady") < G.GAME.probabilities.normal / card.ability.extra.odds then
-                    local choices = {
-                        "j_joy_dmaid_tinkhec",
-                        "j_joy_dmaid_lorpar",
-                        "j_joy_dmaid_ernus",
-                        "j_joy_dmaid_nudyarl",
-                        "j_joy_dmaid_stern"
-                    }
+                    local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Dragonmaid" }, rarity = 2 } })
                     JoyousSpring.transform_card(card,
                         pseudorandom_element(choices, pseudoseed("j_joy_dmaid_lady")) or j_joy_dmaid_tinkhec)
                 end
@@ -796,6 +793,7 @@ SMODS.Joker({
         if not from_debuff and not card.debuff then
             if #JoyousSpring.extra_deck_area.cards < JoyousSpring.extra_deck_area.config.card_limit then
                 JoyousSpring.add_to_extra_deck("j_joy_dmaid_house")
+                SMODS.calculate_effect({ message = localize("k_joy_add") }, card)
             end
         end
     end,
@@ -825,7 +823,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    cost = 7,
+    cost = 9,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_transform" }
@@ -869,7 +867,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval then
                 card.ability.extra.blinds_won = card.ability.extra.blinds_won + 1
@@ -920,7 +918,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 7,
+    cost = 9,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_transform" }
@@ -945,28 +943,18 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.setting_blind and context.main_eval then
                 if G.GAME.blind and ((not G.GAME.blind.disabled) and (G.GAME.blind.boss)) then
                     G.GAME.blind:disable()
-                    local choices = {
-                        "j_joy_dmaid_kitchen",
-                        "j_joy_dmaid_parlor",
-                        "j_joy_dmaid_nurse",
-                        "j_joy_dmaid_laundry",
-                        "j_joy_dmaid_chamber",
-                    }
 
                     for i = 1, card.ability.extra.cards_to_create do
-                        if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
-                            SMODS.add_card({
-                                key = pseudorandom_element(choices, pseudoseed("j_joy_dmaid_sheou"))
-                            })
-                        end
+                        JoyousSpring.create_pseudorandom({ { monster_archetypes = { "Dragonmaid" }, rarity = 1 } },
+                            pseudoseed("j_joy_dmaid_sheou"), true)
                     end
                     JoyousSpring.transform_card(card, "j_joy_dmaid_house")
-                    card_eval_status_text(card, 'extra', nil, nil, nil, { message = localize('ph_boss_disabled') })
+                    return { message = localize('ph_boss_disabled') }
                 end
             end
         end

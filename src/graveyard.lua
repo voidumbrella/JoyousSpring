@@ -7,15 +7,29 @@
 ---@param must_have_room boolean?
 ---@param edition any
 ---@return Card?
-JoyousSpring.revive = function(key, must_have_room, edition)
+JoyousSpring.revive = function(key, must_have_room, edition, debuff_source)
     if JoyousSpring.graveyard[key] and JoyousSpring.graveyard[key].summonable > 0 and
         (not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit)) then
         JoyousSpring.graveyard[key].count = JoyousSpring.graveyard[key].count - 1
         JoyousSpring.graveyard[key].summonable = JoyousSpring.graveyard[key].summonable - 1
-        local added_card = SMODS.add_card({
+
+        local added_card = SMODS.create_card({
             key = key,
             edition = edition
         })
+        added_card.states.visible = false
+        if debuff_source then
+            SMODS.debuff_card(added_card, true, debuff_source)
+        end
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                added_card.states.visible = true
+                added_card:add_to_deck()
+                G.jokers:emplace(added_card)
+                return true
+            end
+        }))
+
         added_card.ability.extra.joyous_spring.summoned = JoyousSpring.is_extra_deck_monster(added_card) or false
         added_card.ability.extra.joyous_spring.revived = true
         added_card:set_cost()
@@ -29,11 +43,14 @@ end
 ---@param property_list table
 ---@param seed number
 ---@param must_have_room boolean?
----@param edition any
+---@param edition any?
+---@param card_limit_modif integer?
+---@param different_names boolean?
 ---@return Card?
-JoyousSpring.revive_pseudorandom = function(property_list, seed, must_have_room, edition)
-    if not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit) then
-        local choices = JoyousSpring.get_materials_in_graveyard(property_list, true)
+JoyousSpring.revive_pseudorandom = function(property_list, seed, must_have_room, edition, card_limit_modif,
+                                            different_names)
+    if not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit + (card_limit_modif or 0)) then
+        local choices = JoyousSpring.get_materials_in_graveyard(property_list, true, different_names)
         local key_to_add = pseudorandom_element(choices, seed)
         if key_to_add then
             return JoyousSpring.revive(key_to_add, must_have_room, edition)
@@ -43,17 +60,32 @@ JoyousSpring.revive_pseudorandom = function(property_list, seed, must_have_room,
 end
 
 JoyousSpring.send_to_graveyard = function(card)
-    if JoyousSpring.graveyard then
+    if JoyousSpring.graveyard and not JoyousSpring.delete_run then
         if type(card) == "string" then
-            local not_summoned = JoyousSpring.is_material_center(card, { is_extra_deck = true })
+            local not_summoned = JoyousSpring.is_material_center(card, { exclude_summon_types = { "NORMAL" } })
             local cannot_revive = G.P_CENTERS[card].config.extra.joyous_spring.cannot_revive or not_summoned
+            SMODS.calculate_context({
+                joy_sent_to_gy = true,
+                joy_key = card,
+                joy_from_field = false,
+                joy_summoned =
+                    not not_summoned
+            })
             if not JoyousSpring.graveyard[card] then JoyousSpring.graveyard[card] = { count = 0, summonable = 0 } end
             JoyousSpring.graveyard[card].count = JoyousSpring.graveyard[card].count + 1
             JoyousSpring.graveyard[card].summonable = JoyousSpring.graveyard[card].summonable +
                 (cannot_revive and 0 or 1)
         elseif type(card) == "table" then
-            local not_summoned = JoyousSpring.is_extra_deck_monster(card) and not JoyousSpring.is_summoned(card)
+            local not_summoned = not JoyousSpring.is_summon_type(card, "NORMAL") and not JoyousSpring.is_summoned(card)
             local cannot_revive = card.ability.extra.joyous_spring.cannot_revive or not_summoned
+            SMODS.calculate_context({
+                joy_sent_to_gy = true,
+                joy_card = card,
+                joy_key = card.config.center.key,
+                joy_from_field = card.area and card.area == G.jokers or false,
+                joy_summoned = not
+                    not_summoned
+            })
             if not JoyousSpring.graveyard[card.config.center_key] then JoyousSpring.graveyard[card.config.center_key] = { count = 0, summonable = 0 } end
             JoyousSpring.graveyard[card.config.center_key].count = JoyousSpring.graveyard[card.config.center_key].count +
                 1
@@ -61,6 +93,14 @@ JoyousSpring.send_to_graveyard = function(card)
                 .summonable + (cannot_revive and 0 or 1)
         end
     end
+end
+
+-- Prevent GY from doing stuff at the end of the run
+local game_delete_run_ref = Game.delete_run
+function Game:delete_run()
+    JoyousSpring.delete_run = true
+    game_delete_run_ref(self)
+    JoyousSpring.delete_run = nil
 end
 
 JoyousSpring.create_graveyard_tab = function()

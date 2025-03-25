@@ -33,14 +33,26 @@ end
 ---@param card Card
 JoyousSpring.return_to_extra_deck = function(card)
     if card.area and card.area == G.jokers then
-        G.jokers:remove_card(card)
-        card:remove_from_deck()
-        card.ability.extra.joyous_spring.summoned = false
-        card:set_cost()
-        JoyousSpring.extra_deck_area:emplace(card)
-        if JokerDisplay then
-            card:joker_display_remove()
-        end
+        SMODS.calculate_effect({
+            message = localize("k_joy_return"),
+            func = function()
+                G.E_MANAGER:add_event(Event({
+                    trigger = "after",
+                    delay = 0.3,
+                    func = function()
+                        G.jokers:remove_card(card)
+                        card:remove_from_deck()
+                        card.ability.extra.joyous_spring.summoned = false
+                        card:set_cost()
+                        JoyousSpring.extra_deck_area:emplace(card)
+                        if JokerDisplay then
+                            card:joker_display_remove()
+                        end
+                        return true
+                    end,
+                }))
+            end
+        }, card)
     end
 end
 
@@ -53,6 +65,7 @@ JoyousSpring.create_UIBox_extra_deck = function()
                 n = G.UIT.O,
                 config = {
                     object = JoyousSpring.extra_deck_area,
+                    draw_layer = 1
                 }
             },
             {
@@ -88,14 +101,21 @@ JoyousSpring.open_extra_deck = function(forced, open, delay_close)
             trigger = "after",
             delay = 0.15 + (delay_close or 0),
             func = function()
-                G.joy_extra_deck.alignment.offset.y = -5
-                G.jokers.states.visible = true
-                G.consumeables.states.visible = true
+                G.E_MANAGER:add_event(Event({
+                    trigger = "ease",
+                    delay = 0.5,
+                    ref_table = G.joy_extra_deck.alignment.offset,
+                    ref_value = "y",
+                    ease_to = -5,
+                }))
                 G.E_MANAGER:add_event(Event({
                     blockable = false,
                     trigger = "after",
-                    delay = 0.15,
+                    delay = 0.5,
                     func = function()
+                        G.consumeables.states.visible = true
+                        G.jokers.states.visible = true
+                        G.joy_extra_deck.alignment.offset.y = -5
                         G.joy_extra_deck.states.visible = false
                         JoyousSpring.extra_deck_area:unhighlight_all()
                         JoyousSpring.field_spell_area:unhighlight_all()
@@ -201,13 +221,31 @@ function Card:remove_from_area()
         self.edition and self.edition.card_limit then
         JoyousSpring.field_spell_area.config.card_limit =
             JoyousSpring.field_spell_area.config.card_limit - self.edition.card_limit
+        if JoyousSpring.field_spell_area.config.card_limit < 1 then
+            JoyousSpring.field_spell_area.config.card_limit = 1
+        end
     end
     if self.area == JoyousSpring.extra_deck_area and
         self.edition and self.edition.card_limit then
         JoyousSpring.extra_deck_area.config.card_limit =
             JoyousSpring.extra_deck_area.config.card_limit - self.edition.card_limit
+        if JoyousSpring.extra_deck_area.config.card_limit < 5 then
+            JoyousSpring.extra_deck_area.config.card_limit = 5
+        end
     end
     card_remove_from_area_ref(self)
+end
+
+local card_set_edition_ref = Card.set_edition
+function Card:set_edition(edition, immediate, silent)
+    if edition and edition.negative and JoyousSpring.is_monster_card(card) and card.area then
+        if card.area == JoyousSpring.extra_deck_area then
+            JoyousSpring.extra_deck_area.config.card_limit = JoyousSpring.extra_deck_area.config.card_limit + 1
+        elseif card.area == JoyousSpring.field_spell_area then
+            JoyousSpring.field_spell_area.config.card_limit = JoyousSpring.field_spell_area.config.card_limit + 1
+        end
+    end
+    card_set_edition_ref(self, edition, immediate, silent)
 end
 
 local cardarea_remove_ref = CardArea.remove
@@ -238,7 +276,7 @@ function Game:start_run(args)
         self.CARD_W * 4.95,
         self.CARD_H * 0.95,
         {
-            card_limit = 5,
+            card_limit = self.GAME.modifiers["joy_extra_deck_slots"] or 5,
             type = 'extra_deck',
             highlight_limit = 1,
         }

@@ -66,7 +66,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.joker_main then
                 return {
                     xmult = 1 +
@@ -78,6 +78,16 @@ SMODS.Joker({
                 local types_owned = JoyousSpring.extra_deck_types_owned() + 1
                 ease_hands_played(types_owned - G.GAME.current_round.hands_left, true)
                 card.ability.extra.hands = {}
+            end
+            if context.debuff_hand and context.main_eval then
+                if card.ability.extra.hands[context.scoring_name] then
+                    return {
+                        debuff = true
+                    }
+                end
+            end
+            if context.after and context.main_eval then
+                card.ability.extra.hands[context.scoring_name] = true
             end
         end
     end,
@@ -100,16 +110,6 @@ SMODS.Joker({
             SMODS.debuff_card(added_card, true, "j_joy_boarder")
         end
     end,
-    joy_debuff_hand = function(joker, cards, hand, handname)
-        if not joker.debuff then
-            if joker.ability.extra.hands[handname] then
-                return true
-            else
-                joker.ability.extra.hands[handname] = true
-                return false
-            end
-        end
-    end,
     joker_display_def = function(JokerDisplay)
         return {
             text = {
@@ -128,6 +128,7 @@ SMODS.Joker({
     end
 })
 
+-- Gren Maju Da Eiza
 SMODS.Joker({
     key = "grenmaju",
     atlas = 'Misc02',
@@ -156,11 +157,103 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.joker_main then
                 return {
                     chips = card.ability.extra.chips * (G.GAME.joy_cards_banished or 0)
                 }
+            end
+        end
+    end,
+})
+
+-- Fiendish Rhino Warrior
+SMODS.Joker({
+    key = "rhino",
+    atlas = 'Misc03',
+    pos = { x = 2, y = 0 },
+    rarity = 1,
+    discovered = true,
+    blueprint_compat = false,
+    eternal_compat = true,
+    cost = 4,
+    loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_revive" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_material" }
+        end
+        return { vars = { card.ability.extra.mills, card.ability.extra.revives } }
+    end,
+    joy_desc_cards = {
+        { properties = { { monster_type = "Fiend" } }, name = "Sends" },
+    },
+    generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
+    config = {
+        extra = {
+            joyous_spring = JoyousSpring.init_joy_table {
+                attribute = "EARTH",
+                monster_type = "Fiend",
+                monster_archetypes = {}
+            },
+            mills = 5,
+            revives = 1
+        },
+    },
+    calculate = function(self, card, context)
+        if context.joy_summon and context.main_eval and not context.blueprint_card then
+            for _, joker in ipairs(context.joy_summon_materials) do
+                if joker == card then
+                    local choices = JoyousSpring.get_materials_in_collection({ { monster_type = "Fiend" } })
+                    for _ = 1, card.ability.extra.mills do
+                        local key_to_send = pseudorandom_element(choices, pseudoseed("j_joy_rhino"))
+                        JoyousSpring.send_to_graveyard(key_to_send or "j_joy_ba_cagna")
+                    end
+                    JoyousSpring.revive_pseudorandom({ { monster_type = "Fiend" } }, pseudoseed("j_joy_rhino"))
+                    break
+                end
+            end
+        end
+    end,
+})
+
+-- Tour Guide From the Underworld
+SMODS.Joker({
+    key = "tourguide",
+    atlas = 'Misc03',
+    pos = { x = 4, y = 0 },
+    rarity = 2,
+    discovered = true,
+    blueprint_compat = false,
+    eternal_compat = true,
+    cost = 6,
+    loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_main_deck_joker" }
+        end
+        return { vars = { card.ability.extra.adds } }
+    end,
+    joy_desc_cards = {
+        { properties = { { is_main_deck = true, monster_type = "Fiend" } }, name = "Creates" },
+    },
+    generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
+    config = {
+        extra = {
+            joyous_spring = JoyousSpring.init_joy_table {
+                attribute = "DARK",
+                monster_type = "Fiend",
+                monster_archetypes = {}
+            },
+            adds = 1
+        },
+    },
+    add_to_deck = function(self, card, from_debuff)
+        if not card.debuff and not from_debuff then
+            for _ = 1, card.ability.extra.adds do
+                JoyousSpring.create_pseudorandom(
+                    { { monster_type = "Fiend", rarity = 1, is_main_deck = true }, { monster_type = "Fiend", rarity = 2, is_main_deck = true } },
+                    pseudoseed("j_joy_tourguide"), false, false, "e_negative")
             end
         end
     end,
@@ -198,29 +291,12 @@ SMODS.Joker({
             max = 2
         },
     },
-    calculate = function(self, card, context)
-        if card.facing ~= 'back' then
-            if context.joker_main then
-                return {
-                    mult = card.ability.extra.mult * (G.GAME.joy_cards_destroyed or 0)
-                }
-            end
-        end
-    end,
     use = function(self, card, area, copier)
         local destroyed_cards = {}
         for i = #G.hand.highlighted, 1, -1 do
             destroyed_cards[#destroyed_cards + 1] = G.hand.highlighted[i]
         end
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = 0.4,
-            func = function()
-                play_sound('tarot1')
-                card:juice_up(0.3, 0.5)
-                return true
-            end
-        }))
+        JoyousSpring.pre_consumable_use(card, true)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.2,
@@ -236,11 +312,20 @@ SMODS.Joker({
                 return true
             end
         }))
-        delay(0.3)
+        JoyousSpring.post_consumable_highlighted_use()
         SMODS.calculate_context({ remove_playing_cards = true, removed = destroyed_cards })
     end,
     can_use = function(self, card)
         return card.ability.extra.max >= #G.hand.highlighted and #G.hand.highlighted >= 1
+    end,
+    calculate = function(self, card, context)
+        if JoyousSpring.can_use_abilities(card) then
+            if context.joker_main then
+                return {
+                    mult = card.ability.extra.mult * (G.GAME.joy_cards_destroyed or 0)
+                }
+            end
+        end
     end,
     joker_display_def = function(JokerDisplay)
         return {
@@ -297,7 +382,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and context.selling_self then
                 if G.GAME.blind and ((not G.GAME.blind.disabled) and (G.GAME.blind:get_type() == 'Boss')) then
                     card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil,
@@ -468,7 +553,7 @@ SMODS.Joker({
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_material" }
         end
-        return { vars = { card.ability.extra.chips_gain, card.ability.extra.chips_loss, card.ability.extra.chips } }
+        return { vars = { card.ability.extra.mult_gain, card.ability.extra.mult_loss, card.ability.extra.mult } }
     end,
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -491,24 +576,24 @@ SMODS.Joker({
                     }
                 }
             },
-            chips_gain = 80,
-            chips_loss = 40,
-            chips = 0
+            mult_gain = 80,
+            mult_loss = 80,
+            mult = 0
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.joker_main then
                 return {
-                    chips = card.ability.extra.chips
+                    mult = card.ability.extra.mult
                 }
             end
             if context.end_of_round and context.game_over == false and context.main_eval then
-                if card.ability.extra.chips > 0 then
-                    card.ability.extra.chips = card.ability.extra.chips - card.ability.extra.chips_loss
-                    card.ability.extra.chips = (card.ability.extra.chips >= 0 and card.ability.extra.chips) or 0
+                if card.ability.extra.mult > 0 then
+                    card.ability.extra.mult = card.ability.extra.mult - card.ability.extra.mult_loss
+                    card.ability.extra.mult = (card.ability.extra.mult >= 0 and card.ability.extra.mult) or 0
                     return {
-                        message = localize { type = 'variable', key = 'a_chips_minus', vars = { card.ability.extra.chips_loss } },
+                        message = localize { type = 'variable', key = 'a_chips_minus', vars = { card.ability.extra.mult_loss } },
                         colour = G.C.CHIPS
                     }
                 end
@@ -517,16 +602,16 @@ SMODS.Joker({
     end,
     add_to_deck = function(self, card, from_debuff)
         if not card.debuff and not from_debuff then
-            card.ability.extra.chips = card.ability.extra.chips_gain * #JoyousSpring.get_materials(card)
+            card.ability.extra.mult = card.ability.extra.mult_gain * #JoyousSpring.get_materials(card)
         end
     end,
     joker_display_def = function(JokerDisplay)
         return {
             text = {
                 { text = "+" },
-                { ref_table = "card.ability.extra", ref_value = "chips", retrigger_type = "mult" }
+                { ref_table = "card.ability.extra", ref_value = "mult", retrigger_type = "mult" }
             },
-            text_config = { colour = G.C.CHIPS },
+            text_config = { colour = G.C.MULT },
         }
     end
 })
@@ -570,98 +655,6 @@ SMODS.Joker({
 })
 
 --#endregion
-
-SMODS.Joker({
-    key = "rhino",
-    atlas = 'Misc03',
-    pos = { x = 2, y = 0 },
-    rarity = 1,
-    discovered = true,
-    blueprint_compat = false,
-    eternal_compat = true,
-    cost = 4,
-    loc_vars = function(self, info_queue, card)
-        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
-            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_revive" }
-            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_material" }
-        end
-        return { vars = { card.ability.extra.mills, card.ability.extra.revives } }
-    end,
-    joy_desc_cards = {
-        { properties = { { monster_type = "Fiend" } }, name = "Sends" },
-    },
-    generate_ui = JoyousSpring.generate_info_ui,
-    set_sprites = JoyousSpring.set_back_sprite,
-    config = {
-        extra = {
-            joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "EARTH",
-                monster_type = "Fiend",
-                monster_archetypes = {}
-            },
-            mills = 5,
-            revives = 1
-        },
-    },
-    calculate = function(self, card, context)
-        if context.joy_summon and context.main_eval and not context.blueprint_card then
-            for _, joker in ipairs(context.joy_summon_materials) do
-                if joker == card then
-                    local choices = JoyousSpring.get_materials_in_collection({ { monster_type = "Fiend" } })
-                    for _ = 1, card.ability.extra.mills do
-                        local key_to_send = pseudorandom_element(choices, pseudoseed("j_joy_rhino"))
-                        JoyousSpring.send_to_graveyard(key_to_send or "j_joy_ba_cagna")
-                    end
-                    JoyousSpring.revive_pseudorandom({ { monster_type = "Fiend" } }, pseudoseed("j_joy_rhino"))
-                    break
-                end
-            end
-        end
-    end,
-})
-SMODS.Joker({
-    key = "tourguide",
-    atlas = 'Misc03',
-    pos = { x = 4, y = 0 },
-    rarity = 2,
-    discovered = true,
-    blueprint_compat = false,
-    eternal_compat = true,
-    cost = 6,
-    loc_vars = function(self, info_queue, card)
-        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
-            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_main_deck_joker" }
-        end
-        return { vars = { card.ability.extra.adds } }
-    end,
-    joy_desc_cards = {
-        { properties = { { is_main_deck = true, monster_type = "Fiend" } }, name = "Creates" },
-    },
-    generate_ui = JoyousSpring.generate_info_ui,
-    set_sprites = JoyousSpring.set_back_sprite,
-    config = {
-        extra = {
-            joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Fiend",
-                monster_archetypes = {}
-            },
-            adds = 1
-        },
-    },
-    add_to_deck = function(self, card, from_debuff)
-        if not card.debuff and not from_debuff then
-            local choices = JoyousSpring.get_materials_in_collection({ { monster_type = "Fiend", rarity = 1, is_main_deck = true }, { monster_type = "Fiend", rarity = 2, is_main_deck = true } })
-            for _ = 1, card.ability.extra.adds do
-                local key_to_add = pseudorandom_element(choices, pseudoseed("j_joy_tourguide"))
-                SMODS.add_card({
-                    key = key_to_add or "j_joy_ba_graff",
-                    edition = "e_negative"
-                })
-            end
-        end
-    end,
-})
 
 JoyousSpring.collection_pool[#JoyousSpring.collection_pool + 1] = {
     keys = { "misc" },

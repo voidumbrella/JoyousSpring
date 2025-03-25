@@ -38,22 +38,12 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.end_of_round and context.game_over == false and context.main_eval then
-                local choices = {
-                    "j_joy_spright_blue",
-                    "j_joy_spright_jet",
-                    "j_joy_spright_carrot",
-                    "j_joy_spright_red",
-                    "j_joy_spright_pixies",
-                }
-
                 for i = 1, card.ability.extra.cards_to_create do
-                    if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
-                        SMODS.add_card({
-                            key = pseudorandom_element(choices, pseudoseed("j_joy_spright_blue"))
-                        })
-                    end
+                    JoyousSpring.create_pseudorandom(
+                        { { monster_archetypes = { "Spright" }, is_main_deck = true, exclude_keys = { "j_joy_spright_blue" } } },
+                        pseudoseed("j_joy_spright_blue"), true)
                 end
             end
         end
@@ -94,7 +84,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.setting_blind and context.main_eval then
                 local choices = JoyousSpring.get_materials_in_collection({ { rarity = 2 } })
 
@@ -146,7 +136,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.joker_main then
                 local uncommon_count = JoyousSpring.count_materials_owned({ { rarity = 2 } }) +
                     (next(SMODS.find_card("j_joy_spright_elf")) and JoyousSpring.count_materials_in_graveyard({ { rarity = 2 } }) or 0)
@@ -215,7 +205,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.joker_main then
                 local uncommon_count = JoyousSpring.count_materials_owned({ { rarity = 2 } }) +
                     (next(SMODS.find_card("j_joy_spright_elf")) and JoyousSpring.count_materials_in_graveyard({ { rarity = 2 } }) or 0)
@@ -281,7 +271,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.joker_main then
                 local uncommon_count = JoyousSpring.count_materials_owned({ { rarity = 2 } }) +
                     (next(SMODS.find_card("j_joy_spright_elf")) and JoyousSpring.count_materials_in_graveyard({ { rarity = 2 } }) or 0)
@@ -354,13 +344,13 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.setting_blind and context.main_eval then
                 for i = 1, card.ability.extra.revives do
                     JoyousSpring.revive_pseudorandom(
                         { { rarity = 2 } },
                         pseudoseed("j_joy_spright_elf"),
-                        true
+                        true, nil, (card.edition and card.edition.negative and 0 or -1)
                     )
                 end
             end
@@ -404,12 +394,12 @@ SMODS.Joker({
                     }
                 }
             },
-            base_materials = 2,
+            base_materials = 6,
             detached = 0
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and context.joy_detach then
                 card.ability.extra.detached = card.ability.extra.detached + 1
                 if card.ability.extra.detached >= card.ability.extra.base_materials then
@@ -467,7 +457,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 10,
+    cost = 15,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_material" }
@@ -508,10 +498,13 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.joy_detach and context.joy_detaching_card == card then
                 local choices, _ = get_current_pool("Joker", "Uncommon", nil, "JoyousSpring")
+                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+                    JoyousSpring.ease_detach(card)
+                end
 
                 for i = 1, card.ability.extra.cards_to_create do
                     if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
@@ -522,9 +515,9 @@ SMODS.Joker({
                             center = pseudorandom_element(choices,
                                 pseudoseed("j_joy_spright_gigantic" .. '_resample' .. it))
                         end
-                        SMODS.add_card({
+                        JoyousSpring.create_summon({
                             key = center
-                        })
+                        }, true)
                     end
                 end
             end

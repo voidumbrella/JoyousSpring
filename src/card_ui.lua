@@ -255,6 +255,78 @@ JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, spe
                 }
             }
         }
+
+        -- Pendulum ability
+        if card and not card.debuff and G.localization.descriptions[self.set][self.key].joy_consumable then
+            full_UI_table.joy_consumable = {}
+            full_UI_table.joy_consumable.background_colour = lighten(G.C.JOY.SPELL, 0.7)
+            local loc_vars = {}
+            if self.loc_vars and type(self.loc_vars) == 'function' then
+                loc_vars = self:loc_vars({}, card) or {}
+            end
+            localize { type = "joy_consumable", set = self.set, key = self.key, nodes = full_UI_table.joy_consumable, vars = loc_vars.vars or {} }
+            table.insert(info_queue, 1, { set = "Other", key = "joy_tooltip_pendulum_joker" })
+        end
+
+        -- Transferred ability
+        if card and not card.debuff and card.ability.extra.joyous_spring.material_effects and next(card.ability.extra.joyous_spring.material_effects) then
+            desc_nodes[#desc_nodes + 1] = {
+                {
+                    n = G.UIT.B,
+                    config = { align = "cm", w = 0, h = 0.3 },
+                },
+            }
+            desc_nodes[#desc_nodes + 1] = {
+                {
+                    n = G.UIT.R,
+                    config = { align = "cm" },
+                    nodes = {
+                        {
+                            n = G.UIT.T,
+                            config = {
+                                text = localize("k_joy_transferred_abilities"),
+                                scale = 0.3,
+                                colour = G.C.UI.TEXT_INACTIVE,
+                            },
+                        },
+                    }
+                },
+            }
+            for material_key, config in pairs(card.ability.extra.joyous_spring.material_effects) do
+                local joy_loc_string = localize { type = 'name_text', set = "Joker", key = material_key }
+                local joy_colour
+                if string.len(joy_loc_string) > 2 and string.sub(joy_loc_string, string.len(joy_loc_string) - 1, string.len(joy_loc_string)) == "{}" then
+                    joy_loc_string = string.sub(joy_loc_string, 1, string.len(joy_loc_string) - 2)
+                end
+                if string.sub(joy_loc_string, 1, 3) == "{C:" then
+                    local _, _, colour, real_name = string.find(joy_loc_string, "{C:(.*)}(.*)")
+                    joy_colour = colour
+                    joy_loc_string = real_name
+                end
+                desc_nodes[#desc_nodes + 1] = {
+                    {
+                        n = G.UIT.R,
+                        config = { align = "cm" },
+                        nodes = {
+                            {
+                                n = G.UIT.T,
+                                config = {
+                                    text = joy_loc_string,
+                                    scale = 0.27,
+                                    colour = G.ARGS.LOC_COLOURS[joy_colour] or G.C.JOY.EFFECT,
+                                },
+                            }
+                        }
+                    },
+                }
+
+                local material_center = G.P_CENTERS[material_key]
+                if material_center and G.localization.descriptions["Joker"][material_key].joy_transfer_ability then
+                    localize { type = "joy_transfer_ability", set = "Joker", key = material_key, nodes = desc_nodes, vars = material_center.joy_transfer_loc_vars and material_center:joy_transfer_loc_vars(info_queue, card, config).vars or {}, scale = 0.9 }
+                end
+            end
+        end
+
         -- Add summoning conditions to info_queue automatically
         if G.localization.descriptions[self.set][self.key].joy_summon_conditions then
             full_UI_table.info[#full_UI_table.info + 1] = {}
@@ -262,6 +334,8 @@ JoyousSpring.generate_info_ui = function(self, info_queue, card, desc_nodes, spe
             summon_desc_nodes.name = localize('k_joy_summon_conditions')
             localize { type = "joy_summon_conditions", set = self.set, key = self.key, nodes = summon_desc_nodes }
         end
+
+        -- Add tooltip if it has a related cards menu
         if self.joy_desc_cards then
             table.insert(info_queue, 1, { set = "Other", key = "joy_tooltip_related" })
         end
@@ -275,12 +349,12 @@ function localize(args, misc_cat)
     end
 
     local loc_target = nil
-    if args.type == 'joy_summon_conditions' then
+    if args.type == 'joy_summon_conditions' or args.type == 'joy_transfer_ability' or args.type == 'joy_consumable' then
         loc_target = G.localization.descriptions[(args.set or args.node.config.center.set)]
             [args.key or args.node.config.center.key]
 
         if loc_target then
-            for _, lines in ipairs(loc_target.joy_summon_conditions_parsed) do
+            for _, lines in ipairs(loc_target[args.type .. "_parsed"]) do
                 local final_line = {}
                 for _, part in ipairs(lines) do
                     local assembled_string = ''
@@ -363,6 +437,18 @@ function init_localization()
             center.joy_summon_conditions_parsed = {}
             for _, line in ipairs(center.joy_summon_conditions) do
                 center.joy_summon_conditions_parsed[#center.joy_summon_conditions_parsed + 1] = loc_parse_string(line)
+            end
+        end
+        if center.joy_transfer_ability then
+            center.joy_transfer_ability_parsed = {}
+            for _, line in ipairs(center.joy_transfer_ability) do
+                center.joy_transfer_ability_parsed[#center.joy_transfer_ability_parsed + 1] = loc_parse_string(line)
+            end
+        end
+        if center.joy_consumable then
+            center.joy_consumable_parsed = {}
+            for _, line in ipairs(center.joy_consumable) do
+                center.joy_consumable_parsed[#center.joy_consumable_parsed + 1] = loc_parse_string(line)
             end
         end
     end

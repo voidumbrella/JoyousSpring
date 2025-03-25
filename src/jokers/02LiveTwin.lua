@@ -44,7 +44,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.joker_main then
                 return {
                     chips = card.ability.extra.chips,
@@ -53,17 +53,13 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        if not card.joy_from_kisikil and not next(SMODS.find_card("j_joy_ltwin_kisikil", true)) and not card.debuff and not from_debuff then
+        if not next(SMODS.find_card("j_joy_ltwin_kisikil", true)) and not card.debuff and not from_debuff then
             for i = 1, card.ability.extra.cards_to_create do
-                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit -
-                    ((card.edition and card.edition.negative) and 0 or 1) then
-                    local added_card = SMODS.create_card({
-                        key = "j_joy_ltwin_kisikil"
-                    })
-                    added_card.joy_from_lilla = true
-                    added_card:add_to_deck()
-                    G.jokers:emplace(added_card)
-                end
+                JoyousSpring.create_summon({
+                    key = "j_joy_ltwin_kisikil"
+                }, true)
+
+                card:juice_up()
             end
         end
     end,
@@ -109,7 +105,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.joker_main then
                 return {
                     mult = card.ability.extra.mult,
@@ -118,17 +114,12 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        if not card.joy_from_lilla and not next(SMODS.find_card("j_joy_ltwin_lilla", true)) and not card.debuff and not from_debuff then
+        if not next(SMODS.find_card("j_joy_ltwin_lilla", true)) and not card.debuff and not from_debuff then
             for i = 1, card.ability.extra.cards_to_create do
-                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit -
-                    ((card.edition and card.edition.negative) and 0 or 1) then
-                    local added_card = SMODS.create_card({
-                        key = "j_joy_ltwin_lilla"
-                    })
-                    added_card.joy_from_kisikil = true
-                    added_card:add_to_deck()
-                    G.jokers:emplace(added_card)
-                end
+                JoyousSpring.create_summon({
+                    key = "j_joy_ltwin_lilla"
+                }, true)
+                card:juice_up()
             end
         end
     end,
@@ -325,22 +316,21 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.joker_main then
                 return {
                     mult = card.ability.extra.mult,
                 }
             end
             if context.setting_blind and context.main_eval then
-                local choices = {
-                    "j_joy_ltwin_lilla",
-                    "j_joy_ltwin_lilla_treat",
-                    "j_joy_ltwin_lilla_sweet",
-                }
+                local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Lilla" }, is_main_deck = true } })
 
                 for i = 1, card.ability.extra.mill do
                     JoyousSpring.send_to_graveyard(pseudorandom_element(choices, pseudoseed("j_joy_etwin_kisikil_deal")))
                 end
+                return {
+                    message = localize("k_joy_mill")
+                }
             end
         end
     end,
@@ -410,25 +400,33 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.joker_main then
                 return {
                     mult = card.ability.extra.mult,
                 }
             end
             if context.setting_blind and context.main_eval then
+                local has_revived = false
                 if JoyousSpring.graveyard["j_joy_etwin_lilla"] and JoyousSpring.graveyard["j_joy_etwin_lilla"].summonable > 0 then
                     for i = 1, card.ability.extra.revives do
-                        JoyousSpring.revive("j_joy_etwin_lilla", true)
+                        local revived_card = JoyousSpring.revive("j_joy_etwin_lilla", true)
+                        has_revived = revived_card and true or has_revived
                     end
                 else
                     for i = 1, card.ability.extra.revives do
-                        JoyousSpring.revive_pseudorandom(
+                        local revived_card = JoyousSpring.revive_pseudorandom(
                             { { monster_archetypes = { "Lilla" } } },
                             pseudoseed("j_joy_etwin_kisikil"),
                             true
                         )
+                        has_revived = revived_card and true or has_revived
                     end
+                end
+                if has_revived then
+                    return {
+                        message = localize("k_joy_revive")
+                    }
                 end
             end
         end
@@ -496,25 +494,33 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.joker_main then
                 return {
                     chips = card.ability.extra.chips,
                 }
             end
             if context.setting_blind and context.main_eval then
+                local has_revived = false
                 if JoyousSpring.graveyard["j_joy_etwin_kisikil"] and JoyousSpring.graveyard["j_joy_etwin_kisikil"].summonable > 0 then
                     for i = 1, card.ability.extra.revives do
-                        JoyousSpring.revive("j_joy_etwin_kisikil", true)
+                        local revived_card = JoyousSpring.revive("j_joy_etwin_kisikil", true)
+                        has_revived = revived_card and true or has_revived
                     end
                 else
                     for i = 1, card.ability.extra.revives do
-                        JoyousSpring.revive_pseudorandom(
+                        local revived_card = JoyousSpring.revive_pseudorandom(
                             { { monster_archetypes = { "Kisikil" } } },
                             pseudoseed("j_joy_etwin_lilla"),
                             true
                         )
+                        has_revived = revived_card and true or has_revived
                     end
+                end
+                if has_revived then
+                    return {
+                        message = localize("k_joy_revive")
+                    }
                 end
             end
         end
@@ -578,11 +584,12 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.setting_blind and context.main_eval then
                 local links_owned = JoyousSpring.count_materials_owned({ { summon_type = "LINK" } })
                 if links_owned and links_owned > 0 then
                     ease_discard(-links_owned)
+                    card:juice_up()
                 end
             end
             if context.joker_main then
@@ -658,29 +665,39 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval then
                 if #JoyousSpring.extra_deck_area.cards < JoyousSpring.extra_deck_area.config.card_limit +
                     ((card.edition and card.edition.negative) and 1 or 0) then
-                    JoyousSpring.return_to_extra_deck(card)
                     local is_lilla_owned = JoyousSpring.count_materials_owned({ { monster_archetypes = { "Lilla" } } }) >
                         0
                     local kisikil_summoned = {}
+                    local has_revived = false
                     if JoyousSpring.graveyard["j_joy_etwin_kisikil"] and JoyousSpring.graveyard["j_joy_etwin_kisikil"].summonable > 0 then
                         for i = 1, card.ability.extra.revives do
-                            table.insert(kisikil_summoned, JoyousSpring.revive("j_joy_etwin_kisikil", true))
+                            local revived_card = JoyousSpring.revive("j_joy_etwin_kisikil", true)
+                            if revived_card then
+                                table.insert(kisikil_summoned, revived_card)
+                                has_revived = true
+                            end
                         end
                     end
                     if JoyousSpring.graveyard["j_joy_etwin_lilla"] and JoyousSpring.graveyard["j_joy_etwin_lilla"].summonable > 0 then
                         for i = 1, card.ability.extra.revives do
-                            JoyousSpring.revive("j_joy_etwin_lilla", true)
+                            local revived_card = JoyousSpring.revive("j_joy_etwin_lilla", true)
+                            if revived_card then
+                                has_revived = true
+                            end
                         end
                     end
                     if not is_lilla_owned then
                         for _, joker in ipairs(kisikil_summoned) do
                             joker.config.center:add_to_deck(joker)
                         end
+                    end
+                    if has_revived then
+                        JoyousSpring.return_to_extra_deck(card)
                     end
                 end
             end
@@ -738,17 +755,17 @@ SMODS.Joker({
     },
     calculate = function(self, card, context)
         if context.joy_activate_effect and context.joy_activated_card == card then
-            local materials = JoyousSpring.get_materials_owned({ { summon_type = "LINK", monster_archetypes = { "Kisikil" } }, { summon_type = "LINK", monster_archetypes = { "Lilla" } } })
-            if next(materials) then
+            local materials = JoyousSpring.get_materials_owned(
+                { { summon_type = "LINK", monster_archetypes = { "Kisikil" } }, { summon_type = "LINK", monster_archetypes = { "Lilla" } } },
+                false, true)
+            if #materials >= card.ability.extra.tributes then
                 JoyousSpring.create_overlay_effect_selection(card, materials, card.ability.extra.tributes,
                     card.ability.extra.tributes)
             end
         end
         if context.joy_exit_effect_selection and context.joy_card == card and
             #context.joy_selection == card.ability.extra.tributes and G.GAME.blind.in_blind then
-            for _, selected_card in ipairs(context.joy_selection) do
-                selected_card:start_dissolve()
-            end
+            JoyousSpring.tribute(card, context.joy_selection)
 
             G.GAME.chips = G.GAME.chips * 2
             if (G.GAME.chips >= G.GAME.blind.chips) then
@@ -756,6 +773,10 @@ SMODS.Joker({
                 G.STATE_COMPLETE = true
                 end_round()
             end
+
+            return {
+                message = localize("k_joy_activated_ex")
+            }
         end
         if context.ending_shop and context.main_eval then
             for i = 1, card.ability.extra.revives do
@@ -768,9 +789,13 @@ SMODS.Joker({
         end
     end,
     joy_can_activate = function(card)
-        local materials = JoyousSpring.get_materials_owned({ { summon_type = "LINK", monster_archetypes = { "Kisikil" } }, { summon_type = "LINK", monster_archetypes = { "Lilla" } } })
-        return not card.debuff and (G.GAME.blind.in_blind and next(materials)) and
-            true or false
+        if not G.GAME.blind.in_blind then
+            return false
+        end
+        local materials = JoyousSpring.get_materials_owned(
+            { { summon_type = "LINK", monster_archetypes = { "Kisikil" } }, { summon_type = "LINK", monster_archetypes = { "Lilla" } } },
+            false, true)
+        return #materials >= card.ability.extra.tributes
     end,
     in_pool = function(self, args)
         return args and args.source and args.source == "sho" or false

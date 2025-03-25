@@ -76,7 +76,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and context.setting_blind and context.main_eval then
                 local _, driver = next(SMODS.find_card("j_joy_psy_driver", true))
                 if not driver then
@@ -100,14 +100,11 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        if not next(SMODS.find_card("j_joy_psy_driver", true)) and not card.debuff and not from_debuff then
+        if not card.debuff and not from_debuff then
             for i = 1, card.ability.extra.cards_to_create do
-                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit -
-                    ((card.edition and card.edition.negative) and 0 or 1) then
-                    SMODS.add_card({
-                        key = "j_joy_psy_driver"
-                    })
-                end
+                JoyousSpring.create_summon({
+                    key = "j_joy_psy_driver"
+                }, true)
             end
         end
     end,
@@ -147,7 +144,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and context.setting_blind and context.main_eval then
                 local _, driver = next(SMODS.find_card("j_joy_psy_driver", true))
                 if not driver then
@@ -171,14 +168,11 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        if not next(SMODS.find_card("j_joy_psy_driver", true)) and not card.debuff and not from_debuff then
+        if not card.debuff and not from_debuff then
             for i = 1, card.ability.extra.cards_to_create do
-                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit -
-                    ((card.edition and card.edition.negative) and 0 or 1) then
-                    SMODS.add_card({
-                        key = "j_joy_psy_driver"
-                    })
-                end
+                JoyousSpring.create_summon({
+                    key = "j_joy_psy_driver"
+                }, true)
             end
         end
     end,
@@ -218,7 +212,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and context.setting_blind and context.main_eval then
                 local _, driver = next(SMODS.find_card("j_joy_psy_driver", true))
                 if not driver then
@@ -242,14 +236,11 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        if not next(SMODS.find_card("j_joy_psy_driver", true)) and not card.debuff and not from_debuff then
+        if not card.debuff and not from_debuff then
             for i = 1, card.ability.extra.cards_to_create do
-                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit -
-                    ((card.edition and card.edition.negative) and 0 or 1) then
-                    SMODS.add_card({
-                        key = "j_joy_psy_driver"
-                    })
-                end
+                JoyousSpring.create_summon({
+                    key = "j_joy_psy_driver"
+                }, true)
             end
         end
     end,
@@ -289,7 +280,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and context.setting_blind and context.main_eval then
                 local _, driver = next(SMODS.find_card("j_joy_psy_driver", true))
                 if not driver then
@@ -313,14 +304,11 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        if not next(SMODS.find_card("j_joy_psy_driver", true)) and not card.debuff and not from_debuff then
+        if not card.debuff and not from_debuff then
             for i = 1, card.ability.extra.cards_to_create do
-                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit -
-                    ((card.edition and card.edition.negative) and 0 or 1) then
-                    SMODS.add_card({
-                        key = "j_joy_psy_driver"
-                    })
-                end
+                JoyousSpring.create_summon({
+                    key = "j_joy_psy_driver"
+                }, true)
             end
         end
     end,
@@ -360,7 +348,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and context.setting_blind and context.main_eval then
                 local _, driver = next(SMODS.find_card("j_joy_psy_driver", true))
                 if not driver then
@@ -384,14 +372,11 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        if not next(SMODS.find_card("j_joy_psy_driver", true)) and not card.debuff and not from_debuff then
+        if not card.debuff and not from_debuff then
             for i = 1, card.ability.extra.cards_to_create do
-                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit -
-                    ((card.edition and card.edition.negative) and 0 or 1) then
-                    SMODS.add_card({
-                        key = "j_joy_psy_driver"
-                    })
-                end
+                JoyousSpring.create_summon({
+                    key = "j_joy_psy_driver"
+                }, true)
             end
         end
     end,
@@ -430,23 +415,12 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and context.joy_returned and context.joy_returned_card == card then
-                local choices = {
-                    "j_joy_psy_alpha",
-                    "j_joy_psy_beta",
-                    "j_joy_psy_gamma",
-                    "j_joy_psy_delta",
-                    "j_joy_psy_epsilon",
-                }
-
                 for i = 1, card.ability.extra.cards_to_create do
-                    local key_to_add, _ = pseudorandom_element(choices, pseudoseed("j_joy_psy_multithreader"))
-                    if key_to_add and #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
-                        SMODS.add_card({
-                            key = key_to_add
-                        })
-                    end
+                    JoyousSpring.create_pseudorandom(
+                        { { monster_archetypes = { "PSYFrame" }, is_main_deck = true, is_effect = true, exclude_keys = { "j_joy_psy_multithreader" } } },
+                        pseudoseed("j_joy_psy_multithreader"), true)
                 end
             end
         end
@@ -495,7 +469,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.banish(card, "blind_selected")
                 local choices = {}
@@ -557,7 +531,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.banish(card, "blind_selected")
                 local choices = JoyousSpring.get_materials_owned({ { exclude_keys = { "j_joy_psy_omega" } } })
@@ -612,14 +586,10 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.joy_returned and JoyousSpring.is_monster_type(context.joy_returned_card, "Psychic") then
-                local choices = {
-                    "j_joy_psy_zeta",
-                    "j_joy_psy_omega",
-                    "j_joy_psy_lambda",
-                }
+                local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "PSYFrame" }, is_extra_deck = true, exclude_keys = { "j_joy_psy_lambda" } } })
 
                 for i = 1, card.ability.extra.cards_to_create do
                     local key_to_add, _ = pseudorandom_element(choices, pseudoseed("j_joy_psy_lambda"))

@@ -11,7 +11,7 @@ local ba_die = function()
     if next(SMODS.find_card("j_joy_ba_malacoda")) or next(SMODS.find_card("j_joy_ba_cherubini")) or next(SMODS.find_card("j_joy_ba_pilgrim")) or next(SMODS.find_card("j_joy_ba_virgil")) or next(SMODS.find_card("j_joy_ba_dante")) or next(SMODS.find_card("j_joy_ba_beatrice")) then
         return false
     end
-    if JoyousSpring.count_materials_owned({ { is_monster = true, exclude_monster_types = { "Fiend" } } }) > 0 then
+    if JoyousSpring.count_materials_owned({ { is_monster = true, exclude_monster_types = { "Fiend" }, exclude_traps = true } }) > 0 then
         return true
     end
 end
@@ -22,8 +22,8 @@ SMODS.Joker({
     pos = { x = 0, y = 0 },
     rarity = 1,
     discovered = true,
-    blueprint_compat = false,
-    eternal_compat = true,
+    blueprint_compat = true,
+    eternal_compat = false,
     cost = 4,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.percent * 100 } }
@@ -44,9 +44,9 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.setting_blind and context.main_eval then
-                if ba_die() then
+                if ba_die() and not context.blueprint then
                     card:start_dissolve()
                 else
                     G.GAME.blind.chips = math.floor(G.GAME.blind.chips - G.GAME.blind.chips * card.ability.extra.percent)
@@ -65,8 +65,8 @@ SMODS.Joker({
     pos = { x = 1, y = 0 },
     rarity = 1,
     discovered = true,
-    blueprint_compat = false,
-    eternal_compat = true,
+    blueprint_compat = true,
+    eternal_compat = false,
     cost = 4,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult, card.ability.extra.extra_mult, card.ability.extra.mult + (card.ability.extra.extra_mult * JoyousSpring.count_materials_in_graveyard({ { monster_type = "Fiend" } })) } }
@@ -88,8 +88,8 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
-            if context.setting_blind and context.main_eval and ba_die() then
+        if JoyousSpring.can_use_abilities(card) then
+            if context.setting_blind and context.main_eval and ba_die() and not context.blueprint then
                 card:start_dissolve()
             end
             if context.joker_main then
@@ -107,8 +107,8 @@ SMODS.Joker({
     pos = { x = 2, y = 0 },
     rarity = 1,
     discovered = true,
-    blueprint_compat = false,
-    eternal_compat = true,
+    blueprint_compat = true,
+    eternal_compat = false,
     cost = 4,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips, card.ability.extra.mills } }
@@ -131,9 +131,9 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.setting_blind and context.main_eval then
-                if ba_die() then
+                if ba_die() and not context.blueprint then
                     card:start_dissolve()
                 else
                     local choices = JoyousSpring.get_materials_in_collection({ { monster_type = "Fiend" } })
@@ -158,7 +158,7 @@ SMODS.Joker({
     rarity = 1,
     discovered = true,
     blueprint_compat = false,
-    eternal_compat = true,
+    eternal_compat = false,
     cost = 4,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.h_size } }
@@ -179,8 +179,8 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
-            if context.setting_blind and context.main_eval and ba_die() then
+        if JoyousSpring.can_use_abilities(card) then
+            if context.setting_blind and context.main_eval and ba_die() and not context.blueprint then
                 card:start_dissolve()
             end
         end
@@ -202,8 +202,8 @@ SMODS.Joker({
     pos = { x = 4, y = 0 },
     rarity = 1,
     discovered = true,
-    blueprint_compat = false,
-    eternal_compat = true,
+    blueprint_compat = true,
+    eternal_compat = false,
     cost = 4,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
@@ -228,9 +228,9 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.setting_blind and context.main_eval then
-                if ba_die() then
+                if ba_die() and not context.blueprint then
                     card:start_dissolve()
                 else
                     for _ = 1, card.ability.extra.revives do
@@ -253,8 +253,8 @@ SMODS.Joker({
     pos = { x = 0, y = 1 },
     rarity = 1,
     discovered = true,
-    blueprint_compat = false,
-    eternal_compat = true,
+    blueprint_compat = true,
+    eternal_compat = false,
     cost = 4,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
@@ -279,8 +279,8 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
-            if context.setting_blind and context.main_eval and ba_die() then
+        if JoyousSpring.can_use_abilities(card) then
+            if context.setting_blind and context.main_eval and ba_die() and not context.blueprint then
                 card:start_dissolve()
             end
             if context.other_joker and JoyousSpring.is_monster_type(context.other_joker, "Fiend") then
@@ -291,16 +291,12 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        if not card.debuff and not from_debuff and card.facing ~= 'back' then
-            local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "BurningAbyss" }, is_main_deck = true, exclude_summon_types = { "RITUAL" }, exclude_keys = { "j_joy_ba_draghig" } } })
+        if not card.debuff and not from_debuff and JoyousSpring.can_use_abilities(card) then
             for _ = 1, card.ability.extra.creates do
-                local key_to_add = pseudorandom_element(choices, pseudoseed("j_joy_ba_draghig"))
-                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit -
-                    ((card.edition and card.edition.negative) and 0 or 1) then
-                    SMODS.add_card({
-                        key = key_to_add or "j_joy_ba_alich"
-                    })
-                end
+                JoyousSpring.create_pseudorandom(
+                    { { monster_archetypes = { "BurningAbyss" }, is_main_deck = true, exclude_summon_types = { "RITUAL" }, exclude_keys = { "j_joy_ba_draghig" } } },
+                    pseudoseed("j_joy_ba_draghig"), true, false, nil,
+                    (card.edition and card.edition.negative) and 0 or -1)
             end
         end
     end,
@@ -312,7 +308,7 @@ SMODS.Joker({
     rarity = 1,
     discovered = true,
     blueprint_compat = false,
-    eternal_compat = true,
+    eternal_compat = false,
     cost = 4,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
@@ -336,14 +332,14 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
-            if context.setting_blind and context.main_eval and ba_die() then
+        if JoyousSpring.can_use_abilities(card) then
+            if context.setting_blind and context.main_eval and ba_die() and not context.blueprint then
                 card:start_dissolve()
             end
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        if not card.debuff and not from_debuff and card.facing ~= 'back' then
+        if not card.debuff and not from_debuff and JoyousSpring.can_use_abilities(card) then
             local choices = JoyousSpring.get_materials_owned({ { exclude_keys = { "j_joy_ba_farfa" } } })
             local to_banish = pseudorandom_element(choices, pseudoseed("j_joy_ba_farfa"))
             if to_banish then
@@ -358,8 +354,8 @@ SMODS.Joker({
     pos = { x = 2, y = 1 },
     rarity = 1,
     discovered = true,
-    blueprint_compat = false,
-    eternal_compat = true,
+    blueprint_compat = true,
+    eternal_compat = false,
     cost = 4,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
@@ -384,8 +380,8 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
-            if context.setting_blind and context.main_eval and ba_die() then
+        if JoyousSpring.can_use_abilities(card) then
+            if context.setting_blind and context.main_eval and ba_die() and not context.blueprint then
                 card:start_dissolve()
             end
             if context.other_joker and JoyousSpring.is_monster_type(context.other_joker, "Fiend") then
@@ -396,16 +392,12 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        if not card.debuff and not from_debuff and card.facing ~= 'back' then
-            local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "BurningAbyss" }, is_main_deck = true, exclude_summon_types = { "RITUAL" }, exclude_keys = { "j_joy_ba_draghig" } } })
+        if not card.debuff and not from_debuff and JoyousSpring.can_use_abilities(card) then
             for _ = 1, card.ability.extra.creates do
-                local key_to_add = pseudorandom_element(choices, pseudoseed("j_joy_ba_draghig"))
-                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit -
-                    ((card.edition and card.edition.negative) and 0 or 1) then
-                    SMODS.add_card({
-                        key = key_to_add or "j_joy_ba_alich"
-                    })
-                end
+                JoyousSpring.create_pseudorandom(
+                    { { monster_archetypes = { "BurningAbyss" }, is_main_deck = true, exclude_summon_types = { "RITUAL" }, exclude_keys = { "j_joy_ba_graff" } } },
+                    pseudoseed("j_joy_ba_graff"), true, false, nil,
+                    (card.edition and card.edition.negative) and 0 or -1)
             end
         end
     end,
@@ -417,7 +409,7 @@ SMODS.Joker({
     rarity = 1,
     discovered = true,
     blueprint_compat = false,
-    eternal_compat = true,
+    eternal_compat = false,
     cost = 3,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
@@ -441,8 +433,8 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
-            if context.selling_self or (context.setting_blind and context.main_eval and ba_die()) then
+        if JoyousSpring.can_use_abilities(card) then
+            if (context.selling_self or (context.setting_blind and context.main_eval and ba_die())) and not context.blueprint then
                 card:start_dissolve()
                 for _ = 1, card.ability.extra.revives do
                     JoyousSpring.revive_pseudorandom({ { monster_type = "Fiend" } },
@@ -459,7 +451,7 @@ SMODS.Joker({
     rarity = 1,
     discovered = true,
     blueprint_compat = false,
-    eternal_compat = true,
+    eternal_compat = false,
     cost = 3,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.adds } }
@@ -481,8 +473,8 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
-            if context.selling_self or (context.setting_blind and context.main_eval and ba_die()) then
+        if JoyousSpring.can_use_abilities(card) then
+            if (context.selling_self or (context.setting_blind and context.main_eval and ba_die())) and not context.blueprint then
                 card:start_dissolve()
 
                 local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "BurningAbyss" }, is_extra_deck = true } })
@@ -503,7 +495,7 @@ SMODS.Joker({
     rarity = 1,
     discovered = true,
     blueprint_compat = false,
-    eternal_compat = true,
+    eternal_compat = false,
     cost = 3,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
@@ -528,18 +520,15 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
-            if context.selling_self or (context.setting_blind and context.main_eval and ba_die()) then
+        if JoyousSpring.can_use_abilities(card) then
+            if (context.selling_self or (context.setting_blind and context.main_eval and ba_die())) and not context.blueprint then
                 card:start_dissolve()
-                local choices = JoyousSpring.get_materials_in_collection({ { monster_type = "Fiend", is_main_deck = true, exclude_keys = { "j_joy_ba_scarm" } } })
+
                 for _ = 1, card.ability.extra.creates do
-                    local key_to_add = pseudorandom_element(choices, pseudoseed("j_joy_ba_draghig"))
-                    if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit +
-                        ((card.edition and card.edition.negative) and 0 or 1) then
-                        SMODS.add_card({
-                            key = key_to_add or "j_joy_ba_alich"
-                        })
-                    end
+                    JoyousSpring.create_pseudorandom(
+                        { { monster_type = "Fiend", is_main_deck = true, exclude_keys = { "j_joy_ba_scarm" } } },
+                        pseudoseed("j_joy_ba_scarm"), true, false, nil,
+                        (card.edition and card.edition.negative) and 0 or 1)
                 end
             end
         end
@@ -551,7 +540,7 @@ SMODS.Joker({
     pos = { x = 1, y = 2 },
     rarity = 3,
     discovered = true,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
     cost = 8,
     loc_vars = function(self, info_queue, card)
@@ -586,7 +575,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.joker_main then
                 return {
                     xmult = 1 +
@@ -602,7 +591,7 @@ SMODS.Joker({
     pos = { x = 1, y = 3 },
     rarity = 2,
     discovered = true,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
     cost = 6,
     loc_vars = function(self, info_queue, card)
@@ -634,7 +623,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.setting_blind and context.main_eval then
                 local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "BurningAbyss" } } })
                 for _ = 1, card.ability.extra.mills do
@@ -651,7 +640,7 @@ SMODS.Joker({
     pos = { x = 4, y = 2 },
     rarity = 3,
     discovered = true,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
     cost = 8,
     loc_vars = function(self, info_queue, card)
@@ -696,13 +685,14 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and context.joy_detach and context.joy_detaching_card == card then
                 local choices = JoyousSpring.get_materials_in_collection({ { is_monster = true } })
                 for _ = 1, card.ability.extra.mills do
                     local key_to_send = pseudorandom_element(choices, pseudoseed("j_joy_ba_dante"))
                     JoyousSpring.send_to_graveyard(key_to_send or "j_joy_ba_cir")
                 end
+                JoyousSpring.ease_detach(card)
             end
             if context.joker_main then
                 return {
@@ -820,7 +810,7 @@ SMODS.Joker({
     pos = { x = 0, y = 3 },
     rarity = 3,
     discovered = true,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
     cost = 10,
     loc_vars = function(self, info_queue, card)
@@ -872,17 +862,20 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and context.joy_detach and context.joy_detaching_card == card then
+                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+                    JoyousSpring.ease_detach(card)
+                end
                 for _ = 1, card.ability.extra.revives do
                     local revived = JoyousSpring.revive_pseudorandom({ { monster_archetypes = { "BurningAbyss" } } },
                         pseudoseed("j_joy_ba_beatrice"), true)
                     if not revived then
-                        JoyousSpring.revive_pseudorandom({ {} }, pseudoseed("j_joy_ba_beatrice"), true)
+                        revived = JoyousSpring.revive_pseudorandom({ {} }, pseudoseed("j_joy_ba_beatrice"), true)
                     end
                 end
             end
-            if context.selling_self then
+            if context.selling_self and not context.blueprint then
                 if #JoyousSpring.extra_deck_area.cards + 1 < JoyousSpring.extra_deck_area.config.card_limit then
                     JoyousSpring.add_to_extra_deck("j_joy_ba_dante")
                     JoyousSpring.add_to_extra_deck("j_joy_ba_pilgrim")

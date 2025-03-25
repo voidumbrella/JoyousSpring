@@ -4,7 +4,7 @@
 
 G.FUNCS.joy_can_use = function(e)
     local card = e.config.ref_table
-    if card.config.center.can_use and card.config.center:can_use(card) then
+    if JoyousSpring.can_use(card) then
         e.config.colour = G.C.JOY.PENDULUM
         e.config.button = 'joy_use_card'
     else
@@ -16,7 +16,7 @@ end
 G.FUNCS.joy_can_buy_and_use = function(e)
     local card = e.config.ref_table
     if (((to_big(card.cost) > to_big(G.GAME.dollars - G.GAME.bankrupt_at)) and (card.cost > 0)) or
-            not (card.config.center.can_use and card.config.center:can_use(card))) then
+            not JoyousSpring.can_use(card)) then
         e.UIBox.states.visible = false
         e.config.colour = G.C.UI.BACKGROUND_INACTIVE
         e.config.button = nil
@@ -134,6 +134,7 @@ G.FUNCS.joy_use_card = function(e)
             trigger = 'after',
             delay = 0.2,
             func = function()
+                JoyousSpring.send_to_graveyard(card)
                 card:start_dissolve()
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
@@ -186,6 +187,73 @@ G.FUNCS.joy_use_card = function(e)
             end
         }))
     end
+end
+
+--#endregion
+
+--#region Consumable utils
+
+JoyousSpring.pre_consumable_use = function(card, highlighted)
+    if highlighted then
+        update_hand_text({ immediate = true, nopulse = true, delay = 0 },
+            { mult = 0, chips = 0, level = '', handname = '' })
+    end
+
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.1,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.3, 0.5)
+            return true
+        end
+    }))
+end
+
+JoyousSpring.post_consumable_highlighted_use = function()
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.2,
+        func = function()
+            G.hand:unhighlight_all()
+            return true
+        end
+    }))
+    delay(0.5)
+end
+
+JoyousSpring.pre_consumable_change_use = function()
+    for i = 1, #G.hand.highlighted do
+        local percent = 1.15 - (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.15,
+            func = function()
+                G.hand.highlighted[i]:flip()
+                play_sound('card1', percent)
+                G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                return true
+            end
+        }))
+    end
+    delay(0.2)
+end
+
+JoyousSpring.post_consumable_change_use = function()
+    for i = 1, #G.hand.highlighted do
+        local percent = 0.85 + (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.15,
+            func = function()
+                G.hand.highlighted[i]:flip()
+                play_sound('tarot2', percent, 0.6)
+                G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                return true
+            end
+        }))
+    end
+    JoyousSpring.post_consumable_highlighted_use()
 end
 
 --#endregion

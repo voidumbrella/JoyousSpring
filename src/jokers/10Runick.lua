@@ -94,7 +94,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker then
                 if context.using_consumeable and G.GAME.blind.in_blind and context.consumeable.ability.set == 'Tarot' then
                     card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.base_chips
@@ -157,7 +157,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.selling_self then
                 for i = 1, card.ability.extra.cards_to_create do
                     if #G.consumeables.cards < G.consumeables.config.card_limit then
@@ -216,7 +216,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.selling_self then
                 for i = 1, card.ability.extra.cards_to_create do
                     if #G.consumeables.cards < G.consumeables.config.card_limit then
@@ -274,7 +274,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval then
                 JoyousSpring.banish(card, "blind_selected")

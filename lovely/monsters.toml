@@ -35,3 +35,14 @@ elseif string.find(config.name, 'joker') and JoyousSpring and JoyousSpring.is_mo
         end
     table.insert(left_text, {n=G.UIT.O, config={object = DynaText({string = joy_loc_string, colours = {G.ARGS.LOC_COLOURS[joy_colour] or G.C.JOY.NORMAL}, shadow = true, pop_in = 0, scale = (0.6*scale)- 0.006 * #joy_loc_string, silent = true})}})
 '''
+
+# Consumable box
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "desc_from_rows(AUT.main),"
+position = 'before'
+match_indent = true
+payload = '''
+AUT.joy_consumable and desc_from_rows(AUT.joy_consumable) or nil,
+'''

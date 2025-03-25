@@ -4,6 +4,8 @@
 
 local SMODS_calculate_context_ref = SMODS.calculate_context
 function SMODS.calculate_context(context, return_table)
+    -- The area seems to be destryoed too early when the game restarts
+    if JoyousSpring.field_spell_area and not JoyousSpring.field_spell_area.cards then return {} end
     JoyousSpring.calculate_context(context)
     return SMODS_calculate_context_ref(context, return_table)
 end
@@ -53,6 +55,47 @@ JoyousSpring.calculate_context = function(context)
     end
 end
 
+local game_init_game_object_ref = Game.init_game_object
+function Game:init_game_object()
+    local ret = game_init_game_object_ref(self)
+    ret.joy_tributed_cards = {}
+    ret.current_round.joy_tributed_cards = {}
+    return ret
+end
+
+function SMODS.current_mod.reset_game_globals(run_start)
+    G.GAME.current_round.joy_tributed_cards = {}
+end
+
+JoyousSpring.count_as_tributed = function(card)
+    if not G.GAME.joy_tributed_cards[card.config.center.key] then
+        G.GAME.joy_tributed_cards[card.config.center.key] = {
+            set = card.ability.set,
+            count = 0
+        }
+    end
+    if not G.GAME.current_round.joy_tributed_cards[card.config.center.key] then
+        G.GAME.current_round.joy_tributed_cards[card.config.center.key] = {
+            set = card.ability.set,
+            count = 0
+        }
+    end
+    G.GAME.joy_tributed_cards[card.config.center.key].count = G.GAME.joy_tributed_cards[card.config.center.key]
+        .count + 1
+    G.GAME.current_round.joy_tributed_cards[card.config.center.key].count = G.GAME.current_round.joy_tributed_cards
+        [card.config.center.key].count + 1
+end
+
+JoyousSpring.tribute = function(card, card_list)
+    if not card_list then return end
+
+    for _, material in ipairs(card_list) do
+        JoyousSpring.count_as_tributed(material)
+        SMODS.calculate_context({ joy_tributed = true, joy_card = material, joy_source = card })
+        material:start_dissolve()
+    end
+end
+
 ---Changes a card's ability with a little animation
 ---@param card Card
 ---@param other_key string
@@ -83,7 +126,7 @@ JoyousSpring.transform_card = function(card, other_key, keep_edition)
 end
 
 ---Creates cards with "permanent" debuffs
----@param card Card
+---@param card Card|string
 ---@param source string?
 ---@param edition any
 ---@return Card
@@ -98,8 +141,13 @@ JoyousSpring.create_perma_debuffed_card = function(card, source, edition)
             added_card.ability.extra.joyous_spring.perma_debuffed = true
         end
         added_card:set_cost()
-        added_card:add_to_deck()
-        G.jokers:emplace(added_card)
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                added_card:add_to_deck()
+                G.jokers:emplace(added_card)
+                return true
+            end
+        }))
         return added_card
     else
         SMODS.debuff_card(card, true, source)
@@ -132,7 +180,7 @@ JoyousSpring.create_random_playing_card = function(enhanced_prob, silent, colour
             end
             local enhanced = enhanced_prob >= 1 and
                 (pseudorandom(seed or pseudoseed('JoyousSpring')) < 1 / enhanced_prob and true) or false
-            create_playing_card(
+            local added_card = create_playing_card(
                 {
                     front = G.P_CARDS[_suit .. '_' .. _rank],
                     center = enhanced and pseudorandom_element(cen_pool,
@@ -143,6 +191,7 @@ JoyousSpring.create_random_playing_card = function(enhanced_prob, silent, colour
                 silent,
                 colours or { G.C.JOY.EFFECT }
             )
+            SMODS.calculate_context({ playing_card_added = true, cards = { added_card } })
             return true
         end
     }))
@@ -167,6 +216,20 @@ JoyousSpring.set_cost = function(card)
             card.cost = 0
         end
     end
+    if card and G.jokers then
+        for _, joker in ipairs(G.jokers.cards) do
+            if not joker.debuff and joker.config.center.joy_modify_cost then
+                joker.config.center.joy_modify_cost(joker, card)
+            end
+        end
+        if JoyousSpring.field_spell_area then
+            for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
+                if not joker.debuff and joker.config.center.joy_modify_cost then
+                    joker.config.center.joy_modify_cost(joker, card)
+                end
+            end
+        end
+    end
     if card.joy_modify_cost then
         if card.joy_modify_cost.cost then
             card.cost = card.joy_modify_cost.cost
@@ -177,33 +240,12 @@ JoyousSpring.set_cost = function(card)
     end
 end
 
----Debuffs a hand similar to a blind
----Use joy_debuff_hand in the center to check if a hand should be debuffed by that card's effect
----@param cards Card[]
----@param hand Card[]
----@param handname string
----@return boolean
-JoyousSpring.debuff_hand = function(cards, hand, handname)
-    for _, joker in ipairs(G.jokers.cards) do
-        if joker.config.center.joy_debuff_hand and joker.config.center.joy_debuff_hand(joker, cards, hand, handname) then
-            return true
-        end
-    end
-    for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
-        if joker.config.center.joy_debuff_hand and joker.config.center.joy_debuff_hand(joker, cards, hand, handname) then
-            return true
-        end
-    end
-    return false
-end
-
 G.FUNCS.joy_detach_material = function(e)
     local card = e.config.ref_table
     local detach = card.ability.extra.detach or 1
-    if not ((G.play and #G.play.cards > 0) or
+    if not card.debuff and not ((G.play and #G.play.cards > 0) or
             (G.CONTROLLER.locked) or
             (G.GAME.STOP_USE and G.GAME.STOP_USE > 0)) and JoyousSpring.get_xyz_materials(card) >= detach then
-        card.ability.extra.joyous_spring.xyz_materials = card.ability.extra.joyous_spring.xyz_materials - detach
         SMODS.calculate_context({ joy_detach = true, joy_detaching_card = card })
     end
 end
@@ -213,14 +255,14 @@ function create_card_for_shop(area)
     local card = create_card_for_shop_ref(area)
     if card and G.jokers then
         for _, joker in ipairs(G.jokers.cards) do
-            if joker.config.center.joy_create_card_for_shop then
-                joker.config.center.joy_create_card_for_shop(card, area)
+            if not joker.debuff and joker.config.center.joy_create_card_for_shop then
+                joker.config.center.joy_create_card_for_shop(joker, card, area)
             end
         end
         if JoyousSpring.field_spell_area then
             for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
-                if joker.config.center.joy_create_card_for_shop then
-                    joker.config.center.joy_create_card_for_shop(card, area)
+                if not joker.debuff and joker.config.center.joy_create_card_for_shop then
+                    joker.config.center.joy_create_card_for_shop(joker, card, area)
                 end
             end
         end
@@ -232,46 +274,204 @@ local cardarea_emplace_ref = CardArea.emplace
 function CardArea:emplace(card, location, stay_flipped)
     if self == G.jokers then
         for _, joker in ipairs(G.jokers.cards) do
-            if joker.config.center.joy_apply_to_jokers_added then
+            if not joker.debuff and joker.config.center.joy_apply_to_jokers_added then
                 joker.config.center.joy_apply_to_jokers_added(joker, card)
             end
         end
         for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
-            if joker.config.center.joy_apply_to_jokers_added then
+            if not joker.debuff and joker.config.center.joy_apply_to_jokers_added then
                 joker.config.center.joy_apply_to_jokers_added(joker, card)
             end
         end
     end
-    cardarea_emplace_ref(self, card, location, stay_flipped)
+    cardarea_emplace_ref(self, card, location, JoyousSpring.is_monster_card(card) or stay_flipped)
 end
 
-JoyousSpring.stay_flipped = function(card, stay_flipped)
-    local keep_flipped = stay_flipped or false
-    local source
-    if G.jokers then
-        for _, joker in ipairs(G.jokers.cards) do
-            if joker.config.center.joy_stay_flipped then
-                keep_flipped = joker.config.center.joy_stay_flipped(joker, card)
-                if keep_flipped and not source then
-                    source = joker
-                end
+local stay_flipped_ref = Blind.stay_flipped
+function Blind:stay_flipped(to_area, card, from_area)
+    local ret = stay_flipped_ref(self, to_area, card, from_area)
+    if ret then
+        SMODS.calculate_context({ joy_card_flipped = card })
+    end
+    return ret
+end
+
+JoyousSpring.calculate_hand_highlight_limit = function(count_card, remove_card)
+    G.GAME.joy_original_hand_limit = G.GAME.joy_original_hand_limit or G.hand.config.highlighted_limit or 5
+    local maxlimit = -1
+    if count_card and not count_card.debuff and count_card.config.center.joy_set_hand_highlight_limit then
+        local new_limit = count_card.config.center.joy_set_hand_highlight_limit(joker) or -1
+        maxlimit = (new_limit > maxlimit) and new_limit or maxlimit
+    end
+    for _, joker in ipairs(G.jokers.cards) do
+        if joker ~= remove_card and not joker.debuff and joker.config.center.joy_set_hand_highlight_limit then
+            local new_limit = joker.config.center.joy_set_hand_highlight_limit(joker) or -1
+            maxlimit = (new_limit > maxlimit) and new_limit or maxlimit
+        end
+    end
+    for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
+        if joker ~= remove_card and not joker.debuff and joker.config.center.joy_set_hand_highlight_limit then
+            local new_limit = joker.config.center.joy_set_hand_highlight_limit(joker)
+            maxlimit = (new_limit > maxlimit) and new_limit or maxlimit
+        end
+    end
+
+    G.hand.config.highlighted_limit = (maxlimit > -1) and maxlimit or G.GAME.joy_original_hand_limit
+end
+
+--#endregion
+
+--#region Transfer Abilities
+
+JoyousSpring.transfer_abilities = function(card, material_key, other_card, materials)
+    local material_center = G.P_CENTERS[material_key]
+    if not card or not material_center or not material_center.joy_can_transfer_ability or (other_card and other_card.debuff) then
+        return
+    end
+    if material_center:joy_can_transfer_ability(card) then
+        local was_material = card.ability.extra.joyous_spring.material_effects[material_key] and true or false
+        card.ability.extra.joyous_spring.material_effects[material_key] = material_center.joy_transfer_config and
+            material_center:joy_transfer_config(card) or {}
+        if not was_material and material_center.joy_transfer_add_to_deck then
+            material_center:joy_transfer_add_to_deck(card,
+                card.ability.extra.joyous_spring.material_effects[material_key], other_card, false, materials)
+        end
+    end
+end
+
+---Calculate transferred abilities
+---@param card Card|table
+---@param context CalcContext
+---@param effects table?
+---@return table?
+JoyousSpring.calculate_transfer_abilities = function(card, context, effects)
+    if card.debuff or (not card.ability.extra.joyous_spring.material_effects or not next(card.ability.extra.joyous_spring.material_effects)) then
+        return effects
+    end
+    local transfer_effects = {}
+
+    for material_key, config in pairs(card.ability.extra.joyous_spring.material_effects) do
+        local material_center = G.P_CENTERS[material_key]
+
+        if material_center and material_center.joy_transfer_ability_calculate then
+            local material_effect = material_center:joy_transfer_ability_calculate(card, context, config)
+            if material_effect then
+                transfer_effects[#transfer_effects + 1] = material_effect
             end
         end
     end
-    if JoyousSpring.field_spell_area then
-        for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
-            if joker.config.center.joy_stay_flipped then
-                keep_flipped = joker.config.center.joy_stay_flipped(joker, card)
-                if keep_flipped and not source then
-                    source = joker
-                end
-            end
+
+    if #transfer_effects == 0 then return effects end
+
+    if not effects then effects = table.remove(transfer_effects, 1) end
+
+    local main_effect = effects
+    for _, eff in ipairs(transfer_effects) do
+        while main_effect.extra ~= nil do
+            main_effect = main_effect.extra
+        end
+        main_effect.extra = eff
+    end
+
+    return effects
+end
+
+local card_calculate_joker_ref = Card.calculate_joker
+function Card:calculate_joker(context)
+    if JoyousSpring.is_monster_card(self) then
+        if self.debuff then return nil end
+        local obj = self.config.center
+        local o, t
+
+        if obj.calculate and type(obj.calculate) == 'function' then
+            o, t = obj:calculate(self, context)
+        end
+
+        o = JoyousSpring.calculate_transfer_abilities(self, context, o)
+        if o or t then return o, t end
+    else
+        return card_calculate_joker_ref(self, context)
+    end
+end
+
+JoyousSpring.transfer_add_to_deck = function(card, from_debuff)
+    if card.debuff or (not card.ability.extra.joyous_spring.material_effects or not next(card.ability.extra.joyous_spring.material_effects)) then
+        return
+    end
+
+    for material_key, config in pairs(card.ability.extra.joyous_spring.material_effects) do
+        local material_center = G.P_CENTERS[material_key]
+
+        if material_center and material_center.joy_transfer_add_to_deck then
+            material_center:joy_transfer_add_to_deck(card, config, nil, from_debuff)
         end
     end
-    if keep_flipped then
-        SMODS.calculate_context({ joy_card_flipped = card, joy_source = source })
+end
+
+local card_add_to_deck_ref = Card.add_to_deck
+function Card:add_to_deck(from_debuff)
+    local not_added = not self.added_to_deck
+    card_add_to_deck_ref(self, from_debuff)
+
+    if JoyousSpring.is_monster_card(self) and not_added then
+        JoyousSpring.transfer_add_to_deck(self, from_debuff)
     end
-    return keep_flipped
+end
+
+JoyousSpring.transfer_remove_from_deck = function(card, from_debuff)
+    if card.debuff or (not card.ability.extra.joyous_spring.material_effects or not next(card.ability.extra.joyous_spring.material_effects)) then
+        return
+    end
+
+    for material_key, config in pairs(card.ability.extra.joyous_spring.material_effects) do
+        local material_center = G.P_CENTERS[material_key]
+
+        if material_center and material_center.joy_transfer_remove_from_deck then
+            material_center:joy_transfer_remove_from_deck(card, config, from_debuff)
+        end
+    end
+end
+
+local card_remove_from_deck_ref = Card.remove_from_deck
+function Card:remove_from_deck(from_debuff)
+    local added = self.added_to_deck
+    card_remove_from_deck_ref(self, from_debuff)
+
+    if JoyousSpring.is_monster_card(self) and added then
+        JoyousSpring.transfer_remove_from_deck(self, from_debuff)
+    end
+end
+
+JoyousSpring.transfer_calc_dollar_bonus = function(card)
+    if card.debuff or (not card.ability.extra.joyous_spring.material_effects or not next(card.ability.extra.joyous_spring.material_effects)) then
+        return 0
+    end
+
+    local bonus = 0
+
+    for material_key, config in pairs(card.ability.extra.joyous_spring.material_effects) do
+        local material_center = G.P_CENTERS[material_key]
+
+        if material_center and material_center.joy_transfer_calc_dollar_bonus then
+            bonus = bonus + (material_center:joy_transfer_calc_dollar_bonus(card, config) or 0)
+        end
+    end
+
+    return bonus
+end
+
+local card_calculate_dollar_bonus_ref = Card.calculate_dollar_bonus
+function Card:calculate_dollar_bonus()
+    local ret = card_calculate_dollar_bonus_ref(self)
+
+    if JoyousSpring.is_monster_card(self) then
+        local add = JoyousSpring.transfer_calc_dollar_bonus(self)
+        if add > 0 then
+            ret = (ret or 0) + JoyousSpring.transfer_calc_dollar_bonus(self)
+        end
+    end
+
+    return ret
 end
 
 --#endregion
@@ -418,7 +618,7 @@ JoyousSpring.create_UIBox_effect_selection = function(card, text, select_text)
                                                     {
                                                         n = G.UIT.T,
                                                         config = {
-                                                            text = select_text or localize('k_joy_summon'),
+                                                            text = select_text or localize('k_joy_select'),
                                                             scale = 0.5,
                                                             colour = G.C.UI.TEXT_LIGHT,
                                                             shadow = true,
@@ -508,6 +708,10 @@ JoyousSpring.create_overlay_effect_selection = function(card, card_list, min, ma
             end
         end
         JoyousSpring.summon_effect_area:emplace(added_joker)
+        if joker.facing == 'back' then
+            added_joker.facing = 'back'
+            added_joker.sprite_facing = 'back'
+        end
         if joker.ability.set == 'Joker' then
             for i, og_joker in ipairs(G.jokers.cards) do
                 if og_joker == joker then

@@ -22,7 +22,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 1,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
+        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -55,7 +55,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.mult, JoyousSpring.get_joker_column(card) } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
+        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -70,7 +70,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.individual and context.cardarea == G.play then
                 if next(SMODS.find_card("j_joy_mekk_spectrum")) or JoyousSpring.get_joker_column(card) == (JoyousSpring.index_of(context.full_hand, context.other_card)) then
                     return {
@@ -80,6 +80,21 @@ SMODS.Joker({
             end
         end
     end,
+    joker_display_def = function(JokerDisplay)
+        return {
+            reminder_text = {
+                { text = "(" },
+                { ref_table = "card.joker_display_values", ref_value = "localized_text" },
+                { text = " " },
+                { ref_table = "card.joker_display_values", ref_value = "column" },
+                { text = ")" },
+            },
+            calc_function = function(card)
+                card.joker_display_values.localized_text = localize("k_joy_column")
+                card.joker_display_values.column = JoyousSpring.get_joker_column(card)
+            end
+        }
+    end
 })
 
 -- Mekk-Knight Orange Sunset
@@ -96,7 +111,7 @@ SMODS.Joker({
         return { vars = { JoyousSpring.get_joker_column(card) } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
+        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -110,7 +125,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.modify_scoring_hand then
                 if next(SMODS.find_card("j_joy_mekk_spectrum")) or JoyousSpring.get_joker_column(card) == (JoyousSpring.index_of(context.full_hand, context.other_card)) then
                     return {
@@ -137,7 +152,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.money, JoyousSpring.get_joker_column(card) } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
+        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -152,7 +167,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.individual and context.cardarea == G.play then
                 if next(SMODS.find_card("j_joy_mekk_spectrum")) or JoyousSpring.get_joker_column(card) == (JoyousSpring.index_of(context.full_hand, context.other_card)) then
                     return {
@@ -175,10 +190,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 4,
     loc_vars = function(self, info_queue, card)
-        return { vars = { JoyousSpring.get_joker_column(card) } }
+        return { vars = { G.GAME.probabilities.normal, JoyousSpring.get_joker_column(card) } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
+        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -192,7 +207,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.repetition and context.cardarea == G.play then
                 if next(SMODS.find_card("j_joy_mekk_spectrum")) or JoyousSpring.get_joker_column(card) == (JoyousSpring.index_of(context.full_hand, context.other_card)) then
                     if pseudorandom("j_joy_mekk_green") < G.GAME.probabilities.normal / (context.other_card.base.nominal >= 1 and context.other_card.base.nominal or 1) then
@@ -220,7 +235,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.chips, JoyousSpring.get_joker_column(card) } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
+        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -235,7 +250,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.individual and context.cardarea == G.play then
                 if next(SMODS.find_card("j_joy_mekk_spectrum")) or JoyousSpring.get_joker_column(card) == (JoyousSpring.index_of(context.full_hand, context.other_card)) then
                     return {
@@ -281,7 +296,7 @@ SMODS.Joker({
         }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
+        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -299,7 +314,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.joker_main then
                 local has_spectrum = next(SMODS.find_card("j_joy_mekk_spectrum"))
                 return {
@@ -343,7 +358,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.cards_to_create } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
+        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -358,25 +373,18 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.setting_blind and context.main_eval then
                 if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit +
                     ((card.edition and card.edition.negative) and 0 or 1) then
                     JoyousSpring.banish(card, "end_of_ante")
-                    local choices = {
-                        "j_joy_mekk_avram",
-                        "j_joy_mekk_red",
-                        "j_joy_mekk_orange",
-                        "j_joy_mekk_yellow",
-                        "j_joy_mekk_green",
-                        "j_joy_mekk_blue",
-                        "j_joy_mekk_indigo",
-                    }
+
                     for i = 1, card.ability.extra.cards_to_create do
-                        SMODS.add_card({
-                            key = pseudorandom_element(choices, pseudoseed("j_joy_mekk_purple"))
-                        })
+                        JoyousSpring.create_pseudorandom(
+                            { { monster_archetypes = { "MekkKnight" }, is_main_deck = true, exclude_keys = { "j_joy_mekk_purple" } } },
+                            pseudoseed("j_joy_mekk_purple"), true, false, nil,
+                            (card.edition and card.edition.negative) and 0 or 1)
                     end
                 end
             end
@@ -398,7 +406,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.xmult, JoyousSpring.get_joker_column(card) - 1, JoyousSpring.get_joker_column(card) + 1 } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
+        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -423,7 +431,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if context.individual and context.cardarea == G.play then
                 local card_index = JoyousSpring.index_of(context.full_hand, context.other_card)
                 local is_mekk = G.jokers.cards[card_index] and
@@ -456,7 +464,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.cards_to_create } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
+        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -483,26 +491,14 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not card.ability.extra.activated and context.selling_card and JoyousSpring.is_monster_archetype(context.card, "MekkKnight") then
                 card.ability.extra.activated = true
-                local choices = {
-                    "j_joy_mekk_avram",
-                    "j_joy_mekk_red",
-                    "j_joy_mekk_orange",
-                    "j_joy_mekk_yellow",
-                    "j_joy_mekk_green",
-                    "j_joy_mekk_blue",
-                    "j_joy_mekk_indigo",
-                    "j_joy_mekk_purple",
-                }
+
                 for i = 1, card.ability.extra.cards_to_create do
-                    if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit +
-                        ((context.card.edition and context.card.edition.negative) and 0 or 1) then
-                        SMODS.add_card({
-                            key = pseudorandom_element(choices, pseudoseed("j_joy_mekk_spectrum"))
-                        })
-                    end
+                    JoyousSpring.create_pseudorandom(
+                        { { monster_archetypes = { "MekkKnight" }, is_main_deck = true } },
+                        pseudoseed("j_joy_mekk_spectrum"), true)
                 end
             end
             if context.end_of_round and context.game_over == false and context.main_eval then
@@ -530,7 +526,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.blinds, #JoyousSpring.get_materials(card) } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
+        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -598,7 +594,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.mult, card.ability.extra.tributes, card.ability.extra.hands, card.ability.extra.mekk_count } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
+        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = "Archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -616,7 +612,7 @@ SMODS.Joker({
     },
     calculate = function(self, card, context)
         if context.joy_activate_effect and context.joy_activated_card == card then
-            local materials = JoyousSpring.get_materials_owned({ { monster_archetypes = { "MekkKnight" } } })
+            local materials = JoyousSpring.get_materials_owned({ { monster_archetypes = { "MekkKnight" } } }, false, true)
             if next(materials) then
                 JoyousSpring.create_overlay_effect_selection(card, materials, card.ability.extra.tributes,
                     card.ability.extra.tributes)
@@ -624,9 +620,7 @@ SMODS.Joker({
         end
         if context.joy_exit_effect_selection and context.joy_card == card and
             #context.joy_selection == card.ability.extra.tributes and G.GAME.blind.in_blind then
-            for _, selected_card in ipairs(context.joy_selection) do
-                selected_card:start_dissolve()
-            end
+            JoyousSpring.tribute(card, context.joy_selection)
             ease_hands_played(card.ability.extra.hands)
         end
         if context.other_joker and JoyousSpring.is_monster_archetype(context.other_joker, "MekkKnight") then
@@ -645,8 +639,11 @@ SMODS.Joker({
         end
     end,
     joy_can_activate = function(card)
-        local materials = JoyousSpring.get_materials_owned({ { monster_archetypes = { "MekkKnight" } } })
-        return not card.debuff and (G.GAME.blind.in_blind and next(materials)) and true or false
+        if not G.GAME.blind.in_blind then
+            return false
+        end
+        local materials = JoyousSpring.get_materials_owned({ { monster_archetypes = { "MekkKnight" } } }, false, true)
+        return next(materials) and true or false
     end,
     in_pool = function(self, args)
         return args and args.source and args.source == "sho" or false

@@ -11,10 +11,10 @@ SMODS.Joker({
     key = "generaider_loptr",
     atlas = 'Generaider',
     pos = { x = 0, y = 0 },
-    rarity = 2,
+    rarity = 1,
     discovered = true,
     blueprint_compat = false,
-    eternal_compat = true,
+    eternal_compat = false,
     cost = 8,
     loc_vars = function(self, info_queue, card)
         return {}
@@ -35,7 +35,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval and G.GAME.blind.boss then
                 if #JoyousSpring.field_spell_area.cards < JoyousSpring.field_spell_area.config.card_limit then
@@ -55,7 +55,7 @@ SMODS.Joker({
     rarity = 2,
     discovered = true,
     blueprint_compat = false,
-    eternal_compat = true,
+    eternal_compat = false,
     cost = 5,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
@@ -79,7 +79,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.end_of_round and context.game_over == false and context.main_eval and G.GAME.blind.boss then
                 if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit +
@@ -110,7 +110,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 1,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_tribute" }
@@ -133,32 +133,29 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' and not context.blueprint_card then
+        if JoyousSpring.can_use_abilities(card) and not context.blueprint_card then
             if context.joy_activate_effect and context.joy_activated_card == card then
-                local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
-                local spellcasters = JoyousSpring.get_materials_owned({ { monster_type = "Spellcaster" } })
-                local tokens = SMODS.merge_lists({ generaiders, spellcasters })
-                if next(tokens) then
-                    JoyousSpring.create_overlay_effect_selection(card, tokens, card.ability.extra.tributes,
+                local materials = JoyousSpring.get_materials_owned(
+                    { { monster_archetypes = { "Generaider" } }, { monster_type = "Spellcaster" } }, false, true)
+                if #materials >= card.ability.extra.tributes then
+                    JoyousSpring.create_overlay_effect_selection(card, materials, card.ability.extra.tributes,
                         card.ability.extra.tributes)
                 end
             end
             if context.joy_exit_effect_selection and context.joy_card == card and
                 #context.joy_selection == card.ability.extra.tributes then
-                for _, selected_card in ipairs(context.joy_selection) do
-                    selected_card:start_dissolve()
-                end
+                JoyousSpring.tribute(card, context.joy_selection)
                 G.GAME.blind:disable()
             end
         end
     end,
     joy_can_activate = function(card)
-        local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
-        local spellcasters = JoyousSpring.get_materials_owned({ { monster_type = "Spellcaster" } })
-        local tokens = SMODS.merge_lists({ generaiders, spellcasters })
-        return not card.debuff and
-            (G.GAME.blind and ((not G.GAME.blind.disabled) and (G.GAME.blind.boss)) and next(tokens)) and
-            true or false
+        if not G.GAME.blind and ((not G.GAME.blind.disabled) and (G.GAME.blind.boss)) then
+            return false
+        end
+        local materials = JoyousSpring.get_materials_owned(
+            { { monster_archetypes = { "Generaider" } }, { monster_type = "Spellcaster" } }, false, true)
+        return #materials >= card.ability.extra.tributes
     end,
     in_pool = function(self, args)
         return args and args.source and args.source == "JoyousSpring" or false
@@ -174,7 +171,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    cost = 1,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_tribute" }
@@ -198,22 +195,19 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card then
                 if context.joy_activate_effect and context.joy_activated_card == card then
-                    local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
-                    local wyrms = JoyousSpring.get_materials_owned({ { monster_type = "Wyrm" } })
-                    local tokens = SMODS.merge_lists({ generaiders, wyrms })
-                    if next(tokens) then
-                        JoyousSpring.create_overlay_effect_selection(card, tokens, card.ability.extra.tributes,
+                    local materials = JoyousSpring.get_materials_owned(
+                        { { monster_archetypes = { "Generaider" } }, { monster_type = "Wyrm" } }, false, true)
+                    if #materials >= card.ability.extra.tributes then
+                        JoyousSpring.create_overlay_effect_selection(card, materials, card.ability.extra.tributes,
                             card.ability.extra.tributes)
                     end
                 end
                 if context.joy_exit_effect_selection and context.joy_card == card and
                     #context.joy_selection == card.ability.extra.tributes then
-                    for _, selected_card in ipairs(context.joy_selection) do
-                        selected_card:start_dissolve()
-                    end
+                    JoyousSpring.tribute(card, context.joy_selection)
                     card.ability.extra.active = true
                 end
                 if context.end_of_round and context.game_over == false and context.main_eval then
@@ -230,11 +224,12 @@ SMODS.Joker({
         end
     end,
     joy_can_activate = function(card)
-        local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
-        local wyrms = JoyousSpring.get_materials_owned({ { monster_type = "Wyrm" } })
-        local tokens = SMODS.merge_lists({ generaiders, wyrms })
-        return not card.debuff and (not card.ability.extra.active and next(tokens)) and
-            true or false
+        if card.ability.extra.active then
+            return false
+        end
+        local materials = JoyousSpring.get_materials_owned(
+            { { monster_archetypes = { "Generaider" } }, { monster_type = "Wyrm" } }, false, true)
+        return #materials >= card.ability.extra.tributes
     end,
     in_pool = function(self, args)
         return args and args.source and args.source == "JoyousSpring" or false
@@ -250,7 +245,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 1,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_tribute" }
@@ -273,22 +268,19 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card then
                 if context.joy_activate_effect and context.joy_activated_card == card then
-                    local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
-                    local warriors = JoyousSpring.get_materials_owned({ { monster_type = "Warrior" } })
-                    local tokens = SMODS.merge_lists({ generaiders, warriors })
-                    if next(tokens) then
-                        JoyousSpring.create_overlay_effect_selection(card, tokens, 1, 52)
+                    local materials = JoyousSpring.get_materials_owned(
+                        { { monster_archetypes = { "Generaider" } }, { monster_type = "Spellcaster" } }, false, true)
+                    if next(materials) then
+                        JoyousSpring.create_overlay_effect_selection(card, materials, 1, 52)
                     end
                 end
                 if context.joy_exit_effect_selection and context.joy_card == card and
                     #context.joy_selection > 0 then
                     local count = #context.joy_selection
-                    for _, selected_card in ipairs(context.joy_selection) do
-                        selected_card:start_dissolve()
-                    end
+                    JoyousSpring.tribute(card, context.joy_selection)
                     G.hand:change_size(count)
                     card.ability.extra.hand_gain = card.ability.extra.hand_gain + count
                 end
@@ -304,10 +296,9 @@ SMODS.Joker({
         card.ability.extra.hand_gain = 0
     end,
     joy_can_activate = function(card)
-        local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
-        local warriors = JoyousSpring.get_materials_owned({ { monster_type = "Warrior" } })
-        local tokens = SMODS.merge_lists({ generaiders, warriors })
-        return not card.debuff and (next(tokens)) and true or false
+        local materials = JoyousSpring.get_materials_owned(
+            { { monster_archetypes = { "Generaider" } }, { monster_type = "Warrior" } }, false, true)
+        return next(materials) and true or false
     end,
     in_pool = function(self, args)
         return args and args.source and args.source == "JoyousSpring" or false
@@ -323,7 +314,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 1,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_tribute" }
@@ -347,21 +338,18 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' and not context.blueprint_card then
+        if JoyousSpring.can_use_abilities(card) and not context.blueprint_card then
             if context.joy_activate_effect and context.joy_activated_card == card then
-                local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
-                local rocks = JoyousSpring.get_materials_owned({ { monster_type = "Rock" } })
-                local tokens = SMODS.merge_lists({ generaiders, rocks })
-                if next(tokens) then
-                    JoyousSpring.create_overlay_effect_selection(card, tokens, card.ability.extra.tributes,
+                local materials = JoyousSpring.get_materials_owned(
+                    { { monster_archetypes = { "Generaider" } }, { monster_type = "Rock" } }, false, true)
+                if #materials >= card.ability.extra.tributes then
+                    JoyousSpring.create_overlay_effect_selection(card, materials, card.ability.extra.tributes,
                         card.ability.extra.tributes)
                 end
             end
             if context.joy_exit_effect_selection and context.joy_card == card and
                 #context.joy_selection == card.ability.extra.tributes then
-                for _, selected_card in ipairs(context.joy_selection) do
-                    selected_card:start_dissolve()
-                end
+                JoyousSpring.tribute(card, context.joy_selection)
                 local choices = G.consumeables.cards
                 local to_banish = pseudorandom_element(choices, pseudoseed("j_joy_generaider_utgarda"))
                 if to_banish then
@@ -371,11 +359,12 @@ SMODS.Joker({
         end
     end,
     joy_can_activate = function(card)
-        local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
-        local rocks = JoyousSpring.get_materials_owned({ { monster_type = "Rock" } })
-        local tokens = SMODS.merge_lists({ generaiders, rocks })
-        return not card.debuff and (#G.consumeables.cards > 0 and next(tokens)) and
-            true or false
+        if not (#G.consumeables.cards > 0) then
+            return false
+        end
+        local materials = JoyousSpring.get_materials_owned(
+            { { monster_archetypes = { "Generaider" } }, { monster_type = "Rock" } }, false, true)
+        return #materials >= card.ability.extra.tributes
     end,
     in_pool = function(self, args)
         return args and args.source and args.source == "JoyousSpring" or false
@@ -391,7 +380,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 1,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_tribute" }
@@ -411,46 +400,42 @@ SMODS.Joker({
                 monster_archetypes = { ["Generaider"] = true }
             },
             tributes = 1,
-            cards_to_create = 1
+            cards_to_create = 1,
+            activated = false
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' and not context.blueprint_card then
-            if context.joy_activate_effect and context.joy_activated_card == card then
-                local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
-                local plants = JoyousSpring.get_materials_owned({ { monster_type = "Plant" } })
-                local tokens = SMODS.merge_lists({ generaiders, plants })
-                if next(tokens) then
-                    JoyousSpring.create_overlay_effect_selection(card, tokens, card.ability.extra.tributes,
+        if JoyousSpring.can_use_abilities(card) and not context.blueprint_card then
+            if not card.ability.extra.activated and context.joy_activate_effect and context.joy_activated_card == card then
+                local materials = JoyousSpring.get_materials_owned(
+                    { { monster_archetypes = { "Generaider" } }, { monster_type = "Plant" } }, false, true)
+                if #materials >= card.ability.extra.tributes then
+                    JoyousSpring.create_overlay_effect_selection(card, materials, card.ability.extra.tributes,
                         card.ability.extra.tributes)
                 end
             end
-            if context.joy_exit_effect_selection and context.joy_card == card and
+            if not card.ability.extra.activated and context.joy_exit_effect_selection and context.joy_card == card and
                 #context.joy_selection == card.ability.extra.tributes then
-                for _, selected_card in ipairs(context.joy_selection) do
-                    selected_card:start_dissolve()
-                end
-                local choices = {
-                    "j_joy_generaider_loptr",
-                    "j_joy_generaider_vala",
-                }
+                card.ability.extra.activated = true
+                JoyousSpring.tribute(card, context.joy_selection)
                 for i = 1, card.ability.extra.cards_to_create do
-                    if #G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit then
-                        SMODS.add_card({
-                            key = pseudorandom_element(choices, pseudoseed("j_joy_generaider_mardel"))
-                        })
-                    end
+                    JoyousSpring.create_pseudorandom(
+                        { { monster_archetypes = { "Generaider" }, rarity = 1 }, { monster_archetypes = { "Generaider" }, rarity = 2 } },
+                        pseudoseed("j_joy_generaider_mardel"), true)
                 end
             end
         end
+        if context.end_of_round and context.game_over == false and context.main_eval then
+            card.ability.extra.activated = false
+        end
     end,
     joy_can_activate = function(card)
-        local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
-        local plants = JoyousSpring.get_materials_owned({ { monster_type = "Plant" } })
-        local tokens = SMODS.merge_lists({ generaiders, plants })
-        return not card.debuff and
-            (#G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit and next(tokens)) and
-            true or false
+        if card.ability.extra.activated or not (#G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit) then
+            return false
+        end
+        local materials = JoyousSpring.get_materials_owned(
+            { { monster_archetypes = { "Generaider" } }, { monster_type = "Plant" } }, false, true)
+        return #materials >= card.ability.extra.tributes
     end,
     in_pool = function(self, args)
         return args and args.source and args.source == "JoyousSpring" or false
@@ -466,7 +451,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    cost = 1,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_tribute" }
@@ -491,22 +476,19 @@ SMODS.Joker({
         active = false
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card then
                 if context.joy_activate_effect and context.joy_activated_card == card then
-                    local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
-                    local machines = JoyousSpring.get_materials_owned({ { monster_type = "Machine" } })
-                    local tokens = SMODS.merge_lists({ generaiders, machines })
-                    if next(tokens) then
-                        JoyousSpring.create_overlay_effect_selection(card, tokens, card.ability.extra.tributes,
+                    local materials = JoyousSpring.get_materials_owned(
+                        { { monster_archetypes = { "Generaider" } }, { monster_type = "Machine" } }, false, true)
+                    if #materials >= card.ability.extra.tributes then
+                        JoyousSpring.create_overlay_effect_selection(card, materials, card.ability.extra.tributes,
                             card.ability.extra.tributes)
                     end
                 end
                 if context.joy_exit_effect_selection and context.joy_card == card and
                     #context.joy_selection == card.ability.extra.tributes then
-                    for _, selected_card in ipairs(context.joy_selection) do
-                        selected_card:start_dissolve()
-                    end
+                    JoyousSpring.tribute(card, context.joy_selection)
                     card.ability.extra.active = true
                 end
                 if context.end_of_round and context.game_over == false and context.main_eval then
@@ -524,11 +506,12 @@ SMODS.Joker({
         end
     end,
     joy_can_activate = function(card)
-        local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
-        local machines = JoyousSpring.get_materials_owned({ { monster_type = "Machine" } })
-        local tokens = SMODS.merge_lists({ generaiders, machines })
-        return not card.debuff and (not card.ability.extra.active and next(tokens)) and
-            true or false
+        if card.ability.extra.active then
+            return false
+        end
+        local materials = JoyousSpring.get_materials_owned(
+            { { monster_archetypes = { "Generaider" } }, { monster_type = "Machine" } }, false, true)
+        return #materials >= card.ability.extra.tributes
     end,
     in_pool = function(self, args)
         return args and args.source and args.source == "JoyousSpring" or false
@@ -544,7 +527,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 1,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_tribute" }
@@ -569,22 +552,19 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card then
                 if context.joy_activate_effect and context.joy_activated_card == card then
-                    local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
-                    local beastwarriors = JoyousSpring.get_materials_owned({ { monster_type = "BeastWarrior" } })
-                    local tokens = SMODS.merge_lists({ generaiders, beastwarriors })
-                    if next(tokens) then
-                        JoyousSpring.create_overlay_effect_selection(card, tokens, card.ability.extra.tributes,
+                    local materials = JoyousSpring.get_materials_owned(
+                        { { monster_archetypes = { "Generaider" } }, { monster_type = "BeastWarrior" } }, false, true)
+                    if #materials >= card.ability.extra.tributes then
+                        JoyousSpring.create_overlay_effect_selection(card, materials, card.ability.extra.tributes,
                             card.ability.extra.tributes)
                     end
                 end
                 if context.joy_exit_effect_selection and context.joy_card == card and
                     #context.joy_selection == card.ability.extra.tributes then
-                    for _, selected_card in ipairs(context.joy_selection) do
-                        selected_card:start_dissolve()
-                    end
+                    JoyousSpring.tribute(card, context.joy_selection)
                     ease_hands_played(card.ability.extra.hands)
                     ease_discard(card.ability.extra.discards)
                 end
@@ -592,10 +572,12 @@ SMODS.Joker({
         end
     end,
     joy_can_activate = function(card)
-        local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
-        local beastwarriors = JoyousSpring.get_materials_owned({ { monster_type = "BeastWarrior" } })
-        local tokens = SMODS.merge_lists({ generaiders, beastwarriors })
-        return not card.debuff and (G.GAME.blind and G.GAME.blind.in_blind and next(tokens)) and true or false
+        if not (G.GAME.blind and G.GAME.blind.in_blind) then
+            return false
+        end
+        local materials = JoyousSpring.get_materials_owned(
+            { { monster_archetypes = { "Generaider" } }, { monster_type = "BeastWarrior" } }, false, true)
+        return #materials >= card.ability.extra.tributes
     end,
     in_pool = function(self, args)
         return args and args.source and args.source == "JoyousSpring" or false
@@ -611,7 +593,7 @@ SMODS.Joker({
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    cost = 1,
+    cost = 10,
     loc_vars = function(self, info_queue, card)
         if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
             info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_tribute" }
@@ -636,22 +618,19 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card then
                 if context.joy_activate_effect and context.joy_activated_card == card then
-                    local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
-                    local zombies = JoyousSpring.get_materials_owned({ { monster_type = "Zombie" } })
-                    local tokens = SMODS.merge_lists({ generaiders, zombies })
-                    if next(tokens) then
-                        JoyousSpring.create_overlay_effect_selection(card, tokens, card.ability.extra.tributes,
+                    local materials = JoyousSpring.get_materials_owned(
+                        { { monster_archetypes = { "Generaider" } }, { monster_type = "Zombie" } }, false, true)
+                    if #materials >= card.ability.extra.tributes then
+                        JoyousSpring.create_overlay_effect_selection(card, materials, card.ability.extra.tributes,
                             card.ability.extra.tributes)
                     end
                 end
                 if context.joy_exit_effect_selection and context.joy_card == card and
                     #context.joy_selection == card.ability.extra.tributes then
-                    for _, selected_card in ipairs(context.joy_selection) do
-                        selected_card:start_dissolve()
-                    end
+                    JoyousSpring.tribute(card, context.joy_selection)
                     for i = 1, card.ability.extra.revives do
                         JoyousSpring.revive_pseudorandom(
                             { { rarity = 3, monster_archetypes = { "Generaider" } } },
@@ -665,10 +644,12 @@ SMODS.Joker({
         end
     end,
     joy_can_activate = function(card)
-        local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" } } })
-        local zombies = JoyousSpring.get_materials_owned({ { monster_type = "Zombie" } })
-        local tokens = SMODS.merge_lists({ generaiders, zombies })
-        return not card.debuff and (G.GAME.blind and G.GAME.blind.in_blind and next(tokens)) and true or false
+        if not (G.GAME.blind and G.GAME.blind.in_blind) then
+            return false
+        end
+        local materials = JoyousSpring.get_materials_owned(
+            { { monster_archetypes = { "Generaider" } }, { monster_type = "Zombie" } }, false, true)
+        return #materials >= card.ability.extra.tributes
     end,
     in_pool = function(self, args)
         return args and args.source and args.source == "JoyousSpring" or false
@@ -726,9 +707,10 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.joy_detach and context.joy_detaching_card == card then
+                JoyousSpring.ease_detach(card)
                 G.hand:change_size(card.ability.extra.hsize)
             end
             if context.joker_main then
@@ -787,7 +769,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if card.facing ~= 'back' then
+        if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.joy_detach and context.joy_detaching_card == card then
                 for _, joker in ipairs(G.jokers.cards) do
@@ -795,11 +777,12 @@ SMODS.Joker({
                         joker:start_dissolve()
                     end
                 end
-                local added_card = SMODS.add_card({
+                local added_card = JoyousSpring.create_summon({
                     key = "j_joy_generaider_jormungandr"
-                })
+                }, true)
                 added_card.ability.extra.joyous_spring.xyz_materials = JoyousSpring.get_graveyard_count()
                 JoyousSpring.empty_graveyard()
+                JoyousSpring.ease_detach(card)
             end
         end
     end,
@@ -840,41 +823,35 @@ SMODS.Joker({
     },
     calculate = function(self, card, context)
         if context.setting_blind and context.main_eval then
-            while #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit do
+            local generaiders = JoyousSpring.get_materials_owned({ { monster_archetypes = { "Generaider" }, exclude_tokens = true } })
+            local count = 0
+            for _, joker in ipairs(generaiders) do
+                if not joker.edition or not joker.edition.negative then
+                    count = count + 1
+                end
+            end
+            local i = 0
+            while (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit - i + count) and (i < 20) do
                 JoyousSpring.summon_token("generaider")
+                i = i + 1
             end
         end
         if context.joy_activate_effect and context.joy_activated_card == card then
             local tokens = JoyousSpring.get_materials_owned({ { key = "j_joy_token", monster_archetypes = { "Generaider" } } })
-            if next(tokens) then
+            if #tokens >= card.ability.extra.tributes then
                 JoyousSpring.create_overlay_effect_selection(card, tokens, card.ability.extra.tributes,
                     card.ability.extra.tributes)
             end
         end
         if context.joy_exit_effect_selection and context.joy_card == card and
             #context.joy_selection == card.ability.extra.tributes then
-            for _, selected_card in ipairs(context.joy_selection) do
-                selected_card:start_dissolve()
-            end
+            JoyousSpring.tribute(card, context.joy_selection)
             card.ability.extra.used = true
-            local choices = {
-                "j_joy_generaider_harr",
-                "j_joy_generaider_nidhogg",
-                "j_joy_generaider_frodi",
-                "j_joy_generaider_utgarda",
-                "j_joy_generaider_mardel",
-                "j_joy_generaider_dovelgus",
-                "j_joy_generaider_naglfar",
-                "j_joy_generaider_hela",
-            }
+
             for i = 1, card.ability.extra.cards_to_create do
-                local not_owned = JoyousSpring.get_not_owned(choices, true)
-                if #G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit then
-                    SMODS.add_card({
-                        key = pseudorandom_element(not_owned, pseudoseed("j_joy_generaider_boss_stage")) or
-                            "j_joy_generaider_utgarda"
-                    })
-                end
+                JoyousSpring.create_pseudorandom(
+                    { { monster_archetypes = { "Generaider" }, rarity = 3 } },
+                    pseudoseed("j_joy_generaider_boss_stage"), true, true, nil, #context.joy_selection)
             end
         end
         if context.end_of_round and context.main_eval then

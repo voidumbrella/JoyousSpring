@@ -1,4 +1,4 @@
---- RUNICK
+--- DANGER!
 SMODS.Atlas({
     key = "danger",
     path = "21Danger.png",
@@ -6,7 +6,7 @@ SMODS.Atlas({
     py = 95
 })
 
-
+-- Danger!? Jackalope?
 SMODS.Joker({
     key = "danger_jack",
     atlas = 'danger',
@@ -19,18 +19,23 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                monster_type = "Beast",
+                monster_archetypes = { ["Danger"] = true }
             },
         },
     },
 })
+
+-- Danger!? Tsuchinoko?
 SMODS.Joker({
     key = "danger_tsuch",
     atlas = 'danger',
@@ -43,18 +48,23 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                monster_type = "Reptile",
+                monster_archetypes = { ["Danger"] = true }
             },
         },
     },
 })
+
+-- Danger! Chupacabra!
 SMODS.Joker({
     key = "danger_chup",
     atlas = 'danger',
@@ -67,18 +77,23 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                monster_type = "Fiend",
+                monster_archetypes = { ["Danger"] = true }
             },
         },
     },
 })
+
+-- Danger! Mothman!
 SMODS.Joker({
     key = "danger_moth",
     atlas = 'danger',
@@ -91,18 +106,23 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                monster_type = "Insect",
+                monster_archetypes = { ["Danger"] = true }
             },
         },
     },
 })
+
+-- Danger! Dogman!
 SMODS.Joker({
     key = "danger_dog",
     atlas = 'danger',
@@ -115,18 +135,23 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                monster_type = "BeastWarrior",
+                monster_archetypes = { ["Danger"] = true }
             },
         },
     },
 })
+
+-- Danger! Nessie!
 SMODS.Joker({
     key = "danger_ness",
     atlas = 'danger',
@@ -139,18 +164,23 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                monster_type = "Aqua",
+                monster_archetypes = { ["Danger"] = true }
             },
         },
     },
 })
+
+-- Danger! Bigfoot!
 SMODS.Joker({
     key = "danger_big",
     atlas = 'danger',
@@ -163,18 +193,23 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                monster_type = "Beast",
+                monster_archetypes = { ["Danger"] = true }
             },
         },
     },
 })
+
+-- Danger! Ogopogo!
 SMODS.Joker({
     key = "danger_ogo",
     atlas = 'danger',
@@ -187,18 +222,23 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                monster_type = "SeaSerpent",
+                monster_archetypes = { ["Danger"] = true }
             },
         },
     },
 })
+
+-- Danger! Thunderbird!
 SMODS.Joker({
     key = "danger_thunder",
     atlas = 'danger',
@@ -211,18 +251,23 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
                 attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                monster_type = "WingedBeast",
+                monster_archetypes = { ["Danger"] = true }
             },
         },
     },
 })
+
+-- Realm of Danger!
 SMODS.Joker({
     key = "danger_realm",
     atlas = 'danger',
@@ -235,18 +280,22 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                is_field_spell = true,
+                monster_archetypes = { ["Danger"] = true }
             },
         },
     },
 })
+
+-- Danger! Disturbance! Disorder!
 SMODS.Joker({
     key = "danger_disorder",
     atlas = 'danger',
@@ -259,14 +308,16 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {}
     end,
+    joy_desc_cards = {
+        { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
+    },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
     config = {
         extra = {
             joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "DARK",
-                monster_type = "Cyberse",
-                monster_archetypes = {}
+                is_field_spell = true,
+                monster_archetypes = { ["Danger"] = true }
             },
         },
     },
