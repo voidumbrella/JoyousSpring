@@ -2762,7 +2762,7 @@ return {
 				text = { "TBD" }
 			},
 			j_joy_rhino = {
-				name = "Fiendish Rhino Warrior",
+				name = "{C:joy_effect}Fiendish Rhino Warrior",
 				text = {
 					"Send {C:attention}#1#{} {C:joy_normal}Fiends{} to the {C:attention}GY{} and",
 					"{C:attention}revive #2#{} {C:joy_normal}Fiend{} when used",
@@ -2770,7 +2770,7 @@ return {
 				}
 			},
 			j_joy_tourguide = {
-				name = "Tour Guide From the Underworld",
+				name = "{C:joy_effect}Tour Guide From the Underworld",
 				text = {
 					"Creates {C:attention}#1#{} {C:dark_edition}Negative{} {C:joy_normal}Main Deck{}",
 					"{C:blue}Common{} or {C:green}Uncommon{} {C:joy_normal}Fiend{} when obtained",
