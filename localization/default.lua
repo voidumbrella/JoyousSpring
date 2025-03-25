@@ -2650,47 +2650,102 @@ return {
 			--#region Danger!
 			j_joy_danger_jack = {
 				name = "Danger!? Jackalope?",
-				text = { "TBD" }
+				text = {
+					"Gains {C:chips}+#1#{} Chips when {C:attention}Blind{} is selected",
+					"{C:inactive}(Currently {C:chips}+#2# {C:inactive}Chips)",
+					" ",
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected {C:inactive}(itself included)",
+					" ",
+					"Creates {C:attention}#3#{} {C:joy_normal}\"Danger!\"",
+					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability",
+					"{C:inactive}(Must have room){}",
+				}
 			},
 			j_joy_danger_tsuch = {
 				name = "Danger!? Tsuchinoko?",
-				text = { "TBD" }
+				text = {
+					"Gains {C:mult}+#1#{} Mult when {C:attention}Blind{} is selected",
+					"{C:inactive}(Currently {C:mult}+#2# {C:inactive}Mult)",
+					" ",
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected",
+					" ",
+					"Creates {C:attention}#3#{} {C:joy_normal}\"Danger!\"",
+					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability",
+					"{C:inactive}(Must have room){}",
+				}
 			},
 			j_joy_danger_chup = {
 				name = "Danger! Chupacabra!",
-				text = { "TBD" }
+				text = {
+					"{C:money}+$#1#{} at end of round",
+					"Increases by {C:money}#2#{} when {C:attention}Blind{} is selected",
+					" ",
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected",
+					" ",
+					"{C:attention}Revives #3#{} {C:joy_normal}\"Danger!\"",
+					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability"
+				}
 			},
 			j_joy_danger_moth = {
 				name = "Danger! Mothman!",
-				text = { "TBD" }
+				text = {
+					"{C:red}+#1#{} Discard",
+					"Increases by {C:money}#2#{} when {C:attention}Blind{} is selected",
+					" ",
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected",
+					" ",
+					"{C:attention}Revives #3#{} {C:joy_normal}\"Danger!\"",
+					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability"
+				}
 			},
 			j_joy_danger_dog = {
 				name = "Danger! Dogman!",
-				text = { "TBD" }
+				text = {
+					"Reduces {C:attention}Blind{}'s requirements by {C:red}#1#%{}",
+					"Increases by {C:red}#2#%{} when {C:attention}Blind{} is selected",
+					"{s:0.9,C:inactive}(Max. 25%)",
+					" ",
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected",
+					" ",
+					"Add {C:attention}#3#{} {C:joy_normal}\"Danger!\" to the shop",
+					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability"
+				}
 			},
 			j_joy_danger_ness = {
 				name = "Danger! Nessie!",
-				text = { "TBD" }
+				text = {
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected"
+				}
 			},
 			j_joy_danger_big = {
 				name = "Danger! Bigfoot!",
-				text = { "TBD" }
+				text = {
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected"
+				}
 			},
 			j_joy_danger_ogo = {
 				name = "Danger! Ogopogo!",
-				text = { "TBD" }
+				text = {
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected"
+				}
 			},
 			j_joy_danger_thunder = {
 				name = "Danger! Thunderbird!",
-				text = { "TBD" }
+				text = {
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected"
+				}
 			},
 			j_joy_danger_realm = {
 				name = "Realm of Danger!",
-				text = { "TBD" }
+				text = {
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected"
+				}
 			},
 			j_joy_danger_disorder = {
 				name = "Danger! Disturbance! Disorder!",
-				text = { "TBD" }
+				text = {
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected"
+				}
 			},
 			--#endregion
 			--#region Adamancipator
