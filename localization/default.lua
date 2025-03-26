@@ -781,7 +781,7 @@ return {
 					" ",
 					"Once per round, you can {C:attention}tribute #1#{}",
 					"{C:joy_token}\"Generaider Tokens\"{} to create {C:attention}#2#{}",
-					"not owned {C:red}Rare{} {C:joy_normal}\"Generaider\"{}",
+					"not owned {C:red}Rare{} {C:joy_normal}Main Deck \"Generaider\"{}",
 					"{C:inactive}(Must have room){}",
 				},
 			},
