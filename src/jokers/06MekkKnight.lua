@@ -130,7 +130,7 @@ SMODS.Joker({
                 if next(SMODS.find_card("j_joy_mekk_spectrum")) or JoyousSpring.get_joker_column(card) == (JoyousSpring.index_of(context.full_hand, context.other_card)) then
                     return {
                         add_to_hand = true,
-                        message = localize("k_joy_splash")
+                        --message = localize("k_joy_splash")
                     }
                 end
             end
