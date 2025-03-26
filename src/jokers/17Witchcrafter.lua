@@ -669,7 +669,7 @@ SMODS.Joker({
             end
             if context.joker_main then
                 return {
-                    xmult = card.ability.extra.current_mult
+                    mult = card.ability.extra.current_mult
                 }
             end
         end
