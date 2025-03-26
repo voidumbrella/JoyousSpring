@@ -687,7 +687,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and context.joy_detach and context.joy_detaching_card == card then
-                local choices = JoyousSpring.get_materials_in_collection({ { is_monster = true } })
+                local choices = JoyousSpring.get_materials_in_collection({ { is_monster = true, exclude_tokens = true } })
                 for _ = 1, card.ability.extra.mills do
                     local key_to_send = pseudorandom_element(choices, pseudoseed("j_joy_ba_dante"))
                     JoyousSpring.send_to_graveyard(key_to_send or "j_joy_ba_cir")
