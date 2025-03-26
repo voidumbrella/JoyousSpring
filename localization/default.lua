@@ -3349,6 +3349,7 @@ return {
 			k_joy_disable_booster_tag = "Disable Booster Tag from appearing naturally",
 			k_joy_only_ygo_cards = "Only Monster Cards appear",
 			k_joy_extra_ygo_booster = "Extra Monster Card booster each shop",
+			k_joy_instant_poker_hand = "Disable poker hand level up animation (for this mod)",
 			k_joy_splash = "Splash!",
 			k_joy_defeated = "Defeated!",
 			k_joy_banished = "Banished!",
