@@ -424,8 +424,21 @@ function localize(args, misc_cat)
             end
         end
     else
-        return localize_ref(args, misc_cat)
+        local ret = localize_ref(args, misc_cat)
+        -- Remove color codes from info_queue tooltip names
+        if args.type == "name_text" then
+            if string.len(ret) > 2 and string.sub(ret, string.len(ret) - 1, string.len(ret)) == "{}" then
+                ret = string.sub(ret, 1, string.len(ret) - 2)
+            end
+            if string.sub(ret, 1, 3) == "{C:" then
+                local _, _, _, real_name = string.find(ret, "{C:(.*)}(.*)")
+                ret = real_name
+            end
+        end
+
+        return ret
     end
+    return localize_ref(args, misc_cat)
 end
 
 local init_localization_ref = init_localization
