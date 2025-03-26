@@ -1304,7 +1304,7 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if JoyousSpring.can_use_abilities(card) then
+        if JoyousSpring.can_use_abilities(card) and context.joker_main and JoyousSpring.count_materials_owned({ { summon_type = "LINK" } }) > 0 then
             return {
                 xmult = card.ability.extra.xmult * JoyousSpring.count_materials_owned({ { summon_type = "LINK" } })
             }
