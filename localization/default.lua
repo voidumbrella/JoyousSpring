@@ -2592,7 +2592,7 @@ return {
 					"You can {C:attention}tribute #1#{} other {C:attention}Jokers",
 					"to {C:attention}transform{} this card into {C:joy_effect}\"Aleister the Invoker\"",
 					" ",
-					"Each {C:attention}Joker{} gives {X:mult,C:white}X#2#{} Mult",
+					"Each {C:joy_fusion}Fusion{} gives {X:mult,C:white}X#2#{} Mult",
 				}
 			},
 			j_joy_invoked_mage = {
@@ -2633,7 +2633,7 @@ return {
 					"Gains abilities of each {C:joy_normal}\"Invoked\"{} in the {C:attention}GY{}",
 					" ",
 					"Treated as any {C:attention}material{} for a {C:joy_fusion}Fusion"
-				}
+				},
 			},
 			j_joy_invoked_meltdown = {
 				name = "{C:joy_spell}Magical Meltdown",
@@ -2649,7 +2649,7 @@ return {
 			--#endregion
 			--#region Danger!
 			j_joy_danger_jack = {
-				name = "Danger!? Jackalope?",
+				name = "{C:joy_effect}Danger!? Jackalope?",
 				text = {
 					"Gains {C:chips}+#1#{} Chips when {C:attention}Blind{} is selected",
 					"{C:inactive}(Currently {C:chips}+#2# {C:inactive}Chips)",
@@ -2662,7 +2662,7 @@ return {
 				}
 			},
 			j_joy_danger_tsuch = {
-				name = "Danger!? Tsuchinoko?",
+				name = "{C:joy_effect}Danger!? Tsuchinoko?",
 				text = {
 					"Gains {C:mult}+#1#{} Mult when {C:attention}Blind{} is selected",
 					"{C:inactive}(Currently {C:mult}+#2# {C:inactive}Mult)",
@@ -2675,7 +2675,7 @@ return {
 				}
 			},
 			j_joy_danger_chup = {
-				name = "Danger! Chupacabra!",
+				name = "{C:joy_effect}Danger! Chupacabra!",
 				text = {
 					"{C:money}+$#1#{} at end of round",
 					"Increases by {C:money}#2#{} when {C:attention}Blind{} is selected",
@@ -2687,10 +2687,10 @@ return {
 				}
 			},
 			j_joy_danger_moth = {
-				name = "Danger! Mothman!",
+				name = "{C:joy_effect}Danger! Mothman!",
 				text = {
 					"{C:red}+#1#{} Discard",
-					"Increases by {C:money}#2#{} when {C:attention}Blind{} is selected",
+					"Increases by {C:red}#2#{} when {C:attention}Blind{} is selected",
 					" ",
 					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected",
 					" ",
@@ -2699,7 +2699,7 @@ return {
 				}
 			},
 			j_joy_danger_dog = {
-				name = "Danger! Dogman!",
+				name = "{C:joy_effect}Danger! Dogman!",
 				text = {
 					"Reduces {C:attention}Blind{}'s requirements by {C:red}#1#%{}",
 					"Increases by {C:red}#2#%{} when {C:attention}Blind{} is selected",
@@ -2707,44 +2707,76 @@ return {
 					" ",
 					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected",
 					" ",
-					"Add {C:attention}#3#{} {C:joy_normal}\"Danger!\" to the shop",
+					"Add {C:attention}#3#{} {C:joy_normal}\"Danger!\"{} to the shop",
 					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability"
 				}
 			},
 			j_joy_danger_ness = {
-				name = "Danger! Nessie!",
+				name = "{C:joy_effect}Danger! Nessie!",
 				text = {
-					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected"
+					"{C:attention}+#1#{} hand size",
+					"Increases by {C:attention}#2#{} when {C:attention}Blind{} is selected",
+					" ",
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected",
+					" ",
+					"Add {C:attention}#3#{} {C:joy_normal}\"Danger!\"{} to the shop",
+					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability"
 				}
 			},
 			j_joy_danger_big = {
-				name = "Danger! Bigfoot!",
+				name = "{C:joy_effect}Danger! Bigfoot!",
 				text = {
-					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected"
+					"Gains {X:mult,C:white}X#1#{} Mult when {C:attention}Blind{} is selected",
+					"{C:inactive}(Currently {X:mult,C:white}X#2#{} {C:inactive}Mult)",
+					" ",
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected",
+					" ",
+					"Destroy all other {C:attention}Jokers{}",
+					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability",
 				}
 			},
 			j_joy_danger_ogo = {
-				name = "Danger! Ogopogo!",
+				name = "{C:joy_effect}Danger! Ogopogo!",
 				text = {
-					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected"
+					"{C:chips}+#1#{} Chips for each {C:joy_normal}\"Danger!\"{} in the {C:attention}GY{}",
+					"{C:inactive}(Currently {C:chips}+#2# {C:inactive}Chips)",
+					" ",
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected {C:inactive}(itself included)",
+					" ",
+					"Sends {C:attention}#3#{} {C:joy_normal}\"Danger!\"{} to the {C:attention}GY{}",
+					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability",
+					"{C:inactive}(Must have room){}",
 				}
 			},
 			j_joy_danger_thunder = {
-				name = "Danger! Thunderbird!",
+				name = "{C:joy_effect}Danger! Thunderbird!",
 				text = {
-					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected"
+					"Gains {X:chips,C:white}X#1#{} Chips when {C:attention}Blind{} is selected",
+					"{C:inactive}(Currently {X:chips,C:white}X#2#{} {C:inactive}Chips)",
+					" ",
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected",
+					" ",
+					"Destroy {C:attention}#3#{} other {C:attention}Joker{} and all {C:attention}Consumables",
+					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability",
 				}
 			},
 			j_joy_danger_realm = {
-				name = "Realm of Danger!",
+				name = "{C:joy_spell}Realm of Danger!",
 				text = {
-					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected"
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected",
+					"and gives {C:money}+$#1#{}",
+					" ",
+					"{C:joy_normal}\"Danger!\"{} {C:attention}revive{} and create cards as {C:dark_edition}Polychrome{}"
 				}
 			},
 			j_joy_danger_disorder = {
-				name = "Danger! Disturbance! Disorder!",
+				name = "{C:joy_spell}Danger! Disturbance! Disorder!",
 				text = {
-					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected"
+					"Creates {C:attention}#1#{} {C:joy_normal}\"Danger!\"{}",
+					"when {C:attention}Blind{} is selected",
+					"{C:inactive}(Must have room){}",
+					" ",
+					"All non-{C:joy_normal}\"Danger!\"{} are debuffed"
 				}
 			},
 			--#endregion

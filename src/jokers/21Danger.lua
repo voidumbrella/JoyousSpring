@@ -17,7 +17,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 50, 0, 1 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
@@ -46,7 +46,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 20, 0, 1 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
@@ -75,7 +75,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 2, 2, 1 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
@@ -104,7 +104,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 1, 1, 1 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
@@ -133,7 +133,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 2, 0.5, 1 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
@@ -162,7 +162,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 1, 1, 1 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
@@ -191,7 +191,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 1, 1 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
@@ -220,7 +220,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 20, 0, 3 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
@@ -249,7 +249,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 1, 1, 1 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
@@ -278,7 +278,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 8 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
@@ -306,7 +306,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return {}
+        return { vars = { 1 } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
