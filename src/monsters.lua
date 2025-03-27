@@ -10,6 +10,7 @@ SMODS.Atlas({
 --#region LSP
 
 ---@class SMODS.Joker
+---@field get_weight? fun(self: SMODS.Center|table, args: table):number? Only YGO monsters weighted rarity, if it returns nil then it uses the default rate for the rarity
 ---@field joy_set_cost? fun(card:table|Card) Sets its own cost and sell cost inside Card:set_cost()
 ---@field joy_modify_cost? fun(card:table|Card, other_card:table|Card) Like joy_set_cost but for another card
 ---@field joy_can_activate? fun(card:table|Card):boolean? Returns `true` if the activated ability can be used

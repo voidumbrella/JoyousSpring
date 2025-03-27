@@ -8,18 +8,18 @@ local get_weighted_pool = function(starting_pool, default_key, _append)
     local _pool_size = 0
     local _total_weight = 0
     local available_rarities = copy_table(SMODS.ObjectTypes["Joker"].rarities)
-    -- Calculate total rates of rarities
+
     local rarity_weight = 0
     for _, v in ipairs(available_rarities) do
         v.mod = G.GAME[tostring(v.key):lower() .. "_mod"] or 1
-        -- Should this fully override the v.weight calcs?
+
         if SMODS.Rarities[v.key] and SMODS.Rarities[v.key].get_weight and type(SMODS.Rarities[v.key].get_weight) == "function" then
             v.weight = SMODS.Rarities[v.key]:get_weight(v.weight, SMODS.ObjectTypes[_pool_key])
         end
         v.weight = v.weight * v.mod
         rarity_weight = rarity_weight + v.weight
     end
-    -- recalculate rarities to account for v.mod
+
     for _, v in ipairs(available_rarities) do
         v.weight = v.weight / rarity_weight
     end

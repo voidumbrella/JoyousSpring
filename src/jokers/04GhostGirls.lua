@@ -58,7 +58,7 @@ SMODS.Joker({
             end
         end
     end,
-    get_weight = function(self)
+    get_weight = function(self, args)
         return 0.01
     end,
     joker_display_def = function(JokerDisplay)
@@ -115,7 +115,7 @@ SMODS.Joker({
             end
         end
     end,
-    get_weight = function(self)
+    get_weight = function(self, args)
         return 0.01
     end,
     joker_display_def = function(JokerDisplay)
@@ -181,7 +181,7 @@ SMODS.Joker({
             end
         end
     end,
-    get_weight = function(self)
+    get_weight = function(self, args)
         return 0.01
     end,
     joker_display_def = function(JokerDisplay)
@@ -243,7 +243,7 @@ SMODS.Joker({
             end
         end
     end,
-    get_weight = function(self)
+    get_weight = function(self, args)
         return 0.01
     end,
     joker_display_def = function(JokerDisplay)
@@ -325,7 +325,7 @@ SMODS.Joker({
             end
         end
     end,
-    get_weight = function(self)
+    get_weight = function(self, args)
         return 0.01
     end,
     joker_display_def = function(JokerDisplay)
@@ -406,7 +406,7 @@ SMODS.Joker({
             SMODS.debuff_card(added_card, true, "j_joy_yokai_mourner")
         end
     end,
-    get_weight = function(self)
+    get_weight = function(self, args)
         return 0.01
     end,
     joker_display_def = function(JokerDisplay)
