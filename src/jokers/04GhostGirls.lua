@@ -11,7 +11,7 @@ SMODS.Joker({
     key = "yokai_ogre",
     atlas = 'GhostGirls',
     pos = { x = 0, y = 0 },
-    rarity = 3,
+    rarity = 4,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
@@ -58,6 +58,9 @@ SMODS.Joker({
             end
         end
     end,
+    get_weight = function(self)
+        return 0.01
+    end,
     joker_display_def = function(JokerDisplay)
         return {
             text = {
@@ -78,7 +81,7 @@ SMODS.Joker({
     key = "yokai_reaper",
     atlas = 'GhostGirls',
     pos = { x = 1, y = 0 },
-    rarity = 3,
+    rarity = 4,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
@@ -112,6 +115,9 @@ SMODS.Joker({
             end
         end
     end,
+    get_weight = function(self)
+        return 0.01
+    end,
     joker_display_def = function(JokerDisplay)
         return {
             text = {
@@ -137,7 +143,7 @@ SMODS.Joker({
     key = "yokai_ash",
     atlas = 'GhostGirls',
     pos = { x = 2, y = 0 },
-    rarity = 3,
+    rarity = 4,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
@@ -175,6 +181,9 @@ SMODS.Joker({
             end
         end
     end,
+    get_weight = function(self)
+        return 0.01
+    end,
     joker_display_def = function(JokerDisplay)
         return {
             text = {
@@ -194,7 +203,7 @@ SMODS.Joker({
     key = "yokai_belle",
     atlas = 'GhostGirls',
     pos = { x = 0, y = 1 },
-    rarity = 3,
+    rarity = 4,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
@@ -234,6 +243,9 @@ SMODS.Joker({
             end
         end
     end,
+    get_weight = function(self)
+        return 0.01
+    end,
     joker_display_def = function(JokerDisplay)
         return {
             text = {
@@ -256,7 +268,7 @@ SMODS.Joker({
     key = "yokai_sister",
     atlas = 'GhostGirls',
     pos = { x = 1, y = 1 },
-    rarity = 3,
+    rarity = 4,
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
@@ -313,6 +325,9 @@ SMODS.Joker({
             end
         end
     end,
+    get_weight = function(self)
+        return 0.01
+    end,
     joker_display_def = function(JokerDisplay)
         return {
             text = {
@@ -334,7 +349,7 @@ SMODS.Joker({
     key = "yokai_mourner",
     atlas = 'GhostGirls',
     pos = { x = 2, y = 1 },
-    rarity = 3,
+    rarity = 4,
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
@@ -390,6 +405,9 @@ SMODS.Joker({
         if not card.debuff and added_card.config.center.rarity == 1 or added_card.config.center.rarity == 2 then
             SMODS.debuff_card(added_card, true, "j_joy_yokai_mourner")
         end
+    end,
+    get_weight = function(self)
+        return 0.01
     end,
     joker_display_def = function(JokerDisplay)
         return {
