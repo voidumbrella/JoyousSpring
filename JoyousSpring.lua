@@ -21,6 +21,7 @@ assert(SMODS.load_file("src/pendulum.lua"))()
 assert(SMODS.load_file("src/summon.lua"))()
 assert(SMODS.load_file("src/monsters.lua"))()
 assert(SMODS.load_file("src/effects.lua"))()
+assert(SMODS.load_file("src/custom_pool.lua"))()
 
 -- Jokers
 

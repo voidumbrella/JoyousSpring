@@ -797,9 +797,6 @@ SMODS.Joker({
             false, true)
         return #materials >= card.ability.extra.tributes
     end,
-    in_pool = function(self, args)
-        return args and args.source and args.source == "sho" or false
-    end,
 })
 
 JoyousSpring.collection_pool[#JoyousSpring.collection_pool + 1] = {

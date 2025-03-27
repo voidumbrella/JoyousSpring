@@ -864,9 +864,6 @@ SMODS.Joker({
             (not card.ability.extra.used and #G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit and next(tokens)) and
             true or false
     end,
-    in_pool = function(self, args)
-        return args and args.source and args.source == "sho" or false
-    end,
 })
 
 JoyousSpring.token_pool["generaider"] = {

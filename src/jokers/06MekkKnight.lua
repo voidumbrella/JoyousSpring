@@ -645,9 +645,6 @@ SMODS.Joker({
         local materials = JoyousSpring.get_materials_owned({ { monster_archetypes = { "MekkKnight" } } }, false, true)
         return next(materials) and true or false
     end,
-    in_pool = function(self, args)
-        return args and args.source and args.source == "sho" or false
-    end,
 })
 
 JoyousSpring.collection_pool[#JoyousSpring.collection_pool + 1] = {

@@ -100,6 +100,8 @@ SMODS.Atlas({
 ---@field exclude_extra_deck boolean?
 ---@field is_main_deck boolean?
 ---@field exclude_main_deck boolean?
+---@field is_field_spell boolean?
+---@field exclude_field_spell boolean?
 ---@field summon_type summon_type?
 ---@field exclude_summon_types summon_type[]?
 ---@field is_effect boolean?
@@ -571,6 +573,16 @@ JoyousSpring.is_material = function(card, properties, summon_type)
             return false
         end
     end
+    if properties.is_field_spell then
+        if not JoyousSpring.is_field_spell(card) then
+            return false
+        end
+    end
+    if properties.exclude_field_spell then
+        if JoyousSpring.is_field_spell(card) then
+            return false
+        end
+    end
     if properties.cannot_flip then
         if not JoyousSpring.cannot_flip(card) and not JoyousSpring.is_summon_type(card, "LINK") and card.config.center_key ~= "j_joy_token" then
             return false
@@ -709,6 +721,16 @@ JoyousSpring.is_material_center = function(card_key, properties)
     end
     if properties.exclude_extra_deck or properties.is_main_deck then
         if not monster_card_properties.is_main_deck then
+            return false
+        end
+    end
+    if properties.is_field_spell then
+        if not monster_card_properties.is_field_spell then
+            return false
+        end
+    end
+    if properties.exclude_field_spell then
+        if monster_card_properties.is_field_spell then
             return false
         end
     end
