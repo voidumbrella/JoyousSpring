@@ -1,6 +1,6 @@
 SMODS.ObjectType({
     key = "joy_monster",
-    default = "j_joy_eccentrick",
+    default = "j_joy_fish_paces",
     cards = {},
 })
 

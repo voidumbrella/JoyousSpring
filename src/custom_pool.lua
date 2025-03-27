@@ -1,6 +1,6 @@
 -- CUSTOM POOL
 
-local get_weighted_pool = function(starting_pool, default_key, _append)
+local get_weighted_pool = function(starting_pool, default_key, _append, allow_duplicates)
     local _starting_pool = starting_pool or G.P_CENTER_POOLS["Joker"]
     G.ARGS.TEMP_POOL = EMPTY(G.ARGS.TEMP_POOL)
     local _pool = G.ARGS.TEMP_POOL
@@ -33,7 +33,7 @@ local get_weighted_pool = function(starting_pool, default_key, _append)
             in_pool, pool_opts = v:in_pool({ source = _append })
         end
         pool_opts = pool_opts or {}
-        if not (G.GAME.used_jokers[v.key] and not pool_opts.allow_duplicates and not next(find_joker("Showman"))) and
+        if not (G.GAME.used_jokers[v.key] and not pool_opts.allow_duplicates and not allow_duplicates and not next(find_joker("Showman"))) and
             (v.unlocked ~= false or v.rarity == 4) then
             if v.enhancement_gate then
                 add = nil
@@ -81,9 +81,9 @@ local get_weighted_pool = function(starting_pool, default_key, _append)
     return _pool
 end
 
-local get_weighted_card = function(starting_pool, default_key, key_append)
+local get_weighted_card = function(starting_pool, default_key, key_append, allow_duplicates)
     local poll = pseudorandom(pseudoseed('JoyousSpring' .. G.GAME.round_resets.ante .. (key_append or '')))
-    local pool = get_weighted_pool(starting_pool, default_key, key_append)
+    local pool = get_weighted_pool(starting_pool, default_key, key_append, allow_duplicates)
     local weight_i = 0
     for _, v in ipairs(pool) do
         weight_i = weight_i + v.weight
@@ -110,10 +110,35 @@ function create_card(_type, area, legendary, _rarity, skip_materialize, soulable
                 rarity = type(_rarity) == "number" and _rarity or nil,
                 exclude_field_spell = (not is_shop_or_pack) and true or nil,
             },
-        }), "j_joy_eccentrick", key_append)
-        key = not G.GAME.banned_keys[key] and key or "j_joy_eccentrick"
+        }), "j_joy_fish_paces", key_append)
+        key = not G.GAME.banned_keys[key] and key or "j_joy_fish_paces"
     end
 
     return create_card_ref(_type, area, legendary, _rarity, skip_materialize, soulable,
         key or forced_key, key_append)
+end
+
+local smods_create_card_ref = SMODS.create_card
+function SMODS.create_card(t)
+    local key = nil
+    local _rarity = t.rarity
+    if t.set == "JoyousSpring" and not t.key then
+        local _rarity = (type(_rarity) == "number" and ((_rarity > 0.95 and 3) or (_rarity > 0.7 and 2) or 1)) or _rarity
+        _rarity = ({ Common = 1, Uncommon = 2, Rare = 3, Legendary = 4 })[_rarity] or _rarity
+
+        key = get_weighted_card(JoyousSpring.get_materials_in_collection(t.joy_monster_properties or {
+            {
+                is_monster = true,
+                rarity = type(_rarity) == "number" and _rarity or nil,
+            },
+        }), t.joy_monster_default or "j_joy_fish_paces", t.key_append, t.joy_allow_duplicates)
+        key = not G.GAME.banned_keys[key] and key or t.joy_monster_default or "j_joy_fish_paces"
+        t.set = "Joker"
+    end
+    t.key = key or t.key
+    if JoyousSpring.is_material_center(t.key or "", { is_field_spell = true }) then
+        t.area = JoyousSpring.field_spell_area
+    end
+
+    return smods_create_card_ref(t)
 end
