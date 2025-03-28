@@ -373,6 +373,15 @@ JoyousSpring.get_material_attributes = function(card_list, ignore_debuffed)
         WIND = false,
         DIVINE = false
     }
+    local attributes_list = {
+        "LIGHT",
+        "DARK",
+        "WATER",
+        "FIRE",
+        "EARTH",
+        "WIND",
+        "DIVINE",
+    }
     for _, card in ipairs(card_list) do
         if type(card) == "table" and (not ignore_debuffed or not card.debuff) and JoyousSpring.is_monster_card(card) then
             if not JoyousSpring.is_all_attributes(card) then
@@ -390,9 +399,9 @@ JoyousSpring.get_material_attributes = function(card_list, ignore_debuffed)
     for _, card in ipairs(card_list) do
         if type(card) == "table" and (not ignore_debuffed or not card.debuff) and JoyousSpring.is_monster_card(card) then
             if JoyousSpring.is_all_attributes(card) then
-                for k, v in pairs(attributes) do
-                    if not v then
-                        attributes[k] = true
+                for _, v in ipairs(attributes_list) do
+                    if not attributes[v] then
+                        attributes[v] = true
                         break
                     end
                 end
@@ -402,9 +411,9 @@ JoyousSpring.get_material_attributes = function(card_list, ignore_debuffed)
             if card_center and card_center.config and card_center.config.extra and
                 type(card_center.config.extra) == "table" and
                 card_center.config.extra.joyous_spring and card_center.config.extra.joyous_spring.is_all_attributes then
-                for k, v in pairs(attributes) do
-                    if not v then
-                        attributes[k] = true
+                for _, v in ipairs(attributes_list) do
+                    if not attributes[v] then
+                        attributes[v] = true
                         break
                     end
                 end
