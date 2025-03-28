@@ -715,12 +715,22 @@ JoyousSpring.is_material_center = function(card_key, properties)
             return false
         end
     end
-    if properties.is_extra_deck or properties.exclude_main_deck then
+    if properties.is_extra_deck then
         if monster_card_properties.is_main_deck or monster_card_properties.is_field_spell then
             return false
         end
     end
-    if properties.exclude_extra_deck or properties.is_main_deck then
+    if properties.exclude_main_deck then
+        if monster_card_properties.is_main_deck then
+            return false
+        end
+    end
+    if properties.exclude_extra_deck then
+        if not monster_card_properties.is_main_deck and not monster_card_properties.is_field_spell then
+            return false
+        end
+    end
+    if properties.is_main_deck then
         if not monster_card_properties.is_main_deck then
             return false
         end

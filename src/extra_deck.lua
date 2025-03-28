@@ -276,7 +276,7 @@ function Game:start_run(args)
         self.CARD_W * 4.95,
         self.CARD_H * 0.95,
         {
-            card_limit = self.GAME.modifiers["joy_extra_deck_slots"] or 5,
+            card_limit = 5,
             type = 'extra_deck',
             highlight_limit = 1,
         }
@@ -284,6 +284,9 @@ function Game:start_run(args)
     JoyousSpring.extra_deck_area = G.joy_extra_deck_area
 
     game_start_run_ref(self, args)
+
+    JoyousSpring.extra_deck_area.config.card_limit = self.GAME.modifiers["joy_extra_deck_slots"] or
+        JoyousSpring.extra_deck_area.config.card_limit or 5
 
     self.joy_extra_deck = UIBox {
         definition = JoyousSpring.create_UIBox_extra_deck(),

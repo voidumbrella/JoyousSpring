@@ -101,20 +101,9 @@ function loc_colour(_c, _default)
     return loc_colour_ref(_c, _default)
 end
 
--- Prevent other cards from spawning if the Only YGO Cards config is enabled
 local get_current_pool_ref = get_current_pool
 function get_current_pool(_type, _rarity, _legendary, _append)
     local _pool, _pool_key = get_current_pool_ref(_type, _rarity, _legendary, _append)
-    local new_pool
-
-    if not _legendary and _type == 'Joker' and JoyousSpring.config.only_ygo_cards then
-        for i = 1, #_pool do
-            local key = _pool[i]
-            if key:sub(1, 5) ~= "j_joy" and key ~= "j_joker" then
-                _pool[i] = "UNAVAILABLE"
-            end
-        end
-    end
     if G.GAME.modifiers["joy_no_extra_deck_jokers"] then
         for i = 1, #_pool do
             local key = _pool[i]

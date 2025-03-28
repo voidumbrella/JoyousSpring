@@ -121,6 +121,7 @@ function create_card(_type, area, legendary, _rarity, skip_materialize, soulable
                 is_monster = true,
                 rarity = type(_rarity) == "number" and _rarity or nil,
                 exclude_field_spell = (not is_shop_or_pack) and true or nil,
+                exclude_extra_deck = G.GAME.modifiers["joy_no_extra_deck_jokers"] and true or nil
             },
         }), "j_joy_fish_paces", key_append)
         key = not G.GAME.banned_keys[key] and key or "j_joy_fish_paces"
@@ -147,6 +148,7 @@ function SMODS.create_card(t)
             {
                 is_monster = true,
                 rarity = type(_rarity) == "number" and _rarity or nil,
+                exclude_extra_deck = G.GAME.modifiers["joy_no_extra_deck_jokers"] and true or nil
             },
         }), t.joy_monster_default or "j_joy_fish_paces", t.key_append, t.joy_allow_duplicates)
         key = not G.GAME.banned_keys[key] and key or t.joy_monster_default or "j_joy_fish_paces"
