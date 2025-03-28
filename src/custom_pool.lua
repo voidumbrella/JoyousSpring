@@ -1,5 +1,11 @@
 -- CUSTOM POOL
 
+---Gets a weighted pool of all Jokers in starting_pool
+---@param starting_pool string[]|SMODS.Center[]?
+---@param default_key string?
+---@param _append string?
+---@param allow_duplicates boolean?
+---@return table
 local get_weighted_pool = function(starting_pool, default_key, _append, allow_duplicates)
     local _starting_pool = starting_pool or G.P_CENTER_POOLS["Joker"]
     G.ARGS.TEMP_POOL = EMPTY(G.ARGS.TEMP_POOL)
@@ -81,6 +87,12 @@ local get_weighted_pool = function(starting_pool, default_key, _append, allow_du
     return _pool
 end
 
+---Get a random card key from a weighted pool
+---@param starting_pool string[]|SMODS.Center[]?
+---@param default_key string?
+---@param key_append string?
+---@param allow_duplicates boolean?
+---@return string
 local get_weighted_card = function(starting_pool, default_key, key_append, allow_duplicates)
     local poll = pseudorandom(pseudoseed('JoyousSpring' .. G.GAME.round_resets.ante .. (key_append or '')))
     local pool = get_weighted_pool(starting_pool, default_key, key_append, allow_duplicates)
@@ -91,7 +103,7 @@ local get_weighted_card = function(starting_pool, default_key, key_append, allow
             return v.key
         end
     end
-    return default_key or "j_joy_eccentrick"
+    return default_key or "j_joy_fish_paces"
 end
 
 local create_card_ref = create_card
@@ -117,6 +129,11 @@ function create_card(_type, area, legendary, _rarity, skip_materialize, soulable
     return create_card_ref(_type, area, legendary, _rarity, skip_materialize, soulable,
         key or forced_key, key_append)
 end
+
+---@class CreateCard
+---@field joy_monster_default? string Default monster when set is "JoyousSpring" and the pool is weighted
+---@field joy_monster_properties? material_properties[] Starting properties of the pool when set is "JoyousSpring" and the pool is weighted
+---@field joy_allow_duplicates? boolean? Allow duplicates when set is "JoyousSpring" and the pool is weighted
 
 local smods_create_card_ref = SMODS.create_card
 function SMODS.create_card(t)
