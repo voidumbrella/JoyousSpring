@@ -781,7 +781,7 @@ return {
 					" ",
 					"Once per round, you can {C:attention}tribute #1#{}",
 					"{C:joy_token}\"Generaider Tokens\"{} to create {C:attention}#2#{}",
-					"not owned {C:red}Rare{} {C:joy_normal}\"Generaider\"{}",
+					"not owned {C:red}Rare{} {C:joy_normal}Main Deck \"Generaider\"{}",
 					"{C:inactive}(Must have room){}",
 				},
 			},
@@ -2322,88 +2322,274 @@ return {
 			--#endregion
 			--#region Shaddoll
 			j_joy_shaddoll_beast = {
-				name = "Shaddoll Beast",
-				text = { "TBD" }
+				name = "{C:joy_effect}Shaddoll Beast",
+				text = {
+					"{C:attention}Flips{} at end of round {C:inactive}(even if face-down)",
+					" ",
+					"{C:joy_effect}FLIP{}: {C:attention}+#1#{} hand size this round,",
+					"{C:attention}revive #2#{} {C:joy_normal}\"Shaddoll\"{} if any",
+					"and send {C:attention}#3#{} {C:joy_normal}\"Shaddoll\"{} to the {C:attention}GY{}",
+					" ",
+					"Turn {C:attention}#4#{} random cards in deck to",
+					"{C:attention}Blue Seal Wild{} cards when used as {C:attention}material{} for a {C:joy_fusion}Fusion"
+				}
 			},
 			j_joy_shaddoll_dragon = {
-				name = "Shaddoll Dragon",
-				text = { "TBD" }
+				name = "{C:joy_effect}Shaddoll Dragon",
+				text = {
+					"{C:attention}Flips{} at end of round {C:inactive}(even if face-down)",
+					" ",
+					"{C:joy_effect}FLIP{}: {C:blue}+#1#{} Hand this round,",
+					"{C:attention}revive #2#{} {C:joy_normal}\"Shaddoll\"{} if any",
+					"and send {C:attention}#3#{} {C:joy_normal}\"Shaddoll\"{} to the {C:attention}GY{}",
+					" ",
+					"Turn {C:attention}#4#{} random cards in deck to",
+					"{C:attention}Gold Seal Glass{} cards when used as {C:attention}material{} for a {C:joy_fusion}Fusion"
+				}
 			},
 			j_joy_shaddoll_falco = {
-				name = "Shaddoll Falco",
-				text = { "TBD" }
+				name = "{C:joy_effect}Shaddoll Falco",
+				text = {
+					"{C:attention}Flips{} at end of round {C:inactive}(even if face-down)",
+					" ",
+					"{C:joy_effect}FLIP{}: {C:attention}Revive #1#{} {C:joy_effect}Flip{} {C:attention}Joker{} face-down if any,",
+					"{C:attention}revive #2#{} {C:joy_normal}\"Shaddoll\"{} if any",
+					"and send {C:attention}#3#{} {C:joy_normal}\"Shaddoll\"{} to the {C:attention}GY{}",
+					" ",
+					"Create {C:attention}#4#{} face-down {C:dark_edition}Negative {C:joy_effect}\"Shaddoll Falco\"",
+					"when used as {C:attention}material{} for a {C:joy_fusion}Fusion",
+				}
 			},
 			j_joy_shaddoll_hedgehog = {
-				name = "Shaddoll Hedgehog",
-				text = { "TBD" }
+				name = "{C:joy_effect}Shaddoll Hedgehog",
+				text = {
+					"{C:attention}Flips{} at end of round {C:inactive}(even if face-down)",
+					" ",
+					"{C:joy_effect}FLIP{}: Create {C:attention}#1#{} {C:tarot}Tarot{} {C:inactive}(Must have room){},",
+					"{C:attention}revive #2#{} {C:joy_normal}\"Shaddoll\"{} if any",
+					"and send {C:attention}#3#{} {C:joy_normal}\"Shaddoll\"{} to the {C:attention}GY{}",
+					" ",
+					"Create {C:attention}#4#{} {C:spectral}Spectral",
+					"when used as {C:attention}material{} for a {C:joy_fusion}Fusion",
+					"{C:inactive}(Must have room)",
+				}
 			},
 			j_joy_shaddoll_hound = {
-				name = "Shaddoll Hound",
-				text = { "TBD" }
+				name = "{C:joy_effect}Shaddoll Hound",
+				text = {
+					"{C:attention}Flips{} at end of round {C:inactive}(even if face-down)",
+					" ",
+					"{C:joy_effect}FLIP{}: {C:money}+$#1#{},",
+					"{C:attention}revive #2#{} {C:joy_normal}\"Shaddoll\"{} if any",
+					"and send {C:attention}#3#{} {C:joy_normal}\"Shaddoll\"{} to the {C:attention}GY{}",
+					" ",
+					"{C:attention}Flip{} all {C:attention}Jokers{} face-up",
+					"when used as {C:attention}material{} for a {C:joy_fusion}Fusion"
+				}
 			},
 			j_joy_shaddoll_squamata = {
-				name = "Shaddoll Squamata",
-				text = { "TBD" }
+				name = "{C:joy_effect}Shaddoll Squamata",
+				text = {
+					"{C:attention}Flips{} at end of round {C:inactive}(even if face-down)",
+					" ",
+					"{C:joy_effect}FLIP{}: {C:red}+#1#{} Discard this round,",
+					"{C:attention}revive #2#{} {C:joy_normal}\"Shaddoll\"{} if any",
+					"and send {C:attention}#3#{} {C:joy_normal}\"Shaddoll\"{} to the {C:attention}GY{}",
+					" ",
+					"Turn {C:attention}#4#{} random cards in deck to",
+					"{C:attention}Purple Seal Steel{} cards when used as {C:attention}material{} for a {C:joy_fusion}Fusion"
+				}
 			},
 			j_joy_shaddoll_core = {
-				name = "Shaddoll Core",
-				text = { "TBD" }
+				name = "{C:joy_trap}Shaddoll Core",
+				text = {
+					"{C:joy_effect}FLIP{}: {X:mult,C:white}X#1#{} Mult this round,",
+					"{C:attention}revive #2#{} {C:joy_normal}\"Shaddoll\"{} if any",
+					"and send {C:attention}#3#{} {C:joy_normal}\"Shaddoll\"{} to the {C:attention}GY{}",
+					" ",
+					"Can be used as any {C:attention}material{} for a {C:joy_fusion}Fusion",
+					" ",
+					"Create {C:attention}#4#{} {C:joy_spell}\"Curse of the Shadow Prison\"",
+					"when used as {C:attention}material{} for a {C:joy_fusion}Fusion",
+					"{C:inactive}(Must have room)",
+				}
 			},
 			j_joy_shaddoll_ariel = {
-				name = "Naelshaddoll Ariel",
-				text = { "TBD" }
+				name = "{C:joy_effect}Naelshaddoll Ariel",
+				text = {
+					"{C:attention}Flips{} at end of round {C:inactive}(even if face-down)",
+					" ",
+					"{C:joy_effect}FLIP{}: {C:attention}Banish #1#{} other {C:attention}Joker{} at end of round",
+					"until {C:attention}Blind{} is selected",
+					" ",
+					"A {C:joy_fusion}Fusion{} summoned using this card as {C:attention}material{} gains this ability:",
+					"{s:0.9,C:attention}Banish{} {s:0.9}this card at end of round",
+					"{s:0.9}until {s:0.9,C:attention}Blind{} {s:0.9}is selected"
+				}
 			},
 			j_joy_shaddoll_genius = {
-				name = "Nehshaddoll Genius",
-				text = { "TBD" }
+				name = "{C:joy_effect}Nehshaddoll Genius",
+				text = {
+					"{C:attention}Flips{} at end of round {C:inactive}(even if face-down)",
+					" ",
+					"{C:joy_effect}FLIP{}: You can {C:attention}flip #1#{} {C:attention}Joker{} this round",
+					" ",
+					"A {C:joy_fusion}Fusion{} summoned using this card as {C:attention}material{} gains this ability:",
+					"{s:0.9}Can't be debuffed",
+				}
 			},
 			j_joy_shaddoll_keios = {
-				name = "Qadshaddoll Keios",
-				text = { "TBD" }
+				name = "{C:joy_effect}Qadshaddoll Keios",
+				text = {
+					"{C:attention}Flips{} at end of round {C:inactive}(even if face-down)",
+					" ",
+					"{C:joy_effect}FLIP{}: Add {C:attention}#1#{} {C:joy_normal}\"Shaddoll\"{} to the {C:joy_spell}Extra Deck",
+					"{C:inactive}(Must have room)",
+					" ",
+					"A {C:joy_fusion}Fusion{} summoned using this card as {C:attention}material{} gains this ability:",
+					"{s:0.9,C:mult}+#2#{s:0.9} Mult for each {s:0.9,C:joy_normal}\"Shaddoll\"{s:0.9} or {s:0.9,C:joy_normal}Spellcaster{s:0.9} in the {s:0.9,C:attention}GY"
+				}
 			},
 			j_joy_shaddoll_wendi = {
-				name = "Reeshaddoll Wendi",
-				text = { "TBD" }
+				name = "{C:joy_effect}Reeshaddoll Wendi",
+				text = {
+					"{C:attention}Flips{} at end of round {C:inactive}(even if face-down)",
+					" ",
+					"{C:joy_effect}FLIP{}: Create {C:attention}#1#{} {C:joy_normal}Main Deck \"Shaddoll\"{}",
+					"{C:inactive}(Must have room)",
+					" ",
+					"A {C:joy_fusion}Fusion{} summoned using this card as {C:attention}material{} gains this ability:",
+					"{s:0.9,C:attention}Revive #2#{s:0.9,C:joy_effect} Flip {s:0.9,C:attention}Joker{s:0.9} as {s:0.9,C:dark_edition}Negative{s:0.9} when {s:0.9,C:attention}Boss Blind{s:0.9} is selected",
+				}
 			},
 			j_joy_shaddoll_hollow = {
-				name = "Helshaddoll Hollow",
-				text = { "TBD" }
+				name = "{C:joy_effect}Helshaddoll Hollow",
+				text = {
+					"{C:attention}Flips{} at end of round {C:inactive}(even if face-down)",
+					" ",
+					"{C:joy_effect}FLIP{}: Send {C:attention}#1#{} {C:joy_normal}Main Deck \"Shaddoll\"{} to the {C:attention}GY",
+					" ",
+					"A {C:joy_fusion}Fusion{} summoned using this card as {C:attention}material{} gains this ability:",
+					"{s:0.9}Send {s:0.9,C:attention}#2#{} {s:0.9,C:joy_normal}Main Deck \"Shaddoll\"{s:0.9} to the {s:0.9,C:attention}GY{s:0.9} when {s:0.9,C:attention}Blind{s:0.9} is selected",
+				}
 			},
 			j_joy_shaddoll_anoya = {
-				name = "El Shaddoll Anoyatyllis",
-				text = { "TBD" }
+				name = "{C:joy_fusion}El Shaddoll Anoyatyllis",
+				text = {
+					"{C:chips}+#1#{} Chips for each {C:joy_normal}\"Shaddoll\"{} in the {C:attention}GY",
+					"{C:inactive}(Currently {C:chips}+#2#{} {C:inactive}Chips)",
+					" ",
+					"Add {C:attention}#3#{} {C:joy_normal}\"Shaddoll\"{} to the {C:joy_spell}Extra Deck",
+					"when used as {C:attention}material",
+					"{C:inactive}(Must have room)",
+					" ",
+					"A {C:joy_fusion}Fusion{} summoned using this card as {C:attention}material{} gains this ability:",
+					"{s:0.9,C:chips}+#1#{s:0.9} Chips for each {s:0.9,C:joy_normal}\"Shaddoll\"{s:0.9} in the {s:0.9,C:attention}GY"
+				}
 			},
 			j_joy_shaddoll_apka = {
-				name = "El Shaddoll Apkallone",
-				text = { "TBD" }
+				name = "{C:joy_fusion}El Shaddoll Apkallone",
+				text = {
+					"{C:joy_normal}\"Shaddoll\"{} {C:joy_fusion}Fusions{} can't be debuffed or {C:attention}flipped{} face-down",
+					" ",
+					"Add {C:attention}#1#{} {C:joy_normal}\"Shaddoll\"{} to the {C:joy_spell}Extra Deck",
+					"when used as {C:attention}material",
+					"{C:inactive}(Must have room)",
+					" ",
+					"A {C:joy_fusion}Fusion{} summoned using this card as {C:attention}material{} gains this ability:",
+					"{s:0.9,C:joy_normal}\"Shaddoll\"{} {s:0.9,C:joy_fusion}Fusions{s:0.9} can't be debuffed or {s:0.9,C:attention}flipped{s:0.9} face-down"
+				}
 			},
 			j_joy_shaddoll_winda = {
-				name = "El Shaddoll Winda",
-				text = { "TBD" }
+				name = "{C:joy_fusion}El Shaddoll Winda",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult for each {C:joy_normal}\"Shaddoll\"{}, face-down {C:attention}Joker{} or empty {C:attention}Joker{} slot",
+					"{C:inactive}(Currently {X:mult,C:white}X#2#{} {C:inactive}Mult)",
+					" ",
+					"Add {C:attention}#3#{} {C:joy_normal}\"Shaddoll\"{} to the {C:joy_spell}Extra Deck",
+					"when used as {C:attention}material",
+					"{C:inactive}(Must have room)",
+					" ",
+					"A {C:joy_fusion}Fusion{} summoned using this card as {C:attention}material{} gains this ability:",
+					"{s:0.9,X:mult,C:white}X#1#{s:0.9} Mult for each {s:0.9,C:joy_normal}\"Shaddoll\"{s:0.9}, face-down {s:0.9,C:attention}Joker{s:0.9} or empty {s:0.9,C:attention}Joker{s:0.9} slot"
+				}
 			},
 			j_joy_shaddoll_elconstruct = {
-				name = "El Shaddoll Construct",
-				text = { "TBD" }
+				name = "{C:joy_fusion}El Shaddoll Construct",
+				text = {
+					"Send {C:attention}#1# {C:joy_normal}\"Shaddoll\"{} to the {C:attention}GY{} when {C:attention}Blind{} is selected",
+					" ",
+					"Add {C:attention}#2#{} {C:joy_normal}\"Shaddoll\"{} to the {C:joy_spell}Extra Deck",
+					"when used as {C:attention}material",
+					"{C:inactive}(Must have room)",
+					" ",
+					"A {C:joy_fusion}Fusion{} summoned using this card as {C:attention}material{} gains this ability:",
+					"{s:0.9}Send {s:0.9,C:attention}#1# {s:0.9,C:joy_normal}\"Shaddoll\"{s:0.9} to the {s:0.9,C:attention}GY{s:0.9} when {s:0.9,C:attention}Blind{s:0.9} is selected",
+				}
 			},
 			j_joy_shaddoll_grysta = {
-				name = "El Shaddoll Grysta",
-				text = { "TBD" }
+				name = "{C:joy_fusion}El Shaddoll Grysta",
+				text = {
+					"{X:chips,C:white}X#1#{} Chips for each {C:joy_normal}\"Shaddoll\"{} in the {C:attention}GY",
+					"{C:inactive}(Currently {X:chips,C:white}X#2#{} {C:inactive}Chips)",
+					" ",
+					"Add {C:attention}#3#{} {C:joy_normal}\"Shaddoll\"{} to the {C:joy_spell}Extra Deck",
+					"when used as {C:attention}material",
+					"{C:inactive}(Must have room)",
+					" ",
+					"A {C:joy_fusion}Fusion{} summoned using this card as {C:attention}material{} gains this ability:",
+					"{s:0.9,X:chips,C:white}X#1#{s:0.9} Chips for each {s:0.9,C:joy_normal}\"Shaddoll\"{s:0.9} in the {s:0.9,C:attention}GY",
+				}
 			},
 			j_joy_shaddoll_shekh = {
-				name = "El Shaddoll Shekhinaga",
-				text = { "TBD" }
+				name = "{C:joy_fusion}El Shaddoll Shekhinaga",
+				text = {
+					"Disables effect of every {C:attention}Boss Blind",
+					" ",
+					"Add {C:attention}#1#{} {C:joy_normal}\"Shaddoll\"{} to the {C:joy_spell}Extra Deck",
+					"when used as {C:attention}material",
+					"{C:inactive}(Must have room)",
+					" ",
+					"A {C:joy_fusion}Fusion{} summoned using this card as {C:attention}material{} gains this ability:",
+					"{s:0.9}Disables effect of every {s:0.9,C:attention}Boss Blind",
+				}
 			},
 			j_joy_shaddoll_wendigo = {
-				name = "El Shaddoll Wendigo",
-				text = { "TBD" }
+				name = "{C:joy_fusion}El Shaddoll Wendigo",
+				text = {
+					"{C:joy_normal}\"Shaddoll\"{} {C:joy_effect}Flip{} {C:attention}Jokers{} don't {C:attention}flip{} face-down and keep their {C:joy_effect}FLIP{} abilities",
+					" ",
+					"Add {C:attention}#1#{} {C:joy_normal}\"Shaddoll\"{} to the {C:joy_spell}Extra Deck",
+					"when used as {C:attention}material",
+					"{C:inactive}(Must have room)",
+					" ",
+					"A {C:joy_fusion}Fusion{} summoned using this card as {C:attention}material{} gains this ability:",
+					"{s:0.9,C:joy_normal}\"Shaddoll\"{} {s:0.9,C:joy_effect}Flip{} {s:0.9,C:attention}Jokers{s:0.9} don't {s:0.9,C:attention}flip{s:0.9} face-down and keep their {s:0.9,C:joy_effect}FLIP{s:0.9} abilities",
+				}
 			},
 			j_joy_shaddoll_construct = {
-				name = "Shaddoll Construct",
-				text = { "TBD" }
+				name = "{C:joy_link}Shaddoll Construct",
+				text = {
+					"Can be treated as any {C:attention}material{} for a {C:joy_fusion}Fusion",
+					" ",
+					"Add {C:attention}#1#{} {C:joy_normal}\"Shaddoll\"{} to the {C:joy_spell}Extra Deck",
+					"when used as {C:attention}material",
+					"{C:inactive}(Must have room)",
+					" ",
+					"A {C:joy_fusion}Fusion{} summoned using this card as {C:attention}material{} gains this ability:",
+					"{s:0.9}Can be treated as any {s:0.9,C:attention}material{s:0.9} for a {s:0.9,C:joy_fusion}Fusion",
+				}
 			},
 			j_joy_shaddoll_prison = {
-				name = "Curse of the Shadow Prison",
-				text = { "TBD" }
+				name = "{C:joy_spell}Curse of the Shadow Prison",
+				text = {
+					"Each time a {C:joy_normal}\"Shaddoll\"{}, {C:joy_normal}Spellcaster{} or {C:joy_effect}Flip{} {C:attention}Joker",
+					"is sent to the {C:attention}GY{}, add {C:attention}#1#{} {C:joy_token}Counter{} to this card",
+					" ",
+					"{C:chips}+#2#{} Chips for each {C:joy_token}Counter{}",
+					" ",
+					"Remove {C:attention}#3#{} {C:joy_token}Counters{} to {C:attention}revive #4#{} {C:joy_fusion}Fusion"
+				}
 			},
 			--#endregion
 			--#region Paleozoic
@@ -2592,7 +2778,7 @@ return {
 					"You can {C:attention}tribute #1#{} other {C:attention}Jokers",
 					"to {C:attention}transform{} this card into {C:joy_effect}\"Aleister the Invoker\"",
 					" ",
-					"Each {C:attention}Joker{} gives {X:mult,C:white}X#2#{} Mult",
+					"Each {C:joy_fusion}Fusion{} gives {X:mult,C:white}X#2#{} Mult",
 				}
 			},
 			j_joy_invoked_mage = {
@@ -2633,7 +2819,7 @@ return {
 					"Gains abilities of each {C:joy_normal}\"Invoked\"{} in the {C:attention}GY{}",
 					" ",
 					"Treated as any {C:attention}material{} for a {C:joy_fusion}Fusion"
-				}
+				},
 			},
 			j_joy_invoked_meltdown = {
 				name = "{C:joy_spell}Magical Meltdown",
@@ -2649,7 +2835,7 @@ return {
 			--#endregion
 			--#region Danger!
 			j_joy_danger_jack = {
-				name = "Danger!? Jackalope?",
+				name = "{C:joy_effect}Danger!? Jackalope?",
 				text = {
 					"Gains {C:chips}+#1#{} Chips when {C:attention}Blind{} is selected",
 					"{C:inactive}(Currently {C:chips}+#2# {C:inactive}Chips)",
@@ -2662,7 +2848,7 @@ return {
 				}
 			},
 			j_joy_danger_tsuch = {
-				name = "Danger!? Tsuchinoko?",
+				name = "{C:joy_effect}Danger!? Tsuchinoko?",
 				text = {
 					"Gains {C:mult}+#1#{} Mult when {C:attention}Blind{} is selected",
 					"{C:inactive}(Currently {C:mult}+#2# {C:inactive}Mult)",
@@ -2675,7 +2861,7 @@ return {
 				}
 			},
 			j_joy_danger_chup = {
-				name = "Danger! Chupacabra!",
+				name = "{C:joy_effect}Danger! Chupacabra!",
 				text = {
 					"{C:money}+$#1#{} at end of round",
 					"Increases by {C:money}#2#{} when {C:attention}Blind{} is selected",
@@ -2687,10 +2873,10 @@ return {
 				}
 			},
 			j_joy_danger_moth = {
-				name = "Danger! Mothman!",
+				name = "{C:joy_effect}Danger! Mothman!",
 				text = {
 					"{C:red}+#1#{} Discard",
-					"Increases by {C:money}#2#{} when {C:attention}Blind{} is selected",
+					"Increases by {C:red}#2#{} when {C:attention}Blind{} is selected",
 					" ",
 					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected",
 					" ",
@@ -2699,7 +2885,7 @@ return {
 				}
 			},
 			j_joy_danger_dog = {
-				name = "Danger! Dogman!",
+				name = "{C:joy_effect}Danger! Dogman!",
 				text = {
 					"Reduces {C:attention}Blind{}'s requirements by {C:red}#1#%{}",
 					"Increases by {C:red}#2#%{} when {C:attention}Blind{} is selected",
@@ -2707,44 +2893,76 @@ return {
 					" ",
 					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected",
 					" ",
-					"Add {C:attention}#3#{} {C:joy_normal}\"Danger!\" to the shop",
+					"Add {C:attention}#3#{} {C:joy_normal}\"Danger!\"{} to the shop",
 					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability"
 				}
 			},
 			j_joy_danger_ness = {
-				name = "Danger! Nessie!",
+				name = "{C:joy_effect}Danger! Nessie!",
 				text = {
-					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected"
+					"{C:attention}+#1#{} hand size",
+					"Increases by {C:attention}#2#{} when {C:attention}Blind{} is selected",
+					" ",
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected",
+					" ",
+					"Add {C:attention}#3#{} {C:joy_normal}\"Danger!\"{} to the shop",
+					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability"
 				}
 			},
 			j_joy_danger_big = {
-				name = "Danger! Bigfoot!",
+				name = "{C:joy_effect}Danger! Bigfoot!",
 				text = {
-					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected"
+					"Gains {X:mult,C:white}X#1#{} Mult when {C:attention}Blind{} is selected",
+					"{C:inactive}(Currently {X:mult,C:white}X#2#{} {C:inactive}Mult)",
+					" ",
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected",
+					" ",
+					"Destroy all other {C:attention}Jokers{}",
+					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability",
 				}
 			},
 			j_joy_danger_ogo = {
-				name = "Danger! Ogopogo!",
+				name = "{C:joy_effect}Danger! Ogopogo!",
 				text = {
-					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected"
+					"{C:chips}+#1#{} Chips for each {C:joy_normal}\"Danger!\"{} in the {C:attention}GY{}",
+					"{C:inactive}(Currently {C:chips}+#2# {C:inactive}Chips)",
+					" ",
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected {C:inactive}(itself included)",
+					" ",
+					"Sends {C:attention}#3#{} {C:joy_normal}\"Danger!\"{} to the {C:attention}GY{}",
+					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability",
+					"{C:inactive}(Must have room){}",
 				}
 			},
 			j_joy_danger_thunder = {
-				name = "Danger! Thunderbird!",
+				name = "{C:joy_effect}Danger! Thunderbird!",
 				text = {
-					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected"
+					"Gains {X:chips,C:white}X#1#{} Chips when {C:attention}Blind{} is selected",
+					"{C:inactive}(Currently {X:chips,C:white}X#2#{} {C:inactive}Chips)",
+					" ",
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected",
+					" ",
+					"Destroy {C:attention}#3#{} other {C:attention}Joker{} and all {C:attention}Consumables",
+					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability",
 				}
 			},
 			j_joy_danger_realm = {
-				name = "Realm of Danger!",
+				name = "{C:joy_spell}Realm of Danger!",
 				text = {
-					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected"
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected",
+					"and gives {C:money}+$#1#{}",
+					" ",
+					"{C:joy_normal}\"Danger!\"{} {C:attention}revive{} and create cards as {C:dark_edition}Polychrome{}"
 				}
 			},
 			j_joy_danger_disorder = {
-				name = "Danger! Disturbance! Disorder!",
+				name = "{C:joy_spell}Danger! Disturbance! Disorder!",
 				text = {
-					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected"
+					"Creates {C:attention}#1#{} {C:joy_normal}\"Danger!\"{}",
+					"when {C:attention}Blind{} is selected",
+					"{C:inactive}(Must have room){}",
+					" ",
+					"All non-{C:joy_normal}\"Danger!\"{} are debuffed"
 				}
 			},
 			--#endregion
@@ -3349,6 +3567,7 @@ return {
 			k_joy_disable_booster_tag = "Disable Booster Tag from appearing naturally",
 			k_joy_only_ygo_cards = "Only Monster Cards appear",
 			k_joy_extra_ygo_booster = "Extra Monster Card booster each shop",
+			k_joy_instant_poker_hand = "Disable poker hand level up animation (for this mod)",
 			k_joy_splash = "Splash!",
 			k_joy_defeated = "Defeated!",
 			k_joy_banished = "Banished!",

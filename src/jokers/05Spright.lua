@@ -501,22 +501,16 @@ SMODS.Joker({
         if JoyousSpring.can_use_abilities(card) then
             if not context.blueprint_card and not context.retrigger_joker and
                 context.joy_detach and context.joy_detaching_card == card then
-                local choices, _ = get_current_pool("Joker", "Uncommon", nil, "JoyousSpring")
                 if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
                     JoyousSpring.ease_detach(card)
                 end
 
                 for i = 1, card.ability.extra.cards_to_create do
                     if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
-                        local it = 0
-                        local center = pseudorandom_element(choices, pseudoseed("j_joy_spright_gigantic"))
-                        while center == 'UNAVAILABLE' do
-                            it = it + 1
-                            center = pseudorandom_element(choices,
-                                pseudoseed("j_joy_spright_gigantic" .. '_resample' .. it))
-                        end
                         JoyousSpring.create_summon({
-                            key = center
+                            set = "Joker",
+                            rarity = "Uncommon",
+                            key_append = "JoyousSpring"
                         }, true)
                     end
                 end

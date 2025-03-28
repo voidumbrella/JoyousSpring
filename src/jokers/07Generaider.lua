@@ -850,7 +850,7 @@ SMODS.Joker({
 
             for i = 1, card.ability.extra.cards_to_create do
                 JoyousSpring.create_pseudorandom(
-                    { { monster_archetypes = { "Generaider" }, rarity = 3 } },
+                    { { monster_archetypes = { "Generaider" }, rarity = 3, is_main_deck = true } },
                     pseudoseed("j_joy_generaider_boss_stage"), true, true, nil, #context.joy_selection)
             end
         end
@@ -863,9 +863,6 @@ SMODS.Joker({
         return not card.debuff and
             (not card.ability.extra.used and #G.jokers.cards + G.GAME.joker_buffer - card.ability.extra.tributes < G.jokers.config.card_limit and next(tokens)) and
             true or false
-    end,
-    in_pool = function(self, args)
-        return args and args.source and args.source == "sho" or false
     end,
 })
 

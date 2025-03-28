@@ -130,7 +130,7 @@ SMODS.Joker({
                 if next(SMODS.find_card("j_joy_mekk_spectrum")) or JoyousSpring.get_joker_column(card) == (JoyousSpring.index_of(context.full_hand, context.other_card)) then
                     return {
                         add_to_hand = true,
-                        message = localize("k_joy_splash")
+                        --message = localize("k_joy_splash")
                     }
                 end
             end
@@ -644,9 +644,6 @@ SMODS.Joker({
         end
         local materials = JoyousSpring.get_materials_owned({ { monster_archetypes = { "MekkKnight" } } }, false, true)
         return next(materials) and true or false
-    end,
-    in_pool = function(self, args)
-        return args and args.source and args.source == "sho" or false
     end,
 })
 

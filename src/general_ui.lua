@@ -393,7 +393,8 @@ end
 
 local cardarea_can_highlight_ref = CardArea.can_highlight
 function CardArea:can_highlight(card)
-    return self.config.type == 'extra_deck' or self.config.type == 'summon_materials' or cardarea_can_highlight_ref
+    return self.config.type == 'extra_deck' or self.config.type == 'summon_materials' or
+    cardarea_can_highlight_ref(self, card)
 end
 
 local cardarea_add_to_highlighted_ref = CardArea.add_to_highlighted
