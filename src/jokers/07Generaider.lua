@@ -821,7 +821,7 @@ SMODS.Joker({
             },
             tributes = 2,
             cards_to_create = 1,
-            used = true,
+            used = false,
         },
     },
     calculate = function(self, card, context)
