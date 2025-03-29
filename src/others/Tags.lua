@@ -36,18 +36,8 @@ SMODS.Tag({
         end
         local name = tag.ability.monster and localize({ type = 'name_text', set = 'Joker', key = tag.ability.monster }) or
             localize("k_joy_monster_tag_default")
-        local name_for_color = tag.ability.monster and G.localization.descriptions["Joker"][tag.ability.monster].name or
-            ""
-        local name_color = "joy_normal"
-        if string.len(name_for_color) > 2 and string.sub(name_for_color, string.len(name_for_color) - 1, string.len(name_for_color)) == "{}" then
-            name = string.sub(name_for_color, 1, string.len(name_for_color) - 2)
-        end
-        if string.sub(name_for_color, 1, 3) == "{C:" then
-            local _, _, color, real_name = string.find(name_for_color, "{C:(.*)}(.*)")
-            name = real_name
-            name_color = color or name_color
-        end
-        return { vars = { name, colours = { G.ARGS.LOC_COLOURS[name_color] } } }
+
+        return { vars = { name, colours = { JoyousSpring.get_name_color(tag.ability.monster) } } }
     end,
     pos = { x = 1, y = 0 },
     discovered = true,

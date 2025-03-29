@@ -472,6 +472,30 @@ JoyousSpring.get_consumable_count = function(set)
     return #JoyousSpring.get_consumable_set(set)
 end
 
+JoyousSpring.get_summoned_count = function(type)
+    return G.GAME.joy_summoned_count and G.GAME.joy_summoned_count[type or "Total"] or 0
+end
+
+JoyousSpring.get_flipped_count = function(set)
+    return G.GAME.joy_flipped_count and G.GAME.joy_flipped_count[set or "Total"] or 0
+end
+
+JoyousSpring.get_name_color = function(key, set)
+    if not key then return G.ARGS.LOC_COLOURS["joy_normal"] end
+    local name_color
+    local name_for_color = G.localization.descriptions[set or "Joker"][key].name or
+        ""
+    if string.len(name_for_color) > 2 and string.sub(name_for_color, string.len(name_for_color) - 1, string.len(name_for_color)) == "{}" then
+        name = string.sub(name_for_color, 1, string.len(name_for_color) - 2)
+    end
+    if string.sub(name_for_color, 1, 3) == "{C:" then
+        local _, _, color, real_name = string.find(name_for_color, "{C:(.*)}(.*)")
+        name = real_name
+        name_color = color or name_color
+    end
+    return G.ARGS.LOC_COLOURS[name_color or "joy_normal"]
+end
+
 --- Talisman compat
 to_big = to_big or function(num)
     return num

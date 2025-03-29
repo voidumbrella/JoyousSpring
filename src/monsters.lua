@@ -18,6 +18,7 @@ SMODS.Atlas({
 ---@field joy_create_card_for_shop? fun(card:table|Card, other_card:table|Card, area:CardArea) Used to modify *other_Card* when it's created for the shop
 ---@field joy_apply_to_jokers_added? fun(card:table|Card,added_card:table|Card) Used to modify *added_card* when obtained
 ---@field joy_allow_ability? fun(card:table|Card, other_card:table|Card):boolean? Determines if *other_card* can use abilities while face-down
+---@field joy_prevent_flip? fun(card:table|Card, other_card:table|Card):boolean? Determines if *other_card* should flip
 ---@field joy_prevent_trap_flip? fun(card:table|Card, other_card:table|Card):boolean? Determines if the Trap *other_card* should flip at end of round
 ---@field joy_flip_effect_active? fun(card:table|Card, other_card:table|Card):boolean? Determines if the FLIP ability of *other_card* should activate at the start of Blind
 ---@field joy_can_transfer_ability? fun(self:SMODS.Center|table, other_card:Card|table):boolean? Determines if *self* transfers its ability to *other_card*
@@ -289,7 +290,25 @@ JoyousSpring.has_activated_effect = function(card)
 end
 
 JoyousSpring.cannot_flip = function(card)
-    return JoyousSpring.is_monster_card(card) and card.ability.extra.joyous_spring.cannot_flip or false
+    if not JoyousSpring.is_monster_card(card) then
+        return false
+    end
+    if card.ability.extra.joyous_spring.cannot_flip then
+        return true
+    end
+
+    for _, joker in ipairs(G.jokers.cards) do
+        if not joker.debuff and joker.config.center.joy_prevent_flip and joker.config.center.joy_prevent_flip(joker, card) then
+            return true
+        end
+    end
+    for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
+        if not joker.debuff and joker.config.center.joy_prevent_flip and joker.config.center.joy_prevent_flip(joker, card) then
+            return true
+        end
+    end
+
+    return false
 end
 
 JoyousSpring.can_activate = function(card)

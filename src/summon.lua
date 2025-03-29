@@ -128,7 +128,6 @@ JoyousSpring.perform_summon = function(card, card_list, summon_type)
             summon_type
     })
     card.ability.extra.joyous_spring.summon_materials = {}
-    card.ability.extra.joyous_spring.xyz_materials = 0
     local transfer = summon_type == "XYZ" and JoyousSpring.transfer_materials_with_combo(card, card_list) or false
     card.ability.extra.joyous_spring.xyz_materials = card.ability.extra.joyous_spring.xyz_materials or 0
     for _, joker in ipairs(card_list) do

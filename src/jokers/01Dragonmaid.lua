@@ -486,7 +486,7 @@ SMODS.Joker({
                 monster_type = "Dragon",
                 monster_archetypes = { ["Dragonmaid"] = true },
             },
-            mill = 3
+            mills = 3
         },
     },
     calculate = function(self, card, context)
@@ -501,7 +501,7 @@ SMODS.Joker({
         if not from_debuff and not card.debuff then
             local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Dragonmaid" }, is_main_deck = true } })
 
-            for i = 1, card.ability.extra.mill do
+            for i = 1, card.ability.extra.mills do
                 JoyousSpring.send_to_graveyard(pseudorandom_element(choices, pseudoseed("j_joy_dmaid_laundry")))
             end
             SMODS.calculate_effect({ message = localize("k_joy_mill") }, card)

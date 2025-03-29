@@ -19,6 +19,25 @@ JoyousSpring.calculate_context = function(context)
             (G.GAME.joy_cards_destroyed + #context.removed) or #context.removed
     end
 
+    -- Global counter for summoned cards
+    if context.joy_summon then
+        G.GAME.joy_summoned_count = G.GAME.joy_summoned_count or {}
+        G.GAME.joy_summoned_count["Total"] = (G.GAME.joy_summoned_count["Total"] or 0) +
+            1
+        G.GAME.joy_summoned_count[context.joy_summon_type] = (G.GAME.joy_summoned_count[context.joy_summon_type] or 0) +
+            1
+    end
+
+    if context.joy_card_flipped then
+        G.GAME.joy_flipped_count = G.GAME.joy_flipped_count or {}
+        G.GAME.joy_flipped_count["Total"] = (G.GAME.joy_flipped_count["Total"] or 0) + 1
+        if JoyousSpring.is_playing_card(context.joy_card_flipped) then
+            G.GAME.joy_flipped_count["Playing Card"] = (G.GAME.joy_flipped_count["Playing Card"] or 0) + 1
+        end
+        G.GAME.joy_flipped_count[context.joy_card_flipped.ability.set] = (G.GAME.joy_flipped_count[context.joy_card_flipped.ability.set] or 0) +
+            1
+    end
+
     -- Return from Banishment
     if context.setting_blind then
         if G.GAME.blind and G.GAME.blind.boss then
@@ -100,14 +119,25 @@ end
 ---Changes a card's ability with a little animation
 ---@param card Card
 ---@param other_key string
----@param keep_edition boolean? Not implemented, keeps it by default
-JoyousSpring.transform_card = function(card, other_key, keep_edition)
+---@param keep_materials boolean?
+---@param summon_type string?
+---@param summon_materials Card[]?
+JoyousSpring.transform_card = function(card, other_key, keep_materials, summon_type, summon_materials)
     local joyous_spring_table = card.ability.extra.joyous_spring
     local revived = joyous_spring_table.revived
     local is_free = joyous_spring_table.is_free
     local summoned = joyous_spring_table.summoned
-    local summon_materials = joyous_spring_table.summon_materials
+    local original_summon_materials = joyous_spring_table.summon_materials
     local xyz_materials = joyous_spring_table.xyz_materials
+    local material_effects = joyous_spring_table.material_effects
+    local original_key = card.config.center.key
+    SMODS.calculate_context({
+        joy_transform_summon = true,
+        joy_card = card,
+        joy_summon_materials = summon_materials,
+        joy_summon_type =
+            summon_type,
+    })
     G.E_MANAGER:add_event(Event({
         trigger = "after",
         delay = 0.15,
@@ -116,11 +146,52 @@ JoyousSpring.transform_card = function(card, other_key, keep_edition)
             play_sound("card1")
             card:juice_up(0.3, 0.3)
             local joyous_spring_table = card.ability.extra.joyous_spring
-            joyous_spring_table.revived = revived
             joyous_spring_table.is_free = is_free
+            joyous_spring_table.revived = revived
             joyous_spring_table.summoned = summoned
-            joyous_spring_table.summon_materials = summon_materials
-            joyous_spring_table.xyz_materials = xyz_materials
+
+            if summon_type then
+                joyous_spring_table.summoned = true
+                SMODS.calculate_context({
+                    joy_summon = true,
+                    joy_card = card,
+                    joy_summon_materials = summon_materials,
+                    joy_summon_type =
+                        summon_type
+                })
+                card.ability.extra.joyous_spring.summon_materials = { original_key }
+                card.ability.extra.joyous_spring.xyz_materials = 1
+                JoyousSpring.transfer_abilities(card, original_key, card, summon_materials)
+                for _, joker in ipairs(summon_materials or {}) do
+                    table.insert(card.ability.extra.joyous_spring.summon_materials, joker.config.center.key)
+                    JoyousSpring.transfer_abilities(card, joker.config.center.key, joker, summon_materials)
+
+                    card.ability.extra.joyous_spring.xyz_materials = card.ability.extra.joyous_spring.xyz_materials + 1
+                    if JoyousSpring.is_summon_type(joker, "XYZ") then
+                        for _, material in ipairs(joker.ability.extra.joyous_spring.summon_materials) do
+                            table.insert(card.ability.extra.joyous_spring.summon_materials, material)
+                        end
+                        card.ability.extra.joyous_spring.xyz_materials = card.ability.extra.joyous_spring.xyz_materials +
+                            joker.ability.extra.joyous_spring.xyz_materials
+                    end
+                end
+            end
+
+            if keep_materials then
+                for _, material in ipairs(original_summon_materials or {}) do
+                    table.insert(joyous_spring_table.summon_materials, material)
+                end
+                joyous_spring_table.xyz_materials = (joyous_spring_table.xyz_materials or 0) + xyz_materials
+                for _, material in ipairs(material_effects or {}) do
+                    table.insert(joyous_spring_table.material_effects, material)
+                end
+            end
+
+            card:set_cost()
+
+            if summon_type == "XYZ" then
+                card.children.xyz_materials = JoyousSpring.create_UIBox_xyz_materials(card)
+            end
             return true
         end,
     }))

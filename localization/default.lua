@@ -1817,9 +1817,11 @@ return {
 					" ",
 					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability:",
 					"{s:0.9}Lowers {s:0.9,C:attention}Blind{}{s:0.9}'s requirement by {s:0.9,C:red}#1#%{}",
+					"{s:0.9}when {s:0.9,C:attention}Blind{}{s:0.9} is selected",
 				},
 				joy_transfer_ability = {
 					"Lowers {C:attention}Blind{}'s requirement by {C:red}#1#%{}",
+					"when {C:attention}Blind{} is selected",
 				}
 			},
 			j_joy_ignis_doyon = {
@@ -2722,6 +2724,10 @@ return {
 					" ",
 					"A {C:joy_fusion}Fusion{} summoned using this card as {C:attention}material{} gains this ability:",
 					"{s:0.9,C:chips}+#2#{} {s:0.9}Chips for each {s:0.9,C:joy_fusion}Fusion{} {s:0.9}summoned this run"
+				},
+				joy_transfer_ability = {
+					"{C:chips}+#1#{} Chips for each {C:joy_fusion}Fusion{} summoned this run",
+					"{C:inactive}(Currently {C:chips}+#2#{} {C:inactive}Chips)"
 				}
 			},
 			j_joy_invoked_madness = {
@@ -2741,6 +2747,10 @@ return {
 					"{C:attention}2 Jokers{} with",
 					"different {C:attention}Types",
 					"and {C:attention}Attributes"
+				},
+				joy_transfer_ability = {
+					"{C:mult}+#1#{} Mult for each {C:joy_fusion}Fusion{} summoned this run",
+					"{C:inactive}(Currently {C:mult}+#2#{} {C:inactive}Mult)"
 				}
 			},
 			j_joy_invoked_caliga = {
@@ -2758,6 +2768,12 @@ return {
 					"{C:attention}Tribute 1{} {C:joy_dark}DARK {C:attention}Joker{}",
 					"{s:0.8,C:inactive}(Random chance when tributing",
 					"{s:0.8,C:inactive}a non-Monster)"
+				},
+				joy_transfer_ability = {
+					"Gains {X:mult,C:white}X#1#{} Mult for each {C:attention}Joker{} {C:attention}tributed{} this run",
+					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}",
+					" ",
+					"Reduce price of {C:joy_effect}Monster Packs{} by {C:money}$#3#"
 				}
 			},
 			j_joy_invoked_raidjin = {
@@ -2769,13 +2785,20 @@ return {
 					"Gains {X:mult,C:white}X#2#{} Mult for each {C:attention}Joker{} {C:attention}flipped{} this run",
 					"{C:inactive}(Currently{} {X:mult,C:white}X#3#{} {C:inactive}Mult){}",
 					" ",
-					"{C:attention}Flip #4# Joker{} face-up when {C:attention}Blind{} is selected",
-					"{C:attention}Flip #4# Joker{} face-up at end of round",
+					"{C:attention}Flip #4#{} other random {C:attention}Joker{} face-up when {C:attention}Blind{} is selected",
+					"{C:attention}Flip #4#{} other random {C:attention}Joker{} face-down at end of round",
 				},
 				joy_summon_conditions = {
 					"{C:attention}Tribute 1{} {C:joy_wind}WIND {C:attention}Joker{}",
 					"{s:0.8,C:inactive}(Random chance when tributing",
 					"{s:0.8,C:inactive}a non-Monster)"
+				},
+				joy_transfer_ability = {
+					"Gains {X:mult,C:white}X#1#{} Mult for each {C:attention}Joker{} {C:attention}flipped{} this run",
+					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}",
+					" ",
+					"{C:attention}Flip #3#{} other random {C:attention}Joker{} face-up when {C:attention}Blind{} is selected",
+					"{C:attention}Flip #3#{} other random {C:attention}Joker{} face-down at end of round",
 				}
 			},
 			j_joy_invoked_cocytus = {
@@ -2790,6 +2813,9 @@ return {
 					"{C:attention}Tribute 1{} {C:joy_water}WATER {C:attention}Joker{}",
 					"{s:0.8,C:inactive}(Random chance when tributing",
 					"{s:0.8,C:inactive}a non-Monster)"
+				},
+				joy_transfer_ability = {
+					"Reduce {C:attention}Blind{}'s requirement by {C:red}#1#%",
 				}
 			},
 			j_joy_invoked_purgatorio = {
@@ -2804,6 +2830,9 @@ return {
 					"{C:attention}Tribute 1{} {C:joy_fire}FIRE {C:attention}Joker{}",
 					"{s:0.8,C:inactive}(Random chance when tributing",
 					"{s:0.8,C:inactive}a non-Monster)"
+				},
+				joy_transfer_ability = {
+					"Each {C:joy_fusion}Fusion{} gives {X:mult,C:white}X#1#{} Mult",
 				}
 			},
 			j_joy_invoked_mage = {
@@ -2818,6 +2847,9 @@ return {
 					"{C:attention}Tribute 1{} {C:joy_earth}EARTH {C:attention}Joker{}",
 					"{s:0.8,C:inactive}(Random chance when tributing",
 					"{s:0.8,C:inactive}a non-Monster)"
+				},
+				joy_transfer_ability = {
+					"{C:mult}+#1#{} Mult",
 				}
 			},
 			j_joy_invoked_mechaba = {
@@ -2833,6 +2865,10 @@ return {
 					"{C:attention}Tribute 1{} {C:joy_light}LIGHT {C:attention}Joker{}",
 					"{s:0.8,C:inactive}(Random chance when tributing",
 					"{s:0.8,C:inactive}a non-Monster)"
+				},
+				joy_transfer_ability = {
+					"Disables effect of {C:attention}Boss Blind{} after {C:attention}#1#{} cards are sold this round",
+					"{C:inactive}(#2#/#1#)"
 				}
 			},
 			j_joy_invoked_augo = {
@@ -2844,11 +2880,19 @@ return {
 					"Gains {X:mult,C:white}X#2#{} Mult for each {C:joy_fusion}Fusion{} in the {C:attention}GY{}",
 					"{C:inactive}(Currently{} {X:mult,C:white}X#3#{} {C:inactive}Mult){}",
 					" ",
-					"Send {C:attention}#4#{} {C:joy_fusion}Fusion{} to the {C:attention}GY{} when {C:attention}Blind{} is selected",
+					"Send {C:attention}#4#{} non-{C:joy_normal}\"Invoked\"{} {C:joy_fusion}Fusion{} to the {C:attention}GY{}",
+					"when {C:attention}Blind{} is selected",
 				},
 				joy_summon_conditions = {
 					"{C:attention}Tribute 1{} {C:joy_fusion}Fusion",
 					"{s:0.8,C:inactive}(Supersedes other conditions)",
+				},
+				joy_transfer_ability = {
+					"Gains {X:mult,C:white}X#1#{} Mult for each {C:joy_fusion}Fusion{} in the {C:attention}GY{}",
+					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}",
+					" ",
+					"Send {C:attention}#3#{} non-{C:joy_normal}\"Invoked\"{} {C:joy_fusion}Fusion{} to the {C:attention}GY{}",
+					"when {C:attention}Blind{} is selected",
 				}
 			},
 			j_joy_invoked_elysium = {

@@ -233,13 +233,12 @@ SMODS.Joker({
         if card.ability.eternal or not G.GAME.blind.in_blind then
             return false
         end
-        local materials = {}
         for i, joker in ipairs(G.jokers.cards) do
             if joker ~= card and not joker.ability.eternal then
-                materials[#materials + 1] = joker
+                return true
             end
         end
-        return next(materials) and true or false
+        return false
     end,
 
 })
@@ -370,10 +369,10 @@ SMODS.Joker({
         local materials = {}
         for i, joker in ipairs(G.jokers.cards) do
             if joker ~= card and not joker.ability.eternal then
-                materials[#materials + 1] = joker
+                return true
             end
         end
-        return next(materials) and true or false
+        return false
     end,
 })
 

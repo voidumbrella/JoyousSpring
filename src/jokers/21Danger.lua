@@ -340,7 +340,7 @@ SMODS.Joker({
                 G.GAME.blind.chips * card.ability.extra.current_percent)
             G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
         end
-    end
+    end,
 })
 
 -- Danger! Nessie!

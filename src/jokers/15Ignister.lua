@@ -176,13 +176,12 @@ SMODS.Joker({
             return false
         end
         local targets = JoyousSpring.get_materials_owned({ { monster_type = "Cyberse" } }, false, true)
-        local materials = {}
         for i, joker in ipairs(targets) do
             if not joker.ability.eternal then
-                materials[#materials + 1] = joker
+                return true
             end
         end
-        return next(materials)
+        return false
     end,
     add_to_deck = function(self, card, from_debuff)
         if not JoyousSpring.is_perma_debuffed(card) then
