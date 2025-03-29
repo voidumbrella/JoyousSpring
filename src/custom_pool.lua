@@ -115,7 +115,8 @@ function create_card(_type, area, legendary, _rarity, skip_materialize, soulable
             (type(_rarity) == "number" and ((_rarity > 0.95 and 3) or (_rarity > 0.7 and 2) or 1)) or _rarity
         _rarity = ({ Common = 1, Uncommon = 2, Rare = 3, Legendary = 4 })[_rarity] or _rarity
 
-        local is_shop_or_pack = key_append == 'buf' or key_append == 'rta' or key_append == 'uta' or key_append == 'sho'
+        local is_shop_or_pack = key_append == 'buf' or key_append == 'rta' or key_append == 'uta' or key_append == 'sho' or
+            key_append == "JoyousSpring"
 
         key = get_weighted_card(JoyousSpring.get_materials_in_collection({
             {
@@ -156,7 +157,7 @@ function SMODS.create_card(t)
         t.set = "Joker"
     end
     t.key = key or t.key
-    if JoyousSpring.is_material_center(t.key or "", { is_field_spell = true }) then
+    if not t.area and JoyousSpring.field_spell_area and JoyousSpring.is_material_center(t.key or "", { is_field_spell = true }) then
         t.area = JoyousSpring.field_spell_area
     end
 
