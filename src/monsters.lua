@@ -297,14 +297,16 @@ JoyousSpring.cannot_flip = function(card)
         return true
     end
 
-    for _, joker in ipairs(G.jokers.cards) do
-        if not joker.debuff and joker.config.center.joy_prevent_flip and joker.config.center.joy_prevent_flip(joker, card) then
-            return true
+    if G.jokers then
+        for _, joker in ipairs(G.jokers.cards) do
+            if not joker.debuff and joker.config.center.joy_prevent_flip and joker.config.center.joy_prevent_flip(joker, card) then
+                return true
+            end
         end
-    end
-    for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
-        if not joker.debuff and joker.config.center.joy_prevent_flip and joker.config.center.joy_prevent_flip(joker, card) then
-            return true
+        for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
+            if not joker.debuff and joker.config.center.joy_prevent_flip and joker.config.center.joy_prevent_flip(joker, card) then
+                return true
+            end
         end
     end
 
