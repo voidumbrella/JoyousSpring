@@ -1,6 +1,7 @@
 -- CUSTOM POOL
 
 ---Gets a weighted pool of all Jokers in starting_pool
+---Centers should have a defined get_weight function
 ---@param starting_pool string[]|SMODS.Center[]?
 ---@param default_key string?
 ---@param _append string?
