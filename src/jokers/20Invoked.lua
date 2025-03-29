@@ -17,7 +17,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1, 20 } }
+        return { vars = { card.ability.extra.tributes, card.ability.extra.chips } }
     end,
     joy_desc_cards = {
         { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
@@ -31,6 +31,8 @@ SMODS.Joker({
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Aleister"] = true }
             },
+            tributes = 1,
+            chips = 50
         },
     },
 })
@@ -46,7 +48,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1, 1, 10 } }
+        return { vars = { card.ability.extra.tributes, card.ability.extra.creates, card.ability.extra.mult } }
     end,
     joy_desc_cards = {
         { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
@@ -60,6 +62,9 @@ SMODS.Joker({
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Aleister"] = true }
             },
+            tributes = 1,
+            creates = 1,
+            mult = 15
         },
     },
 })
@@ -75,7 +80,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 2, 0.1, 1, 2 } }
+        return { vars = { card.ability.extra.tributes, card.ability.extra.xmult, card.ability.extra.current_xmult, card.ability.extra.reduces } }
     end,
     joy_desc_cards = {
         { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
@@ -89,6 +94,10 @@ SMODS.Joker({
                 monster_type = "Beast",
                 monster_archetypes = { ["Invoked"] = true }
             },
+            tributes = 1,
+            xmult = 0.1,
+            current_xmult = 1,
+            reduces = 2
         },
     },
 })
@@ -104,7 +113,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 2, 0.1, 1, 1 } }
+        return { vars = { card.ability.extra.tributes, card.ability.extra.xmult, card.ability.extra.current_xmult, card.ability.extra.flips } }
     end,
     joy_desc_cards = {
         { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
@@ -118,6 +127,10 @@ SMODS.Joker({
                 monster_type = "Warrior",
                 monster_archetypes = { ["Invoked"] = true }
             },
+            tributes = 1,
+            xmult = 0.1,
+            current_xmult = 1,
+            flips = 1
         },
     },
 })
@@ -133,7 +146,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 2, 10 } }
+        return { vars = { card.ability.extra.tributes, card.ability.extra.percent * 100 } }
     end,
     joy_desc_cards = {
         { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
@@ -147,6 +160,8 @@ SMODS.Joker({
                 monster_type = "Dragon",
                 monster_archetypes = { ["Invoked"] = true }
             },
+            tributes = 1,
+            percent = 0.1
         },
     },
 })
@@ -162,7 +177,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 2, 2 } }
+        return { vars = { card.ability.extra.tributes, card.ability.extra.xmult } }
     end,
     joy_desc_cards = {
         { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
@@ -176,6 +191,8 @@ SMODS.Joker({
                 monster_type = "Fiend",
                 monster_archetypes = { ["Invoked"] = true }
             },
+            tributes = 1,
+            xmult = 2
         },
     },
 })
@@ -191,7 +208,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 2, 150 } }
+        return { vars = { card.ability.extra.tributes, card.ability.extra.mult } }
     end,
     joy_desc_cards = {
         { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
@@ -205,35 +222,8 @@ SMODS.Joker({
                 monster_type = "Rock",
                 monster_archetypes = { ["Invoked"] = true }
             },
-        },
-    },
-})
-
--- Invoked Augoeides
-SMODS.Joker({
-    key = "invoked_augo",
-    atlas = 'invoked',
-    pos = { x = 2, y = 0 },
-    rarity = 1,
-    discovered = true,
-    blueprint_compat = false,
-    eternal_compat = true,
-    cost = 0,
-    loc_vars = function(self, info_queue, card)
-        return { vars = { 2, 0.1, 1 } }
-    end,
-    joy_desc_cards = {
-        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
-    },
-    generate_ui = JoyousSpring.generate_info_ui,
-    set_sprites = JoyousSpring.set_back_sprite,
-    config = {
-        extra = {
-            joyous_spring = JoyousSpring.init_joy_table {
-                attribute = "LIGHT",
-                monster_type = "Fairy",
-                monster_archetypes = { ["Invoked"] = true }
-            },
+            tributes = 1,
+            mult = 100
         },
     },
 })
@@ -249,7 +239,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 2, 3 } }
+        return { vars = { card.ability.extra.tributes, card.ability.extra.sell, card.ability.extra.sold } }
     end,
     joy_desc_cards = {
         { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
@@ -263,6 +253,42 @@ SMODS.Joker({
                 monster_type = "Machine",
                 monster_archetypes = { ["Invoked"] = true }
             },
+            tributes = 1,
+            sell = 3,
+            sold = 0
+        },
+    },
+})
+
+-- Invoked Augoeides
+SMODS.Joker({
+    key = "invoked_augo",
+    atlas = 'invoked',
+    pos = { x = 2, y = 0 },
+    rarity = 1,
+    discovered = true,
+    blueprint_compat = false,
+    eternal_compat = true,
+    cost = 0,
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.tributes, card.ability.extra.xmult, card.ability.extra.current_xmult, card.ability.extra.mills } }
+    end,
+    joy_desc_cards = {
+        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
+    },
+    generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
+    config = {
+        extra = {
+            joyous_spring = JoyousSpring.init_joy_table {
+                attribute = "LIGHT",
+                monster_type = "Fairy",
+                monster_archetypes = { ["Invoked"] = true }
+            },
+            tributes = 1,
+            xmult = 0.1,
+            current_xmult = 1,
+            mills = 1
         },
     },
 })
@@ -278,7 +304,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 2 } }
+        return { vars = { card.ability.extra.tributes } }
     end,
     joy_desc_cards = {
         { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
@@ -292,6 +318,7 @@ SMODS.Joker({
                 monster_type = "Fairy",
                 monster_archetypes = { ["Invoked"] = true }
             },
+            tributes = 1
         },
     },
 })
@@ -307,7 +334,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 2, 1, 0.1, 1 } }
+        return { vars = { card.ability.extra.tributes, card.ability.extra.creates, card.ability.extra.xmult, card.ability.extra.current_xmult } }
     end,
     joy_desc_cards = {
         { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
@@ -319,6 +346,10 @@ SMODS.Joker({
             joyous_spring = JoyousSpring.init_joy_table {
                 is_field_spell = true
             },
+            tributes = 2,
+            creates = 1,
+            xmult = 0.1,
+            current_xmult = 1
         },
     },
 })

@@ -1489,7 +1489,7 @@ return {
 				name = "{C:joy_effect}Subterror Nemesis Archer",
 				text = {
 					"Once per ante, you can {C:attention}flip{} this card and another {C:attention}Joker{} face-down",
-					"to {C:attention}create #1#{} {C:dark_edition}Negative{} {C:blue}Common{} or {C:green}Uncommon{} {C:joy_normal}\"Subterror\"{}"
+					"to create {C:attention}#1#{} {C:dark_edition}Negative{} {C:blue}Common{} or {C:green}Uncommon{} {C:joy_normal}\"Subterror\"{}"
 				}
 			},
 			j_joy_sub_warrior = {
@@ -1510,7 +1510,7 @@ return {
 					"and {C:attention}+#3#{} hand size for each {C:attention}flipped{} face-up",
 					"{s:0.9,C:inactive}(Even if face-down)",
 					" ",
-					"{C:joy_effect}FLIP{}: {C:attention}Create #4#{} {C:blue}Common{} or {C:green}Uncommon{} {C:joy_normal}\"Subterror\"{}",
+					"{C:joy_effect}FLIP{}: Create {C:attention}#4#{} {C:blue}Common{} or {C:green}Uncommon{} {C:joy_normal}\"Subterror\"{}",
 					"{C:inactive}(Must have room)",
 					" ",
 					"{C:attention}Flips{} face-up when {C:attention}Blind{} is selected",
@@ -1618,7 +1618,7 @@ return {
 					"{C:mult}+#2#{} Mult for each {C:joy_normal}\"Subterror\"{} used",
 					"{C:inactive}(Currently{} {C:chips}+#3#{} {C:inactive}Chips and {C:mult}+#4#{} {C:inactive}Mult){}",
 					" ",
-					"Once per round, you can {C:attention}flip #5# Jokers{} face-down to {C:attention}create #6#",
+					"Once per round, you can {C:attention}flip #5# Jokers{} face-down to create {C:attention}#6#",
 					"{C:joy_normal}\"Subterror Behemoth\"{}",
 					"{C:inactive}(Must have room){}"
 				},
@@ -1646,7 +1646,7 @@ return {
 					"Scored cards become {C:attention}Gold{} cards after scoring",
 					" ",
 					"Once per round, you can {C:attention}tribute #2#{} {C:joy_normal}Zombie{} or {C:joy_trap}Trap{} {C:attention}Joker",
-					"to {C:attention}create #3#{} {C:joy_normal}Main Deck \"Golden Land\"{}",
+					"to create {C:attention}#3#{} {C:joy_normal}Main Deck \"Golden Land\"{}",
 					"{C:inactive}(Must have room){}",
 				}
 			},
@@ -1736,7 +1736,7 @@ return {
 				text = {
 					"{C:mult}+#1#{} Mult",
 					" ",
-					"{C:attention}Creates #2#{} {C:blue}Common{} {C:joy_normal}Main Deck",
+					"Creates {C:attention}#2#{} {C:blue}Common{} {C:joy_normal}Main Deck",
 					"{C:joy_normal}\"@Ignister\"{} when obtained",
 					"{C:inactive}(Must have room){}",
 				}
@@ -1786,7 +1786,7 @@ return {
 				text = {
 					"{X:mult,C:white}X#1#{} Mult",
 					" ",
-					"Can be used as any material for a {C:joy_link}Link",
+					"Can be used as any {C:attention}material{} for a {C:joy_link}Link",
 					" ",
 					"A {C:joy_normal}Cyberse{} summoned using this card as {C:attention}material{} gains this ability:",
 					"{s:0.9}Can't be debuffed or {s:0.9,C:attention}flipped {s:0.9}face-down"
@@ -1800,7 +1800,7 @@ return {
 				text = {
 					"{C:mult}+#1#{} Mult",
 					" ",
-					"Can be used as any material for a {C:joy_link}Link",
+					"Can be used as any {C:attention}material{} for a {C:joy_link}Link",
 					" ",
 					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability:",
 					"{s:0.9,C:mult}+#1# {s:0.9}Mult for each {s:0.9,C:attention}material {s:0.9}used for its summon",
@@ -1813,7 +1813,7 @@ return {
 			j_joy_ignis_danmari = {
 				name = "{C:joy_effect}Danmari @Ignister",
 				text = {
-					"Can be used as any material for a {C:joy_link}Link",
+					"Can be used as any {C:attention}material{} for a {C:joy_link}Link",
 					" ",
 					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability:",
 					"{s:0.9}Lowers {s:0.9,C:attention}Blind{}{s:0.9}'s requirement by {s:0.9,C:red}#1#%{}",
@@ -1870,13 +1870,13 @@ return {
 				text = {
 					"Add {C:attention}#1#{} {C:joy_normal}\"@Ignister\"{} to the {C:joy_spell}Extra Deck{} when summoned",
 					" ",
-					"{C:chips}+#2#{} Chips for each {C:attention}attribute{} used for its summon",
+					"{C:chips}+#2#{} Chips for each {C:attention}Attribute{} used for its summon",
 					"Amount increases by {C:chips}+#3#{} when a {C:joy_link}Link{} is summoned",
 					"{C:inactive}(Currently {C:chips}+#4# {C:inactive}Chips)",
 					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability"
 				},
 				joy_transfer_ability = {
-					"{C:chips}+#1#{} Chips for each {C:attention}attribute{} used for its summon",
+					"{C:chips}+#1#{} Chips for each {C:attention}Attribute{} used for its summon",
 					"Amount increases by {C:chips}+#2#{} when a {C:joy_link}Link{} is summoned",
 					"{C:inactive}(Currently {C:chips}+#3# {C:inactive}Chips)",
 				},
@@ -1889,12 +1889,12 @@ return {
 				text = {
 					"Add {C:attention}#1#{} {C:joy_normal}\"@Ignister\"{} to the {C:joy_spell}Extra Deck{} when summoned",
 					" ",
-					"{C:attention}+#2# Joker{} slot for each {C:attention}attribute{} used for its summon",
+					"{C:attention}+#2# Joker{} slot for each {C:attention}Attribute{} used for its summon",
 					"{C:inactive}(Currently {C:attention}+#3#{C:inactive})",
 					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability"
 				},
 				joy_transfer_ability = {
-					"{C:attention}+#1# Joker{} slot for each {C:attention}attribute{} used for its summon",
+					"{C:attention}+#1# Joker{} slot for each {C:attention}Attribute{} used for its summon",
 					"{C:inactive}(Currently {C:attention}+#2#{C:inactive})",
 				},
 				joy_summon_conditions = {
@@ -1907,12 +1907,12 @@ return {
 					"Add {C:attention}#1#{} {C:joy_normal}\"@Ignister\"{} to the {C:joy_spell}Extra Deck{} when summoned",
 					" ",
 					"{C:green}#2# in #3#{} chance to retrigger playing cards",
-					"Chances increase for each {C:attention}attribute{} used for its summon",
+					"Chances increase for each {C:attention}Attribute{} used for its summon",
 					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability",
 				},
 				joy_transfer_ability = {
 					"{C:green}#1# in #2#{} chance to retrigger playing cards",
-					"Chances increase for each {C:attention}attribute{} used for its summon",
+					"Chances increase for each {C:attention}Attribute{} used for its summon",
 				},
 				joy_summon_conditions = {
 					"{C:attention}1{} {C:joy_synchro}Tuner{} +",
@@ -1926,13 +1926,13 @@ return {
 					"Add {C:attention}#1#{} {C:joy_normal}\"@Ignister\"{} to the {C:joy_spell}Extra Deck{} when summoned",
 					" ",
 					"Scored cards gain {C:money}+$#2#{} when held in hand at end of round",
-					"for each {C:attention}attribute{} used for its summon",
+					"for each {C:attention}Attribute{} used for its summon",
 					"{C:inactive}(Currently {C:money}+$#3#{C:inactive})",
 					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability",
 				},
 				joy_transfer_ability = {
 					"Scored cards gain {C:money}+$#1#{} when held in hand",
-					"for each {C:attention}attribute{} used for its summon",
+					"for each {C:attention}Attribute{} used for its summon",
 					"{C:inactive}(Currently {C:money}+$#2#{C:inactive})",
 				},
 				joy_summon_conditions = {
@@ -1949,13 +1949,13 @@ return {
 					"Creates {C:attention}#2#{} {C:dark_edition}Negative{} Debuffed {C:joy_link}\"Fire Phoenix @Ignister\"{}",
 					"when used as {C:attention}material{} for a {C:joy_normal}Cyberse",
 					" ",
-					"Scored cards gain {X:mult,C:white}X#3#{} extra Mult for each {C:attention}attribute{} used for its summon",
+					"Scored cards gain {X:mult,C:white}X#3#{} extra Mult for each {C:attention}Attribute{} used for its summon",
 					"Amount increases {X:mult,C:white}X#4#{} when a {C:joy_link}Link{} is summoned",
 					"{C:inactive}(Currently {X:mult,C:white}X#5#{} {C:inactive}Mult)",
 					"A {C:joy_link}Link{} summoned using this card as {C:attention}material{} gains this ability",
 				},
 				joy_transfer_ability = {
-					"Scored cards gain {X:mult,C:white}X#1#{} extra Mult for each {C:attention}attribute{} used for its summon",
+					"Scored cards gain {X:mult,C:white}X#1#{} extra Mult for each {C:attention}Attribute{} used for its summon",
 					"Amount increases {X:mult,C:white}X#2#{} when a {C:joy_link}Link{} is summoned",
 					"{C:inactive}(Currently {X:mult,C:white}X#3#{} {C:inactive}Mult)",
 				},
@@ -1981,8 +1981,8 @@ return {
 					"Create {C:attention}#1#{} {C:joy_spell}\"Ignister A.I.Land\"{} when summoned",
 					"{C:inactive}(Must have room){}",
 					" ",
-					"Can be used as any {C:attention}material{} for a {C:joy_link}Link",
-					"and can be treated as any {C:attention}attribute"
+					"Treated as any {C:attention}material{} for a {C:joy_link}Link",
+					"and as any {C:attention}Attribute{} while owned"
 				},
 				joy_summon_conditions = {
 					"{C:attention}1 {C:joy_normal}Cyberse{}"
@@ -2003,7 +2003,7 @@ return {
 			j_joy_ignis_arrival = {
 				name = "{C:joy_link}The Arrival Cyberse @Ignister",
 				text = {
-					"{X:mult,C:white}X#1#{} Mult for each {C:attention}attribute{} used for its summon",
+					"{X:mult,C:white}X#1#{} Mult for each {C:attention}Attribute{} used for its summon",
 					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult)",
 					" ",
 					"Gains abilities based on the {C:attention}materials{} used for its summon",
@@ -2024,7 +2024,7 @@ return {
 					"Add {C:attention}#1#{} {C:joy_normal}Main Deck \"@Ignister\"{} to the shop",
 					"when an {C:joy_normal}\"@Ignister\"{} is used as {C:attention}material",
 					" ",
-					"If you own {C:attention}Jokers{} with {C:attention}#2#{} different {C:attention}attributes{} at end of round,",
+					"If you own {C:attention}Jokers{} with {C:attention}#2#{} different {C:attention}Attributes{} at end of round,",
 					"{C:attention}banish{} all {C:joy_normal}Cyberse{} until {C:attention}Blind{} is selected",
 					"but debuffs all non-{C:joy_normal}Cyberse{}"
 				}
@@ -2041,7 +2041,7 @@ return {
 					"Scored cards with even rank give {C:mult}+#2#{} Mult for each {C:joy_normal}\"Solfachord\"",
 					"{C:inactive}(Currently{} {C:mult}+#3#{} {C:inactive}Mult){}",
 					" ",
-					"Once per round, {C:attention}create #4#{} {C:joy_pendulum}Pendulum{} {C:joy_normal}\"Solfachord\"{}",
+					"Once per round, create {C:attention}#4#{} {C:joy_pendulum}Pendulum{} {C:joy_normal}\"Solfachord\"{}",
 					"after {C:attention}#5#{} {C:joy_pendulum}Pendulum{} are consumed",
 					"{C:inactive}(#6#/#5#) (Must have room){}",
 				}
@@ -2084,7 +2084,7 @@ return {
 					"Gains {C:chips}+#2#{} Chips for each scored card with odd rank",
 					"{C:inactive}(Currently{} {C:chips}+#3#{} {C:inactive}Chips){}",
 					" ",
-					"{C:attention}Create #4#{} {C:joy_normal}\"Solfachord\"{} after {C:attention}#5#{} odd cards are scored",
+					"Create {C:attention}#4#{} {C:joy_normal}\"Solfachord\"{} after {C:attention}#5#{} odd cards are scored",
 					"{C:inactive}(#6#/#5#) (Must have room){}",
 				}
 			},
@@ -2097,7 +2097,7 @@ return {
 				text = {
 					"Retrigger each even card {C:attention}#2#{} times",
 					" ",
-					"{C:attention}Create #3#{} {C:joy_spell}\"Solfachord Harmonia\"{}",
+					"Create {C:attention}#3#{} {C:joy_spell}\"Solfachord Harmonia\"{}",
 					"after {C:attention}#4#{} even cards are scored",
 					"{C:inactive}(#5#/#4#) (Must have room){}",
 				}
@@ -2150,7 +2150,7 @@ return {
 					"Playing cards affected by {C:joy_normal}\"Solfachord\"{} consumable abilities",
 					"gain a random edition if possible",
 					" ",
-					"Once per round, {C:attention}create #1#{} {C:dark_edition}Negative{} {C:joy_pendulum}Pendulum{} {C:joy_normal}\"Solfachord\"{}",
+					"Once per round, create {C:attention}#1#{} {C:dark_edition}Negative{} {C:joy_pendulum}Pendulum{} {C:joy_normal}\"Solfachord\"{}",
 					"after {C:attention}#2#{} {C:joy_pendulum}Pendulum{} are consumed {C:inactive}(#3#/#2#){}",
 					" ",
 					"If scoring hand contains both even and odd ranks,",
@@ -2187,7 +2187,7 @@ return {
 					"{C:attention}Revives #1#{} {C:joy_normal}\"Solfachord\"{} (or {C:joy_pendulum}Pendulum{} if none)",
 					"when {C:attention}Blind{} is selected",
 					" ",
-					"{C:attention}Create #2# Strength{} {C:tarot}Tarot{} after a {C:joy_pendulum}Pendulum{} is consumed",
+					"Create {C:attention}#2# Strength{} {C:tarot}Tarot{} after a {C:joy_pendulum}Pendulum{} is consumed",
 					"{C:inactive}(Must have room){}",
 					" ",
 					"All even cards become {C:attention}Gold{} and all odd cards become {C:attention}Steel{} after scoring",
@@ -2690,7 +2690,7 @@ return {
 					"{C:joy_xyz}Detach{} {C:attention}#1#{}: Gains {X:mult,C:white}X#2#{} Mult this round",
 					"{C:inactive}(Currently {X:mult,C:white}X#3#{} {C:inactive}Mult)",
 					" ",
-					"Attach {C:attention}#4# material{} to this card when a {C:joy_trap}Trap{} is flipped face-up",
+					"Attach {C:attention}#4# {C:joy_xyz}material{} to this card when a {C:joy_trap}Trap{} is flipped face-up",
 					" ",
 					"Can't be debuffed"
 				},
@@ -2720,7 +2720,7 @@ return {
 					"to {C:attention}transform{} this card into an {C:joy_normal}\"Invoked\"",
 					"{C:inactive}(This is treated as a fusion)",
 					" ",
-					"A {C:joy_fusion}Fusion{} summoned using this card as material gains this ability:",
+					"A {C:joy_fusion}Fusion{} summoned using this card as {C:attention}material{} gains this ability:",
 					"{s:0.9,C:chips}+#2#{} {s:0.9}Chips for each {s:0.9,C:joy_fusion}Fusion{} {s:0.9}summoned this run"
 				}
 			},
@@ -2731,29 +2731,39 @@ return {
 					"to {C:attention}transform{} this card into an {C:joy_normal}\"Invoked\"",
 					"{C:inactive}(This is treated as a fusion)",
 					" ",
-					"Create {C:attention}#2#{} {C:joy_spell}\"Magical Meltdown\"{} when used as material for a {C:joy_fusion}Fusion{}",
+					"Create {C:attention}#2#{} {C:joy_spell}\"Magical Meltdown\"{} when used as {C:attention}material{} for a {C:joy_fusion}Fusion{}",
 					"{C:inactive}(Must have room)",
 					" ",
-					"A {C:joy_fusion}Fusion{} summoned using this card as material gains this ability:",
+					"A {C:joy_fusion}Fusion{} summoned using this card as {C:attention}material{} gains this ability:",
 					"{s:0.9,C:mult}+#3#{} {s:0.9}Mult for each {s:0.9,C:joy_fusion}Fusion{} {s:0.9}summoned this run"
+				},
+				joy_summon_conditions = {
+					"{C:attention}2 Jokers{} with",
+					"different {C:attention}Types",
+					"and {C:attention}Attributes"
 				}
 			},
 			j_joy_invoked_caliga = {
 				name = "{C:joy_fusion}Invoked Caliga",
 				text = {
-					"You can {C:attention}tribute #1#{} other {C:attention}Jokers",
+					"You can {C:attention}tribute #1#{} other {C:attention}Joker",
 					"to {C:attention}transform{} this card into {C:joy_effect}\"Aleister the Invoker\"",
 					" ",
 					"Gains {X:mult,C:white}X#2#{} Mult for each {C:attention}Joker{} {C:attention}tributed{} this run",
 					"{C:inactive}(Currently{} {X:mult,C:white}X#3#{} {C:inactive}Mult){}",
 					" ",
 					"Reduce price of {C:joy_effect}Monster Packs{} by {C:money}$#4#"
+				},
+				joy_summon_conditions = {
+					"{C:attention}Tribute 1{} {C:joy_dark}DARK {C:attention}Joker{}",
+					"{s:0.8,C:inactive}(Random chance when tributing",
+					"{s:0.8,C:inactive}a non-Monster)"
 				}
 			},
 			j_joy_invoked_raidjin = {
 				name = "{C:joy_fusion}Invoked Raidjin",
 				text = {
-					"You can {C:attention}tribute #1#{} other {C:attention}Jokers",
+					"You can {C:attention}tribute #1#{} other {C:attention}Joker",
 					"to {C:attention}transform{} this card into {C:joy_effect}\"Aleister the Invoker\"",
 					" ",
 					"Gains {X:mult,C:white}X#2#{} Mult for each {C:attention}Joker{} {C:attention}flipped{} this run",
@@ -2761,65 +2771,102 @@ return {
 					" ",
 					"{C:attention}Flip #4# Joker{} face-up when {C:attention}Blind{} is selected",
 					"{C:attention}Flip #4# Joker{} face-up at end of round",
+				},
+				joy_summon_conditions = {
+					"{C:attention}Tribute 1{} {C:joy_wind}WIND {C:attention}Joker{}",
+					"{s:0.8,C:inactive}(Random chance when tributing",
+					"{s:0.8,C:inactive}a non-Monster)"
 				}
 			},
 			j_joy_invoked_cocytus = {
 				name = "{C:joy_fusion}Invoked Cocytus",
 				text = {
-					"You can {C:attention}tribute #1#{} other {C:attention}Jokers",
+					"You can {C:attention}tribute #1#{} other {C:attention}Joker",
 					"to {C:attention}transform{} this card into {C:joy_effect}\"Aleister the Invoker\"",
 					" ",
 					"Reduce {C:attention}Blind{}'s requirement by {C:red}#2#%",
+				},
+				joy_summon_conditions = {
+					"{C:attention}Tribute 1{} {C:joy_water}WATER {C:attention}Joker{}",
+					"{s:0.8,C:inactive}(Random chance when tributing",
+					"{s:0.8,C:inactive}a non-Monster)"
 				}
 			},
 			j_joy_invoked_purgatorio = {
 				name = "{C:joy_fusion}Invoked Purgatrio",
 				text = {
-					"You can {C:attention}tribute #1#{} other {C:attention}Jokers",
+					"You can {C:attention}tribute #1#{} other {C:attention}Joker",
 					"to {C:attention}transform{} this card into {C:joy_effect}\"Aleister the Invoker\"",
 					" ",
 					"Each {C:joy_fusion}Fusion{} gives {X:mult,C:white}X#2#{} Mult",
+				},
+				joy_summon_conditions = {
+					"{C:attention}Tribute 1{} {C:joy_fire}FIRE {C:attention}Joker{}",
+					"{s:0.8,C:inactive}(Random chance when tributing",
+					"{s:0.8,C:inactive}a non-Monster)"
 				}
 			},
 			j_joy_invoked_mage = {
 				name = "{C:joy_fusion}Invoked Magellanica",
 				text = {
-					"You can {C:attention}tribute #1#{} other {C:attention}Jokers",
+					"You can {C:attention}tribute #1#{} other {C:attention}Joker",
 					"to {C:attention}transform{} this card into {C:joy_effect}\"Aleister the Invoker\"",
 					" ",
 					"{C:mult}+#2#{} Mult",
-				}
-			},
-			j_joy_invoked_augo = {
-				name = "{C:joy_fusion}Invoked Augoeides",
-				text = {
-					"You can {C:attention}tribute #1#{} other {C:attention}Jokers",
-					"to {C:attention}transform{} this card into {C:joy_effect}\"Aleister the Invoker\"",
-					" ",
-					"Gains {X:mult,C:white}X#2#{} Mult for each {C:joy_fusion}Fusion{} in the {C:attention}GY{}",
-					" ",
-					"Send {C:attention}#3#{} {C:joy_fusion}Fusion{} to the {C:attention}GY{} when {C:attention}Blind{} is selected",
+				},
+				joy_summon_conditions = {
+					"{C:attention}Tribute 1{} {C:joy_earth}EARTH {C:attention}Joker{}",
+					"{s:0.8,C:inactive}(Random chance when tributing",
+					"{s:0.8,C:inactive}a non-Monster)"
 				}
 			},
 			j_joy_invoked_mechaba = {
 				name = "{C:joy_fusion}Invoked Mechaba",
 				text = {
-					"You can {C:attention}tribute #1#{} other {C:attention}Jokers",
+					"You can {C:attention}tribute #1#{} other {C:attention}Joker",
 					"to {C:attention}transform{} this card into {C:joy_effect}\"Aleister the Invoker\"",
 					" ",
-					"Disables effect of {C:attention}Boss Blind{} after {C:attention}#2#{} cards are sold",
+					"Disables effect of {C:attention}Boss Blind{} after {C:attention}#2#{} cards are sold this round",
+					"{C:inactive}(#3#/#2#)"
+				},
+				joy_summon_conditions = {
+					"{C:attention}Tribute 1{} {C:joy_light}LIGHT {C:attention}Joker{}",
+					"{s:0.8,C:inactive}(Random chance when tributing",
+					"{s:0.8,C:inactive}a non-Monster)"
+				}
+			},
+			j_joy_invoked_augo = {
+				name = "{C:joy_fusion}Invoked Augoeides",
+				text = {
+					"You can {C:attention}tribute #1#{} other {C:attention}Joker",
+					"to {C:attention}transform{} this card into {C:joy_effect}\"Aleister the Invoker\"",
+					" ",
+					"Gains {X:mult,C:white}X#2#{} Mult for each {C:joy_fusion}Fusion{} in the {C:attention}GY{}",
+					"{C:inactive}(Currently{} {X:mult,C:white}X#3#{} {C:inactive}Mult){}",
+					" ",
+					"Send {C:attention}#4#{} {C:joy_fusion}Fusion{} to the {C:attention}GY{} when {C:attention}Blind{} is selected",
+				},
+				joy_summon_conditions = {
+					"{C:attention}Tribute 1{} {C:joy_fusion}Fusion",
+					"{s:0.8,C:inactive}(Supersedes other conditions)",
 				}
 			},
 			j_joy_invoked_elysium = {
 				name = "{C:joy_fusion}Invoked Elysium",
 				text = {
-					"You can {C:attention}tribute #1#{} other {C:attention}Jokers",
+					"You can {C:attention}tribute #1#{} other {C:attention}Joker",
 					"to {C:attention}transform{} this card into {C:joy_effect}\"Aleister the Invoker\"",
 					" ",
-					"Gains abilities of each {C:joy_normal}\"Invoked\"{} in the {C:attention}GY{}",
+					"Gains abilities of each different {C:joy_normal}\"Invoked\"{} in the {C:attention}GY{}",
 					" ",
-					"Treated as any {C:attention}material{} for a {C:joy_fusion}Fusion"
+					"Treated as any {C:attention}material{} for a {C:joy_fusion}Fusion",
+					"and as any {C:attention}Attribute{} while owned"
 				},
+				joy_summon_conditions = {
+					"{C:attention}Tribute 1{} summoned",
+					"non-{C:joy_fusion}Fusion",
+					"{s:0.8,C:inactive}(Supersedes other conditions)",
+				}
 			},
 			j_joy_invoked_meltdown = {
 				name = "{C:joy_spell}Magical Meltdown",
@@ -2853,7 +2900,7 @@ return {
 					"Gains {C:mult}+#1#{} Mult when {C:attention}Blind{} is selected",
 					"{C:inactive}(Currently {C:mult}+#2# {C:inactive}Mult)",
 					" ",
-					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected",
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected {C:inactive}(itself included)",
 					" ",
 					"Creates {C:attention}#3#{} {C:joy_normal}\"Danger!\"",
 					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability",
@@ -2866,7 +2913,7 @@ return {
 					"{C:money}+$#1#{} at end of round",
 					"Increases by {C:money}#2#{} when {C:attention}Blind{} is selected",
 					" ",
-					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected",
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected {C:inactive}(itself included)",
 					" ",
 					"{C:attention}Revives #3#{} {C:joy_normal}\"Danger!\"",
 					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability"
@@ -2878,7 +2925,7 @@ return {
 					"{C:red}+#1#{} Discards",
 					"Increases by {C:red}#2#{} when {C:attention}Blind{} is selected",
 					" ",
-					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected",
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected {C:inactive}(itself included)",
 					" ",
 					"{C:attention}Revives #3#{} {C:joy_normal}\"Danger!\"",
 					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability"
@@ -2891,7 +2938,7 @@ return {
 					"Increases by {C:red}#2#%{} when {C:attention}Blind{} is selected",
 					"{s:0.9,C:inactive}(Max. 25%)",
 					" ",
-					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected",
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected {C:inactive}(itself included)",
 					" ",
 					"Add {C:attention}#3#{} {C:joy_normal}\"Danger!\"{} to the shop",
 					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability"
@@ -2903,7 +2950,7 @@ return {
 					"{C:attention}+#1#{} hand size",
 					"Increases by {C:attention}#2#{} when {C:attention}Blind{} is selected",
 					" ",
-					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected",
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected {C:inactive}(itself included)",
 					" ",
 					"Add {C:attention}#3#{} {C:joy_normal}\"Danger!\"{} to the shop",
 					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability"
@@ -2915,7 +2962,7 @@ return {
 					"Gains {X:mult,C:white}X#1#{} Mult when {C:attention}Blind{} is selected",
 					"{C:inactive}(Currently {X:mult,C:white}X#2#{} {C:inactive}Mult)",
 					" ",
-					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected",
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected {C:inactive}(itself included)",
 					" ",
 					"Destroy all other {C:attention}Jokers{}",
 					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability",
@@ -2940,7 +2987,7 @@ return {
 					"Gains {X:chips,C:white}X#1#{} Chips when {C:attention}Blind{} is selected",
 					"{C:inactive}(Currently {X:chips,C:white}X#2#{} {C:inactive}Chips)",
 					" ",
-					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected",
+					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected {C:inactive}(itself included)",
 					" ",
 					"Destroy {C:attention}#3#{} other {C:attention}Joker{} and all {C:attention}Consumables",
 					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability",
@@ -3166,9 +3213,8 @@ return {
 			j_joy_mudragon = {
 				name = "{C:joy_fusion}Mudragon of the Swamp",
 				text = {
-					"This {C:attention}Joker{} is treated as every",
-					"{C:joy_normal}Attribute{} and can be used as any {C:attention}material{}",
-					"for a {C:joy_fusion}Fusion Summon{}"
+					"Treated as any {C:attention}material{} for a {C:joy_fusion}Fusion",
+					"and as any {C:attention}Attribute{} while owned"
 				},
 				joy_summon_conditions = {
 					"{C:attention}2 Jokers{} with different rarities",
