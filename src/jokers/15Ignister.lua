@@ -304,8 +304,7 @@ SMODS.Joker({
                     for i = 1, card.ability.extra.revives do
                         JoyousSpring.revive_pseudorandom(
                             { { monster_archetypes = { "Ignister" }, is_extra_deck = true } },
-                            pseudoseed("j_joy_ignis_doshin"), true, nil,
-                            (card.edition and card.edition.negative) and 0 or 1)
+                            pseudoseed("j_joy_ignis_doshin"), true)
                     end
                     break
                 end

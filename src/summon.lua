@@ -143,6 +143,7 @@ JoyousSpring.perform_summon = function(card, card_list, summon_type)
             card.ability.extra.joyous_spring.xyz_materials = card.ability.extra.joyous_spring.xyz_materials +
                 joker.ability.extra.joyous_spring.xyz_materials
         end
+        joker.getting_sliced = true
         joker:start_dissolve()
     end
     card.ability.extra.joyous_spring.summoned = true
@@ -169,16 +170,17 @@ JoyousSpring.perform_summon = function(card, card_list, summon_type)
     end
 end
 
-JoyousSpring.create_summon = function(add_params, must_have_room)
-    local card = SMODS.create_card(add_params)
+JoyousSpring.create_summon = function(add_params, must_have_room, card_limit_modif)
+    local card = add_params.is and add_params:is(Card) and add_params or SMODS.create_card(add_params)
     card.states.visible = false
     G.E_MANAGER:add_event(Event({
         func = function()
-            if not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit) then
+            if not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit + (card_limit_modif or 0)) then
                 card.states.visible = true
                 card:add_to_deck()
                 G.jokers:emplace(card)
             else
+                card.getting_sliced = true
                 card:remove()
                 card = nil
             end

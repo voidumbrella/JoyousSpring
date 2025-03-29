@@ -346,7 +346,7 @@ JoyousSpring.level_up_hand = function(card, hand_key, instant, amount)
     end
 end
 
-JoyousSpring.create_pseudorandom = function(property_list, seed, must_have_room, not_owned, edition, card_limit_modif)
+JoyousSpring.create_pseudorandom = function(property_list, seed, must_have_room, not_owned, edition)
     local choices = JoyousSpring.get_materials_in_collection(property_list)
 
     if not_owned then

@@ -335,7 +335,8 @@ SMODS.Joker({
         end
     end,
     calc_dollar_bonus = function(self, card)
-        return (next(SMODS.find_card("j_joy_mekk_spectrum")) or JoyousSpring.get_joker_column(card) >= 5) and
+        return JoyousSpring.can_use_abilities(card) and
+            (next(SMODS.find_card("j_joy_mekk_spectrum")) or JoyousSpring.get_joker_column(card) >= 5) and
             card.ability.extra.money or nil
     end,
 })
@@ -562,6 +563,7 @@ SMODS.Joker({
         if not context.blueprint and context.end_of_round and context.game_over == false and context.main_eval then
             card.ability.extra.blinds = card.ability.extra.blinds + 1
             if card.ability.extra.blinds >= #JoyousSpring.get_materials(card) then
+                card.getting_sliced = true
                 card:start_dissolve()
             end
         end

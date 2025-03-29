@@ -7,9 +7,8 @@
 ---@param must_have_room boolean?
 ---@param edition any
 ---@return Card?
-JoyousSpring.revive = function(key, must_have_room, edition, debuff_source)
-    if JoyousSpring.graveyard[key] and JoyousSpring.graveyard[key].summonable > 0 and
-        (not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit)) then
+JoyousSpring.revive = function(key, must_have_room, edition, card_limit_modif, debuff_source)
+    if JoyousSpring.graveyard[key] and JoyousSpring.graveyard[key].summonable > 0 then
         JoyousSpring.graveyard[key].count = JoyousSpring.graveyard[key].count - 1
         JoyousSpring.graveyard[key].summonable = JoyousSpring.graveyard[key].summonable - 1
 
@@ -17,18 +16,10 @@ JoyousSpring.revive = function(key, must_have_room, edition, debuff_source)
             key = key,
             edition = edition
         })
-        added_card.states.visible = false
         if debuff_source then
             SMODS.debuff_card(added_card, true, debuff_source)
         end
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                added_card.states.visible = true
-                added_card:add_to_deck()
-                G.jokers:emplace(added_card)
-                return true
-            end
-        }))
+        JoyousSpring.create_summon(added_card, must_have_room, card_limit_modif)
 
         added_card.ability.extra.joyous_spring.summoned = JoyousSpring.is_extra_deck_monster(added_card) or false
         added_card.ability.extra.joyous_spring.revived = true
@@ -49,13 +40,12 @@ end
 ---@return Card?
 JoyousSpring.revive_pseudorandom = function(property_list, seed, must_have_room, edition, card_limit_modif,
                                             different_names)
-    if not must_have_room or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit + (card_limit_modif or 0)) then
-        local choices = JoyousSpring.get_materials_in_graveyard(property_list, true, different_names)
-        local key_to_add = pseudorandom_element(choices, seed)
-        if key_to_add then
-            return JoyousSpring.revive(key_to_add, must_have_room, edition)
-        end
+    local choices = JoyousSpring.get_materials_in_graveyard(property_list, true, different_names)
+    local key_to_add = pseudorandom_element(choices, seed)
+    if key_to_add then
+        return JoyousSpring.revive(key_to_add, must_have_room, edition, card_limit_modif)
     end
+
     return nil
 end
 

@@ -92,6 +92,7 @@ JoyousSpring.tribute = function(card, card_list)
     for _, material in ipairs(card_list) do
         JoyousSpring.count_as_tributed(material)
         SMODS.calculate_context({ joy_tributed = true, joy_card = material, joy_source = card })
+        material.getting_sliced = true
         material:start_dissolve()
     end
 end
@@ -272,19 +273,24 @@ end
 
 local cardarea_emplace_ref = CardArea.emplace
 function CardArea:emplace(card, location, stay_flipped)
-    if self == G.jokers then
+    cardarea_emplace_ref(self, card, location, JoyousSpring.is_monster_card(card) or stay_flipped)
+end
+
+local card_add_to_deck_ref = Card.add_to_deck
+function Card:add_to_deck(from_debuff)
+    if not self.added_to_deck and self.ability.set == "Joker" and not JoyousSpring.is_field_spell(self) then
         for _, joker in ipairs(G.jokers.cards) do
             if not joker.debuff and joker.config.center.joy_apply_to_jokers_added then
-                joker.config.center.joy_apply_to_jokers_added(joker, card)
+                joker.config.center.joy_apply_to_jokers_added(joker, self)
             end
         end
         for _, joker in ipairs(JoyousSpring.field_spell_area.cards) do
             if not joker.debuff and joker.config.center.joy_apply_to_jokers_added then
-                joker.config.center.joy_apply_to_jokers_added(joker, card)
+                joker.config.center.joy_apply_to_jokers_added(joker, self)
             end
         end
     end
-    cardarea_emplace_ref(self, card, location, JoyousSpring.is_monster_card(card) or stay_flipped)
+    card_add_to_deck_ref(self, from_debuff)
 end
 
 local stay_flipped_ref = Blind.stay_flipped

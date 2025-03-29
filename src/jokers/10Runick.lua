@@ -333,6 +333,7 @@ SMODS.Joker({
                             end
                         }))
                     end
+                    card_to_destroy.getting_sliced = true
                     card_to_destroy:start_dissolve()
                 end
             end

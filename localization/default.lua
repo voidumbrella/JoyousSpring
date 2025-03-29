@@ -2875,7 +2875,7 @@ return {
 			j_joy_danger_moth = {
 				name = "{C:joy_effect}Danger! Mothman!",
 				text = {
-					"{C:red}+#1#{} Discard",
+					"{C:red}+#1#{} Discards",
 					"Increases by {C:red}#2#{} when {C:attention}Blind{} is selected",
 					" ",
 					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected",
@@ -2958,7 +2958,10 @@ return {
 			j_joy_danger_disorder = {
 				name = "{C:joy_spell}Danger! Disturbance! Disorder!",
 				text = {
-					"Creates {C:attention}#1#{} {C:joy_normal}\"Danger!\"{}",
+					"{C:mult}+#1#{} Mult for each {C:joy_normal}\"Danger!\"{} in the {C:attention}GY{}",
+					"{C:inactive}(Currently {C:mult}+#2# {C:inactive}Mult)",
+					" ",
+					"Creates {C:attention}#3#{} {C:joy_normal}\"Danger!\"{}",
 					"when {C:attention}Blind{} is selected",
 					"{C:inactive}(Must have room){}",
 					" ",
