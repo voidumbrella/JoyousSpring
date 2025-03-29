@@ -426,47 +426,49 @@ SMODS.Joker({
 
 --#region Fusion
 
--- -- Mudragon of the Swamp
+-- Mudragon of the Swamp
 
--- SMODS.Joker({
---     key = "mudragon",
---     atlas = 'Misc01',
---     pos = { x = 2, y = 0 },
---     rarity = 2,
---     discovered = true,
---     blueprint_compat = false,
---     eternal_compat = true,
---     cost = 3,
---     loc_vars = function(self, info_queue, card)
---         return {}
---     end,
---     generate_ui = JoyousSpring.generate_info_ui,
---set_sprites = JoyousSpring.set_back_sprite,
---     config = {
---         extra = {
---             joyous_spring = JoyousSpring.init_joy_table {
---                 summon_type = "FUSION",
---                 is_all_attributes = true,
---                 is_all_materials = { "FUSION" },
---                 attribute = "FIRE",
---                 monster_type = "Dragon",
---                 monster_archetypes = {},
---                 summon_conditions = {
---                     {
---                         type = "FUSION",
---                         materials = {
---                             {},
---                             {},
---                         },
---                         restrictions = {
---                             different_rarities = true
---                         }
---                     }
---                 },
---             },
---         },
---     },
--- })
+SMODS.Joker({
+    key = "mudragon",
+    atlas = 'Misc01',
+    pos = { x = 2, y = 0 },
+    rarity = 2,
+    discovered = true,
+    blueprint_compat = false,
+    eternal_compat = true,
+    cost = 3,
+    loc_vars = function(self, info_queue, card)
+        if not JoyousSpring.config.disable_tooltips and not card.fake_card and not card.debuff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "joy_tooltip_material" }
+        end
+        return {}
+    end,
+    generate_ui = JoyousSpring.generate_info_ui,
+    set_sprites = JoyousSpring.set_back_sprite,
+    config = {
+        extra = {
+            joyous_spring = JoyousSpring.init_joy_table {
+                summon_type = "FUSION",
+                is_all_attributes = true,
+                is_all_materials = { FUSION = true },
+                attribute = "WATER",
+                monster_type = "Wyrm",
+                summon_conditions = {
+                    {
+                        type = "FUSION",
+                        materials = {
+                            {},
+                            {},
+                        },
+                        restrictions = {
+                            different_rarities = true
+                        }
+                    }
+                },
+            },
+        },
+    },
+})
 
 -- Garura, Wings of Resonant Life
 
