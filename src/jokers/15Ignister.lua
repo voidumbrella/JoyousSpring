@@ -755,16 +755,14 @@ SMODS.Joker({
         },
     },
     calculate = function(self, card, context)
-        if JoyousSpring.can_use_abilities(card) then
-            if not context.blueprint_card and context.selling_self then
-                if G.GAME.blind and ((not G.GAME.blind.disabled) and (G.GAME.blind:get_type() == 'Boss')) then
-                    card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil,
-                        { message = localize('ph_boss_disabled') })
-                    G.GAME.blind:disable()
+        if not context.blueprint_card and context.selling_self then
+            if G.GAME.blind and ((not G.GAME.blind.disabled) and (G.GAME.blind:get_type() == 'Boss')) then
+                card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil,
+                    { message = localize('ph_boss_disabled') })
+                G.GAME.blind:disable()
 
-                    if JoyousSpring.count_materials_owned({ { monster_type = "Cyberse", is_summoned = true, is_extra_deck = true } }) > 0 then
-                        JoyousSpring.add_monster_tag("j_joy_ignis_kiruku")
-                    end
+                if JoyousSpring.count_materials_owned({ { monster_type = "Cyberse", is_summoned = true, is_extra_deck = true } }) > 0 then
+                    JoyousSpring.add_monster_tag("j_joy_ignis_kiruku")
                 end
             end
         end

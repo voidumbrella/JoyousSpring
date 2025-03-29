@@ -383,19 +383,19 @@ SMODS.Joker({
     },
     calculate = function(self, card, context)
         if JoyousSpring.can_use_abilities(card) then
-            if not context.blueprint_card and context.selling_self then
-                if G.GAME.blind and ((not G.GAME.blind.disabled) and (G.GAME.blind:get_type() == 'Boss')) then
-                    card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil,
-                        { message = localize('ph_boss_disabled') })
-                    G.GAME.blind:disable()
-                    JoyousSpring.add_monster_tag("j_joy_sauravis")
-                    G.GAME.joy_sauravis_uses = (G.GAME.joy_sauravis_uses or 0) + 1
-                end
-            end
             if context.joker_main then
                 return {
                     xmult = 1 + (card.ability.extra.xmult * (G.GAME.joy_sauravis_uses or 0))
                 }
+            end
+        end
+        if not context.blueprint_card and context.selling_self then
+            if G.GAME.blind and ((not G.GAME.blind.disabled) and (G.GAME.blind:get_type() == 'Boss')) then
+                card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil,
+                    { message = localize('ph_boss_disabled') })
+                G.GAME.blind:disable()
+                JoyousSpring.add_monster_tag("j_joy_sauravis")
+                G.GAME.joy_sauravis_uses = (G.GAME.joy_sauravis_uses or 0) + 1
             end
         end
     end,
