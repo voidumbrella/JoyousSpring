@@ -149,7 +149,20 @@ SMODS.Joker({
                 summon_type = "LINK",
                 attribute = "DARK",
                 monster_type = "Spellcaster",
-                monster_archetypes = { ["Aleister"] = true }
+                monster_archetypes = { ["Aleister"] = true },
+                summon_conditions = {
+                    {
+                        type = "LINK",
+                        materials = {
+                            {},
+                            {},
+                        },
+                        restrictions = {
+                            different_attributes = true,
+                            different_types = true
+                        }
+                    }
+                }
             },
             tributes = 1,
             creates = 1,
