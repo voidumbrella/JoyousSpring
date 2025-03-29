@@ -854,7 +854,7 @@ SMODS.Joker({
             for i = 1, card.ability.extra.cards_to_create do
                 JoyousSpring.create_pseudorandom(
                     { { monster_archetypes = { "Generaider" }, rarity = 3, is_main_deck = true } },
-                    pseudoseed("j_joy_generaider_boss_stage"), true, true, nil, #context.joy_selection)
+                    pseudoseed("j_joy_generaider_boss_stage"), true, true)
             end
         end
         if context.end_of_round and context.main_eval then

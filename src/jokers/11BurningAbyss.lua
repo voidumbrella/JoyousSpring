@@ -301,8 +301,7 @@ SMODS.Joker({
             for _ = 1, card.ability.extra.creates do
                 JoyousSpring.create_pseudorandom(
                     { { monster_archetypes = { "BurningAbyss" }, is_main_deck = true, exclude_summon_types = { "RITUAL" }, exclude_keys = { "j_joy_ba_draghig" } } },
-                    pseudoseed("j_joy_ba_draghig"), true, false, nil,
-                    (card.edition and card.edition.negative) and 0 or -1)
+                    pseudoseed("j_joy_ba_draghig"), true)
             end
         end
     end,
@@ -404,8 +403,7 @@ SMODS.Joker({
             for _ = 1, card.ability.extra.creates do
                 JoyousSpring.create_pseudorandom(
                     { { monster_archetypes = { "BurningAbyss" }, is_main_deck = true, exclude_summon_types = { "RITUAL" }, exclude_keys = { "j_joy_ba_graff" } } },
-                    pseudoseed("j_joy_ba_graff"), true, false, nil,
-                    (card.edition and card.edition.negative) and 0 or -1)
+                    pseudoseed("j_joy_ba_graff"), true)
             end
         end
     end,
@@ -538,8 +536,7 @@ SMODS.Joker({
                 for _ = 1, card.ability.extra.creates do
                     JoyousSpring.create_pseudorandom(
                         { { monster_type = "Fiend", is_main_deck = true, exclude_keys = { "j_joy_ba_scarm" } } },
-                        pseudoseed("j_joy_ba_scarm"), true, false, nil,
-                        (card.edition and card.edition.negative) and 0 or 1)
+                        pseudoseed("j_joy_ba_scarm"), true)
                 end
             end
         end

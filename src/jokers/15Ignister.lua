@@ -52,8 +52,7 @@ SMODS.Joker({
             for i = 1, card.ability.extra.creates do
                 JoyousSpring.create_pseudorandom(
                     { { rarity = 1, monster_archetypes = { "Ignister" }, is_main_deck = true } },
-                    pseudoseed("j_joy_ignis_achichi"), true, false, nil,
-                    ((card.edition and card.edition.negative) and 0 or -1))
+                    pseudoseed("j_joy_ignis_achichi"), true)
             end
         end
     end

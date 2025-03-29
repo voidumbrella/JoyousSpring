@@ -384,8 +384,7 @@ SMODS.Joker({
                     for i = 1, card.ability.extra.cards_to_create do
                         JoyousSpring.create_pseudorandom(
                             { { monster_archetypes = { "MekkKnight" }, is_main_deck = true, exclude_keys = { "j_joy_mekk_purple" } } },
-                            pseudoseed("j_joy_mekk_purple"), true, false, nil,
-                            (card.edition and card.edition.negative) and 0 or 1)
+                            pseudoseed("j_joy_mekk_purple"), true)
                     end
                 end
             end
