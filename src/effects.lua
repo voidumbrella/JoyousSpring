@@ -245,7 +245,7 @@ JoyousSpring.create_random_playing_card = function(enhanced_prob, silent, colour
                     cen_pool[#cen_pool + 1] = v
                 end
             end
-            local enhanced = enhanced_prob >= 1 and
+            local enhanced = enhanced_prob and enhanced_prob >= 1 and
                 (pseudorandom(seed or pseudoseed('JoyousSpring')) < 1 / enhanced_prob and true) or false
             local added_card = create_playing_card(
                 {
