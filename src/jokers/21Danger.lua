@@ -46,7 +46,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.dest_chips, card.ability.extra.chips, card.ability.extra.current_chips + (card.ability.extra.dest_chips * get_danger_count()), card.ability.extra.creates } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Danger" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -113,7 +113,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.dest_mult, card.ability.extra.mult, card.ability.extra.current_mult + (card.ability.extra.dest_mult * get_danger_count()), card.ability.extra.creates } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Danger" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -179,7 +179,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.current_money, card.ability.extra.money, card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Danger" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -243,7 +243,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.discards, card.ability.extra.current_discards, card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Danger" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -312,7 +312,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.current_percent * 100, card.ability.extra.percent * 100, card.ability.extra.adds } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Danger" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -383,7 +383,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.current_h_size, card.ability.extra.h_size, card.ability.extra.adds } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Danger" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -450,7 +450,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.dest_xmult, card.ability.extra.xmult, card.ability.extra.current_xmult + (card.ability.extra.dest_xmult * get_danger_count()) } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Danger" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -517,7 +517,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.chips, card.ability.extra.chips * JoyousSpring.count_materials_in_graveyard({ { monster_archetypes = { "Danger" } } }), card.ability.extra.mills } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Danger" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -572,7 +572,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.dest_xchips, card.ability.extra.xchips, card.ability.extra.current_xchips + (card.ability.extra.dest_xchips * get_danger_count()), card.ability.extra.destroys } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Danger" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -655,7 +655,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.money } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Danger" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -700,7 +700,7 @@ SMODS.Joker({
         }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Danger" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,

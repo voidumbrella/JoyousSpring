@@ -31,7 +31,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.base_xmult, card.ability.extra.xmult } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -90,7 +90,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.mult } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -142,7 +142,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.cards_to_create } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -189,7 +189,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.cards_to_create } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -242,7 +242,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.chips, card.ability.extra.chips * JoyousSpring.count_materials_owned({ { is_extra_deck = true, is_debuffed = true } }) } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -316,7 +316,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -367,7 +367,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.duplicates } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -428,7 +428,7 @@ SMODS.Joker({
         }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -503,7 +503,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.mult, debuffed_ed_count * card.ability.extra.mult } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -592,7 +592,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.money, card.ability.extra.money * debuffed_ed_count, card.ability.extra.tributes, card.ability.extra.creates } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Dogmatika" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,

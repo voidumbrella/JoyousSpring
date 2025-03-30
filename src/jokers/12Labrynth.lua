@@ -24,7 +24,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.flips, card.ability.extra.bonus_mult, card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Labrynth" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Labrynth" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -132,7 +132,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.flips, card.ability.extra.bonus_chips, card.ability.extra.money } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Labrynth" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Labrynth" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -260,7 +260,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.flips, card.ability.extra.bonus_dollars, card.ability.extra.creates } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Labrynth" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Labrynth" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -390,7 +390,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.h_size, card.ability.extra.flipped, card.ability.extra.count } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Labrynth" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Labrynth" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -463,7 +463,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.h_size, card.ability.extra.flipped, card.ability.extra.count } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Labrynth" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Labrynth" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -535,7 +535,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.chips, card.ability.extra.chips * card.ability.extra.total_count, card.ability.extra.flipped, card.ability.extra.count } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Labrynth" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Labrynth" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -601,7 +601,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.mult, card.ability.extra.mult * JoyousSpring.count_materials_in_graveyard({ { monster_type = "Fiend" } }) } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Labrynth" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Labrynth" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -688,7 +688,7 @@ SMODS.Joker({
         return { vars = { G.GAME.probabilities.normal, math.max(1, card.ability.extra.odds - JoyousSpring.count_materials_owned({ { monster_type = "Fiend" } })), card.ability.extra.extra_mult, card.ability.extra.mult } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Labrynth" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Labrynth" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -740,7 +740,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.extra_xmult, 1 + card.ability.extra.xmult } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Labrynth" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Labrynth" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -787,7 +787,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.money, G.GAME.probabilities.normal, card.ability.extra.odds, card.ability.extra.flips } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Labrynth" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Labrynth" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,

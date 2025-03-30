@@ -101,7 +101,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.change, card.ability.extra.mult, card.ability.extra.mult * solfa_count(), card.ability.extra.creates, card.ability.extra.consumed, card.ability.extra.consumed_this_round } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Solfachord" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -179,7 +179,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.change, card.ability.extra.mult, card.ability.extra.mult * solfa_count() } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Solfachord" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -243,7 +243,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.change, card.ability.extra.chips, card.ability.extra.current_chips, card.ability.extra.adds, card.ability.extra.scored, card.ability.extra.currently_scored } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Solfachord" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -321,7 +321,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.change, card.ability.extra.chips, card.ability.extra.current_chips, card.ability.extra.creates, card.ability.extra.scored, card.ability.extra.currently_scored } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Solfachord" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -397,8 +397,8 @@ SMODS.Joker({
         return { vars = { card.ability.extra.change, card.ability.extra.repetitions, card.ability.extra.creates, card.ability.extra.scored, card.ability.extra.currently_scored } }
     end,
     joy_desc_cards = {
-        { "j_joy_solfa_harmonia",                                     name = "Creates" },
-        { properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { "j_joy_solfa_harmonia",                                     name = localize("k_joy_creates") },
+        { properties = { { monster_archetypes = { "Solfachord" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -487,7 +487,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.change, card.ability.extra.repetitions, card.ability.extra.revives, card.ability.extra.scored, card.ability.extra.currently_scored } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Solfachord" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -584,7 +584,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.change, card.ability.extra.xchips, 1 + card.ability.extra.xchips * solfa_count(), card.ability.extra.banishes } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Solfachord" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -662,7 +662,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.change, card.ability.extra.xmult, 1 + card.ability.extra.xmult * solfa_count() } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Solfachord" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -730,7 +730,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.creates, card.ability.extra.consumed, card.ability.extra.consumed_this_round } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Solfachord" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -792,7 +792,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.chips, card.ability.extra.chips * pend_count(), card.ability.extra.money, card.ability.extra.consumed, card.ability.extra.consumed_this_round } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Solfachord" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -861,7 +861,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.revives, card.ability.extra.creates, card.ability.extra.solfa_owned } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Solfachord" } } }, name = localize("k_joy_archetype") },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
