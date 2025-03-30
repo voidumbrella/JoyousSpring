@@ -65,7 +65,7 @@ local is_even = function(card)
 end
 
 local is_odd = function(card)
-    return card and (card:get_id() <= 10 and card:get_id() >= 0 and card:get_id() % 2 == 1) or (card:get_id() == 14) or
+    return card and ((card:get_id() <= 10 and card:get_id() >= 0 and card:get_id() % 2 == 1) or (card:get_id() == 14)) or
         false
 end
 
