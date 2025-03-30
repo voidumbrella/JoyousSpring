@@ -335,7 +335,7 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        if G.GAME.blind.in_blind then
+        if not card.debuff and G.GAME.blind.in_blind then
             G.GAME.blind.chips = math.floor(G.GAME.blind.chips -
                 G.GAME.blind.chips * card.ability.extra.current_percent)
             G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
@@ -695,9 +695,11 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        for i = 1, #G.jokers.cards do
-            if not JoyousSpring.is_monster_archetype(G.jokers.cards[i], "Danger") then
-                SMODS.debuff_card(G.jokers.cards[i], true, 'j_joy_danger_disorder')
+        if not card.debuff then
+            for i = 1, #G.jokers.cards do
+                if not JoyousSpring.is_monster_archetype(G.jokers.cards[i], "Danger") then
+                    SMODS.debuff_card(G.jokers.cards[i], true, 'j_joy_danger_disorder')
+                end
             end
         end
     end,
