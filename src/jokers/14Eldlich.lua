@@ -23,7 +23,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.money, card.ability.extra.tributes, card.ability.extra.creates } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Eldlich" } }, { monster_archetypes = { "GoldenLand" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Eldlich" } }, { monster_archetypes = { "GoldenLand" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -112,7 +112,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.chips, card.ability.extra.discards } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Eldlich" } }, { monster_archetypes = { "GoldenLand" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Eldlich" } }, { monster_archetypes = { "GoldenLand" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -186,7 +186,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.mult, card.ability.extra.hands } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Eldlich" } }, { monster_archetypes = { "GoldenLand" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Eldlich" } }, { monster_archetypes = { "GoldenLand" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -261,7 +261,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.chips, card.ability.extra.banishes } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Eldlich" } }, { monster_archetypes = { "GoldenLand" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Eldlich" } }, { monster_archetypes = { "GoldenLand" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -326,7 +326,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.mult, card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Eldlich" } }, { monster_archetypes = { "GoldenLand" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Eldlich" } }, { monster_archetypes = { "GoldenLand" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -390,7 +390,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.xmult } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Eldlich" } }, { monster_archetypes = { "GoldenLand" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Eldlich" } }, { monster_archetypes = { "GoldenLand" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -462,8 +462,8 @@ SMODS.Joker({
         return { vars = { card.ability.extra.mills, card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { "j_joy_eld_eldlich",                                                                                name = "Sends" },
-        { properties = { { monster_archetypes = { "Eldlich" } }, { monster_archetypes = { "GoldenLand" } } }, name = "Archetype" },
+        { "j_joy_eld_eldlich",                                                                                name = localize("k_joy_mills") },
+        { properties = { { monster_archetypes = { "Eldlich" } }, { monster_archetypes = { "GoldenLand" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,

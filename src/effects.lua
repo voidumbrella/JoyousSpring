@@ -213,13 +213,8 @@ JoyousSpring.create_perma_debuffed_card = function(card, source, edition)
             added_card.ability.extra.joyous_spring.perma_debuffed = true
         end
         added_card:set_cost()
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                added_card:add_to_deck()
-                G.jokers:emplace(added_card)
-                return true
-            end
-        }))
+        JoyousSpring.create_summon(added_card)
+
         return added_card
     else
         SMODS.debuff_card(card, true, source)
@@ -250,7 +245,7 @@ JoyousSpring.create_random_playing_card = function(enhanced_prob, silent, colour
                     cen_pool[#cen_pool + 1] = v
                 end
             end
-            local enhanced = enhanced_prob >= 1 and
+            local enhanced = enhanced_prob and enhanced_prob >= 1 and
                 (pseudorandom(seed or pseudoseed('JoyousSpring')) < 1 / enhanced_prob and true) or false
             local added_card = create_playing_card(
                 {

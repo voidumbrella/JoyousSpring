@@ -20,8 +20,8 @@ SMODS.Joker({
         return {}
     end,
     joy_desc_cards = {
-        { "j_joy_generaider_boss_stage",                              name = "Creates" },
-        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+        { "j_joy_generaider_boss_stage",                              name = localize("k_joy_creates") },
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -65,7 +65,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -120,7 +120,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.tributes } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -181,7 +181,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.tributes } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -255,7 +255,7 @@ SMODS.Joker({
         return {}
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -325,7 +325,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.tributes } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -390,7 +390,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.tributes, card.ability.extra.cards_to_create } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -461,7 +461,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.tributes, card.ability.extra.xmult } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -537,7 +537,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.tributes, card.ability.extra.hands, card.ability.extra.discards } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -604,7 +604,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.tributes, card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -676,7 +676,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.mult, card.ability.extra.joyous_spring.xyz_materials * card.ability.extra.mult, card.ability.extra.detach, card.ability.extra.hsize } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -742,8 +742,8 @@ SMODS.Joker({
         return { vars = { card.ability.extra.detach } }
     end,
     joy_desc_cards = {
-        { "j_joy_generaider_jormungandr",                             name = "Creates" },
-        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+        { "j_joy_generaider_jormungandr",                             name = localize("k_joy_creates") },
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -809,7 +809,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.tributes, card.ability.extra.cards_to_create } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Generaider" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Generaider" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,

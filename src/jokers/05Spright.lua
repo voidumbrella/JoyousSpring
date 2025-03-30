@@ -23,7 +23,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.cards_to_create } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Spright" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Spright" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -69,7 +69,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.mill } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Spright" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Spright" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -121,7 +121,7 @@ SMODS.Joker({
         }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Spright" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Spright" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -190,7 +190,7 @@ SMODS.Joker({
         }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Spright" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Spright" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -256,7 +256,7 @@ SMODS.Joker({
         }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Spright" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Spright" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -319,7 +319,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Spright" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Spright" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -372,8 +372,8 @@ SMODS.Joker({
         return { vars = { card.ability.extra.base_materials, card.ability.extra.detached } }
     end,
     joy_desc_cards = {
-        { "j_joy_spright_gigantic",                                name = "Adds" },
-        { properties = { { monster_archetypes = { "Spright" } } }, name = "Archetype" },
+        { "j_joy_spright_gigantic",                                name = localize("k_joy_adds") },
+        { properties = { { monster_archetypes = { "Spright" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -475,7 +475,7 @@ SMODS.Joker({
         end
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Spright" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Spright" } } }, name = "k_joy_archetype" },
     },
     config = {
         extra = {

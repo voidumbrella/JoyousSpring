@@ -2928,12 +2928,14 @@ return {
 			j_joy_danger_jack = {
 				name = "{C:joy_effect}Danger!? Jackalope?",
 				text = {
-					"Gains {C:chips}+#1#{} Chips when {C:attention}Blind{} is selected",
-					"{C:inactive}(Currently {C:chips}+#2# {C:inactive}Chips)",
+					"{C:chips}+#1#{} Chips for each {C:joy_normal}\"Danger!\"{}",
+					"destruction ability triggered this run,",
+					"gains {C:chips}+#2#{} Chips when {C:attention}Blind{} is selected,",
+					"{C:inactive}(Currently {C:chips}+#3# {C:inactive}Chips)",
 					" ",
 					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected {C:inactive}(itself included)",
 					" ",
-					"Creates {C:attention}#3#{} {C:joy_normal}\"Danger!\"",
+					"Creates {C:attention}#4#{} {C:joy_normal}\"Danger!\"",
 					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability",
 					"{C:inactive}(Must have room){}",
 				}
@@ -2941,12 +2943,14 @@ return {
 			j_joy_danger_tsuch = {
 				name = "{C:joy_effect}Danger!? Tsuchinoko?",
 				text = {
-					"Gains {C:mult}+#1#{} Mult when {C:attention}Blind{} is selected",
-					"{C:inactive}(Currently {C:mult}+#2# {C:inactive}Mult)",
+					"{C:mult}+#1#{} Mult for each {C:joy_normal}\"Danger!\"{}",
+					"destruction ability triggered this run,",
+					"gains {C:mult}+#2#{} Mult when {C:attention}Blind{} is selected",
+					"{C:inactive}(Currently {C:mult}+#3# {C:inactive}Mult)",
 					" ",
 					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected {C:inactive}(itself included)",
 					" ",
-					"Creates {C:attention}#3#{} {C:joy_normal}\"Danger!\"",
+					"Creates {C:attention}#4#{} {C:joy_normal}\"Danger!\"",
 					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability",
 					"{C:inactive}(Must have room){}",
 				}
@@ -3003,8 +3007,10 @@ return {
 			j_joy_danger_big = {
 				name = "{C:joy_effect}Danger! Bigfoot!",
 				text = {
-					"Gains {X:mult,C:white}X#1#{} Mult when {C:attention}Blind{} is selected",
-					"{C:inactive}(Currently {X:mult,C:white}X#2#{} {C:inactive}Mult)",
+					"Gains {X:mult,C:white}X#1#{} Mult for each {C:joy_normal}\"Danger!\"{}",
+					"destruction ability triggered this run,",
+					"gains {X:mult,C:white}X#2#{} Mult when {C:attention}Blind{} is selected",
+					"{C:inactive}(Currently {X:mult,C:white}X#3#{} {C:inactive}Mult)",
 					" ",
 					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected {C:inactive}(itself included)",
 					" ",
@@ -3028,12 +3034,14 @@ return {
 			j_joy_danger_thunder = {
 				name = "{C:joy_effect}Danger! Thunderbird!",
 				text = {
-					"Gains {X:chips,C:white}X#1#{} Chips when {C:attention}Blind{} is selected",
-					"{C:inactive}(Currently {X:chips,C:white}X#2#{} {C:inactive}Chips)",
+					"Gains {X:chips,C:white}X#1#{} Chips for each {C:joy_normal}\"Danger!\"{}",
+					"destruction ability triggered this run,",
+					"gains {X:chips,C:white}X#2#{} Chips when {C:attention}Blind{} is selected",
+					"{C:inactive}(Currently {X:chips,C:white}X#3#{} {C:inactive}Chips)",
 					" ",
 					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected {C:inactive}(itself included)",
 					" ",
-					"Destroy {C:attention}#3#{} other {C:attention}Joker{} and all {C:attention}Consumables",
+					"Destroy {C:attention}#4#{} other {C:attention}Joker{} and all {C:attention}Consumables",
 					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability",
 				}
 			},
@@ -3635,6 +3643,7 @@ return {
 			}
 		},
 		dictionary = {
+			--#region General UI
 			k_joy_extra_deck = "Extra Deck",
 			k_joy_summon_conditions = "Summoning Conditions",
 			k_joy_graveyard = "Graveyard",
@@ -3654,13 +3663,10 @@ return {
 			k_joy_summon = "Summon",
 			k_joy_detach = "Detach",
 			k_joy_activate = "Activate",
+			--#endregion
+			--#region Effect text
 			k_joy_activated_ex = "Activated!",
 			k_joy_token = "Token",
-			k_joy_disable_tooltips = "Disable glossary tooltips",
-			k_joy_disable_booster_tag = "Disable Booster Tag from appearing naturally",
-			k_joy_only_ygo_cards = "Only Monster Cards appear",
-			k_joy_extra_ygo_booster = "Extra Monster Card booster each shop",
-			k_joy_instant_poker_hand = "Disable poker hand level up animation (for this mod)",
 			k_joy_splash = "Splash!",
 			k_joy_defeated = "Defeated!",
 			k_joy_banished = "Banished!",
@@ -3670,14 +3676,33 @@ return {
 			k_joy_mill = "Mill!",
 			k_joy_add = "Add!",
 			k_joy_return = "Return!",
+			--#endregion
+			--#region Booster
 			k_joy_booster_group = "Monster Pack",
-			k_joy_related = "Related",
 			k_joy_monster_tag_default = "a Monster Joker",
+			--#endregion
+			--#region Mod Description
 			k_joy_glossary = "Basic Glossary",
 			k_joy_summon_glosary = "Summon Glossary",
 			k_joy_credits = "Credits",
 			k_joy_discord = "Discord",
 			k_joy_github = "Github",
+			--#endregion
+			--#region Config
+			k_joy_disable_tooltips = "Disable glossary tooltips",
+			k_joy_disable_booster_tag = "Disable Booster Tag from appearing naturally",
+			k_joy_only_ygo_cards = "Only Monster Cards appear",
+			k_joy_extra_ygo_booster = "Extra Monster Card booster each shop",
+			k_joy_instant_poker_hand = "Disable poker hand level up animation (for this mod)",
+			--#endregion
+			--#region Related cards
+			k_joy_related = "Related",
+			k_joy_archetype = "Archetype",
+			k_joy_transforms_into = "Transforms into",
+			k_joy_creates = "Creates",
+			k_joy_adds = "Adds",
+			k_joy_mills = "Sends",
+			--#endregion
 			--#region Card types
 			k_joy_Aqua = "Aqua",
 			k_joy_Beast = "Beast",

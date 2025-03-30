@@ -19,7 +19,7 @@ SMODS.Joker({
         return {}
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Adamancipator" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Adamancipator" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -47,7 +47,7 @@ SMODS.Joker({
         return {}
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Adamancipator" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Adamancipator" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -75,7 +75,7 @@ SMODS.Joker({
         return {}
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Adamancipator" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Adamancipator" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -103,7 +103,7 @@ SMODS.Joker({
         return {}
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Adamancipator" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Adamancipator" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -130,7 +130,7 @@ SMODS.Joker({
         return {}
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Adamancipator" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Adamancipator" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -157,7 +157,7 @@ SMODS.Joker({
         return {}
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Adamancipator" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Adamancipator" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -184,7 +184,7 @@ SMODS.Joker({
         return {}
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Adamancipator" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Adamancipator" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -211,7 +211,7 @@ SMODS.Joker({
         return {}
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Adamancipator" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Adamancipator" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -238,7 +238,7 @@ SMODS.Joker({
         return {}
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Adamancipator" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Adamancipator" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -265,7 +265,7 @@ SMODS.Joker({
         return {}
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Adamancipator" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Adamancipator" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,

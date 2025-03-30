@@ -23,7 +23,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.mult, card.ability.extra.current_mult, card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -87,7 +87,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.banishes, card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -157,7 +157,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.chips, card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -216,7 +216,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.mult, card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -275,7 +275,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.chips, card.ability.extra.current_chips, card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -338,7 +338,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.revives, card.ability.extra.mills } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -395,7 +395,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.discards, card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -465,7 +465,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.h_size, card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -531,7 +531,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.adds } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -591,7 +591,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.detach, card.ability.extra.xmult, card.ability.extra.current_xmult, card.ability.extra.attach } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -671,7 +671,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.detach, card.ability.extra.creates } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "Archetype" },
+        { properties = { { monster_archetypes = { "Paleozoic" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,

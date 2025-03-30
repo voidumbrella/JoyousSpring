@@ -17,10 +17,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1, 1, 1, 3 } }
+        return { vars = { card.ability.extra.h_size, card.ability.extra.revives, card.ability.extra.mills, card.ability.extra.turns } }
     end,
     joy_desc_cards = {
-        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -31,6 +31,10 @@ SMODS.Joker({
                 monster_type = "Fairy",
                 monster_archetypes = { ["Shaddoll"] = true }
             },
+            h_size = 1,
+            revives = 1,
+            mills = 1,
+            turns = 3
         },
     },
 })
@@ -46,10 +50,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1, 1, 1, 3 } }
+        return { vars = { card.ability.extra.hands, card.ability.extra.revives, card.ability.extra.mills, card.ability.extra.turns } }
     end,
     joy_desc_cards = {
-        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -60,6 +64,10 @@ SMODS.Joker({
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Shaddoll"] = true }
             },
+            hands = 1,
+            revives = 1,
+            mills = 1,
+            turns = 3
         },
     },
 })
@@ -75,10 +83,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1, 1, 1, 1 } }
+        return { vars = { card.ability.extra.revives_flip, card.ability.extra.revives, card.ability.extra.mills, card.ability.extra.creates } }
     end,
     joy_desc_cards = {
-        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -90,6 +98,10 @@ SMODS.Joker({
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Shaddoll"] = true }
             },
+            revives_flip = 1,
+            revives = 1,
+            mills = 1,
+            creates = 1
         },
     },
 })
@@ -105,10 +117,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1, 1, 1, 1 } }
+        return { vars = { card.ability.extra.creates_tarot, card.ability.extra.revives, card.ability.extra.mills, card.ability.extra.creates_spectral } }
     end,
     joy_desc_cards = {
-        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -119,6 +131,10 @@ SMODS.Joker({
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Shaddoll"] = true }
             },
+            creates_tarot = 1,
+            revives = 1,
+            mills = 1,
+            creates_spectral = 1
         },
     },
 })
@@ -134,10 +150,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 5, 1, 1 } }
+        return { vars = { card.ability.extra.money, card.ability.extra.revives, card.ability.extra.mills } }
     end,
     joy_desc_cards = {
-        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -148,6 +164,9 @@ SMODS.Joker({
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Shaddoll"] = true }
             },
+            money = 5,
+            revives = 1,
+            mills = 1
         },
     },
 })
@@ -163,10 +182,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1, 1, 1, 3 } }
+        return { vars = { card.ability.extra.discards, card.ability.extra.revives, card.ability.extra.mills, card.ability.extra.turns } }
     end,
     joy_desc_cards = {
-        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -177,6 +196,10 @@ SMODS.Joker({
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Shaddoll"] = true }
             },
+            discards = 1,
+            revives = 1,
+            mills = 1,
+            turns = 3
         },
     },
 })
@@ -192,10 +215,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 2, 1, 1, 1 } }
+        return { vars = { card.ability.extra.xmult, card.ability.extra.revives, card.ability.extra.mills, card.ability.extra.creates } }
     end,
     joy_desc_cards = {
-        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -206,6 +229,10 @@ SMODS.Joker({
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Shaddoll"] = true }
             },
+            xmult = 2,
+            revives = 1,
+            mills = 1,
+            creates = 1
         },
     },
 })
@@ -221,10 +248,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1 } }
+        return { vars = { card.ability.extra.banishes } }
     end,
     joy_desc_cards = {
-        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -235,6 +262,7 @@ SMODS.Joker({
                 monster_type = "Psychic",
                 monster_archetypes = { ["Shaddoll"] = true }
             },
+            banishes = 1
         },
     },
 })
@@ -250,10 +278,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1 } }
+        return { vars = { card.ability.extra.flips } }
     end,
     joy_desc_cards = {
-        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -264,6 +292,7 @@ SMODS.Joker({
                 monster_type = "Machine",
                 monster_archetypes = { ["Shaddoll"] = true }
             },
+            flips = 1
         },
     },
 })
@@ -279,10 +308,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1, 5 } }
+        return { vars = { card.ability.extra.adds, card.ability.extra.mult } }
     end,
     joy_desc_cards = {
-        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -293,6 +322,8 @@ SMODS.Joker({
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Shaddoll"] = true }
             },
+            adds = 1,
+            mult = 5
         },
     },
 })
@@ -308,10 +339,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1, 1 } }
+        return { vars = { card.ability.extra.creates, card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -322,6 +353,8 @@ SMODS.Joker({
                 monster_type = "Psychic",
                 monster_archetypes = { ["Shaddoll"] = true }
             },
+            creates = 1,
+            revives = 1
         },
     },
 })
@@ -337,10 +370,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 3, 3 } }
+        return { vars = { card.ability.extra.mills, card.ability.extra.mills_transfer } }
     end,
     joy_desc_cards = {
-        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -351,6 +384,8 @@ SMODS.Joker({
                 monster_type = "Fiend",
                 monster_archetypes = { ["Shaddoll"] = true }
             },
+            mills = 3,
+            mills_transfer = 3
         },
     },
 })
@@ -366,10 +401,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 20, 0, 1 } }
+        return { vars = { card.ability.extra.chips, 0, card.ability.extra.adds } }
     end,
     joy_desc_cards = {
-        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -380,6 +415,8 @@ SMODS.Joker({
                 monster_type = "Fiend",
                 monster_archetypes = { ["Shaddoll"] = true }
             },
+            chips = 40,
+            adds = 1
         },
     },
 })
@@ -395,10 +432,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1 } }
+        return { vars = { card.ability.extra.adds } }
     end,
     joy_desc_cards = {
-        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -409,6 +446,7 @@ SMODS.Joker({
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Shaddoll"] = true }
             },
+            adds = 1
         },
     },
 })
@@ -424,10 +462,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 2, 1, 1 } }
+        return { vars = { card.ability.extra.xmult, 1, card.ability.extra.adds } }
     end,
     joy_desc_cards = {
-        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -438,6 +476,8 @@ SMODS.Joker({
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Shaddoll"] = true }
             },
+            xmult = 2,
+            adds = 1
         },
     },
 })
@@ -453,10 +493,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 10, 1 } }
+        return { vars = { card.ability.extra.mills, card.ability.extra.adds } }
     end,
     joy_desc_cards = {
-        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -467,6 +507,8 @@ SMODS.Joker({
                 monster_type = "Fairy",
                 monster_archetypes = { ["Shaddoll"] = true }
             },
+            mills = 10,
+            adds = 1
         },
     },
 })
@@ -482,10 +524,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1.05, 1, 1 } }
+        return { vars = { card.ability.extra.xchips, 1, card.ability.extra.adds } }
     end,
     joy_desc_cards = {
-        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -496,6 +538,8 @@ SMODS.Joker({
                 monster_type = "Rock",
                 monster_archetypes = { ["Shaddoll"] = true }
             },
+            xchips = 1.05,
+            adds = 1
         },
     },
 })
@@ -511,10 +555,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1 } }
+        return { vars = { card.ability.extra.adds } }
     end,
     joy_desc_cards = {
-        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -525,6 +569,7 @@ SMODS.Joker({
                 monster_type = "Machine",
                 monster_archetypes = { ["Shaddoll"] = true }
             },
+            adds = 1
         },
     },
 })
@@ -540,10 +585,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1 } }
+        return { vars = { card.ability.extra.adds } }
     end,
     joy_desc_cards = {
-        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -554,6 +599,7 @@ SMODS.Joker({
                 monster_type = "Psychic",
                 monster_archetypes = { ["Shaddoll"] = true }
             },
+            adds = 1
         },
     },
 })
@@ -569,10 +615,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1 } }
+        return { vars = { card.ability.extra.adds } }
     end,
     joy_desc_cards = {
-        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -583,6 +629,7 @@ SMODS.Joker({
                 monster_type = "Spellcaster",
                 monster_archetypes = { ["Shaddoll"] = true }
             },
+            adds = 1
         },
     },
 })
@@ -598,10 +645,10 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 0,
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1, 5, 10, 1 } }
+        return { vars = { card.ability.extra.add_counter, card.ability.extra.chips, card.ability.extra.remove, card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "Archetype" },
+        { "j_joy_shaddoll_prison", properties = { { monster_archetypes = { "Solfachord" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -610,6 +657,10 @@ SMODS.Joker({
             joyous_spring = JoyousSpring.init_joy_table {
                 is_field_spell = true,
             },
+            add_counter = 1,
+            chips = 5,
+            remove = 10,
+            revives = 1
         },
     },
 })

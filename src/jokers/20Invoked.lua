@@ -57,7 +57,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.tributes, card.ability.extra.chips } }
     end,
     joy_desc_cards = {
-        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
+        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -139,7 +139,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.tributes, card.ability.extra.creates, card.ability.extra.mult } }
     end,
     joy_desc_cards = {
-        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
+        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -250,7 +250,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.tributes, card.ability.extra.xmult, 1 + card.ability.extra.xmult * JoyousSpring.count_set_tributed("Joker", true), card.ability.extra.reduces } }
     end,
     joy_desc_cards = {
-        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
+        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -349,7 +349,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.tributes, card.ability.extra.xmult, 1 + card.ability.extra.xmult * JoyousSpring.get_flipped_count("Joker"), card.ability.extra.flips } }
     end,
     joy_desc_cards = {
-        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
+        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -467,7 +467,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.tributes, card.ability.extra.percent * 100 } }
     end,
     joy_desc_cards = {
-        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
+        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -521,9 +521,9 @@ SMODS.Joker({
         return false
     end,
     add_to_deck = function(self, card, from_debuff)
-        if G.GAME.blind.in_blind then
+        if not card.debuff and G.GAME.blind.in_blind then
             G.GAME.blind.chips = math.floor(G.GAME.blind.chips -
-                G.GAME.blind.chips * card.ability.extra.current_percent)
+                G.GAME.blind.chips * card.ability.extra.percent)
             G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
         end
     end,
@@ -572,7 +572,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.tributes, card.ability.extra.xmult } }
     end,
     joy_desc_cards = {
-        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
+        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -664,7 +664,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.tributes, card.ability.extra.mult } }
     end,
     joy_desc_cards = {
-        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
+        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -756,7 +756,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.tributes, card.ability.extra.sell, card.ability.extra.sold } }
     end,
     joy_desc_cards = {
-        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
+        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -868,7 +868,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.tributes, card.ability.extra.xmult, 1 + card.ability.extra.xmult * JoyousSpring.count_materials_in_graveyard({ { summon_type = "FUSION" } }), card.ability.extra.mills } }
     end,
     joy_desc_cards = {
-        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
+        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -988,7 +988,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.tributes } }
     end,
     joy_desc_cards = {
-        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
+        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -1072,7 +1072,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.tributes, card.ability.extra.creates, card.ability.extra.xmult, 1 + card.ability.extra.xmult * JoyousSpring.get_summoned_count("FUSION") } }
     end,
     joy_desc_cards = {
-        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "Archetype" },
+        { "j_joy_invoked_meltdown", properties = { { monster_archetypes = { "Aleister" } }, { monster_archetypes = { "Invoked" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -1109,9 +1109,11 @@ SMODS.Joker({
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        for _, joker in ipairs(G.jokers.cards) do
-            if JoyousSpring.is_summon_type(joker, "FUSION") then
-                SMODS.debuff_card(joker, "prevent_debuff", "j_joy_invoked_meltdown")
+        if not card.debuff then
+            for _, joker in ipairs(G.jokers.cards) do
+                if JoyousSpring.is_summon_type(joker, "FUSION") and not JoyousSpring.is_perma_debuffed(joker) then
+                    SMODS.debuff_card(joker, "prevent_debuff", "j_joy_invoked_meltdown")
+                end
             end
         end
     end,
@@ -1127,7 +1129,7 @@ SMODS.Joker({
             true or false
     end,
     joy_apply_to_jokers_added = function(card, added_card)
-        if JoyousSpring.is_summon_type(added_card, "FUSION") then
+        if JoyousSpring.is_summon_type(added_card, "FUSION") and not JoyousSpring.is_perma_debuffed(added_card) then
             SMODS.debuff_card(added_card, "prevent_debuff", "j_joy_invoked_meltdown")
         end
     end,
