@@ -24,6 +24,14 @@ local danger_destroy = function(card, context)
     return joker_to_destroy
 end
 
+local inc_danger_count = function()
+    G.GAME.joy_danger_effect_count = (G.GAME.joy_danger_effect_count or 0) + 1
+end
+
+local get_danger_count = function()
+    return G.GAME.joy_danger_effect_count or 0
+end
+
 -- Danger!? Jackalope?
 SMODS.Joker({
     key = "danger_jack",
@@ -35,7 +43,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 3,
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.chips, card.ability.extra.current_chips, card.ability.extra.creates } }
+        return { vars = { card.ability.extra.dest_chips, card.ability.extra.chips, card.ability.extra.current_chips + (card.ability.extra.dest_chips * get_danger_count()), card.ability.extra.creates } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
@@ -49,9 +57,11 @@ SMODS.Joker({
                 monster_type = "Beast",
                 monster_archetypes = { ["Danger"] = true }
             },
-            chips = 50,
+            dest_chips = 10,
+            chips = 100,
             current_chips = 0,
-            creates = 1
+            creates = 1,
+            activated = false
         },
     },
     calculate = function(self, card, context)
@@ -72,11 +82,14 @@ SMODS.Joker({
             end
             if context.joker_main then
                 return {
-                    chips = card.ability.extra.current_chips
+                    chips = card.ability.extra.current_chips + (card.ability.extra.dest_chips * get_danger_count())
                 }
             end
         end
-        if context.joy_danger == card then
+        if context.joy_danger == card and not card.ability.extra.activated then
+            card.ability.extra.activated = true
+            inc_danger_count()
+
             for i = 1, card.ability.extra.creates do
                 JoyousSpring.create_pseudorandom({ { monster_archetypes = { "Danger" }, is_main_deck = true } },
                     pseudoseed('j_joy_danger_jack'), true, nil,
@@ -97,7 +110,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 3,
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.mult, card.ability.extra.current_mult, card.ability.extra.creates } }
+        return { vars = { card.ability.extra.dest_mult, card.ability.extra.mult, card.ability.extra.current_mult + (card.ability.extra.dest_mult * get_danger_count()), card.ability.extra.creates } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
@@ -111,9 +124,11 @@ SMODS.Joker({
                 monster_type = "Reptile",
                 monster_archetypes = { ["Danger"] = true }
             },
+            dest_mult = 5,
             mult = 50,
             current_mult = 0,
-            creates = 1
+            creates = 1,
+            activated = false
         },
     },
     calculate = function(self, card, context)
@@ -134,11 +149,13 @@ SMODS.Joker({
             end
             if context.joker_main then
                 return {
-                    mult = card.ability.extra.current_mult
+                    mult = card.ability.extra.current_mult + (card.ability.extra.dest_mult * get_danger_count())
                 }
             end
         end
-        if context.joy_danger == card then
+        if context.joy_danger == card and not card.ability.extra.activated then
+            card.ability.extra.activated = true
+            inc_danger_count()
             for i = 1, card.ability.extra.creates do
                 JoyousSpring.create_pseudorandom({ { monster_archetypes = { "Danger" }, is_main_deck = true } },
                     pseudoseed('j_joy_danger_tsuch'), true, nil,
@@ -175,7 +192,8 @@ SMODS.Joker({
             },
             money = 2,
             current_money = 2,
-            revives = 1
+            revives = 1,
+            activated = false
         },
     },
     calculate = function(self, card, context)
@@ -195,7 +213,9 @@ SMODS.Joker({
                 end
             end
         end
-        if context.joy_danger == card then
+        if context.joy_danger == card and not card.ability.extra.activated then
+            card.ability.extra.activated = true
+            inc_danger_count()
             for i = 1, card.ability.extra.revives do
                 JoyousSpring.revive_pseudorandom({ { monster_archetypes = { "Danger" }, is_main_deck = true } },
                     pseudoseed('j_joy_danger_chup'), true,
@@ -236,7 +256,8 @@ SMODS.Joker({
             },
             discards = 1,
             current_discards = 0,
-            revives = 1
+            revives = 1,
+            activated = false
         },
     },
     calculate = function(self, card, context)
@@ -259,7 +280,9 @@ SMODS.Joker({
                 end
             end
         end
-        if context.joy_danger == card then
+        if context.joy_danger == card and not card.ability.extra.activated then
+            card.ability.extra.activated = true
+            inc_danger_count()
             for i = 1, card.ability.extra.revives do
                 JoyousSpring.revive_pseudorandom({ { monster_archetypes = { "Danger" }, is_main_deck = true } },
                     pseudoseed('j_joy_danger_moth'), true,
@@ -302,7 +325,8 @@ SMODS.Joker({
             },
             percent = 0.005,
             current_percent = 0.02,
-            adds = 1
+            adds = 2,
+            activated = false
         },
     },
     calculate = function(self, card, context)
@@ -326,7 +350,9 @@ SMODS.Joker({
                 end
             end
         end
-        if context.joy_danger == card then
+        if context.joy_danger == card and not card.ability.extra.activated then
+            card.ability.extra.activated = true
+            inc_danger_count()
             local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Danger" } } })
             for i = 1, card.ability.extra.adds do
                 key_to_add = pseudorandom_element(choices, pseudoseed("j_joy_danger_dog"))
@@ -370,7 +396,8 @@ SMODS.Joker({
             },
             h_size = 1,
             current_h_size = 0,
-            adds = 1
+            adds = 2,
+            activated = false
         },
     },
     calculate = function(self, card, context)
@@ -392,7 +419,9 @@ SMODS.Joker({
                 end
             end
         end
-        if context.joy_danger == card then
+        if context.joy_danger == card and not card.ability.extra.activated then
+            card.ability.extra.activated = true
+            inc_danger_count()
             local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Danger" } } })
             for i = 1, card.ability.extra.adds do
                 key_to_add = pseudorandom_element(choices, pseudoseed("j_joy_danger_ness"))
@@ -418,7 +447,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 7,
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.xmult, card.ability.extra.current_xmult } }
+        return { vars = { card.ability.extra.dest_xmult, card.ability.extra.xmult, card.ability.extra.current_xmult + (card.ability.extra.dest_xmult * get_danger_count()) } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
@@ -432,6 +461,7 @@ SMODS.Joker({
                 monster_type = "Beast",
                 monster_archetypes = { ["Danger"] = true }
             },
+            dest_xmult = 0.2,
             xmult = 1,
             current_xmult = 1,
             activated = false
@@ -455,12 +485,13 @@ SMODS.Joker({
             end
             if context.joker_main then
                 return {
-                    xmult = card.ability.extra.current_xmult
+                    xmult = card.ability.extra.current_xmult + (card.ability.extra.dest_xmult * get_danger_count())
                 }
             end
         end
         if context.joy_danger == card and not card.ability.extra.activated then
             card.ability.extra.activated = true
+            inc_danger_count()
             for i = 1, #G.jokers.cards do
                 if G.jokers.cards[i] ~= card and not G.jokers.cards[i].ability.eternal and not G.jokers.cards[i].getting_sliced then
                     G.jokers.cards[i]:start_dissolve()
@@ -498,7 +529,8 @@ SMODS.Joker({
                 monster_archetypes = { ["Danger"] = true }
             },
             chips = 50,
-            mills = 3
+            mills = 3,
+            activated = false
         },
     },
     calculate = function(self, card, context)
@@ -513,7 +545,9 @@ SMODS.Joker({
                 }
             end
         end
-        if context.joy_danger == card then
+        if context.joy_danger == card and not card.ability.extra.activated then
+            card.ability.extra.activated = true
+            inc_danger_count()
             local choices = JoyousSpring.get_materials_in_collection({ { monster_archetypes = { "Danger" } } })
 
             for i = 1, card.ability.extra.mills do
@@ -535,7 +569,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 7,
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.xchips, card.ability.extra.current_xchips, card.ability.extra.destroys } }
+        return { vars = { card.ability.extra.dest_xchips, card.ability.extra.xchips, card.ability.extra.current_xchips + (card.ability.extra.dest_xchips * get_danger_count()), card.ability.extra.destroys } }
     end,
     joy_desc_cards = {
         { properties = { { monster_archetypes = { "Danger" } } }, name = "Archetype" },
@@ -549,6 +583,7 @@ SMODS.Joker({
                 monster_type = "WingedBeast",
                 monster_archetypes = { ["Danger"] = true }
             },
+            dest_xchips = 0.1,
             xchips = 1,
             current_xchips = 1,
             destroys = 1,
@@ -573,12 +608,13 @@ SMODS.Joker({
             end
             if context.joker_main then
                 return {
-                    xchips = card.ability.extra.current_xchips
+                    xchips = card.ability.extra.current_xchips + (card.ability.extra.dest_xchips * get_danger_count())
                 }
             end
         end
         if context.joy_danger == card and not card.ability.extra.activated then
             card.ability.extra.activated = true
+            inc_danger_count()
             for _ = 1, card.ability.extra.destroys do
                 local destructable_jokers = {}
                 for i = 1, #G.jokers.cards do

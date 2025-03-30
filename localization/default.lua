@@ -2928,12 +2928,14 @@ return {
 			j_joy_danger_jack = {
 				name = "{C:joy_effect}Danger!? Jackalope?",
 				text = {
-					"Gains {C:chips}+#1#{} Chips when {C:attention}Blind{} is selected",
-					"{C:inactive}(Currently {C:chips}+#2# {C:inactive}Chips)",
+					"{C:chips}+#1#{} Chips for each {C:joy_normal}\"Danger!\"{}",
+					"destruction ability activated this run,",
+					"gains {C:chips}+#2#{} Chips when {C:attention}Blind{} is selected,",
+					"{C:inactive}(Currently {C:chips}+#3# {C:inactive}Chips)",
 					" ",
 					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected {C:inactive}(itself included)",
 					" ",
-					"Creates {C:attention}#3#{} {C:joy_normal}\"Danger!\"",
+					"Creates {C:attention}#4#{} {C:joy_normal}\"Danger!\"",
 					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability",
 					"{C:inactive}(Must have room){}",
 				}
@@ -2941,12 +2943,14 @@ return {
 			j_joy_danger_tsuch = {
 				name = "{C:joy_effect}Danger!? Tsuchinoko?",
 				text = {
-					"Gains {C:mult}+#1#{} Mult when {C:attention}Blind{} is selected",
-					"{C:inactive}(Currently {C:mult}+#2# {C:inactive}Mult)",
+					"{C:mult}+#1#{} Mult for each {C:joy_normal}\"Danger!\"{}",
+					"destruction ability activated this run,",
+					"gains {C:mult}+#2#{} Mult when {C:attention}Blind{} is selected",
+					"{C:inactive}(Currently {C:mult}+#3# {C:inactive}Mult)",
 					" ",
 					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected {C:inactive}(itself included)",
 					" ",
-					"Creates {C:attention}#3#{} {C:joy_normal}\"Danger!\"",
+					"Creates {C:attention}#4#{} {C:joy_normal}\"Danger!\"",
 					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability",
 					"{C:inactive}(Must have room){}",
 				}
@@ -3003,8 +3007,10 @@ return {
 			j_joy_danger_big = {
 				name = "{C:joy_effect}Danger! Bigfoot!",
 				text = {
-					"Gains {X:mult,C:white}X#1#{} Mult when {C:attention}Blind{} is selected",
-					"{C:inactive}(Currently {X:mult,C:white}X#2#{} {C:inactive}Mult)",
+					"Gains {X:mult,C:white}X#1#{} Mult for each {C:joy_normal}\"Danger!\"{}",
+					"destruction ability activated this run,",
+					"gains {X:mult,C:white}X#2#{} Mult when {C:attention}Blind{} is selected",
+					"{C:inactive}(Currently {X:mult,C:white}X#3#{} {C:inactive}Mult)",
 					" ",
 					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected {C:inactive}(itself included)",
 					" ",
@@ -3028,12 +3034,14 @@ return {
 			j_joy_danger_thunder = {
 				name = "{C:joy_effect}Danger! Thunderbird!",
 				text = {
-					"Gains {X:chips,C:white}X#1#{} Chips when {C:attention}Blind{} is selected",
-					"{C:inactive}(Currently {X:chips,C:white}X#2#{} {C:inactive}Chips)",
+					"Gains {X:chips,C:white}X#1#{} Chips for each {C:joy_normal}\"Danger!\"{}",
+					"destruction ability activated this run,",
+					"gains {X:chips,C:white}X#2#{} Chips when {C:attention}Blind{} is selected",
+					"{C:inactive}(Currently {X:chips,C:white}X#3#{} {C:inactive}Chips)",
 					" ",
 					"Destroys a random {C:attention}Joker{} when {C:attention}Blind{} is selected {C:inactive}(itself included)",
 					" ",
-					"Destroy {C:attention}#3#{} other {C:attention}Joker{} and all {C:attention}Consumables",
+					"Destroy {C:attention}#4#{} other {C:attention}Joker{} and all {C:attention}Consumables",
 					"when destroyed by a {C:joy_normal}\"Danger!\"{} ability",
 				}
 			},
