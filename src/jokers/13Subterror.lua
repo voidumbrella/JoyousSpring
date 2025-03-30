@@ -23,7 +23,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -107,7 +107,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.chips, card.ability.extra.chips * (JoyousSpring.count_flipped('back', { G.jokers }) + JoyousSpring.count_materials_owned({ { monster_archetypes = { "Subterror" } } })) } }
     end,
     joy_desc_cards = {
-        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -150,7 +150,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.creates } }
     end,
     joy_desc_cards = {
-        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -234,7 +234,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.revives, card.ability.extra.mills } }
     end,
     joy_desc_cards = {
-        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -325,7 +325,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.flips, card.ability.extra.xmult, card.ability.extra.h_size, card.ability.extra.creates } }
     end,
     joy_desc_cards = {
-        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -440,7 +440,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.xmult } }
     end,
     joy_desc_cards = {
-        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -496,7 +496,7 @@ SMODS.Joker({
         return { vars = {} }
     end,
     joy_desc_cards = {
-        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -549,7 +549,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.banishes } }
     end,
     joy_desc_cards = {
-        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -607,7 +607,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.chips, card.ability.extra.chips * JoyousSpring.count_materials_in_graveyard({ { monster_type = "Aqua" }, { monster_archetypes = { "Subterror" } } }), card.ability.extra.mills } }
     end,
     joy_desc_cards = {
-        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -669,7 +669,7 @@ SMODS.Joker({
         }
     end,
     joy_desc_cards = {
-        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -723,7 +723,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.draws } }
     end,
     joy_desc_cards = {
-        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -789,7 +789,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.extra_xmult, 1 + card.ability.extra.xmult } }
     end,
     joy_desc_cards = {
-        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -855,7 +855,7 @@ SMODS.Joker({
         }
     end,
     joy_desc_cards = {
-        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -913,7 +913,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.chips, card.ability.extra.mult, card.ability.extra.current_chips, card.ability.extra.current_mult, 2, 1 } }
     end,
     joy_desc_cards = {
-        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -1024,7 +1024,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.money } }
     end,
     joy_desc_cards = {
-        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_sub_city", properties = { { monster_archetypes = { "Subterror" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,

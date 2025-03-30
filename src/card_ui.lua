@@ -564,7 +564,7 @@ JoyousSpring.create_overlay_see_related = function(card)
 
     for i, area_cards in ipairs(card_center.joy_desc_cards) do
         local area_tab = {
-            label = area_cards.name or localize("k_joy_related"),
+            label = localize(area_cards.name) ~= "ERROR" and localize(area_cards.name) or localize("k_joy_related"),
             chosen = i == 1,
             tab_definition_function = function(t)
                 t.area_table[#t.area_table + 1] = CardArea(
@@ -578,24 +578,26 @@ JoyousSpring.create_overlay_see_related = function(card)
                         highlight_limit = 0,
                     }
                 )
+
+                local keys = {}
+
                 for _, key in ipairs(t.area_cards) do
+                    table.insert(keys, key)
+                end
+                if t.area_cards.properties then
+                    local keys_to_add = JoyousSpring.get_materials_in_collection(t.area_cards.properties)
+                    for _, key in ipairs(keys_to_add) do
+                        table.insert(keys, key)
+                    end
+                end
+                table.sort(keys, function(a, b) return JoyousSpring.card_order[a] < JoyousSpring.card_order[b] end)
+                for j, key in ipairs(keys) do
                     local added_card = SMODS.create_card({
                         key = key,
                         no_edition = true,
                         area = t.area_table[#t.area_table]
                     })
                     t.area_table[#t.area_table]:emplace(added_card)
-                end
-                if t.area_cards.properties then
-                    local keys_to_add = JoyousSpring.get_materials_in_collection(t.area_cards.properties)
-                    for _, key in ipairs(keys_to_add) do
-                        local added_card = SMODS.create_card({
-                            key = key,
-                            no_edition = true,
-                            area = t.area_table[#t.area_table]
-                        })
-                        t.area_table[#t.area_table]:emplace(added_card)
-                    end
                 end
 
                 return {

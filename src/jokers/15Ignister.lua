@@ -23,7 +23,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.mult, card.ability.extra.creates } }
     end,
     joy_desc_cards = {
-        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -72,7 +72,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.dollars, card.ability.extra.creates } }
     end,
     joy_desc_cards = {
-        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -121,7 +121,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.h_size, card.ability.extra.tributes, card.ability.extra.creates } }
     end,
     joy_desc_cards = {
-        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -219,7 +219,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.mills, card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -280,7 +280,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.chips, card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -333,7 +333,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.xmult } }
     end,
     joy_desc_cards = {
-        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -386,7 +386,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.mult } }
     end,
     joy_desc_cards = {
-        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -450,7 +450,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.percent * 100 } }
     end,
     joy_desc_cards = {
-        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -505,7 +505,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.revives, card.ability.extra.adds } }
     end,
     joy_desc_cards = {
-        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -564,7 +564,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.money, card.ability.extra.banishes } }
     end,
     joy_desc_cards = {
-        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -622,7 +622,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.to_negative } }
     end,
     joy_desc_cards = {
-        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -685,7 +685,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -740,7 +740,7 @@ SMODS.Joker({
         return { vars = {} }
     end,
     joy_desc_cards = {
-        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -785,7 +785,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.adds, card.ability.extra.chips, card.ability.extra.extra_chips, card.ability.extra.current_chips } }
     end,
     joy_desc_cards = {
-        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -886,7 +886,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.adds, card.ability.extra.slots, card.ability.extra.slots * JoyousSpring.get_attribute_count(JoyousSpring.get_materials(card)) } }
     end,
     joy_desc_cards = {
-        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -965,7 +965,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.adds, G.GAME.probabilities.normal, math.max(1, card.ability.extra.odds - JoyousSpring.get_attribute_count(JoyousSpring.get_materials(card))) } }
     end,
     joy_desc_cards = {
-        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -1053,7 +1053,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.adds, card.ability.extra.money, card.ability.extra.money * JoyousSpring.get_attribute_count(JoyousSpring.get_materials(card)) } }
     end,
     joy_desc_cards = {
-        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -1149,7 +1149,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.adds, card.ability.extra.creates, card.ability.extra.xmult, card.ability.extra.extra_xmult, card.ability.extra.current_xmult } }
     end,
     joy_desc_cards = {
-        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -1272,7 +1272,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.xmult, card.ability.extra.xmult * JoyousSpring.count_materials_owned({ { summon_type = "LINK" } }), card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -1334,7 +1334,7 @@ SMODS.Joker({
     end,
     joy_desc_cards = {
         { "j_joy_ignis_ailand", name = "Creates" },
-        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -1386,7 +1386,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.revives } }
     end,
     joy_desc_cards = {
-        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -1538,7 +1538,7 @@ SMODS.Joker({
         }
     end,
     joy_desc_cards = {
-        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -1646,7 +1646,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.creates, card.ability.extra.attributes } }
     end,
     joy_desc_cards = {
-        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_ignis_ailand", properties = { { monster_archetypes = { "Ignister" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,

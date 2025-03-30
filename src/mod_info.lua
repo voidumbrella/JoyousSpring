@@ -288,6 +288,7 @@ end
 
 JoyousSpring.collection_pool = {}
 JoyousSpring.token_pool = {}
+JoyousSpring.card_order = {}
 
 JoyousSpring.get_archetype_pool = function(pool)
     local archetype_pool = {}

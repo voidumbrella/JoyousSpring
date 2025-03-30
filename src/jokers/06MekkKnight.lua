@@ -22,7 +22,7 @@ SMODS.Joker({
     eternal_compat = true,
     cost = 1,
     joy_desc_cards = {
-        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -55,7 +55,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.mult, JoyousSpring.get_joker_column(card) } }
     end,
     joy_desc_cards = {
-        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -111,7 +111,7 @@ SMODS.Joker({
         return { vars = { JoyousSpring.get_joker_column(card) } }
     end,
     joy_desc_cards = {
-        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -152,7 +152,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.money, JoyousSpring.get_joker_column(card) } }
     end,
     joy_desc_cards = {
-        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -193,7 +193,7 @@ SMODS.Joker({
         return { vars = { G.GAME.probabilities.normal, JoyousSpring.get_joker_column(card) } }
     end,
     joy_desc_cards = {
-        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -235,7 +235,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.chips, JoyousSpring.get_joker_column(card) } }
     end,
     joy_desc_cards = {
-        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -296,7 +296,7 @@ SMODS.Joker({
         }
     end,
     joy_desc_cards = {
-        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -359,7 +359,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.cards_to_create } }
     end,
     joy_desc_cards = {
-        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -406,7 +406,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.xmult, JoyousSpring.get_joker_column(card) - 1, JoyousSpring.get_joker_column(card) + 1 } }
     end,
     joy_desc_cards = {
-        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -464,7 +464,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.cards_to_create } }
     end,
     joy_desc_cards = {
-        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -526,7 +526,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.blinds, #JoyousSpring.get_materials(card) } }
     end,
     joy_desc_cards = {
-        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -595,7 +595,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.mult, card.ability.extra.tributes, card.ability.extra.hands, card.ability.extra.mekk_count } }
     end,
     joy_desc_cards = {
-        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = localize("k_joy_archetype") },
+        { "j_joy_mekkleg_scars", properties = { { monster_archetypes = { "MekkKnight" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,

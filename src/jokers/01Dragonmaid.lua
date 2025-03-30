@@ -24,7 +24,7 @@ SMODS.Joker({
     end,
     joy_desc_cards = {
         { "j_joy_dmaid_tinkhec",                                      name = localize("k_joy_transforms_into") },
-        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = localize("k_joy_archetype") },
+        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -83,7 +83,7 @@ SMODS.Joker({
     end,
     joy_desc_cards = {
         { "j_joy_dmaid_kitchen",                                      name = localize("k_joy_transforms_into") },
-        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = localize("k_joy_archetype") },
+        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -174,7 +174,7 @@ SMODS.Joker({
     end,
     joy_desc_cards = {
         { "j_joy_dmaid_lorpar",                                       name = localize("k_joy_transforms_into") },
-        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = localize("k_joy_archetype") },
+        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -243,7 +243,7 @@ SMODS.Joker({
     end,
     joy_desc_cards = {
         { "j_joy_dmaid_parlor",                                       name = localize("k_joy_transforms_into") },
-        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = localize("k_joy_archetype") },
+        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -334,7 +334,7 @@ SMODS.Joker({
     end,
     joy_desc_cards = {
         { "j_joy_dmaid_ernus",                                        name = localize("k_joy_transforms_into") },
-        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = localize("k_joy_archetype") },
+        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = "k_joy_archetype" },
     },
     config = {
         extra = {
@@ -408,7 +408,7 @@ SMODS.Joker({
     end,
     joy_desc_cards = {
         { "j_joy_dmaid_nurse",                                        name = localize("k_joy_transforms_into") },
-        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = localize("k_joy_archetype") },
+        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -475,7 +475,7 @@ SMODS.Joker({
     end,
     joy_desc_cards = {
         { "j_joy_dmaid_nudyarl",                                      name = localize("k_joy_transforms_into") },
-        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = localize("k_joy_archetype") },
+        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -527,7 +527,7 @@ SMODS.Joker({
     end,
     joy_desc_cards = {
         { "j_joy_dmaid_laundry",                                      name = localize("k_joy_transforms_into") },
-        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = localize("k_joy_archetype") },
+        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -599,7 +599,7 @@ SMODS.Joker({
     end,
     joy_desc_cards = {
         { "j_joy_dmaid_stern",                                        name = localize("k_joy_transforms_into") },
-        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = localize("k_joy_archetype") },
+        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -668,7 +668,7 @@ SMODS.Joker({
     end,
     joy_desc_cards = {
         { "j_joy_dmaid_chamber",                                      name = localize("k_joy_transforms_into") },
-        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = localize("k_joy_archetype") },
+        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -753,7 +753,7 @@ SMODS.Joker({
     end,
     joy_desc_cards = {
         { "j_joy_dmaid_house",                                        name = localize("k_joy_adds") },
-        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = localize("k_joy_archetype") },
+        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -840,7 +840,7 @@ SMODS.Joker({
     end,
     joy_desc_cards = {
         { "j_joy_dmaid_sheou",                                        name = localize("k_joy_transforms_into") },
-        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = localize("k_joy_archetype") },
+        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -927,7 +927,7 @@ SMODS.Joker({
     end,
     joy_desc_cards = {
         { "j_joy_dmaid_house",                                        name = localize("k_joy_transforms_into") },
-        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = localize("k_joy_archetype") },
+        { properties = { { monster_archetypes = { "Dragonmaid" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,

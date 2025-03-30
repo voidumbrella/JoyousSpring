@@ -21,7 +21,7 @@ SMODS.Joker({
     end,
     joy_desc_cards = {
         { "j_joy_runick_fountain",                                name = localize("k_joy_creates") },
-        { properties = { { monster_archetypes = { "Runick" } } }, name = localize("k_joy_archetype") },
+        { properties = { { monster_archetypes = { "Runick" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -73,7 +73,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.extra_slots, card.ability.extra.base_chips, card.ability.extra.chips } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Runick" } } }, name = localize("k_joy_archetype") },
+        { properties = { { monster_archetypes = { "Runick" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -137,7 +137,7 @@ SMODS.Joker({
     end,
     joy_desc_cards = {
         { "j_joy_runick_fountain",                                name = localize("k_joy_creates") },
-        { properties = { { monster_archetypes = { "Runick" } } }, name = localize("k_joy_archetype") },
+        { properties = { { monster_archetypes = { "Runick" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -196,7 +196,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.playing_cards_to_create, card.ability.extra.cards_to_create } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Runick" } } }, name = localize("k_joy_archetype") },
+        { properties = { { monster_archetypes = { "Runick" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -255,7 +255,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.cards_to_create } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Runick" } } }, name = localize("k_joy_archetype") },
+        { properties = { { monster_archetypes = { "Runick" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
@@ -306,7 +306,7 @@ SMODS.Joker({
         return { vars = { card.ability.extra.cards_to_destroy } }
     end,
     joy_desc_cards = {
-        { properties = { { monster_archetypes = { "Runick" } } }, name = localize("k_joy_archetype") },
+        { properties = { { monster_archetypes = { "Runick" } } }, name = "k_joy_archetype" },
     },
     generate_ui = JoyousSpring.generate_info_ui,
     set_sprites = JoyousSpring.set_back_sprite,
