@@ -400,7 +400,7 @@ local game_start_run_ref = Game.start_run
 function Game:start_run(args)
     game_start_run_ref(self, args)
 
-    G.GAME.joy_show_graveyard = G.GAME.joy_show_graveyard or false
+    G.GAME.joy_show_graveyard = false
 
     self.GAME.joy_graveyard = self.GAME.joy_graveyard or self.GAME.modifiers["joy_gy_start"] or {}
     JoyousSpring.graveyard = self.GAME.joy_graveyard
