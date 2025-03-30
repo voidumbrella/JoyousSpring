@@ -24,8 +24,8 @@ SMODS.Booster({
     group_key = "k_joy_booster_group",
     create_card = function(self, card)
         return SMODS.create_card({
-            set = "joy_monster",
-            area = G.pack_cards
+            set = "JoyousSpring",
+            area = G.pack_cards,
         })
     end,
     ease_background_colour = function(self)
@@ -57,7 +57,7 @@ SMODS.Booster({
     group_key = "k_joy_booster_group",
     create_card = function(self, card)
         return SMODS.create_card({
-            set = "joy_monster",
+            set = "JoyousSpring",
             area = G.pack_cards
         })
     end,
@@ -90,7 +90,7 @@ SMODS.Booster({
     group_key = "k_joy_booster_group",
     create_card = function(self, card)
         return SMODS.create_card({
-            set = "joy_monster",
+            set = "JoyousSpring",
             area = G.pack_cards
         })
     end,
@@ -123,8 +123,20 @@ SMODS.Booster({
     group_key = "k_joy_booster_group",
     create_card = function(self, card)
         return SMODS.create_card({
-            set = "joy_extra",
-            area = G.pack_cards
+            set = "JoyousSpring",
+            area = G.pack_cards,
+            joy_monster_properties = {
+                {
+                    is_monster = true,
+                    exclude_extra_deck = G.GAME.modifiers["joy_no_extra_deck_jokers"] and true or nil,
+                    exclude_main_deck = true,
+                    exclude_field_spell = true
+                },
+                {
+                    summon_type = "RITUAL"
+                }
+            },
+            joy_monster_default = "j_joy_sauravis"
         })
     end,
     ease_background_colour = function(self)
@@ -159,8 +171,20 @@ SMODS.Booster({
     group_key = "k_joy_booster_group",
     create_card = function(self, card)
         return SMODS.create_card({
-            set = "joy_extra",
-            area = G.pack_cards
+            set = "JoyousSpring",
+            area = G.pack_cards,
+            joy_monster_properties = {
+                {
+                    is_monster = true,
+                    exclude_extra_deck = G.GAME.modifiers["joy_no_extra_deck_jokers"] and true or nil,
+                    exclude_main_deck = true,
+                    exclude_field_spell = true
+                },
+                {
+                    summon_type = "RITUAL"
+                }
+            },
+            joy_monster_default = "j_joy_sauravis"
         })
     end,
     ease_background_colour = function(self)
@@ -195,8 +219,20 @@ SMODS.Booster({
     group_key = "k_joy_booster_group",
     create_card = function(self, card)
         return SMODS.create_card({
-            set = "joy_extra",
-            area = G.pack_cards
+            set = "JoyousSpring",
+            area = G.pack_cards,
+            joy_monster_properties = {
+                {
+                    is_monster = true,
+                    exclude_extra_deck = G.GAME.modifiers["joy_no_extra_deck_jokers"] and true or nil,
+                    exclude_main_deck = true,
+                    exclude_field_spell = true
+                },
+                {
+                    summon_type = "RITUAL"
+                }
+            },
+            joy_monster_default = "j_joy_sauravis"
         })
     end,
     ease_background_colour = function(self)
