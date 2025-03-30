@@ -117,8 +117,13 @@ JoyousSpring.create_graveyard_tab = function()
         JoyousSpring.graveyard_area[i].monster_h_popup = true
     end
 
-    local i = 0
-    for key, t in pairs(JoyousSpring.graveyard) do
+    local keys = {}
+    for key, _ in pairs(JoyousSpring.graveyard) do
+        table.insert(keys, key)
+    end
+    table.sort(keys, function(a, b) return JoyousSpring.card_order[a] < JoyousSpring.card_order[b] end)
+    for i, key in ipairs(keys) do
+        local t = JoyousSpring.graveyard[key]
         local count = t.count
         local summonable = t.summonable
         if count > 0 then
@@ -129,7 +134,6 @@ JoyousSpring.create_graveyard_tab = function()
                 skip_materialize = true,
             })
             JoyousSpring.graveyard_area[math.min(4, math.floor(i / 25) + 1)]:emplace(added_card)
-            i = i + 1
             -- copied from Cartomancer
             if not added_card.children.stack_display and (count > 1 or
                     (JoyousSpring.is_extra_deck_monster(added_card)) and count ~= summonable) then
